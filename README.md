@@ -7,7 +7,7 @@ This engine is still in development. It is not well tested for other uses than t
 Also I am very happy to get feedback on any projects or tests that might be using this engine and very eager to help with getting issues resolved.
 
 #Hot links
-- [API documentation](http://hachitus.github.io/warmapengine/documentation/)
+- [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
 - [Contribution guidelines](https://github.com/Hachitus/warmapengine/blob/master/CONTRIBUTING.md)
 - [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
 - [Basic base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
