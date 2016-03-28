@@ -1,0 +1,48 @@
+{"frames": {
+
+"terrain_blueHexagon.png":
+{
+	"frame": {"x":2,"y":2,"w":82,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":94},
+	"sourceSize": {"w":82,"h":94},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"terrain_greenHexagon.png":
+{
+	"frame": {"x":86,"y":2,"w":82,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":94},
+	"sourceSize": {"w":82,"h":94},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"terrain_redHexagon.png":
+{
+	"frame": {"x":170,"y":2,"w":82,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":94},
+	"sourceSize": {"w":82,"h":94},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"terrain_yellowHexagon.png":
+{
+	"frame": {"x":254,"y":2,"w":82,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":94},
+	"sourceSize": {"w":82,"h":94},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "testHexagonSpritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":338,"h":98},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:fa59b27e546807d1163060ccbff5780d:b8f8838556cf570a4a23cc2873ed278e:4dd9ec3647daaf493e79b25f8d7ee5d5$"
+}
+}
