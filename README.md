@@ -7,11 +7,11 @@ This engine is still in development. It is not well tested for other uses than t
 Also I am very happy to get feedback on any projects or tests that might be using this engine and very eager to help with getting issues resolved.
 
 #Hot links
-[Contribution guidelines](https://github.com/Hachitus/warmapengine/blob/master/CONTRIBUTING.md)
-[API documentation](http://hachitus.github.io/warmapengine/documentation/)
-[Changelog (after it is in use)](https://github.com/Hachitus/warmapengine/blob/master/CHANGELOG.md)
-[Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
-[Basic base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
+- [API documentation](http://hachitus.github.io/warmapengine/documentation/)
+- [Contribution guidelines](https://github.com/Hachitus/warmapengine/blob/master/CONTRIBUTING.md)
+- [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
+- [Basic base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
+- [Changelog](https://github.com/Hachitus/warmapengine/blob/master/CHANGELOG.md)
 
 #Introduction
 2D strategy game engine for browsers. Project will move forward at its own pace. The very core functionality has been done, that practically manages adding the objects to the map, moving the map around and selecting + highlighting objects on the map. Other functionality outside of that, has not yet been done. But rough roadmap for these exist.
@@ -24,9 +24,7 @@ If you are interested contact me (http://hyytia.level7.fi/)
 
 #Developing
 ##Testing and development
-Tests can be found with index-file in tests/-folder. A working example should be found in: *http://warmapengine.level7.fi/tests/*, but naturally on your server it is http://server_address/tests/.
-
-There are no unit tests at the moment, since I didn't find them worth the time and effort as many things in canvas game can not be unit tested easily, I decided to skip them all together for now.
+Tests can be found with index-file in tests/-folder. A working example should be also found in: *http://warmapengine.level7.fi/tests/*.
 
 #How the Map engine works
 ##How to setup simple map
@@ -116,19 +114,30 @@ Unless overridden there are 3 map events fired currently (each in different file
 ** Data passed to event: array of objects selected as data
 
 # Rough roadmap
-**2016-04-01**
+###2016-04-01###
+
 - Map publicly released and moved to flatworld repository
-**2016-05-10**
+
+###2016-05-10###
+
 - Minimap added
 - Started making example game
-**2016-07-01**
+
+###2016-07-01###
+
 - Preliminary server-side functionality ready
-**2016-08-01**
+
+###2016-08-01###
+
 - Example game front-end ready
-**2016-11-01**
+
+###2016-11-01###
+
 - Server-side ready
 - The map has been extended with several more features (animation, minimap, offline functionality, hotkeys etc.)
-**2016-12-01**
+
+###2016-12-01###
+
 - Example game ready
 - Documentation finished
 - Front- and server-sides are ready for version 1.0
