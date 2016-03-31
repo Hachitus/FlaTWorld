@@ -79,14 +79,12 @@
      *
      * @return {Object}                                      New Map instance
      */
-    constructor(canvasContainer = null,
-        props = {
-          bounds: { width: 0, height: 0 },
-          rendererOptions: { refreshEventListeners: true },
-          subcontainers: false,
-          cache: false,
-          trackFPSCB: false }) {
-      var { bounds, rendererOptions, subcontainers, trackFPSCB, cache } = props;
+    constructor(canvasContainer = null, {
+      bounds = { width: 0, height: 0 },
+      rendererOptions = { autoResize: true, antialias: true },
+      subcontainers = false,
+      cache = false,
+      trackFPSCB = false } = {}) {
 
       /* Check for the required parameters! */
       if (!canvasContainer) {
@@ -98,7 +96,7 @@
       }
 
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
-      _renderer = PIXI.autoDetectRenderer(bounds.width, bounds.height, rendererOptions);
+      _renderer = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
       /* We handle all the events ourselves through addEventListeners-method on canvas, so destroy pixi native method */
       _renderer.plugins.interaction.destroy();
       /* Make sure the canvasContainer is empty. So there are no nasty surprises */
@@ -125,8 +123,6 @@
       _renderer.view.style.top = "0px";
       /* stop scrollbars of showing */
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
-      /* For html5 canvas. I guess it doesn't apply for webgl */
-      _renderer.roundPixels = true;
 
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
