@@ -1,3 +1,13 @@
+<a name="0.0.2"></a>
+# 0.0.2 Bug fixes (2016-??-??)
+## Bug Fixes
+* Context menu is totally disabled now and right click works better cross browser
+* ES6 away from test scripts. Was failing on android
+
+## Features
+
+## Others
+
 <a name="0.0.1"></a>
 # 0.0.1 Tiny bug fixes to kickstart the official versions development (2016-04-03)
 ## Bug Fixes
