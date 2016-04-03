@@ -7,7 +7,7 @@ The development is still in pre-alpha stage. The most drastic changes have been 
 Next development phase contains building example game for the engine slowly and adding features to it. These feature can or can not be added to the engine. Based on the situation they are in the engine or as a separate example of how to build the game on top of the engine.
 
 #Introduction
-2D (turn-based) strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core games and not casual games (though it can most certainly be used for those!). Some features are in my roadmap to do, for the next 6-9 months.
+2D (turn-based) strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games (though it can most certainly be used for those!). Some features are in my roadmap to do, for the next 6-9 months. Why is was decided to create the engine, was that I saw huge potential for turn-based games in browser and have been waiting for years to get a decent one. But that never happened.
 
 The engine will also get a server-side implementation in node.js (for turn-based games). But it is still not sure, how much of this implementation can be used as-is in the general engine and how much will be example game-related code.
 
