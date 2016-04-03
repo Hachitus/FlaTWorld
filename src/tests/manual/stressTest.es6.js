@@ -134,7 +134,12 @@
   }
 
   function initFlatworld(mapData, options) {
-    var { mapsize, canvasContainer, trackFPSCB, UITheme, cache, automatic} = options;
+    var mapsize = options.mapsize;
+    var canvasContainer = options.canvasContainer;
+    var trackFPSCB = options.trackFPSCB;
+    var UITheme = options.UITheme;
+    var cache = options.cache;
+    var automatic = options.automatic;
     var map = {};
     var globalMap = {
       data: {}
@@ -291,7 +296,8 @@
     var layerData = addBase_spriteLayerData("terrainLayer", "terrain");
 
     hexagonGrid.forEach(function (coordinates) {
-      var { x, y } = coordinates;
+      var x = coordinates.x;
+      var y = coordinates.y;
 
       layerData.objectGroups.push({
         type: "ObjectTerrain",
@@ -318,7 +324,8 @@
     var layerData = addBase_spriteLayerData("unitLayer", "unit");
 
     hexagonGrid.forEach(function (coordinates) {
-      var { x, y } = coordinates;
+      var x = coordinates.x;
+      var y = coordinates.y;
 
       layerData.objectGroups.push({
         type: "ObjectUnit",
