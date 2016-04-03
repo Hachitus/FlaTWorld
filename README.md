@@ -1,34 +1,54 @@
 [![GPLv3 Affero License](http://img.shields.io/badge/license-LGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl.html)
 [![Gitter](https://badges.gitter.im/Hachitus/FlaTWorld.svg)](https://gitter.im/Hachitus/FlaTWorld)
 
-#NOTE, STILL IN DEVELOPMENT!
-This engine is still in development. It is not well tested for other uses than the current tests / example game. When the most critical development phase is over, the API will be more locked down. At this stage the API and structure can still change, so if you use the engine for something serious, please take that into account!
+#PRE-ALPHA!
+The development is still in pre-alpha stage. The most drastic changes have been done and the basic functionality and API is in place. The API and structure can still go under dramatic changes after feedback. If you use the engine for something serious, please take that into account! Also it is good to contact me, if you use the engine for something, as I can provide assistance and will know what people are using it for and can develop the engine a lot more efficiently following a correct path.
 
-Also I am very happy to get feedback on any projects or tests that might be using this engine and very eager to help with getting issues resolved.
-
-#Hot links
-- [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
-- [Contribution guidelines](https://github.com/Hachitus/warmapengine/blob/master/CONTRIBUTING.md)
-- [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
-- [Basic base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
-- [Changelog](https://github.com/Hachitus/warmapengine/blob/master/CHANGELOG.md)
+Next development phase contains building example game for the engine slowly and adding features to it. These feature can or can not be added to the engine. Based on the situation they are in the engine or as a separate example of how to build the game on top of the engine.
 
 #Introduction
-2D strategy game engine for browsers. Project will move forward at its own pace. The very core functionality has been done, that practically manages adding the objects to the map, moving the map around and selecting + highlighting objects on the map. Other functionality outside of that, has not yet been done. But rough roadmap for these exist.
+2D (turn-based) strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core games and not casual games (though it can most certainly be used for those!). Some features are in my roadmap to do, for the next 6-9 months.
 
-Basically the core functionality will appear mostly in the pace of making a simple example 2D strategy game for the engine. A much later on there will be a full-blown game made based on this, but after the core engine is ready.
+The engine will also get a server-side implementation in node.js (for turn-based games). But it is still not sure, how much of this implementation can be used as-is in the general engine and how much will be example game-related code.
 
-The development is done in ES6 and transpiled to work on all browsers that are supported. the official support for the engine is IE11+, since there are a lot of other features that will not be available for browser outside of that.
+The development is done in ES6 and transpiled to work on all browsers that are supported. the official support for the engine is IE11+.
 
-If you are interested contact me (http://hyytia.level7.fi/)
+If you are interested contact me (http://hyytia.level7.fi/). I am very eager to get any feedback or help with the project.
+
+Table of contents
+=================
+
+  * [Hot links](#Hot-links)
+  * [Developing](#Developing)
+    * [Examples](#Examples)
+    * [Setup a simple map](#Setup-a-simple-map)
+    * [Plugins](#Plugins)
+    * [Events](#Events)
+    * [Templates](#Templates)
+  * [Roadmap](#Roadmap)
+    * [2016-05](#2016-05)
+    * [2016-06](#2016-06)
+    * [2016-07](#2016-07)
+    * [2016-08](#2016-08)
+    * [2016-09](#2016-09)
+    * [2016-11](#2016-11)
+    * [2017-01](#2017-01)
+  * [Sponsors](#Sponsors)
+  * [Credits](#Credits)
+
+#Hot links
+* [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
+* [Contribution guidelines](CONTRIBUTING.md)
+* [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
+* [Base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
+* [Changelog](CHANGELOG.md)
 
 #Developing
-##Testing and development
-Tests can be found with index-file in tests/-folder. A working example should be also found in: *http://warmapengine.level7.fi/tests/*.
+##Examples
+Best example is found in [plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview). This is the base map created with the engine. The latest example will be found from the engines manual tests (in src/tests/-folder). A working example should also be found in: *http://warmapengine.level7.fi/tests/*, but not quaranteed that it is always on (as server can be down or dns changed).
 
-#How the Map engine works
-##How to setup simple map
-The main module for the whole map is core.map, so you should always primarily look through it's API and then dig deeper. The best examples for setting up a map at the moment is still going through the code. Check the test-files: tests/manualTest.html and tests/manualStressTest.html (which are more comprehensive). They use horizontalHexaFactory to go through the map data and setup objects based on that data. You can use horizontalHexaFactory if you want or setup your own factory and own data structure. Factories always have to follow a certain data structure so they might not be something everyone wants or can cope with.
+##Setup a simple map
+The main module for the whole map is core.Flatworld, so you should always primarily look through it's API and then dig deeper. The best examples for setting up a map at the moment is still going through the code. Check the test-files: tests/manualTest.html and tests/manualStressTest.html (which are more comprehensive). They use horizontalHexaFactory to go through the map data and setup objects based on that data. You can use horizontalHexaFactory if you want or setup your own factory and own data structure. Factories always have to follow a certain data structure so they might not be something everyone wants or can cope with.
 
 Simple unfinished example:
 
@@ -73,77 +93,83 @@ Simple unfinished example:
 		thisLayer.addChild(newObject);
 	})
 
-##Plugins
-The map supports adding plugins and even some of the core functionalities have been implemented as plugins. You must comply to just to a couplr rules. Plugins have a lot of freedom to mess around with the map data, this is subject to change if there are issues with this later on. Plugin objects must have init method and pluginName variable, in the format of:
+##Factories
+Factories are the ones that get the server-side data, iterate through it and create the necessary objects to the FlaTWorld map.
+
+You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [horizontalHexaFactory.js](src/factories/horizontalHexaFactory.js) and create your own based on that.
+
+##Extensions
+The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to just couple rules:
+* Be careful when constructing an extension. They have a lot of freedom to mess around with the map data (which might change in the future).
+* Must return an object containing:
+  * Init method
+  * 'PluginName' variable, which has same value as the exported library name
+
+You can see the required format from e.g. [hexagon](src/components/map/extensions/hexagons/selectHexagonPlugin.js) extension.
+
+The format for these rules as an example:
 ```javascript
 
 	export const sameNameThatIsExported = setupModuleFunction();
 
-	{
-	  pluginName: "sameNameThatIsExported"
-	  init: function(map) {
-	    // All the functionality e.g. extend map prototype or activate eventListener etc.
-	  }
+	function setupModuleFunction() {
+    return {
+  	  pluginName: "sameNameThatIsExported",
+  	  init: function(map) {}
+    }
 	}
 
 ```
 
-Plugins need to export the class / object that exposes the init-method with the same name as pluginName, like so:
-```javascript
-
-	export const sameNameThatIsExported = setupModuleFunction();
-
-```
-
-Also the map engine uses it's own interface to use the normal map functionalities like moving the map (default dragging
-the map), selecting units and zooming the map. These are implemented via eventlisteners.js and UI.js core modules.
-
+##Templates
 UI interface is implemented so that map uses the UI.js module to implement API and to that API you pass in the UITheme
-module you want to use in the game. All UIThemes have to implement at least the core functionality API (or overwrite
-the API, which is naturally not encouraged).
+module you want to use in the game. All UIThemes should implement at least the core functionality API.
 
-All UI templates need to extend the UI_templateBase @ '/components/map/core/UI_themeBase'
+UI Templates use the methods that UI.js offers them. They do not need to inherit anything, but they will be used through UI.js and must comply to the necessary methods that UI.js uses.
 
 ##Events
-Unless overridden there are 3 map events fired currently (each in different file in the core or extensions files):
-* mapMoved
-** Data passed to event: Amount of movement being handled ({ x, y })
-* mapZoomed
-** Data passed to event: Last scale factor, amount of current zoom to be applied, is is zoom in or out (true / false)
-* objectsSelected
-** Data passed to event: array of objects selected as data
+For events involved with the FlaTWorld map, you should check the current list from the [mapEvents.js](src/components/map/core/mapEvents.js) file. We try to keep it as up-to-date as possible.
 
-# Rough roadmap
-###2016-04-01###
+#Roadmap
+###2016-05###
+- Created own repository and very basic base for server-side
 
-- Map publicly released and moved to flatworld repository
+###2016-06###
+- Minimap and Fog of War layer added
 
-###2016-05-10###
+###2016-07###
+- Simple example game working, that will be developed through the year
 
-- Minimap added
-- Started making example game
+###2016-08###
+* Preliminary server-side functionality ready
+  * Normal API works, with most likely mongoDB
+  * Receives and sends data correctly, but does not generate turns yet
 
-###2016-07-01###
+###2016-09###
+- Map generator ready
 
-- Preliminary server-side functionality ready
+###2016-11###
 
-###2016-08-01###
+- Server-side logic for turn-based strategy ready
+- The map has been extended with several more features
+  - animation
+  - offline functionality
+  - hotkeys
+  - push notifications
 
-- Example game front-end ready
-
-###2016-11-01###
-
-- Server-side ready
-- The map has been extended with several more features (animation, minimap, offline functionality, hotkeys etc.)
-
-###2016-12-01###
+###2017-01###
 
 - Example game ready
 - Documentation finished
 - Front- and server-sides are ready for version 1.0
 
-# Sponsors
+#Sponsors
 Thank you to browserstack for providing magnificient testing tools
 <a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
-# Credit
+
+#Credits
 Copyright (c) 2016 Janne Hyytiä
+
+Graphics:
+* http://kenney.nl/assets/hexagon-pack
+* Originally everything was from freeciv, but those are being refactored away.
