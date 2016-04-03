@@ -22,20 +22,21 @@
    *
    * @class factories.horizontalHexaFactory
    * @requires PIXI in global space
-   * @param {HTMLElement} canvasContainerElement  HTML Element. Container which will hold the generated canvas element
-   * @param {Object} datas                        Object with mapDatas to construct the map structure
-   * @param {Object} datas.map                    Holds all the stage, layer and object data needed to construct a full map
-   * @param {Object} datas.game                   More general game data (like turn number, map size etc.)
-   * @param {Object} datas.type                   Type data such as different unit types and their graphics (tank, soldier etc.)
-   * @param {UITheme} UITheme                     An instance of the UITheme class that the map uses.
-   * @param {Object} options                      Optional options
-   * @param {Object} options.isHiddenByDefault    When we use mapMovement plugin, it is best to keep all the obejcts hidden at the beginnig.
-   * @param {Function} options.trackFPSCB         Callback to track FPS
+   * @param {HTMLElement} canvasContainerElement HTML Element. Container which will hold the generated canvas element
+   * @param {Object} datas                       Object with mapDatas to construct the map structure
+   * @param {Object} datas.map                   Holds all the stage, layer and object data needed to construct a full map
+   * @param {Object} datas.game                  More general game data (like turn number, map size etc.)
+   * @param {Object} datas.type                  Type data such as different unit types and their graphics (tank, soldier etc.)
+   * @param {UITheme} UITheme                    An instance of the UITheme class that the map uses.
+   * @param {Object} {}                          Optional options
+   * @param {Object} {}.isHiddenByDefault        When we use mapMovement plugin, it is best to keep all the obejcts hidden at the beginnig.
+   * @param {Function} {}.trackFPSCB             Callback to track FPS
    **/
-  function hexaFactory(canvasContainerElement, datas, options = {
-        trackFPSCB: false,
-        isHiddenByDefault: true,
-        cache: false }) {
+  function hexaFactory(canvasContainerElement, datas, {
+        trackFPSCB = false,
+        isHiddenByDefault = true,
+        cache = false,
+        scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
     console.log("============== Horizontal hexagonal Map factory started =============");
     const pixelRatio = utils.environmentDetection.getPixelRatio();
     const DATA_MAP = (typeof datas.map === "string") ? JSON.parse(datas.map) : datas.map;
@@ -69,12 +70,14 @@
         width: 500,
         height: 500,
         maxDetectionOffset: 100,
-        isHiddenByDefault: options.isHiddenByDefault
+        isHiddenByDefault: isHiddenByDefault
       },
-      trackFPSCB: options.trackFPSCB,
-      cache: options.cache
+      trackFPSCB: trackFPSCB,
+      cache: cache
     };
     var map = new Flatworld(canvasContainerElement, mapProperties, mapOptions );
+
+    PIXI.SCALE_MODES.DEFAULT = 1;
 
     DATA_MAP.layers.forEach( layerData => {
       if (typeof layerData !== "object") {
@@ -116,6 +119,7 @@
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);
+              texture.baseTexture.scaleMode = scaleMode;
               objectOptions = {
                 data: {
                   typeData: objTypeData,

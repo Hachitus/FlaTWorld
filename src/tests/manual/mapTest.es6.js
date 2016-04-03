@@ -70,7 +70,8 @@
           type: typeData
         },
         {
-          isHiddenByDefault: false
+          isHiddenByDefault: false,
+          scaleMode: PIXI.SCALE_MODES.NEAREST
         });
 
       var dialog_selection = document.getElementById("selectionDialog");

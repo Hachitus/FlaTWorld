@@ -81,7 +81,7 @@
      */
     constructor(canvasContainer = null, {
       bounds = { width: 0, height: 0 },
-      rendererOptions = { autoResize: true, antialias: true },
+      rendererOptions = { autoResize: true, antialias: false },
       subcontainers = false,
       cache = false,
       trackFPSCB = false } = {}) {

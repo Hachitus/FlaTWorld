@@ -231,7 +231,8 @@
         {
           trackFPSCB: trackFPSCB,
           isHiddenByDefault: true,
-          cache: options.cache
+          cache: options.cache,
+          scaleMode: PIXI.SCALE_MODES.NEAREST
         });
 
       var dialog_selection = document.getElementById("selectionDialog");
