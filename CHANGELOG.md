@@ -3,6 +3,7 @@
 ## Bug Fixes
 * Context menu is totally disabled now and right click works better cross browser
 * ES6 away from test scripts. Was failing on android
+* README has instructions to install FlaTWorld with the current setup.
 
 ## Features
 

@@ -20,6 +20,7 @@ Table of contents
 
   * [Hot links](#Hot-links)
   * [Developing](#Developing)
+    * [Installation](#Installation)
     * [Examples](#Examples)
     * [Setup a simple map](#Setup-a-simple-map)
     * [Plugins](#Plugins)
@@ -44,6 +45,27 @@ Table of contents
 * [Changelog](CHANGELOG.md)
 
 #Developing
+##Installation
+You can
+
+    git clone https://github.com/Hachitus/FlaTWorld.git
+
+Then install dependencies for building
+
+    npm install
+
+Then build for development
+
+    npm run build
+
+And the current distribution build will be in: src/dist/ (flatworld.js and flatworld_libraries.js)
+
+If you need files for production, deploy
+
+    npm run deploy
+
+And the production files (uglified) will be in: dist/ (flatworld.js and flatworld_libraries.js)
+
 ##Examples
 Best example is found in [plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview). This is the base map created with the engine. The latest example will be found from the engines manual tests (in src/tests/-folder). A working example should also be found in: *http://warmapengine.level7.fi/tests/*, but not quaranteed that it is always on (as server can be down or dns changed).
 
