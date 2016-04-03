@@ -124,6 +124,11 @@
       /* stop scrollbars of showing */
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
 
+      /* Disable contextMenu */
+      _renderer.view.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *

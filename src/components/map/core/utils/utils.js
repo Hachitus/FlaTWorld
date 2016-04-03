@@ -27,25 +27,10 @@
      * Detects if the mouse click has been the right mouse button
      *
      * @method isRightClick
-     * @param {Event} event The event where the click occured
+     * @param {Event} e   The event where the click occured
      */
-    function isRightClick( event ) {
-      var rightclick;
-
-      event = event ? event : window.event; /* For IE. */
-      if ( event.buttons ) {
-        rightclick = ( +event.buttons === 2 );
-      } else if ( event.which ) {
-        rightclick = ( +event.which === 3 );
-      } else if ( event.button ) {
-        rightclick = ( +event.button === 2 );
-      }
-
-      if ( rightclick ) {
-        return true;
-      }
-
-      return false;
+    function isRightClick( e ) {
+      return e.which === 3;
     }
     /**
      * @method getPointerCoords

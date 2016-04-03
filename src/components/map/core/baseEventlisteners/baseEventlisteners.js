@@ -215,17 +215,22 @@
 
           hammer.add(press);
           hammer.on("press", clickListener);
-          mapInstance.canvas.addEventListener("contextmenu", clickListener, true);
+          mapInstance.canvas.addEventListener("mouseup", (e) => {
+            if (e.which === 3) {
+              clickListener(e);
+            }
+          }, true);
         },
         off: () => {
           hammer.off("press", clickListener);
-          mapInstance.canvas.removeEventListener("contextmenu", clickListener, true);
+          mapInstance.canvas.removeEventListener("mouseup", clickListener, true);
         }
       };
 
       function clickListener(e) {
-        /* Prevent right clicks default menu */
-        e.preventDefault();
+        if (!utils.mouse.isRightClick(e) && e.type !== "press") {
+          return;
+        }
 
         /* Check that finite state is correct and that if desktop, the user clicked right button */
         if (! mapStates.can("objectOrder") && ( mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
