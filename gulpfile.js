@@ -64,11 +64,9 @@ gulp.task('build', ['cleanDev', 'bundleLibDev', 'bundleCssDev', 'bundleDev']);
 
 gulp.task('bundleProd', function() {
   return gulp.src(config.entryFiles)
-    .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(uglify())
     .pipe(concat('flatworld.min.js'))
-    .pipe(sourcemaps.write("."))
     .pipe(gulp.dest(config.outputDir));
 });
 
@@ -86,11 +84,10 @@ gulp.task('bundleLibDev', function() {
 
 gulp.task('bundleDev', function() {
   return gulp.src(config.entryFiles)
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init({ debug: true }))
     .pipe(babel())
-    .pipe(uglify())
     .pipe(concat('flatworld.js'))
-    .pipe(sourcemaps.write("."))
+    .pipe(sourcemaps.write("./maps"))
     .pipe(gulp.dest(config.outputDirDev));
 });
 
