@@ -2,31 +2,28 @@
 [![Gitter](https://badges.gitter.im/Hachitus/FlaTWorld.svg)](https://gitter.im/Hachitus/FlaTWorld)
 
 #PRE-ALPHA!
-The development is still in pre-alpha stage. The most drastic changes have been done and the basic functionality and API is in place. The API and structure can still go under dramatic changes after feedback. If you use the engine for something serious, please take that into account! Also it is good to contact me, if you use the engine for something, as I can provide assistance and will know what people are using it for and can develop the engine a lot more efficiently following a correct path.
-
-Next development phase contains building example game for the engine slowly and adding features to it. These feature can or can not be added to the engine. Based on the situation they are in the engine or as a separate example of how to build the game on top of the engine.
+The development is still in pre-alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under dramatic changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
 
 #Introduction
-2D (turn-based) strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games (though it can most certainly be used for those!). Some features are in my roadmap to do, for the next 6-9 months. Why is was decided to create the engine, was that I saw huge potential for turn-based games in browser and have been waiting for years to get a decent one. But that never happened.
-
-The engine will also get a server-side implementation in node.js (for turn-based games). But it is still not sure, how much of this implementation can be used as-is in the general engine and how much will be example game-related code.
-
-The development is done in ES6 and transpiled to work on all browsers that are supported. the official support for the engine is IE11+.
+2D turn-based strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games. I was frustrated at waiting for those games and decided to start making it on my own. Browser environment is a perfect match for turn-based multiplayer. You can continue your turn easily anywhere, any time!
 
 If you are interested contact me (http://hyytia.level7.fi/). I am very eager to get any feedback or help with the project.
 
 Table of contents
 =================
 
-  * [Hot links](#Hot-links)
-  * [Developing](#Developing)
-    * [Installation](#Installation)
-    * [Examples](#Examples)
-    * [Setup a simple map](#Setup-a-simple-map)
-    * [Plugins](#Plugins)
-    * [Events](#Events)
-    * [Templates](#Templates)
-  * [Roadmap](#Roadmap)
+  * [Hot links](#hot-links)
+  * [Developing](#developing)
+    * [Installation](#installation)
+    * [Examples](#examples)
+    * [Setup a simple map](#setup-a-simple-map)
+    * [Plugins](#plugins)
+    * [Events](#events)
+    * [Templates](#templates)
+  * [Requirements and restrictions](#requirements-and-efficiency-goals)
+    * [Supported environments](#supported-environments)
+    * [Aimed mapsize and efficiency](#aimed-mapsize-and-efficiency)
+  * [Roadmap](#roadmap)
     * [2016-05](#2016-05)
     * [2016-06](#2016-06)
     * [2016-07](#2016-07)
@@ -34,8 +31,8 @@ Table of contents
     * [2016-09](#2016-09)
     * [2016-11](#2016-11)
     * [2017-01](#2017-01)
-  * [Sponsors](#Sponsors)
-  * [Credits](#Credits)
+  * [Sponsors](#sponsors)
+  * [Credits](#credits)
 
 #Hot links
 * [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
@@ -151,6 +148,17 @@ UI Templates use the methods that UI.js offers them. They do not need to inherit
 
 ##Events
 For events involved with the FlaTWorld map, you should check the current list from the [mapEvents.js](src/components/map/core/mapEvents.js) file. We try to keep it as up-to-date as possible.
+
+#Requirements and efficiency goals
+##Supported environments
+* Anything that runs browsers, with these restrictions:
+  * [WebGL support](http://caniuse.com/#feat=webgl)
+  * if you use the transpiled version, then babel restrictions apply for ES6
+##Aimed mapsize and efficiency
+These are still subject to change (both raised and lowered). The map is planned to be big! In the way that I checked pretty much the biggest civilization community made maps and got over it. Since those maps do not seem to be sufficient for the plans I have for the engine! But these are still very realistic goals with the present setup.
+* Maximum map size: 225 000 000 pixels (15k * 15k)
+* Total object count on map: ~50k
+* FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
 
 #Roadmap
 ###2016-05###
