@@ -227,6 +227,7 @@
       });
 
     function onComplete(loader, resources) {
+      console.log("HEP1", PIXI.SCALE_MODES.NEAREST)
       window.worldMap = map = globalMap.data = factories.hexaFactory(
         canvasContainer, {
           game: gameData,

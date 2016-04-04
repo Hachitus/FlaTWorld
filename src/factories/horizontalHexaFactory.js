@@ -37,7 +37,7 @@
         isHiddenByDefault = true,
         cache = false,
         scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
-    console.log("============== Horizontal hexagonal Map factory started =============");
+    log.debug("============== Horizontal hexagonal Map factory started =============");
     const pixelRatio = utils.environmentDetection.getPixelRatio();
     const DATA_MAP = (typeof datas.map === "string") ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === "string") ? JSON.parse(datas.type) : datas.type;
@@ -73,7 +73,8 @@
         isHiddenByDefault: isHiddenByDefault
       },
       trackFPSCB: trackFPSCB,
-      cache: cache
+      cache: cache,
+      defaultScaleMode: scaleMode
     };
     var map = new Flatworld(canvasContainerElement, mapProperties, mapOptions );
 
@@ -119,7 +120,6 @@
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);
-              texture.baseTexture.scaleMode = scaleMode;
               objectOptions = {
                 data: {
                   typeData: objTypeData,

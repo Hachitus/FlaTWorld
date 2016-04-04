@@ -84,7 +84,8 @@
       rendererOptions = { autoResize: true, antialias: false },
       subcontainers = false,
       cache = false,
-      trackFPSCB = false } = {}) {
+      trackFPSCB = false,
+      defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
 
       /* Check for the required parameters! */
       if (!canvasContainer) {
@@ -128,6 +129,10 @@
       _renderer.view.addEventListener("contextmenu", (e) => {
         e.preventDefault();
       });
+
+      /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P. Setting this separately in each
+       * baseTexture, would seem stupid, so we do it like this for now. */
+      this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
 
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
