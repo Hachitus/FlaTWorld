@@ -1,13 +1,15 @@
 <a name="0.0.2"></a>
 # 0.0.2 Bug fixes (2016-??-??)
 ## Bug Fixes
-* Context menu is totally disabled now and right click works better cross browser
-* ES6 away from test scripts. Was failing on android
-* README has instructions to install FlaTWorld with the current setup.
+* Context menu is totally disabled now and right click works better cross browser.
+* ES6 away from test scripts. Was failing on android.
 
 ## Features
+* Scale mode can be changed with parameters.
 
 ## Others
+* Renamed horizontalHexaFactory -> hexaFactory, it will later support vertical too.
+* README install instructions and requirements added.
 
 <a name="0.0.1"></a>
 # 0.0.1 Tiny bug fixes to kickstart the official versions development (2016-04-03)
