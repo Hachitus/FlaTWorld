@@ -1,0 +1,20 @@
+{
+  "name": "FlaTWorld",
+  "description": "2D turn-based strategy game engine for browsers",
+  "main": "src/dist/flatworld.js",
+  "authors": [
+    "Janne Hyytiä <janne.hyytia@saunalahti.fi>"
+  ],
+  "homepage": "https://github.com/Hachitus/FlaTWorld",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "npm-debug.log"
+  ]
+}

@@ -1,0 +1,3 @@
+# Here we define the default UIs for the map engine. UIs are always as flexible as possible for own implementations.
+
+# All UI templates need to extend the UI_templateBase @ 'components/map/core/UI_templateBase'
