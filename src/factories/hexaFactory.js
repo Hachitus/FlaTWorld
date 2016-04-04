@@ -20,7 +20,7 @@
    * This constructs a whole horizontally aligned hexagonal map. Some polyfills are needed and added for IE11 (
    * http://babeljs.io/docs/usage/polyfill/ ). These are found in utils
    *
-   * @class factories.horizontalHexaFactory
+   * @class factories.hexaFactory
    * @requires PIXI in global space
    * @param {HTMLElement} canvasContainerElement HTML Element. Container which will hold the generated canvas element
    * @param {Object} datas                       Object with mapDatas to construct the map structure
@@ -37,7 +37,7 @@
         isHiddenByDefault = true,
         cache = false,
         scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
-    log.debug("============== Horizontal hexagonal Map factory started =============");
+    log.debug("============== Hexagonal Map factory started =============");
     const pixelRatio = utils.environmentDetection.getPixelRatio();
     const DATA_MAP = (typeof datas.map === "string") ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === "string") ? JSON.parse(datas.type) : datas.type;
@@ -82,8 +82,8 @@
 
     DATA_MAP.layers.forEach( layerData => {
       if (typeof layerData !== "object") {
-        log.error("Problem in horizontalHexaFactory, with layerData:" + JSON.stringify(layerData));
-        throw new Error("Problem in horizontalHexaFactory, with layerData:", layerData);
+        log.error("Problem in hexaFactory, with layerData:" + JSON.stringify(layerData));
+        throw new Error("Problem in hexaFactory, with layerData:", layerData);
       }
 
       var renderer = map.getRenderer();

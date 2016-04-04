@@ -31,7 +31,7 @@
      *
      * The biggest part of creating the map, is the data structure. There is a clear data structure that you can see from the
      * tests/data-folder, but the factory is responsible for creating the objects, so you can use your own factory implementation. So to
-     * understand more, please see e.g. factories.horizontalHexaFactory.
+     * understand more, please see e.g. {{#crossLink "flatworld.factories.hexaFactory"}}{{/crossLink}}.
      *
      * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
      * structure is this:
