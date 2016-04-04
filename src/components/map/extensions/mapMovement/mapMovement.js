@@ -6,7 +6,6 @@
   -----------------------*/
   var mapEvents = window.flatworld.mapEvents;
   var arrays = window.flatworld.generalUtils.arrays;
-  var Q = window.flatworld_libraries.Q;
 
   /*-----------------------
   ------- VARIABLES -------
@@ -22,7 +21,8 @@
   /*-----------------------
   -------- PUBLIC ---------
   -----------------------*/
-  /** This module manages visibility of the objects, based on are they visible to the player (on the canvas / webgl) or outside of it. This makes the map a lot faster and reliable resource-wise and lags otherwise. Requires subcontainers atm.
+  /** This module manages visibility of the objects, based on are they visible to the player (on the canvas / webgl) or outside of it.
+   * This makes the map a lot faster and reliable resource-wise and lags otherwise. Requires subcontainers atm.
    *
    * @namespace flatworld.extensions
    * @class mapMovement
