@@ -152,7 +152,7 @@ For events involved with the FlaTWorld map, you should check the current list fr
 #Requirements and efficiency goals
 ##Supported environments
 * Anything that runs browsers, with these restrictions:
-  * [WebGL support](http://caniuse.com/#feat=webgl)
+  * WebGL support: [supported devices](http://caniuse.com/#feat=webgl), [webgl on your browser](http://www.doesmybrowsersupportwebgl.com/)
   * if you use the transpiled version, then babel restrictions apply for ES6
 ##Aimed mapsize and efficiency
 These are still subject to change (both raised and lowered). The map is planned to be big! In the way that I checked pretty much the biggest civilization community made maps and got over it. Since those maps do not seem to be sufficient for the plans I have for the engine! But these are still very realistic goals with the present setup.
