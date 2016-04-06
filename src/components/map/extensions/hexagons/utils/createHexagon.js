@@ -54,12 +54,12 @@
    *                              isFlatTop (Boolean), is the heaxgon flat-topped
    * @return {PIXI.Graphics}      Graphics object that is shaped as hexagon, based on given radius and options.
    */
-  function createVisibleHexagon(radius, options = { color: "#000000", isFlatTop: false }) {
+  function createVisibleHexagon(radius, { color = 0xFF0000, isFlatTop = false } = {}) {
     var graphics = new PIXI.Graphics();
-    var points = coordsToPixiPoints(radius);
+    var points = coordsToPixiPoints(radius, isFlatTop);
 
-    graphics.beginFill(options.color, 1);
-    graphics.drawPolygon(points);
+    graphics.beginFill(color, 1);
+    graphics.drawPolygon(points, isFlatTop);
     graphics.endFill();
 
     return graphics;
@@ -79,7 +79,7 @@
    * @return {Array}                Array of PIXI.Point coordinates
    */
   function coordsToPixiPoints(radius) {
-    return getHexagonPoints(radius).map(function(point) {
+    return getHexagonPoints({ radius }).map(function(point) {
       return new PIXI.Point(point.x, point.y);
     });
   }

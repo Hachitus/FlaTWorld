@@ -5,17 +5,18 @@
   ------- IMPORT --------
   ----------------------*/
   var { Q, PIXI } = window.flatworld_libraries;
-  var { mapLayers, ObjectManager, mapEvents, generalUtils, log }  = window.flatworld;
+  var { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils }  = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
   const LAYER_TYPE_STATIC = 0;
   const LAYER_TYPE_MOVABLE = 1;
+  const LAYER_TYPE_MINIMAP = 2;
   const VERSION = "0.0.0";
   var _drawMapOnNextTick = false;
   var isMapReadyPromises = [];
-  var _staticLayer, _movableLayer, _renderer, ParentLayerConstructor;
+  var _staticLayer, _movableLayer, _minimapLayer, _renderer, _rendererMinimap, ParentLayerConstructor;
 
   /*---------------------
   --------- API ---------
@@ -64,46 +65,53 @@
      * @requires Hammer for touch events
      * @requires Hamster for mouse scroll events
      *
-     * @param {HTMLElement} canvasContainer                 HTML element which will be container for the created canvas element. REQUIRED
-     * @param {Object} props                                Extra properties
-     * @param {Object} props.bounds                         Bounds of the map / mapSize
+     * @param {HTMLElement} mapCanvas                       HTML element which will be container for the created canvas element.
+     * @param {Object} [props]                              Extra properties
+     * @param {Object} props.bounds                         Bounds of the viewport
      * @param {Integer} props.bounds.width                  Bound width
      * @param {Integer} props.bounds.height                 Bound height
+     * @param {Object} [props.mapSize]                      The total mapSize
+     * @param {Integer} props.mapSize.x                     x-axis
+     * @param {Integer} props.mapSize.y                     y-axis
      * @param {Object} props.rendererOptions                Renderer options passed to PIXI.autoDetectRenderer
      * @param {Object} props.subcontainers                  Subcontainers size in pixels. If given, will activate subcontainers. If not
      * given or false, subcontainers are not used.area.
      * @param {Integer} props.subcontainers.width           Subcontainer width
      * @param {Integer} props.subcontainers.height          Subcontainer height
-     * @param {FPSCallback} trackFPSCB                      Callback function for tracking FPS in renderer. So this is used for debugging
+     * @param {FPSCallback} [trackFPSCB]                    Callback function for tracking FPS in renderer. So this is used for debugging
      * and optimizing.
      *
      * @return {Object}                                      New Map instance
      */
-    constructor(canvasContainer = null, {
+    constructor(mapCanvas = null, {
       bounds = { width: 0, height: 0 },
+      mapSize = { x:0, y:0 },
       rendererOptions = { autoResize: true, antialias: false },
+      minimapCanvas,
       subcontainers = false,
       cache = false,
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
 
       /* Check for the required parameters! */
-      if (!canvasContainer) {
-        throw new Error(this.constructor.name + " needs canvasContainer!");
+      if (!mapCanvas) {
+        throw new Error(this.constructor.name + " needs canvas element!");
       }
-      /* If the constructor was passed canvasContainer as a string and not as an Element, we get the element */
-      if (typeof canvasContainer === "string") {
-        canvasContainer = document.querySelector(canvasContainer);
+      /* If the constructor was passed mapCanvas as a string and not as an Element, we get the element */
+      if (typeof mapCanvas === "string") {
+        mapCanvas = document.querySelector(mapCanvas);
       }
 
+      /* Make sure the mapCanvas is empty. So there are no nasty surprises */
+      mapCanvas.innerHTML = "";
+      /* Add the given canvas Element to the options that are passed to PIXI renderer */
+      rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
       _renderer = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+      /* Create PIXI renderer for minimap */
+      _rendererMinimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
       /* We handle all the events ourselves through addEventListeners-method on canvas, so destroy pixi native method */
       _renderer.plugins.interaction.destroy();
-      /* Make sure the canvasContainer is empty. So there are no nasty surprises */
-      canvasContainer.innerHTML = "";
-      /* Add the canvas Element PIXI created inside the given canvasContainer */
-      canvasContainer.appendChild(_renderer.view, canvasContainer);
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
       ParentLayerConstructor = subcontainers ? mapLayers.MapLayerParent : mapLayers.MapLayer;
@@ -115,20 +123,15 @@
        * graphics that show which area or object is currently selected. */
       _staticLayer = new mapLayers.MapLayer({ name:"staticLayer", coord: { x: 0, y: 0 } });
       _movableLayer = new mapLayers.MapLayer({ name:"movableLayer", coord: { x: 0, y: 0 } });
+      _minimapLayer = new mapLayers.MapLayer({ name:"minimapLayer", coord: { x: 0, y: 0 } });
       _staticLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
-      _renderer.view.style.position = "absolute";
-      _renderer.view.style.display = "block";
-      _renderer.view.style.left = "0px";
-      _renderer.view.style.top = "0px";
+      utils.general.fullsizeCanvasCSS(_renderer.view);
       /* stop scrollbars of showing */
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
 
-      /* Disable contextMenu */
-      _renderer.view.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-      });
+      utils.mouse.disableContextMenu(_renderer.view);
 
       /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P. Setting this separately in each
        * baseTexture, would seem stupid, so we do it like this for now. */
@@ -142,6 +145,20 @@
        * @required
        **/
       this.canvas = _renderer.view;
+      /**
+       * canvas element that was generated and is being used by this new generated Map instance.
+       *
+       * @attribute canvas
+       * @type {HTMLElement}
+       * @required
+       **/
+      this.minimapCanvas = _rendererMinimap.view;
+      /**
+       * @attribute mapSize
+       * @type {x: Number, y: Number}
+       * @optional
+       **/
+      this.mapSize = mapSize;
       /**
        * list of plugins that the map uses and are initialized
        * @see Map.activatePlugins
@@ -208,6 +225,10 @@
         movableType: {
           id: LAYER_TYPE_MOVABLE,
           layer: _movableLayer
+        },
+        minimapType: {
+          id: LAYER_TYPE_MINIMAP,
+          layer: _minimapLayer
         }
       };
       /**
@@ -423,6 +444,14 @@
       return layer;
     }
     /**
+     * return the mapsize as width and height
+     *
+     * @return {Object}       { x: Number, y: Number }
+     */
+    getMapsize() {
+      return this.mapSize;
+    }
+    /**
      * Moves the map the amount of given x and y pixels. Note that this is not the destination coordinate, but the amount of movement that
      * the map should move. Internally it moves the movableLayer, taking into account necessary properties (like scale). Draws map after
      * movement.
@@ -436,14 +465,23 @@
      * SCALING
      * @param {Integer} informCoordinates.x  X coordinate
      * @param {Integer} informCoordinates.y  Y coordinate
+     * @param {Integer} absolute              If the given coordinates are not relative, like move map 1 pixel, but instead absolute, like
+     * move map to coordinates { x: 1, y: 2 }. Defaults to false (relative).
+     * @todo  the informcoordinates away and fix the issue they tried to fix!
      **/
-    moveMap(coord = { x: 0, y: 0 }, informCoordinates = coord) {
+    moveMap(coord = { x: 0, y: 0 }, { absolute = false } = {}) {
       var realCoordinates = {
         x: Math.round(coord.x / this.getStaticLayer().getZoom()),
         y: Math.round(coord.y / this.getStaticLayer().getZoom())
       };
-      _movableLayer.move(realCoordinates);
-      mapEvents.publish("mapMoved", informCoordinates || realCoordinates);
+
+      if (absolute) {
+        _movableLayer.position = new PIXI.Point(coord.x, coord.y);
+      } else {
+        _movableLayer.move(realCoordinates);
+      }
+
+      mapEvents.publish("mapMoved", realCoordinates);
       this.drawOnNextTick();
     }
     /**
@@ -570,17 +608,59 @@
      * the map more.
      *
      * @method getPrimaryLayers
+     * @param {MapDataManipulator} [{}.filters]         The mapDataManipulator instance, that you use for filtering.
      * @return {Object} Basically anything in the map that is used as a layer (not really counting subcontainers).
      */
     getPrimaryLayers ({ filters } = {}) {
       return this.getMovableLayer().getPrimaryLayers({ filters });
     }
     /**
-     * Get current map coordinates. Basically the same as movable layers position.
+     * Get all objects on the map, from layers and subcontainers.
      *
-     * @method getMapCoordinates
-     * @return {{x: Integer, y: Integer}}          current coordinates for the moved map
+     * @todo Not very intelligent atm. You need to make a recursive and smart retrieving of objects, so no matter how many layers or
+     * layers there are, you always retrieve the end objects and the end of the path.
+     *
+     * @method getAllObjects
+     * @param {MapDataManipulator} [{}.filters]         The mapDataManipulator instance, that you use for filtering.
+     * @return {Array}                                  Array of found objects
      * */
+    getAllObjects ({ filters } = {}) {
+      var allObjects, theseObjs;
+
+      allObjects = this.getPrimaryLayers({ filters }).map((layer) => {
+        var allObjs;
+
+        if (layer.hasSubcontainers()) {
+          let subcontainers = generalUtils.arrays.flatten2Levels(layer.getSubcontainers());
+
+          allObjs = subcontainers.map((subContainer) => {
+            theseObjs = subContainer.children.map((obj) => {
+              if (filters) {
+                return filters.filter(obj);
+              }
+
+              return obj;
+            });
+
+            return generalUtils.arrays.flatten2Levels(theseObjs);
+          });
+        } else {
+          allObjs = layer.children.map((obj) => {
+            if (filters) {
+              return filters.filter(obj);
+            }
+
+            return obj;
+          });
+        }
+
+        return generalUtils.arrays.flatten2Levels(allObjs);
+      });
+
+      allObjects = generalUtils.arrays.flatten2Levels(allObjects);
+
+      return allObjects;
+    }
     getMapCoordinates() {
       return {
         x: this.getMovableLayer().x,
@@ -619,6 +699,27 @@
       return this.getZoomLayer().getZoom();
     }
     /**
+     * Returns the PIXI renderer. Don't use this unless you must. For more advanced or PIXI specific cases.
+     *
+     * @method getRenderer
+     * @return {PIXI.Renderer}
+     */
+    getRenderer(type) {
+      if (type === "minimap") {
+        return _rendererMinimap;
+      } else {
+        return _renderer;
+      }
+    }
+    /**
+     * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
+     *
+     * @method getStaticLayer
+     */
+    getStaticLayer() {
+      return _staticLayer;
+    }
+    /**
      * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
      * to the current map position the player is seeing. This can be used e.g. when you want to display some objects on the map or UI
      * elements, like effects that happen on certain point on the map.
@@ -630,21 +731,18 @@
       return _movableLayer;
     }
     /**
-     * Returns the PIXI renderer. Don't use this unless you must. For more advanced or PIXI specific cases.
+     * Return minimap layer. Holds minimap, if used in the game.
      *
-     * @method getRenderer
-     * @return {PIXI.Renderer}
+     * @method getMinimapLayer
      */
-    getRenderer() {
-      return _renderer;
+    getMinimapLayer() {
+      return _minimapLayer;
     }
     /**
-     * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
-     *
-     * @method getStaticLayer
+     * Removes the minimapLayer from the game.
      */
-    getStaticLayer() {
-      return _staticLayer;
+    removeMinimapLayer() {
+      _minimapLayer = undefined;
     }
     /*---------------------------------------------
      ------- ABSTRACT APIS THROUGH PLUGINS --------
@@ -675,6 +773,12 @@
      * @method toggleFullScreen
      **/
     toggleFullScreen () { return "notImplementedYet. Activate with plugin"; }
+    /**
+     * Plugin will overwrite create this method. Method for actually activating minimap.
+     *
+     * @method initMinimap
+     **/
+    initMinimap () { return "notImplementedYet. Activate with plugin"; }
 
     /*-------------------------
     --------- PRIVATE ---------
@@ -693,15 +797,14 @@
      * @param {Object} allCoords.localCoords            REQUIRED
      * @param {Integer} allCoords.localCoords.x         REQUIRED
      * @param {Integer} allCoords.localCoords.y         REQUIRED
-     * @param {Object} options                          Optional options
-     * @param {String} options.type                     The type of objects we want
-     * @param {Array} options.subcontainers             Array of the subcontainers we will search
+     * @param {String} [{}.type]                        The type of objects we want
+     * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
      * @return {Array}                                  Found objects
      */
-    _retrieveObjects(allCoords, options = { type: "", subcontainers: [] }) {
+    _retrieveObjects(allCoords, { type = "", subcontainers = [] } = {}) {
       return this.objectManager.retrieve(allCoords, {
-        type: options.type,
-        subcontainers: options.subcontainers,
+        type: type,
+        subcontainers: subcontainers,
         size: {
           width: allCoords.globalCoords.width,
           height: allCoords.globalCoords.height
@@ -763,6 +866,7 @@
           }
 
           _renderer.render(_staticLayer);
+          _rendererMinimap && _rendererMinimap.render(_minimapLayer);
           _drawMapOnNextTick = false;
 
           if (this.trackFPSCB) {

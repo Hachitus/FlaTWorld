@@ -22,7 +22,7 @@
    *
    * @class factories.hexaFactory
    * @requires PIXI in global space
-   * @param {HTMLElement} canvasContainerElement HTML Element. Container which will hold the generated canvas element
+   * @param {HTMLElement} mapCanvas              Canvas element used for the map
    * @param {Object} datas                       Object with mapDatas to construct the map structure
    * @param {Object} datas.map                   Holds all the stage, layer and object data needed to construct a full map
    * @param {Object} datas.game                  More general game data (like turn number, map size etc.)
@@ -32,10 +32,11 @@
    * @param {Object} {}.isHiddenByDefault        When we use mapMovement plugin, it is best to keep all the obejcts hidden at the beginnig.
    * @param {Function} {}.trackFPSCB             Callback to track FPS
    **/
-  function hexaFactory(canvasContainerElement, datas, {
+  function hexaFactory(mapCanvas, datas, {
         trackFPSCB = false,
         isHiddenByDefault = true,
         cache = false,
+        minimapCanvas,
         scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
     log.debug("============== Hexagonal Map factory started =============");
     const pixelRatio = utils.environmentDetection.getPixelRatio();
@@ -43,9 +44,6 @@
     const DATA_TYPE = (typeof datas.type === "string") ? JSON.parse(datas.type) : datas.type;
     const DATA_GAME = (typeof datas.game === "string") ? JSON.parse(datas.game) : datas.game;
     const WINDOW_SIZE = utils.resize.getWindowSize();
-    const mapOptions = {
-      refreshEventListeners: true
-    };
     /*---------------------
     ------ VARIABLES ------
     ----------------------*/
@@ -54,6 +52,7 @@
       ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit
     };
     var mapProperties = {
+      mapSize: DATA_GAME.mapSize,
       bounds: {
         x: 0,
         y: 0,
@@ -74,9 +73,10 @@
       },
       trackFPSCB: trackFPSCB,
       cache: cache,
-      defaultScaleMode: scaleMode
+      defaultScaleMode: scaleMode,
+      minimapCanvas: minimapCanvas
     };
-    var map = new Flatworld(canvasContainerElement, mapProperties, mapOptions );
+    var map = new Flatworld(mapCanvas, mapProperties );
 
     PIXI.SCALE_MODES.DEFAULT = 1;
 
@@ -125,7 +125,9 @@
                   typeData: objTypeData,
                   activeData: object.data
                 },
-                radius: DATA_GAME.hexagonRadius
+                radius: DATA_GAME.hexagonRadius,
+                minimapColor: objTypeData.minimapColor,
+                minimapSize: objTypeData.minimapSize
               };
 
               newObject = new functionsInObj[objectGroup.type]( texture, object.coord, objectOptions );

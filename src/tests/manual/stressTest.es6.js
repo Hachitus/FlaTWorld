@@ -16,6 +16,8 @@
   var mapDrag = window.flatworld.extensions.mapDrag;
   var hexagons = window.flatworld.extensions.hexagons;
   var mapMovement = window.flatworld.extensions.mapMovement;
+  var pixelizedMinimap = window.flatworld.extensions.minimaps.pixelizedMinimap;
+  var hexaUtils = window.flatworld.extensions.hexagons.utils;
   var Sound = window.flatworld.Sound;
   var mapEvents = window.flatworld.mapEvents;
   var mapAPI = window.flatworld.mapAPI;
@@ -28,6 +30,8 @@
   /* Note the y is 3/4 of the actual height */
   var HEXAGON_RADIUS = gameData.hexagonRadius;
   var BASE_URL = "/requests/";
+  var X_PADDING = 20;
+  var Y_PADDING = 20;
 
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
@@ -60,6 +64,7 @@
     var mapsizeElement = document.getElementById("hexaTiles");
     var cacheElement = document.getElementById("cache");
     var UIThemeIndex = document.getElementById("UItheme").value;
+    var minimapCanvas = document.getElementById("minimapCanvas");
     var cacheMap = true;
     var currentMapSize, mapData;
 
@@ -77,8 +82,9 @@
         mapsize: currentMapSize,
         cache: cacheMap,
         UITheme: window.flatworld.UIs[UIThemeIndex],
-        canvasContainer: document.getElementById("mapCanvasContainer"),
+        mapCanvas: document.getElementById("mapCanvas"),
         automatic: window.automaticTest,
+        minimapCanvas: minimapCanvas,
         trackFPSCB: function (data) {
           var totalFPS = data.FPS;
           var totalTime = data.FPStime;
@@ -135,21 +141,24 @@
 
   function initFlatworld(mapData, options) {
     var mapsize = options.mapsize;
-    var canvasContainer = options.canvasContainer;
+    var mapCanvas = options.mapCanvas;
     var trackFPSCB = options.trackFPSCB;
     var UITheme = options.UITheme;
     var cache = options.cache;
     var automatic = options.automatic;
+    var minimapCanvas = options.minimapCanvas;
     var map = {};
     var globalMap = {
       data: {}
     };
+    var minimapSize = { x: 0, y: 0, width: 200, height: 200 };
     var pluginsToActivate = [
       baseEventlisteners,
       mapZoom,
       mapDrag,
       hexagons.selectHexagonObject,
-      mapMovement
+      mapMovement,
+      pixelizedMinimap
     ];
     var sound = new Sound();
     var preload;
@@ -228,7 +237,7 @@
 
     function onComplete(loader, resources) {
       window.worldMap = map = globalMap.data = factories.hexaFactory(
-        canvasContainer, {
+        mapCanvas, {
           game: gameData,
           map: mapData,
           type: typeData
@@ -237,7 +246,8 @@
           trackFPSCB: trackFPSCB,
           isHiddenByDefault: true,
           cache: options.cache,
-          scaleMode: PIXI.SCALE_MODES.NEAREST
+          scaleMode: PIXI.SCALE_MODES.NEAREST,
+          minimapCanvas: minimapCanvas
         });
 
       var dialog_selection = document.getElementById("selectionDialog");
@@ -247,6 +257,77 @@
       UI(initializedUITheme, map);
 
       map.init( pluginsToActivate, mapData.startPoint );
+
+      let minimapUIImage = new PIXI.Sprite();
+      let pixelRatio = minimapSize.width / map.getMapsize().x * hexaUtils.calcLongDiagonal();
+      let staticCB = function (obj) {
+        var size = pixelRatio;
+        var minimapColor = obj.minimapColor;
+        var minimapShape, globalPoints;
+
+        /* We must divide the pixelRatio with two. Since this is the hexagons radius. Which means the hexagon is actually twice the given
+         * radius in width and height.
+         */
+        if (obj.type === "unit") {
+          minimapColor = 0x55FF55;
+          size = size / 2;
+        }
+        minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: minimapColor });
+        globalPoints = _getCorrectGlobalCoords(obj);
+
+        minimapShape.x = Math.floor(pixelRatio * globalPoints.x / hexaUtils.calcShortDiagonal());
+        minimapShape.y = Math.floor(pixelRatio * globalPoints.y / hexaUtils.calcLongDiagonal());
+
+        return minimapShape;
+      };
+      let dynamicCB = function (obj) {
+        var minimapColor = obj.minimapColor;
+        var size = pixelRatio;
+        var minimapShape, globalPoints;
+
+        if (obj.type === "unit") {
+          minimapColor = 0x55FF55;
+          size = size / 2;
+        }
+        minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: obj.minimapColor });
+        globalPoints = obj.toGlobal(new PIXI.Point(obj.x,obj.y));
+
+        let indexes = new PIXI.Point(hexaUtils.calculateIndex(globalPoints));
+        minimapShape.x = Math.floor(pixelRatio * indexes.x);
+        minimapShape.y = Math.floor(pixelRatio * indexes.y);
+
+        return minimapShape;
+      };
+      let coordinateConverterCB = function (globalCoordinates, toMinimap) {
+        var minimapLayer = map.getMinimapLayer();
+        var minimapCoordinates = new PIXI.Point( globalCoordinates.x, globalCoordinates.y);
+
+        if (toMinimap) {
+          return minimapCoordinates;
+        } else {
+          let minimapCoords = {
+            x: -minimapCoordinates.x / minimapSize.width * map.getMapsize().x,
+            y: -minimapCoordinates.y / minimapSize.height * map.getMapsize().y
+          };
+
+          return minimapCoords;
+        }
+      };
+
+      let minimapViewport = new PIXI.Graphics();
+      let viewportArea = map.getViewportArea();
+      let minimapViewportSize = {
+        width: minimapSize.width * viewportArea.width / map.getMapsize().x,
+        height: minimapSize.height * viewportArea.height / map.getMapsize().y
+      };
+
+      minimapViewport.lineStyle(5, 0xFFFFFF, 0.75);
+      minimapViewport.drawRect(0, 0, minimapViewportSize.width, minimapViewportSize.height);
+      minimapViewport.position = new PIXI.Point(X_PADDING, Y_PADDING);
+
+      map.initMinimap(minimapUIImage, minimapSize, staticCB, dynamicCB, coordinateConverterCB, minimapViewport, {
+          xPadding: X_PADDING, yPadding: Y_PADDING
+        });
 
       /* Activate the fullscreen button: */
       document.getElementById("testFullscreen").addEventListener("click", function () {
@@ -374,5 +455,24 @@
       },
       BASE_URL
     );
+  }
+
+  /* This function should really not be needed or if it really is, it should be elsewhere!
+   * It iterates through all the x and y coordinates on this objects parent tree and adds them together. So practically it gets the global
+   * coordinates
+  */
+  function _getCorrectGlobalCoords(obj) {
+    var coordinates = {
+      x: obj.x,
+      y: obj.y
+    };
+
+    if (obj.parent) {
+      let parentCoords = _getCorrectGlobalCoords(obj.parent);
+      coordinates.x += parentCoords.x;
+      coordinates.y += parentCoords.y;
+    }
+
+    return coordinates;
   }
 })();

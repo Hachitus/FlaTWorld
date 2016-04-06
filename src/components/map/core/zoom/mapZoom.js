@@ -178,11 +178,11 @@
 
       if (mouseWheelDelta > 0) {
         if (map.zoomIn()) {
-          map.moveMap(_calculateCenterMoveCoordinates(oldScale, true), _calculateCenterMoveCoordinates(map.getZoom(), true));
+          map.moveMap(_calculateCenterMoveCoordinates(oldScale, true));
         }
       } else if (mouseWheelDelta < 0) {
         if (map.zoomOut()) {
-          map.moveMap(_calculateCenterMoveCoordinates(oldScale), _calculateCenterMoveCoordinates(map.getZoom()));
+          map.moveMap(_calculateCenterMoveCoordinates(oldScale));
         }
       }
     }

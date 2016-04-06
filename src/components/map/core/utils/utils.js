@@ -16,10 +16,12 @@
   function setupMouseUtils() {
     return {
       isRightClick,
+      disableContextMenu,
       eventData: {
         getPointerCoords,
         getHAMMERPointerCoords
       },
+      coordinatesFromGlobalToRelative,
       eventMouseCoords
     };
 
@@ -31,6 +33,14 @@
      */
     function isRightClick( e ) {
       return e.which === 3;
+    }
+    /**
+     * Disabled the right click (or something else in mobile) context menu from appearing
+     */
+    function disableContextMenu(canvas) {
+      canvas.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
     }
     /**
      * @method getPointerCoords
@@ -51,6 +61,53 @@
     function getHAMMERPointerCoords(e) {
       return e.center;
     }
+    /**
+     * Transform coordinates that are in the window to become relative with the given element
+     *
+     * @param  {[type]} coordinates [description]
+     * @param  {[type]} element     [description]
+     * @return {[type]}             [description]
+     */
+    function coordinatesFromGlobalToRelative(coordinates, element) {
+      var elementPosition = getElementPositionInWindow(element);
+
+      return {
+        x: coordinates.x - elementPosition.x,
+        y: coordinates.y - elementPosition.y
+      };
+    }
+    /**
+     * Gets given elements position relative to window
+     *
+     * @param  {[type]} el [description]
+     * @return {[type]}    [description]
+     */
+    function getElementPositionInWindow(el) {
+      var xPos = 0;
+      var yPos = 0;
+
+      while (el) {
+        if (el.tagName.toLowerCase() === "body") {
+          // deal with browser quirks with body/window/document and page scroll
+          var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+          var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+          xPos += (el.offsetLeft - xScroll + el.clientLeft);
+          yPos += (el.offsetTop - yScroll + el.clientTop);
+        } else {
+          // for all other non-BODY elements
+          xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+          yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+        }
+
+        el = el.offsetParent;
+      }
+      return {
+        x: xPos,
+        y: yPos
+      };
+    }
+
     /**
      * @method eventMouseCoords
      * @param  {Event} e    Event object
@@ -195,7 +252,8 @@
     const PIXEL_EPSILON = 0.01;
 
     return {
-      pixelEpsilonEquality: epsilonEquality
+      pixelEpsilonEquality: epsilonEquality,
+      fullsizeCanvasCSS
     };
 
     /**
@@ -205,6 +263,17 @@
      */
     function epsilonEquality(x, y) {
       return ( Math.abs(x) - Math.abs(y) ) < PIXEL_EPSILON;
+    }
+    /**
+     * Setup correct css for setting up fullsize (window size) canvas
+     *
+     * @param {Element} canvasElement
+     */
+    function fullsizeCanvasCSS(canvasElement) {
+      canvasElement.style.position = "absolute";
+      canvasElement.style.display = "block";
+      canvasElement.style.left = "0px";
+      canvasElement.style.top = "0px";
     }
   }
 })();

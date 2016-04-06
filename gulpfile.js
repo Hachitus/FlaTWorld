@@ -24,6 +24,7 @@ var config = {
     './src/components/map/core/utils/dataManipulation.js',
     './src/components/map/core/utils/effects.js',
     './src/components/map/core/utils/utils.js',
+    './src/components/map/core/utils/shapes.js',
     './src/components/map/core/mapAPI.js',
     './src/components/map/core/mapEvents.js',
     './src/components/map/core/eventlisteners.js',
@@ -46,6 +47,8 @@ var config = {
     './src/components/map/extensions/hexagons/eventListeners/*.js',
     './src/components/map/extensions/hexagons/*.js',
     './src/components/map/extensions/mapMovement/mapMovement.js',
+    './src/components/map/extensions/minimaps/init.js',
+    './src/components/map/extensions/minimaps/*.js',
     './src/components/map/UIs/default/init.js',
     './src/components/map/UIs/default/utils/*.js',
     './src/components/map/UIs/default/layout/*.js',
@@ -84,10 +87,11 @@ gulp.task('bundleLibDev', function() {
 
 gulp.task('bundleDev', function() {
   return gulp.src(config.entryFiles)
-    .pipe(sourcemaps.init({ debug: true }))
-    .pipe(babel())
+    .pipe(babel({
+      presets: ['es2015'],
+      sourceMaps: true
+    }))
     .pipe(concat('flatworld.js'))
-    .pipe(sourcemaps.write("./maps"))
     .pipe(gulp.dest(config.outputDirDev));
 });
 

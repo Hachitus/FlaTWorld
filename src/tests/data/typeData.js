@@ -14,27 +14,32 @@ window.typeData = {
         image:"parkingLot",
         attachedToTerrains:["0"],
         propability:"100%",
-        name: "forDebugging - parkingLot"
+        name: "forDebugging - parkingLot",
+        minimapColor: 0xa4afaf
       },{
         image:"park",
         attachedToTerrains:["2"],
         propability:"100%",
-        name: "forDebugging - park"
+        name: "forDebugging - park",
+        minimapColor: 0x168344
       },{
         image:"fountainPark",
         attachedToTerrains:["1"],
         propability:"100%",
-        name: "forDebugging - fountainPark"
+        name: "forDebugging - fountainPark",
+        minimapColor: 0x66FFFF
       },{
         image:"fountain",
         attachedToTerrains:["4"],
         propability:"100%",
-        name: "forDebugging - fountain"
+        name: "forDebugging - fountain",
+        minimapColor: 0xd1f4ff
       },{
         image:"crystalMountain",
         attachedToTerrains:["4"],
         propability:"100%",
-        name: "forDebugging - crystalMountain"
+        name: "forDebugging - crystalMountain",
+        minimapColor: 0xb55f40
       }],
     terrain:[{
       name:"desert",

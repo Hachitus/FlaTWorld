@@ -1,11 +1,12 @@
-<a name="0.0.2"></a>
-# 0.0.2 Bug fixes (2016-04-24)
+<a name="0.1.0"></a>
+# 0.1.0 Bug fixes (2016-04-24)
 ## Bug Fixes
 * Context menu is totally disabled now and right click works better cross browser.
 * ES6 away from test scripts. Was failing on android.
 
 ## Features
 * Scale mode can be changed with parameters.
+* Added buggy minimap (but working). I introduced too many changes when making the minimap and thus decided to add it to this update. It's still in development.
 
 ## Others
 * Renamed horizontalHexaFactory -> hexaFactory, it will later support vertical too.

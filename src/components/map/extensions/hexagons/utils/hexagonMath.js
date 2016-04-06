@@ -16,6 +16,7 @@
   window.flatworld.extensions.hexagons.utils.calcLongDiagonal = calcLongDiagonal;
   window.flatworld.extensions.hexagons.utils.hexaHitTest = hexaHitTest;
   window.flatworld.extensions.hexagons.utils.getClosestHexagonCenter = getClosestHexagonCenter;
+  window.flatworld.extensions.hexagons.utils.calculateIndex = calculateIndex;
 
 
   /*-----------------------
@@ -154,7 +155,7 @@
       };
     });
 
-    return pointInPolygon(hitCoords, realPolygonPoints);
+    return _pointInPolygon(hitCoords, realPolygonPoints);
   }
   /**
    * Create Array that holds the coordinates for the size of hexagon grid we want to create.
@@ -228,6 +229,12 @@
 
     return closestHexagonCenter;
   }
+  function calculateIndex(coordinates) {
+    return {
+      x: coordinates.x / calcShortDiagonal(),
+      y: coordinates.y / calcLongDiagonal()
+    };
+  }
   /*-----------------------
   --------- PRIVATE -------
   -----------------------*/
@@ -237,14 +244,14 @@
    *
    * @static
    * @private
-   * @method pointInPolygon
+   * @method _pointInPolygon
    * @param  {Object} point             The coordinates to test against
    * @param  {Integer} hitCoords.x      X coordinate
    * @param  {Integer} hitCoords.y      Y coordinate
    * @param  {Integer[]} vs             The points of the polygon to test [0] === x-point, [1] === y-point
    * @return {Boolean}                  Is the coordinate inside the hexagon or not
    */
-  function pointInPolygon(point, vs) {
+  function _pointInPolygon(point, vs) {
     var x = point.x;
     var y = point.y;
     var inside = false;

@@ -28,10 +28,12 @@
      * @param {Object} options            options.radius REQUIRED.
      * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
      */
-    constructor(texture, coords = {x: 0, y: 0}, { data, radius } = {}) {
+    constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
       this.name = "DefaultTerrainObject_hexa";
+      this.minimapColor = minimapColor;
+      this.minimapShape = minimapShape;
       calculateHexa.call(this, radius);
     }
   }
@@ -50,10 +52,13 @@
      * @param {Object} options            options.radius REQUIRED
      * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
      */
-    constructor(texture, coords = {x: 0, y: 0}, { data = null, radius = null } = {}) {
+    constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
       this.name = "DefaultUnitObjects_hexa";
+      this.minimapColor = minimapColor;
+      this.minimapShape = minimapShape;
+      this.static = false;
 
       calculateHexa.call(this, radius);
     }

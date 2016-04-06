@@ -64,4 +64,12 @@ describe("mapDataManipulator => ", function () {
 
     expect(foundObjects).toEqual([testObjects[0], testObjects[1]]);
   });
+  it("filter both", function () {
+    var mapDataManipulator = new MapDataManipulator(layerRules);
+    var foundObjects;
+
+    foundObjects = mapDataManipulator.filter(testObjects);
+
+    expect(foundObjects[0]).toBe(testObjects[0]);
+  });
 });

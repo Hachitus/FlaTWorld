@@ -33,12 +33,12 @@
      * @param  {Integer} options.specialLayer.x         X coordinate
      * @param  {Integer} options.specialLayer.y         Y coordinate
      **/
-    constructor(options = {
-        name: "",
-        coord: { x: 0, y: 0 },
-        specialLayer: false,
-        selectable: false } ) {
-      var { name, coord, specialLayer, selectable } = options;
+    constructor({
+        name = "",
+        coord = { x: 0, y: 0 },
+        specialLayer = false,
+        staticLayer = true,
+        selectable = false } = {}) {
 
       super();
       Object.assign(this, coord);
@@ -57,6 +57,13 @@
        * @type {Boolean}
        */
       this.specialLayer = !!specialLayer;
+      /**
+       * Will this layer change dynamically or can we assume that this holds the same objects always, until game reload
+       *
+       * @attribute static
+       * @type {Boolean}
+       */
+      this.staticLayer = !!staticLayer;
       /**
        * Can you select objects from this layer. For example with Map.getObjectsUnderArea
        *
@@ -291,10 +298,15 @@
      * @param  {Integer} options.subcontainers.height  height (in pixels)
      * @param {Boolean} options.specialLayer           Is this special layer or not.
      */
-    constructor(options = { name: "", coord: { x: 0, y: 0 }, subcontainers: false, specialLayer: false, selectable: false } ) {
-      var { subcontainers, selectable, specialLayer } = options;
+    constructor({
+        name = "",
+        coord = { x: 0, y: 0 },
+        subcontainers = false,
+        specialLayer = false,
+        staticLayer = true,
+        selectable = false } = {}) {
 
-      super(options);
+      super(arguments[0]);
 
       this.oldAddChild = super.addChild.bind(this);
       this.subcontainersConfig = subcontainers;
@@ -413,6 +425,44 @@
       return toCacheStatus;
     }
   }
+
+  class MinimapLayer extends PIXI.Container {
+    /**
+     * Subcontainers are containers that hold objects like units and terrain etc. under them. They have some restrictions atm. since they
+     * are PIXI.ParticleContainers. But when needed we can extend MapLayers with another class which is subcontainer, but not
+     * ParticleContainer at the present there is no need, so we won't extend yet. Subcontainers help the layers to make better movement of
+     * the map, by making subcontainers visible or invisible and even helping with selecting objects on the map. Thus we don't need to use
+     * our inefficient Quadtree. The intention was to use PIXI.ParticleContainer for this, but it seems it doesn't clean up the memory
+     * afterwards the same way as normal Container.
+     *
+     * @private
+     * @class MapSubcontainer
+     * @constructor
+     * @param  {Object} size              Subontainer size. If given activated subcontainers, otherwise not.
+     * @param  {Integer} size.width       width (in pixels)
+     * @param  {Integer} size.height      height (in pixels)
+     */
+    constructor(size) {
+      super();
+
+      this.specialLayer = true;
+      this.targetSize = size;
+      this.selectable = false;
+    }
+    /**
+     * Set cache on or off for this layer
+     *
+     * @method setCache
+     * @param {Boolean} status      true = activate cache, false = disable cache
+     */
+    setCache(status) {
+      var toCacheStatus = status ? true : false;
+
+      this.cacheAsBitmap = toCacheStatus;
+
+      return toCacheStatus;
+    }
+  }
   /*---------------------
   ------- PRIVATE -------
   ----------------------*/
@@ -504,4 +554,5 @@
   window.flatworld.mapLayers = window.flatworld.mapLayers || {};
   window.flatworld.mapLayers.MapLayer = MapLayer;
   window.flatworld.mapLayers.MapLayerParent = MapLayerParent;
+  window.flatworld.mapLayers.MinimapLayer = MinimapLayer;
 })();

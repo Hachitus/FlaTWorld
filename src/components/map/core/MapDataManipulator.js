@@ -65,7 +65,8 @@
      * @param {Array} [varname] [description]
      **/
     _runRule(object) {
-      var ruleMatches, matchedType;
+      var ruleMatches = true;
+      var matchedType;
 
       Object.keys(this.classes).forEach((type) => {
         var filtered = this.classes[type].filter((thisClass) => {

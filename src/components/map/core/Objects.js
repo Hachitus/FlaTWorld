@@ -37,45 +37,59 @@
       /**
        * Name of the object. Used mostly for debugging
        *
-       * @attribute
+       * @attribute name
        * @type {String}
        */
       this.name = "Objects_sprite_" + this.id;
       /**
        * Type of the object. Can be used for filtering, ordering or finding correct objects.
        *
-       * @attribute
+       * @attribute type
        * @type {String}
        */
       this.type = "None";
       /**
        * Is the object highligtable.
        *
-       * @attribute
+       * @attribute highlightable
        * @type {Boolean}
        */
       this.highlightable = true;
       /**
        * Objects custom data. Holds unit statistics and most data. Like unit movement speed etc.
        *
-       * @attribute
+       * @attribute data
        * @type {Object}
        */
       this.data = data;
       /**
        * Object area width in pixels.
        *
-       * @attribute
+       * @attribute areaWidth
        * @type {Number}
        */
       this.areaWidth = this.width;
       /**
        * Object area height in pixels.
        *
-       * @attribute
+       * @attribute areaHeight
        * @type {Number}
        */
       this.areaHeight = this.height;
+      /**
+       * If this object is static. Meaning it's position won't be changed etc. This can be used e.g. in rendering the minimap. The static
+       * objects and then the dynamic separately.
+       *
+       * @attribute static
+       * @type {Boolean}
+       */
+      this.static = true;
+      /**
+       * This is a color used to generate minimap functionality. Holds a color in hexadecimal
+       *
+       * @type {Number}
+       */
+      this.minimapColor = 0xFF0000;
     }
     /**
      * Drawing the object

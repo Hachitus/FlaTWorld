@@ -17,12 +17,16 @@ describe("hexagon extension, testing utils => ", function () {
   });
 
   it("getHexagonPoints", function () {
-    let points = HEXAGONS_UTILS.getHexagonPoints(radius);
+    var points = HEXAGONS_UTILS.getHexagonPoints();
 
-    expect(points).toBeDefined();
+    expect(Math.ceil(points[0].y)).toEqual(30);
+
+    points = HEXAGONS_UTILS.getHexagonPoints({ radius: 4 });
+
+    expect(Math.ceil(points[0].y)).toEqual(2);
   });
   it("calcShortDiagonal", function () {
-    let shortDiagonal = HEXAGONS_UTILS.calcShortDiagonal();
+    var shortDiagonal = HEXAGONS_UTILS.calcShortDiagonal();
 
     expect(shortDiagonal).toEqual(103);
 
@@ -36,7 +40,7 @@ describe("hexagon extension, testing utils => ", function () {
     expect(shortDiagonal).toEqual(114);
   });
   it("calcLongDiagonal", function () {
-    let longDiagonal = HEXAGONS_UTILS.calcLongDiagonal();
+    var longDiagonal = HEXAGONS_UTILS.calcLongDiagonal();
 
     expect(longDiagonal).toEqual(120);
 

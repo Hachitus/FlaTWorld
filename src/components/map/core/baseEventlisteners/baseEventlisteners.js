@@ -215,6 +215,7 @@
 
           hammer.add(press);
           hammer.on("press", clickListener);
+          /* We are detecting mouse right click here. This should be in utils */
           mapInstance.canvas.addEventListener("mouseup", (e) => {
             if (e.which === 3) {
               clickListener(e);
