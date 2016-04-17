@@ -152,7 +152,7 @@
     clone(renderer, options = { position: false, anchor: false }) {
       var newSprite = new PIXI.Sprite();
 
-      newSprite.texture = this.generateTexture(renderer);
+      newSprite.texture = renderer.generateTexture(this);
 
       if (options.anchor) {
         newSprite.anchor = Object.assign({}, this.anchor);
