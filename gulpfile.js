@@ -57,7 +57,7 @@ var config = {
     './src/factories/*.js'],
   cssFiles: ['./src/assets/lib/pace/css/loadingBar.css'],
   outputDir: './dist/',
-  outputDirDev: './src/dist/',
+  outputDirDev: './tests/dist/',
   outputFile: 'flatworld.js'
 };
 

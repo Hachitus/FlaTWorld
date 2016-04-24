@@ -3,10 +3,10 @@
 window.typeData = {
   graphicData: {
     terrainBase:{
-      json: "/tests/testAssets/images/terrain/terrains.json"
+      json: "/testAssets/images/terrain/terrains.json"
     },
     unit:{
-      json: "/tests/testAssets/images/units/testHexagonUnits.json"
+      json: "/testAssets/images/units/testHexagonUnits.json"
     }
   },
   objectData: {

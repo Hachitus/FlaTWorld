@@ -5,28 +5,17 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<!-- MOBILE prevent zooming with mobile native gestures and use our own -->
-	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, maximum-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<!-- MOBILE Remove tap highlight on Windows Phone -->
 	<meta name="msapplication-tap-highlight" content="no" />
-  <style>
-  @media screen {
-    html, body {
-       height: 100vh;
-    }
-  }
-  </style>
+
   <!--<script src="/tests/testAssets/lib/pace/pace.js"></script>
   <link rel="stylesheet" href="/tests/testAssets/lib/pace/css/loadingBar.css">-->
 </head>
 
 <body>
-  <div id="mapCanvasContainer">
-    <canvas id="mapCanvas">
-      Canvas not supported!
-    </canvas>
-    <canvas id="minimapCanvas" style="position:fixed;bottom:0px;left:0px;display:block">
+  <div id="mapCanvasContainer" height="600" width="1200">
+    <canvas id="mapCanvas" height="600" width="1200">
       Canvas not supported!
     </canvas>
   </div>
@@ -42,12 +31,12 @@
     </div>
     <div style="display: inline-block;background-color: white;margin:0;">
       mapsize (pixels):
-      <input id="hexaTiles" value="1500" type="text">,
+      <input id="hexaTiles" value="15000" type="text">,
       theme:
       <input id="UItheme" value="default" type="text">,
       cache:
       <input id="cache" type="checkbox">
-      <button id="changeValues" style="height:3em;width:6em" disabled>
+      <button id="changeValues" style="height:5em;width:10em" disabled>
         START!
       </button>
     </div>
@@ -57,11 +46,19 @@
     MODAL WINDOW
   </div>
 
+  <script>
+    (function () {
+      'use strict';
+
+      window.automaticTest = true;
+    })();
+	</script>
+
   <script src="/assets/lib/jquery/jquery-css-ajax-effects.min.js"></script>
   <script src="/dist/flatworld_libraries.js"></script>
   <script src="/dist/flatworld.js"></script>
-  <script src="/tests/data/gameData.js"></script>
-  <script src="/tests/data/typeData.js"></script>
-  <script src="/tests/manual/stressTest.es6.js"></script>
+  <script src="/data/gameData.js"></script>
+  <script src="/data/typeData.js"></script>
+  <script src="/manual/stressTest.es6.js"></script>
 </body>
 </html>

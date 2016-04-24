@@ -345,7 +345,7 @@
       sound.play("cheer");
     }
     function loadSounds() {
-      sound.add( "cheer", "/tests/testAssets/sounds/personCheering.mp3" );
+      sound.add( "cheer", "/testAssets/sounds/personCheering.mp3" );
     }
   }
 

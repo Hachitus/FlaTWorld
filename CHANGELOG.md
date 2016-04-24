@@ -1,3 +1,14 @@
+<a name="0.1.1"></a>
+# 0.1.1 Bug fixes (2016-05-??)
+## Bug Fixes
+* If minimap canvas was not given flatworld main module threw an error.
+
+## Features
+
+## Others
+* Placed test and dist folders more properly. I can now develop the backend part also more easier.
+* Removed jscs
+
 <a name="0.1.0"></a>
 # 0.1.0 Bug fixes (2016-04-24)
 ## Bug Fixes

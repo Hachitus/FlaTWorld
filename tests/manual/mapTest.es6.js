@@ -39,7 +39,7 @@
 
   /* Start the whole functionality */
   (function () {
-    var canvasElement = document.getElementById("mapCanvasContainer");
+    var canvasElement = document.getElementById("mapCanvas");
     var preload;
 
     window.globalMap = {};
