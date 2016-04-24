@@ -25,11 +25,12 @@
   /* DATA FILES used for testing */
   var gameData = window.gameData;
   var typeData = window.typeData;
+  var graphicData = window.graphicData;
 
   /** ===== CONFIGS ===== */
   /* Note the y is 3/4 of the actual height */
   var HEXAGON_RADIUS = gameData.hexagonRadius;
-  var BASE_URL = "/requests/";
+  var BASE_URL = '/requests/';
   var X_PADDING = 20;
   var Y_PADDING = 20;
 
@@ -53,7 +54,7 @@
 
   /* Start the whole functionality */
   (function () {
-    window.FPSElement = document.createElement("div");
+    window.FPSElement = document.createElement('div');
     window.FPSElement.style.position = 'absolute';
     window.FPSElement.style.left = '0px';
     window.FPSElement.style.top = '0px';
@@ -61,18 +62,18 @@
 
     document.body.appendChild( window.FPSElement );
 
-    var mapsizeElement = document.getElementById("hexaTiles");
-    var cacheElement = document.getElementById("cache");
-    var UIThemeIndex = document.getElementById("UItheme").value;
-    var minimapCanvas = document.getElementById("minimapCanvas");
+    var mapsizeElement = document.getElementById('hexaTiles');
+    var cacheElement = document.getElementById('cache');
+    var UIThemeIndex = document.getElementById('UItheme').value;
+    var minimapCanvas = document.getElementById('minimapCanvas');
     var cacheMap = true;
     var currentMapSize, mapData;
 
-    document.getElementById("testNotification").textContent = "START THE TESTS BY SELECTING VALUES BELOW AND CLICKING START!";
-    document.getElementById("changeValues").disabled = false;
+    document.getElementById('testNotification').textContent = 'START THE TESTS BY SELECTING VALUES BELOW AND CLICKING START!';
+    document.getElementById('changeValues').disabled = false;
 
-    document.getElementById("changeValues").addEventListener("click", function() {
-      document.getElementById("testNotification").style.display = "none";
+    document.getElementById('changeValues').addEventListener('click', function() {
+      document.getElementById('testNotification').style.display = 'none';
       currentMapSize = mapsizeElement.value;
       cacheMap = cacheElement.checked;
 
@@ -82,7 +83,7 @@
         mapsize: currentMapSize,
         cache: cacheMap,
         UITheme: window.flatworld.UIs[UIThemeIndex],
-        mapCanvas: document.getElementById("mapCanvas"),
+        mapCanvas: document.getElementById('mapCanvas'),
         automatic: window.automaticTest,
         minimapCanvas: minimapCanvas,
         trackFPSCB: function (data) {
@@ -91,7 +92,7 @@
           var totalRenderTime = data.renderTime;
           var drawCount = data.drawCount;
 
-          window.FPSElement.innerHTML = totalFPS + " - " + Math.round( ( totalRenderTime / totalTime * 100 ) ) + "%" + " : " + drawCount;
+          window.FPSElement.innerHTML = totalFPS + ' - ' + Math.round( ( totalRenderTime / totalTime * 100 ) ) + '%' + ' : ' + drawCount;
         }
       });
     });
@@ -126,10 +127,10 @@
     terrainLayer2 = populateTerrainLayer(hexagonGridCoordinates.terrains, TERRAIN_TYPE_COUNT);
 
     return {
-      gameID: "53837d47976fed3b24000005",
+      gameID: '53837d47976fed3b24000005',
       turn: 1,
       startPoint: { x: 0, y: 0 },
-      element: "#mapCanvas",
+      element: '#mapCanvas',
       layers: [
       terrainLayer,
       terrainLayer2,
@@ -177,17 +178,17 @@
       y: mapsize || 1000
     };
 
-    preload = new Preload( "", { crossOrigin: false } );
-    preload.addResource( typeData.graphicData.terrainBase.json );
-    preload.addResource( typeData.graphicData.unit.json );
+    preload = new Preload( '', { crossOrigin: false } );
+    preload.addResource( graphicData.terrainBase.json );
+    preload.addResource( graphicData.unit.json );
     loadSounds();
-    mapEvents.subscribe("objectsSelected", unitSelectedSound);
+    mapEvents.subscribe('objectsSelected', unitSelectedSound);
 
     preload.setErrorHandler(function(e) {
-      console.log("preloader error:", e);
+      console.log('preloader error:', e);
     });
     preload.setProgressHandler(function(progress) {
-      console.log("progressing" + progress);
+      console.log('progressing' + progress);
     });
 
     return preload.resolveOnComplete()
@@ -195,7 +196,7 @@
       .then(function (map) {
         return map.whenReady;
       }).then(function () {
-        document.getElementById("testFullscreen").addEventListener("click", map.toggleFullScreen);
+        document.getElementById('testFullscreen').addEventListener('click', map.toggleFullScreen);
 
         var perfTestLoop = setupPerfTestLoop();
 
@@ -232,7 +233,7 @@
         }
       })
       .catch(function (e) {
-        console.log("Map stressTest error: ", e);
+        console.log('Map stressTest error: ', e);
       });
 
     function onComplete(loader, resources) {
@@ -240,7 +241,8 @@
         mapCanvas, {
           game: gameData,
           map: mapData,
-          type: typeData
+          type: typeData,
+          graphic: graphicData
         },
         {
           trackFPSCB: trackFPSCB,
@@ -250,9 +252,9 @@
           minimapCanvas: minimapCanvas
         });
 
-      var dialog_selection = document.getElementById("selectionDialog");
+      var dialog_selection = document.getElementById('selectionDialog');
       var initializedUITheme = new UITheme.init(dialog_selection, map, { elements: {
-          select: "#dialog_select"
+          select: '#dialog_select'
         }});
       UI(initializedUITheme, map);
 
@@ -268,7 +270,7 @@
         /* We must divide the pixelRatio with two. Since this is the hexagons radius. Which means the hexagon is actually twice the given
          * radius in width and height.
          */
-        if (obj.type === "unit") {
+        if (obj.type === 'unit') {
           minimapColor = 0x55FF55;
           size = size / 2;
         }
@@ -285,7 +287,7 @@
         var size = pixelRatio;
         var minimapShape, globalPoints;
 
-        if (obj.type === "unit") {
+        if (obj.type === 'unit') {
           minimapColor = 0x55FF55;
           size = size / 2;
         }
@@ -330,7 +332,7 @@
         });
 
       /* Activate the fullscreen button: */
-      document.getElementById("testFullscreen").addEventListener("click", function () {
+      document.getElementById('testFullscreen').addEventListener('click', function () {
         map.setFullScreen();
       });
 
@@ -339,13 +341,13 @@
 
     /* ====== private functions ====== */
     function preloadErrorHandler(err) {
-      console.log("PRELOADER ERROR", err );
+      console.log('PRELOADER ERROR', err );
     }
     function unitSelectedSound() {
-      sound.play("cheer");
+      sound.play('cheer');
     }
     function loadSounds() {
-      sound.add( "cheer", "/testAssets/sounds/personCheering.mp3" );
+      sound.add( 'cheer', '/testAssets/sounds/personCheering.mp3' );
     }
   }
 
@@ -359,7 +361,7 @@
     var cache = options.cache || true;
 
     return {
-      type: "MapLayerParent",
+      type: 'MapLayerParent',
       coord: { x: 0, y: 0 },
       name: name,
       group: group, // For quadTrees
@@ -374,19 +376,19 @@
   }
 
   function populateTerrainLayer(hexagonGrid, typeCount) {
-    var layerData = addBase_spriteLayerData("terrainLayer", "terrain");
+    var layerData = addBase_spriteLayerData('terrainLayer', 'terrain');
 
     hexagonGrid.forEach(function (coordinates) {
       var x = coordinates.x;
       var y = coordinates.y;
 
       layerData.objectGroups.push({
-        type: "ObjectTerrain",
-        name: "Terrain", // For quadTrees and debugging
-        typeImageData: "terrainBase",
+        type: 'ObjectTerrain',
+        name: 'Terrain', // For quadTrees and debugging
+        typeImageData: 'terrainBase',
         objects: [{
           objType: Math.floor(Math.random() * typeCount),
-          name:"random_" + Math.random(),
+          name:'random_' + Math.random(),
           _id: Math.random(),
           coord:{
             x: x,
@@ -402,19 +404,19 @@
   }
 
   function populateUnitLayer(hexagonGrid, typeCount) {
-    var layerData = addBase_spriteLayerData("unitLayer", "unit");
+    var layerData = addBase_spriteLayerData('unitLayer', 'unit');
 
     hexagonGrid.forEach(function (coordinates) {
       var x = coordinates.x;
       var y = coordinates.y;
 
       layerData.objectGroups.push({
-        type: "ObjectUnit",
-        name: "Unit", // For quadTrees and debugging
-        typeImageData: "unit",
+        type: 'ObjectUnit',
+        name: 'Unit', // For quadTrees and debugging
+        typeImageData: 'unit',
         objects: [{
           objType: Math.floor(Math.random() * typeCount),
-          name: "random_" + Math.random(),
+          name: 'random_' + Math.random(),
           _id: Math.random(),
           coord:{
             x: x,
@@ -423,12 +425,12 @@
           data: {
             playerID: Math.floor(Math.random() * 10),
             hp: Math.floor(Math.random() * 100),
-            someStuff: "jalajajajajaja" + Math.random(),
-            someStuff2: "jalajajajajaja" + Math.random(),
-            someStuff3: "jalajajajajaja" + Math.random(),
-            someStuff4: "jalajajajajaja" + Math.random(),
-            someStuff5: "jalajajajajaja" + Math.random(),
-            someStuff6: ("jalajajajajaja" + Math.random()).repeat(30)
+            someStuff: 'jalajajajajaja' + Math.random(),
+            someStuff2: 'jalajajajajaja' + Math.random(),
+            someStuff3: 'jalajajajajaja' + Math.random(),
+            someStuff4: 'jalajajajajaja' + Math.random(),
+            someStuff5: 'jalajajajajaja' + Math.random(),
+            someStuff6: ('jalajajajajaja' + Math.random()).repeat(30)
           },
           lastSeenTurn:Math.floor(Math.random() * 10)
         }]
@@ -440,9 +442,9 @@
 
   function activateAPIs() {
     mapAPI.add(
-      "objectMove",
+      'objectMove',
       function (type, data, movementData) {
-        if (type === "get") {
+        if (type === 'get') {
           return {
             url: data.baseUrl + movementData.id
           };

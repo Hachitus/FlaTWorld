@@ -43,6 +43,7 @@
     const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === 'string') ? JSON.parse(datas.type) : datas.type;
     const DATA_GAME = (typeof datas.game === 'string') ? JSON.parse(datas.game) : datas.game;
+    const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
     const WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------

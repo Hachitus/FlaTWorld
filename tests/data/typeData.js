@@ -1,14 +1,6 @@
 'use strict';
 
 window.typeData = {
-  graphicData: {
-    terrainBase:{
-      json: '/testAssets/images/terrain/terrains.json'
-    },
-    unit:{
-      json: '/testAssets/images/units/testHexagonUnits.json'
-    }
-  },
   objectData: {
     terrainBase:[{
         image:'parkingLot',

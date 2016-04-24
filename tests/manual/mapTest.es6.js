@@ -21,6 +21,7 @@
   /* DATA FILES used for testing */
   var gameData = window.gameData;
   var typeData = window.typeData;
+  var graphicData = window.graphicData;
   var mapData = window.mapData;
 
   var pluginsToActivate = [
@@ -39,26 +40,26 @@
 
   /* Start the whole functionality */
   (function () {
-    var canvasElement = document.getElementById("mapCanvas");
+    var canvasElement = document.getElementById('mapCanvas');
     var preload;
 
     window.globalMap = {};
 
-    preload = new Preload( "", { crossOrigin: false } );
-    preload.addResource( typeData.graphicData.terrainBase.json );
-    preload.addResource( typeData.graphicData.unit.json );
+    preload = new Preload( '', { crossOrigin: false } );
+    preload.addResource( graphicData.terrainBase.json );
+    preload.addResource( graphicData.unit.json );
 
     preload.setErrorHandler(function(e) {
-      console.log("preloader error:", e);
+      console.log('preloader error:', e);
     });
     preload.setProgressHandler(function(progress) {
-      console.log("progressing" + progress);
+      console.log('progressing' + progress);
     });
 
     preload.resolveOnComplete()
       .then(onComplete)
       .catch(function (e) {
-        console.log("Map stressTest error: ", e);
+        console.log('Map stressTest error: ', e);
       });
 
     function onComplete() {
@@ -67,23 +68,24 @@
       window.globalMap = factories.hexaFactory(canvasElement, {
           game: gameData,
           map: mapData,
-          type: typeData
+          type: typeData,
+          graphic: graphicData
         },
         {
           isHiddenByDefault: false,
           scaleMode: PIXI.SCALE_MODES.NEAREST
         });
 
-      var dialog_selection = document.getElementById("selectionDialog");
+      var dialog_selection = document.getElementById('selectionDialog');
       var initializedUITheme = new UITheme.init(dialog_selection, window.globalMap, { elements: {
-          select: "#dialog_select"
+          select: '#dialog_select'
         }});
       UI(initializedUITheme, window.globalMap);
 
       promises = window.globalMap.init( pluginsToActivate, mapData.startPoint );
 
       Promise.all(promises).then( function () {
-        document.getElementById("testFullscreen").addEventListener("click", window.globalMap.toggleFullScreen);
+        document.getElementById('testFullscreen').addEventListener('click', window.globalMap.toggleFullScreen);
       });
     }
   })();

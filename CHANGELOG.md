@@ -7,7 +7,8 @@
 
 ## Others
 * Placed test and dist folders more properly. I can now develop the backend part also more easier.
-* Removed jscs
+* Style changes for jshint (and jscs removed)
+* Moved graphicData to it's own file, since it's supposed to be changeable.
 
 <a name="0.1.0"></a>
 # 0.1.0 Bug fixes (2016-04-24)
