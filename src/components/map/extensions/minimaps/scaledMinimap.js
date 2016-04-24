@@ -29,7 +29,7 @@
 
     return {
       init,
-      pluginName: "scaledMinimap",
+      pluginName: 'scaledMinimap',
       _testObject: {
         
       }
@@ -55,7 +55,7 @@
       setupBackgroundLayer(backgroundImage);
       _setMinimapCoordinates(Math.round(x),  Math.round(y));
 
-      mapEvents.publish("minimapInitialized", minimap);
+      mapEvents.publish('minimapInitialized', minimap);
     }
     function setMinimapUI(UIImage) {
       var UITexture = PIXI.Texture.fromFrame(UIImage);

@@ -38,7 +38,7 @@
      * Disabled the right click (or something else in mobile) context menu from appearing
      */
     function disableContextMenu(canvas) {
-      canvas.addEventListener("contextmenu", (e) => {
+      canvas.addEventListener('contextmenu', (e) => {
         e.preventDefault();
       });
     }
@@ -87,7 +87,7 @@
       var yPos = 0;
 
       while (el) {
-        if (el.tagName.toLowerCase() === "body") {
+        if (el.tagName.toLowerCase() === 'body') {
           // deal with browser quirks with body/window/document and page scroll
           var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
           var yScroll = el.scrollTop || document.documentElement.scrollTop;
@@ -169,9 +169,9 @@
            el.exitFullscreen;
         if ( requestMethod ) { // cancel full screen.
           requestMethod.call( el );
-        } else if ( typeof window.ActiveXObject !== "undefined" ) { // Older IE.
-          var wscript = new ActiveXObject( "WScript.Shell" );
-          wscript !== null && wscript.SendKeys( "{F11}" );
+        } else if ( typeof window.ActiveXObject !== 'undefined' ) { // Older IE.
+          var wscript = new ActiveXObject( 'WScript.Shell' );
+          wscript !== null && wscript.SendKeys( '{F11}' );
         }
       }
       function requestFullScreen( el ) {
@@ -183,9 +183,9 @@
 
         if ( requestMethod ) { // Native full screen.
           requestMethod.call( el );
-        } else if ( typeof window.ActiveXObject !== "undefined" ) { // Older IE.
-          var wscript = new ActiveXObject( "WScript.Shell" );
-          wscript !== null && wscript.SendKeys( "{F11}" );
+        } else if ( typeof window.ActiveXObject !== 'undefined' ) { // Older IE.
+          var wscript = new ActiveXObject( 'WScript.Shell' );
+          wscript !== null && wscript.SendKeys( '{F11}' );
         }
         return false;
       }
@@ -236,7 +236,7 @@
      */
     function getPixelRatio(canvasElement) {
       const DPR = window.devicePixelRatio || 1;
-      var ctx = ( canvasElement && canvasElement.getContext("2d") ) || document.createElement('canvas').getContext("2d");
+      var ctx = ( canvasElement && canvasElement.getContext('2d') ) || document.createElement('canvas').getContext('2d');
       var bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio ||
                 ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio ||
                 ctx.backingStorePixelRatio || 1;
@@ -270,10 +270,10 @@
      * @param {Element} canvasElement
      */
     function fullsizeCanvasCSS(canvasElement) {
-      canvasElement.style.position = "absolute";
-      canvasElement.style.display = "block";
-      canvasElement.style.left = "0px";
-      canvasElement.style.top = "0px";
+      canvasElement.style.position = 'absolute';
+      canvasElement.style.display = 'block';
+      canvasElement.style.left = '0px';
+      canvasElement.style.top = '0px';
     }
   }
 })();

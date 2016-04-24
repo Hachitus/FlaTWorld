@@ -52,7 +52,7 @@
        * @attribute pluginName
        * @type {String}
        */
-      pluginName: "baseEventlisteners"
+      pluginName: 'baseEventlisteners'
     };
 
     /**
@@ -68,16 +68,16 @@
       hammer = new Hammer.Manager(map.canvas);
       hamster = new Hamster(map.canvas);
 
-      eventListeners.setDetector("fullSize", toggleFullSize().on, toggleFullSize().off);
-      eventListeners.setDetector("fullscreen", toggleFullscreen().on, toggleFullscreen().off);
-      eventListeners.setDetector("zoom", toggleZoom().on, toggleZoom().off);
-      eventListeners.setDetector("drag", toggleDrag().on, toggleDrag().off);
-      eventListeners.setDetector("select", selectToggle.on, selectToggle.off);
-      eventListeners.setDetector("order", orderToggle.on, orderToggle.off);
+      eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
+      eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
+      eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off);
+      eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
+      eventListeners.setDetector('select', selectToggle.on, selectToggle.off);
+      eventListeners.setDetector('order', orderToggle.on, orderToggle.off);
 
-      eventListeners.on("fullSize", _resizeCanvas);
-      map.setPrototype("setFullScreen", () => {
-        eventListeners.on("fullscreen", _setFullScreen);
+      eventListeners.on('fullSize', _resizeCanvas);
+      map.setPrototype('setFullScreen', () => {
+        eventListeners.on('fullscreen', _setFullScreen);
       });
     }
 
@@ -93,10 +93,10 @@
         on: (cb) => {
           activeCB = cb;
 
-          window.addEventListener("resize", activeCB);
+          window.addEventListener('resize', activeCB);
         },
         off: () => {
-          window.removeEventListener("resize", activeCB);
+          window.removeEventListener('resize', activeCB);
         }
       };
     }
@@ -114,10 +114,10 @@
         on: (cb) => {
           activeCB = cb;
 
-          window.addEventListener("fullscreen", activeCB);
+          window.addEventListener('fullscreen', activeCB);
         },
         off: () => {
-          window.removeEventListener("fullscreen", activeCB);
+          window.removeEventListener('fullscreen', activeCB);
         }
       };
     }
@@ -137,12 +137,12 @@
           activeCB = cb;
 
           hammer.add(pinch);
-          hammer.on("pinch", activeCB);
+          hammer.on('pinch', activeCB);
           /* Hamster handles wheel events really nicely */
           hamster.wheel(activeCB);
         },
         off: () => {
-          hammer.on("pinch", activeCB);
+          hammer.on('pinch', activeCB);
           hamster.unwheel(activeCB);
         }
       };
@@ -166,10 +166,10 @@
           activeCB = cb;
 
           hammer.add(pan);
-          hammer.on("pan", activeCB);
+          hammer.on('pan', activeCB);
         },
         off: () => {
-          hammer.off("pan", activeCB);
+          hammer.off('pan', activeCB);
         }
       };
     }
@@ -189,10 +189,10 @@
           activeCB = cb;
 
           hammer.add(tap);
-          hammer.on("tap", activeCB);
+          hammer.on('tap', activeCB);
         },
         off: () => {
-          hammer.off("tap", activeCB);
+          hammer.off('tap', activeCB);
         }
       };
     }
@@ -214,27 +214,27 @@
           var press = new Hammer.Press();
 
           hammer.add(press);
-          hammer.on("press", clickListener);
+          hammer.on('press', clickListener);
           /* We are detecting mouse right click here. This should be in utils */
-          mapInstance.canvas.addEventListener("mouseup", (e) => {
+          mapInstance.canvas.addEventListener('mouseup', (e) => {
             if (e.which === 3) {
               clickListener(e);
             }
           }, true);
         },
         off: () => {
-          hammer.off("press", clickListener);
-          mapInstance.canvas.removeEventListener("mouseup", clickListener, true);
+          hammer.off('press', clickListener);
+          mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
         }
       };
 
       function clickListener(e) {
-        if (!utils.mouse.isRightClick(e) && e.type !== "press") {
+        if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
           return;
         }
 
         /* Check that finite state is correct and that if desktop, the user clicked right button */
-        if (! mapStates.can("objectOrder") && ( mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
+        if (! mapStates.can('objectOrder') && ( mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
           return false;
         }
 
@@ -247,14 +247,14 @@
      * @method toggleMouseTextSelection
      */
     function toggleMouseTextSelection() {
-      var bodyStyles = document.getElementsByTagName("body")[0].style;
+      var bodyStyles = document.getElementsByTagName('body')[0].style;
 
-      bodyStyles.webkitTouchCallout = "none";
-      bodyStyles.webkitUserSelect = "none";
-      bodyStyles.khtmlUserSelect = "none";
-      bodyStyles.mozUserSelect = "none";
-      bodyStyles.msUserSelect = "none";
-      bodyStyles.userSelect = "none";
+      bodyStyles.webkitTouchCallout = 'none';
+      bodyStyles.webkitUserSelect = 'none';
+      bodyStyles.khtmlUserSelect = 'none';
+      bodyStyles.mozUserSelect = 'none';
+      bodyStyles.msUserSelect = 'none';
+      bodyStyles.userSelect = 'none';
     }
 
     /**
@@ -265,7 +265,7 @@
      */
     function _setFullScreen() {
       utils.resize.toggleFullScreen();
-      mapEvents.publish("mapResized");
+      mapEvents.publish('mapResized');
       _resizeCanvas();
     }
     /**
@@ -280,7 +280,7 @@
 
       _renderer.autoResize = true;
       _renderer.resize(windowSize.x, windowSize.y);
-      mapEvents.publish("mapResized");
+      mapEvents.publish('mapResized');
       mapInstance.drawOnNextTick();
     }
   }

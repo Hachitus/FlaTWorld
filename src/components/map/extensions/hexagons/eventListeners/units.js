@@ -34,13 +34,13 @@
     var ui;
 
     if (!FTW) {
-      throw new Error("eventlisteners initialization requires flatworld instance as a parameter");
+      throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
     }
 
     ui = UI();
 
-    eventListeners.on("select", tapListener);
-    eventListeners.on("order", orderListener);
+    eventListeners.on('select', tapListener);
+    eventListeners.on('order', orderListener);
 
     return true;
 
@@ -62,10 +62,10 @@
         }
       };
       const containerFilter = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "name",
-        value: "unitLayer"
+        type: 'filter',
+        object: 'layer',
+        property: 'name',
+        value: 'unitLayer'
       });
       var objects;
 
@@ -77,14 +77,14 @@
 
       if (!objects.length) {
         FTW.currentlySelectedObjects = undefined;
-        mapLog.debug("No objects found for selection!");
+        mapLog.debug('No objects found for selection!');
         // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
         ui.showSelections([]);
         return;
       }
 
       FTW.currentlySelectedObjects = objects;
-      mapEvents.publish("objectsSelected", objects);
+      mapEvents.publish('objectsSelected', objects);
       ui.showSelections(objects, getData);
       FTW.drawOnNextTick();
     }
@@ -98,10 +98,10 @@
      */
     function orderListener(e) {
       const filter = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "name",
-        value: "unitLayer"
+        type: 'filter',
+        object: 'layer',
+        property: 'name',
+        value: 'unitLayer'
       });
       var getData = {
         allData: function (object) {
@@ -111,10 +111,10 @@
       var globalCoords, selectedObject;
 
       if (!FTW.currentlySelectedObjects) {
-        mapLog.debug("No objects selected for orders! " + JSON.stringify(selectedObject));
+        mapLog.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
         return;
       } else if (FTW.currentlySelectedObjects.length > 1) {
-        mapLog.debug("the selected object is only supported to be one atm." + JSON.stringify(FTW.currentlySelectedObjects));
+        mapLog.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
         return;
       }
 
@@ -129,7 +129,7 @@
       }
 
       selectedObject.move(globalCoords);
-      mapEvents.publish("objectMoves", selectedObject);
+      mapEvents.publish('objectMoves', selectedObject);
 
       ui.showUnitMovement(selectedObject, globalCoords);
 

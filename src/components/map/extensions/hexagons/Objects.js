@@ -31,7 +31,7 @@
     constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
-      this.name = "DefaultTerrainObject_hexa";
+      this.name = 'DefaultTerrainObject_hexa';
       this.minimapColor = minimapColor;
       this.minimapShape = minimapShape;
       calculateHexa.call(this, radius);
@@ -55,7 +55,7 @@
     constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
-      this.name = "DefaultUnitObjects_hexa";
+      this.name = 'DefaultUnitObjects_hexa';
       this.minimapColor = minimapColor;
       this.minimapShape = minimapShape;
       this.static = false;
@@ -74,7 +74,7 @@
    */
   function calculateHexa(radius) {
     if (!radius) {
-      throw new Error("Need radius!");
+      throw new Error('Need radius!');
     }
 
     const HEIGHT = Math.round(calcLongDiagonal(radius));

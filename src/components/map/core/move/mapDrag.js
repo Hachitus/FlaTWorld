@@ -36,7 +36,7 @@
     --------------------*/
     return {
       init,
-      pluginName: "mapDrag",
+      pluginName: 'mapDrag',
       _startDragListener /* Function revealed for testing */
     };
 
@@ -53,7 +53,7 @@
       eventListenerCB = _startDragListener(map);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
-      eventListeners.on("drag", eventListenerCB);
+      eventListeners.on('drag', eventListenerCB);
     }
 
     /*---------------------
@@ -74,7 +74,7 @@
       return function startDrag(e) {
         var coords;
 
-        if (eventListeners.getActivityState("zoom")) {
+        if (eventListeners.getActivityState('zoom')) {
           return false;
         }
         coords = utils.mouse.eventData.getHAMMERPointerCoords(e);

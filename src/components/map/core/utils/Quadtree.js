@@ -4,7 +4,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var QuadMod = require("/assets/lib/quadtree-js/quadtree-js-hitman");
+  var QuadMod = require('/assets/lib/quadtree-js/quadtree-js-hitman');
 
   /*---------------------
   --------- API ---------
@@ -172,7 +172,7 @@
     var objToAdd = coords;
 
     if (coords.x === undefined && coords.y === undefined) {
-      throw new Error("_createQuadtreeObject requires x and y coordinates as parameters");
+      throw new Error('_createQuadtreeObject requires x and y coordinates as parameters');
     }
     objToAdd.width = size.width;
     objToAdd.height = size.height;

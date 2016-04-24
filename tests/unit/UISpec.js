@@ -1,7 +1,7 @@
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-describe("UI and UI themes => ", function () {
+describe('UI and UI themes => ', function () {
   const UI = window.flatworld.UI;
   var UITheme, passedArguments, returnedArguments;
 
@@ -35,14 +35,14 @@ describe("UI and UI themes => ", function () {
     ];
   });
 
-  it("everything defined", function () {
+  it('everything defined', function () {
     let ui = UI(UITheme, {});
 
     expect(ui).toBeDefined();
     expect(UITheme).toBeDefined();
   });
 
-  it("showSelections", function () {
+  it('showSelections', function () {
     var result;
     let ui = UI(UITheme, {});
 
@@ -58,7 +58,7 @@ describe("UI and UI themes => ", function () {
     expect(result).toEqual(returnedArguments);
   });
 
-  it("showUnitMovement", function () {
+  it('showUnitMovement', function () {
     var result;
     let ui = UI(UITheme, {});
 
@@ -67,7 +67,7 @@ describe("UI and UI themes => ", function () {
     expect(result).toEqual(returnedArguments);
   });
 
-  it("add methods", function () {
+  it('add methods', function () {
     let ui = UI(UITheme, {});
 
     ui.testFunc = function () {

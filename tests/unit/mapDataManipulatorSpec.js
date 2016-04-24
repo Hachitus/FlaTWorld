@@ -1,7 +1,7 @@
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-describe("mapDataManipulator => ", function () {
+describe('mapDataManipulator => ', function () {
   const MapDataManipulator = window.flatworld.MapDataManipulator;
   const mapLayers = window.flatworld.mapLayers;
   const objects = window.flatworld.objects;
@@ -9,28 +9,28 @@ describe("mapDataManipulator => ", function () {
 
   beforeEach(function () {
     layerRules = {
-      type: "filter",
-      object: "layer",
-      property: "selectable",
+      type: 'filter',
+      object: 'layer',
+      property: 'selectable',
       value: true
     };
     objectRules = {
-      type: "filter",
-      object: "object",
-      property: "name",
-      value: "DefaultTerrainObject"
+      type: 'filter',
+      object: 'object',
+      property: 'name',
+      value: 'DefaultTerrainObject'
     };
     testLayers = [new mapLayers.MapLayer({
       selectable: false,
-      name: "terrainLayer"
+      name: 'terrainLayer'
     }),
     new mapLayers.MapLayer({
       selectable: true,
-      name: "unitLayer"
+      name: 'unitLayer'
     }),
     new mapLayers.MapLayer({
       selectable: false,
-      name: "unitLayer"
+      name: 'unitLayer'
     })];
     testObjects = [
       new objects.ObjectSpriteTerrain(),
@@ -38,7 +38,7 @@ describe("mapDataManipulator => ", function () {
     ];
   });
 
-  it("filter layers", function () {
+  it('filter layers', function () {
     var mapDataManipulator = new MapDataManipulator(layerRules);
     var foundLayers;
 
@@ -51,7 +51,7 @@ describe("mapDataManipulator => ", function () {
 
     expect(foundLayers).toEqual([testLayers[1], testLayers[2]]);
   });
-  it("filter objects", function () {
+  it('filter objects', function () {
     var mapDataManipulator = new MapDataManipulator(objectRules);
     var foundObjects;
 
@@ -59,12 +59,12 @@ describe("mapDataManipulator => ", function () {
 
     expect(foundObjects[0]).toBe(testObjects[0]);
 
-    testObjects[1].name = "DefaultTerrainObject";
+    testObjects[1].name = 'DefaultTerrainObject';
     foundObjects = mapDataManipulator.filter(testObjects);
 
     expect(foundObjects).toEqual([testObjects[0], testObjects[1]]);
   });
-  it("filter both", function () {
+  it('filter both', function () {
     var mapDataManipulator = new MapDataManipulator(layerRules);
     var foundObjects;
 

@@ -28,7 +28,7 @@
      * @return {Object}                   Created instance of sound
      */
     add(name, url, options = { loop: false, volume: 1 }) {
-      const ERROR_STRING = "The sound '" + name + "' was unable to load!";
+      const ERROR_STRING = 'The sound "' + name + '" was unable to load!';
       var { loop, volume } = options;
 
       this._allSounds[name] = {};

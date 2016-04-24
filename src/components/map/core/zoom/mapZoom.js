@@ -54,7 +54,7 @@
     ---------------------*/
     return {
       init,
-      pluginName: "mapZoom"
+      pluginName: 'mapZoom'
     };
 
     /*---------------------
@@ -71,13 +71,13 @@
      **/
     function init(thisMap) {
       map = thisMap;
-      map.setPrototype("zoomIn", zoomIn);
-      map.setPrototype("zoomOut", zoomOut);
-      map.setPrototype("setZoomLimits", setZoomLimits);
-      map.setPrototype("setZoomModifier", setZoomModifier);
+      map.setPrototype('zoomIn', zoomIn);
+      map.setPrototype('zoomOut', zoomOut);
+      map.setPrototype('setZoomLimits', setZoomLimits);
+      map.setPrototype('setZoomModifier', setZoomModifier);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
-      eventListeners.on("zoom", unifiedEventCB);
+      eventListeners.on('zoom', unifiedEventCB);
     }
 
     /*----------------------------------------
@@ -91,7 +91,7 @@
      **/
     function setZoomModifier (amount) {
       if (! (amount > 0 || amount <= 0.5) ) {
-        throw new Error("Wrong zoom modifier! (needs to be >0 and <=0.5, given:" + amount);
+        throw new Error('Wrong zoom modifier! (needs to be >0 and <=0.5, given:' + amount);
       }
       zoomModifier = amount;
 
@@ -212,7 +212,7 @@
             x: changeX,
             y: changeY
           };
-          eventListeners.setActivityState("zoom", true);
+          eventListeners.setActivityState('zoom', true);
           initialized = true;
 
           return;
@@ -221,7 +221,7 @@
            * bad if after zoom there is immediately an unexplainable drag and the map moves a bit
            * */
           window.setTimeout(function () {
-            eventListeners.setActivityState("zoom", false);
+            eventListeners.setActivityState('zoom', false);
           }, TIMEOUT_AFTER_ZOOM);
           initialized = false;
         }
@@ -242,7 +242,7 @@
         };
 
       } catch (ev) {
-        console.log("Error! ", ev);
+        console.log('Error! ', ev);
       }
     }
 

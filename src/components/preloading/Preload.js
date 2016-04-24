@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   /*---------------------
   ------- IMPORT --------
@@ -59,7 +59,7 @@
      * @method setErrorHandler
      **/
     setErrorHandler (errorCB) {
-      this.preloaderClass.on("error", errorCB);
+      this.preloaderClass.on('error', errorCB);
 
       return this;
     }
@@ -69,7 +69,7 @@
      * @method setProgressHandler
      **/
     setProgressHandler (progressCB) {
-      this.preloaderClass.on("error", progressCB);
+      this.preloaderClass.on('error', progressCB);
 
       return this;
     }

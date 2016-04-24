@@ -40,7 +40,7 @@
    * @method setRadius
    * @param {Number} radius    The radius of the hexagon
    */
-  function init(radius, startingPoint = { x: 0, y: 0}, { orientation = "horizontal" } = {}) {
+  function init(radius, startingPoint = { x: 0, y: 0}, { orientation = 'horizontal' } = {}) {
     globalRadius = radius;
     globalStartingPoint = startingPoint;
     globalOrientation = orientation;
@@ -53,11 +53,11 @@
    * @param {object} options    extra options, like generating horizontal hexagon points and
    * how many decimals to round
   */
-  function getHexagonPoints({ radius = globalRadius, orientation = "horizontal" } = {}) {
+  function getHexagonPoints({ radius = globalRadius, orientation = 'horizontal' } = {}) {
     if (!radius) {
-      mapLog.error("You need to define at least globalRadius for the hexagonMath utils class");
+      mapLog.error('You need to define at least globalRadius for the hexagonMath utils class');
     }
-    const OFFSET = orientation === "horizontal" ? 0.5 : 0;
+    const OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     const CENTER = {
       x: radius,
       y: radius
@@ -170,7 +170,7 @@
    * @param {String} {}.orientation     Is it horizontal or vertical hexagon grid. Default: horizontal
    * @return {[]}                       Array that holds the coordinates for the hexagon grid, like [{x: ?, y: ?}]
    */
-  function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = "horizontal" } = {}) {
+  function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = 'horizontal' } = {}) {
     const { rows, columns } = gridSize;
     var gridArray = [];
     var shortDistance = calcShortDiagonal(radius);
@@ -178,15 +178,15 @@
     var rowHeight, columnWidth;
 
     /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
-    rowHeight = orientation === "horizontal" ? longDistance : shortDistance;
-    columnWidth = orientation === "horizontal" ? shortDistance : longDistance;
+    rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
+    columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
 
     for (let row = 0; rows > row; row++) {
       for (let column = 0; columns > column; column++) {
         /* Se the coordinates for each hexagons upper-left corner on the grid */
         gridArray.push({
           x: Math.round(( column * columnWidth ) +
-            ( orientation === "horizontal" && ( row === 0 || row % 2 === 0 ) ? 0 : -shortDistance / 2) ),
+            ( orientation === 'horizontal' && ( row === 0 || row % 2 === 0 ) ? 0 : -shortDistance / 2) ),
           y: row * rowHeight
         });
       }
@@ -208,10 +208,10 @@
     var closestHexagonCenter;
 
     if (!globalOrientation || !radius || !globalStartingPoint) {
-      throw new Error("getClosestHexagonCenter requirements not filled");
+      throw new Error('getClosestHexagonCenter requirements not filled');
     }
 
-    if (globalOrientation === "horizontal") {
+    if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
         x: Math.round( coordinates.x -
               ( coordinates.x % calcShortDiagonal(radius) ) +

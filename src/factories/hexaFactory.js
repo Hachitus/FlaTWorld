@@ -38,11 +38,11 @@
         cache = false,
         minimapCanvas,
         scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
-    log.debug("============== Hexagonal Map factory started =============");
+    log.debug('============== Hexagonal Map factory started =============');
     const pixelRatio = utils.environmentDetection.getPixelRatio();
-    const DATA_MAP = (typeof datas.map === "string") ? JSON.parse(datas.map) : datas.map;
-    const DATA_TYPE = (typeof datas.type === "string") ? JSON.parse(datas.type) : datas.type;
-    const DATA_GAME = (typeof datas.game === "string") ? JSON.parse(datas.game) : datas.game;
+    const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;
+    const DATA_TYPE = (typeof datas.type === 'string') ? JSON.parse(datas.type) : datas.type;
+    const DATA_GAME = (typeof datas.game === 'string') ? JSON.parse(datas.game) : datas.game;
     const WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
@@ -81,9 +81,9 @@
     PIXI.SCALE_MODES.DEFAULT = 1;
 
     DATA_MAP.layers.forEach( layerData => {
-      if (typeof layerData !== "object") {
-        log.error("Problem in hexaFactory, with layerData:" + JSON.stringify(layerData));
-        throw new Error("Problem in hexaFactory, with layerData:", layerData);
+      if (typeof layerData !== 'object') {
+        log.error('Problem in hexaFactory, with layerData:' + JSON.stringify(layerData));
+        throw new Error('Problem in hexaFactory, with layerData:', layerData);
       }
 
       var renderer = map.getRenderer();
@@ -94,7 +94,7 @@
           x: renderer.width,
           y: renderer.height
         },
-        selectable: layerData.name === "unitLayer" ? true : false
+        selectable: layerData.name === 'unitLayer' ? true : false
       };
       var thisLayer;
 
@@ -105,7 +105,7 @@
           let spritesheetType = objectGroup.typeImageData;
 
           if (!spritesheetType) {
-            log.error("Error with spritesheetType-data");
+            log.error('Error with spritesheetType-data');
             return;
           }
 
@@ -115,8 +115,8 @@
             try {
               objTypeData = DATA_TYPE.objectData[spritesheetType][object.objType];
               if (!objTypeData) {
-                log.error("Bad mapData for type:", spritesheetType, object.objType, object.name);
-                throw new Error("Bad mapData for type:", spritesheetType, object.objType, object.name);
+                log.error('Bad mapData for type:', spritesheetType, object.objType, object.name);
+                throw new Error('Bad mapData for type:', spritesheetType, object.objType, object.name);
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);
@@ -139,7 +139,7 @@
           });
         });
       } catch (e) {
-        log.error("Problem:" + JSON.stringify(layerData.type) + " ---- " + JSON.stringify(e.stack));
+        log.error('Problem:' + JSON.stringify(layerData.type) + ' ---- ' + JSON.stringify(e.stack));
       }
     });
 

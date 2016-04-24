@@ -1,7 +1,7 @@
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-describe("hexagon extension, testing utils => ", function () {
+describe('hexagon extension, testing utils => ', function () {
   const HEXAGONS_UTILS = window.flatworld.extensions.hexagons.utils;
   var radius, hexagonPoints, gridSize;
 
@@ -16,7 +16,7 @@ describe("hexagon extension, testing utils => ", function () {
     HEXAGONS_UTILS.init(radius);
   });
 
-  it("getHexagonPoints", function () {
+  it('getHexagonPoints', function () {
     var points = HEXAGONS_UTILS.getHexagonPoints();
 
     expect(Math.ceil(points[0].y)).toEqual(30);
@@ -25,7 +25,7 @@ describe("hexagon extension, testing utils => ", function () {
 
     expect(Math.ceil(points[0].y)).toEqual(2);
   });
-  it("calcShortDiagonal", function () {
+  it('calcShortDiagonal', function () {
     var shortDiagonal = HEXAGONS_UTILS.calcShortDiagonal();
 
     expect(shortDiagonal).toEqual(103);
@@ -39,7 +39,7 @@ describe("hexagon extension, testing utils => ", function () {
     shortDiagonal = HEXAGONS_UTILS.calcShortDiagonal({ radius: radius + 5.9 });
     expect(shortDiagonal).toEqual(114);
   });
-  it("calcLongDiagonal", function () {
+  it('calcLongDiagonal', function () {
     var longDiagonal = HEXAGONS_UTILS.calcLongDiagonal();
 
     expect(longDiagonal).toEqual(120);
@@ -53,17 +53,17 @@ describe("hexagon extension, testing utils => ", function () {
     longDiagonal = HEXAGONS_UTILS.calcLongDiagonal({ radius: radius + 5.9 });
     expect(longDiagonal).toEqual(131);
   });
-  it("createHexagonGridCoordinates", function () {
+  it('createHexagonGridCoordinates', function () {
     var hexagonGrid;
 
     hexagonGrid = HEXAGONS_UTILS.createHexagonGridCoordinates(gridSize);
 
-    expect(hexagonGrid[0].x).toEqual(0, "FIRST X");
-    expect(hexagonGrid[0].y).toEqual(0, "FIRST Y");
-    expect(hexagonGrid[10].x).toEqual(-51, "SECOND X");
-    expect(hexagonGrid[15].y).toEqual(90, "SECOND Y");
+    expect(hexagonGrid[0].x).toEqual(0, 'FIRST X');
+    expect(hexagonGrid[0].y).toEqual(0, 'FIRST Y');
+    expect(hexagonGrid[10].x).toEqual(-51, 'SECOND X');
+    expect(hexagonGrid[15].y).toEqual(90, 'SECOND Y');
   });
-  it("hexaHitTest", function () {
+  it('hexaHitTest', function () {
     var isHit;
 
     isHit = HEXAGONS_UTILS.hexaHitTest(hexagonPoints, {x:0, y:0}, {x:0, y:0});
@@ -74,7 +74,7 @@ describe("hexagon extension, testing utils => ", function () {
 
     expect(isHit).toEqual(false);
   });
-  it("getClosestHexagonCenter", function () {
+  it('getClosestHexagonCenter', function () {
     var closestCenter;
 
     closestCenter = HEXAGONS_UTILS.getClosestHexagonCenter({

@@ -26,7 +26,7 @@
 
     return {
       init,
-      pluginName: "selectHexagonObject"
+      pluginName: 'selectHexagonObject'
     };
 
     /**

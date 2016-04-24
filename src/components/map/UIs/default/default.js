@@ -34,7 +34,7 @@
      * @param  {Object} options         optional options
      * @param  {Object} options.styles  styles for the UI
      */
-    constructor(modal, FTW, { styles = "#F0F0F0" , elements } = {}) {
+    constructor(modal, FTW, { styles = '#F0F0F0' , elements } = {}) {
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
@@ -54,11 +54,11 @@
       this.addCSSRulesToScriptTag(styleSheetElement, createdCSS);
 
       // Add a media (and/or media query) here if you'd like!
-      // style.setAttribute("media", "screen")
-      // style.setAttribute("media", "only screen and (max-width : 1024px)")
+      // style.setAttribute('media', 'screen')
+      // style.setAttribute('media', 'only screen and (max-width : 1024px)')
 
       this.FTW = FTW;
-      this.modal = modal || document.getElementById("dialog_select");
+      this.modal = modal || document.getElementById('dialog_select');
       this.styles = styles;
     }
     /**
@@ -94,13 +94,13 @@
       if (objects && objects.length > 1) {
         cb = () => {
           this.modal.innerHTML = templates.multiSelection({
-            title: "Objects",
+            title: 'Objects',
             objects
           });
 
           this.showModal(this.modal, cssClasses);
 
-          _getElement("select").style.display = 'block';
+          _getElement('select').style.display = 'block';
         };
       } else if (objects && objects.length === 1) {
         cb = () => {
@@ -110,11 +110,11 @@
         cb = () => {
           UILayer.deleteUIObjects();
           updateCB();
-          mapLog.debug("Error occured selecting the objects on this coordinates! Nothing found");
+          mapLog.debug('Error occured selecting the objects on this coordinates! Nothing found');
         };
       }
 
-      _getElement("select").style.display = 'none';
+      _getElement('select').style.display = 'none';
       cb();
     }
     /**
@@ -125,14 +125,14 @@
      * @param {Object} getDatas       See explanation in core.UI
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      */
-    highlightSelectedObject(object, getDatas, options = {shadow: { color: "0x0000", distance: 5, alpha: 0.55, angle: 45, blur: 5 }}) {
+    highlightSelectedObject(object, getDatas, options = {shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 }}) {
       var { shadow } = options;
       var highlightableObject, objectDatas;
 
       objectDatas = getDatas.allData(object);
 
       this.modal.innerHTML = templates.singleSelection({
-        title: "Selected",
+        title: 'Selected',
         object: {
           name: objectDatas.name
         }
@@ -151,7 +151,7 @@
 
       this.FTW.drawOnNextTick();
 
-      _getElement("select").style.display = 'block';
+      _getElement('select').style.display = 'block';
 
       return highlightableObject;
     }
@@ -160,7 +160,7 @@
      * @param {PIXI.Point} to       Global coordinates that were clicked
      */
     showUnitMovement(object, to) {
-      const UINAME = "movementArrow";
+      const UINAME = 'movementArrow';
       var localTo, localFrom, currentArrow;
 
       localTo = this.FTW.getMovableLayer().toLocal(to);
@@ -209,16 +209,16 @@
      */
     createHighlight(object, options = { coords: new PIXI.Point(0, 0) }) {
       const RADIUS = 47;
-      const UI_CONTAINER_NAME = "unit highlight";
+      const UI_CONTAINER_NAME = 'unit highlight';
       const movableLayer = this.FTW.getMovableLayer();
-      const container = new this.FTW.createSpecialLayer("UILayer", { toLayer: movableLayer});
+      const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer});
       const objCoords = {
         x: Number(object.x),
         y: Number(object.y)
       };
       var highlighterObject;
 
-      highlighterObject = createVisibleHexagon(RADIUS, { color: "#F0F0F0" });
+      highlighterObject = createVisibleHexagon(RADIUS, { color: '#F0F0F0' });
       highlighterObject.x = objCoords.x + 32;
       highlighterObject.y = objCoords.y + 27;
 
@@ -247,9 +247,9 @@
      * @method addStyleElement
      */
     addStyleElement() {
-      var _styleElement = document.createElement("style");
+      var _styleElement = document.createElement('style');
       // WebKit hack :(
-      _styleElement.appendChild(document.createTextNode(""));
+      _styleElement.appendChild(document.createTextNode(''));
       document.head.appendChild(_styleElement);
 
       return _styleElement.sheet;

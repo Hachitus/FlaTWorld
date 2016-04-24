@@ -13,7 +13,7 @@
   const LAYER_TYPE_STATIC = 0;
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
-  const VERSION = "0.0.0";
+  const VERSION = '0.0.0';
   var _drawMapOnNextTick = false;
   var isMapReadyPromises = [];
   var _staticLayer, _movableLayer, _minimapLayer, _renderer, _rendererMinimap, ParentLayerConstructor;
@@ -32,7 +32,7 @@
      *
      * The biggest part of creating the map, is the data structure. There is a clear data structure that you can see from the
      * tests/data-folder, but the factory is responsible for creating the objects, so you can use your own factory implementation. So to
-     * understand more, please see e.g. {{#crossLink "flatworld.factories.hexaFactory"}}{{/crossLink}}.
+     * understand more, please see e.g. {{#crossLink 'flatworld.factories.hexaFactory'}}{{/crossLink}}.
      *
      * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
      * structure is this:
@@ -95,15 +95,15 @@
 
       /* Check for the required parameters! */
       if (!mapCanvas) {
-        throw new Error(this.constructor.name + " needs canvas element!");
+        throw new Error(this.constructor.name + ' needs canvas element!');
       }
       /* If the constructor was passed mapCanvas as a string and not as an Element, we get the element */
-      if (typeof mapCanvas === "string") {
+      if (typeof mapCanvas === 'string') {
         mapCanvas = document.querySelector(mapCanvas);
       }
 
       /* Make sure the mapCanvas is empty. So there are no nasty surprises */
-      mapCanvas.innerHTML = "";
+      mapCanvas.innerHTML = '';
       /* Add the given canvas Element to the options that are passed to PIXI renderer */
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
@@ -121,15 +121,15 @@
        * objects that do not move with the map. StaticLayer has only one child: _movableLayer
        * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move with the map. Like
        * graphics that show which area or object is currently selected. */
-      _staticLayer = new mapLayers.MapLayer({ name:"staticLayer", coord: { x: 0, y: 0 } });
-      _movableLayer = new mapLayers.MapLayer({ name:"movableLayer", coord: { x: 0, y: 0 } });
-      _minimapLayer = new mapLayers.MapLayer({ name:"minimapLayer", coord: { x: 0, y: 0 } });
+      _staticLayer = new mapLayers.MapLayer({ name:'staticLayer', coord: { x: 0, y: 0 } });
+      _movableLayer = new mapLayers.MapLayer({ name:'movableLayer', coord: { x: 0, y: 0 } });
+      _minimapLayer = new mapLayers.MapLayer({ name:'minimapLayer', coord: { x: 0, y: 0 } });
       _staticLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
       utils.general.fullsizeCanvasCSS(_renderer.view);
       /* stop scrollbars of showing */
-      document.getElementsByTagName("body")[0].style.overflow = "hidden";
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
       utils.mouse.disableContextMenu(_renderer.view);
 
@@ -343,7 +343,7 @@
      * @param {Object} options.toLayer    To which layer will this layer be added to as UILayer. Default false
      * @return {MapLayer}            The created UI layer
      **/
-    createSpecialLayer(name = "default special layer", options = { coord: { x: 0, y: 0 }, toLayer: false }) {
+    createSpecialLayer(name = 'default special layer', options = { coord: { x: 0, y: 0 }, toLayer: false }) {
       var coord = options.coord || { x: 0, y: 0 };
       var layer = new mapLayers.MapLayer(name, coord);
 
@@ -481,7 +481,7 @@
         _movableLayer.move(realCoordinates);
       }
 
-      mapEvents.publish("mapMoved", realCoordinates);
+      mapEvents.publish('mapMoved', realCoordinates);
       this.drawOnNextTick();
     }
     /**
@@ -525,10 +525,10 @@
 
       /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
       pluginsArray.forEach(plugin => {
-        if (typeof plugin === "object") {
+        if (typeof plugin === 'object') {
           this.activatePlugin(plugin);
         } else {
-          log.error("problem with initializing a plugin: " + plugin.name);
+          log.error('problem with initializing a plugin: ' + plugin.name);
         }
       });
 
@@ -545,7 +545,7 @@
     activatePlugin(plugin) {
       try {
         if (!plugin || !plugin.pluginName || !plugin.init) {
-          throw new Error("plugin, plugin.pluginName or plugin.init import is missing!");
+          throw new Error('plugin, plugin.pluginName or plugin.init import is missing!');
         }
 
         this.plugins.add(plugin[plugin.pluginName]);
@@ -554,7 +554,7 @@
         }
 
       } catch (e) {
-        log.error("An error initializing plugin. JSON.stringify: '" + JSON.stringify(plugin) + "' ", e);
+        log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
       }
     }
     /**
@@ -685,7 +685,7 @@
      */
     setZoom(newScale) {
       this.getZoomLayer().setZoom(newScale);
-      mapEvents.publish("mapZoomed", { previousScale: this.getZoom(), newScale });
+      mapEvents.publish('mapZoomed', { previousScale: this.getZoom(), newScale });
 
       return newScale;
     }
@@ -705,7 +705,7 @@
      * @return {PIXI.Renderer}
      */
     getRenderer(type) {
-      if (type === "minimap") {
+      if (type === 'minimap') {
         return _rendererMinimap;
       } else {
         return _renderer;
@@ -753,32 +753,32 @@
       *
       * @method zoomIn
       */
-    zoomIn() { return "notImplementedYet. Activate with plugin"; }
+    zoomIn() { return 'notImplementedYet. Activate with plugin'; }
      /**
       * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
       * implement your own, I suggest you use it.
       *
       * @method zoomOut
       */
-    zoomOut() { return "notImplementedYet. Activate with plugin"; }
+    zoomOut() { return 'notImplementedYet. Activate with plugin'; }
     /**
      * Resize the canvas to fill the whole browser content area. Defined by the baseEventlisteners-module (core modules plugin)
      *
      * @method toggleFullsize
      **/
-    toggleFullsize() { return "notImplementedYet. Activate with plugin"; }
+    toggleFullsize() { return 'notImplementedYet. Activate with plugin'; }
     /**
      * Toggles fullscreen mode. Defined by the baseEventlisteners-module (core modules plugin)
      *
      * @method toggleFullScreen
      **/
-    toggleFullScreen () { return "notImplementedYet. Activate with plugin"; }
+    toggleFullScreen () { return 'notImplementedYet. Activate with plugin'; }
     /**
      * Plugin will overwrite create this method. Method for actually activating minimap.
      *
      * @method initMinimap
      **/
-    initMinimap () { return "notImplementedYet. Activate with plugin"; }
+    initMinimap () { return 'notImplementedYet. Activate with plugin'; }
 
     /*-------------------------
     --------- PRIVATE ---------
@@ -801,7 +801,7 @@
      * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
      * @return {Array}                                  Found objects
      */
-    _retrieveObjects(allCoords, { type = "", subcontainers = [] } = {}) {
+    _retrieveObjects(allCoords, { type = '', subcontainers = [] } = {}) {
       return this.objectManager.retrieve(allCoords, {
         type: type,
         subcontainers: subcontainers,

@@ -3,53 +3,53 @@
 
 var mapAPI = window.flatworld.mapAPI;
 
-describe("mapAPI => ", () => {
+describe('mapAPI => ', () => {
   var type, cb, baseUrl, queryStatus;
 
   beforeEach(function () {
     queryStatus = 0;
-    type = "orderUnit";
+    type = 'orderUnit';
     cb = function (queryType, completeData, params) {
       return queryType + completeData.baseUrl + completeData.cbs.length + params;
     };
-    baseUrl = "//test.warmapengine.level7.fi/API/orderUnit/";
+    baseUrl = '//test.warmapengine.level7.fi/API/orderUnit/';
     mapAPI.add(type, cb, baseUrl);
   });
   afterEach(() => {
     mapAPI.remove(type);
   });
 
-  it("add", () => {
+  it('add', () => {
     expect(Object.keys(mapAPI.getAllAPIs()).length).toEqual(1);
   });
-  it("remove", () => {
+  it('remove', () => {
     mapAPI.remove(type);
 
     expect(Object.keys(mapAPI.getAllAPIs()).length).toEqual(0);
   });
-  it("get", () => {
+  it('get', () => {
     var prom = promiseHelper();
-    spyOn(window, "fetch").and.callFake( function () {
+    spyOn(window, 'fetch').and.callFake( function () {
       return prom;
     });
-    var promise = mapAPI.get(type, "");
+    var promise = mapAPI.get(type, '');
 
     expect(promise.then).toBeDefined();
     expect(queryStatus).toEqual(2);
     expect(window.fetch).toHaveBeenCalled();
   });
-  it("post", () => {
+  it('post', () => {
     var prom = promiseHelper();
-    spyOn(window, "fetch").and.callFake( function () {
+    spyOn(window, 'fetch').and.callFake( function () {
       return prom;
     });
-    var promise = mapAPI.post(type, "");
+    var promise = mapAPI.post(type, '');
 
     expect(promise.then).toBeDefined();
     expect(queryStatus).toEqual(2);
     expect(window.fetch).toHaveBeenCalled();
   });
-  it("update", () => {
+  it('update', () => {
   });
 
   /* PRIVATE function to help with dealing promises and their returned objects */

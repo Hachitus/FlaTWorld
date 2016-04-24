@@ -34,7 +34,7 @@
      * @param  {Integer} options.specialLayer.y         Y coordinate
      **/
     constructor({
-        name = "",
+        name = '',
         coord = { x: 0, y: 0 },
         specialLayer = false,
         staticLayer = true,
@@ -49,7 +49,7 @@
        * @attribute name
        * @type {String}
        */
-      this.name = "" + name;
+      this.name = '' + name;
       /**
        * Is this layer special (e.g. UILayer not included in normal operations)
        *
@@ -200,7 +200,7 @@
      * @param  {Integer} coord.y      Y coordinate
      * @return {MapLayer}            The created UI layer
      **/
-    createUILayer(name = "default UI layer", coord = { x: 0, y: 0 }) {
+    createUILayer(name = 'default UI layer', coord = { x: 0, y: 0 }) {
       var layer = new MapLayer(name, coord);
 
       layer.specialLayer = true;
@@ -299,7 +299,7 @@
      * @param {Boolean} options.specialLayer           Is this special layer or not.
      */
     constructor({
-        name = "",
+        name = '',
         coord = { x: 0, y: 0 },
         subcontainers = false,
         specialLayer = false,
@@ -351,7 +351,7 @@
      */
     getSubcontainersByCoordinates(coordinates) {
       if (!this.hasSubcontainers()) {
-        throw new Error("tried to retrieve subcontainers, when they are not present");
+        throw new Error('tried to retrieve subcontainers, when they are not present');
       }
 
       var foundSubcontainers;

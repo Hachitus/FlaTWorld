@@ -36,8 +36,8 @@
     }
 
     if (!UITheme || !givenMap) {
-      throw new Error("UI-module requires UITheme and map object, This is an singletong class, so it's possible it should have been "+
-        "already called earlier");
+      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been '+
+        'already called earlier');
     }
 
     map = givenMap;
@@ -80,7 +80,7 @@
         return UITheme.showSelections([]);
       }
 
-      mapLog.error("No objects found" + objects.length);
+      mapLog.error('No objects found' + objects.length);
       return [];
     };
     /**
@@ -96,7 +96,7 @@
       }
 
       if (Array.isArray(objects) || typeof objects !== 'object' || objects === null) {
-        mapLog.error("Object was an Array, should be plain object: " + objects.length);
+        mapLog.error('Object was an Array, should be plain object: ' + objects.length);
       }
       return UITheme.showUnitMovement(objects, to, UIThemeOptions);
     };

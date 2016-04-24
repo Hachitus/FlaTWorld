@@ -1,7 +1,7 @@
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-describe("Scaled minimap => ", function () {
+describe('Scaled minimap => ', function () {
   const scaledMinimap = window.flatworld.extensions.minimaps.scaled;
   var UITheme, passedArguments, returnedArguments;
 
@@ -35,7 +35,7 @@ describe("Scaled minimap => ", function () {
     ];
   });
 
-  it("scaled", function () {
+  it('scaled', function () {
     let ui = UI(UITheme, {});
 
     expect(ui).toBeDefined();
@@ -43,7 +43,7 @@ describe("Scaled minimap => ", function () {
   });
 });
 
-describe("pixelized minimap => ", function () {
+describe('pixelized minimap => ', function () {
   const scaledMinimap = window.flatworld.extensions.minimaps.pixelized;
   var UITheme, passedArguments, returnedArguments;
 
@@ -77,7 +77,7 @@ describe("pixelized minimap => ", function () {
     ];
   });
 
-  it("scaled", function () {
+  it('scaled', function () {
     let ui = UI(UITheme, {});
 
     expect(ui).toBeDefined();

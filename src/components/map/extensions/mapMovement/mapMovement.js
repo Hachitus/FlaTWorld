@@ -10,7 +10,7 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  //var viewportWorker = new Worker("/components/map/extensions/mapMovement/mapMovementWorker.js");
+  //var viewportWorker = new Worker('/components/map/extensions/mapMovement/mapMovementWorker.js');
 
   /*-----------------------
   ---------- API ----------
@@ -40,7 +40,7 @@
 
     return {
       init,
-      pluginName: "mapMovement",
+      pluginName: 'mapMovement',
       addAll,
       check,
       startEventListeners,
@@ -86,9 +86,9 @@
               return !subcontainer.visible;
             });
 
-            let containerCoords = visibleContainers.reduce((all, cont2) => { all + cont2.x + ""; });
+            let containerCoords = visibleContainers.reduce((all, cont2) => { all + cont2.x + ''; });
             window.flatworld.log.debug(
-              "visible subcontainers: " + visibleContainers.length + ", " + containerCoords + "\n\ninvisible: " +
+              'visible subcontainers: ' + visibleContainers.length + ', ' + containerCoords + '\n\ninvisible: ' +
               invisibleContainers.length);
           });
         };
@@ -165,10 +165,10 @@
      * @param  {Map} map     Instance of Map
      */
     function startEventListeners() {
-      mapEvents.subscribe("mapMoved", moveCb);
-      mapEvents.subscribe("mapResized", resizeCb);
+      mapEvents.subscribe('mapMoved', moveCb);
+      mapEvents.subscribe('mapResized', resizeCb);
       /* We change the scale factor ONLY if the map is zoomed. We reserve resources */
-      mapEvents.subscribe("mapZoomed", zoomCb);
+      mapEvents.subscribe('mapZoomed', zoomCb);
 
       function moveCb(type) {
         var movedCoordinates = type.customData[0];

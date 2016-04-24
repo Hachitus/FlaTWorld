@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   /*---------------------
   --------- API ---------
@@ -58,7 +58,7 @@
       */
     function drawArrow( shape, x1, y1, x2, y2, style, which, angle, d ) {
       var graphics = shape.graphics,
-         color = "#000",
+         color = '#000',
          angle1, topx, topy, angle2, botx, boty;
 
       /* Ceason pointed to a problem when x1 or y1 were a string, and
@@ -136,7 +136,7 @@
         var backdist;
         x0 = +x0, y0 = +y0, x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2;
         // all cases do this.
-        graphics.beginStroke( "#F00" )
+        graphics.beginStroke( '#F00' )
            .moveTo( x0, y0 )
            .lineTo( x1, y1 )
            .lineTo( x2, y2 );
@@ -150,7 +150,7 @@
             break;
           case 1:
             // straight filled, add the bottom as a line and fill.
-            graphics.beginStroke( "#F00" )
+            graphics.beginStroke( '#F00' )
                .moveTo( x0, y0 )
                .lineTo( x1, y1 )
                .lineTo( x2, y2 )
@@ -245,7 +245,7 @@
     }
     /* =============================== */
 
-    function line(graphics, from, to, options = { color: "#000000", style: 5 }) {
+    function line(graphics, from, to, options = { color: '#000000', style: 5 }) {
       var { color, style } = options;
 
       graphics.lineStyle(style, color);

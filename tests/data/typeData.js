@@ -3,1066 +3,1066 @@
 window.typeData = {
   graphicData: {
     terrainBase:{
-      json: "/testAssets/images/terrain/terrains.json"
+      json: '/testAssets/images/terrain/terrains.json'
     },
     unit:{
-      json: "/testAssets/images/units/testHexagonUnits.json"
+      json: '/testAssets/images/units/testHexagonUnits.json'
     }
   },
   objectData: {
     terrainBase:[{
-        image:"parkingLot",
-        attachedToTerrains:["0"],
-        propability:"100%",
-        name: "forDebugging - parkingLot",
+        image:'parkingLot',
+        attachedToTerrains:['0'],
+        propability:'100%',
+        name: 'forDebugging - parkingLot',
         minimapColor: 0xa4afaf
       },{
-        image:"park",
-        attachedToTerrains:["2"],
-        propability:"100%",
-        name: "forDebugging - park",
+        image:'park',
+        attachedToTerrains:['2'],
+        propability:'100%',
+        name: 'forDebugging - park',
         minimapColor: 0x168344
       },{
-        image:"fountainPark",
-        attachedToTerrains:["1"],
-        propability:"100%",
-        name: "forDebugging - fountainPark",
+        image:'fountainPark',
+        attachedToTerrains:['1'],
+        propability:'100%',
+        name: 'forDebugging - fountainPark',
         minimapColor: 0x66FFFF
       },{
-        image:"fountain",
-        attachedToTerrains:["4"],
-        propability:"100%",
-        name: "forDebugging - fountain",
+        image:'fountain',
+        attachedToTerrains:['4'],
+        propability:'100%',
+        name: 'forDebugging - fountain',
         minimapColor: 0xd1f4ff
       },{
-        image:"crystalMountain",
-        attachedToTerrains:["4"],
-        propability:"100%",
-        name: "forDebugging - crystalMountain",
+        image:'crystalMountain',
+        attachedToTerrains:['4'],
+        propability:'100%',
+        name: 'forDebugging - crystalMountain',
         minimapColor: 0xb55f40
       }],
     terrain:[{
-      name:"desert",
-      image:"0",
-      desc:"very dry land",
+      name:'desert',
+      image:'0',
+      desc:'very dry land',
       modifiers: {
         City: {
           _player_: [{
-            from:"thisOnePlace",
+            from:'thisOnePlace',
             modifiers: {
-              production:"Provides +1 food for cities"
+              production:'Provides +1 food for cities'
             }
           }]
         }
       }
     }],
     unit:[{
-      name:"anti-tank",
-      desc:"Vrooom...",
-      image:"tank.png",
-      att:"Good",
-      def:"Poor",
-      siege:"Decent",
-      initiate:"90",
-      move:"100",
-      morale:"Average",
-      vision:"150",
-      influenceArea:"30"
+      name:'anti-tank',
+      desc:'Vrooom...',
+      image:'tank.png',
+      att:'Good',
+      def:'Poor',
+      siege:'Decent',
+      initiate:'90',
+      move:'100',
+      morale:'Average',
+      vision:'150',
+      influenceArea:'30'
     },{
-    name:"tank",
-    desc:"Whistlers",
-    image:"antitank.png",
-    att:"1",
-    def:"2",
-    siege:"2",
-    initiate:"110",
-    move:"100",
-    morale:"Average",
-    vision:"250",
-    influenceArea:"30",
+    name:'tank',
+    desc:'Whistlers',
+    image:'antitank.png',
+    att:'1',
+    def:'2',
+    siege:'2',
+    initiate:'110',
+    move:'100',
+    morale:'Average',
+    vision:'250',
+    influenceArea:'30',
     modifiers:{
     unit:{
     _enemy_:[{
-    from:"thisOnePlace",
+    from:'thisOnePlace',
 						modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"cruiser",
-				desc:"liplap",
-				image:"cruiser.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'cruiser',
+				desc:'liplap',
+				image:'cruiser.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"bomber",
-				desc:"badabooom",
-				image:"bomber.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'bomber',
+				desc:'badabooom',
+				image:'bomber.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"oldCannon",
-				desc:"wiuuuuu",
-				image:"mortar.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'oldCannon',
+				desc:'wiuuuuu',
+				image:'mortar.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"camel",
-				desc:"wiuuuuu",
-				image:"camel.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'camel',
+				desc:'wiuuuuu',
+				image:'camel.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"carrier",
-				desc:"wiuuuuu",
-				image:"carrier.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'carrier',
+				desc:'wiuuuuu',
+				image:'carrier.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"catapult",
-				desc:"wiuuuuu",
-				image:"catapult.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'catapult',
+				desc:'wiuuuuu',
+				image:'catapult.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"missile",
-				desc:"wiuuuuu",
-				image:"missile.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'missile',
+				desc:'wiuuuuu',
+				image:'missile.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"phalanx",
-				desc:"wiuuuuu",
-				image:"phalanx.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'phalanx',
+				desc:'wiuuuuu',
+				image:'phalanx.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"soldier",
-				desc:"wiuuuuu",
-				image:"soldier.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'soldier',
+				desc:'wiuuuuu',
+				image:'soldier.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"sailboat",
-				desc:"wiuuuuu",
-				image:"sailboat.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'sailboat',
+				desc:'wiuuuuu',
+				image:'sailboat.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"wagon",
-				desc:"wiuuuuu",
-				image:"wagon.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'wagon',
+				desc:'wiuuuuu',
+				image:'wagon.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"submarine",
-				desc:"wiuuuuu",
-				image:"submarine.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'submarine',
+				desc:'wiuuuuu',
+				image:'submarine.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"freighter",
-				desc:"wiuuuuu",
-				image:"freighter.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'freighter',
+				desc:'wiuuuuu',
+				image:'freighter.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"vikingboat",
-				desc:"wiuuuuu",
-				image:"vikingboat.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'vikingboat',
+				desc:'wiuuuuu',
+				image:'vikingboat.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"marine",
-				desc:"wiuuuuu",
-				image:"marine.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'marine',
+				desc:'wiuuuuu',
+				image:'marine.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"dude",
-				desc:"wiuuuuu",
-				image:"dude.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'dude',
+				desc:'wiuuuuu',
+				image:'dude.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"tractor",
-				desc:"wiuuuuu",
-				image:"tractor.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'tractor',
+				desc:'wiuuuuu',
+				image:'tractor.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"cannon",
-				desc:"wiuuuuu",
-				image:"cannon.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'cannon',
+				desc:'wiuuuuu',
+				image:'cannon.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"helicopter",
-				desc:"wiuuuuu",
-				image:"helicopter.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'helicopter',
+				desc:'wiuuuuu',
+				image:'helicopter.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"arctic",
-				desc:"wiuuuuu",
-				image:"arctic.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'arctic',
+				desc:'wiuuuuu',
+				image:'arctic.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"stealth",
-				desc:"wiuuuuu",
-				image:"stealth.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'stealth',
+				desc:'wiuuuuu',
+				image:'stealth.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"jet",
-				desc:"wiuuuuu",
-				image:"jet.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'jet',
+				desc:'wiuuuuu',
+				image:'jet.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"battleship",
-				desc:"wiuuuuu",
-				image:"battleship.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'battleship',
+				desc:'wiuuuuu',
+				image:'battleship.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"finnishSoldier",
-				desc:"wiuuuuu",
-				image:"some.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'finnishSoldier',
+				desc:'wiuuuuu',
+				image:'some.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"airplane",
-				desc:"wiuuuuu",
-				image:"airplane.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'airplane',
+				desc:'wiuuuuu',
+				image:'airplane.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"frigate",
-				desc:"wiuuuuu",
-				image:"frigate.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'frigate',
+				desc:'wiuuuuu',
+				image:'frigate.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"steamboat",
-				desc:"wiuuuuu",
-				image:"steamboat.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'steamboat',
+				desc:'wiuuuuu',
+				image:'steamboat.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"knight",
-				desc:"wiuuuuu",
-				image:"knight.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'knight',
+				desc:'wiuuuuu',
+				image:'knight.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"legionaire",
-				desc:"wiuuuuu",
-				image:"legionaire.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'legionaire',
+				desc:'wiuuuuu',
+				image:'legionaire.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"apc",
-				desc:"wiuuuuu",
-				image:"apc.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'apc',
+				desc:'wiuuuuu',
+				image:'apc.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"missile2",
-				desc:"wiuuuuu",
-				image:"missile2.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'missile2',
+				desc:'wiuuuuu',
+				image:'missile2.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"corvette",
-				desc:"wiuuuuu",
-				image:"corvette.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'corvette',
+				desc:'wiuuuuu',
+				image:'corvette.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"horsey",
-				desc:"wiuuuuu",
-				image:"horsey.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'horsey',
+				desc:'wiuuuuu',
+				image:'horsey.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"donkeyPioneer?",
-				desc:"wiuuuuu",
-				image:"donkeyPioneer.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'donkeyPioneer?',
+				desc:'wiuuuuu',
+				image:'donkeyPioneer.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"truck",
-				desc:"wiuuuuu",
-				image:"truck.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'truck',
+				desc:'wiuuuuu',
+				image:'truck.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"superboat",
-				desc:"wiuuuuu",
-				image:"superboat.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'superboat',
+				desc:'wiuuuuu',
+				image:'superboat.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"greenninja",
-				desc:"wiuuuuu",
-				image:"greenninja.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'greenninja',
+				desc:'wiuuuuu',
+				image:'greenninja.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"pikeman",
-				desc:"wiuuuuu",
-				image:"pikeman.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'pikeman',
+				desc:'wiuuuuu',
+				image:'pikeman.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"nomad",
-				desc:"wiuuuuu",
-				image:"nomad.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'nomad',
+				desc:'wiuuuuu',
+				image:'nomad.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"joustingKnight",
-				desc:"wiuuuuu",
-				image:"knight2.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'joustingKnight',
+				desc:'wiuuuuu',
+				image:'knight2.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"priest",
-				desc:"wiuuuuu",
-				image:"priest.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'priest',
+				desc:'wiuuuuu',
+				image:'priest.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"awacs",
-				desc:"wiuuuuu",
-				image:"awacs.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'awacs',
+				desc:'wiuuuuu',
+				image:'awacs.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"oldman?",
-				desc:"wiuuuuu",
-				image:"oldman.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'oldman?',
+				desc:'wiuuuuu',
+				image:'oldman.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"king",
-				desc:"wiuuuuu",
-				image:"king.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'king',
+				desc:'wiuuuuu',
+				image:'king.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"blackDude?",
-				desc:"wiuuuuu",
-				image:"blackie.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'blackDude?',
+				desc:'wiuuuuu',
+				image:'blackie.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"ranger",
-				desc:"wiuuuuu",
-				image:"ranger.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'ranger',
+				desc:'wiuuuuu',
+				image:'ranger.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"reddie",
-				desc:"wiuuuuu",
-				image:"reddie.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'reddie',
+				desc:'wiuuuuu',
+				image:'reddie.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"charriot",
-				desc:"wiuuuuu",
-				image:"charriot.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'charriot',
+				desc:'wiuuuuu',
+				image:'charriot.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"floatingfort",
-				desc:"wiuuuuu",
-				image:"floatingfort.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'floatingfort',
+				desc:'wiuuuuu',
+				image:'floatingfort.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"airborne",
-				desc:"wiuuuuu",
-				image:"airborne.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'airborne',
+				desc:'wiuuuuu',
+				image:'airborne.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"elephant",
-				desc:"wiuuuuu",
-				image:"elephant.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'elephant',
+				desc:'wiuuuuu',
+				image:'elephant.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"archer",
-				desc:"wiuuuuu",
-				image:"archer.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'archer',
+				desc:'wiuuuuu',
+				image:'archer.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"shieldRider",
-				desc:"wiuuuuu",
-				image:"rider.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'shieldRider',
+				desc:'wiuuuuu',
+				image:'rider.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}},{
-				name:"crusader",
-				desc:"wiuuuuu",
-				image:"crusader.png",
-				att:"1",
-				def:"2",
-				siege:"2",
-				initiate:"110",
-				move:"100",
-				morale:"Average",
-				vision:"250",
-				influenceArea:"30",
+				name:'crusader',
+				desc:'wiuuuuu',
+				image:'crusader.png',
+				att:'1',
+				def:'2',
+				siege:'2',
+				initiate:'110',
+				move:'100',
+				morale:'Average',
+				vision:'250',
+				influenceArea:'30',
 				modifiers:{
 					unit:{
 						_enemy_:[{
-							from:"thisOnePlace",
+							from:'thisOnePlace',
 							modifiers:{
-  morale:"suffers morale drop"
+  morale:'suffers morale drop'
 			}}]}}}
 		],
     places: [{
-      name: "Shanghai",
-      image:"city.png"
+      name: 'Shanghai',
+      image:'city.png'
     }]
   }
 };

@@ -77,14 +77,14 @@
       });
 
       this.rules.forEach((rule) => {
-        if (rule.type === "filter") {
+        if (rule.type === 'filter') {
           if (rule.object !== matchedType) {
             return;
           }
 
-          if (matchedType === "layer") {
+          if (matchedType === 'layer') {
             ruleMatches = this._getObject(object, rule);
-          } else if (matchedType === "object") {
+          } else if (matchedType === 'object') {
             ruleMatches = this._getObject(object, rule);
           }
         }

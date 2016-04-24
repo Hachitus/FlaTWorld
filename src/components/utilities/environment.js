@@ -40,7 +40,7 @@
    * @return {Boolean}
    */
   function isTouchDevice() {
-    if ("ontouchstart" in document.documentElement) {
+    if ('ontouchstart' in document.documentElement) {
       return true;
     } else {
       return false;

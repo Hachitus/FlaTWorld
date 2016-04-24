@@ -35,7 +35,7 @@
 
     return {
       init,
-      pluginName: "pixelizedMinimap",
+      pluginName: 'pixelizedMinimap',
       initMinimap,
       _testObject: {
 
@@ -68,7 +68,7 @@
       paddingY = yPadding;
       minimap.minimapSize = minimapSize;
       coordinateConverterCB = coordinateConvCB;
-      //utils.mouse.disableContextMenu(map.getRenderer("minimap").view);
+      //utils.mouse.disableContextMenu(map.getRenderer('minimap').view);
       setMinimapUI(UIImage);
       setupBackgroundLayer(staticCB);
       setupDynamicLayer(dynamicCB);
@@ -78,7 +78,7 @@
       minimapViewport = givenMinimapViewport;
       minimap.addChild(minimapViewport);
 
-      mapEvents.publish("minimapInitialized", minimap);
+      mapEvents.publish('minimapInitialized', minimap);
 
       return minimap;
     }
@@ -93,9 +93,9 @@
      */
     function setupBackgroundLayer(staticCB) {
       const filters = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "staticLayer",
+        type: 'filter',
+        object: 'layer',
+        property: 'staticLayer',
         value: true
       });
       var backgroundContainer = createMinimapLayer();
@@ -110,9 +110,9 @@
     }
     function setupDynamicLayer(updateCB) {
       const filters = new MapDataManipulator({
-        type: "filter",
-        object: "object",
-        property: "static",
+        type: 'filter',
+        object: 'object',
+        property: 'static',
         value: false
       });
       var dynamicContainer = createMinimapLayer();
@@ -124,9 +124,9 @@
       minimap.addChild(dynamicContainer);
     }
     function setupMinimapViewportEvents() {
-      mapEvents.subscribe("mapMoved", reactToMapMovement);
-      mapEvents.subscribe("mapZoomed", reactToMapScale);
-      mapEvents.subscribe("minimapClicked", moveViewport);
+      mapEvents.subscribe('mapMoved', reactToMapMovement);
+      mapEvents.subscribe('mapZoomed', reactToMapScale);
+      mapEvents.subscribe('minimapClicked', moveViewport);
     }
     function reactToMapMovement() {
       if (mapMoveTimestamp - Date.now() > -5) {
@@ -173,16 +173,16 @@
           activeCB = cb;
 
           hammer.add(tap);
-          hammer.on("tap", activeCB);
+          hammer.on('tap', activeCB);
         },
         off: () => {
-          hammer.on("tap", activeCB);
+          hammer.on('tap', activeCB);
         }
       };
 
-      eventListeners.setDetector("minimapClicked", minimapClickDetector.on, minimapClickDetector.off);
+      eventListeners.setDetector('minimapClicked', minimapClickDetector.on, minimapClickDetector.off);
 
-      eventListeners.on("minimapClicked", moveViewport);
+      eventListeners.on('minimapClicked', moveViewport);
     }
     /*-----------------------
     -------- PRIVATE --------
@@ -196,7 +196,7 @@
      * @param {Integer} height
      */
     function _setMinimapArea( x, y, width, height ) {
-      var _minimapRenderer = map.getRenderer("minimap");
+      var _minimapRenderer = map.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;

@@ -48,7 +48,7 @@
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function get(type, params) {
-      return _doFetch("get", type, params);
+      return _doFetch('get', type, params);
     }
     /**
      * Send data to server
@@ -60,13 +60,13 @@
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function post(type, params) {
-      return _doFetch("post", type, params);
+      return _doFetch('post', type, params);
     }
     /**
      * Add a new mapApi endpoint
      *
      * @method add
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint. Callback gets these parameters
      * 1. request type: post, get etc.
      * 2. completeData: { baseUrl, cbs }
@@ -78,7 +78,7 @@
      */
     function add(type, cb, baseUrl) {
       if (APIs[type]) {
-        mapLog.debug("API endpoint already exists and has been defined " + type + ", " + baseUrl + ", " + JSON.stringify(cb));
+        mapLog.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
       }
 
       APIs[type] = {
@@ -90,11 +90,11 @@
      * Removes mapApi endpoint
      *
      * @method remove
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      */
     function remove(type) {
       if (!APIs[type]) {
-        mapLog.debug("API endpoint not found for removing!");
+        mapLog.debug('API endpoint not found for removing!');
       }
 
       delete APIs[type];
@@ -103,13 +103,13 @@
      * Add a new mapApi endpoint
      *
      * @method update
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint
      * @param {Function}  what            The update made
      */
     function update(type, cb, what) {
       if (!APIs[type] || !APIs[type].cbs) {
-        mapLog.debug("API endpoint not found for updating!");
+        mapLog.debug('API endpoint not found for updating!');
       }
 
       APIs[type].cbs.push(cb);
@@ -127,7 +127,7 @@
      */
     function _doFetch(fetchType, type, params) {
       if (!APIs[type]) {
-        mapLog.error("API endpoint for fetch not found: " + fetchType + "/" + type + ", " + ( params ? params[0] : "no params"));
+        mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + ( params ? params[0] : 'no params'));
         return;
       }
 

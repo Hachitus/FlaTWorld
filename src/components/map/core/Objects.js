@@ -40,14 +40,14 @@
        * @attribute name
        * @type {String}
        */
-      this.name = "Objects_sprite_" + this.id;
+      this.name = 'Objects_sprite_' + this.id;
       /**
        * Type of the object. Can be used for filtering, ordering or finding correct objects.
        *
        * @attribute type
        * @type {String}
        */
-      this.type = "None";
+      this.type = 'None';
       /**
        * Is the object highligtable.
        *
@@ -193,8 +193,8 @@
     constructor(texture, coords, { data = null } = {}) {
       super(texture, coords, { data });
 
-      this.name = "DefaultTerrainObject";
-      this.type = "terrain";
+      this.name = 'DefaultTerrainObject';
+      this.type = 'terrain';
       this.highlightable = false;
     }
   }
@@ -216,8 +216,8 @@
     constructor(texture, coords, { data = null } = {}) {
       super(texture, coords, { data });
 
-      this.name = "DefaultUnitObjects";
-      this.type = "unit";
+      this.name = 'DefaultUnitObjects';
+      this.type = 'unit';
       /**
        * actions bound to this object. @todo THIS HAS NOT BEEN IMPLEMENTED YET!
        *
@@ -267,12 +267,12 @@
       * don't implement your own, I suggest you use it. You can attach any method to object if you wish. Like attack, siege, greet, talk.
       *
       * @method move
-      * @requires  mapAPIa..("objectMove") to be declared
+      * @requires  mapAPIa..('objectMove") to be declared
       * @attribute [name]
       */
     move(to) {
-      mapEvents.publish("objectMove", this);
-      mapAPI.post("objectMove", {
+      mapEvents.publish('objectMove', this);
+      mapAPI.post('objectMove', {
         id: this.id,
         from: {
           x: this.x,

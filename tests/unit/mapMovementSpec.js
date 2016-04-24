@@ -1,7 +1,7 @@
 /* global flatworld, describe, beforeEach, it, expect */
 'use strict';
 
-describe("mapMovement extension => ", function () {
+describe('mapMovement extension => ', function () {
   var subcontainerArea;
   var subContainer = {
     getSubcontainerArea: function () {
@@ -28,7 +28,7 @@ describe("mapMovement extension => ", function () {
     });
   });
 
-  it("getViewportCoordinates", function () {
+  it('getViewportCoordinates', function () {
     var calculatedViewportArea;
 
     calculatedViewportArea = flatworld.extensions.mapMovement._testObject.getViewportWithOffset(viewportArea, {
@@ -41,17 +41,17 @@ describe("mapMovement extension => ", function () {
       height: 722
     });
   });
-  it("testRectangleIntersect", function () {
+  it('testRectangleIntersect', function () {
     var calculatedViewportArea;
 
     calculatedViewportArea = flatworld.extensions.mapMovement._testObject.testRectangleIntersect(viewportArea, viewportArea);
     expect(calculatedViewportArea).toEqual(true);
   });
-  it("isObjectOutsideViewport", function () {
+  it('isObjectOutsideViewport', function () {
     var isOutside, isNotOutside;
 
     isOutside = flatworld.extensions.mapMovement._testObject.isObjectOutsideViewport(subContainer, viewportArea);
-    expect(isOutside).toBe(true, "should be outside viewport");
+    expect(isOutside).toBe(true, 'should be outside viewport');
 
     subcontainerArea = {
       x: 100,
@@ -60,7 +60,7 @@ describe("mapMovement extension => ", function () {
       height: 800
     };
     isNotOutside = flatworld.extensions.mapMovement._testObject.isObjectOutsideViewport(subContainer, viewportArea);
-    expect(isNotOutside).toBe(false, "should be outside viewport");
+    expect(isNotOutside).toBe(false, 'should be outside viewport');
 
     subcontainerArea = {
       x: 0,
@@ -69,6 +69,6 @@ describe("mapMovement extension => ", function () {
       height: 100
     };
     isNotOutside = flatworld.extensions.mapMovement._testObject.isObjectOutsideViewport(subContainer, viewportArea);
-    expect(isNotOutside).toBe(false, "should be inside viewport");
+    expect(isNotOutside).toBe(false, 'should be inside viewport');
   });
 });

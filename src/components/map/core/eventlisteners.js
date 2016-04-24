@@ -53,12 +53,12 @@
      * @param  {String}  type   REQUIRED. The type of event. This type has been created with setDetector.
      * @param  {Boolean} cb     REQUIRED. Callback to do it's eventlistener magic.
      */
-    function on(type = "", cb = false) {
+    function on(type = '', cb = false) {
       if (!detectors[type] && !detectors[type].size) {
-        throw new Error("eventlisteners.on needs to have detector set with this event type!");
+        throw new Error('eventlisteners.on needs to have detector set with this event type!');
       }
 
-      detectors[type].on(_createEventListenerWrapper("Map" + type, cb));
+      detectors[type].on(_createEventListenerWrapper('Map' + type, cb));
       activeEventListeners[type] = activeEventListeners[type] || new Set();
       activeEventListeners[type].add(cb);
     }
@@ -69,7 +69,7 @@
      * @param  {String}  type   REQUIRED. The type of event. This type has been created with setDetector.
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
-    function off(type = "", cb = false) {
+    function off(type = '', cb = false) {
       detectors[type].off(cb);
       cb ? activeEventListeners[type].delete(cb) : delete activeEventListeners[type];
     }
@@ -80,7 +80,7 @@
      * @param  {String}  type   REQUIRED. The type of event. This type has been created with setDetector.
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
-    function isOn(type = "", cb = false) {
+    function isOn(type = '', cb = false) {
       var answer;
 
       answer = cb ? activeEventListeners[type].has(cb) : !!activeEventListeners[type].size;
@@ -105,7 +105,7 @@
      * @param  {String} type   EventType
      * @return {Boolean}
      */
-    function getActivityState(type = "") {
+    function getActivityState(type = '') {
       return stateOfEvents[type];
     }
     /**
@@ -116,7 +116,7 @@
      * @param {Function} cbOn    Callback which sets activates the detector
      * @param {Function} cbOff   Callback which sets deactivates the detector
      */
-    function setDetector(type = "", cbOn = () => {}, cbOff = () => {}) {
+    function setDetector(type = '', cbOn = () => {}, cbOff = () => {}) {
       detectors[type] = {};
       detectors[type] = {
         on: cbOn,
@@ -129,7 +129,7 @@
      * @method clearDetector
      * @param {String}   type  Event type
      */
-    function clearDetector(type = "") {
+    function clearDetector(type = '') {
       /* remove all event listeners before we empty the data */
       activeEventListeners[type].forEach(cb => {
         detectors[type].cbOff(cb);
