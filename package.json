@@ -1,7 +1,7 @@
 {
   "name": "flatworld",
   "description": "Game engine for 2D turn-based strategy games in browsers",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "src/dist/flatworld.js",
   "author": "Janne Hyytiä",
   "license": "AGPL-3.0",
