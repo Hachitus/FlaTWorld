@@ -152,7 +152,7 @@
        * @type {HTMLElement}
        * @required
        **/
-      this.minimapCanvas = _rendererMinimap.view;
+      this.minimapCanvas = _rendererMinimap ? _rendererMinimap.view : undefined;
       /**
        * @attribute mapSize
        * @type {x: Number, y: Number}
