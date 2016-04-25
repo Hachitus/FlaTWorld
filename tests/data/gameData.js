@@ -2,6 +2,7 @@
 
 window.gameData = {
   ID: '53837d47976fed3b24000005',
+  startPoint: { x: 41, y: 47 },
   dataPackageID: 0,
   graphicTheme: 0,
   turn: 1,

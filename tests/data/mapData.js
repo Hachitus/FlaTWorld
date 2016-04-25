@@ -3,23 +3,17 @@
 window.mapData = {
   gameID: '53837d47976fed3b24000005',
   turn: 1,
-  startPoint: { x: 41, y: 47 },
-  element: '#mapCanvas',
   layers: [{
     type: 'layer',
     coord: { x: 0, y: 0 },
     name: 'terrainLayer',
-    group: 'terrain', // For quadTrees
-    specials: [{
-      interactive: false
-    }],
     options: {
       cache: true
     },
     objectGroups: [{
       type: 'ObjectTerrain',
       name: 'Terrain', // For quadTrees and debugging
-      typeImageData: 'terrainBase',
+      typeData: 'terrainBase',
       objects: [{
         objType:0,
         name:'swamp',
@@ -71,14 +65,13 @@ window.mapData = {
       y: '0'
     },
     name: 'unitLayer',
-    group: 'unit', // For quadTrees
     options: {
       cache: 'false'
     },
     objectGroups: [{
       type: 'ObjectUnit',
       name: 'Unit', // I guess only for debugging?
-      typeImageData: 'unit',
+      typeData: 'unit',
       objects: [{
         objType:0,
         name: 'Tank you',

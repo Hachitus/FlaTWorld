@@ -43,7 +43,7 @@
     const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === 'string') ? JSON.parse(datas.type) : datas.type;
     const DATA_GAME = (typeof datas.game === 'string') ? JSON.parse(datas.game) : datas.game;
-    const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
+    //const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
     const WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
@@ -114,7 +114,7 @@
             var objTypeData, objectOptions, texture, newObject;
 
             try {
-              objTypeData = DATA_TYPE.objectData[spritesheetType][object.objType];
+              objTypeData = DATA_TYPE[spritesheetType][object.objType];
               if (!objTypeData) {
                 log.error('Bad mapData for type:', spritesheetType, object.objType, object.name);
                 throw new Error('Bad mapData for type:', spritesheetType, object.objType, object.name);
@@ -144,7 +144,7 @@
       }
     });
 
-    map.moveMap(DATA_MAP.startPoint);
+    map.moveMap(DATA_GAME.startPoint);
 
     return map;
   }

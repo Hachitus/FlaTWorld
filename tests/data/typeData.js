@@ -1,7 +1,6 @@
 'use strict';
 
 window.typeData = {
-  objectData: {
     terrainBase:[{
         image:'parkingLot',
         attachedToTerrains:['0'],
@@ -1056,5 +1055,4 @@ window.typeData = {
       name: 'Shanghai',
       image:'city.png'
     }]
-  }
 };

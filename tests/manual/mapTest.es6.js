@@ -82,7 +82,7 @@
         }});
       UI(initializedUITheme, window.globalMap);
 
-      promises = window.globalMap.init( pluginsToActivate, mapData.startPoint );
+      promises = window.globalMap.init( pluginsToActivate, gameData.startPoint );
 
       Promise.all(promises).then( function () {
         document.getElementById('testFullscreen').addEventListener('click', window.globalMap.toggleFullScreen);
