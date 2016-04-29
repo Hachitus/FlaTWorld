@@ -16,6 +16,7 @@
   var mapDrag = window.flatworld.extensions.mapDrag;
   var hexagons = window.flatworld.extensions.hexagons;
   var mapMovement = window.flatworld.extensions.mapMovement;
+  var simpleFogOfWar = window.flatworld.extensions.fogOfWars.simpleFogOfWar;
   var pixelizedMinimap = window.flatworld.extensions.minimaps.pixelizedMinimap;
   var hexaUtils = window.flatworld.extensions.hexagons.utils;
   var Sound = window.flatworld.Sound;
@@ -161,6 +162,7 @@
       mapDrag,
       hexagons.selectHexagonObject,
       mapMovement,
+      simpleFogOfWar
     ];
     var sound = new Sound();
     var preload;
@@ -336,6 +338,9 @@
       map.initMinimap(minimapUIImage, minimapSize, staticCB, dynamicCB, coordinateConverterCB, minimapViewport, {
           xPadding: X_PADDING, yPadding: Y_PADDING
         });
+      map.initFogOfWar((fogOfWarMask) => {
+        fogOfWarMask.drawRect(50, 50, 200, 200);
+      });
 
       /* Activate the fullscreen button: */
       document.getElementById('testFullscreen').addEventListener('click', function () {

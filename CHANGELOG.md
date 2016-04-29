@@ -2,8 +2,11 @@
 # 0.1.1 Bug fixes (2016-05-??)
 ## Bug Fixes
 * If minimap canvas was not given flatworld main module threw an error.
+* Minimap optimizations (caching)
 
 ## Features
+* Added fog of war
+* Added garbage collection method to API (came with PIXIv4)
 
 ## Others
 * Placed test and dist folders more properly. I can now develop the backend part also more easier.
