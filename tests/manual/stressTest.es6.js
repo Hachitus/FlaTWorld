@@ -34,6 +34,9 @@
   var X_PADDING = 20;
   var Y_PADDING = 20;
 
+  var minimapCheckbox = document.getElementById('minimap');
+  var minimapCanvas;
+
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
   polyfills.es6String();
@@ -65,7 +68,7 @@
     var mapsizeElement = document.getElementById('hexaTiles');
     var cacheElement = document.getElementById('cache');
     var UIThemeIndex = document.getElementById('UItheme').value;
-    var minimapCanvas = document.getElementById('minimapCanvas');
+    var minimapCanvas;
     var cacheMap = true;
     var currentMapSize, mapData;
 
@@ -85,7 +88,7 @@
         UITheme: window.flatworld.UIs[UIThemeIndex],
         mapCanvas: document.getElementById('mapCanvas'),
         automatic: window.automaticTest,
-        minimapCanvas: minimapCanvas,
+        minimapCanvas: document.getElementById('minimapCanvas'),
         trackFPSCB: function (data) {
           var totalFPS = data.FPS;
           var totalTime = data.FPStime;
@@ -147,7 +150,6 @@
     var UITheme = options.UITheme;
     var cache = options.cache;
     var automatic = options.automatic;
-    var minimapCanvas = options.minimapCanvas;
     var map = {};
     var globalMap = {
       data: {}
@@ -159,10 +161,14 @@
       mapDrag,
       hexagons.selectHexagonObject,
       mapMovement,
-      pixelizedMinimap
     ];
     var sound = new Sound();
     var preload;
+
+    if (minimapCheckbox.checked) {
+      minimapCanvas = options.minimapCanvas;
+      pluginsToActivate.push(pixelizedMinimap);
+    }
 
     /* This NEEDS to be set for the hexagon plugin to work correctly */
     hexagons.utils.init(gameData.hexagonRadius);

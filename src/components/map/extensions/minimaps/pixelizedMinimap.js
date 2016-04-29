@@ -31,7 +31,7 @@
   function setupPixelizedMinimap () {
     var paddingX = 0;
     var paddingY = 0;
-    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp;
+    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
 
     return {
       init,
@@ -115,11 +115,13 @@
         property: 'static',
         value: false
       });
-      var dynamicContainer = createMinimapLayer();
+      dynamicContainer = createMinimapLayer();
 
       map.getAllObjects({ filters }).forEach((obj) => {
         dynamicContainer.addChild(updateCB(obj));
       });
+
+      dynamicContainer.cacheAsBitmap = true;
 
       minimap.addChild(dynamicContainer);
     }
@@ -216,6 +218,10 @@
       container.y = paddingY;
 
       return container;
+    }
+    function updateMinimapLayer() {
+      dynamicContainer.cacheAsBitmap = false;
+      dynamicContainer.cacheAsBitmap = true;
     }
   }
 })();

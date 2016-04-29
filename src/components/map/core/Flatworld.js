@@ -4,8 +4,8 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { Q, PIXI } = window.flatworld_libraries;
-  var { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils }  = window.flatworld;
+  const { Q, PIXI } = window.flatworld_libraries;
+  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils }  = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
@@ -14,9 +14,11 @@
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
   const VERSION = '0.0.0';
-  var _drawMapOnNextTick = false;
-  var isMapReadyPromises = [];
-  var _staticLayer, _movableLayer, _minimapLayer, _renderer, _rendererMinimap, ParentLayerConstructor;
+  let _drawMapOnNextTick = false;
+  let isMapReadyPromises = [];
+  let _renderers = {};
+  let _privateRenderers;
+  let _staticLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
 
   /*---------------------
   --------- API ---------
@@ -107,11 +109,17 @@
       /* Add the given canvas Element to the options that are passed to PIXI renderer */
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
-      _renderer = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+      _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+      _renderers.main.getResponsibleLayer = this.getStaticLayer;
       /* Create PIXI renderer for minimap */
-      _rendererMinimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
+      if (minimapCanvas) {
+        _renderers.minimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
+        _renderers.minimap.plugins.interaction.destroy();
+        _renderers.minimap.getResponsibleLayer = this.getMinimapLayer;
+      }
       /* We handle all the events ourselves through addEventListeners-method on canvas, so destroy pixi native method */
-      _renderer.plugins.interaction.destroy();
+      _renderers.main.plugins.interaction.destroy();
+      
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
       ParentLayerConstructor = subcontainers ? mapLayers.MapLayerParent : mapLayers.MapLayer;
@@ -127,16 +135,19 @@
       _staticLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
-      utils.general.fullsizeCanvasCSS(_renderer.view);
+      utils.general.fullsizeCanvasCSS(_renderers.main.view);
       /* stop scrollbars of showing */
       document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 
-      utils.mouse.disableContextMenu(_renderer.view);
+      utils.mouse.disableContextMenu(_renderers.main.view);
 
       /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P. Setting this separately in each
        * baseTexture, would seem stupid, so we do it like this for now. */
       this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
 
+      /* We cache the privateRenderers in array format to a module variable */
+      _privateRenderers = Object.keys(_renderers).map(idx => _renderers[idx]);
+
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *
@@ -144,7 +155,7 @@
        * @type {HTMLElement}
        * @required
        **/
-      this.canvas = _renderer.view;
+      this.canvas = _renderers.main.view;
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *
@@ -152,7 +163,7 @@
        * @type {HTMLElement}
        * @required
        **/
-      this.minimapCanvas = _rendererMinimap ? _rendererMinimap.view : undefined;
+      this.minimapCanvas = _renderers.minimap ? _renderers.minimap.view : undefined;
       /**
        * @attribute mapSize
        * @type {x: Number, y: Number}
@@ -297,6 +308,14 @@
      **/
     drawOnNextTick() {
       _drawMapOnNextTick = true;
+    }
+    /**
+     * The correct way to update / redraw the map. Check happens at every tick and thus in every frame.
+     *
+     * @method drawOnNextTick
+     **/
+    collectGarbage() {
+      _privateRenderers.forEach(renderer => renderer.textureGC.run());
     }
     /**
      * Add an UI object to the wanted layer.
@@ -706,9 +725,9 @@
      */
     getRenderer(type) {
       if (type === 'minimap') {
-        return _rendererMinimap;
+        return _renderers.minimap;
       } else {
-        return _renderer;
+        return _renderers.main;
       }
     }
     /**
@@ -855,23 +874,23 @@
      */
     _defaultTick() {
       const ONE_SECOND = 1000;
-      var FPSCount = 0;
-      var fpsTimer = new Date().getTime();
-      var renderStart, totalRenderTime;
+      let FPSCount = 0;
+      let fpsTimer = new Date().getTime();
+      let renderStart, totalRenderTime;
 
       PIXI.ticker.shared.add(function () {
-        if (_drawMapOnNextTick === true) {
+        if (_drawMapOnNextTick) {
           if (this.trackFPSCB) {
             renderStart = new Date().getTime();
           }
 
-          _renderer.render(_staticLayer);
-          _rendererMinimap && _rendererMinimap.render(_minimapLayer);
-          _drawMapOnNextTick = false;
-
+          _privateRenderers.forEach(renderer => renderer.render(renderer.getResponsibleLayer()));
+          
           if (this.trackFPSCB) {
             totalRenderTime += Math.round( Math.abs( renderStart - new Date().getTime() ) );
           }
+
+          _drawMapOnNextTick = false;
         }
         if (this.trackFPSCB) {
           FPSCount++;
@@ -881,7 +900,7 @@
               FPS: FPSCount,
               FPStime: fpsTimer,
               renderTime: totalRenderTime,
-              drawCount: _renderer.drawCount
+              drawCount: _renderers.main.drawCount
             });
 
             FPSCount = 0;
