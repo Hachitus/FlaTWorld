@@ -33,7 +33,8 @@
   var HEXAGON_RADIUS = gameData.hexagonRadius;
   var BASE_URL = '/requests/';
   var X_PADDING = 20;
-  var Y_PADDING = 20;
+  const Y_PADDING = 20;
+  const FOW_IMAGE = '/testAssets/images/FoW/FoWTest.png';
 
   var minimapCheckbox = document.getElementById('minimap');
   var minimapCanvas;
@@ -189,6 +190,7 @@
     preload = new Preload( '', { crossOrigin: false } );
     preload.addResource( graphicData.terrainBase.json );
     preload.addResource( graphicData.unit.json );
+    preload.addResource( FOW_IMAGE );
     loadSounds();
     mapEvents.subscribe('objectsSelected', unitSelectedSound);
 
@@ -339,7 +341,7 @@
           xPadding: X_PADDING, yPadding: Y_PADDING
         });
       map.initFogOfWar((fogOfWarMask) => {
-        fogOfWarMask.drawRect(50, 50, 200, 200);
+        return new PIXI.Sprite.fromImage(FOW_IMAGE);
       });
 
       /* Activate the fullscreen button: */

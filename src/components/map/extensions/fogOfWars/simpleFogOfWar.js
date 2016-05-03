@@ -2,9 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
-  var MapDataManipulator = window.flatworld.MapDataManipulator;
-  var utils = window.flatworld.utils;
+  const { PIXI } = window.flatworld_libraries;
+  const { mapEvents, MapDataManipulator, utils } = window.flatworld;
 
   /*-----------------------
   ---------- API ----------
@@ -41,17 +40,27 @@
       map.initFogOfWar = initFogOfWar;
     }
 
-    function initFogOfWar(shapeCB, lineStyle = [0]) {
-      let fogOfWarMask = new PIXI.Graphics();
+    function initFogOfWar(shapeCB) {
+      const maskContainer =  map.createSpecialLayer();
+      const movableMaskContainer =  map.createSpecialLayer();
+      const filter = new MapDataManipulator([{
+          type: 'filter',
+          object: 'object',
+          property: 'type',
+          value: 'unit'
+        }]);
+      const spriteArray = map.getObjectsUnderArea(map.getViewportArea(), filter).map((unit) => {
+        return shapeCB(unit);
+      });
 
-      fogOfWarMask.lineStyle.apply(fogOfWarMask, lineStyle);
-      fogOfWarMask.beginFill(0x000000, 0.1);
-      shapeCB(fogOfWarMask);
-      fogOfWarMask.endFill();
+      maskContainer.addChild.apply(maskContainer, spriteArray);
 
-      map.getMovableLayer().addChild(fogOfWarMask);
-      map.getMovableLayer().mask = fogOfWarMask;
-
+      const texture = map.getRenderer().generateTexture(maskContainer);
+      const maski = new PIXI.Sprite(texture);
+      movableMaskContainer.addChild(maski);
+      
+      map.getMovableLayer().addChild(movableMaskContainer);
+      map.getMovableLayer().mask = maski;
     }
   }
 })();

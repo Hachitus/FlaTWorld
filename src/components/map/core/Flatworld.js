@@ -798,6 +798,12 @@
      * @method initMinimap
      **/
     initMinimap () { return 'notImplementedYet. Activate with plugin'; }
+    /**
+     * Plugin will overwrite create this method. Method for actually activating minimap.
+     *
+     * @method initMinimap
+     **/
+    initFogOfWar () { return 'notImplementedYet. Activate with plugin'; }
 
     /*-------------------------
     --------- PRIVATE ---------
