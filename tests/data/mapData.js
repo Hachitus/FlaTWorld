@@ -13,7 +13,7 @@ window.mapData = {
     objectGroups: [{
       type: 'ObjectTerrain',
       name: 'Terrain', // For quadTrees and debugging
-      typeData: 'terrainBase',
+      typeImageData: 'terrainBase',
       objects: [{
         objType:0,
         name:'swamp',
@@ -71,7 +71,7 @@ window.mapData = {
     objectGroups: [{
       type: 'ObjectUnit',
       name: 'Unit', // I guess only for debugging?
-      typeData: 'unit',
+      typeImageData: 'unit',
       objects: [{
         objType:0,
         name: 'Tank you',

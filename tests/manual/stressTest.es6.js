@@ -340,8 +340,16 @@
       map.initMinimap(minimapUIImage, minimapSize, staticCB, dynamicCB, coordinateConverterCB, minimapViewport, {
           xPadding: X_PADDING, yPadding: Y_PADDING
         });
-      map.initFogOfWar((fogOfWarMask) => {
-        return new PIXI.Sprite.fromImage(FOW_IMAGE);
+      map.initFogOfWar((unit) => {
+        var circle = new PIXI.Graphics();
+
+        circle.beginFill(0xFFFF00);
+        circle.lineStyle(5, 0xFF0000);
+        circle.drawCircle(unit.x, unit.y, 100);
+        circle.endFill();
+
+        return circle;
+        //return new PIXI.Sprite.fromImage(FOW_IMAGE);
       });
 
       /* Activate the fullscreen button: */
