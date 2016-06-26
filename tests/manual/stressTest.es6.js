@@ -340,16 +340,21 @@
       map.initMinimap(minimapUIImage, minimapSize, staticCB, dynamicCB, coordinateConverterCB, minimapViewport, {
           xPadding: X_PADDING, yPadding: Y_PADDING
         });
-      map.initFogOfWar((unit) => {
-        var circle = new PIXI.Graphics();
 
-        circle.beginFill(0xFFFF00);
-        circle.lineStyle(5, 0xFF0000);
-        circle.drawCircle(unit.x, unit.y, 100);
-        circle.endFill();
+      map.initFogOfWar((coordinates) => {
+        // var circle = new PIXI.Graphics();
 
-        return circle;
-        //return new PIXI.Sprite.fromImage(FOW_IMAGE);
+        // circle.beginFill(0xFFFF00);
+        // circle.lineStyle(5, 0xFF0000);
+        // circle.drawCircle(coordinates.x, coordinates.y, 100);
+        // circle.endFill();
+
+        // return circle;
+        let unitViewSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
+        unitViewSprite.x = coordinates.x;
+        unitViewSprite.y = coordinates.y;
+
+        return unitViewSprite;
       });
 
       /* Activate the fullscreen button: */

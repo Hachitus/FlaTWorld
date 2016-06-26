@@ -14,6 +14,11 @@
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
   const VERSION = '0.0.0';
+  const _retrieveObjects = Symbol('_retrieveObjects');
+  const _getLayersWithAttributes = Symbol('_getLayersWithAttributes');
+  const _getSubcontainersUnderArea = Symbol('_getSubcontainersUnderArea');
+  const _defaultTick = Symbol('_defaultTick');
+  const _addObjectToUIlayer = Symbol('_addObjectToUIlayer');
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
   let _renderers = {};
@@ -137,7 +142,7 @@
       /* needed to make the canvas fullsize canvas with PIXI */
       utils.general.fullsizeCanvasCSS(_renderers.main.view);
       /* stop scrollbars of showing */
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+      mapCanvas.style.overflow = 'hidden';
 
       utils.mouse.disableContextMenu(_renderers.main.view);
 
@@ -280,7 +285,7 @@
       coord && Object.assign(_movableLayer, coord);
 
       /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
-      this._defaultTick();
+      this[_defaultTick]();
       tickCB && this.customTickOn(tickCB);
       isMapReadyPromises = allPromises;
 
@@ -327,10 +332,10 @@
     addUIObject(layerType, objects, UIName) {
       if (Array.isArray(objects)) {
         objects.forEach(object => {
-          this._addObjectToUIlayer(layerType, object);
+          this[_addObjectToUIlayer](layerType, object);
         });
       } else {
-        this._addObjectToUIlayer(layerType, objects, UIName);
+        this[_addObjectToUIlayer](layerType, objects, UIName);
       }
     }
     /**
@@ -584,7 +589,7 @@
      * @param {*} value                 Value for the property
      */
     setPrototype(property, value) {
-      var thisPrototype = Object.getPrototypeOf(this);
+      const thisPrototype = Object.getPrototypeOf(this);
 
       thisPrototype[property] = value;
     }
@@ -602,21 +607,22 @@
      */
     getObjectsUnderArea(globalCoords = { x: 0, y: 0, width: 0, height: 0 }, { filters = null } = {}) {
       /* We need both coordinates later on and it's logical to do the work here */
-      var allCoords = {
+      const allCoords = {
         globalCoords: globalCoords,
         localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
       };
-      var objects = {};
+      let objects = [];
 
       allCoords.localCoords.width = globalCoords.width;
       allCoords.localCoords.height = globalCoords.height;
 
       if (this.usesSubcontainers()) {
-        let allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters } );
+        let allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters } );
 
-        objects = this._retrieveObjects(allCoords, {
-          subcontainers: allMatchingSubcontainers
-        });
+        objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
+      } else {
+        objects = this[_retrieveObjects](allCoords, this.getMovableLayer().children);
+        
       }
 
       return objects;
@@ -805,9 +811,9 @@
      **/
     initFogOfWar () { return 'notImplementedYet. Activate with plugin'; }
 
-    /*-------------------------
-    --------- PRIVATE ---------
-    -------------------------*/
+    /*---------------------------------
+    --------- PRIVATE METHODS ---------
+    ---------------------------------*/
     /**
      * Retrieves the objects from ObjectManager, with the given parameters. Mostly helper functionality for getObjectsUnderArea
      *
@@ -826,10 +832,9 @@
      * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
      * @return {Array}                                  Found objects
      */
-    _retrieveObjects(allCoords, { type = '', subcontainers = [] } = {}) {
-      return this.objectManager.retrieve(allCoords, {
+    [_retrieveObjects](allCoords, containers = [], { type = '' } = {}) {
+      return this.objectManager.retrieve(allCoords, containers, {
         type: type,
-        subcontainers: subcontainers,
         size: {
           width: allCoords.globalCoords.width,
           height: allCoords.globalCoords.height
@@ -845,7 +850,7 @@
      * @param {*} value
      * @return the current map instance
      **/
-    _getLayersWithAttributes(attribute, value) {
+    [_getLayersWithAttributes](attribute, value) {
       return this.getMovableLayer().children[0].children.filter(layer => {
         return layer[attribute] === value;
       });
@@ -859,7 +864,8 @@
      * @param {Object} options              Optional options.
      * @return {Array}                        All subcontainers that matched the critea
      */
-    _getSubcontainersUnderArea(allCoords, { filters } = {} ) {
+    
+    [_getSubcontainersUnderArea](allCoords, { filters } = {} ) {
       var primaryLayers = this.getPrimaryLayers({ filters });
       var allMatchingSubcontainers = [];
       var thisLayersSubcontainers;
@@ -878,7 +884,7 @@
      * @private
      * @method _defaultTick
      */
-    _defaultTick() {
+    [_defaultTick]() {
       const ONE_SECOND = 1000;
       let FPSCount = 0;
       let fpsTimer = new Date().getTime();
@@ -916,7 +922,7 @@
         }
       }.bind(this));
     }
-    _addObjectToUIlayer(layerType, object, name) {
+    [_addObjectToUIlayer](layerType, object, name) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
           this.getStaticLayer().addUIObject(object, name);
@@ -928,9 +934,9 @@
     }
   }
 
-  /*---------------------
-  ------- PRIVATE -------
-  ----------------------*/
+  /*-------------------------------
+  ------- PRIVATE FUNCTIONS -------
+  -------------------------------*/
   /**
    * cacheLayers
    *

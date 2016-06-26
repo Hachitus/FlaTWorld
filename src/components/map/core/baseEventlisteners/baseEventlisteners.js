@@ -27,10 +27,12 @@
    * @class extensions.baseEventlisteners
    * @requires Hammer.js                    (for touch events)
    * @requires Hamster.js                   (for good cross-browser mousewheel events)
+   * @event                                 mapEvents.publish('mapResized')
    * @param {HTMLElement} canvasElement     The canvas element we listen events from. Will try to search the first canvas in the DOM,
    * if none is provided
    */
   function baseEventlistenersModule() {
+    const caches = {};
     var hammer, hamster, mapInstance;
 
     /*---------------------------
@@ -69,16 +71,17 @@
       hamster = new Hamster(map.canvas);
 
       eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
+      eventListeners.on('fullSize', _resizeCanvas);
+
       eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
+      map.setPrototype('setFullScreen', () => {
+        eventListeners.on('fullscreen', _setFullScreen);
+      });
+
       eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off);
       eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
       eventListeners.setDetector('select', selectToggle.on, selectToggle.off);
       eventListeners.setDetector('order', orderToggle.on, orderToggle.off);
-
-      eventListeners.on('fullSize', _resizeCanvas);
-      map.setPrototype('setFullScreen', () => {
-        eventListeners.on('fullscreen', _setFullScreen);
-      });
     }
 
     /**
@@ -89,16 +92,20 @@
     function toggleFullSize() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          activeCB = cb;
+      if (!caches["fullsize"]) {
+        caches["fullsize"] = {
+          on: (cb) => {
+            activeCB = cb;
 
-          window.addEventListener('resize', activeCB);
-        },
-        off: () => {
-          window.removeEventListener('resize', activeCB);
-        }
-      };
+            window.addEventListener('resize', activeCB);
+          },
+          off: () => {
+            window.removeEventListener('resize', activeCB);
+          }
+        };
+      }
+
+      return caches["fullsize"];
     }
     /**
      * Sets the browser in fullscreen mode.
@@ -110,16 +117,22 @@
     function toggleFullscreen() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          activeCB = cb;
+      if (!caches["fullscreen"]) {
+        caches["fullscreen"] = {
+          on: (cb) => {
+            activeCB = cb;
 
-          window.addEventListener('fullscreen', activeCB);
-        },
-        off: () => {
-          window.removeEventListener('fullscreen', activeCB);
-        }
-      };
+            window.addEventListener('fullscreen', activeCB);
+          },
+          off: () => {
+            window.removeEventListener('fullscreen', activeCB);
+          }
+        };
+
+        return caches["fullscreen"];
+      }
+
+      return caches["fullscreen"];
     }
     /**
      * Zoom the map. Mousewheel (desktop) and pinch (mobile)
@@ -131,21 +144,25 @@
     function toggleZoom() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          var pinch = new Hammer.Pinch();
-          activeCB = cb;
+      if (!caches["zoom"]) {
+        caches["zoom"] = {
+          on: (cb) => {
+            var pinch = new Hammer.Pinch();
+            activeCB = cb;
 
-          hammer.add(pinch);
-          hammer.on('pinch', activeCB);
-          /* Hamster handles wheel events really nicely */
-          hamster.wheel(activeCB);
-        },
-        off: () => {
-          hammer.on('pinch', activeCB);
-          hamster.unwheel(activeCB);
-        }
-      };
+            hammer.add(pinch);
+            hammer.on('pinch', activeCB);
+            /* Hamster handles wheel events really nicely */
+            hamster.wheel(activeCB);
+          },
+          off: () => {
+            hammer.on('pinch', activeCB);
+            hamster.unwheel(activeCB);
+          }
+        };
+      }
+
+      return caches["zoom"]; 
     }
     /**
      * DragListener (normally used for moving the map)
@@ -157,21 +174,25 @@
     function toggleDrag() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          var pan = new Hammer.Pan({
-            pointers: 1,
-            threshold: 5,
-            direction:  Hammer.DIRECTION_ALL });
-          activeCB = cb;
+      if (!caches["drag"]) {
+        caches["drag"] = {
+          on: (cb) => {
+            var pan = new Hammer.Pan({
+              pointers: 1,
+              threshold: 5,
+              direction:  Hammer.DIRECTION_ALL });
+            activeCB = cb;
 
-          hammer.add(pan);
-          hammer.on('pan', activeCB);
-        },
-        off: () => {
-          hammer.off('pan', activeCB);
-        }
-      };
+            hammer.add(pan);
+            hammer.on('pan', activeCB);
+          },
+          off: () => {
+            hammer.off('pan', activeCB);
+          }
+        };
+      }
+
+      return caches["drag"]; 
     }
     /**
      * Selecting something from the map
@@ -183,18 +204,22 @@
     function toggleSelect() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          var tap = new Hammer.Tap();
-          activeCB = cb;
+      if (!caches["select"]) {
+        caches["select"] = {
+          on: (cb) => {
+            var tap = new Hammer.Tap();
+            activeCB = cb;
 
-          hammer.add(tap);
-          hammer.on('tap', activeCB);
-        },
-        off: () => {
-          hammer.off('tap', activeCB);
-        }
-      };
+            hammer.add(tap);
+            hammer.on('tap', activeCB);
+          },
+          off: () => {
+            hammer.off('tap', activeCB);
+          }
+        };
+      }
+
+      return caches["select"];
     }
     /**
      * Selecting something from the map. With mouse you can use the default right click and in touch devices you can use continuous press
@@ -207,26 +232,30 @@
     function toggleOrder() {
       var activeCB;
 
-      return {
-        on: (cb) => {
-          activeCB = cb;
+      if (!caches["order"]) {
+        caches["order"] = {
+          on: (cb) => {
+            activeCB = cb;
 
-          var press = new Hammer.Press();
+            var press = new Hammer.Press();
 
-          hammer.add(press);
-          hammer.on('press', clickListener);
-          /* We are detecting mouse right click here. This should be in utils */
-          mapInstance.canvas.addEventListener('mouseup', (e) => {
-            if (e.which === 3) {
-              clickListener(e);
-            }
-          }, true);
-        },
-        off: () => {
-          hammer.off('press', clickListener);
-          mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
-        }
-      };
+            hammer.add(press);
+            hammer.on('press', clickListener);
+            /* We are detecting mouse right click here. This should be in utils */
+            mapInstance.canvas.addEventListener('mouseup', (e) => {
+              if (e.which === 3) {
+                clickListener(e);
+              }
+            }, true);
+          },
+          off: () => {
+            hammer.off('press', clickListener);
+            mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
+          }
+        };
+      }
+
+      return caches["order"];
 
       function clickListener(e) {
         if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
