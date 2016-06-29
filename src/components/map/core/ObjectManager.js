@@ -36,7 +36,7 @@
      *
      * @todo add checks for rectangles. Now we can only check with width = 0 && height = 0
      */
-    retrieve(allCoords, containers = [], options = { type: false, size: { width: 0, height: 0 } }) {
+    retrieve(allCoords, containers = [], options = { type: undefined, size: { width: 0, height: 0 } }) {
       var { size, type } = options;
       var { globalCoords } = allCoords;
       var foundObjs = [];
@@ -47,7 +47,7 @@
         });
 
         if (!size.width || !size.height) {
-          foundObjs = _filterChildren(foundObjs);
+          foundObjs = filterChildren(globalCoords, foundObjs, type);
         }
       } else {
         throw new Error("No containers were given!");
@@ -60,13 +60,13 @@
   window.flatworld.ObjectManager = ObjectManager;
 })();
 
-function _filterChildren(type, children = []) {
+function filterChildren(globalCoords, children = [], type = undefined) {
   return children.filter(obj => {
     if (type && type !== obj.type) {
       return false;
     }
 
-    let isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
+    const isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
 
     return isHit;
   });

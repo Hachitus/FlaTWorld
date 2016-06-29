@@ -115,7 +115,7 @@
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      return map.getObjectsUnderArea(map.getViewportArea(), filter).map((unit) => {
+      return map.getObjectsUnderArea(map.getViewportArea(), { filters: filter }).map((unit) => {
         let correctCoords;
 
         correctCoords = unit.localToLocal(unit.x, unit.y, map.getMovableLayer());

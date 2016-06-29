@@ -82,7 +82,7 @@
      * @param {Integer} props.mapSize.y                     y-axis
      * @param {Object} props.rendererOptions                Renderer options passed to PIXI.autoDetectRenderer
      * @param {Object} props.subcontainers                  Subcontainers size in pixels. If given, will activate subcontainers. If not
-     * given or false, subcontainers are not used.area.
+     * given or false, subcontainers are not used.
      * @param {Integer} props.subcontainers.width           Subcontainer width
      * @param {Integer} props.subcontainers.height          Subcontainer height
      * @param {FPSCallback} [trackFPSCB]                    Callback function for tracking FPS in renderer. So this is used for debugging
@@ -621,8 +621,14 @@
 
         objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
       } else {
-        objects = this[_retrieveObjects](allCoords, this.getMovableLayer().children);
-        
+        let filteredContainers = this.getMovableLayer().children.filter(thisChild => {
+          if ( (filters && !filters.filter(thisChild).length ) || thisChild.specialLayer ) {
+            return false;
+          }
+
+          return true;
+        });
+        objects = this[_retrieveObjects](allCoords, filteredContainers);
       }
 
       return objects;

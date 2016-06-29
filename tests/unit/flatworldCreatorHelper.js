@@ -1,17 +1,25 @@
-window.flatworldCreatorHelper = function () {
-  	const { Flatworld, objects }  = window.flatworld;
-	const renderer = new PIXI.WebGLRenderer();
-	const map = new Flatworld(renderer.view);
+window.flatworldCreatorHelper = function flatworldCreatorHelper(flatworldOptions) {
+  const { Flatworld, objects } = window.flatworld;
+  const renderer = new PIXI.WebGLRenderer();
+  const map = new Flatworld(renderer.view, flatworldOptions);
 
-	let unitLayer = map.addLayer({ name: "unitLayer"});
-	let testUnit = new objects.ObjectSpriteUnit();
-	unitLayer.addChild(testUnit);
+  const unitLayer = map.addLayer({
+    name: 'unitLayer',
+  });
+  const testUnit = new objects.ObjectSpriteUnit();
+  testUnit.x = 10;
+  testUnit.y = 10;
+  unitLayer.addChild(testUnit);
 
-	let terrrainLayer = map.addLayer({ name: "terrrainLayer"});
-	let testTerrain = new objects.ObjectSpriteTerrain();
-	terrrainLayer.addChild(testTerrain);
+  const terrrainLayer = map.addLayer({
+    name: 'terrrainLayer',
+  });
+  const testTerrain = new objects.ObjectSpriteTerrain();
+  testTerrain.x = 20;
+  testTerrain.y = 20;
+  terrrainLayer.addChild(testTerrain);
 
-	map.getMovableLayer().addChild(unitLayer, terrrainLayer);
+  map.getMovableLayer().addChild(unitLayer, terrrainLayer);
 
-	return map;
+  return map;
 };
