@@ -420,7 +420,7 @@
      * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and y-coordinates and the width and height of the
      * viewport
      **/
-    getViewportArea(isLocal = false) {
+    getViewportArea(isLocal = false, multiplier = 1) {
       var leftSideCoords = new PIXI.Point(0, 0);
       var rightSideCoords = new PIXI.Point(window.innerWidth,window.innerHeight);
       var layer, rightSide, leftSide;
@@ -431,36 +431,37 @@
         let leftCoords = layer.toLocal(leftSideCoords);
         leftSide = {
           x: leftCoords.x,
-          y: leftCoords.y
+          y: leftCoords.y,
         };
         rightSide = {
           x2: rightCoords.x,
-          y2: rightCoords.y
+          y2: rightCoords.y,
         };
       } else {
         layer = this.getStaticLayer();
         leftSide = {
           x: leftSideCoords.x,
-          y: leftSideCoords.y
+          y: leftSideCoords.y,
         };
         rightSide = {
           x2: rightSideCoords.x,
-          y2: rightSideCoords.y
+          y2: rightSideCoords.y,
         };
       }
 
       return {
-        x: Math.round(leftSide.x),
-        y: Math.round(leftSide.y),
-        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x)),
-        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y))
+        x: Math.round(leftSide.x * multiplier),
+        y: Math.round(leftSide.y * multiplier),
+        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) * multiplier),
+        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) * multiplier),
       };
     }
     /**
      * Remove a primary layer from the map
      *
      * @method removeLayer
-     * @param {MapLayer|PIXI.Container|PIXI.ParticleContainer} layer       The layer object to be removed
+     * @param {MapLayer|PIXI.Container|PIXI.ParticleContainer} layer       The layer object to be
+     * removed
      **/
     removeLayer(layer) {
       _movableLayer.removeChild(layer);
