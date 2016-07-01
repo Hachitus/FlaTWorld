@@ -106,19 +106,17 @@
 
     function setupAndUpdateMask(mask) {
       movableMaskContainer.addChild(mask);
-      
-      map.getMovableLayer().addChild(movableMaskContainer);
+
+      map.getStaticLayer().addChild(movableMaskContainer);
 
       texture.update();
 
-      map.getMovableLayer().mask = mask;
+      map.getStaticLayer().mask = mask;
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
       return map.getObjectsUnderArea(map.getViewportArea(), { filters: filter }).map((unit) => {
-        let correctCoords;
-
-        correctCoords = unit.localToLocal(unit.x, unit.y, map.getMovableLayer());
+        let correctCoords = unit.localToLocal(unit.x, unit.y, map.getStaticLayer());
         // correctCoords = {
         //   x: unit.x + (unit.anchor.x * unit.width),
         //   y: unit.y + (unit.anchor.y * unit.height)
