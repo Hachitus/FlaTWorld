@@ -12,7 +12,7 @@ window.flatworldCreatorHelper = function flatworldCreatorHelper(flatworldOptions
   unitLayer.addChild(testUnit);
 
   const terrrainLayer = map.addLayer({
-    name: 'terrrainLayer',
+    name: 'terrainLayer',
   });
   const testTerrain = new objects.ObjectSpriteTerrain();
   testTerrain.x = 20;

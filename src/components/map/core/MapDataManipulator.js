@@ -1,34 +1,49 @@
-(function () {
-  'use strict';
-
+(function mapDataManipulatorCreator() {
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
   const mapLayers = window.flatworld.mapLayers;
   const objects = window.flatworld.objects;
+  const utils = window.flatworld.utils;
 
   /*---------------------
   --------- API ---------
   ----------------------*/
   class MapDataManipulator {
     /**
-     * Class to get a consistent standard for the engine to be able to filter objects, when retrieving or sorting them. This is used
+     * Class to get a consistent standard for the engine to be able to filter objects, when
+     * etrieving or sorting them. This is used
      * when some method uses filters.
+     *
+     * You must provide an object that defines how the given objects should be filtered, when
+     * constructing. The module will filter with every rule and object given and everything that
+     * doesn't pass one of the given filters, will be dropped out.
+     *
+     * Given filters look something like this:
+     * {
+     *   type: 'filter',
+     *   object: 'layer',
+     *   property: 'selectable',
+     *   value: true,
+     * }
+     * For more information, please check the mapDataManipulatorSpec.js (test) for now.
      *
      * @namespace flatworld
      * @class MapDataManipulator
      * @constructor
-     * @param {Array|Object} rules        REQUIRED. The rules that apply for this instance. Multiple rules in Array or one as Object.
+     * @param {Array|Object} rules        REQUIRED. The rules that apply for this instance.
+     * Multiple rules in Array or one as Object.
      **/
-    constructor(rules) {
+    constructor(rules = utils.general.requireParameter('MapDataManipulator', 'rules')) {
       this.rules = Array.isArray(rules) ? rules : [rules];
       this.classes = {
         layer: Object.keys(mapLayers).map((k) => mapLayers[k]),
-        object: Object.keys(objects).map((k) => objects[k])
+        object: Object.keys(objects).map((k) => objects[k]),
       };
     }
     /**
-     * This has exceptional query, since it actually queries it's parent. Subcontainers have really no useful values and they are dumb
+     * This has exceptional query, since it actually queries it's parent. Subcontainers have
+     * really no useful values and they are dumb
      * containers of objects, every data is on their parent container
      *
      * @method filter
@@ -105,4 +120,4 @@
   }
 
   window.flatworld.MapDataManipulator = MapDataManipulator;
-})();
+}());

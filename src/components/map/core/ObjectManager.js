@@ -50,7 +50,7 @@
           foundObjs = filterChildren(globalCoords, foundObjs, type);
         }
       } else {
-        throw new Error("No containers were given!");
+        return [];
       }
 
       return foundObjs;

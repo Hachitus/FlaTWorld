@@ -23,14 +23,14 @@
   function setupSimpleFogOfWar () {
     const rendererOptions = {
       transparent: true,
-      autoResize: true
-    }
+      autoResize: true,
+    };
     const FoWOverlay = new PIXI.Graphics();
     const baseFilter = new MapDataManipulator([{
         type: 'filter',
         object: 'object',
         property: 'type',
-        value: 'unit'
+        value: 'unit',
       }]);
     let alpha, map, FoWRenderer, texture, maskContainer, movableMaskContainer, FoWCB;
 
@@ -42,7 +42,7 @@
       refreshFoW,
       setupAndUpdateMask,
       getFoWObjectArray,
-      setCanvasSize
+      setCanvasSize,
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.

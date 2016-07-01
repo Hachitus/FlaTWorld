@@ -5,7 +5,9 @@ module.exports = {
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jasmine": true,
+    "worker": true
   },
   "globals": {
     "PIXI": true

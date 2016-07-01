@@ -213,7 +213,7 @@
     function getWindowSize() {
       return {
         x: window.innerWidth,
-        y: window.innerHeight
+        y: window.innerHeight,
       };
     }
   }
@@ -253,7 +253,8 @@
 
     return {
       pixelEpsilonEquality: epsilonEquality,
-      fullsizeCanvasCSS
+      fullsizeCanvasCSS,
+      requireParameter,
     };
 
     /**
@@ -274,6 +275,15 @@
       canvasElement.style.display = 'block';
       canvasElement.style.left = '0px';
       canvasElement.style.top = '0px';
+    }
+    /**
+     * Helper for creating required parameters
+     *
+     * @param {String} className Name of the function / class used
+     * @param {String} paramName Name of the parameter that is required
+     */
+    function requireParameter(className, paramName) {
+      throw new Error(`Function '${className}' requires parameter ${paramName}`);
     }
   }
 })();

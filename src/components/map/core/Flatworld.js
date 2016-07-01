@@ -594,8 +594,16 @@
       thisPrototype[property] = value;
     }
     /**
-     * Gets object under specific map coordinates. Uses the ObjectManagers retrieve method. Using subcontainers if they exist, other
-     * methods if not. If you provide type parameter, the method returns only object types that match it.
+     * Gets object under specific map coordinates. Using subcontainers if they exist, other 
+     * methods if not. If you provide type parameter, the method returns only object types that
+     * match it.
+     *
+     * NOTE! At the moment filters only support layers! You can not give filters object: object and
+     * expect them to be filtered. It will filter only layers (object: layer)!
+     *
+     * @todo This should work with object filtering too, but the issues regarding it are
+     * efficiency (if there are many filter rules, we don't want to go through them twice?). Since
+     * the way filters work now, we would have to filter layers first and then again objects.
      *
      * @method getObjectsUnderArea
      * @param  {Object} globalCoords            Event coordinates on the staticLayer / canvas.
@@ -628,7 +636,14 @@
 
           return true;
         });
-        objects = this[_retrieveObjects](allCoords, filteredContainers);
+
+        let nonFilteredObjects = this[_retrieveObjects](allCoords, filteredContainers);
+
+        if (filters) {
+          objects = filters.filter(nonFilteredObjects);
+        } else {
+          objects = nonFilteredObjects;
+        }
       }
 
       return objects;
@@ -817,6 +832,14 @@
      **/
     initFogOfWar () { return 'notImplementedYet. Activate with plugin'; }
 
+    /*---------------------------------
+    ----------- FOR TESTING -----------
+    ---------------------------------*/
+    getSymbols() {
+      return {
+        _addObjectToUIlayer,
+      };
+    }
     /*---------------------------------
     --------- PRIVATE METHODS ---------
     ---------------------------------*/
