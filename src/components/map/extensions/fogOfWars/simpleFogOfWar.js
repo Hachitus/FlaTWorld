@@ -1,10 +1,9 @@
-(function () {
+(function simpleFogOfWar() {
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
   const { PIXI } = window.flatworld_libraries;
-  const { mapEvents, MapDataManipulator, utils, eve } = window.flatworld;
-  const baseEventlisteners = window.flatworld.extensions;
+  const { mapEvents, MapDataManipulator, utils } = window.flatworld;
 
   /*-----------------------
   ---------- API ----------
@@ -20,143 +19,185 @@
    * @namespace flatworld.extensions.fogOfWars
    * @class pixelizedMinimap
    **/
-  function setupSimpleFogOfWar () {
-    const rendererOptions = {
+  function setupSimpleFogOfWar() {
+    const VIEWPORT_MULTIPLIER = 0.4;
+    const baseRendererOptions = {
       transparent: true,
       autoResize: true,
     };
-    const FoWOverlay = new PIXI.Graphics();
     const baseFilter = new MapDataManipulator([{
-        type: 'filter',
-        object: 'object',
-        property: 'type',
-        value: 'unit',
-      }]);
-    let alpha, map, FoWRenderer, texture, maskContainer, movableMaskContainer, FoWCB;
+      type: 'filter',
+      object: 'object',
+      property: 'type',
+      value: 'unit',
+    }]);
+    const maskSprite = new PIXI.Sprite();
+    let FoWOverlay;
+    let alpha;
+    let map;
+    let FoWRenderer;
+    let texture;
+    let maskContainer;
+    let FoWCB;
 
     return {
+      // These two are required by all plugins
       init,
       pluginName: 'simpleFogOfWar',
-      activate,
-      resetFoW,
+
+      getFoWRenderer,
+      getMaskContainer,
+
+      activateFogOfWar,
       refreshFoW,
-      setupAndUpdateMask,
       getFoWObjectArray,
-      setCanvasSize,
+      calculateCorrectCoordinates,
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
      *
-     * After plugin has been initialized by the flatworld, you must still call initFogOfWar to start showing it.
+     * After plugin has been initialized by the flatworld, you must still call initFogOfWar to
+     * start showing it.
+     *
+     * @todo the -200 offset is quite crappy, we should make some universal thing in utils, that
+     * can be used here and in getViewportArea-method etc.
      *
      * @method init
      * @param  {Map} givenMap     Instance of Map
      */
     function init(givenMap) {
       map = givenMap;
-      map.initFogOfWar = activate;
+      map.activateFogOfWar = activateFogOfWar;
+      const mapRenderer = map.getRenderer();
+      const coordinates = {
+        x: -200,
+        y: -200,
+        width: (mapRenderer.width + 200 + (mapRenderer.width / 2)) * map.getZoom(),
+        height: (mapRenderer.height + 200 + (mapRenderer.height / 2)) * map.getZoom(),
+      };
+      const rendererOptions = Object.assign(
+        baseRendererOptions, {
+          resolution: mapRenderer.resolution,
+        });
 
-      // Reset earlier fog of war renderer, if present
-      FoWRenderer && FoWRenderer.destroy && FoWRenderer.destroy();
+      setupRenderer(coordinates, rendererOptions);
 
-      // Create new renderer & set it's size correct
-      setCanvasSize();
-
-      // It's a hidden renderer used for mask only
-      FoWRenderer.view.style.visible = "hidden";
-
-      maskContainer =  map.createSpecialLayer();
-      movableMaskContainer =  map.createSpecialLayer();
+      maskContainer = map.createSpecialLayer('FoWLayer');
+      maskContainer.x = coordinates.x;
+      maskContainer.y = coordinates.y;
     }
 
-    function activate(cb, options = { alpha: 0.5 }) {
+    function activateFogOfWar(cb, options = { alpha: 0.8 }, testing = false) {
       alpha = options.alpha;
       FoWCB = cb;
+
+      utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
+
       refreshFoW();
       setEvents();
     }
 
-    function setEvents() {
-      mapEvents.subscribe('mapResized', setCanvasSize);
-      mapEvents.subscribe('mapResized', refreshFoW);
-      mapEvents.subscribe('mapMoved', refreshFoW);
-    }
-
-    function resetFoW() {
-      texture && texture.destroy && texture.destroy();
-      maskContainer.children && maskContainer.removeChildren();
-      movableMaskContainer.children && movableMaskContainer.removeChildren();
-    }
-
     function refreshFoW() {
-      //map.getMovableLayer().mask = null;
-      _resizeCanvas();
-      resetFoW();
+      const staticLayer = map.getStaticLayer();
+      resetFoW(FoWOverlay);
 
       const spriteArray = getFoWObjectArray(FoWCB);
 
-      maskContainer.addChild(FoWOverlay);
-      maskContainer.addChild(...spriteArray);
+      if (spriteArray.length > 0) {
+        maskContainer.addChild(...spriteArray);
+      }
       FoWRenderer.render(maskContainer);
+      maskContainer.removeChildren();
       texture = PIXI.Texture.fromCanvas(FoWRenderer.view);
-      let mask = new PIXI.Sprite(texture);
-
-      setupAndUpdateMask(mask);
-    }
-
-    function setupAndUpdateMask(mask) {
-      movableMaskContainer.addChild(mask);
-
-      map.getStaticLayer().addChild(movableMaskContainer);
+      maskSprite.texture = texture;
 
       texture.update();
-
-      map.getStaticLayer().mask = mask;
+      staticLayer.mask = maskSprite;
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      return map.getObjectsUnderArea(map.getViewportArea(), { filters: filter }).map((unit) => {
-        let correctCoords = unit.localToLocal(unit.x, unit.y, map.getStaticLayer());
-        // correctCoords = {
-        //   x: unit.x + (unit.anchor.x * unit.width),
-        //   y: unit.y + (unit.anchor.y * unit.height)
-        // }
+      // map.getMovableLayer().updateTransform();
 
-        //correctCoords.x = Math.random() * 1000;
-        //correctCoords.y = Math.random() * 1000;
-
-        return cb(correctCoords);
-      });
+      return getCorrectObjects(filter).slice(0, 10).map(unit => cb(calculateCorrectCoordinates(unit)));
     }
 
-    function setCanvasSize() {
-      let mapRenderer = map.getRenderer();
-      let coordinates = {
-        x: -200,
-        y: -200,
-        width: (mapRenderer.width + 200 + (mapRenderer.width / 2)) * map.getZoom(),
-        height: (mapRenderer.height + 200 +(mapRenderer.height / 2)) * map.getZoom(),
-      }
-      rendererOptions.resolution = mapRenderer.resolution;
-      FoWRenderer = new PIXI.WebGLRenderer(coordinates.width, coordinates.height, rendererOptions);
-      FoWOverlay.clear();
-      FoWOverlay.beginFill(0x999999, alpha);
-      FoWOverlay.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
-      FoWOverlay.endFill();
+    function calculateCorrectCoordinates(object) {
+      return object.toGlobal(new PIXI.Point(0, 0));
+      // return new PIXI.Point(Math.random()*1000, Math.random()*1000);
+      // unit.updateTransform();
+      // unit.parent.updateTransform();
+      // unit.parent.parent.updateTransform();
+      // unit.parent.parent.parent.updateTransform();
+      // const correctCoords = {
+      //   x: unit.x + unit.parent.x + map.getMovableLayer().x + (unit.anchor.x * unit.width),
+      //   y: unit.y + unit.parent.y + map.getMovableLayer().y + (unit.anchor.y * unit.height),
+      // };
+      // console.log('Coord:', correctCoords.x, correctCoords.y);
+      // console.log('UNIT:', unit.localTransform, unit.worldTransform);
+      // console.log('Manual:', unit.x + unit.parent.x + map.getMovableLayer().x);
+      // WRONG WAY: const correctCoords = unit.toLocal(new PIXI.Point(0, 0), map.getMovableLayer());
     }
 
     /**
-     * Resizes the canvas to the current most wide and high element status. Basically canvas size === window size.
-     *
-     * @private
-     * @method _resizeCanvas
+     * @param  {MapDataManipulator} filter    REQUIRED
+     * @return {Array}                        Array of objects to be used for creating FoW
      */
-    function _resizeCanvas() {
-      var windowSize = utils.resize.getWindowSize();
+    function getCorrectObjects(filter) {
+      return map.getObjectsUnderArea(
+        map.getViewportArea(false, VIEWPORT_MULTIPLIER),
+        { filters: filter });
+    }
 
-      FoWRenderer.autoResize = true;
-      FoWRenderer.resize(windowSize.x, windowSize.y);
-      map.drawOnNextTick();
+    function setupRenderer(coordinates, resolution, rendererOptions) {
+      // Create the fog that cover everything and create holes to it later:
+      FoWOverlay = createOverlay(coordinates);
+      // Clear old renderer IF it exists
+      clearRenderer(FoWRenderer);
+      // Create new renderer
+      FoWRenderer = setRenderer(coordinates, rendererOptions);
+    }
+
+    function getMaskContainer() {
+      return maskContainer;
+    }
+
+    function getFoWRenderer() {
+      return FoWRenderer;
+    }
+
+    /** *************************************
+    **************** PRIVATE ****************
+    ****************************************/
+    function setRenderer(coordinates, rendererOptions) {
+      return new PIXI.WebGLRenderer(coordinates.width, coordinates.height, rendererOptions);
+    }
+
+    function clearRenderer(renderer) {
+      // Reset earlier fog of war renderer, if present
+      renderer && renderer.destroy && renderer.view && renderer.destroy(); // eslint-disable-line
+    }
+    function resetFoW(overlay) {
+      texture && texture.destroy && texture.destroy(); // eslint-disable-line no-unused-expressions
+      maskContainer.children && maskContainer.removeChildren(); // eslint-disable-line 
+      maskContainer.addChild(overlay);
+    }
+
+    function createOverlay(coordinates) {
+      const graphics = new PIXI.Graphics();
+
+      graphics.clear();
+      graphics.beginFill(0x000000, alpha);
+      graphics.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
+      graphics.endFill();
+
+      return graphics;
+    }
+    function setEvents() {
+      mapEvents.subscribe('mapResized', () => {
+        utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
+      });
+      mapEvents.subscribe('mapResized', refreshFoW);
+      mapEvents.subscribe('mapMoved', refreshFoW);
     }
   }
-})();
+}());

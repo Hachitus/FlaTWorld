@@ -95,7 +95,7 @@
       mapSize = { x:0, y:0 },
       rendererOptions = { autoResize: true, antialias: false },
       minimapCanvas,
-      subcontainers = false,
+      subcontainers = { width: 0, height: 0, maxDetectionOffset: 0 }, // maxDetectionOffset default set later
       cache = false,
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
@@ -127,12 +127,17 @@
       
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
-      ParentLayerConstructor = subcontainers ? mapLayers.MapLayerParent : mapLayers.MapLayer;
+      ParentLayerConstructor =
+        (subcontainers.width && subcontainers.height && subcontainers.maxDetectionOffset) ?
+          mapLayers.MapLayerParent :
+          mapLayers.MapLayer;
 
       /* These are the 2 topmost layers on the map:
-       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map scale value and possible
+       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map
+       * scale value and possible
        * objects that do not move with the map. StaticLayer has only one child: _movableLayer
-       * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move with the map. Like
+       * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move
+       * with the map. Like
        * graphics that show which area or object is currently selected. */
       _staticLayer = new mapLayers.MapLayer({ name:'staticLayer', coord: { x: 0, y: 0 } });
       _movableLayer = new mapLayers.MapLayer({ name:'movableLayer', coord: { x: 0, y: 0 } });
@@ -146,7 +151,8 @@
 
       utils.mouse.disableContextMenu(_renderers.main.view);
 
-      /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P. Setting this separately in each
+      /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
+       * Setting this separately in each
        * baseTexture, would seem stupid, so we do it like this for now. */
       this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
 
@@ -184,11 +190,13 @@
        **/
       this.plugins = new Set();
       /**
-       * Subcontainers size that we want to generate, when layers use subcontainers
+       * Subcontainers size that we want to generate, when layers use subcontainers.
        *
        * @attribute subcontainersConfig
-       * @type {{width: Integer, height: Int}}
+       * @type {{width: Integer, height: Int, maxDetectionOffset: Int}}
        **/
+      // Set default
+      subcontainers.maxDetectionOffset = subcontainers.maxDetectionOffset || 100;
       this.subcontainersConfig = subcontainers;
       /**
        * Callback function that gets the current FPS on the map and shows it in DOM
@@ -198,7 +206,8 @@
        **/
       this.trackFPSCB = trackFPSCB;
       /**
-       * ObjectManager instance. Responsible for retrieving the objects from the map, on desired occasions. Like when the player clicks
+       * ObjectManager instance. Responsible for retrieving the objects from the map, on desired
+       * occasions. Like when the player clicks
        * the map to select some object. This uses subcontainers when present.
        *
        * @attribute objectManager
@@ -206,7 +215,8 @@
        **/
       this.objectManager = new ObjectManager();
       /**
-       * Is cache activated for this map at all. This is set for individual layers with a property, but without activating the cache for
+       * Is cache activated for this map at all. This is set for individual layers with a
+       * property, but without activating the cache for
        * the whole map, the layers cache property is ignored.
        *
        * @attribute objectManager
@@ -236,16 +246,16 @@
       this.layerTypes = {
         staticType: {
           id: LAYER_TYPE_STATIC,
-          layer: _staticLayer
+          layer: _staticLayer,
         },
         movableType: {
           id: LAYER_TYPE_MOVABLE,
-          layer: _movableLayer
+          layer: _movableLayer,
         },
         minimapType: {
           id: LAYER_TYPE_MINIMAP,
-          layer: _minimapLayer
-        }
+          layer: _minimapLayer,
+        },
       };
       /**
        * Self explanatory
@@ -364,7 +374,8 @@
      * @param {Object} options.coord      Coordinates of the layer
      * @param {Integer} options.coord.x   X coordinate
      * @param {Integer} options.coord.y   Y coordinate
-     * @param {Object} options.toLayer    To which layer will this layer be added to as UILayer. Default false
+     * @param {Object} options.toLayer    To which layer will this layer be added to as UILayer.
+     *  Default false
      * @return {MapLayer}            The created UI layer
      **/
     createSpecialLayer(name = 'default special layer', options = { coord: { x: 0, y: 0 }, toLayer: false }) {
@@ -396,19 +407,22 @@
       return newLayer;
     }
     /**
-     * Just a convenience function (for usability and readability), for checking if the map uses subcontainers.
+     * Just a convenience function (for usability and readability), for checking if the map uses
+     * subcontainers.
      *
      * @method usesSubcontainers
+     * @return {Boolean}
      **/
     usesSubcontainers() {
-      return this.getSubcontainerConfigs () ? true : false;
+      return !!(this.getSubcontainerConfigs().width && this.getSubcontainerConfigs().height);
     }
     /**
      * Returns current subcontainers configurations (like subcontainers size).
      *
      * @method getSubcontainerConfigs
+     * @return {Object}
      **/
-    getSubcontainerConfigs () {
+    getSubcontainerConfigs() {
       return this.subcontainersConfig;
     }
     /**
@@ -420,7 +434,7 @@
      * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and y-coordinates and the width and height of the
      * viewport
      **/
-    getViewportArea(isLocal = false, multiplier = 1) {
+    getViewportArea(isLocal = false, multiplier = 0) {
       var leftSideCoords = new PIXI.Point(0, 0);
       var rightSideCoords = new PIXI.Point(window.innerWidth,window.innerHeight);
       var layer, rightSide, leftSide;
@@ -449,11 +463,15 @@
         };
       }
 
+      const offset = {
+        x: (Math.abs(rightSide.x2) - leftSide.x) * multiplier,
+        y: (Math.abs(rightSide.y2) - leftSide.y) * multiplier,
+      };
       return {
-        x: Math.round(leftSide.x * multiplier),
-        y: Math.round(leftSide.y * multiplier),
-        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) * multiplier),
-        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) * multiplier),
+        x: Math.round(leftSide.x - offset.x),
+        y: Math.round(leftSide.y - offset.y),
+        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) + offset.x),
+        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y),
       };
     }
     /**
@@ -494,17 +512,19 @@
      * move map to coordinates { x: 1, y: 2 }. Defaults to false (relative).
      * @todo  the informcoordinates away and fix the issue they tried to fix!
      **/
-    moveMap(coord = { x: 0, y: 0 }, { absolute = false } = {}) {
+    moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
       var realCoordinates = {
-        x: Math.round(coord.x / this.getStaticLayer().getZoom()),
-        y: Math.round(coord.y / this.getStaticLayer().getZoom())
+        x: Math.round(x / this.getStaticLayer().getZoom()),
+        y: Math.round(y / this.getStaticLayer().getZoom())
       };
 
       if (absolute) {
-        _movableLayer.position = new PIXI.Point(coord.x, coord.y);
+        _movableLayer.position = new PIXI.Point(x, y);
       } else {
         _movableLayer.move(realCoordinates);
       }
+
+      // Would we need this? _movableLayer.displayObjectUpdateTransform();
 
       mapEvents.publish('mapMoved', realCoordinates);
       this.drawOnNextTick();
@@ -638,13 +658,11 @@
           return true;
         });
 
-        let nonFilteredObjects = this[_retrieveObjects](allCoords, filteredContainers);
+        objects = this[_retrieveObjects](allCoords, filteredContainers);
+      }
 
-        if (filters) {
-          objects = filters.filter(nonFilteredObjects);
-        } else {
-          objects = nonFilteredObjects;
-        }
+      if (filters) {
+        objects = filters.filter(objects);
       }
 
       return objects;
@@ -819,19 +837,19 @@
      *
      * @method toggleFullScreen
      **/
-    toggleFullScreen () { return 'notImplementedYet. Activate with plugin'; }
+    toggleFullScreen() { return 'notImplementedYet. Activate with plugin'; }
     /**
      * Plugin will overwrite create this method. Method for actually activating minimap.
      *
      * @method initMinimap
      **/
-    initMinimap () { return 'notImplementedYet. Activate with plugin'; }
+    initMinimap() { return 'notImplementedYet. Activate with plugin'; }
     /**
-     * Plugin will overwrite create this method. Method for actually activating minimap.
+     * Plugin will overwrite create this method. Method for actually activating fog of war.
      *
-     * @method initMinimap
+     * @method activateFogOfWar
      **/
-    initFogOfWar () { return 'notImplementedYet. Activate with plugin'; }
+    activateFogOfWar() { return 'notImplementedYet. Activate with plugin'; }
 
     /*---------------------------------
     ----------- FOR TESTING -----------

@@ -19,10 +19,10 @@
       disableContextMenu,
       eventData: {
         getPointerCoords,
-        getHAMMERPointerCoords
+        getHAMMERPointerCoords,
       },
       coordinatesFromGlobalToRelative,
-      eventMouseCoords
+      eventMouseCoords,
     };
 
     /**
@@ -142,7 +142,8 @@
     return {
       toggleFullScreen,
       setToFullSize,
-      getWindowSize
+      getWindowSize,
+      resizePIXIRenderer,
     };
 
     /**
@@ -215,6 +216,20 @@
         x: window.innerWidth,
         y: window.innerHeight,
       };
+    }
+    /**
+     * Resizes the PIXI renderer to the current most wide and high element status. Basically
+     * canvas size === window size.
+     *
+     * @static
+     * @method resizeRenderer
+     */
+    function resizePIXIRenderer(renderer, drawOnNextTick) {
+      const windowSize = getWindowSize();
+
+      renderer.autoResize = true; // eslint-disable-line no-param-reassign
+      renderer.resize(windowSize.x, windowSize.y);
+      drawOnNextTick();
     }
   }
   /**

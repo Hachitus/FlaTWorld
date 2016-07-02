@@ -47,7 +47,7 @@
       expect(queryStatus).toEqual(2);
       expect(window.fetch).toHaveBeenCalled();
     });
-    it('update', () => {
+    xit('update', () => {
     });
 
     /* PRIVATE function to help with dealing promises and their returned objects */

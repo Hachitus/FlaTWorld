@@ -1,6 +1,4 @@
 (function () {
-  'use strict';
-
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
@@ -138,22 +136,6 @@
         width: Math.round( this.width ),
         height: Math.round( this.height )
       };
-    }
-    /**
-     * Coordinate conversion: localToLocal
-     *
-     * @method localToLocal
-     * @param  {Number} x                  X coordinate
-     * @param  {Number} y                  Y coordinate
-     * @param  {Object} target             PIXI.DisplayObject. The DisplayObject where we should target the coordinates for
-     * @return  {{PIXI.Point}} point       PIXI.Point. Coordinates.
-     * @return {Coordinates}
-     */
-    localToLocal(x, y, target) {
-      var globalCoords = this.toGlobal( { x, y } );
-      var targetLocalCoords = target.toLocal( globalCoords );
-
-      return targetLocalCoords;
     }
     /**
      * Clone object

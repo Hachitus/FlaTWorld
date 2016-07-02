@@ -4,12 +4,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var eventListeners = window.flatworld.eventListeners;
-  var mapStates = window.flatworld.mapStates;
-  var mapEvents = window.flatworld.mapEvents;
-  var utils = window.flatworld.utils;
-  var Hammer = window.flatworld_libraries.Hammer;
-  var Hamster = window.flatworld_libraries.Hamster;
+  const { mapEvents, utils, mapStates, eventListeners, Flatworld } = window.flatworld;
+  const { Hammer, Hamster } = window.flatworld_libraries;
 
   /*-----------------------
   ---------- API ----------
@@ -71,7 +67,7 @@
       hamster = new Hamster(map.canvas);
 
       eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
-      eventListeners.on('fullSize', _resizeCanvas);
+      eventListeners.on('fullSize', resizeCanvas);
 
       eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
       map.setPrototype('setFullScreen', () => {
@@ -295,22 +291,21 @@
     function _setFullScreen() {
       utils.resize.toggleFullScreen();
       mapEvents.publish('mapResized');
-      _resizeCanvas();
+      resizeCanvas();
     }
     /**
-     * Resizes the canvas to the current most wide and high element status. Basically canvas size === window size.
+     * Resizes the canvas to the current most wide and high element status.
+     * Basically canvas size === window size.
      *
      * @private
      * @method _resizeCanvas
      */
-    function _resizeCanvas() {
-      var windowSize = utils.resize.getWindowSize();
-      var _renderer = mapInstance.getRenderer();
-
-      _renderer.autoResize = true;
-      _renderer.resize(windowSize.x, windowSize.y);
+    function resizeCanvas() {
+      utils.resize.resizePIXIRenderer(
+        mapInstance.getRenderer(),
+        mapInstance.drawOnNextTick.bind(mapInstance)
+      );
       mapEvents.publish('mapResized');
-      mapInstance.drawOnNextTick();
     }
   }
-})();
+}());
