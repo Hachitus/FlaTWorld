@@ -116,26 +116,13 @@
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      // map.getMovableLayer().updateTransform();
+      //map.getMovableLayer().updateTransform();
 
-      return getCorrectObjects(filter).slice(0, 10).map(unit => cb(calculateCorrectCoordinates(unit)));
+      return getCorrectObjects(filter).map(unit => cb(calculateCorrectCoordinates(unit)));
     }
 
     function calculateCorrectCoordinates(object) {
       return object.toGlobal(new PIXI.Point(0, 0));
-      // return new PIXI.Point(Math.random()*1000, Math.random()*1000);
-      // unit.updateTransform();
-      // unit.parent.updateTransform();
-      // unit.parent.parent.updateTransform();
-      // unit.parent.parent.parent.updateTransform();
-      // const correctCoords = {
-      //   x: unit.x + unit.parent.x + map.getMovableLayer().x + (unit.anchor.x * unit.width),
-      //   y: unit.y + unit.parent.y + map.getMovableLayer().y + (unit.anchor.y * unit.height),
-      // };
-      // console.log('Coord:', correctCoords.x, correctCoords.y);
-      // console.log('UNIT:', unit.localTransform, unit.worldTransform);
-      // console.log('Manual:', unit.x + unit.parent.x + map.getMovableLayer().x);
-      // WRONG WAY: const correctCoords = unit.toLocal(new PIXI.Point(0, 0), map.getMovableLayer());
     }
 
     /**
