@@ -101,8 +101,9 @@
       const staticLayer = map.getStaticLayer();
       resetFoW(FoWOverlay);
 
+      map.getMovableLayer().updateTransform();
       const spriteArray = getFoWObjectArray(FoWCB);
-
+console.log("aaa", spriteArray[0].x, spriteArray[0].y)
       if (spriteArray.length > 0) {
         maskContainer.addChild(...spriteArray);
       }
@@ -116,11 +117,16 @@
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      return getCorrectObjects(filter).map(unit => cb(calculateCorrectCoordinates(unit)));
+      return getCorrectObjects(filter).slice(0,1).map(object => cb(calculateCorrectCoordinates(object)));
     }
 
     function calculateCorrectCoordinates(object) {
-      return object.toGlobal(new PIXI.Point(0, 0));
+      const coordinates = object.toGlobal(new PIXI.Point(-119, 0));
+
+      coordinates.x = Math.round(coordinates.x);
+      coordinates.y = Math.round(coordinates.y);
+
+      return coordinates;
     }
 
     /**
@@ -181,8 +187,13 @@
       mapEvents.subscribe('mapResized', () => {
         utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
       });
+      mapEvents.subscribe('mapZoomed', zoomFoWLayer);
       mapEvents.subscribe('mapResized', refreshFoW);
       mapEvents.subscribe('mapMoved', refreshFoW);
+    }
+
+    function zoomFoWLayer(ev) {
+      maskContainer.setZoom(ev.customData[0].newScale);
     }
   }
 }());
