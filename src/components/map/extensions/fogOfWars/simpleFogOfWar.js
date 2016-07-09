@@ -116,8 +116,6 @@
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      //map.getMovableLayer().updateTransform();
-
       return getCorrectObjects(filter).map(unit => cb(calculateCorrectCoordinates(unit)));
     }
 
