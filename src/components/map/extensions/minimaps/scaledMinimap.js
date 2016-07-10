@@ -24,15 +24,15 @@
    * @namespace flatworld.extensions.minimaps
    * @class scaledMinimap
    **/
-  function setupScaledMinimap () {
+  function setupScaledMinimap() {
     var map, minimap;
 
     return {
       init,
       pluginName: 'scaledMinimap',
       _testObject: {
-        
-      }
+
+      },
     };
     /**
      * Ínitialize as a plugin
@@ -53,7 +53,7 @@
       _minimapLayer.targetSize.y = height;
       setMinimapUI(UIImage);
       setupBackgroundLayer(backgroundImage);
-      _setMinimapCoordinates(Math.round(x),  Math.round(y));
+      _setMinimapCoordinates(Math.round(x), Math.round(y));
 
       mapEvents.publish('minimapInitialized', minimap);
     }
@@ -76,7 +76,7 @@
     /*-----------------------
     -------- PRIVATE --------
     -----------------------*/
-    function _setMinimapCoordinates({ x, y}) {
+    function _setMinimapCoordinates({ x, y }) {
       map.getMinimapLayer().position(new PIXI.Point(x, y));
     }
   }

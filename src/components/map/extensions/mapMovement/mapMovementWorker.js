@@ -45,7 +45,7 @@ var viewportArea, scale, methodType, smallerViewportArea;
  * @return {totalViewportArea[]}            Array consists of normal calculated viewport and smaller scaled viewport.
  */
 self.addEventListener('message', function (e) {
-  console.log('handling4-1')
+  console.log('handling4-1');
   var scaledViewport, smallerScaledViewportArea;
 
   methodType = e.data[0];
@@ -54,11 +54,11 @@ self.addEventListener('message', function (e) {
 
   if (methodType === METHOD_ALL) {
     try {
-      smallerViewportArea = Object.assign( {}, getViewportCoordinates(viewportArea, 0.5));
-      Object.assign( viewportArea, getViewportCoordinates(viewportArea));
+      smallerViewportArea = Object.assign({}, getViewportCoordinates(viewportArea, 0.5));
+      Object.assign(viewportArea, getViewportCoordinates(viewportArea));
 
-      scaledViewport = Object.assign({} , applyScaleToViewport(viewportArea, scale) );
-      smallerScaledViewportArea = Object.assign({} , applyScaleToViewport(smallerViewportArea, scale) );
+      scaledViewport = Object.assign({}, applyScaleToViewport(viewportArea, scale));
+      smallerScaledViewportArea = Object.assign({}, applyScaleToViewport(smallerViewportArea, scale));
 
       postMessage([scaledViewport, smallerScaledViewportArea]);
     } catch (ev) {
@@ -78,16 +78,16 @@ self.addEventListener('message', function (e) {
  * @return {totalViewportArea}              The total viewportArea
  */
 function getViewportCoordinates(viewportArea, offsetQuantifier) {
-  var offsetSize = Math.abs( viewportArea.width * VIEWPORT_OFFSET  );
+  var offsetSize = Math.abs(viewportArea.width * VIEWPORT_OFFSET);
   offsetQuantifier = offsetQuantifier || 1;
 
   return {
-    x: Math.round( viewportArea.x - offsetSize * offsetQuantifier ),
-    y: Math.round( viewportArea.y - offsetSize * offsetQuantifier ),
-    x2: Math.round( viewportArea.x + Math.abs( viewportArea.width ) + offsetSize * offsetQuantifier ),
-    y2: Math.round( viewportArea.y + Math.abs( viewportArea.height ) + offsetSize * offsetQuantifier ),
-    width: Math.round( viewportArea.width + offsetSize * 2 * offsetQuantifier ),
-    height: Math.round( viewportArea.height + offsetSize * 2 * offsetQuantifier )
+    x: Math.round(viewportArea.x - offsetSize * offsetQuantifier),
+    y: Math.round(viewportArea.y - offsetSize * offsetQuantifier),
+    x2: Math.round(viewportArea.x + Math.abs(viewportArea.width) + offsetSize * offsetQuantifier),
+    y2: Math.round(viewportArea.y + Math.abs(viewportArea.height) + offsetSize * offsetQuantifier),
+    width: Math.round(viewportArea.width + offsetSize * 2 * offsetQuantifier),
+    height: Math.round(viewportArea.height + offsetSize * 2 * offsetQuantifier),
   };
 }
 /**
@@ -100,11 +100,11 @@ function getViewportCoordinates(viewportArea, offsetQuantifier) {
  */
 function applyScaleToViewport(viewportArea, scale) {
   return {
-    x: Math.round( viewportArea.x / scale ),
-    y: Math.round( viewportArea.y / scale ),
-    x2: Math.round( viewportArea.x2 / scale ),
-    y2: Math.round( viewportArea.y2 / scale ),
-    width: Math.round( viewportArea.width / scale ),
-    height: Math.round( viewportArea.height / scale )
+    x: Math.round(viewportArea.x / scale),
+    y: Math.round(viewportArea.y / scale),
+    x2: Math.round(viewportArea.x2 / scale),
+    y2: Math.round(viewportArea.y2 / scale),
+    width: Math.round(viewportArea.width / scale),
+    height: Math.round(viewportArea.height / scale),
   };
 }

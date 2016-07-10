@@ -37,7 +37,7 @@
     return {
       init,
       pluginName: 'mapDrag',
-      _startDragListener /* Function revealed for testing */
+      _startDragListener, /* Function revealed for testing */
     };
 
     /*---------------------
@@ -68,7 +68,7 @@
      * @method _startDragListener
      * @param {Map} map           The current instance of Map class
      */
-    function _startDragListener( map ) {
+    function _startDragListener(map) {
       var initialized = false;
 
       return function startDrag(e) {
@@ -81,13 +81,13 @@
 
         mapMoved = true;
 
-        coords.x = Math.round( coords.x );
-        coords.y = Math.round( coords.y );
+        coords.x = Math.round(coords.x);
+        coords.y = Math.round(coords.y);
 
         if (!initialized) {
           offsetCoords.setOffset({
             x: coords.x,
-            y: coords.y
+            y: coords.y,
           });
           initialized = true;
 
@@ -118,7 +118,7 @@
       offset = offsetCoords.getOffset();
       moved = {
         x: coords.x - offset.x,
-        y: coords.y - offset.y
+        y: coords.y - offset.y,
       };
 
       if (moved.x > 0 || moved.y > 0 || moved.x < 0 || moved.y < 0) {
@@ -131,7 +131,7 @@
 
       offsetCoords.setOffset({
         x: coords.x,
-        y: coords.y
+        y: coords.y,
       });
 
       e.preventDefault();
@@ -150,11 +150,11 @@
 
       return {
         setOffset,
-        getOffset
+        getOffset,
       };
 
       function setOffset(coords) {
-        return ( offsetCoords = coords );
+        return (offsetCoords = coords);
       }
       function getOffset() {
         return offsetCoords;

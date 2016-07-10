@@ -34,7 +34,7 @@
      * @param  {Object} options         optional options
      * @param  {Object} options.styles  styles for the UI
      */
-    constructor(modal, FTW, { styles = '#F0F0F0' , elements } = {}) {
+    constructor(modal, FTW, { styles = '#F0F0F0', elements } = {}) {
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
@@ -89,13 +89,13 @@
       var cb;
 
       /* We add the objects to be highlighted to the correct UI layer */
-      //objectsToUI(UILayer, objects);
+      // objectsToUI(UILayer, objects);
 
       if (objects && objects.length > 1) {
         cb = () => {
           this.modal.innerHTML = templates.multiSelection({
             title: 'Objects',
-            objects
+            objects,
           });
 
           this.showModal(this.modal, cssClasses);
@@ -125,7 +125,7 @@
      * @param {Object} getDatas       See explanation in core.UI
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      */
-    highlightSelectedObject(object, getDatas, options = {shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 }}) {
+    highlightSelectedObject(object, getDatas, options = { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } }) {
       var { shadow } = options;
       var highlightableObject, objectDatas;
 
@@ -134,8 +134,8 @@
       this.modal.innerHTML = templates.singleSelection({
         title: 'Selected',
         object: {
-          name: objectDatas.name
-        }
+          name: objectDatas.name,
+        },
       });
       this.showModal(this.modal, cssClasses);
 
@@ -146,7 +146,7 @@
         distance: shadow.distance,
         alpha: shadow.alpha,
         angle: shadow.angle,
-        blur: shadow.blur
+        blur: shadow.blur,
       });
 
       this.FTW.drawOnNextTick();
@@ -164,9 +164,9 @@
       var localTo, localFrom, currentArrow;
 
       localTo = this.FTW.getMovableLayer().toLocal(to);
-      localFrom = this.FTW.getMovableLayer().toLocal(object.toGlobal(new PIXI.Point(0,0)));
+      localFrom = this.FTW.getMovableLayer().toLocal(object.toGlobal(new PIXI.Point(0, 0)));
 
-      currentArrow = drawShapes.line(new PIXI.Graphics(), localFrom, localTo );
+      currentArrow = drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
 
       this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id, UINAME);
 
@@ -192,7 +192,7 @@
       clonedObject = object.clone(renderer);
       clonedObject.__proto__ = object.__proto__;
 
-      var coord = object.toGlobal(new PIXI.Point(0,0));
+      var coord = object.toGlobal(new PIXI.Point(0, 0));
       coord = movableLayer.toLocal(coord);
 
       coord.x -= object.width * object.anchor.x;
@@ -211,10 +211,10 @@
       const RADIUS = 47;
       const UI_CONTAINER_NAME = 'unit highlight';
       const movableLayer = this.FTW.getMovableLayer();
-      const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer});
+      const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
       const objCoords = {
         x: Number(object.x),
-        y: Number(object.y)
+        y: Number(object.y),
       };
       var highlighterObject;
 

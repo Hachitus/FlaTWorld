@@ -20,5 +20,5 @@ export var templates = {
       <li>
         {{object.name}}
       </li>
-    </ul>`)
+    </ul>`),
 };

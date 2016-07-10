@@ -30,19 +30,19 @@
          *
          * @method objectSelectDialog
          */
-        { name: 'objectSelectDialog', from: [ 'statusQuo', 'objectSelected'], to: 'objectSelectDialogOpened' },
+        { name: 'objectSelectDialog', from: ['statusQuo', 'objectSelected'], to: 'objectSelectDialogOpened' },
         /**
          * When the object is selected
          *
          * @method objectSelect
          */
-        { name: 'objectSelect', from: [ 'statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'objectSelected' },
+        { name: 'objectSelect', from: ['statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'objectSelected' },
         /**
          * When situation is normal, nothing selected.
          *
          * @method normalize
          */
-        { name: 'normalize', from: [ 'objectSelected', 'objectSelectDialogOpened'], to: 'statusQuo' },
+        { name: 'normalize', from: ['objectSelected', 'objectSelectDialogOpened'], to: 'statusQuo' },
         /**
          * When object is issued a move order
          *
@@ -66,7 +66,7 @@
          *
          * @method UIClose
          */
-        { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' }
-    ]});
+        { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' },
+      ] });
   }
 })();

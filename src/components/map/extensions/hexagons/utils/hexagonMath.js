@@ -40,7 +40,7 @@
    * @method setRadius
    * @param {Number} radius    The radius of the hexagon
    */
-  function init(radius, startingPoint = { x: 0, y: 0}, { orientation = 'horizontal' } = {}) {
+  function init(radius, startingPoint = { x: 0, y: 0 }, { orientation = 'horizontal' } = {}) {
     globalRadius = radius;
     globalStartingPoint = startingPoint;
     globalOrientation = orientation;
@@ -60,21 +60,21 @@
     const OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     const CENTER = {
       x: radius,
-      y: radius
+      y: radius,
     };
     var angle = 2 * Math.PI / 6 * OFFSET;
     var x = CENTER.x * Math.cos(angle);
     var y = CENTER.y * Math.sin(angle);
     var points = [];
 
-    points.push({x, y});
+    points.push({ x, y });
 
     for (let i = 1; i < 7; i++) {
       angle = 2 * Math.PI / 6 * (i + OFFSET);
       x = CENTER.x * Math.cos(angle);
       y = CENTER.y * Math.sin(angle);
 
-      points.push({x, y});
+      points.push({ x, y });
     }
 
     return points;
@@ -145,13 +145,13 @@
    * @return {Boolean}                  Is the coordinate inside the hexagon or not
    */
 
-  function hexaHitTest(points, hitCoords, offsetCoords = {x:0, y:0}) {
+  function hexaHitTest(points, hitCoords, offsetCoords = { x: 0, y: 0 }) {
     var realPolygonPoints;
 
     realPolygonPoints = points.map(point => {
       return {
         x: point.x + offsetCoords.x,
-        y: point.y + offsetCoords.y
+        y: point.y + offsetCoords.y,
       };
     });
 
@@ -185,9 +185,9 @@
       for (let column = 0; columns > column; column++) {
         /* Se the coordinates for each hexagons upper-left corner on the grid */
         gridArray.push({
-          x: Math.round(( column * columnWidth ) +
-            ( orientation === 'horizontal' && ( row === 0 || row % 2 === 0 ) ? 0 : -shortDistance / 2) ),
-          y: row * rowHeight
+          x: Math.round((column * columnWidth) +
+            (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
+          y: row * rowHeight,
         });
       }
     }
@@ -213,17 +213,17 @@
 
     if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
-        x: Math.round( coordinates.x -
-              ( coordinates.x % calcShortDiagonal(radius) ) +
-              calcShortDiagonal(radius) / 2 + globalStartingPoint.x ),
-        y: Math.round( coordinates.y -
-              ( coordinates.y % calcSpecialDistance(radius) ) +
-              calcLongDiagonal(radius) / 2 + globalStartingPoint.y )
+        x: Math.round(coordinates.x -
+              (coordinates.x % calcShortDiagonal(radius)) +
+              calcShortDiagonal(radius) / 2 + globalStartingPoint.x),
+        y: Math.round(coordinates.y -
+              (coordinates.y % calcSpecialDistance(radius)) +
+              calcLongDiagonal(radius) / 2 + globalStartingPoint.y),
       };
     } else {
       closestHexagonCenter = {
-        x: Math.floor( coordinates.x - ( coordinates.x % calcSpecialDistance(radius) ) + globalStartingPoint.x ),
-        y: Math.floor( coordinates.y - ( coordinates.y % calcShortDiagonal(radius) ) + globalStartingPoint.y )
+        x: Math.floor(coordinates.x - (coordinates.x % calcSpecialDistance(radius)) + globalStartingPoint.x),
+        y: Math.floor(coordinates.y - (coordinates.y % calcShortDiagonal(radius)) + globalStartingPoint.y),
       };
     }
 
@@ -232,7 +232,7 @@
   function calculateIndex(coordinates) {
     return {
       x: coordinates.x / calcShortDiagonal(),
-      y: coordinates.y / calcLongDiagonal()
+      y: coordinates.y / calcLongDiagonal(),
     };
   }
   /*-----------------------

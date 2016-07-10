@@ -24,7 +24,7 @@
    * @return {Object}     subsribe and publish
    * @todo add mapfullscreen, mapfullSize and check if something is missing from the list
    */
-  function setupMapEvents () {
+  function setupMapEvents() {
     const TIMER_FOR_SAME_TYPE = 50;
     var lastTimePublished = {};
 
@@ -33,7 +33,7 @@
     ----------------------*/
     return {
       subscribe,
-      publish
+      publish,
     };
 
     /*---------------------
@@ -48,7 +48,7 @@
 
       timestamp = new Date().getTime();
 
-      if ( (lastTimePublished[type] + TIMER_FOR_SAME_TYPE ) < timestamp) {
+      if ((lastTimePublished[type] + TIMER_FOR_SAME_TYPE) < timestamp) {
         let eventToDispatch;
 
         eventToDispatch = createCrossIeEvent(type);

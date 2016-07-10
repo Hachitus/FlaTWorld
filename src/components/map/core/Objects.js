@@ -29,9 +29,9 @@
       /* We need to round the numbers. If there are decimal values, the graphics will get blurry */
       let exactCoords = {
         x: Math.round(coord.x),
-        y: Math.round(coord.y)
+        y: Math.round(coord.y),
       };
-      this.position.set(exactCoords.x,  exactCoords.y);
+      this.position.set(exactCoords.x, exactCoords.y);
       /**
        * Name of the object. Used mostly for debugging
        *
@@ -98,7 +98,7 @@
      * @return this object instance
      */
     innerDraw(x, y) {
-      this.fromFrame ( this.currentFrame );
+      this.fromFrame(this.currentFrame);
       this.x = x;
       this.y = y;
 
@@ -125,16 +125,16 @@
      * @param  {Object} options       toGlobal: Boolean. Should the method return global coordinates or local (movableLayer)
      * @return {AreaSize}               { x: Number, y: Number, width: Number, height: Number}
      */
-    getGraphicalArea(options = { toGlobal: true } ) {
+    getGraphicalArea(options = { toGlobal: true }) {
       var coordinates;
 
-      coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0,0)) : this;
+      coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
       return {
-        x: Math.round( coordinates.x ),
-        y: Math.round( coordinates.y ),
-        width: Math.round( this.width ),
-        height: Math.round( this.height )
+        x: Math.round(coordinates.x),
+        y: Math.round(coordinates.y),
+        width: Math.round(this.width),
+        height: Math.round(this.height),
       };
     }
     /**
@@ -258,9 +258,9 @@
         id: this.id,
         from: {
           x: this.x,
-          y: this.y
+          y: this.y,
         },
-        to
+        to,
       });
     }
   }

@@ -35,8 +35,8 @@
       this._allSounds[name] = new Howl({
         urls: [url],
         autoplay: false,
-        loop: loop,
-        volume: volume
+        loop,
+        volume,
       });
 
       return this._allSounds[name];

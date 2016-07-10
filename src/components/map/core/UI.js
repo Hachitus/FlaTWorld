@@ -27,7 +27,7 @@
    * @param {Map} givenMap          Map instance that is used
    * @return {Object}               UI module
   */
-  function UI (UITheme, givenMap) {
+  function UI(UITheme, givenMap) {
     var map;
 
     /* SINGLETON MODULE */
@@ -36,7 +36,7 @@
     }
 
     if (!UITheme || !givenMap) {
-      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been '+
+      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been ' +
         'already called earlier');
     }
 
@@ -108,7 +108,7 @@
      * @static
      * @param  {String} newMethod   Name of the new method
      */
-    scope.extend = function(newMethod) {
+    scope.extend = function (newMethod) {
       scope[newMethod] = function () {
         UITheme[newMethod]();
       };

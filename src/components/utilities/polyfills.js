@@ -21,7 +21,7 @@
     return {
       arrayFind,
       objectAssign,
-      es6String
+      es6String,
     };
 
     /**
@@ -30,7 +30,7 @@
      */
     function arrayFind() {
       if (!Array.prototype.find) {
-        Array.prototype.find = function(predicate) {
+        Array.prototype.find = function (predicate) {
           if (this === null) {
             throw new TypeError('Array.prototype.find called on null or undefined');
           }
@@ -88,9 +88,9 @@
     function es6String() {
       /*! https://mths.be/repeat v0.2.0 by @mathias */
       if (!String.prototype.repeat) {
-        (function() {
+        (function () {
           'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
-          var defineProperty = (function() {
+          var defineProperty = (function () {
             // IE 8 only supports `Object.defineProperty` on DOM elements
             try {
               var object = {};
@@ -99,7 +99,7 @@
             } catch (error) {}
             return result;
           }());
-          var repeat = function(count) {
+          var repeat = function (count) {
             if (this == null) {
               throw TypeError();
             }
@@ -129,7 +129,7 @@
             defineProperty(String.prototype, 'repeat', {
               value: repeat,
               configurable: true,
-              writable: true
+              writable: true,
             });
           } else {
             String.prototype.repeat = repeat;

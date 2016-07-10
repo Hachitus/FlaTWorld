@@ -1,1 +1,1 @@
-console.log('flattis:', flatworld)
+console.log('flattis:', flatworld);

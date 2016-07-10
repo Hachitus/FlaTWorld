@@ -19,7 +19,7 @@
      * @requires Q for promises
      * @todo should you use PIXI here or just https://github.com/englercj/resource-loader straight?
      */
-    constructor (baseUrl, options = { concurrency: 15, crossOrigin: false }) {
+    constructor(baseUrl, options = { concurrency: 15, crossOrigin: false }) {
       var { concurrency } = options;
 
       this.preloaderClass = new PIXI.loaders.Loader(baseUrl, concurrency);
@@ -28,12 +28,12 @@
      * @method resolveOnComplete
      * @return {Promise} Return promise object, that will be resolved when the preloading is finished
      **/
-    resolveOnComplete () {
+    resolveOnComplete() {
       var promise = Q.defer();
 
       this.preloaderClass.load();
 
-      this.preloaderClass.once('complete', function(loader, resources) {
+      this.preloaderClass.once('complete', function (loader, resources) {
         promise.resolve(loader, resources);
       });
 
@@ -42,7 +42,7 @@
     /**
      * @method addResource
      **/
-    addResource (resource) {
+    addResource(resource) {
       this.preloaderClass.add(resource);
     }
     /**
@@ -50,7 +50,7 @@
      *
      * @method loadManifest
      **/
-    loadManifest () {
+    loadManifest() {
       return this;
     }
     /**
@@ -58,7 +58,7 @@
      *
      * @method setErrorHandler
      **/
-    setErrorHandler (errorCB) {
+    setErrorHandler(errorCB) {
       this.preloaderClass.on('error', errorCB);
 
       return this;
@@ -68,7 +68,7 @@
      *
      * @method setProgressHandler
      **/
-    setProgressHandler (progressCB) {
+    setProgressHandler(progressCB) {
       this.preloaderClass.on('error', progressCB);
 
       return this;
@@ -78,7 +78,7 @@
      *
      * @method activateSound
      **/
-    activateSound () {
+    activateSound() {
       this.preloaderClass.installPlugin();
     }
   }

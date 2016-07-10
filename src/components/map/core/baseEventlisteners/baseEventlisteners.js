@@ -50,7 +50,7 @@
        * @attribute pluginName
        * @type {String}
        */
-      pluginName: 'baseEventlisteners'
+      pluginName: 'baseEventlisteners',
     };
 
     /**
@@ -88,8 +88,8 @@
     function toggleFullSize() {
       var activeCB;
 
-      if (!caches["fullsize"]) {
-        caches["fullsize"] = {
+      if (!caches['fullsize']) {
+        caches['fullsize'] = {
           on: (cb) => {
             activeCB = cb;
 
@@ -97,11 +97,11 @@
           },
           off: () => {
             window.removeEventListener('resize', activeCB);
-          }
+          },
         };
       }
 
-      return caches["fullsize"];
+      return caches['fullsize'];
     }
     /**
      * Sets the browser in fullscreen mode.
@@ -113,8 +113,8 @@
     function toggleFullscreen() {
       var activeCB;
 
-      if (!caches["fullscreen"]) {
-        caches["fullscreen"] = {
+      if (!caches['fullscreen']) {
+        caches['fullscreen'] = {
           on: (cb) => {
             activeCB = cb;
 
@@ -122,13 +122,13 @@
           },
           off: () => {
             window.removeEventListener('fullscreen', activeCB);
-          }
+          },
         };
 
-        return caches["fullscreen"];
+        return caches['fullscreen'];
       }
 
-      return caches["fullscreen"];
+      return caches['fullscreen'];
     }
     /**
      * Zoom the map. Mousewheel (desktop) and pinch (mobile)
@@ -140,8 +140,8 @@
     function toggleZoom() {
       var activeCB;
 
-      if (!caches["zoom"]) {
-        caches["zoom"] = {
+      if (!caches['zoom']) {
+        caches['zoom'] = {
           on: (cb) => {
             var pinch = new Hammer.Pinch();
             activeCB = cb;
@@ -154,11 +154,11 @@
           off: () => {
             hammer.on('pinch', activeCB);
             hamster.unwheel(activeCB);
-          }
+          },
         };
       }
 
-      return caches["zoom"]; 
+      return caches['zoom'];
     }
     /**
      * DragListener (normally used for moving the map)
@@ -170,13 +170,13 @@
     function toggleDrag() {
       var activeCB;
 
-      if (!caches["drag"]) {
-        caches["drag"] = {
+      if (!caches['drag']) {
+        caches['drag'] = {
           on: (cb) => {
             var pan = new Hammer.Pan({
               pointers: 1,
               threshold: 5,
-              direction:  Hammer.DIRECTION_ALL });
+              direction: Hammer.DIRECTION_ALL });
             activeCB = cb;
 
             hammer.add(pan);
@@ -184,11 +184,11 @@
           },
           off: () => {
             hammer.off('pan', activeCB);
-          }
+          },
         };
       }
 
-      return caches["drag"]; 
+      return caches['drag'];
     }
     /**
      * Selecting something from the map
@@ -200,8 +200,8 @@
     function toggleSelect() {
       var activeCB;
 
-      if (!caches["select"]) {
-        caches["select"] = {
+      if (!caches['select']) {
+        caches['select'] = {
           on: (cb) => {
             var tap = new Hammer.Tap();
             activeCB = cb;
@@ -211,11 +211,11 @@
           },
           off: () => {
             hammer.off('tap', activeCB);
-          }
+          },
         };
       }
 
-      return caches["select"];
+      return caches['select'];
     }
     /**
      * Selecting something from the map. With mouse you can use the default right click and in touch devices you can use continuous press
@@ -228,8 +228,8 @@
     function toggleOrder() {
       var activeCB;
 
-      if (!caches["order"]) {
-        caches["order"] = {
+      if (!caches['order']) {
+        caches['order'] = {
           on: (cb) => {
             activeCB = cb;
 
@@ -247,11 +247,11 @@
           off: () => {
             hammer.off('press', clickListener);
             mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
-          }
+          },
         };
       }
 
-      return caches["order"];
+      return caches['order'];
 
       function clickListener(e) {
         if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
@@ -259,7 +259,7 @@
         }
 
         /* Check that finite state is correct and that if desktop, the user clicked right button */
-        if (! mapStates.can('objectOrder') && ( mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
+        if (! mapStates.can('objectOrder') && (mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
           return false;
         }
 

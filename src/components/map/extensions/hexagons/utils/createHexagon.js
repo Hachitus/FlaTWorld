@@ -79,7 +79,7 @@
    * @return {Array}                Array of PIXI.Point coordinates
    */
   function coordsToPixiPoints(radius) {
-    return getHexagonPoints({ radius }).map(function(point) {
+    return getHexagonPoints({ radius }).map(function (point) {
       return new PIXI.Point(point.x, point.y);
     });
   }

@@ -33,7 +33,7 @@
       add,
       remove,
       update,
-      getAllAPIs
+      getAllAPIs,
     };
 
     /*---------------------
@@ -82,8 +82,8 @@
       }
 
       APIs[type] = {
-        baseUrl: baseUrl,
-        cbs: cb ? [cb] : []
+        baseUrl,
+        cbs: cb ? [cb] : [],
       };
     }
     /**
@@ -127,7 +127,7 @@
      */
     function _doFetch(fetchType, type, params) {
       if (!APIs[type]) {
-        mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + ( params ? params[0] : 'no params'));
+        mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
         return;
       }
 
@@ -138,9 +138,9 @@
       });
 
       return fetch(completeData.url, {
-          method: fetchType,
-          body: completeData.body
-        })
+        method: fetchType,
+        body: completeData.body,
+      })
         .then(function (response) {
           return response.json();
         }).then(function (json) {

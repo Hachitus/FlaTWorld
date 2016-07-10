@@ -5,7 +5,7 @@
   ------- IMPORT --------
   ----------------------*/
   var PIXI = window.flatworld_libraries.PIXI;
-  var { Flatworld, utils, log }  = window.flatworld;
+  var { Flatworld, utils, log } = window.flatworld;
   var hexagonPlugin = window.flatworld.extensions.hexagons;
 
   /*---------------------
@@ -43,14 +43,14 @@
     const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === 'string') ? JSON.parse(datas.type) : datas.type;
     const DATA_GAME = (typeof datas.game === 'string') ? JSON.parse(datas.game) : datas.game;
-    //const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
+    // const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
     const WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
     ----------------------*/
     const functionsInObj = {
       ObjectTerrain: hexagonPlugin.objects.ObjectHexaTerrain,
-      ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit
+      ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit,
     };
     var mapProperties = {
       mapSize: DATA_GAME.mapSize,
@@ -58,30 +58,30 @@
         x: 0,
         y: 0,
         width: WINDOW_SIZE.x,
-        height: WINDOW_SIZE.y
+        height: WINDOW_SIZE.y,
       },
       rendererOptions: {
         resolution: pixelRatio, // We might need this later on, when doing mobile optimizations, for different pizel density devices
         autoResize: true,
         transparent: true,
-        antialias: false // TEST. Only should work in chrome atm.?
+        antialias: false, // TEST. Only should work in chrome atm.?
       },
       subcontainers: {
         width: 500,
         height: 500,
         maxDetectionOffset: 100,
-        isHiddenByDefault: isHiddenByDefault
+        isHiddenByDefault,
       },
-      trackFPSCB: trackFPSCB,
-      cache: cache,
+      trackFPSCB,
+      cache,
       defaultScaleMode: scaleMode,
-      minimapCanvas: minimapCanvas
+      minimapCanvas,
     };
-    var map = new Flatworld(mapCanvas, mapProperties );
+    var map = new Flatworld(mapCanvas, mapProperties);
 
     PIXI.SCALE_MODES.DEFAULT = 1;
 
-    DATA_MAP.layers.forEach( layerData => {
+    DATA_MAP.layers.forEach(layerData => {
       if (typeof layerData !== 'object') {
         log.error('Problem in hexaFactory, with layerData:' + JSON.stringify(layerData));
         throw new Error('Problem in hexaFactory, with layerData:', layerData);
@@ -93,16 +93,16 @@
         coord: layerData.coord,
         drawOutsideViewport: {
           x: renderer.width,
-          y: renderer.height
+          y: renderer.height,
         },
-        selectable: layerData.name === 'unitLayer' ? true : false
+        selectable: layerData.name === 'unitLayer' ? true : false,
       };
       var thisLayer;
 
       try {
         thisLayer = map.addLayer(layerOptions);
 
-        layerData.objectGroups.forEach( objectGroup => {
+        layerData.objectGroups.forEach(objectGroup => {
           let spritesheetType = objectGroup.typeImageData;
 
           if (!spritesheetType) {
@@ -110,7 +110,7 @@
             return;
           }
 
-          objectGroup.objects.forEach( object => {
+          objectGroup.objects.forEach(object => {
             var objTypeData, objectOptions, texture, newObject;
 
             try {
@@ -124,14 +124,14 @@
               objectOptions = {
                 data: {
                   typeData: objTypeData,
-                  activeData: object.data
+                  activeData: object.data,
                 },
                 radius: DATA_GAME.hexagonRadius,
                 minimapColor: objTypeData.minimapColor,
-                minimapSize: objTypeData.minimapSize
+                minimapSize: objTypeData.minimapSize,
               };
 
-              newObject = new functionsInObj[objectGroup.type]( texture, object.coord, objectOptions );
+              newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);
 
               thisLayer.addChild(newObject);
             } catch (e) {

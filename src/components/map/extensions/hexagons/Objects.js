@@ -28,7 +28,7 @@
      * @param {Object} options            options.radius REQUIRED.
      * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
      */
-    constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
+    constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
       this.name = 'DefaultTerrainObject_hexa';
@@ -52,7 +52,7 @@
      * @param {Object} options            options.radius REQUIRED
      * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
      */
-    constructor(texture, coords = {x: 0, y: 0}, { data, radius, minimapColor, minimapShape } = {}) {
+    constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape } = {}) {
       super(texture, coords, { data });
 
       this.name = 'DefaultUnitObjects_hexa';
@@ -116,6 +116,6 @@
   -----------------------*/
   window.flatworld.extensions.hexagons.objects = {
     ObjectHexaTerrain,
-    ObjectHexaUnit
+    ObjectHexaUnit,
   };
 })();

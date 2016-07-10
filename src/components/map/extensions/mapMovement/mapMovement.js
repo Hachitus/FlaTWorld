@@ -10,7 +10,7 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  //var viewportWorker = new Worker('/components/map/extensions/mapMovement/mapMovementWorker.js');
+  // var viewportWorker = new Worker('/components/map/extensions/mapMovement/mapMovementWorker.js');
 
   /*-----------------------
   ---------- API ----------
@@ -27,13 +27,13 @@
    * @namespace flatworld.extensions
    * @class mapMovement
    **/
-  function setupMapMovement () {
+  function setupMapMovement() {
     const VIEWPORT_OFFSET = 0.2;
     const CHECK_INTERVAL = 20;
     var queue = {};
     var changedCoordinates = {
       width: 0,
-      height: 0
+      height: 0,
     };
     var debug = false;
     var map, currentScale;
@@ -49,8 +49,8 @@
         viewportWorkerOnMessage,
         getViewportWithOffset,
         testRectangleIntersect,
-        _setMap
-      }
+        _setMap,
+      },
     };
     /**
      * Ínitialize as a plugin
@@ -74,8 +74,8 @@
          * @method window.FlaTWorld_mapMovement_subCheck
          * @static
          */
-        window.FlaTWorld_mapMovement_subCheck = function() {
-          map.getPrimaryLayers().forEach( layer => {
+        window.FlaTWorld_mapMovement_subCheck = function () {
+          map.getPrimaryLayers().forEach(layer => {
             var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
             var visibleContainers, invisibleContainers;
 
@@ -98,8 +98,8 @@
          * @method window.FlaTWorld_mapMovement_deactivate
          * @static
          */
-        window.FlaTWorld_mapMovement_deactivate = function() {
-          map.getPrimaryLayers().forEach( layer => {
+        window.FlaTWorld_mapMovement_deactivate = function () {
+          map.getPrimaryLayers().forEach(layer => {
             var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
             var visibleContainers;
 
@@ -121,7 +121,7 @@
 
       viewportArea = map.getViewportArea(true);
 
-      map.getPrimaryLayers().forEach( layer => {
+      map.getPrimaryLayers().forEach(layer => {
         var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
 
         subcontainers.forEach(subcontainer => {
@@ -292,10 +292,10 @@
       var offsetSize = calculateOffset(viewportArea, options);
 
       return {
-        x: Math.round( viewportArea.x - offsetSize ),
-        y: Math.round( viewportArea.y - offsetSize ),
-        width: Math.round( viewportArea.width + offsetSize * 2 ),
-        height: Math.round( viewportArea.height + offsetSize * 2 )
+        x: Math.round(viewportArea.x - offsetSize),
+        y: Math.round(viewportArea.y - offsetSize),
+        width: Math.round(viewportArea.width + offsetSize * 2),
+        height: Math.round(viewportArea.height + offsetSize * 2),
       };
     }
     /**
@@ -315,7 +315,7 @@
      * @method calculateOffset
      */
     function calculateOffset(viewportArea, options = { scale: 1 }) {
-      return Math.abs( viewportArea.width / options.scale * VIEWPORT_OFFSET  );
+      return Math.abs(viewportArea.width / options.scale * VIEWPORT_OFFSET);
     }
     /**
      * @private

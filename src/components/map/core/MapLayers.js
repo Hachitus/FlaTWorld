@@ -39,7 +39,6 @@
         specialLayer = false,
         staticLayer = true,
         selectable = false } = {}) {
-
       super();
       Object.assign(this, coord);
 
@@ -150,7 +149,7 @@
      * */
     getPrimaryLayers({ filters } = {}) {
       return this.children.filter(thisChild => {
-        if ( (filters && !filters.filter(thisChild).length ) || thisChild.specialLayer ) {
+        if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
           return false;
         }
 
@@ -246,7 +245,7 @@
       }
 
       this.UILayer.addChild(object);
-      _UIObjects.push( object );
+      _UIObjects.push(object);
 
       return _UIObjects;
     }
@@ -305,7 +304,6 @@
         specialLayer = false,
         staticLayer = true,
         selectable = false } = {}) {
-
       super(arguments[0]);
 
       this.oldAddChild = super.addChild.bind(this);
@@ -399,16 +397,16 @@
      * @param {Boolean} options.toGlobal                  Do we get the global coordinates or local
      * @return {Object}                                   x, y, width and height returned inside object.
      */
-    getSubcontainerArea (options = { toGlobal: true } ) {
+    getSubcontainerArea(options = { toGlobal: true }) {
       var coordinates;
 
       coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
       return {
-        x: Math.round( coordinates.x ),
-        y: Math.round( coordinates.y ),
-        width: Math.round( this.size.width ),
-        height: Math.round( this.size.height )
+        x: Math.round(coordinates.x),
+        y: Math.round(coordinates.y),
+        width: Math.round(this.size.width),
+        height: Math.round(this.size.height),
       };
     }
     /**
@@ -481,8 +479,8 @@
    */
   function setCorrectSubcontainer(displayObject, parentLayer) {
     var { subcontainersConfig, subcontainerList } = parentLayer;
-    var xIndex = Math.floor( displayObject.x / subcontainersConfig.width );
-    var yIndex = Math.floor( displayObject.y / subcontainersConfig.height );
+    var xIndex = Math.floor(displayObject.x / subcontainersConfig.width);
+    var yIndex = Math.floor(displayObject.y / subcontainersConfig.height);
     var thisSubcontainer;
 
     subcontainerList[xIndex] = subcontainerList[xIndex] || [];
@@ -529,16 +527,16 @@
     var coordinates = {
       x: givenCoordinates.x >= 0 ? givenCoordinates.x - maxDetectionOffset : -maxDetectionOffset,
       y: givenCoordinates.y >= 0 ? givenCoordinates.y - maxDetectionOffset : -maxDetectionOffset,
-      width: ( givenCoordinates.width || 0 ) + maxDetectionOffset * 2,
-      height: ( givenCoordinates.height || 0 ) + maxDetectionOffset * 2
+      width: (givenCoordinates.width || 0) + maxDetectionOffset * 2,
+      height: (givenCoordinates.height || 0) + maxDetectionOffset * 2,
     };
     var allFoundSubcontainers = [];
-    var xIndex = Math.floor( coordinates.x / width );
-    var yIndex = Math.floor( coordinates.y / height );
-    var x2 = coordinates.width ? coordinates.x + coordinates.width :  +coordinates.x;
-    var y2 = coordinates.height ? coordinates.y + coordinates.height :  +coordinates.y;
-    var widthIndex = Math.floor( x2 / width );
-    var heightIndex = Math.floor( y2 / height );
+    var xIndex = Math.floor(coordinates.x / width);
+    var yIndex = Math.floor(coordinates.y / height);
+    var x2 = coordinates.width ? coordinates.x + coordinates.width : +coordinates.x;
+    var y2 = coordinates.height ? coordinates.y + coordinates.height : +coordinates.y;
+    var widthIndex = Math.floor(x2 / width);
+    var heightIndex = Math.floor(y2 / height);
     var subcontainerList = layer.subcontainerList;
 
     for (let thisXIndex = xIndex; thisXIndex <= widthIndex; thisXIndex++) {

@@ -21,7 +21,8 @@
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
     "document": "yuidoc -t node_modules/yuidoc-theme-blue",
     "showDocuments": "echo 'starting instance in http://localhost:9002/' && forever start startDocument.js --uid FlaTWorldDocument",
-    "init": "npm i -g forever && ln -s /usr/bin/nodejs /usr/bin/node && npm install"
+    "init": "npm i -g forever && ln -s /usr/bin/nodejs /usr/bin/node && npm install",
+    "lint": "node_modules/.bin/eslint ."
   },
   "devDependencies": {
     "babel-core": "^6.5.1",

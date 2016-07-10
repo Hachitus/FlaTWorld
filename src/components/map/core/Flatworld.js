@@ -5,7 +5,7 @@
   ------- IMPORT --------
   ----------------------*/
   const { Q, PIXI } = window.flatworld_libraries;
-  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils }  = window.flatworld;
+  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils } = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
@@ -92,14 +92,13 @@
      */
     constructor(mapCanvas = null, {
       bounds = { width: 0, height: 0 },
-      mapSize = { x:0, y:0 },
+      mapSize = { x: 0, y: 0 },
       rendererOptions = { autoResize: true, antialias: false },
       minimapCanvas,
       subcontainers = { width: 0, height: 0, maxDetectionOffset: 0 }, // maxDetectionOffset default set later
       cache = false,
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
-
       /* Check for the required parameters! */
       if (!mapCanvas) {
         throw new Error(this.constructor.name + ' needs canvas element!');
@@ -124,7 +123,7 @@
       }
       /* We handle all the events ourselves through addEventListeners-method on canvas, so destroy pixi native method */
       _renderers.main.plugins.interaction.destroy();
-      
+
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
       ParentLayerConstructor =
@@ -139,9 +138,9 @@
        * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move
        * with the map. Like
        * graphics that show which area or object is currently selected. */
-      _staticLayer = new mapLayers.MapLayer({ name:'staticLayer', coord: { x: 0, y: 0 } });
-      _movableLayer = new mapLayers.MapLayer({ name:'movableLayer', coord: { x: 0, y: 0 } });
-      _minimapLayer = new mapLayers.MapLayer({ name:'minimapLayer', coord: { x: 0, y: 0 } });
+      _staticLayer = new mapLayers.MapLayer({ name: 'staticLayer', coord: { x: 0, y: 0 } });
+      _movableLayer = new mapLayers.MapLayer({ name: 'movableLayer', coord: { x: 0, y: 0 } });
+      _minimapLayer = new mapLayers.MapLayer({ name: 'minimapLayer', coord: { x: 0, y: 0 } });
       _staticLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
@@ -397,8 +396,8 @@
     addLayer(layerOptions) {
       var newLayer;
 
-      if (this.getSubcontainerConfigs () && layerOptions.subcontainers !== false) {
-        layerOptions.subcontainers = this.getSubcontainerConfigs ();
+      if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
+        layerOptions.subcontainers = this.getSubcontainerConfigs();
       }
 
       newLayer = new ParentLayerConstructor(layerOptions);
@@ -508,7 +507,7 @@
     moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
       var realCoordinates = {
         x: Math.round(x / this.getStaticLayer().getZoom()),
-        y: Math.round(y / this.getStaticLayer().getZoom())
+        y: Math.round(y / this.getStaticLayer().getZoom()),
       };
 
       if (absolute) {
@@ -590,7 +589,6 @@
         if (this.plugins.has(plugin[plugin.pluginName])) {
           plugin.init(this);
         }
-
       } catch (e) {
         log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
       }
@@ -608,7 +606,7 @@
       thisPrototype[property] = value;
     }
     /**
-     * Gets object under specific map coordinates. Using subcontainers if they exist, other 
+     * Gets object under specific map coordinates. Using subcontainers if they exist, other
      * methods if not. If you provide type parameter, the method returns only object types that
      * match it.
      *
@@ -630,8 +628,8 @@
     getObjectsUnderArea(globalCoords = { x: 0, y: 0, width: 0, height: 0 }, { filters = null } = {}) {
       /* We need both coordinates later on and it's logical to do the work here */
       const allCoords = {
-        globalCoords: globalCoords,
-        localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
+        globalCoords,
+        localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y)),
       };
       let objects = [];
 
@@ -639,12 +637,12 @@
       allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
       if (this.usesSubcontainers()) {
-        let allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters } );
+        let allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters });
 
         objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
       } else {
         let filteredContainers = this.getMovableLayer().children.filter(thisChild => {
-          if ( (filters && !filters.filter(thisChild).length ) || thisChild.specialLayer ) {
+          if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
             return false;
           }
 
@@ -669,7 +667,7 @@
      * @param {MapDataManipulator} [{}.filters]         The mapDataManipulator instance, that you use for filtering.
      * @return {Object} Basically anything in the map that is used as a layer (not really counting subcontainers).
      */
-    getPrimaryLayers ({ filters } = {}) {
+    getPrimaryLayers({ filters } = {}) {
       return this.getMovableLayer().getPrimaryLayers({ filters });
     }
     /**
@@ -682,7 +680,7 @@
      * @param {MapDataManipulator} [{}.filters]         The mapDataManipulator instance, that you use for filtering.
      * @return {Array}                                  Array of found objects
      * */
-    getAllObjects ({ filters } = {}) {
+    getAllObjects({ filters } = {}) {
       var allObjects, theseObjs;
 
       allObjects = this.getPrimaryLayers({ filters }).map((layer) => {
@@ -722,7 +720,7 @@
     getMapCoordinates() {
       return {
         x: this.getMovableLayer().x,
-        y: this.getMovableLayer().y
+        y: this.getMovableLayer().y,
       };
     }
     /**
@@ -875,11 +873,11 @@
      */
     [_retrieveObjects](allCoords, containers = [], { type = '' } = {}) {
       return this.objectManager.retrieve(allCoords, containers, {
-        type: type,
+        type,
         size: {
           width: allCoords.globalCoords.width,
-          height: allCoords.globalCoords.height
-        }
+          height: allCoords.globalCoords.height,
+        },
       });
     }
     /**
@@ -905,8 +903,8 @@
      * @param {Object} options              Optional options.
      * @return {Array}                        All subcontainers that matched the critea
      */
-    
-    [_getSubcontainersUnderArea](allCoords, { filters } = {} ) {
+
+    [_getSubcontainersUnderArea](allCoords, { filters } = {}) {
       var primaryLayers = this.getPrimaryLayers({ filters });
       var allMatchingSubcontainers = [];
       var thisLayersSubcontainers;
@@ -938,9 +936,9 @@
           }
 
           _privateRenderers.forEach(renderer => renderer.render(renderer.getResponsibleLayer()));
-          
+
           if (this.trackFPSCB) {
-            totalRenderTime += Math.round( Math.abs( renderStart - new Date().getTime() ) );
+            totalRenderTime += Math.round(Math.abs(renderStart - new Date().getTime()));
           }
 
           _drawMapOnNextTick = false;
@@ -949,11 +947,11 @@
           FPSCount++;
 
           if (fpsTimer + ONE_SECOND < new Date().getTime()) {
-            this.trackFPSCB( {
+            this.trackFPSCB({
               FPS: FPSCount,
               FPStime: fpsTimer,
               renderTime: totalRenderTime,
-              drawCount: _renderers.main.drawCount
+              drawCount: _renderers.main.drawCount,
             });
 
             FPSCount = 0;

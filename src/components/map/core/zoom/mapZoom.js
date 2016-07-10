@@ -39,7 +39,7 @@
      */
     var zoomLimit = {
       farther: 0.4,
-      closer : 2.5
+      closer: 2.5,
     };
     /**
      * How much one step of zooming affects
@@ -54,7 +54,7 @@
     ---------------------*/
     return {
       init,
-      pluginName: 'mapZoom'
+      pluginName: 'mapZoom',
     };
 
     /*---------------------
@@ -89,8 +89,8 @@
      * @method setZoomModifier
      * @param {Number} amount           How much one mouse wheel step zooms. Needs to be in between 0 - 0.5
      **/
-    function setZoomModifier (amount) {
-      if (! (amount > 0 || amount <= 0.5) ) {
+    function setZoomModifier(amount) {
+      if (! (amount > 0 || amount <= 0.5)) {
         throw new Error('Wrong zoom modifier! (needs to be >0 and <=0.5, given:' + amount);
       }
       zoomModifier = amount;
@@ -104,7 +104,7 @@
      * @param {Number} farther          (>1) How much one mouse wheel step zooms out
      * @param {Number} closer           (0 - 1) How much one mouse wheel step zooms in
      **/
-    function setZoomLimits (farther, closer) {
+    function setZoomLimits(farther, closer) {
       zoomLimit.farther = farther;
       zoomLimit.closer = closer;
 
@@ -116,7 +116,7 @@
      * @method zoomIn
      * @param {Number} amount how much map is zoomed in
      * */
-    function zoomIn (amount) {
+    function zoomIn(amount) {
       var presentScale = this.getZoom();
       const IS_ZOOM_IN = true;
 
@@ -128,7 +128,7 @@
      * @method zoomOut
      * @param {Number} amount how much map is zoomed out
      * */
-    function zoomOut (amount) {
+    function zoomOut(amount) {
       var presentScale = this.getZoom();
       const IS_ZOOM_IN = false;
 
@@ -195,14 +195,14 @@
     function handleZoomEventMobile(e) {
       var pointers = e.pointers;
       var coords = [{
-          x: pointers[0].pageX,
-          y: pointers[0].pageY
-        },{
-          x: pointers[1].pageX,
-          y: pointers[1].pageY
-        }];
-      var changeX = Math.abs( coords[0].x - coords[1].x );
-      var changeY = Math.abs( coords[0].y - coords[1].y );
+        x: pointers[0].pageX,
+        y: pointers[0].pageY,
+      }, {
+        x: pointers[1].pageX,
+        y: pointers[1].pageY,
+      }];
+      var changeX = Math.abs(coords[0].x - coords[1].x);
+      var changeY = Math.abs(coords[0].y - coords[1].y);
 
       e.preventDefault();
 
@@ -210,7 +210,7 @@
         if (!initialized) {
           difference = {
             x: changeX,
-            y: changeY
+            y: changeY,
           };
           eventListeners.setActivityState('zoom', true);
           initialized = true;
@@ -238,9 +238,8 @@
 
         difference = {
           x: changeX,
-          y: changeY
+          y: changeY,
         };
-
       } catch (ev) {
         console.log('Error! ', ev);
       }
@@ -257,7 +256,7 @@
      * @method _isOverZoomLimit
      **/
     function _isOverZoomLimit(amount, isZoomIn) {
-      if ( (isZoomIn && amount > zoomLimit.closer ) || (!isZoomIn && amount < zoomLimit.farther) ) {
+      if ((isZoomIn && amount > zoomLimit.closer) || (!isZoomIn && amount < zoomLimit.farther)) {
         return true;
       }
 
@@ -271,12 +270,12 @@
     function _calculateCenterMoveCoordinates(scale, isZoomIn) {
       var windowSize = utils.resize.getWindowSize();
       var halfWindowSize = {
-        x: ( windowSize.x / 2 ) / scale,
-        y: ( windowSize.y / 2 ) / scale
+        x: (windowSize.x / 2) / scale,
+        y: (windowSize.y / 2) / scale,
       };
       var realMovement = {
-        x: ( halfWindowSize.x ) * ( ( isZoomIn ? -zoomModifier : zoomModifier) ),
-        y: ( halfWindowSize.y ) * ( ( isZoomIn ? -zoomModifier : zoomModifier) )
+        x: (halfWindowSize.x) * ((isZoomIn ? -zoomModifier : zoomModifier)),
+        y: (halfWindowSize.y) * ((isZoomIn ? -zoomModifier : zoomModifier)),
       };
 
       return realMovement;
@@ -290,8 +289,8 @@
     function _zoom(map, presentScale, amount, isZoomIn) {
       var newScale;
 
-      if ( !_isOverZoomLimit(presentScale, isZoomIn) ) {
-        newScale = map.setZoom( amount ? presentScale + amount : presentScale + zoomModifier );
+      if (!_isOverZoomLimit(presentScale, isZoomIn)) {
+        newScale = map.setZoom(amount ? presentScale + amount : presentScale + zoomModifier);
       }
 
       return newScale;

@@ -26,7 +26,7 @@
    * @namespace flatworld.extensions.minimaps
    * @class pixelizedMinimap
    **/
-  function setupPixelizedMinimap () {
+  function setupPixelizedMinimap() {
     var paddingX = 0;
     var paddingY = 0;
     var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
@@ -37,7 +37,7 @@
       initMinimap,
       _testObject: {
 
-      }
+      },
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
@@ -66,7 +66,7 @@
       paddingY = yPadding;
       minimap.minimapSize = minimapSize;
       coordinateConverterCB = coordinateConvCB;
-      //utils.mouse.disableContextMenu(map.getRenderer('minimap').view);
+      // utils.mouse.disableContextMenu(map.getRenderer('minimap').view);
       setMinimapUI(UIImage);
       setupBackgroundLayer(staticCB);
       setupDynamicLayer(dynamicCB);
@@ -94,7 +94,7 @@
         type: 'filter',
         object: 'layer',
         property: 'staticLayer',
-        value: true
+        value: true,
       });
       var backgroundContainer = createMinimapLayer();
 
@@ -111,7 +111,7 @@
         type: 'filter',
         object: 'object',
         property: 'static',
-        value: false
+        value: false,
       });
       dynamicContainer = createMinimapLayer();
 
@@ -146,7 +146,7 @@
     }
     function moveViewport(e) {
       var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(e);
-      var mapCoordinates = new PIXI.Point( e.srcEvent.layerX, e.srcEvent.layerY);
+      var mapCoordinates = new PIXI.Point(e.srcEvent.layerX, e.srcEvent.layerY);
 
       globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, map.minimapCanvas);
 
@@ -177,7 +177,7 @@
         },
         off: () => {
           hammer.on('tap', activeCB);
-        }
+        },
       };
 
       eventListeners.setDetector('minimapClicked', minimapClickDetector.on, minimapClickDetector.off);
@@ -195,7 +195,7 @@
      * @param {Integer} width
      * @param {Integer} height
      */
-    function _setMinimapArea( x, y, width, height ) {
+    function _setMinimapArea(x, y, width, height) {
       var _minimapRenderer = map.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);

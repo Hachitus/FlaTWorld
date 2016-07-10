@@ -57,15 +57,15 @@
     function tapListener(e) {
       const globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
       const getData = {
-        allData: function (object) {
+        allData(object) {
           return object.data.typeData;
-        }
+        },
       };
       const containerFilter = new MapDataManipulator({
         type: 'filter',
         object: 'layer',
         property: 'name',
-        value: 'unitLayer'
+        value: 'unitLayer',
       });
       var objects;
 
@@ -101,12 +101,12 @@
         type: 'filter',
         object: 'layer',
         property: 'name',
-        value: 'unitLayer'
+        value: 'unitLayer',
       });
       var getData = {
-        allData: function (object) {
+        allData(object) {
           return object.data.typeData;
-        }
+        },
       };
       var globalCoords, selectedObject;
 

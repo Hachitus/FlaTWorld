@@ -77,12 +77,12 @@
      * @param {Integer} size.width                  Width (in pixels)
      * @param {Integer} size.height                 Height (in pixels)
      */
-    retrieve(coords, size = { width: 0, height: 0 } ) {
+    retrieve(coords, size = { width: 0, height: 0 }) {
       const hitDimensions = {
         x: coords.x,
         y: coords.y,
         width: size.width,
-        height: size.height
+        height: size.height,
       };
       var objects = [];
 
@@ -144,7 +144,7 @@
      * @return {Object}                             Found object
      */
     findObject(coords, size, data) {
-      var foundObject = this.retrieve(coords, size).filter(function(object) {
+      var foundObject = this.retrieve(coords, size).filter(function (object) {
         return object.data === data ? true : false;
       });
 
@@ -168,7 +168,7 @@
    * @param  {Object} data                Extra data stored for the quadtree object
    * @return {Object}                     Added quadtree object
    */
-  function _creteQuadtreeObject(coords, size = {width:0, height:0}, data = undefined) {
+  function _creteQuadtreeObject(coords, size = { width: 0, height: 0 }, data = undefined) {
     var objToAdd = coords;
 
     if (coords.x === undefined && coords.y === undefined) {

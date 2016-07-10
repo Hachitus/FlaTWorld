@@ -5,7 +5,7 @@
   --------- API ---------
   ----------------------*/
   window.flatworld.utils.shapes = {
-    createSquare
+    createSquare,
   };
 
   function createSquare() {
