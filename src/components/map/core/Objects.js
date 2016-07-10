@@ -157,6 +157,8 @@
         newSprite.position = Object.assign({}, this.position);
       }
 
+      newSprite.constructor.prototype = this.constructor.prototype;
+
       return newSprite;
     }
   }

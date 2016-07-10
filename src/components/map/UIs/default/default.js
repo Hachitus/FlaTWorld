@@ -190,7 +190,6 @@
       var clonedObject;
 
       clonedObject = object.clone(renderer);
-      clonedObject.__proto__ = object.__proto__;
 
       var coord = object.toGlobal(new PIXI.Point(0, 0));
       coord = movableLayer.toLocal(coord);
