@@ -1,6 +1,4 @@
 (function () {
-  'use strict';
-
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
@@ -19,11 +17,14 @@
   const _getSubcontainersUnderArea = Symbol('_getSubcontainersUnderArea');
   const _defaultTick = Symbol('_defaultTick');
   const _addObjectToUIlayer = Symbol('_addObjectToUIlayer');
+  const _renderers = {};
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
-  let _renderers = {};
   let _privateRenderers;
-  let _staticLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
+  let _staticLayer;
+  let _movableLayer;
+  let _minimapLayer;
+  let ParentLayerConstructor;
 
   /*---------------------
   --------- API ---------
@@ -95,13 +96,17 @@
       mapSize = { x: 0, y: 0 },
       rendererOptions = { autoResize: true, antialias: false },
       minimapCanvas,
-      subcontainers = { width: 0, height: 0, maxDetectionOffset: 0 }, // maxDetectionOffset default set later
+      subcontainers = {
+        width: 0,
+        height: 0,
+        maxDetectionOffset: 0, // maxDetectionOffset default set later
+      },
       cache = false,
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
       /* Check for the required parameters! */
       if (!mapCanvas) {
-        throw new Error(this.constructor.name + ' needs canvas element!');
+        throw new Error(`${this.constructor.name} needs canvas element!`);
       }
       /* If the constructor was passed mapCanvas as a string and not as an Element, we get the element */
       if (typeof mapCanvas === 'string') {
@@ -117,7 +122,9 @@
       _renderers.main.getResponsibleLayer = this.getStaticLayer;
       /* Create PIXI renderer for minimap */
       if (minimapCanvas) {
-        _renderers.minimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
+        _renderers.minimap = minimapCanvas ?
+          new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) :
+          undefined;
         _renderers.minimap.plugins.interaction.destroy();
         _renderers.minimap.getResponsibleLayer = this.getMinimapLayer;
       }
@@ -377,9 +384,14 @@
      *  Default false
      * @return {MapLayer}            The created UI layer
      **/
-    createSpecialLayer(name = 'default special layer', options = { coord: { x: 0, y: 0 }, toLayer: false }) {
-      var coord = options.coord || { x: 0, y: 0 };
-      var layer = new mapLayers.MapLayer(name, coord);
+    createSpecialLayer(name = 'default special layer',
+      options = {
+        coord: {
+          x: 0,
+          y: 0 },
+        toLayer: false }) {
+      const coord = options.coord || { x: 0, y: 0 };
+      const layer = new mapLayers.MapLayer(name, coord);
 
       layer.specialLayer = true;
       options.toLayer && options.toLayer.addChild(layer);
@@ -394,7 +406,7 @@
      * @return {MapLayer}          created MapLayer instance
      **/
     addLayer(layerOptions) {
-      var newLayer;
+      let newLayer;
 
       if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
         layerOptions.subcontainers = this.getSubcontainerConfigs();
@@ -505,7 +517,7 @@
      * @todo  the informcoordinates away and fix the issue they tried to fix!
      **/
     moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
-      var realCoordinates = {
+      const realCoordinates = {
         x: Math.round(x / this.getStaticLayer().getZoom()),
         y: Math.round(y / this.getStaticLayer().getZoom()),
       };
@@ -558,7 +570,7 @@
      * @return {Promise}                Promise. If string are provided resolved those with System.import, otherwise resolves immediately.
      * */
     activatePlugins(pluginsArray = []) {
-      var allPromises = [];
+      const allPromises = [];
 
       /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
       pluginsArray.forEach(plugin => {
@@ -637,11 +649,11 @@
       allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
       if (this.usesSubcontainers()) {
-        let allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters });
+        const allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters });
 
         objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
       } else {
-        let filteredContainers = this.getMovableLayer().children.filter(thisChild => {
+        const filteredContainers = this.getMovableLayer().children.filter(thisChild => {
           if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
             return false;
           }
@@ -681,13 +693,14 @@
      * @return {Array}                                  Array of found objects
      * */
     getAllObjects({ filters } = {}) {
-      var allObjects, theseObjs;
+      let allObjects;
+      let theseObjs;
 
       allObjects = this.getPrimaryLayers({ filters }).map((layer) => {
-        var allObjs;
+        let allObjs;
 
         if (layer.hasSubcontainers()) {
-          let subcontainers = generalUtils.arrays.flatten2Levels(layer.getSubcontainers());
+          const subcontainers = generalUtils.arrays.flatten2Levels(layer.getSubcontainers());
 
           allObjs = subcontainers.map((subContainer) => {
             theseObjs = subContainer.children.map((obj) => {
@@ -761,11 +774,7 @@
      * @return {PIXI.Renderer}
      */
     getRenderer(type) {
-      if (type === 'minimap') {
-        return _renderers.minimap;
-      } else {
-        return _renderers.main;
-      }
+      return type === 'minimap' ? _renderers.minimap : _renderers.main;
     }
     /**
      * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
@@ -905,9 +914,9 @@
      */
 
     [_getSubcontainersUnderArea](allCoords, { filters } = {}) {
-      var primaryLayers = this.getPrimaryLayers({ filters });
-      var allMatchingSubcontainers = [];
-      var thisLayersSubcontainers;
+      const primaryLayers = this.getPrimaryLayers({ filters });
+      let allMatchingSubcontainers = [];
+      let thisLayersSubcontainers;
 
       primaryLayers.forEach(layer => {
         thisLayersSubcontainers = layer.getSubcontainersByCoordinates(allCoords.localCoords);
@@ -927,9 +936,10 @@
       const ONE_SECOND = 1000;
       let FPSCount = 0;
       let fpsTimer = new Date().getTime();
-      let renderStart, totalRenderTime;
+      let renderStart;
+      let totalRenderTime;
 
-      PIXI.ticker.shared.add(function () {
+      PIXI.ticker.shared.add(() => {
         if (_drawMapOnNextTick) {
           if (this.trackFPSCB) {
             renderStart = new Date().getTime();
@@ -959,7 +969,7 @@
             fpsTimer = new Date().getTime();
           }
         }
-      }.bind(this));
+      });
     }
     [_addObjectToUIlayer](layerType, object, name) {
       switch (layerType) {
@@ -988,23 +998,14 @@
   function cacheLayers(cacheOrNot, hasSubcontainers) {
     if (hasSubcontainers) {
       _movableLayer.children.forEach(child => {
-        if (!child.isCached()) {
-          return false;
-        }
-        var subcontainers = child.getSubcontainers();
+        if (child.isCached()) {
+          const subcontainers = child.getSubcontainers();
 
-        subcontainers.forEach(subcontainer => {
-          subcontainer.setCache(cacheOrNot);
-        });
+          subcontainers.forEach(subcontainer => subcontainer.setCache(cacheOrNot));
+        }
       });
     } else {
-      _movableLayer.children.forEach(child => {
-        if (!child.isCached()) {
-          return false;
-        }
-
-        child.setCache(cacheOrNot);
-      });
+      _movableLayer.children.forEach(child => child.isCached() && child.setCache(cacheOrNot));
     }
   }
 
