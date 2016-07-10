@@ -7,9 +7,6 @@ module.exports = {
     "worker": true,
     "es6": true
   },
-  "globals": {
-    "PIXI": true
-  },
   "rules": {
     "no-use-before-define": "off",
     "no-param-reassign": "off",
