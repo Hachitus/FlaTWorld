@@ -59,7 +59,9 @@
      * After plugin has been initialized by the flatworld, you must still call initFogOfWar to
      * start showing it.
      *
-     * @todo the -200 offset is quite crappy, we should make some universal thing in utils, that
+     * @todo the offsets are really bad! For some reason they are needed, I don't know where the
+     * issue lies :(. We probably need an offset for the renderer in the end anyway, but now it
+     * doesn't even work properly without them.
      * can be used here and in getViewportArea-method etc.
      *
      * @method init
@@ -70,10 +72,10 @@
       map.activateFogOfWar = activateFogOfWar;
       const mapRenderer = map.getRenderer();
       const coordinates = {
-        x: -200,
-        y: -200,
-        width: (mapRenderer.width + 200 + (mapRenderer.width / 2)) * map.getZoom(),
-        height: (mapRenderer.height + 200 + (mapRenderer.height / 2)) * map.getZoom(),
+        x: 0,
+        y: 0,
+        width: (mapRenderer.width + 0 + (mapRenderer.width / 2)) * map.getZoom(),
+        height: (mapRenderer.height + 0 + (mapRenderer.height / 2)) * map.getZoom(),
       };
       const rendererOptions = Object.assign(
         baseRendererOptions, {
@@ -82,12 +84,12 @@
 
       setupRenderer(coordinates, rendererOptions);
 
-      maskContainer = map.createSpecialLayer('FoWLayer');
+      maskContainer = map.createSpecialLayer('FoWMaskLayer');
       maskContainer.x = coordinates.x;
       maskContainer.y = coordinates.y;
     }
 
-    function activateFogOfWar(cb, options = { alpha: 0.8 }, testing = false) {
+    function activateFogOfWar(cb, options = { alpha: 0.8 }) {
       alpha = options.alpha;
       FoWCB = cb;
 
@@ -103,7 +105,7 @@
 
       map.getMovableLayer().updateTransform();
       const spriteArray = getFoWObjectArray(FoWCB);
-console.log("aaa", spriteArray[0].x, spriteArray[0].y)
+
       if (spriteArray.length > 0) {
         maskContainer.addChild(...spriteArray);
       }
@@ -117,14 +119,19 @@ console.log("aaa", spriteArray[0].x, spriteArray[0].y)
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
-      return getCorrectObjects(filter).slice(0,1).map(object => cb(calculateCorrectCoordinates(object)));
+      return getCorrectObjects(filter).map(object => cb(calculateCorrectCoordinates(object)));
     }
-
+    /**
+     * @todo this artificial -119 HAS to be taken away
+     */
     function calculateCorrectCoordinates(object) {
-      const coordinates = object.toGlobal(new PIXI.Point(-119, 0));
+      const coordinates = object.toGlobal(new PIXI.Point(0, 0));
 
       coordinates.x = Math.round(coordinates.x);
       coordinates.y = Math.round(coordinates.y);
+      coordinates.anchor = object.anchor;
+      coordinates.pivot = object.pivot;
+      coordinates.scale = map.getZoom();
 
       return coordinates;
     }
@@ -134,6 +141,8 @@ console.log("aaa", spriteArray[0].x, spriteArray[0].y)
      * @return {Array}                        Array of objects to be used for creating FoW
      */
     function getCorrectObjects(filter) {
+      console.log("MAP COORD", map.getViewportArea(true, VIEWPORT_MULTIPLIER),
+        { filters: filter });
       return map.getObjectsUnderArea(
         map.getViewportArea(false, VIEWPORT_MULTIPLIER),
         { filters: filter });
@@ -187,13 +196,8 @@ console.log("aaa", spriteArray[0].x, spriteArray[0].y)
       mapEvents.subscribe('mapResized', () => {
         utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
       });
-      mapEvents.subscribe('mapZoomed', zoomFoWLayer);
       mapEvents.subscribe('mapResized', refreshFoW);
       mapEvents.subscribe('mapMoved', refreshFoW);
-    }
-
-    function zoomFoWLayer(ev) {
-      maskContainer.setZoom(ev.customData[0].newScale);
     }
   }
 }());

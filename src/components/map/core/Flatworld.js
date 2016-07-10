@@ -426,42 +426,35 @@
       return this.subcontainersConfig;
     }
     /**
-     * Get the size of the area that is shown to the player. More or less the area of the browser window.
+     * Get the size of the area that is shown to the player. More or less the area of the browser
+     * window.
      *
      * @method getViewportArea
-     * @param  {Boolean} isLocal                                                  Do we want to use Map coordinates or global / canvas
+     * @param  {Boolean} isLocal                                                  Do we want to
+     * use Map coordinates or global / canvas
      * coordinates. Default = false
-     * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and y-coordinates and the width and height of the
+     * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and
+     * y-coordinates and the width and height of the
      * viewport
      **/
     getViewportArea(isLocal = false, multiplier = 0) {
-      var leftSideCoords = new PIXI.Point(0, 0);
-      var rightSideCoords = new PIXI.Point(window.innerWidth,window.innerHeight);
-      var layer, rightSide, leftSide;
+      const layer = isLocal ? this.getMovableLayer() : this.getStaticLayer();
+      let leftSideCoords = new PIXI.Point(0, 0);
+      let rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
 
       if (isLocal) {
-        layer = this.getMovableLayer();
-        let rightCoords = layer.toLocal(rightSideCoords);
-        let leftCoords = layer.toLocal(leftSideCoords);
-        leftSide = {
-          x: leftCoords.x,
-          y: leftCoords.y,
-        };
-        rightSide = {
-          x2: rightCoords.x,
-          y2: rightCoords.y,
-        };
-      } else {
-        layer = this.getStaticLayer();
-        leftSide = {
-          x: leftSideCoords.x,
-          y: leftSideCoords.y,
-        };
-        rightSide = {
-          x2: rightSideCoords.x,
-          y2: rightSideCoords.y,
-        };
+        rightSideCoords = layer.toLocal(rightSideCoords);
+        leftSideCoords = layer.toLocal(leftSideCoords);
       }
+
+      const leftSide = {
+        x: leftSideCoords.x,
+        y: leftSideCoords.y,
+      };
+      const rightSide = {
+        x2: rightSideCoords.x,
+        y2: rightSideCoords.y,
+      };
 
       const offset = {
         x: (Math.abs(rightSide.x2) - leftSide.x) * multiplier,

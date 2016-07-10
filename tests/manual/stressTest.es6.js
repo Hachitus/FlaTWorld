@@ -341,21 +341,35 @@
           xPadding: X_PADDING, yPadding: Y_PADDING,
         });
 
-      map.activateFogOfWar((coordinates) => {
-        // var circle = new PIXI.Graphics();
+      /* ----------- FOW stuff ------------ */
+      const textureRenderer = new PIXI.WebGLRenderer(500, 500, {
+        transparent: true,
+        autoResize: true,
+      });
+      let fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
+      let currentScale = 1;
+      /*
+      mapEvents.subscribe('mapZoomed', (ev) => {
+        const textureSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
+        const cont = new PIXI.Container();
+        cont.addChild(textureSprite);
+        currentScale = ev.customData[0].newScale;
+        cont.scale.set(ev.customData[0].newScale, ev.customData[0].newScale);
+        textureRenderer.render(cont);
+        fowTexture = new PIXI.Texture.fromCanvas(textureRenderer.view);
+      });
+      */
 
-        // circle.beginFill(0xFFFF00);
-        // circle.lineStyle(5, 0xFF0000);
-        // circle.drawCircle(coordinates.x, coordinates.y, 100);
-        // circle.endFill();
+      map.activateFogOfWar((data) => {
+        const unitViewSprite = new PIXI.Sprite(fowTexture);
 
-        // return circle;
-        let unitViewSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
-        unitViewSprite.x = coordinates.x;
-        unitViewSprite.y = coordinates.y;
+        unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
+        unitViewSprite.scale.set(data.scale, data.scale);
+        unitViewSprite.position.set(data.x, data.y);
 
         return unitViewSprite;
       });
+      /* ----------- FOW stuff END------------ */
 
       /* Activate the fullscreen button: */
       document.getElementById('testFullscreen').addEventListener('click', function () {
