@@ -635,8 +635,8 @@
       };
       let objects = [];
 
-      allCoords.localCoords.width = globalCoords.width;
-      allCoords.localCoords.height = globalCoords.height;
+      allCoords.localCoords.width = globalCoords.width / this.getZoom();
+      allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
       if (this.usesSubcontainers()) {
         let allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters } );

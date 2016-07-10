@@ -141,8 +141,6 @@
      * @return {Array}                        Array of objects to be used for creating FoW
      */
     function getCorrectObjects(filter) {
-      console.log("MAP COORD", map.getViewportArea(true, VIEWPORT_MULTIPLIER),
-        { filters: filter });
       return map.getObjectsUnderArea(
         map.getViewportArea(false, VIEWPORT_MULTIPLIER),
         { filters: filter });
