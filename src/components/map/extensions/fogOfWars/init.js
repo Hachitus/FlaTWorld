@@ -1,0 +1,1 @@
+window.flatworld.extensions.fogOfWars = {};

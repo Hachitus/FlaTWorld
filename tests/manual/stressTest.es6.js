@@ -16,6 +16,7 @@
   var mapDrag = window.flatworld.extensions.mapDrag;
   var hexagons = window.flatworld.extensions.hexagons;
   var mapMovement = window.flatworld.extensions.mapMovement;
+  var simpleFogOfWar = window.flatworld.extensions.fogOfWars.simpleFogOfWar;
   var pixelizedMinimap = window.flatworld.extensions.minimaps.pixelizedMinimap;
   var hexaUtils = window.flatworld.extensions.hexagons.utils;
   var Sound = window.flatworld.Sound;
@@ -32,7 +33,8 @@
   var HEXAGON_RADIUS = gameData.hexagonRadius;
   var BASE_URL = '/requests/';
   var X_PADDING = 20;
-  var Y_PADDING = 20;
+  const Y_PADDING = 20;
+  const FOW_IMAGE = '/testAssets/images/FoW/FoWTest.png';
 
   var minimapCheckbox = document.getElementById('minimap');
   var minimapCanvas;
@@ -161,6 +163,7 @@
       mapDrag,
       hexagons.selectHexagonObject,
       mapMovement,
+      simpleFogOfWar
     ];
     var sound = new Sound();
     var preload;
@@ -187,6 +190,7 @@
     preload = new Preload( '', { crossOrigin: false } );
     preload.addResource( graphicData.terrainBase.json );
     preload.addResource( graphicData.unit.json );
+    preload.addResource( FOW_IMAGE );
     loadSounds();
     mapEvents.subscribe('objectsSelected', unitSelectedSound);
 
@@ -334,12 +338,52 @@
       minimapViewport.position = new PIXI.Point(X_PADDING, Y_PADDING);
 
       map.initMinimap(minimapUIImage, minimapSize, staticCB, dynamicCB, coordinateConverterCB, minimapViewport, {
-          xPadding: X_PADDING, yPadding: Y_PADDING
+          xPadding: X_PADDING, yPadding: Y_PADDING,
         });
+
+      /* ----------- FOW stuff ------------ */
+      const textureRenderer = new PIXI.WebGLRenderer(500, 500, {
+        transparent: true,
+        autoResize: true,
+      });
+      let fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
+      let currentScale = 1;
+      /*
+      mapEvents.subscribe('mapZoomed', (ev) => {
+        const textureSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
+        const cont = new PIXI.Container();
+        cont.addChild(textureSprite);
+        currentScale = ev.customData[0].newScale;
+        cont.scale.set(ev.customData[0].newScale, ev.customData[0].newScale);
+        textureRenderer.render(cont);
+        fowTexture = new PIXI.Texture.fromCanvas(textureRenderer.view);
+      });
+      */
+
+      map.activateFogOfWar((data) => {
+        const unitViewSprite = new PIXI.Sprite(fowTexture);
+
+        unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
+        unitViewSprite.scale.set(data.scale, data.scale);
+        unitViewSprite.position.set(data.x, data.y);
+
+        return unitViewSprite;
+      });
+      /* ----------- FOW stuff END------------ */
 
       /* Activate the fullscreen button: */
       document.getElementById('testFullscreen').addEventListener('click', function () {
         map.setFullScreen();
+      });
+
+      document.getElementById('showFowCanvas').addEventListener('click', () => {
+        const coveringOverlay = new PIXI.Graphics();
+        coveringOverlay.beginFill(0xFFFFFF, 1);
+        coveringOverlay.drawRect(0, 0, 800, 800);
+        coveringOverlay.endFill();
+        simpleFogOfWar.getMaskContainer().children.shift(coveringOverlay);
+        simpleFogOfWar.getFoWRenderer().render(simpleFogOfWar.getMaskContainer());
+        document.body.appendChild(simpleFogOfWar.getFoWRenderer().view);
       });
 
       return map;
@@ -416,31 +460,33 @@
       var x = coordinates.x;
       var y = coordinates.y;
 
-      layerData.objectGroups.push({
-        type: 'ObjectUnit',
-        name: 'Unit', // For quadTrees and debugging
-        typeImageData: 'unit',
-        objects: [{
-          objType: Math.floor(Math.random() * typeCount),
-          name: 'random_' + Math.random(),
-          _id: Math.random(),
-          coord:{
-            x: x,
-            y: y
-          },
-          data: {
-            playerID: Math.floor(Math.random() * 10),
-            hp: Math.floor(Math.random() * 100),
-            someStuff: 'jalajajajajaja' + Math.random(),
-            someStuff2: 'jalajajajajaja' + Math.random(),
-            someStuff3: 'jalajajajajaja' + Math.random(),
-            someStuff4: 'jalajajajajaja' + Math.random(),
-            someStuff5: 'jalajajajajaja' + Math.random(),
-            someStuff6: ('jalajajajajaja' + Math.random()).repeat(30)
-          },
-          lastSeenTurn:Math.floor(Math.random() * 10)
-        }]
-      });
+      if (Math.random() > 0.6) {
+        layerData.objectGroups.push({
+          type: 'ObjectUnit',
+          name: 'Unit', // For quadTrees and debugging
+          typeImageData: 'unit',
+          objects: [{
+            objType: Math.floor(Math.random() * typeCount),
+            name: 'random_' + Math.random(),
+            _id: Math.random(),
+            coord:{
+              x: x,
+              y: y
+            },
+            data: {
+              playerID: Math.floor(Math.random() * 10),
+              hp: Math.floor(Math.random() * 100),
+              someStuff: 'jalajajajajaja' + Math.random(),
+              someStuff2: 'jalajajajajaja' + Math.random(),
+              someStuff3: 'jalajajajajaja' + Math.random(),
+              someStuff4: 'jalajajajajaja' + Math.random(),
+              someStuff5: 'jalajajajajaja' + Math.random(),
+              someStuff6: ('jalajajajajaja' + Math.random()).repeat(30)
+            },
+            lastSeenTurn:Math.floor(Math.random() * 10)
+          }]
+        });
+      }
     });
 
     return layerData;

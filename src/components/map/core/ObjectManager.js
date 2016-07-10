@@ -1,6 +1,4 @@
 (function () {
-  'use strict';
-
   /*---------------------
   --------- API ---------
   ----------------------*/
@@ -15,8 +13,7 @@
      * @todo It might be a good idea to make the hitDetection more extensive. Now it just uses point or rectangle / bounds to detect hits.
      * It could use sprites or forms.
      */
-    constructor() {
-    }
+    constructor() {}
     /**
      * Retrieve objects under certain coordinates or area, if size is given. Uses subcontainers when used, no other options yet.
      *
@@ -39,27 +36,21 @@
      *
      * @todo add checks for rectangles. Now we can only check with width = 0 && height = 0
      */
-    retrieve(allCoords, options = { type: false, subcontainers: [], size: { width: 0, height: 0 } }) {
-      var { subcontainers, size, type } = options;
+    retrieve(allCoords, containers = [], options = { type: undefined, size: { width: 0, height: 0 } }) {
+      var { size, type } = options;
       var { globalCoords } = allCoords;
       var foundObjs = [];
 
-      if (subcontainers.length > 0) {
-        subcontainers.forEach(container => {
+      if (containers.length > 0) {
+        containers.forEach(container => {
           foundObjs = foundObjs.concat(container.children);
         });
 
         if (!size.width || !size.height) {
-          foundObjs = foundObjs.filter(obj => {
-            if (type && type !== obj.type) {
-              return false;
-            }
-
-            let isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
-
-            return isHit;
-          });
+          foundObjs = filterChildren(globalCoords, foundObjs, type);
         }
+      } else {
+        return [];
       }
 
       return foundObjs;
@@ -68,3 +59,15 @@
 
   window.flatworld.ObjectManager = ObjectManager;
 })();
+
+function filterChildren(globalCoords, children = [], type = undefined) {
+  return children.filter(obj => {
+    if (type && type !== obj.type) {
+      return false;
+    }
+
+    const isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
+
+    return isHit;
+  });
+}

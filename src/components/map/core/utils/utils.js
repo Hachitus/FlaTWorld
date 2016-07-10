@@ -19,10 +19,10 @@
       disableContextMenu,
       eventData: {
         getPointerCoords,
-        getHAMMERPointerCoords
+        getHAMMERPointerCoords,
       },
       coordinatesFromGlobalToRelative,
-      eventMouseCoords
+      eventMouseCoords,
     };
 
     /**
@@ -142,7 +142,8 @@
     return {
       toggleFullScreen,
       setToFullSize,
-      getWindowSize
+      getWindowSize,
+      resizePIXIRenderer,
     };
 
     /**
@@ -213,8 +214,22 @@
     function getWindowSize() {
       return {
         x: window.innerWidth,
-        y: window.innerHeight
+        y: window.innerHeight,
       };
+    }
+    /**
+     * Resizes the PIXI renderer to the current most wide and high element status. Basically
+     * canvas size === window size.
+     *
+     * @static
+     * @method resizeRenderer
+     */
+    function resizePIXIRenderer(renderer, drawOnNextTick) {
+      const windowSize = getWindowSize();
+
+      renderer.autoResize = true; // eslint-disable-line no-param-reassign
+      renderer.resize(windowSize.x, windowSize.y);
+      drawOnNextTick();
     }
   }
   /**
@@ -253,7 +268,8 @@
 
     return {
       pixelEpsilonEquality: epsilonEquality,
-      fullsizeCanvasCSS
+      fullsizeCanvasCSS,
+      requireParameter,
     };
 
     /**
@@ -274,6 +290,15 @@
       canvasElement.style.display = 'block';
       canvasElement.style.left = '0px';
       canvasElement.style.top = '0px';
+    }
+    /**
+     * Helper for creating required parameters
+     *
+     * @param {String} className Name of the function / class used
+     * @param {String} paramName Name of the parameter that is required
+     */
+    function requireParameter(className, paramName) {
+      throw new Error(`Function '${className}' requires parameter ${paramName}`);
     }
   }
 })();

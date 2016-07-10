@@ -49,6 +49,8 @@ var config = {
     './src/components/map/extensions/mapMovement/mapMovement.js',
     './src/components/map/extensions/minimaps/init.js',
     './src/components/map/extensions/minimaps/*.js',
+    './src/components/map/extensions/fogOfWars/init.js',
+    './src/components/map/extensions/fogOfWars/*.js',
     './src/components/map/UIs/default/init.js',
     './src/components/map/UIs/default/utils/*.js',
     './src/components/map/UIs/default/layout/*.js',

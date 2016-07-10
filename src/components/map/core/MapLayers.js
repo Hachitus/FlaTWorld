@@ -87,7 +87,7 @@
      * @return {Boolean} true = uses subcontainers.
      */
     hasSubcontainers() {
-      return this.subcontainersConfig ? true : false;
+      return (this.subcontainersConfig.width && this.subcontainersConfig.height) ? true : false;
     }
     /**
      * Is this layer cached at the moment or not.
@@ -301,7 +301,7 @@
     constructor({
         name = '',
         coord = { x: 0, y: 0 },
-        subcontainers = false,
+        subcontainers = { width: 0, height: 0, maxDetectionOffset: 100 },
         specialLayer = false,
         staticLayer = true,
         selectable = false } = {}) {
@@ -315,7 +315,8 @@
       this.specialLayer = specialLayer;
     }
     /**
-     * We override the PIXIs own addchild functionality. Since we need to support subcontainers in addChild. We check subcontainers and
+     * We override the PIXIs own addchild functionality. Since we need to support subcontainers in
+     * addChild. We check subcontainers and
      * then we call the original (PIXIs) addChild
      *
      * @method addChild
@@ -323,8 +324,7 @@
      */
     addChild(displayObject) {
       if (this.hasSubcontainers()) {
-        let correctContainer;
-        correctContainer = setCorrectSubcontainer(displayObject, this);
+        const correctContainer = setCorrectSubcontainer(displayObject, this);
         this.oldAddChild(correctContainer);
       } else {
         this.oldAddChild(displayObject);
@@ -337,7 +337,7 @@
      *
      * @method getSubcontainerConfigs
      */
-    getSubcontainerConfigs () {
+    getSubcontainerConfigs() {
       return this.subcontainersConfig;
     }
     /**
@@ -467,7 +467,10 @@
   ------- PRIVATE -------
   ----------------------*/
   /**
-   * Helper function for setting subcontainers to parent containers
+   * Helper function for setting subcontainers to parent containers. Adds subcontainers when
+   * needed. Subcontainers are not and can not be initialized at the start as we won't know the
+   * size of the parent container. Container is always dynamic in size.
+   *
    *
    * @method setCorrectSubcontainer
    * @private
@@ -490,13 +493,13 @@
         x: xIndex * subcontainersConfig.width,
         y: yIndex * subcontainersConfig.height,
         width: subcontainersConfig.width,
-        height: subcontainersConfig.height
+        height: subcontainersConfig.height,
       });
 
       subcontainerList[xIndex][yIndex] = thisSubcontainer;
       thisSubcontainer.x = xIndex * subcontainersConfig.width;
       thisSubcontainer.y = yIndex * subcontainersConfig.height;
-      thisSubcontainer.visible = subcontainersConfig.isHiddenByDefault ? false : true;
+      thisSubcontainer.visible = !subcontainersConfig.isHiddenByDefault;
     }
 
     displayObject.x -= thisSubcontainer.x;
@@ -522,7 +525,7 @@
    * @return {Array}                                Array of found subcontainers.
    */
   function _getClosestSubcontainers(layer, givenCoordinates) {
-    var { width, height, maxDetectionOffset } = layer.getSubcontainerConfigs ();
+    var { width, height, maxDetectionOffset } = layer.getSubcontainerConfigs();
     var coordinates = {
       x: givenCoordinates.x >= 0 ? givenCoordinates.x - maxDetectionOffset : -maxDetectionOffset,
       y: givenCoordinates.y >= 0 ? givenCoordinates.y - maxDetectionOffset : -maxDetectionOffset,

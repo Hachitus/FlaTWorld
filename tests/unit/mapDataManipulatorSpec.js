@@ -1,48 +1,53 @@
-/* global describe, beforeEach, it, expect */
-'use strict';
-
-describe('mapDataManipulator => ', function () {
+describe('mapDataManipulator => ', () => {
   const MapDataManipulator = window.flatworld.MapDataManipulator;
   const mapLayers = window.flatworld.mapLayers;
   const objects = window.flatworld.objects;
-  var layerRules, objectRules, testLayers, testObjects;
+  const utils = window.flatworld.utils;
+  let layerRules;
+  let objectRules;
+  let testLayers;
+  let testObjects;
 
-  beforeEach(function () {
+  beforeEach(() => {
     layerRules = {
       type: 'filter',
       object: 'layer',
       property: 'selectable',
-      value: true
+      value: true,
     };
     objectRules = {
       type: 'filter',
       object: 'object',
       property: 'name',
-      value: 'DefaultTerrainObject'
+      value: 'DefaultTerrainObject',
     };
     testLayers = [new mapLayers.MapLayer({
       selectable: false,
-      name: 'terrainLayer'
+      name: 'terrainLayer',
     }),
     new mapLayers.MapLayer({
       selectable: true,
-      name: 'unitLayer'
+      name: 'unitLayer',
     }),
     new mapLayers.MapLayer({
       selectable: false,
-      name: 'unitLayer'
+      name: 'unitLayer',
     })];
     testObjects = [
       new objects.ObjectSpriteTerrain(),
-      new objects.ObjectSpriteUnit()
+      new objects.ObjectSpriteUnit(),
     ];
   });
 
-  it('filter layers', function () {
-    var mapDataManipulator = new MapDataManipulator(layerRules);
-    var foundLayers;
+  it('constructing without params should throw error', () => {
+    spyOn(utils.general, 'requireParameter');
+    new MapDataManipulator(); // eslint-disable-line no-new
+    expect(utils.general.requireParameter).toHaveBeenCalled();
+  });
+  it('filter layers', () => {
+    const mapDataManipulator = new MapDataManipulator(layerRules);
 
-    foundLayers = mapDataManipulator.filter(testLayers);
+    let foundLayers = mapDataManipulator.filter(testLayers);
 
     expect(foundLayers[0]).toBe(testLayers[1]);
 
@@ -51,11 +56,10 @@ describe('mapDataManipulator => ', function () {
 
     expect(foundLayers).toEqual([testLayers[1], testLayers[2]]);
   });
-  it('filter objects', function () {
-    var mapDataManipulator = new MapDataManipulator(objectRules);
-    var foundObjects;
+  it('filter objects', () => {
+    const mapDataManipulator = new MapDataManipulator(objectRules);
 
-    foundObjects = mapDataManipulator.filter(testObjects);
+    let foundObjects = mapDataManipulator.filter(testObjects);
 
     expect(foundObjects[0]).toBe(testObjects[0]);
 
@@ -64,12 +68,13 @@ describe('mapDataManipulator => ', function () {
 
     expect(foundObjects).toEqual([testObjects[0], testObjects[1]]);
   });
-  it('filter both', function () {
-    var mapDataManipulator = new MapDataManipulator(layerRules);
-    var foundObjects;
+  it('filter both', () => {
+    const layerAndObjectsFilter = new MapDataManipulator([layerRules, objectRules]);
+    const allObjects = testObjects.concat(testLayers);
 
-    foundObjects = mapDataManipulator.filter(testObjects);
+    const foundObjects = layerAndObjectsFilter.filter(allObjects);
 
     expect(foundObjects[0]).toBe(testObjects[0]);
+    expect(foundObjects[1]).toBe(testLayers[1]);
   });
 });

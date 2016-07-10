@@ -285,6 +285,7 @@
      * @private
      * @static
      * @method _zoom
+     * @todo zoom should always product integers, not floats (this seems to happen)
      **/
     function _zoom(map, presentScale, amount, isZoomIn) {
       var newScale;
