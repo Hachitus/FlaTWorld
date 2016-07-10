@@ -549,7 +549,7 @@
      * @method cacheMap
      * @param {Object} filters          filters from MapDataManipulator.js
      **/
-    cacheMap(filters) {
+    cacheMap() {
       cacheLayers(true, this.usesSubcontainers());
     }
     /**

@@ -1,10 +1,11 @@
 module.exports = {
-  "extends": "airbnb",
+  "extends": "eslint:recommended",
   "env": {
     "browser": true,
     "node": true,
     "jasmine": true,
-    "worker": true
+    "worker": true,
+    "es6": true
   },
   "globals": {
     "PIXI": true
