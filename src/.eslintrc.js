@@ -8,8 +8,9 @@ module.exports = {
     "es6": true
   },
   "rules": {
-    "no-use-before-define": "off",
-    "no-param-reassign": "off",
-    "no-underscore-dangle": "off",
+    "indent": ["error", { "SwitchCase": 1 }],
+    "eqeqeq": ["error", "always"],
+    "no-undef": "error",
+    "no-unused-vars": "error"
   }
 };
