@@ -1,8 +1,9 @@
-<a name="0.1.1"></a>
-# 0.1.1 Bug fixes (2016-05-??)
+<a name="0.2.0"></a>
+# 0.1.1 Bug fixes (2016-07-??)
 ## Bug Fixes
 * If minimap canvas was not given flatworld main module threw an error.
 * Minimap optimizations (caching)
+* Multiple small fixes (unfortunately due to nature of the update, not specified individually)
 
 ## Features
 * Added fog of war
@@ -12,6 +13,7 @@
 * Placed test and dist folders more properly. I can now develop the backend part also more easier.
 * Style changes for jshint (and jscs removed)
 * Moved graphicData to it's own file, since it's supposed to be changeable.
+* Added eslint to the project instead of jshint
 
 <a name="0.1.0"></a>
 # 0.1.0 Bug fixes (2016-04-24)
