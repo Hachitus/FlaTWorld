@@ -38,7 +38,7 @@ Table of contents
 * [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
 * [Contribution guidelines](CONTRIBUTING.md)
 * [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
-* [Base plunkr](https://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
+* [Base plunkr](http://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
 * [Changelog](CHANGELOG.md)
 
 #Developing
