@@ -70,6 +70,8 @@ gulp.task('build', ['cleanDev', 'bundleLibDev', 'bundleCssDev', 'bundleDev']);
 gulp.task('bundleProd', function() {
   return gulp.src(config.entryFiles)
     .pipe(babel())
+    .pipe(concat('flatworld.js'))
+    .pipe(gulp.dest(config.outputDir))
     .pipe(uglify())
     .pipe(concat('flatworld.min.js'))
     .pipe(gulp.dest(config.outputDir));

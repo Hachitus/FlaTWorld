@@ -295,21 +295,21 @@
    * @return {Boolean}
    */
   function isTouchDevice() {
-    if ("ontouchstart" in document.documentElement) {
+    if ('ontouchstart' in document.documentElement) {
       return true;
     } else {
       return false;
     }
   }
 })();
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function () {
-  "use strict";
+  'use strict';
 
   /*---------------------
   ------- IMPORT --------
@@ -351,7 +351,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(Preload, [{
-      key: "resolveOnComplete",
+      key: 'resolveOnComplete',
       value: function resolveOnComplete() {
         var promise = Q.defer();
 
@@ -368,7 +368,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "addResource",
+      key: 'addResource',
       value: function addResource(resource) {
         this.preloaderClass.add(resource);
       }
@@ -379,7 +379,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "loadManifest",
+      key: 'loadManifest',
       value: function loadManifest() {
         return this;
       }
@@ -390,9 +390,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "setErrorHandler",
+      key: 'setErrorHandler',
       value: function setErrorHandler(errorCB) {
-        this.preloaderClass.on("error", errorCB);
+        this.preloaderClass.on('error', errorCB);
 
         return this;
       }
@@ -403,9 +403,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "setProgressHandler",
+      key: 'setProgressHandler',
       value: function setProgressHandler(progressCB) {
-        this.preloaderClass.on("error", progressCB);
+        this.preloaderClass.on('error', progressCB);
 
         return this;
       }
@@ -416,7 +416,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "activateSound",
+      key: 'activateSound',
       value: function activateSound() {
         this.preloaderClass.installPlugin();
       }
@@ -493,7 +493,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -545,11 +545,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.filters = [shadow];
       */
 
-      var options = arguments.length <= 0 || arguments[0] === undefined ? { color: "#000000", distance: 5, alpha: 0.5, amgöe: 45, blur: 5 } : arguments[0];
+      var options = arguments.length <= 0 || arguments[0] === undefined ? { color: '#000000', distance: 5, alpha: 0.5, amgöe: 45, blur: 5 } : arguments[0];
     }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -592,7 +592,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * Disabled the right click (or something else in mobile) context menu from appearing
      */
     function disableContextMenu(canvas) {
-      canvas.addEventListener("contextmenu", function (e) {
+      canvas.addEventListener('contextmenu', function (e) {
         e.preventDefault();
       });
     }
@@ -641,7 +641,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var yPos = 0;
 
       while (el) {
-        if (el.tagName.toLowerCase() === "body") {
+        if (el.tagName.toLowerCase() === 'body') {
           // deal with browser quirks with body/window/document and page scroll
           var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
           var yScroll = el.scrollTop || document.documentElement.scrollTop;
@@ -696,7 +696,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return {
       toggleFullScreen: toggleFullScreen,
       setToFullSize: setToFullSize,
-      getWindowSize: getWindowSize
+      getWindowSize: getWindowSize,
+      resizePIXIRenderer: resizePIXIRenderer
     };
 
     /**
@@ -719,10 +720,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (requestMethod) {
           // cancel full screen.
           requestMethod.call(el);
-        } else if (typeof window.ActiveXObject !== "undefined") {
+        } else if (typeof window.ActiveXObject !== 'undefined') {
           // Older IE.
-          var wscript = new ActiveXObject("WScript.Shell");
-          wscript !== null && wscript.SendKeys("{F11}");
+          var wscript = new ActiveXObject('WScript.Shell');
+          wscript !== null && wscript.SendKeys('{F11}');
         }
       }
       function requestFullScreen(el) {
@@ -732,10 +733,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (requestMethod) {
           // Native full screen.
           requestMethod.call(el);
-        } else if (typeof window.ActiveXObject !== "undefined") {
+        } else if (typeof window.ActiveXObject !== 'undefined') {
           // Older IE.
-          var wscript = new ActiveXObject("WScript.Shell");
-          wscript !== null && wscript.SendKeys("{F11}");
+          var wscript = new ActiveXObject('WScript.Shell');
+          wscript !== null && wscript.SendKeys('{F11}');
         }
         return false;
       }
@@ -766,6 +767,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         y: window.innerHeight
       };
     }
+    /**
+     * Resizes the PIXI renderer to the current most wide and high element status. Basically
+     * canvas size === window size.
+     *
+     * @static
+     * @method resizeRenderer
+     */
+    function resizePIXIRenderer(renderer, drawOnNextTick) {
+      var windowSize = getWindowSize();
+
+      renderer.autoResize = true; // eslint-disable-line no-param-reassign
+      renderer.resize(windowSize.x, windowSize.y);
+      drawOnNextTick();
+    }
   }
   /**
    * @class utils.environment
@@ -773,10 +788,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
   function setupEnvironmentDetection() {
     return {
-      getPixelRatio: getPixelRatio //,
-      // isMobile,
-      // isMobile_detectUserAgent
-    };
+      getPixelRatio: getPixelRatio };
 
     /**
      * @method getPixelRatio
@@ -784,9 +796,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {HTMLElement} canvasElement       HTML canvas element
      * @return {Number}
      */
+    // ,
+    // isMobile,
+    // isMobile_detectUserAgent
     function getPixelRatio(canvasElement) {
       var DPR = window.devicePixelRatio || 1;
-      var ctx = canvasElement && canvasElement.getContext("2d") || document.createElement('canvas').getContext("2d");
+      var ctx = canvasElement && canvasElement.getContext('2d') || document.createElement('canvas').getContext('2d');
       var bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
 
       return DPR / bsr;
@@ -801,7 +816,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return {
       pixelEpsilonEquality: epsilonEquality,
-      fullsizeCanvasCSS: fullsizeCanvasCSS
+      fullsizeCanvasCSS: fullsizeCanvasCSS,
+      requireParameter: requireParameter
     };
 
     /**
@@ -818,10 +834,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Element} canvasElement
      */
     function fullsizeCanvasCSS(canvasElement) {
-      canvasElement.style.position = "absolute";
-      canvasElement.style.display = "block";
-      canvasElement.style.left = "0px";
-      canvasElement.style.top = "0px";
+      canvasElement.style.position = 'absolute';
+      canvasElement.style.display = 'block';
+      canvasElement.style.left = '0px';
+      canvasElement.style.top = '0px';
+    }
+    /**
+     * Helper for creating required parameters
+     *
+     * @param {String} className Name of the function / class used
+     * @param {String} paramName Name of the parameter that is required
+     */
+    function requireParameter(className, paramName) {
+      throw new Error('Function \'' + className + '\' requires parameter ' + paramName);
     }
   }
 })();
@@ -847,7 +872,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return graphics;
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -900,7 +925,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function get(type, params) {
-      return _doFetch("get", type, params);
+      return _doFetch('get', type, params);
     }
     /**
      * Send data to server
@@ -912,13 +937,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function post(type, params) {
-      return _doFetch("post", type, params);
+      return _doFetch('post', type, params);
     }
     /**
      * Add a new mapApi endpoint
      *
      * @method add
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint. Callback gets these parameters
      * 1. request type: post, get etc.
      * 2. completeData: { baseUrl, cbs }
@@ -930,7 +955,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      */
     function add(type, cb, baseUrl) {
       if (APIs[type]) {
-        mapLog.debug("API endpoint already exists and has been defined " + type + ", " + baseUrl + ", " + JSON.stringify(cb));
+        mapLog.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
       }
 
       APIs[type] = {
@@ -942,11 +967,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * Removes mapApi endpoint
      *
      * @method remove
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      */
     function remove(type) {
       if (!APIs[type]) {
-        mapLog.debug("API endpoint not found for removing!");
+        mapLog.debug('API endpoint not found for removing!');
       }
 
       delete APIs[type];
@@ -955,13 +980,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * Add a new mapApi endpoint
      *
      * @method update
-     * @param {String}    type            Basically the name of the mapAPI. Like "moveUnit".
+     * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
      * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint
      * @param {Function}  what            The update made
      */
     function update(type, cb, what) {
       if (!APIs[type] || !APIs[type].cbs) {
-        mapLog.debug("API endpoint not found for updating!");
+        mapLog.debug('API endpoint not found for updating!');
       }
 
       APIs[type].cbs.push(cb);
@@ -979,7 +1004,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      */
     function _doFetch(fetchType, type, params) {
       if (!APIs[type]) {
-        mapLog.error("API endpoint for fetch not found: " + fetchType + "/" + type + ", " + (params ? params[0] : "no params"));
+        mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
         return;
       }
 
@@ -1105,7 +1130,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return event;
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -1164,14 +1189,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {Boolean} cb     REQUIRED. Callback to do it's eventlistener magic.
      */
     function on() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
       var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
       if (!detectors[type] && !detectors[type].size) {
-        throw new Error("eventlisteners.on needs to have detector set with this event type!");
+        throw new Error('eventlisteners.on needs to have detector set with this event type!');
       }
 
-      detectors[type].on(_createEventListenerWrapper("Map" + type, cb));
+      detectors[type].on(_createEventListenerWrapper('Map' + type, cb));
       activeEventListeners[type] = activeEventListeners[type] || new Set();
       activeEventListeners[type].add(cb);
     }
@@ -1183,7 +1208,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
     function off() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
       var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
       detectors[type].off(cb);
@@ -1197,7 +1222,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
     function isOn() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
       var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
       var answer;
@@ -1225,7 +1250,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}
      */
     function getActivityState() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
       return stateOfEvents[type];
     }
@@ -1238,7 +1263,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Function} cbOff   Callback which sets deactivates the detector
      */
     function setDetector() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
       var cbOn = arguments.length <= 1 || arguments[1] === undefined ? function () {} : arguments[1];
       var cbOff = arguments.length <= 2 || arguments[2] === undefined ? function () {} : arguments[2];
 
@@ -1255,7 +1280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {String}   type  Event type
      */
     function clearDetector() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? "" : arguments[0];
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
       /* remove all event listeners before we empty the data */
       activeEventListeners[type].forEach(function (cb) {
@@ -1292,7 +1317,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
   }
 })();
-"use strict";
+'use strict';
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
@@ -1348,7 +1373,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
       var _ref$name = _ref.name;
-      var name = _ref$name === undefined ? "" : _ref$name;
+      var name = _ref$name === undefined ? '' : _ref$name;
       var _ref$coord = _ref.coord;
       var coord = _ref$coord === undefined ? { x: 0, y: 0 } : _ref$coord;
       var _ref$specialLayer = _ref.specialLayer;
@@ -1370,7 +1395,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * @attribute name
        * @type {String}
        */
-      _this.name = "" + name;
+      _this.name = '' + name;
       /**
        * Is this layer special (e.g. UILayer not included in normal operations)
        *
@@ -1411,9 +1436,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(MapLayer, [{
-      key: "hasSubcontainers",
+      key: 'hasSubcontainers',
       value: function hasSubcontainers() {
-        return this.subcontainersConfig ? true : false;
+        return this.subcontainersConfig.width && this.subcontainersConfig.height ? true : false;
       }
       /**
        * Is this layer cached at the moment or not.
@@ -1423,7 +1448,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "isCached",
+      key: 'isCached',
       value: function isCached() {
         return this.cacheAsBitmap;
       }
@@ -1438,7 +1463,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        **/
 
     }, {
-      key: "move",
+      key: 'move',
       value: function move(coord) {
         this.x += coord.x;
         this.y += coord.y;
@@ -1453,7 +1478,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * */
 
     }, {
-      key: "setZoom",
+      key: 'setZoom',
       value: function setZoom(amount) {
         this.scale.x = this.scale.y = +amount.toFixed(2);
 
@@ -1467,7 +1492,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * */
 
     }, {
-      key: "getZoom",
+      key: 'getZoom',
       value: function getZoom() {
         return this.scale.x;
       }
@@ -1479,7 +1504,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       * */
 
     }, {
-      key: "getUIObjects",
+      key: 'getUIObjects',
       value: function getUIObjects() {
         return _UIObjects;
       }
@@ -1491,7 +1516,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * */
 
     }, {
-      key: "getPrimaryLayers",
+      key: 'getPrimaryLayers',
       value: function getPrimaryLayers() {
         var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -1513,7 +1538,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * */
 
     }, {
-      key: "getObjects",
+      key: 'getObjects',
       value: function getObjects() {
         var allObjects = [];
 
@@ -1535,7 +1560,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "setCache",
+      key: 'setCache',
       value: function setCache(status) {
         var toCacheStatus = status ? true : false;
 
@@ -1556,9 +1581,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        **/
 
     }, {
-      key: "createUILayer",
+      key: 'createUILayer',
       value: function createUILayer() {
-        var name = arguments.length <= 0 || arguments[0] === undefined ? "default UI layer" : arguments[0];
+        var name = arguments.length <= 0 || arguments[0] === undefined ? 'default UI layer' : arguments[0];
         var coord = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
 
         var layer = new MapLayer(name, coord);
@@ -1578,7 +1603,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "getUILayer",
+      key: 'getUILayer',
       value: function getUILayer() {
         return this.UILayer;
       }
@@ -1593,7 +1618,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "addUIObject",
+      key: 'addUIObject',
       value: function addUIObject(object, UIName) {
         var UILayer;
         _UIObjects = _UIObjects || [];
@@ -1625,7 +1650,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * */
 
     }, {
-      key: "deleteUIObjects",
+      key: 'deleteUIObjects',
       value: function deleteUIObjects(UIName) {
         var _this2 = this;
 
@@ -1679,11 +1704,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var _ref3 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
       var _ref3$name = _ref3.name;
-      var name = _ref3$name === undefined ? "" : _ref3$name;
+      var name = _ref3$name === undefined ? '' : _ref3$name;
       var _ref3$coord = _ref3.coord;
       var coord = _ref3$coord === undefined ? { x: 0, y: 0 } : _ref3$coord;
       var _ref3$subcontainers = _ref3.subcontainers;
-      var subcontainers = _ref3$subcontainers === undefined ? false : _ref3$subcontainers;
+      var subcontainers = _ref3$subcontainers === undefined ? { width: 0, height: 0, maxDetectionOffset: 100 } : _ref3$subcontainers;
       var _ref3$specialLayer = _ref3.specialLayer;
       var specialLayer = _ref3$specialLayer === undefined ? false : _ref3$specialLayer;
       var _ref3$staticLayer = _ref3.staticLayer;
@@ -1695,7 +1720,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(MapLayerParent).call(this, arguments[0]));
 
-      _this3.oldAddChild = _get(Object.getPrototypeOf(MapLayerParent.prototype), "addChild", _this3).bind(_this3);
+      _this3.oldAddChild = _get(Object.getPrototypeOf(MapLayerParent.prototype), 'addChild', _this3).bind(_this3);
       _this3.subcontainersConfig = subcontainers;
       _this3.subcontainerList = [];
       _this3.selectable = selectable;
@@ -1703,7 +1728,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       return _this3;
     }
     /**
-     * We override the PIXIs own addchild functionality. Since we need to support subcontainers in addChild. We check subcontainers and
+     * We override the PIXIs own addchild functionality. Since we need to support subcontainers in
+     * addChild. We check subcontainers and
      * then we call the original (PIXIs) addChild
      *
      * @method addChild
@@ -1712,11 +1738,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(MapLayerParent, [{
-      key: "addChild",
+      key: 'addChild',
       value: function addChild(displayObject) {
         if (this.hasSubcontainers()) {
-          var correctContainer = void 0;
-          correctContainer = setCorrectSubcontainer(displayObject, this);
+          var correctContainer = setCorrectSubcontainer(displayObject, this);
           this.oldAddChild(correctContainer);
         } else {
           this.oldAddChild(displayObject);
@@ -1731,7 +1756,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "getSubcontainerConfigs",
+      key: 'getSubcontainerConfigs',
       value: function getSubcontainerConfigs() {
         return this.subcontainersConfig;
       }
@@ -1746,10 +1771,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "getSubcontainersByCoordinates",
+      key: 'getSubcontainersByCoordinates',
       value: function getSubcontainersByCoordinates(coordinates) {
         if (!this.hasSubcontainers()) {
-          throw new Error("tried to retrieve subcontainers, when they are not present");
+          throw new Error('tried to retrieve subcontainers, when they are not present');
         }
 
         var foundSubcontainers;
@@ -1763,7 +1788,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "getSubcontainers",
+      key: 'getSubcontainers',
       value: function getSubcontainers() {
         return this.subcontainerList;
       }
@@ -1812,7 +1837,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(MapSubcontainer, [{
-      key: "getSubcontainerArea",
+      key: 'getSubcontainerArea',
       value: function getSubcontainerArea() {
         var options = arguments.length <= 0 || arguments[0] === undefined ? { toGlobal: true } : arguments[0];
 
@@ -1835,7 +1860,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "setCache",
+      key: 'setCache',
       value: function setCache(status) {
         var toCacheStatus = status ? true : false;
 
@@ -1886,7 +1911,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(MinimapLayer, [{
-      key: "setCache",
+      key: 'setCache',
       value: function setCache(status) {
         var toCacheStatus = status ? true : false;
 
@@ -1902,7 +1927,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   ------- PRIVATE -------
   ----------------------*/
   /**
-   * Helper function for setting subcontainers to parent containers
+   * Helper function for setting subcontainers to parent containers. Adds subcontainers when
+   * needed. Subcontainers are not and can not be initialized at the start as we won't know the
+   * size of the parent container. Container is always dynamic in size.
+   *
    *
    * @method setCorrectSubcontainer
    * @private
@@ -1935,7 +1963,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       subcontainerList[xIndex][yIndex] = thisSubcontainer;
       thisSubcontainer.x = xIndex * subcontainersConfig.width;
       thisSubcontainer.y = yIndex * subcontainersConfig.height;
-      thisSubcontainer.visible = subcontainersConfig.isHiddenByDefault ? false : true;
+      thisSubcontainer.visible = !subcontainersConfig.isHiddenByDefault;
     }
 
     displayObject.x -= thisSubcontainer.x;
@@ -2000,21 +2028,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   window.flatworld.mapLayers.MapLayerParent = MapLayerParent;
   window.flatworld.mapLayers.MinimapLayer = MinimapLayer;
 })();
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function () {
-  'use strict';
-
+(function mapDataManipulatorCreator() {
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-
   var mapLayers = window.flatworld.mapLayers;
   var objects = window.flatworld.objects;
+  var utils = window.flatworld.utils;
 
   /*---------------------
   --------- API ---------
@@ -2022,16 +2048,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var MapDataManipulator = function () {
     /**
-     * Class to get a consistent standard for the engine to be able to filter objects, when retrieving or sorting them. This is used
+     * Class to get a consistent standard for the engine to be able to filter objects, when
+     * etrieving or sorting them. This is used
      * when some method uses filters.
+     *
+     * You must provide an object that defines how the given objects should be filtered, when
+     * constructing. The module will filter with every rule and object given and everything that
+     * doesn't pass one of the given filters, will be dropped out.
+     *
+     * Given filters look something like this:
+     * {
+     *   type: 'filter',
+     *   object: 'layer',
+     *   property: 'selectable',
+     *   value: true,
+     * }
+     * For more information, please check the mapDataManipulatorSpec.js (test) for now.
      *
      * @namespace flatworld
      * @class MapDataManipulator
      * @constructor
-     * @param {Array|Object} rules        REQUIRED. The rules that apply for this instance. Multiple rules in Array or one as Object.
+     * @param {Array|Object} rules        REQUIRED. The rules that apply for this instance.
+     * Multiple rules in Array or one as Object.
      **/
 
-    function MapDataManipulator(rules) {
+    function MapDataManipulator() {
+      var rules = arguments.length <= 0 || arguments[0] === undefined ? utils.general.requireParameter('MapDataManipulator', 'rules') : arguments[0];
+
       _classCallCheck(this, MapDataManipulator);
 
       this.rules = Array.isArray(rules) ? rules : [rules];
@@ -2045,7 +2088,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     }
     /**
-     * This has exceptional query, since it actually queries it's parent. Subcontainers have really no useful values and they are dumb
+     * This has exceptional query, since it actually queries it's parent. Subcontainers have
+     * really no useful values and they are dumb
      * containers of objects, every data is on their parent container
      *
      * @method filter
@@ -2055,7 +2099,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(MapDataManipulator, [{
-      key: "filter",
+      key: 'filter',
       value: function filter(objects) {
         var _this = this;
 
@@ -2079,7 +2123,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "addRule",
+      key: 'addRule',
       value: function addRule(rules) {
         this.rules.concat(rules);
       }
@@ -2092,7 +2136,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "_runRule",
+      key: '_runRule',
       value: function _runRule(object) {
         var _this2 = this;
 
@@ -2108,14 +2152,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
 
         this.rules.forEach(function (rule) {
-          if (rule.type === "filter") {
+          if (rule.type === 'filter') {
             if (rule.object !== matchedType) {
               return;
             }
 
-            if (matchedType === "layer") {
+            if (matchedType === 'layer') {
               ruleMatches = _this2._getObject(object, rule);
-            } else if (matchedType === "object") {
+            } else if (matchedType === 'object') {
               ruleMatches = _this2._getObject(object, rule);
             }
           }
@@ -2132,7 +2176,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "_getObject",
+      key: '_getObject',
       value: function _getObject(object, rule) {
         return object[rule.property] === rule.value;
       }
@@ -2143,7 +2187,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   window.flatworld.MapDataManipulator = MapDataManipulator;
 })();
-"use strict";
+'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -2186,7 +2230,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
 
     if (!UITheme || !givenMap) {
-      throw new Error("UI-module requires UITheme and map object, This is an singletong class, so it's possible it should have been " + "already called earlier");
+      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been ' + 'already called earlier');
     }
 
     map = givenMap;
@@ -2234,7 +2278,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return UITheme.showSelections([]);
       }
 
-      mapLog.error("No objects found" + objects.length);
+      mapLog.error('No objects found' + objects.length);
       return [];
     };
     /**
@@ -2254,8 +2298,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         objects = filters.filterObjects(objects);
       }
 
-      if (Array.isArray(objects) || (typeof objects === "undefined" ? "undefined" : _typeof(objects)) !== 'object' || objects === null) {
-        mapLog.error("Object was an Array, should be plain object: " + objects.length);
+      if (Array.isArray(objects) || (typeof objects === 'undefined' ? 'undefined' : _typeof(objects)) !== 'object' || objects === null) {
+        mapLog.error('Object was an Array, should be plain object: ' + objects.length);
       }
       return UITheme.showUnitMovement(objects, to, UIThemeOptions);
     };
@@ -2281,15 +2325,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   ----------------------*/
   window.flatworld.UI = UI;
 })();
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function () {
-  'use strict';
-
   /*---------------------
   --------- API ---------
   ----------------------*/
@@ -2334,32 +2376,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(ObjectManager, [{
-      key: 'retrieve',
+      key: "retrieve",
       value: function retrieve(allCoords) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? { type: false, subcontainers: [], size: { width: 0, height: 0 } } : arguments[1];
-        var subcontainers = options.subcontainers;
+        var containers = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+        var options = arguments.length <= 2 || arguments[2] === undefined ? { type: undefined, size: { width: 0, height: 0 } } : arguments[2];
         var size = options.size;
         var type = options.type;
         var globalCoords = allCoords.globalCoords;
 
         var foundObjs = [];
 
-        if (subcontainers.length > 0) {
-          subcontainers.forEach(function (container) {
+        if (containers.length > 0) {
+          containers.forEach(function (container) {
             foundObjs = foundObjs.concat(container.children);
           });
 
           if (!size.width || !size.height) {
-            foundObjs = foundObjs.filter(function (obj) {
-              if (type && type !== obj.type) {
-                return false;
-              }
-
-              var isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
-
-              return isHit;
-            });
+            foundObjs = filterChildren(globalCoords, foundObjs, type);
           }
+        } else {
+          return [];
         }
 
         return foundObjs;
@@ -2371,7 +2407,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   window.flatworld.ObjectManager = ObjectManager;
 })();
-"use strict";
+
+function filterChildren(globalCoords) {
+  var children = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+
+  return children.filter(function (obj) {
+    if (type && type !== obj.type) {
+      return false;
+    }
+
+    var isHit = obj.hitTest ? obj.hitTest(globalCoords) : true;
+
+    return isHit;
+  });
+}
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2382,12 +2433,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function () {
-  'use strict';
-
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-
   var utils = window.flatworld.utils;
   var PIXI = window.flatworld_libraries.PIXI;
   var mapAPI = window.flatworld.mapAPI;
@@ -2438,14 +2486,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * @attribute name
        * @type {String}
        */
-      _this.name = "Objects_sprite_" + _this.id;
+      _this.name = 'Objects_sprite_' + _this.id;
       /**
        * Type of the object. Can be used for filtering, ordering or finding correct objects.
        *
        * @attribute type
        * @type {String}
        */
-      _this.type = "None";
+      _this.type = 'None';
       /**
        * Is the object highligtable.
        *
@@ -2501,7 +2549,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(ObjectSprite, [{
-      key: "innerDraw",
+      key: 'innerDraw',
       value: function innerDraw(x, y) {
         this.fromFrame(this.currentFrame);
         this.x = x;
@@ -2520,7 +2568,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "drawNewFrame",
+      key: 'drawNewFrame',
       value: function drawNewFrame(x, y, newFrame) {
         this.currentFrame = newFrame;
 
@@ -2535,7 +2583,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "getGraphicalArea",
+      key: 'getGraphicalArea',
       value: function getGraphicalArea() {
         var options = arguments.length <= 0 || arguments[0] === undefined ? { toGlobal: true } : arguments[0];
 
@@ -2551,25 +2599,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         };
       }
       /**
-       * Coordinate conversion: localToLocal
-       *
-       * @method localToLocal
-       * @param  {Number} x                  X coordinate
-       * @param  {Number} y                  Y coordinate
-       * @param  {Object} target             PIXI.DisplayObject. The DisplayObject where we should target the coordinates for
-       * @return  {{PIXI.Point}} point       PIXI.Point. Coordinates.
-       * @return {Coordinates}
-       */
-
-    }, {
-      key: "localToLocal",
-      value: function localToLocal(x, y, target) {
-        var globalCoords = this.toGlobal({ x: x, y: y });
-        var targetLocalCoords = target.toLocal(globalCoords);
-
-        return targetLocalCoords;
-      }
-      /**
        * Clone object
        *
        * @method clone
@@ -2579,7 +2608,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "clone",
+      key: 'clone',
       value: function clone(renderer) {
         var options = arguments.length <= 1 || arguments[1] === undefined ? { position: false, anchor: false } : arguments[1];
 
@@ -2593,6 +2622,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         if (options.position) {
           newSprite.position = Object.assign({}, this.position);
         }
+
+        newSprite.constructor.prototype = this.constructor.prototype;
 
         return newSprite;
       }
@@ -2625,8 +2656,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectSpriteTerrain).call(this, texture, coords, { data: data }));
 
-      _this2.name = "DefaultTerrainObject";
-      _this2.type = "terrain";
+      _this2.name = 'DefaultTerrainObject';
+      _this2.type = 'terrain';
       _this2.highlightable = false;
       return _this2;
     }
@@ -2661,8 +2692,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectSpriteUnit).call(this, texture, coords, { data: data }));
 
-      _this3.name = "DefaultUnitObjects";
-      _this3.type = "unit";
+      _this3.name = 'DefaultUnitObjects';
+      _this3.type = 'unit';
       /**
        * actions bound to this object. @todo THIS HAS NOT BEEN IMPLEMENTED YET!
        *
@@ -2681,7 +2712,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
     _createClass(ObjectSpriteUnit, [{
-      key: "doAction",
+      key: 'doAction',
       value: function doAction(type) {
         this.actions[type].forEach(function (action) {
           action();
@@ -2695,7 +2726,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "addActionType",
+      key: 'addActionType',
       value: function addActionType(type) {
         this.actions[type] = this.actions[type] || [];
       }
@@ -2708,7 +2739,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "addCallbackToAction",
+      key: 'addCallbackToAction',
       value: function addCallbackToAction(type, cb) {
         this.actions[type].push(cb);
       }
@@ -2717,7 +2748,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        */
 
     }, {
-      key: "dropShadow",
+      key: 'dropShadow',
       value: function dropShadow() {
         var _utils$effects;
 
@@ -2728,15 +2759,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         * don't implement your own, I suggest you use it. You can attach any method to object if you wish. Like attack, siege, greet, talk.
         *
         * @method move
-        * @requires  mapAPIa..("objectMove") to be declared
+        * @requires  mapAPIa..('objectMove") to be declared
         * @attribute [name]
         */
 
     }, {
-      key: "move",
+      key: 'move',
       value: function move(to) {
-        mapEvents.publish("objectMove", this);
-        mapAPI.post("objectMove", {
+        mapEvents.publish('objectMove', this);
+        mapAPI.post('objectMove', {
           id: this.id,
           from: {
             x: this.x,
@@ -2754,7 +2785,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   window.flatworld.objects.ObjectSpriteTerrain = ObjectSpriteTerrain;
   window.flatworld.objects.ObjectSpriteUnit = ObjectSpriteUnit;
 })();
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2796,11 +2827,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(Sound, [{
-      key: "add",
+      key: 'add',
       value: function add(name, url) {
         var options = arguments.length <= 2 || arguments[2] === undefined ? { loop: false, volume: 1 } : arguments[2];
 
-        var ERROR_STRING = "The sound '" + name + "' was unable to load!";
+        var ERROR_STRING = 'The sound "' + name + '" was unable to load!';
         var loop = options.loop;
         var volume = options.volume;
 
@@ -2823,7 +2854,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "remove",
+      key: 'remove',
       value: function remove(name) {
         delete this._allSounds[name];
       }
@@ -2835,7 +2866,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "play",
+      key: 'play',
       value: function play(name) {
         var promise = Q.defer();
 
@@ -2852,7 +2883,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "stop",
+      key: 'stop',
       value: function stop(name) {
         this._allSounds[name].stop();
       }
@@ -2868,7 +2899,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "fade",
+      key: 'fade',
       value: function fade(name, from, to, duration) {
         var promise = Q.defer();
         var cb;
@@ -2887,7 +2918,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   window.flatworld.Sound = Sound;
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -2915,53 +2946,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
   function setupMapStates() {
     return StateMachine.create({
-      initial: "statusQuo",
+      initial: 'statusQuo',
       events: [
       /**
        * When multiple objects are represented as an option
        *
        * @method objectSelectDialog
        */
-      { name: "objectSelectDialog", from: ["statusQuo", "objectSelected"], to: "objectSelectDialogOpened" },
+      { name: 'objectSelectDialog', from: ['statusQuo', 'objectSelected'], to: 'objectSelectDialogOpened' },
       /**
        * When the object is selected
        *
        * @method objectSelect
        */
-      { name: "objectSelect", from: ["statusQuo", "objectSelected", "objectSelectDialogOpened"], to: "objectSelected" },
+      { name: 'objectSelect', from: ['statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'objectSelected' },
       /**
        * When situation is normal, nothing selected.
        *
        * @method normalize
        */
-      { name: "normalize", from: ["objectSelected", "objectSelectDialogOpened"], to: "statusQuo" },
+      { name: 'normalize', from: ['objectSelected', 'objectSelectDialogOpened'], to: 'statusQuo' },
       /**
        * When object is issued a move order
        *
        * @method objectOrder
        */
-      { name: "objectOrder", from: "objectSelected", to: "animatingObject" },
+      { name: 'objectOrder', from: 'objectSelected', to: 'animatingObject' },
       /**
        * When object ends it's movement animation
        *
        * @method objectOrderEnd
        */
-      { name: "objectOrderEnd", from: "animatingObject", to: "objectSelected" },
+      { name: 'objectOrderEnd', from: 'animatingObject', to: 'objectSelected' },
       /**
        * The games main UI is opened and the map stays at the background, normally non-responsive
        *
        * @method UIOpen
        */
-      { name: "UIOpen", from: ["statusQuo", "objectSelected", "objectSelectDialogOpened"], to: "mainUIOpened" },
+      { name: 'UIOpen', from: ['statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'mainUIOpened' },
       /**
        * Games main UI is closed and map is activated again
        *
        * @method UIClose
        */
-      { name: "UIClose", from: "mainUIOpened", to: "statusQuo" }] });
+      { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' }] });
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -2970,16 +3001,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   --------- IMPORT --------
   -----------------------*/
 
-  var eventListeners = window.flatworld.eventListeners;
-  var mapStates = window.flatworld.mapStates;
-  var mapEvents = window.flatworld.mapEvents;
-  var utils = window.flatworld.utils;
-  var Hammer = window.flatworld_libraries.Hammer;
-  var Hamster = window.flatworld_libraries.Hamster;
+  var _window$flatworld = window.flatworld;
+  var mapEvents = _window$flatworld.mapEvents;
+  var utils = _window$flatworld.utils;
+  var mapStates = _window$flatworld.mapStates;
+  var eventListeners = _window$flatworld.eventListeners;
+  var Flatworld = _window$flatworld.Flatworld;
+  var _window$flatworld_lib = window.flatworld_libraries;
+  var Hammer = _window$flatworld_lib.Hammer;
+  var Hamster = _window$flatworld_lib.Hamster;
 
   /*-----------------------
   ---------- API ----------
   -----------------------*/
+
   window.flatworld.extensions.baseEventlisteners = baseEventlistenersModule();
 
   /*-----------------------
@@ -2993,10 +3028,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * @class extensions.baseEventlisteners
    * @requires Hammer.js                    (for touch events)
    * @requires Hamster.js                   (for good cross-browser mousewheel events)
+   * @event                                 mapEvents.publish('mapResized')
    * @param {HTMLElement} canvasElement     The canvas element we listen events from. Will try to search the first canvas in the DOM,
    * if none is provided
    */
   function baseEventlistenersModule() {
+    var caches = {};
     var hammer, hamster, mapInstance;
 
     /*---------------------------
@@ -3018,7 +3055,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @attribute pluginName
        * @type {String}
        */
-      pluginName: "baseEventlisteners"
+      pluginName: 'baseEventlisteners'
     };
 
     /**
@@ -3034,17 +3071,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       hammer = new Hammer.Manager(map.canvas);
       hamster = new Hamster(map.canvas);
 
-      eventListeners.setDetector("fullSize", toggleFullSize().on, toggleFullSize().off);
-      eventListeners.setDetector("fullscreen", toggleFullscreen().on, toggleFullscreen().off);
-      eventListeners.setDetector("zoom", toggleZoom().on, toggleZoom().off);
-      eventListeners.setDetector("drag", toggleDrag().on, toggleDrag().off);
-      eventListeners.setDetector("select", selectToggle.on, selectToggle.off);
-      eventListeners.setDetector("order", orderToggle.on, orderToggle.off);
+      eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
+      eventListeners.on('fullSize', resizeCanvas);
 
-      eventListeners.on("fullSize", _resizeCanvas);
-      map.setPrototype("setFullScreen", function () {
-        eventListeners.on("fullscreen", _setFullScreen);
+      eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
+      map.setPrototype('setFullScreen', function () {
+        eventListeners.on('fullscreen', _setFullScreen);
       });
+
+      eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off);
+      eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
+      eventListeners.setDetector('select', selectToggle.on, selectToggle.off);
+      eventListeners.setDetector('order', orderToggle.on, orderToggle.off);
     }
 
     /**
@@ -3055,16 +3093,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleFullSize() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          activeCB = cb;
+      if (!caches['fullsize']) {
+        caches['fullsize'] = {
+          on: function on(cb) {
+            activeCB = cb;
 
-          window.addEventListener("resize", activeCB);
-        },
-        off: function off() {
-          window.removeEventListener("resize", activeCB);
-        }
-      };
+            window.addEventListener('resize', activeCB);
+          },
+          off: function off() {
+            window.removeEventListener('resize', activeCB);
+          }
+        };
+      }
+
+      return caches['fullsize'];
     }
     /**
      * Sets the browser in fullscreen mode.
@@ -3076,16 +3118,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleFullscreen() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          activeCB = cb;
+      if (!caches['fullscreen']) {
+        caches['fullscreen'] = {
+          on: function on(cb) {
+            activeCB = cb;
 
-          window.addEventListener("fullscreen", activeCB);
-        },
-        off: function off() {
-          window.removeEventListener("fullscreen", activeCB);
-        }
-      };
+            window.addEventListener('fullscreen', activeCB);
+          },
+          off: function off() {
+            window.removeEventListener('fullscreen', activeCB);
+          }
+        };
+
+        return caches['fullscreen'];
+      }
+
+      return caches['fullscreen'];
     }
     /**
      * Zoom the map. Mousewheel (desktop) and pinch (mobile)
@@ -3097,21 +3145,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleZoom() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          var pinch = new Hammer.Pinch();
-          activeCB = cb;
+      if (!caches['zoom']) {
+        caches['zoom'] = {
+          on: function on(cb) {
+            var pinch = new Hammer.Pinch();
+            activeCB = cb;
 
-          hammer.add(pinch);
-          hammer.on("pinch", activeCB);
-          /* Hamster handles wheel events really nicely */
-          hamster.wheel(activeCB);
-        },
-        off: function off() {
-          hammer.on("pinch", activeCB);
-          hamster.unwheel(activeCB);
-        }
-      };
+            hammer.add(pinch);
+            hammer.on('pinch', activeCB);
+            /* Hamster handles wheel events really nicely */
+            hamster.wheel(activeCB);
+          },
+          off: function off() {
+            hammer.on('pinch', activeCB);
+            hamster.unwheel(activeCB);
+          }
+        };
+      }
+
+      return caches['zoom'];
     }
     /**
      * DragListener (normally used for moving the map)
@@ -3123,21 +3175,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleDrag() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          var pan = new Hammer.Pan({
-            pointers: 1,
-            threshold: 5,
-            direction: Hammer.DIRECTION_ALL });
-          activeCB = cb;
+      if (!caches['drag']) {
+        caches['drag'] = {
+          on: function on(cb) {
+            var pan = new Hammer.Pan({
+              pointers: 1,
+              threshold: 5,
+              direction: Hammer.DIRECTION_ALL });
+            activeCB = cb;
 
-          hammer.add(pan);
-          hammer.on("pan", activeCB);
-        },
-        off: function off() {
-          hammer.off("pan", activeCB);
-        }
-      };
+            hammer.add(pan);
+            hammer.on('pan', activeCB);
+          },
+          off: function off() {
+            hammer.off('pan', activeCB);
+          }
+        };
+      }
+
+      return caches['drag'];
     }
     /**
      * Selecting something from the map
@@ -3149,18 +3205,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleSelect() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          var tap = new Hammer.Tap();
-          activeCB = cb;
+      if (!caches['select']) {
+        caches['select'] = {
+          on: function on(cb) {
+            var tap = new Hammer.Tap();
+            activeCB = cb;
 
-          hammer.add(tap);
-          hammer.on("tap", activeCB);
-        },
-        off: function off() {
-          hammer.off("tap", activeCB);
-        }
-      };
+            hammer.add(tap);
+            hammer.on('tap', activeCB);
+          },
+          off: function off() {
+            hammer.off('tap', activeCB);
+          }
+        };
+      }
+
+      return caches['select'];
     }
     /**
      * Selecting something from the map. With mouse you can use the default right click and in touch devices you can use continuous press
@@ -3173,34 +3233,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function toggleOrder() {
       var activeCB;
 
-      return {
-        on: function on(cb) {
-          activeCB = cb;
+      if (!caches['order']) {
+        caches['order'] = {
+          on: function on(cb) {
+            activeCB = cb;
 
-          var press = new Hammer.Press();
+            var press = new Hammer.Press();
 
-          hammer.add(press);
-          hammer.on("press", clickListener);
-          /* We are detecting mouse right click here. This should be in utils */
-          mapInstance.canvas.addEventListener("mouseup", function (e) {
-            if (e.which === 3) {
-              clickListener(e);
-            }
-          }, true);
-        },
-        off: function off() {
-          hammer.off("press", clickListener);
-          mapInstance.canvas.removeEventListener("mouseup", clickListener, true);
-        }
-      };
+            hammer.add(press);
+            hammer.on('press', clickListener);
+            /* We are detecting mouse right click here. This should be in utils */
+            mapInstance.canvas.addEventListener('mouseup', function (e) {
+              if (e.which === 3) {
+                clickListener(e);
+              }
+            }, true);
+          },
+          off: function off() {
+            hammer.off('press', clickListener);
+            mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
+          }
+        };
+      }
+
+      return caches['order'];
 
       function clickListener(e) {
-        if (!utils.mouse.isRightClick(e) && e.type !== "press") {
+        if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
           return;
         }
 
         /* Check that finite state is correct and that if desktop, the user clicked right button */
-        if (!mapStates.can("objectOrder") && (mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
+        if (!mapStates.can('objectOrder') && (mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
           return false;
         }
 
@@ -3213,14 +3277,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @method toggleMouseTextSelection
      */
     function toggleMouseTextSelection() {
-      var bodyStyles = document.getElementsByTagName("body")[0].style;
+      var bodyStyles = document.getElementsByTagName('body')[0].style;
 
-      bodyStyles.webkitTouchCallout = "none";
-      bodyStyles.webkitUserSelect = "none";
-      bodyStyles.khtmlUserSelect = "none";
-      bodyStyles.mozUserSelect = "none";
-      bodyStyles.msUserSelect = "none";
-      bodyStyles.userSelect = "none";
+      bodyStyles.webkitTouchCallout = 'none';
+      bodyStyles.webkitUserSelect = 'none';
+      bodyStyles.khtmlUserSelect = 'none';
+      bodyStyles.mozUserSelect = 'none';
+      bodyStyles.msUserSelect = 'none';
+      bodyStyles.userSelect = 'none';
     }
 
     /**
@@ -3231,27 +3295,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      */
     function _setFullScreen() {
       utils.resize.toggleFullScreen();
-      mapEvents.publish("mapResized");
-      _resizeCanvas();
+      mapEvents.publish('mapResized');
+      resizeCanvas();
     }
     /**
-     * Resizes the canvas to the current most wide and high element status. Basically canvas size === window size.
+     * Resizes the canvas to the current most wide and high element status.
+     * Basically canvas size === window size.
      *
      * @private
      * @method _resizeCanvas
      */
-    function _resizeCanvas() {
-      var windowSize = utils.resize.getWindowSize();
-      var _renderer = mapInstance.getRenderer();
-
-      _renderer.autoResize = true;
-      _renderer.resize(windowSize.x, windowSize.y);
-      mapEvents.publish("mapResized");
-      mapInstance.drawOnNextTick();
+    function resizeCanvas() {
+      utils.resize.resizePIXIRenderer(mapInstance.getRenderer(), mapInstance.drawOnNextTick.bind(mapInstance));
+      mapEvents.publish('mapResized');
     }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -3292,9 +3352,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     --------------------*/
     return {
       init: init,
-      pluginName: "mapDrag",
-      _startDragListener: _startDragListener /* Function revealed for testing */
-    };
+      pluginName: 'mapDrag',
+      _startDragListener: _startDragListener };
 
     /*---------------------
     -------- PUBLIC -------
@@ -3305,11 +3364,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @method init
      * @param {Map} mapObj        The current instance of Map class
      * */
+    /* Function revealed for testing */
     function init(map) {
       eventListenerCB = _startDragListener(map);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
-      eventListeners.on("drag", eventListenerCB);
+      eventListeners.on('drag', eventListenerCB);
     }
 
     /*---------------------
@@ -3330,7 +3390,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return function startDrag(e) {
         var coords;
 
-        if (eventListeners.getActivityState("zoom")) {
+        if (eventListeners.getActivityState('zoom')) {
           return false;
         }
         coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
@@ -3418,7 +3478,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -3477,7 +3537,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     ---------------------*/
     return {
       init: init,
-      pluginName: "mapZoom"
+      pluginName: 'mapZoom'
     };
 
     /*---------------------
@@ -3494,13 +3554,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      **/
     function init(thisMap) {
       map = thisMap;
-      map.setPrototype("zoomIn", zoomIn);
-      map.setPrototype("zoomOut", zoomOut);
-      map.setPrototype("setZoomLimits", setZoomLimits);
-      map.setPrototype("setZoomModifier", setZoomModifier);
+      map.setPrototype('zoomIn', zoomIn);
+      map.setPrototype('zoomOut', zoomOut);
+      map.setPrototype('setZoomLimits', setZoomLimits);
+      map.setPrototype('setZoomModifier', setZoomModifier);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
-      eventListeners.on("zoom", unifiedEventCB);
+      eventListeners.on('zoom', unifiedEventCB);
     }
 
     /*----------------------------------------
@@ -3514,7 +3574,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      **/
     function setZoomModifier(amount) {
       if (!(amount > 0 || amount <= 0.5)) {
-        throw new Error("Wrong zoom modifier! (needs to be >0 and <=0.5, given:" + amount);
+        throw new Error('Wrong zoom modifier! (needs to be >0 and <=0.5, given:' + amount);
       }
       zoomModifier = amount;
 
@@ -3635,7 +3695,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             x: changeX,
             y: changeY
           };
-          eventListeners.setActivityState("zoom", true);
+          eventListeners.setActivityState('zoom', true);
           initialized = true;
 
           return;
@@ -3645,7 +3705,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
            * bad if after zoom there is immediately an unexplainable drag and the map moves a bit
            * */
           window.setTimeout(function () {
-            eventListeners.setActivityState("zoom", false);
+            eventListeners.setActivityState('zoom', false);
           }, TIMEOUT_AFTER_ZOOM);
           initialized = false;
         }
@@ -3665,7 +3725,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           y: changeY
         };
       } catch (ev) {
-        console.log("Error! ", ev);
+        console.log('Error! ', ev);
       }
     }
 
@@ -3708,6 +3768,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @private
      * @static
      * @method _zoom
+     * @todo zoom should always product integers, not floats (this seems to happen)
      **/
     function _zoom(map, presentScale, amount, isZoomIn) {
       var newScale;
@@ -3725,7 +3786,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 window.flatworld.extensions.hexagons = {};
 window.flatworld.extensions.hexagons.utils = {};
 window.flatworld.extensions.hexagons.eventlisteners = {};
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -3775,7 +3836,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
     var _ref$orientation = _ref.orientation;
-    var orientation = _ref$orientation === undefined ? "horizontal" : _ref$orientation;
+    var orientation = _ref$orientation === undefined ? 'horizontal' : _ref$orientation;
 
     globalRadius = radius;
     globalStartingPoint = startingPoint;
@@ -3795,12 +3856,12 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var _ref2$radius = _ref2.radius;
     var radius = _ref2$radius === undefined ? globalRadius : _ref2$radius;
     var _ref2$orientation = _ref2.orientation;
-    var orientation = _ref2$orientation === undefined ? "horizontal" : _ref2$orientation;
+    var orientation = _ref2$orientation === undefined ? 'horizontal' : _ref2$orientation;
 
     if (!radius) {
-      mapLog.error("You need to define at least globalRadius for the hexagonMath utils class");
+      mapLog.error('You need to define at least globalRadius for the hexagonMath utils class');
     }
-    var OFFSET = orientation === "horizontal" ? 0.5 : 0;
+    var OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     var CENTER = {
       x: radius,
       y: radius
@@ -3940,7 +4001,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var _ref6$radius = _ref6.radius;
     var radius = _ref6$radius === undefined ? globalRadius : _ref6$radius;
     var _ref6$orientation = _ref6.orientation;
-    var orientation = _ref6$orientation === undefined ? "horizontal" : _ref6$orientation;
+    var orientation = _ref6$orientation === undefined ? 'horizontal' : _ref6$orientation;
     var rows = gridSize.rows;
     var columns = gridSize.columns;
 
@@ -3950,14 +4011,14 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var rowHeight, columnWidth;
 
     /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
-    rowHeight = orientation === "horizontal" ? longDistance : shortDistance;
-    columnWidth = orientation === "horizontal" ? shortDistance : longDistance;
+    rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
+    columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
 
     for (var row = 0; rows > row; row++) {
       for (var column = 0; columns > column; column++) {
         /* Se the coordinates for each hexagons upper-left corner on the grid */
         gridArray.push({
-          x: Math.round(column * columnWidth + (orientation === "horizontal" && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
+          x: Math.round(column * columnWidth + (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
           y: row * rowHeight
         });
       }
@@ -3979,10 +4040,10 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var closestHexagonCenter;
 
     if (!globalOrientation || !radius || !globalStartingPoint) {
-      throw new Error("getClosestHexagonCenter requirements not filled");
+      throw new Error('getClosestHexagonCenter requirements not filled');
     }
 
-    if (globalOrientation === "horizontal") {
+    if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
         x: Math.round(coordinates.x - coordinates.x % calcShortDiagonal(radius) + calcShortDiagonal(radius) / 2 + globalStartingPoint.x),
         y: Math.round(coordinates.y - coordinates.y % calcSpecialDistance(radius) + calcLongDiagonal(radius) / 2 + globalStartingPoint.y)
@@ -4039,7 +4100,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     return inside;
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -4075,19 +4136,19 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
    * @method createHexagon
    * @param {Number} radius           Radius of the hexagon
    * @param {Object} {}               *OPTIONAL*
-   * @param {Object} {}.orientation   Is the heaxgon grid horizontal or vertical. Default: "horizontal"
+   * @param {Object} {}.orientation   Is the heaxgon grid horizontal or vertical. Default: 'horizontal"
    * @return {PIXI.Polygon}           Hexagon shaped PIXI.Polygon object. That houses the hexagons corner points.
    */
   function createHexagon(radius) {
     var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     var _ref$orientation = _ref.orientation;
-    var orientation = _ref$orientation === undefined ? "horizontal" : _ref$orientation;
+    var orientation = _ref$orientation === undefined ? 'horizontal' : _ref$orientation;
 
     var points = [];
 
-    if (orientation !== "horizontal") {
-      throw new Error("Nothing else than horizontal supported so far!");
+    if (orientation !== 'horizontal') {
+      throw new Error('Nothing else than horizontal supported so far!');
     }
     points = coordsToPixiPoints(radius);
 
@@ -4141,7 +4202,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     });
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -4180,13 +4241,13 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var ui;
 
     if (!FTW) {
-      throw new Error("eventlisteners initialization requires flatworld instance as a parameter");
+      throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
     }
 
     ui = UI();
 
-    eventListeners.on("select", tapListener);
-    eventListeners.on("order", orderListener);
+    eventListeners.on('select', tapListener);
+    eventListeners.on('order', orderListener);
 
     return true;
 
@@ -4208,10 +4269,10 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
         }
       };
       var containerFilter = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "name",
-        value: "unitLayer"
+        type: 'filter',
+        object: 'layer',
+        property: 'name',
+        value: 'unitLayer'
       });
       var objects;
 
@@ -4223,14 +4284,14 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
 
       if (!objects.length) {
         FTW.currentlySelectedObjects = undefined;
-        mapLog.debug("No objects found for selection!");
+        mapLog.debug('No objects found for selection!');
         // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
         ui.showSelections([]);
         return;
       }
 
       FTW.currentlySelectedObjects = objects;
-      mapEvents.publish("objectsSelected", objects);
+      mapEvents.publish('objectsSelected', objects);
       ui.showSelections(objects, getData);
       FTW.drawOnNextTick();
     }
@@ -4244,10 +4305,10 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
      */
     function orderListener(e) {
       var filter = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "name",
-        value: "unitLayer"
+        type: 'filter',
+        object: 'layer',
+        property: 'name',
+        value: 'unitLayer'
       });
       var getData = {
         allData: function allData(object) {
@@ -4257,10 +4318,10 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
       var globalCoords, selectedObject;
 
       if (!FTW.currentlySelectedObjects) {
-        mapLog.debug("No objects selected for orders! " + JSON.stringify(selectedObject));
+        mapLog.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
         return;
       } else if (FTW.currentlySelectedObjects.length > 1) {
-        mapLog.debug("the selected object is only supported to be one atm." + JSON.stringify(FTW.currentlySelectedObjects));
+        mapLog.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
         return;
       }
 
@@ -4275,7 +4336,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
       }
 
       selectedObject.move(globalCoords);
-      mapEvents.publish("objectMoves", selectedObject);
+      mapEvents.publish('objectMoves', selectedObject);
 
       ui.showUnitMovement(selectedObject, globalCoords);
 
@@ -4284,7 +4345,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     }
   }
 })();
-"use strict";
+'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4346,7 +4407,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectHexaTerrain).call(this, texture, coords, { data: data }));
 
-      _this.name = "DefaultTerrainObject_hexa";
+      _this.name = 'DefaultTerrainObject_hexa';
       _this.minimapColor = minimapColor;
       _this.minimapShape = minimapShape;
       calculateHexa.call(_this, radius);
@@ -4387,7 +4448,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectHexaUnit).call(this, texture, coords, { data: data }));
 
-      _this2.name = "DefaultUnitObjects_hexa";
+      _this2.name = 'DefaultUnitObjects_hexa';
       _this2.minimapColor = minimapColor;
       _this2.minimapShape = minimapShape;
       _this2.static = false;
@@ -4411,7 +4472,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
   function calculateHexa(radius) {
     if (!radius) {
-      throw new Error("Need radius!");
+      throw new Error('Need radius!');
     }
 
     var HEIGHT = Math.round(calcLongDiagonal(radius));
@@ -4456,7 +4517,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     ObjectHexaUnit: ObjectHexaUnit
   };
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -4487,7 +4548,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     return {
       init: init,
-      pluginName: "selectHexagonObject"
+      pluginName: 'selectHexagonObject'
     };
 
     /**
@@ -4513,7 +4574,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -4528,7 +4589,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  //var viewportWorker = new Worker("/components/map/extensions/mapMovement/mapMovementWorker.js");
+  // var viewportWorker = new Worker('/components/map/extensions/mapMovement/mapMovementWorker.js');
 
   /*-----------------------
   ---------- API ----------
@@ -4558,7 +4619,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     return {
       init: init,
-      pluginName: "mapMovement",
+      pluginName: 'mapMovement',
       addAll: addAll,
       check: check,
       startEventListeners: startEventListeners,
@@ -4605,9 +4666,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
             });
 
             var containerCoords = visibleContainers.reduce(function (all, cont2) {
-              all + cont2.x + "";
+              all + cont2.x + '';
             });
-            window.flatworld.log.debug("visible subcontainers: " + visibleContainers.length + ", " + containerCoords + "\n\ninvisible: " + invisibleContainers.length);
+            window.flatworld.log.debug('visible subcontainers: ' + visibleContainers.length + ', ' + containerCoords + '\n\ninvisible: ' + invisibleContainers.length);
           });
         };
         /**
@@ -4683,10 +4744,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Map} map     Instance of Map
      */
     function startEventListeners() {
-      mapEvents.subscribe("mapMoved", moveCb);
-      mapEvents.subscribe("mapResized", resizeCb);
+      mapEvents.subscribe('mapMoved', moveCb);
+      mapEvents.subscribe('mapResized', resizeCb);
       /* We change the scale factor ONLY if the map is zoomed. We reserve resources */
-      mapEvents.subscribe("mapZoomed", zoomCb);
+      mapEvents.subscribe('mapZoomed', zoomCb);
 
       function moveCb(type) {
         var movedCoordinates = type.customData[0];
@@ -4849,15 +4910,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 "use strict";
 
 window.flatworld.extensions.minimaps = {};
-"use strict";
+'use strict';
 
 (function () {
-  'use strict';
-
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-
   var mapEvents = window.flatworld.mapEvents;
   var eventListeners = window.flatworld.eventListeners;
   var MapDataManipulator = window.flatworld.MapDataManipulator;
@@ -4885,11 +4943,11 @@ window.flatworld.extensions.minimaps = {};
   function setupPixelizedMinimap() {
     var paddingX = 0;
     var paddingY = 0;
-    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp;
+    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
 
     return {
       init: init,
-      pluginName: "pixelizedMinimap",
+      pluginName: 'pixelizedMinimap',
       initMinimap: initMinimap,
       _testObject: {}
     };
@@ -4925,7 +4983,7 @@ window.flatworld.extensions.minimaps = {};
       paddingY = yPadding;
       minimap.minimapSize = minimapSize;
       coordinateConverterCB = coordinateConvCB;
-      //utils.mouse.disableContextMenu(map.getRenderer("minimap").view);
+      // utils.mouse.disableContextMenu(map.getRenderer('minimap').view);
       setMinimapUI(UIImage);
       setupBackgroundLayer(staticCB);
       setupDynamicLayer(dynamicCB);
@@ -4935,7 +4993,7 @@ window.flatworld.extensions.minimaps = {};
       minimapViewport = givenMinimapViewport;
       minimap.addChild(minimapViewport);
 
-      mapEvents.publish("minimapInitialized", minimap);
+      mapEvents.publish('minimapInitialized', minimap);
 
       return minimap;
     }
@@ -4950,9 +5008,9 @@ window.flatworld.extensions.minimaps = {};
      */
     function setupBackgroundLayer(staticCB) {
       var filters = new MapDataManipulator({
-        type: "filter",
-        object: "layer",
-        property: "staticLayer",
+        type: 'filter',
+        object: 'layer',
+        property: 'staticLayer',
         value: true
       });
       var backgroundContainer = createMinimapLayer();
@@ -4967,23 +5025,25 @@ window.flatworld.extensions.minimaps = {};
     }
     function setupDynamicLayer(updateCB) {
       var filters = new MapDataManipulator({
-        type: "filter",
-        object: "object",
-        property: "static",
+        type: 'filter',
+        object: 'object',
+        property: 'static',
         value: false
       });
-      var dynamicContainer = createMinimapLayer();
+      dynamicContainer = createMinimapLayer();
 
       map.getAllObjects({ filters: filters }).forEach(function (obj) {
         dynamicContainer.addChild(updateCB(obj));
       });
 
+      dynamicContainer.cacheAsBitmap = true;
+
       minimap.addChild(dynamicContainer);
     }
     function setupMinimapViewportEvents() {
-      mapEvents.subscribe("mapMoved", reactToMapMovement);
-      mapEvents.subscribe("mapZoomed", reactToMapScale);
-      mapEvents.subscribe("minimapClicked", moveViewport);
+      mapEvents.subscribe('mapMoved', reactToMapMovement);
+      mapEvents.subscribe('mapZoomed', reactToMapScale);
+      mapEvents.subscribe('minimapClicked', moveViewport);
     }
     function reactToMapMovement() {
       if (mapMoveTimestamp - Date.now() > -5) {
@@ -5030,16 +5090,16 @@ window.flatworld.extensions.minimaps = {};
           activeCB = cb;
 
           hammer.add(tap);
-          hammer.on("tap", activeCB);
+          hammer.on('tap', activeCB);
         },
         off: function off() {
-          hammer.on("tap", activeCB);
+          hammer.on('tap', activeCB);
         }
       };
 
-      eventListeners.setDetector("minimapClicked", minimapClickDetector.on, minimapClickDetector.off);
+      eventListeners.setDetector('minimapClicked', minimapClickDetector.on, minimapClickDetector.off);
 
-      eventListeners.on("minimapClicked", moveViewport);
+      eventListeners.on('minimapClicked', moveViewport);
     }
     /*-----------------------
     -------- PRIVATE --------
@@ -5053,7 +5113,7 @@ window.flatworld.extensions.minimaps = {};
      * @param {Integer} height
      */
     function _setMinimapArea(x, y, width, height) {
-      var _minimapRenderer = map.getRenderer("minimap");
+      var _minimapRenderer = map.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;
@@ -5074,9 +5134,13 @@ window.flatworld.extensions.minimaps = {};
 
       return container;
     }
+    function updateMinimapLayer() {
+      dynamicContainer.cacheAsBitmap = false;
+      dynamicContainer.cacheAsBitmap = true;
+    }
   }
 })();
-"use strict";
+'use strict';
 
 (function () {
   'use strict';
@@ -5110,7 +5174,7 @@ window.flatworld.extensions.minimaps = {};
 
     return {
       init: init,
-      pluginName: "scaledMinimap",
+      pluginName: 'scaledMinimap',
       _testObject: {}
     };
     /**
@@ -5144,7 +5208,7 @@ window.flatworld.extensions.minimaps = {};
       setupBackgroundLayer(backgroundImage);
       _setMinimapCoordinates(Math.round(x), Math.round(y));
 
-      mapEvents.publish("minimapInitialized", minimap);
+      mapEvents.publish('minimapInitialized', minimap);
     }
     function setMinimapUI(UIImage) {
       var UITexture = PIXI.Texture.fromFrame(UIImage);
@@ -5173,14 +5237,231 @@ window.flatworld.extensions.minimaps = {};
 })();
 "use strict";
 
+window.flatworld.extensions.fogOfWars = {};
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+(function simpleFogOfWar() {
+  /*-----------------------
+  --------- IMPORT --------
+  -----------------------*/
+  var PIXI = window.flatworld_libraries.PIXI;
+  var _window$flatworld = window.flatworld;
+  var mapEvents = _window$flatworld.mapEvents;
+  var MapDataManipulator = _window$flatworld.MapDataManipulator;
+  var utils = _window$flatworld.utils;
+
+  /*-----------------------
+  ---------- API ----------
+  -----------------------*/
+
+  window.flatworld.extensions.fogOfWars.simpleFogOfWar = setupSimpleFogOfWar();
+
+  /*-----------------------
+  -------- PUBLIC ---------
+  -----------------------*/
+  /**
+   * Simple fog of war works with circles around objects
+   *
+   * @namespace flatworld.extensions.fogOfWars
+   * @class pixelizedMinimap
+   **/
+  function setupSimpleFogOfWar() {
+    var VIEWPORT_MULTIPLIER = 0.4;
+    var baseRendererOptions = {
+      transparent: true,
+      autoResize: true
+    };
+    var baseFilter = new MapDataManipulator([{
+      type: 'filter',
+      object: 'object',
+      property: 'type',
+      value: 'unit'
+    }]);
+    var maskSprite = new PIXI.Sprite();
+    var FoWOverlay = void 0;
+    var alpha = void 0;
+    var map = void 0;
+    var FoWRenderer = void 0;
+    var texture = void 0;
+    var maskContainer = void 0;
+    var FoWCB = void 0;
+
+    return {
+      // These two are required by all plugins
+      init: init,
+      pluginName: 'simpleFogOfWar',
+
+      getFoWRenderer: getFoWRenderer,
+      getMaskContainer: getMaskContainer,
+
+      activateFogOfWar: activateFogOfWar,
+      refreshFoW: refreshFoW,
+      getFoWObjectArray: getFoWObjectArray,
+      calculateCorrectCoordinates: calculateCorrectCoordinates
+    };
+    /**
+     * Ínitialize as a plugin. Done by the Flatworld class.
+     *
+     * After plugin has been initialized by the flatworld, you must still call initFogOfWar to
+     * start showing it.
+     *
+     * @todo the offsets are really bad! For some reason they are needed, I don't know where the
+     * issue lies :(. We probably need an offset for the renderer in the end anyway, but now it
+     * doesn't even work properly without them.
+     * can be used here and in getViewportArea-method etc.
+     *
+     * @method init
+     * @param  {Map} givenMap     Instance of Map
+     */
+    function init(givenMap) {
+      map = givenMap;
+      map.activateFogOfWar = activateFogOfWar;
+      var mapRenderer = map.getRenderer();
+      var coordinates = {
+        x: 0,
+        y: 0,
+        width: (mapRenderer.width + 0 + mapRenderer.width / 2) * map.getZoom(),
+        height: (mapRenderer.height + 0 + mapRenderer.height / 2) * map.getZoom()
+      };
+      var rendererOptions = Object.assign(baseRendererOptions, {
+        resolution: mapRenderer.resolution
+      });
+
+      setupRenderer(coordinates, rendererOptions);
+
+      maskContainer = map.createSpecialLayer('FoWMaskLayer');
+      maskContainer.x = coordinates.x;
+      maskContainer.y = coordinates.y;
+    }
+
+    function activateFogOfWar(cb) {
+      var options = arguments.length <= 1 || arguments[1] === undefined ? { alpha: 0.8 } : arguments[1];
+
+      alpha = options.alpha;
+      FoWCB = cb;
+
+      utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
+
+      refreshFoW();
+      setEvents();
+    }
+
+    function refreshFoW() {
+      var staticLayer = map.getStaticLayer();
+      resetFoW(FoWOverlay);
+
+      map.getMovableLayer().updateTransform();
+      var spriteArray = getFoWObjectArray(FoWCB);
+
+      if (spriteArray.length > 0) {
+        var _maskContainer;
+
+        (_maskContainer = maskContainer).addChild.apply(_maskContainer, _toConsumableArray(spriteArray));
+      }
+      FoWRenderer.render(maskContainer);
+      maskContainer.removeChildren();
+      texture = PIXI.Texture.fromCanvas(FoWRenderer.view);
+      maskSprite.texture = texture;
+
+      texture.update();
+      staticLayer.mask = maskSprite;
+    }
+
+    function getFoWObjectArray(cb) {
+      var filter = arguments.length <= 1 || arguments[1] === undefined ? baseFilter : arguments[1];
+
+      return getCorrectObjects(filter).map(function (object) {
+        return cb(calculateCorrectCoordinates(object));
+      });
+    }
+    /**
+     * @todo this artificial -119 HAS to be taken away
+     */
+    function calculateCorrectCoordinates(object) {
+      var coordinates = object.toGlobal(new PIXI.Point(0, 0));
+
+      coordinates.x = Math.round(coordinates.x);
+      coordinates.y = Math.round(coordinates.y);
+      coordinates.anchor = object.anchor;
+      coordinates.pivot = object.pivot;
+      coordinates.scale = map.getZoom();
+
+      return coordinates;
+    }
+
+    /**
+     * @param  {MapDataManipulator} filter    REQUIRED
+     * @return {Array}                        Array of objects to be used for creating FoW
+     */
+    function getCorrectObjects(filter) {
+      return map.getObjectsUnderArea(map.getViewportArea(false, VIEWPORT_MULTIPLIER), { filters: filter });
+    }
+
+    function setupRenderer(coordinates, resolution, rendererOptions) {
+      // Create the fog that cover everything and create holes to it later:
+      FoWOverlay = createOverlay(coordinates);
+      // Clear old renderer IF it exists
+      clearRenderer(FoWRenderer);
+      // Create new renderer
+      FoWRenderer = setRenderer(coordinates, rendererOptions);
+    }
+
+    function getMaskContainer() {
+      return maskContainer;
+    }
+
+    function getFoWRenderer() {
+      return FoWRenderer;
+    }
+
+    /** *************************************
+    **************** PRIVATE ****************
+    ****************************************/
+    function setRenderer(coordinates, rendererOptions) {
+      return new PIXI.WebGLRenderer(coordinates.width, coordinates.height, rendererOptions);
+    }
+
+    function clearRenderer(renderer) {
+      // Reset earlier fog of war renderer, if present
+      renderer && renderer.destroy && renderer.view && renderer.destroy(); // eslint-disable-line
+    }
+    function resetFoW(overlay) {
+      texture && texture.destroy && texture.destroy(); // eslint-disable-line no-unused-expressions
+      maskContainer.children && maskContainer.removeChildren(); // eslint-disable-line
+      maskContainer.addChild(overlay);
+    }
+
+    function createOverlay(coordinates) {
+      var graphics = new PIXI.Graphics();
+
+      graphics.clear();
+      graphics.beginFill(0x000000, alpha);
+      graphics.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
+      graphics.endFill();
+
+      return graphics;
+    }
+    function setEvents() {
+      mapEvents.subscribe('mapResized', function () {
+        utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
+      });
+      mapEvents.subscribe('mapResized', refreshFoW);
+      mapEvents.subscribe('mapMoved', refreshFoW);
+    }
+  }
+})();
+"use strict";
+
 window.flatworld.UIs = window.flatworld.UIs || {};
 window.flatworld.UIs.default = {};
 window.flatworld.UIs.default.utils = {};
 window.flatworld.UIs.default.layout = {};
-"use strict";
+'use strict';
 
 (function () {
-  "use strict";
+  'use strict';
 
   /*---------------------
   --------- API ---------
@@ -5237,7 +5518,7 @@ window.flatworld.UIs.default.layout = {};
         */
     function drawArrow(shape, x1, y1, x2, y2, style, which, angle, d) {
       var graphics = shape.graphics,
-          color = "#000",
+          color = '#000',
           angle1,
           topx,
           topy,
@@ -5320,7 +5601,7 @@ window.flatworld.UIs.default.layout = {};
         var backdist;
         x0 = +x0, y0 = +y0, x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2;
         // all cases do this.
-        graphics.beginStroke("#F00").moveTo(x0, y0).lineTo(x1, y1).lineTo(x2, y2);
+        graphics.beginStroke('#F00').moveTo(x0, y0).lineTo(x1, y1).lineTo(x2, y2);
         switch (style) {
           case 0:
             // curved filled, add the bottom as an arcTo curve and fill
@@ -5330,19 +5611,19 @@ window.flatworld.UIs.default.layout = {};
             break;
           case 1:
             // straight filled, add the bottom as a line and fill.
-            graphics.beginStroke("#F00").moveTo(x0, y0).lineTo(x1, y1).lineTo(x2, y2).lineTo(x0, y0).fill();
+            graphics.beginStroke('#F00').moveTo(x0, y0).lineTo(x1, y1).lineTo(x2, y2).lineTo(x0, y0).fill();
             break;
           case 2:
             // unfilled head, just stroke.
             break;
           case 3:
-            //filled head, add the bottom as a quadraticCurveTo curve and fill
+            // filled head, add the bottom as a quadraticCurveTo curve and fill
             var cpx = (x0 + x1 + x2) / 3;
             var cpy = (y0 + y1 + y2) / 3;
             graphics.beginFill().quadraticCurveTo(cpx, cpy, x0, y0);
             break;
           case 4:
-            //filled head, add the bottom as a bezierCurveTo curve and fill
+            // filled head, add the bottom as a bezierCurveTo curve and fill
             var cp1x, cp1y, cp2x, cp2y;
             var shiftamt = 5;
             if (x2 === x0) {
@@ -5420,7 +5701,7 @@ window.flatworld.UIs.default.layout = {};
     /* =============================== */
 
     function line(graphics, from, to) {
-      var options = arguments.length <= 3 || arguments[3] === undefined ? { color: "#000000", style: 5 } : arguments[3];
+      var options = arguments.length <= 3 || arguments[3] === undefined ? { color: '#000000', style: 5 } : arguments[3];
       var color = options.color;
       var style = options.style;
 
@@ -5452,7 +5733,7 @@ window.flatworld.UIs.default.layout = {};
     singleSelection: Handlebars.compile('\n      <span style=\'font-size:200%;display:block;margin-bottom:20px;\'>\n        {{title}}\n      </span>\n      <ul>\n        <li>\n          {{object.name}}\n        </li>\n      </ul>')
   };
 })();
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -5502,7 +5783,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
       var _ref$styles = _ref.styles;
-      var styles = _ref$styles === undefined ? "#F0F0F0" : _ref$styles;
+      var styles = _ref$styles === undefined ? '#F0F0F0' : _ref$styles;
       var elements = _ref.elements;
 
       _classCallCheck(this, UIDefault);
@@ -5510,15 +5791,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
-      var createdCSS = "\n        " + cssClasses.select + " {\n          z-index: 9999;\n          opacity: 0.9;\n          position: fixed;\n          left: 0px;\n          bottom: 0px;\n          background-color: brown;\n          border: 1px solid rgb(255, 186, 148);;\n          border-bottom: 0px;\n          padding:15px;\n          margin-left:10px;\n        }";
+      var createdCSS = '\n        ' + cssClasses.select + ' {\n          z-index: 9999;\n          opacity: 0.9;\n          position: fixed;\n          left: 0px;\n          bottom: 0px;\n          background-color: brown;\n          border: 1px solid rgb(255, 186, 148);;\n          border-bottom: 0px;\n          padding:15px;\n          margin-left:10px;\n        }';
       this.addCSSRulesToScriptTag(styleSheetElement, createdCSS);
 
       // Add a media (and/or media query) here if you'd like!
-      // style.setAttribute("media", "screen")
-      // style.setAttribute("media", "only screen and (max-width : 1024px)")
+      // style.setAttribute('media', 'screen')
+      // style.setAttribute('media', 'only screen and (max-width : 1024px)')
 
       this.FTW = FTW;
-      this.modal = modal || document.getElementById("dialog_select");
+      this.modal = modal || document.getElementById('dialog_select');
       this.styles = styles;
     }
     /**
@@ -5528,7 +5809,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(UIDefault, [{
-      key: "setFlatworld",
+      key: 'setFlatworld',
       value: function setFlatworld(FTW) {
         this.FTW = FTW;
       }
@@ -5538,7 +5819,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getTemplates",
+      key: 'getTemplates',
       value: function getTemplates() {
         return templates;
       }
@@ -5552,7 +5833,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "showSelections",
+      key: 'showSelections',
       value: function showSelections(objects, getDatas, options) {
         var _this = this;
 
@@ -5561,18 +5842,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var cb;
 
         /* We add the objects to be highlighted to the correct UI layer */
-        //objectsToUI(UILayer, objects);
+        // objectsToUI(UILayer, objects);
 
         if (objects && objects.length > 1) {
           cb = function cb() {
             _this.modal.innerHTML = templates.multiSelection({
-              title: "Objects",
+              title: 'Objects',
               objects: objects
             });
 
             _this.showModal(_this.modal, cssClasses);
 
-            _getElement("select").style.display = 'block';
+            _getElement('select').style.display = 'block';
           };
         } else if (objects && objects.length === 1) {
           cb = function cb() {
@@ -5582,11 +5863,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           cb = function cb() {
             UILayer.deleteUIObjects();
             updateCB();
-            mapLog.debug("Error occured selecting the objects on this coordinates! Nothing found");
+            mapLog.debug('Error occured selecting the objects on this coordinates! Nothing found');
           };
         }
 
-        _getElement("select").style.display = 'none';
+        _getElement('select').style.display = 'none';
         cb();
       }
       /**
@@ -5599,9 +5880,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "highlightSelectedObject",
+      key: 'highlightSelectedObject',
       value: function highlightSelectedObject(object, getDatas) {
-        var options = arguments.length <= 2 || arguments[2] === undefined ? { shadow: { color: "0x0000", distance: 5, alpha: 0.55, angle: 45, blur: 5 } } : arguments[2];
+        var options = arguments.length <= 2 || arguments[2] === undefined ? { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } } : arguments[2];
         var shadow = options.shadow;
 
         var highlightableObject, objectDatas;
@@ -5609,7 +5890,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         objectDatas = getDatas.allData(object);
 
         this.modal.innerHTML = templates.singleSelection({
-          title: "Selected",
+          title: 'Selected',
           object: {
             name: objectDatas.name
           }
@@ -5628,7 +5909,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.FTW.drawOnNextTick();
 
-        _getElement("select").style.display = 'block';
+        _getElement('select').style.display = 'block';
 
         return highlightableObject;
       }
@@ -5638,9 +5919,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "showUnitMovement",
+      key: 'showUnitMovement',
       value: function showUnitMovement(object, to) {
-        var UINAME = "movementArrow";
+        var UINAME = 'movementArrow';
         var localTo, localFrom, currentArrow;
 
         localTo = this.FTW.getMovableLayer().toLocal(to);
@@ -5667,13 +5948,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "_highlightSelectedObject",
+      key: '_highlightSelectedObject',
       value: function _highlightSelectedObject(object, renderer) {
         var movableLayer = this.FTW.getMovableLayer();
         var clonedObject;
 
         clonedObject = object.clone(renderer);
-        clonedObject.__proto__ = object.__proto__;
 
         var coord = object.toGlobal(new PIXI.Point(0, 0));
         coord = movableLayer.toLocal(coord);
@@ -5692,21 +5972,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "createHighlight",
+      key: 'createHighlight',
       value: function createHighlight(object) {
         var options = arguments.length <= 1 || arguments[1] === undefined ? { coords: new PIXI.Point(0, 0) } : arguments[1];
 
         var RADIUS = 47;
-        var UI_CONTAINER_NAME = "unit highlight";
+        var UI_CONTAINER_NAME = 'unit highlight';
         var movableLayer = this.FTW.getMovableLayer();
-        var container = new this.FTW.createSpecialLayer("UILayer", { toLayer: movableLayer });
+        var container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
         var objCoords = {
           x: Number(object.x),
           y: Number(object.y)
         };
         var highlighterObject;
 
-        highlighterObject = createVisibleHexagon(RADIUS, { color: "#F0F0F0" });
+        highlighterObject = createVisibleHexagon(RADIUS, { color: '#F0F0F0' });
         highlighterObject.x = objCoords.x + 32;
         highlighterObject.y = objCoords.y + 27;
 
@@ -5730,7 +6010,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "addCSSRulesToScriptTag",
+      key: 'addCSSRulesToScriptTag',
       value: function addCSSRulesToScriptTag(sheet, rules) {
         sheet.insertRule(rules, 0);
       }
@@ -5739,11 +6019,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "addStyleElement",
+      key: 'addStyleElement',
       value: function addStyleElement() {
-        var _styleElement = document.createElement("style");
+        var _styleElement = document.createElement('style');
         // WebKit hack :(
-        _styleElement.appendChild(document.createTextNode(""));
+        _styleElement.appendChild(document.createTextNode(''));
         document.head.appendChild(_styleElement);
 
         return _styleElement.sheet;
@@ -5757,7 +6037,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "showModal",
+      key: 'showModal',
       value: function showModal(modalElem, cssClasses) {
         modalElem.classList.add(cssClasses.select);
         /* Would be HTML 5.1 standard, but that might be a long way
@@ -5791,7 +6071,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   window.flatworld.UIs.default.init = UIDefault;
 })();
-"use strict";
+'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -5800,12 +6080,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function () {
-  'use strict';
-
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-
   var _window$flatworld_lib = window.flatworld_libraries;
   var Q = _window$flatworld_lib.Q;
   var PIXI = _window$flatworld_lib.PIXI;
@@ -5824,10 +6101,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var LAYER_TYPE_STATIC = 0;
   var LAYER_TYPE_MOVABLE = 1;
   var LAYER_TYPE_MINIMAP = 2;
-  var VERSION = "0.0.0";
+  var VERSION = '0.0.0';
+  var _retrieveObjects = Symbol('_retrieveObjects');
+  var _getLayersWithAttributes = Symbol('_getLayersWithAttributes');
+  var _getSubcontainersUnderArea = Symbol('_getSubcontainersUnderArea');
+  var _defaultTick = Symbol('_defaultTick');
+  var _addObjectToUIlayer = Symbol('_addObjectToUIlayer');
+  var _renderers = {};
   var _drawMapOnNextTick = false;
   var isMapReadyPromises = [];
-  var _staticLayer, _movableLayer, _minimapLayer, _renderer, _rendererMinimap, ParentLayerConstructor;
+  var _privateRenderers = void 0;
+  var _staticLayer = void 0;
+  var _movableLayer = void 0;
+  var _minimapLayer = void 0;
+  var ParentLayerConstructor = void 0;
 
   /*---------------------
   --------- API ---------
@@ -5844,7 +6131,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      *
      * The biggest part of creating the map, is the data structure. There is a clear data structure that you can see from the
      * tests/data-folder, but the factory is responsible for creating the objects, so you can use your own factory implementation. So to
-     * understand more, please see e.g. {{#crossLink "flatworld.factories.hexaFactory"}}{{/crossLink}}.
+     * understand more, please see e.g. {{#crossLink 'flatworld.factories.hexaFactory'}}{{/crossLink}}.
      *
      * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
      * structure is this:
@@ -5887,7 +6174,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Integer} props.mapSize.y                     y-axis
      * @param {Object} props.rendererOptions                Renderer options passed to PIXI.autoDetectRenderer
      * @param {Object} props.subcontainers                  Subcontainers size in pixels. If given, will activate subcontainers. If not
-     * given or false, subcontainers are not used.area.
+     * given or false, subcontainers are not used.
      * @param {Integer} props.subcontainers.width           Subcontainer width
      * @param {Integer} props.subcontainers.height          Subcontainer height
      * @param {FPSCallback} [trackFPSCB]                    Callback function for tracking FPS in renderer. So this is used for debugging
@@ -5909,9 +6196,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var rendererOptions = _ref$rendererOptions === undefined ? { autoResize: true, antialias: false } : _ref$rendererOptions;
       var minimapCanvas = _ref.minimapCanvas;
       var _ref$subcontainers = _ref.subcontainers;
-      var subcontainers = _ref$subcontainers === undefined ? false : _ref$subcontainers;
+      var subcontainers = _ref$subcontainers === undefined ? {
+        width: 0,
+        height: 0,
+        maxDetectionOffset: 0 } : _ref$subcontainers;
       var _ref$cache = _ref.cache;
-      var cache = _ref$cache === undefined ? false : _ref$cache;
+      var // maxDetectionOffset default set later
+      cache = _ref$cache === undefined ? false : _ref$cache;
       var _ref$trackFPSCB = _ref.trackFPSCB;
       var trackFPSCB = _ref$trackFPSCB === undefined ? false : _ref$trackFPSCB;
       var _ref$defaultScaleMode = _ref.defaultScaleMode;
@@ -5921,48 +6212,62 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       /* Check for the required parameters! */
       if (!mapCanvas) {
-        throw new Error(this.constructor.name + " needs canvas element!");
+        throw new Error(this.constructor.name + ' needs canvas element!');
       }
       /* If the constructor was passed mapCanvas as a string and not as an Element, we get the element */
-      if (typeof mapCanvas === "string") {
+      if (typeof mapCanvas === 'string') {
         mapCanvas = document.querySelector(mapCanvas);
       }
 
       /* Make sure the mapCanvas is empty. So there are no nasty surprises */
-      mapCanvas.innerHTML = "";
+      mapCanvas.innerHTML = '';
       /* Add the given canvas Element to the options that are passed to PIXI renderer */
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
-      _renderer = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+      _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+      _renderers.main.getResponsibleLayer = this.getStaticLayer;
       /* Create PIXI renderer for minimap */
-      _rendererMinimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
+      if (minimapCanvas) {
+        _renderers.minimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
+        _renderers.minimap.plugins.interaction.destroy();
+        _renderers.minimap.getResponsibleLayer = this.getMinimapLayer;
+      }
       /* We handle all the events ourselves through addEventListeners-method on canvas, so destroy pixi native method */
-      _renderer.plugins.interaction.destroy();
+      _renderers.main.plugins.interaction.destroy();
+
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
-      ParentLayerConstructor = subcontainers ? mapLayers.MapLayerParent : mapLayers.MapLayer;
+      ParentLayerConstructor = subcontainers.width && subcontainers.height && subcontainers.maxDetectionOffset ? mapLayers.MapLayerParent : mapLayers.MapLayer;
 
       /* These are the 2 topmost layers on the map:
-       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map scale value and possible
+       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map
+       * scale value and possible
        * objects that do not move with the map. StaticLayer has only one child: _movableLayer
-       * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move with the map. Like
+       * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move
+       * with the map. Like
        * graphics that show which area or object is currently selected. */
-      _staticLayer = new mapLayers.MapLayer({ name: "staticLayer", coord: { x: 0, y: 0 } });
-      _movableLayer = new mapLayers.MapLayer({ name: "movableLayer", coord: { x: 0, y: 0 } });
-      _minimapLayer = new mapLayers.MapLayer({ name: "minimapLayer", coord: { x: 0, y: 0 } });
+      _staticLayer = new mapLayers.MapLayer({ name: 'staticLayer', coord: { x: 0, y: 0 } });
+      _movableLayer = new mapLayers.MapLayer({ name: 'movableLayer', coord: { x: 0, y: 0 } });
+      _minimapLayer = new mapLayers.MapLayer({ name: 'minimapLayer', coord: { x: 0, y: 0 } });
       _staticLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
-      utils.general.fullsizeCanvasCSS(_renderer.view);
+      utils.general.fullsizeCanvasCSS(_renderers.main.view);
       /* stop scrollbars of showing */
-      document.getElementsByTagName("body")[0].style.overflow = "hidden";
+      mapCanvas.style.overflow = 'hidden';
 
-      utils.mouse.disableContextMenu(_renderer.view);
+      utils.mouse.disableContextMenu(_renderers.main.view);
 
-      /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P. Setting this separately in each
+      /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
+       * Setting this separately in each
        * baseTexture, would seem stupid, so we do it like this for now. */
       this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
 
+      /* We cache the privateRenderers in array format to a module variable */
+      _privateRenderers = Object.keys(_renderers).map(function (idx) {
+        return _renderers[idx];
+      });
+
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *
@@ -5970,7 +6275,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @type {HTMLElement}
        * @required
        **/
-      this.canvas = _renderer.view;
+      this.canvas = _renderers.main.view;
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *
@@ -5978,7 +6283,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @type {HTMLElement}
        * @required
        **/
-      this.minimapCanvas = _rendererMinimap.view;
+      this.minimapCanvas = _renderers.minimap ? _renderers.minimap.view : undefined;
       /**
        * @attribute mapSize
        * @type {x: Number, y: Number}
@@ -5994,11 +6299,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
       this.plugins = new Set();
       /**
-       * Subcontainers size that we want to generate, when layers use subcontainers
+       * Subcontainers size that we want to generate, when layers use subcontainers.
        *
        * @attribute subcontainersConfig
-       * @type {{width: Integer, height: Int}}
+       * @type {{width: Integer, height: Int, maxDetectionOffset: Int}}
        **/
+      // Set default
+      subcontainers.maxDetectionOffset = subcontainers.maxDetectionOffset || 100;
       this.subcontainersConfig = subcontainers;
       /**
        * Callback function that gets the current FPS on the map and shows it in DOM
@@ -6008,7 +6315,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
       this.trackFPSCB = trackFPSCB;
       /**
-       * ObjectManager instance. Responsible for retrieving the objects from the map, on desired occasions. Like when the player clicks
+       * ObjectManager instance. Responsible for retrieving the objects from the map, on desired
+       * occasions. Like when the player clicks
        * the map to select some object. This uses subcontainers when present.
        *
        * @attribute objectManager
@@ -6016,7 +6324,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
       this.objectManager = new ObjectManager();
       /**
-       * Is cache activated for this map at all. This is set for individual layers with a property, but without activating the cache for
+       * Is cache activated for this map at all. This is set for individual layers with a
+       * property, but without activating the cache for
        * the whole map, the layers cache property is ignored.
        *
        * @attribute objectManager
@@ -6085,7 +6394,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(Flatworld, [{
-      key: "init",
+      key: 'init',
       value: function init() {
         var plugins = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
         var coord = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
@@ -6104,7 +6413,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         coord && Object.assign(_movableLayer, coord);
 
         /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
-        this._defaultTick();
+        this[_defaultTick]();
         tickCB && this.customTickOn(tickCB);
         isMapReadyPromises = allPromises;
 
@@ -6124,7 +6433,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "whenReady",
+      key: 'whenReady',
       value: function whenReady() {
         return Q.all(isMapReadyPromises);
       }
@@ -6135,9 +6444,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "drawOnNextTick",
+      key: 'drawOnNextTick',
       value: function drawOnNextTick() {
         _drawMapOnNextTick = true;
+      }
+      /**
+       * The correct way to update / redraw the map. Check happens at every tick and thus in every frame.
+       *
+       * @method drawOnNextTick
+       **/
+
+    }, {
+      key: 'collectGarbage',
+      value: function collectGarbage() {
+        _privateRenderers.forEach(function (renderer) {
+          return renderer.textureGC.run();
+        });
       }
       /**
        * Add an UI object to the wanted layer.
@@ -6148,16 +6470,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "addUIObject",
+      key: 'addUIObject',
       value: function addUIObject(layerType, objects, UIName) {
         var _this = this;
 
         if (Array.isArray(objects)) {
           objects.forEach(function (object) {
-            _this._addObjectToUIlayer(layerType, object);
+            _this[_addObjectToUIlayer](layerType, object);
           });
         } else {
-          this._addObjectToUIlayer(layerType, objects, UIName);
+          this[_addObjectToUIlayer](layerType, objects, UIName);
         }
       }
       /**
@@ -6169,7 +6491,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "removeUIObject",
+      key: 'removeUIObject',
       value: function removeUIObject(layerType, UIName) {
         switch (layerType) {
           case LAYER_TYPE_STATIC:
@@ -6189,15 +6511,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @param {Object} options.coord      Coordinates of the layer
        * @param {Integer} options.coord.x   X coordinate
        * @param {Integer} options.coord.y   Y coordinate
-       * @param {Object} options.toLayer    To which layer will this layer be added to as UILayer. Default false
+       * @param {Object} options.toLayer    To which layer will this layer be added to as UILayer.
+       *  Default false
        * @return {MapLayer}            The created UI layer
        **/
 
     }, {
-      key: "createSpecialLayer",
+      key: 'createSpecialLayer',
       value: function createSpecialLayer() {
-        var name = arguments.length <= 0 || arguments[0] === undefined ? "default special layer" : arguments[0];
-        var options = arguments.length <= 1 || arguments[1] === undefined ? { coord: { x: 0, y: 0 }, toLayer: false } : arguments[1];
+        var name = arguments.length <= 0 || arguments[0] === undefined ? 'default special layer' : arguments[0];
+        var options = arguments.length <= 1 || arguments[1] === undefined ? {
+          coord: {
+            x: 0,
+            y: 0 },
+          toLayer: false } : arguments[1];
 
         var coord = options.coord || { x: 0, y: 0 };
         var layer = new mapLayers.MapLayer(name, coord);
@@ -6216,9 +6543,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "addLayer",
+      key: 'addLayer',
       value: function addLayer(layerOptions) {
-        var newLayer;
+        var newLayer = void 0;
 
         if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
           layerOptions.subcontainers = this.getSubcontainerConfigs();
@@ -6230,86 +6557,88 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return newLayer;
       }
       /**
-       * Just a convenience function (for usability and readability), for checking if the map uses subcontainers.
+       * Just a convenience function (for usability and readability), for checking if the map uses
+       * subcontainers.
        *
        * @method usesSubcontainers
+       * @return {Boolean}
        **/
 
     }, {
-      key: "usesSubcontainers",
+      key: 'usesSubcontainers',
       value: function usesSubcontainers() {
-        return this.getSubcontainerConfigs() ? true : false;
+        return !!(this.getSubcontainerConfigs().width && this.getSubcontainerConfigs().height);
       }
       /**
        * Returns current subcontainers configurations (like subcontainers size).
        *
        * @method getSubcontainerConfigs
+       * @return {Object}
        **/
 
     }, {
-      key: "getSubcontainerConfigs",
+      key: 'getSubcontainerConfigs',
       value: function getSubcontainerConfigs() {
         return this.subcontainersConfig;
       }
       /**
-       * Get the size of the area that is shown to the player. More or less the area of the browser window.
+       * Get the size of the area that is shown to the player. More or less the area of the browser
+       * window.
        *
        * @method getViewportArea
-       * @param  {Boolean} isLocal                                                  Do we want to use Map coordinates or global / canvas
+       * @param  {Boolean} isLocal                                                  Do we want to
+       * use Map coordinates or global / canvas
        * coordinates. Default = false
-       * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and y-coordinates and the width and height of the
+       * @return {{x: Integer, y: Integer, width: Integer, height: Integer}}        x- and
+       * y-coordinates and the width and height of the
        * viewport
        **/
 
     }, {
-      key: "getViewportArea",
+      key: 'getViewportArea',
       value: function getViewportArea() {
         var isLocal = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+        var multiplier = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
 
+        var layer = isLocal ? this.getMovableLayer() : this.getStaticLayer();
         var leftSideCoords = new PIXI.Point(0, 0);
         var rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
-        var layer, rightSide, leftSide;
 
         if (isLocal) {
-          layer = this.getMovableLayer();
-          var rightCoords = layer.toLocal(rightSideCoords);
-          var leftCoords = layer.toLocal(leftSideCoords);
-          leftSide = {
-            x: leftCoords.x,
-            y: leftCoords.y
-          };
-          rightSide = {
-            x2: rightCoords.x,
-            y2: rightCoords.y
-          };
-        } else {
-          layer = this.getStaticLayer();
-          leftSide = {
-            x: leftSideCoords.x,
-            y: leftSideCoords.y
-          };
-          rightSide = {
-            x2: rightSideCoords.x,
-            y2: rightSideCoords.y
-          };
+          rightSideCoords = layer.toLocal(rightSideCoords);
+          leftSideCoords = layer.toLocal(leftSideCoords);
         }
 
+        var leftSide = {
+          x: leftSideCoords.x,
+          y: leftSideCoords.y
+        };
+        var rightSide = {
+          x2: rightSideCoords.x,
+          y2: rightSideCoords.y
+        };
+
+        var offset = {
+          x: (Math.abs(rightSide.x2) - leftSide.x) * multiplier,
+          y: (Math.abs(rightSide.y2) - leftSide.y) * multiplier
+        };
         return {
-          x: Math.round(leftSide.x),
-          y: Math.round(leftSide.y),
-          width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x)),
-          height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y))
+          x: Math.round(leftSide.x - offset.x),
+          y: Math.round(leftSide.y - offset.y),
+          width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) + offset.x),
+          height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y)
         };
       }
       /**
        * Remove a primary layer from the map
        *
        * @method removeLayer
-       * @param {MapLayer|PIXI.Container|PIXI.ParticleContainer} layer       The layer object to be removed
+       * @param {MapLayer|PIXI.Container|PIXI.ParticleContainer} layer       The layer object to be
+       * removed
        **/
 
     }, {
-      key: "removeLayer",
+      key: 'removeLayer',
       value: function removeLayer(layer) {
         _movableLayer.removeChild(layer);
 
@@ -6322,7 +6651,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getMapsize",
+      key: 'getMapsize',
       value: function getMapsize() {
         return this.mapSize;
       }
@@ -6346,27 +6675,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "moveMap",
-      value: function moveMap() {
-        var coord = arguments.length <= 0 || arguments[0] === undefined ? { x: 0, y: 0 } : arguments[0];
+      key: 'moveMap',
+      value: function moveMap(_ref2) {
+        var _ref2$x = _ref2.x;
+        var x = _ref2$x === undefined ? 0 : _ref2$x;
+        var _ref2$y = _ref2.y;
+        var y = _ref2$y === undefined ? 0 : _ref2$y;
 
-        var _ref2 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref3 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        var _ref2$absolute = _ref2.absolute;
-        var absolute = _ref2$absolute === undefined ? false : _ref2$absolute;
+        var _ref3$absolute = _ref3.absolute;
+        var absolute = _ref3$absolute === undefined ? false : _ref3$absolute;
 
         var realCoordinates = {
-          x: Math.round(coord.x / this.getStaticLayer().getZoom()),
-          y: Math.round(coord.y / this.getStaticLayer().getZoom())
+          x: Math.round(x / this.getStaticLayer().getZoom()),
+          y: Math.round(y / this.getStaticLayer().getZoom())
         };
 
         if (absolute) {
-          _movableLayer.position = new PIXI.Point(coord.x, coord.y);
+          _movableLayer.position = new PIXI.Point(x, y);
         } else {
           _movableLayer.move(realCoordinates);
         }
 
-        mapEvents.publish("mapMoved", realCoordinates);
+        // Would we need this? _movableLayer.displayObjectUpdateTransform();
+
+        mapEvents.publish('mapMoved', realCoordinates);
         this.drawOnNextTick();
       }
       /**
@@ -6377,7 +6711,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "isCacheActivated",
+      key: 'isCacheActivated',
       value: function isCacheActivated() {
         return this.cache;
       }
@@ -6390,8 +6724,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "cacheMap",
-      value: function cacheMap(filters) {
+      key: 'cacheMap',
+      value: function cacheMap() {
         cacheLayers(true, this.usesSubcontainers());
       }
       /**
@@ -6402,7 +6736,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * */
 
     }, {
-      key: "unCacheMap",
+      key: 'unCacheMap',
       value: function unCacheMap() {
         cacheLayers(false, this.usesSubcontainers());
       }
@@ -6416,7 +6750,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * */
 
     }, {
-      key: "activatePlugins",
+      key: 'activatePlugins',
       value: function activatePlugins() {
         var _this2 = this;
 
@@ -6426,10 +6760,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
         pluginsArray.forEach(function (plugin) {
-          if ((typeof plugin === "undefined" ? "undefined" : _typeof(plugin)) === "object") {
+          if ((typeof plugin === 'undefined' ? 'undefined' : _typeof(plugin)) === 'object') {
             _this2.activatePlugin(plugin);
           } else {
-            log.error("problem with initializing a plugin: " + plugin.name);
+            log.error('problem with initializing a plugin: ' + plugin.name);
           }
         });
 
@@ -6445,11 +6779,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * */
 
     }, {
-      key: "activatePlugin",
+      key: 'activatePlugin',
       value: function activatePlugin(plugin) {
         try {
           if (!plugin || !plugin.pluginName || !plugin.init) {
-            throw new Error("plugin, plugin.pluginName or plugin.init import is missing!");
+            throw new Error('plugin, plugin.pluginName or plugin.init import is missing!');
           }
 
           this.plugins.add(plugin[plugin.pluginName]);
@@ -6457,7 +6791,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             plugin.init(this);
           }
         } catch (e) {
-          log.error("An error initializing plugin. JSON.stringify: '" + JSON.stringify(plugin) + "' ", e);
+          log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
         }
       }
       /**
@@ -6469,15 +6803,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "setPrototype",
+      key: 'setPrototype',
       value: function setPrototype(property, value) {
         var thisPrototype = Object.getPrototypeOf(this);
 
         thisPrototype[property] = value;
       }
       /**
-       * Gets object under specific map coordinates. Uses the ObjectManagers retrieve method. Using subcontainers if they exist, other
-       * methods if not. If you provide type parameter, the method returns only object types that match it.
+       * Gets object under specific map coordinates. Using subcontainers if they exist, other
+       * methods if not. If you provide type parameter, the method returns only object types that
+       * match it.
+       *
+       * NOTE! At the moment filters only support layers! You can not give filters object: object and
+       * expect them to be filtered. It will filter only layers (object: layer)!
+       *
+       * @todo This should work with object filtering too, but the issues regarding it are
+       * efficiency (if there are many filter rules, we don't want to go through them twice?). Since
+       * the way filters work now, we would have to filter layers first and then again objects.
        *
        * @method getObjectsUnderArea
        * @param  {Object} globalCoords            Event coordinates on the staticLayer / canvas.
@@ -6489,31 +6831,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getObjectsUnderArea",
+      key: 'getObjectsUnderArea',
       value: function getObjectsUnderArea() {
         var globalCoords = arguments.length <= 0 || arguments[0] === undefined ? { x: 0, y: 0, width: 0, height: 0 } : arguments[0];
 
-        var _ref3 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref4 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        var _ref3$filters = _ref3.filters;
-        var filters = _ref3$filters === undefined ? null : _ref3$filters;
+        var _ref4$filters = _ref4.filters;
+        var filters = _ref4$filters === undefined ? null : _ref4$filters;
 
         /* We need both coordinates later on and it's logical to do the work here */
         var allCoords = {
           globalCoords: globalCoords,
           localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
         };
-        var objects = {};
+        var objects = [];
 
-        allCoords.localCoords.width = globalCoords.width;
-        allCoords.localCoords.height = globalCoords.height;
+        allCoords.localCoords.width = globalCoords.width / this.getZoom();
+        allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
         if (this.usesSubcontainers()) {
-          var allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters: filters });
+          var allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters: filters });
 
-          objects = this._retrieveObjects(allCoords, {
-            subcontainers: allMatchingSubcontainers
+          objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
+        } else {
+          var filteredContainers = this.getMovableLayer().children.filter(function (thisChild) {
+            if (filters && !filters.filter(thisChild).length || thisChild.specialLayer) {
+              return false;
+            }
+
+            return true;
           });
+
+          objects = this[_retrieveObjects](allCoords, filteredContainers);
+        }
+
+        if (filters) {
+          objects = filters.filter(objects);
         }
 
         return objects;
@@ -6529,11 +6883,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getPrimaryLayers",
+      key: 'getPrimaryLayers',
       value: function getPrimaryLayers() {
-        var _ref4 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var _ref5 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        var filters = _ref4.filters;
+        var filters = _ref5.filters;
 
         return this.getMovableLayer().getPrimaryLayers({ filters: filters });
       }
@@ -6549,16 +6903,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * */
 
     }, {
-      key: "getAllObjects",
+      key: 'getAllObjects',
       value: function getAllObjects() {
-        var _ref5 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var _ref6 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        var filters = _ref5.filters;
+        var filters = _ref6.filters;
 
-        var allObjects, theseObjs;
+        var allObjects = void 0;
+        var theseObjs = void 0;
 
         allObjects = this.getPrimaryLayers({ filters: filters }).map(function (layer) {
-          var allObjs;
+          var allObjs = void 0;
 
           if (layer.hasSubcontainers()) {
             var subcontainers = generalUtils.arrays.flatten2Levels(layer.getSubcontainers());
@@ -6592,7 +6947,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return allObjects;
       }
     }, {
-      key: "getMapCoordinates",
+      key: 'getMapCoordinates',
       value: function getMapCoordinates() {
         return {
           x: this.getMovableLayer().x,
@@ -6607,7 +6962,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getZoomLayer",
+      key: 'getZoomLayer',
       value: function getZoomLayer() {
         return this.getStaticLayer();
       }
@@ -6620,10 +6975,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "setZoom",
+      key: 'setZoom',
       value: function setZoom(newScale) {
         this.getZoomLayer().setZoom(newScale);
-        mapEvents.publish("mapZoomed", { previousScale: this.getZoom(), newScale: newScale });
+        mapEvents.publish('mapZoomed', { previousScale: this.getZoom(), newScale: newScale });
 
         return newScale;
       }
@@ -6635,7 +6990,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getZoom",
+      key: 'getZoom',
       value: function getZoom() {
         return this.getZoomLayer().getZoom();
       }
@@ -6647,13 +7002,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getRenderer",
+      key: 'getRenderer',
       value: function getRenderer(type) {
-        if (type === "minimap") {
-          return _rendererMinimap;
-        } else {
-          return _renderer;
-        }
+        return type === 'minimap' ? _renderers.minimap : _renderers.main;
       }
       /**
        * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
@@ -6662,7 +7013,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getStaticLayer",
+      key: 'getStaticLayer',
       value: function getStaticLayer() {
         return _staticLayer;
       }
@@ -6676,7 +7027,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getMovableLayer",
+      key: 'getMovableLayer',
       value: function getMovableLayer() {
         return _movableLayer;
       }
@@ -6687,7 +7038,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "getMinimapLayer",
+      key: 'getMinimapLayer',
       value: function getMinimapLayer() {
         return _minimapLayer;
       }
@@ -6696,7 +7047,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "removeMinimapLayer",
+      key: 'removeMinimapLayer',
       value: function removeMinimapLayer() {
         _minimapLayer = undefined;
       }
@@ -6711,9 +7062,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "zoomIn",
+      key: 'zoomIn',
       value: function zoomIn() {
-        return "notImplementedYet. Activate with plugin";
+        return 'notImplementedYet. Activate with plugin';
       }
       /**
        * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
@@ -6723,9 +7074,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "zoomOut",
+      key: 'zoomOut',
       value: function zoomOut() {
-        return "notImplementedYet. Activate with plugin";
+        return 'notImplementedYet. Activate with plugin';
       }
       /**
        * Resize the canvas to fill the whole browser content area. Defined by the baseEventlisteners-module (core modules plugin)
@@ -6734,9 +7085,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "toggleFullsize",
+      key: 'toggleFullsize',
       value: function toggleFullsize() {
-        return "notImplementedYet. Activate with plugin";
+        return 'notImplementedYet. Activate with plugin';
       }
       /**
        * Toggles fullscreen mode. Defined by the baseEventlisteners-module (core modules plugin)
@@ -6745,9 +7096,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "toggleFullScreen",
+      key: 'toggleFullScreen',
       value: function toggleFullScreen() {
-        return "notImplementedYet. Activate with plugin";
+        return 'notImplementedYet. Activate with plugin';
       }
       /**
        * Plugin will overwrite create this method. Method for actually activating minimap.
@@ -6756,14 +7107,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "initMinimap",
+      key: 'initMinimap',
       value: function initMinimap() {
-        return "notImplementedYet. Activate with plugin";
+        return 'notImplementedYet. Activate with plugin';
+      }
+      /**
+       * Plugin will overwrite create this method. Method for actually activating fog of war.
+       *
+       * @method activateFogOfWar
+       **/
+
+    }, {
+      key: 'activateFogOfWar',
+      value: function activateFogOfWar() {
+        return 'notImplementedYet. Activate with plugin';
       }
 
-      /*-------------------------
-      --------- PRIVATE ---------
-      -------------------------*/
+      /*---------------------------------
+      ----------- FOR TESTING -----------
+      ---------------------------------*/
+
+    }, {
+      key: 'getSymbols',
+      value: function getSymbols() {
+        return {
+          _addObjectToUIlayer: _addObjectToUIlayer
+        };
+      }
+      /*---------------------------------
+      --------- PRIVATE METHODS ---------
+      ---------------------------------*/
       /**
        * Retrieves the objects from ObjectManager, with the given parameters. Mostly helper functionality for getObjectsUnderArea
        *
@@ -6784,18 +7157,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "_retrieveObjects",
-      value: function _retrieveObjects(allCoords) {
-        var _ref6 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      key: _retrieveObjects,
+      value: function value(allCoords) {
+        var containers = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
 
-        var _ref6$type = _ref6.type;
-        var type = _ref6$type === undefined ? "" : _ref6$type;
-        var _ref6$subcontainers = _ref6.subcontainers;
-        var subcontainers = _ref6$subcontainers === undefined ? [] : _ref6$subcontainers;
+        var _ref7 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
-        return this.objectManager.retrieve(allCoords, {
+        var _ref7$type = _ref7.type;
+        var type = _ref7$type === undefined ? '' : _ref7$type;
+
+        return this.objectManager.retrieve(allCoords, containers, {
           type: type,
-          subcontainers: subcontainers,
           size: {
             width: allCoords.globalCoords.width,
             height: allCoords.globalCoords.height
@@ -6813,10 +7185,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        **/
 
     }, {
-      key: "_getLayersWithAttributes",
-      value: function _getLayersWithAttributes(attribute, value) {
+      key: _getLayersWithAttributes,
+      value: function value(attribute, _value) {
         return this.getMovableLayer().children[0].children.filter(function (layer) {
-          return layer[attribute] === value;
+          return layer[attribute] === _value;
         });
       }
       /**
@@ -6830,15 +7202,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "_getSubcontainersUnderArea",
-      value: function _getSubcontainersUnderArea(allCoords) {
-        var _ref7 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      key: _getSubcontainersUnderArea,
+      value: function value(allCoords) {
+        var _ref8 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        var filters = _ref7.filters;
+        var filters = _ref8.filters;
 
         var primaryLayers = this.getPrimaryLayers({ filters: filters });
         var allMatchingSubcontainers = [];
-        var thisLayersSubcontainers;
+        var thisLayersSubcontainers = void 0;
 
         primaryLayers.forEach(function (layer) {
           thisLayersSubcontainers = layer.getSubcontainersByCoordinates(allCoords.localCoords);
@@ -6856,36 +7228,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: "_defaultTick",
-      value: function _defaultTick() {
+      key: _defaultTick,
+      value: function value() {
+        var _this3 = this;
+
         var ONE_SECOND = 1000;
         var FPSCount = 0;
         var fpsTimer = new Date().getTime();
-        var renderStart, totalRenderTime;
+        var renderStart = void 0;
+        var totalRenderTime = void 0;
 
         PIXI.ticker.shared.add(function () {
-          if (_drawMapOnNextTick === true) {
-            if (this.trackFPSCB) {
+          if (_drawMapOnNextTick) {
+            if (_this3.trackFPSCB) {
               renderStart = new Date().getTime();
             }
 
-            _renderer.render(_staticLayer);
-            _rendererMinimap && _rendererMinimap.render(_minimapLayer);
-            _drawMapOnNextTick = false;
+            _privateRenderers.forEach(function (renderer) {
+              return renderer.render(renderer.getResponsibleLayer());
+            });
 
-            if (this.trackFPSCB) {
+            if (_this3.trackFPSCB) {
               totalRenderTime += Math.round(Math.abs(renderStart - new Date().getTime()));
             }
+
+            _drawMapOnNextTick = false;
           }
-          if (this.trackFPSCB) {
+          if (_this3.trackFPSCB) {
             FPSCount++;
 
             if (fpsTimer + ONE_SECOND < new Date().getTime()) {
-              this.trackFPSCB({
+              _this3.trackFPSCB({
                 FPS: FPSCount,
                 FPStime: fpsTimer,
                 renderTime: totalRenderTime,
-                drawCount: _renderer.drawCount
+                drawCount: _renderers.main.drawCount
               });
 
               FPSCount = 0;
@@ -6893,11 +7270,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               fpsTimer = new Date().getTime();
             }
           }
-        }.bind(this));
+        });
       }
     }, {
-      key: "_addObjectToUIlayer",
-      value: function _addObjectToUIlayer(layerType, object, name) {
+      key: _addObjectToUIlayer,
+      value: function value(layerType, object, name) {
         switch (layerType) {
           case LAYER_TYPE_STATIC:
             this.getStaticLayer().addUIObject(object, name);
@@ -6912,9 +7289,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return Flatworld;
   }();
 
-  /*---------------------
-  ------- PRIVATE -------
-  ----------------------*/
+  /*-------------------------------
+  ------- PRIVATE FUNCTIONS -------
+  -------------------------------*/
   /**
    * cacheLayers
    *
@@ -6929,29 +7306,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   function cacheLayers(cacheOrNot, hasSubcontainers) {
     if (hasSubcontainers) {
       _movableLayer.children.forEach(function (child) {
-        if (!child.isCached()) {
-          return false;
-        }
-        var subcontainers = child.getSubcontainers();
+        if (child.isCached()) {
+          var subcontainers = child.getSubcontainers();
 
-        subcontainers.forEach(function (subcontainer) {
-          subcontainer.setCache(cacheOrNot);
-        });
+          subcontainers.forEach(function (subcontainer) {
+            return subcontainer.setCache(cacheOrNot);
+          });
+        }
       });
     } else {
       _movableLayer.children.forEach(function (child) {
-        if (!child.isCached()) {
-          return false;
-        }
-
-        child.setCache(cacheOrNot);
+        return child.isCached() && child.setCache(cacheOrNot);
       });
     }
   }
 
   window.flatworld.Flatworld = Flatworld;
 })();
-"use strict";
+'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -7007,11 +7379,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var _ref$scaleMode = _ref.scaleMode;
     var scaleMode = _ref$scaleMode === undefined ? PIXI.SCALE_MODES.DEFAULT : _ref$scaleMode;
 
-    log.debug("============== Hexagonal Map factory started =============");
+    log.debug('============== Hexagonal Map factory started =============');
     var pixelRatio = utils.environmentDetection.getPixelRatio();
-    var DATA_MAP = typeof datas.map === "string" ? JSON.parse(datas.map) : datas.map;
-    var DATA_TYPE = typeof datas.type === "string" ? JSON.parse(datas.type) : datas.type;
-    var DATA_GAME = typeof datas.game === "string" ? JSON.parse(datas.game) : datas.game;
+    var DATA_MAP = typeof datas.map === 'string' ? JSON.parse(datas.map) : datas.map;
+    var DATA_TYPE = typeof datas.type === 'string' ? JSON.parse(datas.type) : datas.type;
+    var DATA_GAME = typeof datas.game === 'string' ? JSON.parse(datas.game) : datas.game;
+    // const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
     var WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
@@ -7032,8 +7405,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         resolution: pixelRatio, // We might need this later on, when doing mobile optimizations, for different pizel density devices
         autoResize: true,
         transparent: true,
-        antialias: false // TEST. Only should work in chrome atm.?
-      },
+        antialias: false },
+      // TEST. Only should work in chrome atm.?
       subcontainers: {
         width: 500,
         height: 500,
@@ -7050,9 +7423,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     PIXI.SCALE_MODES.DEFAULT = 1;
 
     DATA_MAP.layers.forEach(function (layerData) {
-      if ((typeof layerData === "undefined" ? "undefined" : _typeof(layerData)) !== "object") {
-        log.error("Problem in hexaFactory, with layerData:" + JSON.stringify(layerData));
-        throw new Error("Problem in hexaFactory, with layerData:", layerData);
+      if ((typeof layerData === 'undefined' ? 'undefined' : _typeof(layerData)) !== 'object') {
+        log.error('Problem in hexaFactory, with layerData:' + JSON.stringify(layerData));
+        throw new Error('Problem in hexaFactory, with layerData:', layerData);
       }
 
       var renderer = map.getRenderer();
@@ -7063,7 +7436,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           x: renderer.width,
           y: renderer.height
         },
-        selectable: layerData.name === "unitLayer" ? true : false
+        selectable: layerData.name === 'unitLayer' ? true : false
       };
       var thisLayer;
 
@@ -7074,7 +7447,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           var spritesheetType = objectGroup.typeImageData;
 
           if (!spritesheetType) {
-            log.error("Error with spritesheetType-data");
+            log.error('Error with spritesheetType-data');
             return;
           }
 
@@ -7082,10 +7455,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var objTypeData, objectOptions, texture, newObject;
 
             try {
-              objTypeData = DATA_TYPE.objectData[spritesheetType][object.objType];
+              objTypeData = DATA_TYPE[spritesheetType][object.objType];
               if (!objTypeData) {
-                log.error("Bad mapData for type:", spritesheetType, object.objType, object.name);
-                throw new Error("Bad mapData for type:", spritesheetType, object.objType, object.name);
+                log.error('Bad mapData for type:', spritesheetType, object.objType, object.name);
+                throw new Error('Bad mapData for type:', spritesheetType, object.objType, object.name);
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);
@@ -7108,11 +7481,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           });
         });
       } catch (e) {
-        log.error("Problem:" + JSON.stringify(layerData.type) + " ---- " + JSON.stringify(e.stack));
+        log.error('Problem:' + JSON.stringify(layerData.type) + ' ---- ' + JSON.stringify(e.stack));
       }
     });
 
-    map.moveMap(DATA_MAP.startPoint);
+    map.moveMap(DATA_GAME.startPoint);
 
     return map;
   }
