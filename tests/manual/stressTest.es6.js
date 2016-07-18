@@ -376,15 +376,18 @@
         map.setFullScreen();
       });
 
-      document.getElementById('showFowCanvas').addEventListener('click', () => {
-        const coveringOverlay = new PIXI.Graphics();
-        coveringOverlay.beginFill(0xFFFFFF, 1);
-        coveringOverlay.drawRect(0, 0, 800, 800);
-        coveringOverlay.endFill();
-        simpleFogOfWar.getMaskContainer().children.shift(coveringOverlay);
-        simpleFogOfWar.getFoWRenderer().render(simpleFogOfWar.getMaskContainer());
-        document.body.appendChild(simpleFogOfWar.getFoWRenderer().view);
-      });
+      let showFowCanvas = document.getElementById('showFowCanvas');
+      if (showFowCanvas) {
+        document.getElementById('showFowCanvas').addEventListener('click', () => {
+          const coveringOverlay = new PIXI.Graphics();
+          coveringOverlay.beginFill(0xFFFFFF, 1);
+          coveringOverlay.drawRect(0, 0, 800, 800);
+          coveringOverlay.endFill();
+          simpleFogOfWar.getMaskContainer().children.shift(coveringOverlay);
+          simpleFogOfWar.getFoWRenderer().render(simpleFogOfWar.getMaskContainer());
+          document.body.appendChild(simpleFogOfWar.getFoWRenderer().view);
+        });
+      }
 
       return map;
     }

@@ -18,6 +18,9 @@
     <canvas id="mapCanvas" height="600" width="1200">
       Canvas not supported!
     </canvas>
+    <canvas id="minimapCanvas" style="position:fixed;bottom:0px;left:0px;display:block">
+      Canvas not supported!
+    </canvas>
   </div>
 
   <div id="testNotification" style="position:fixed; bottom:100px; left:50px;font-size: 20px;color:red;">
@@ -34,6 +37,8 @@
       <input id="hexaTiles" value="15000" type="text">,
       theme:
       <input id="UItheme" value="default" type="text">,
+      minimap:
+      <input id="minimap" type="checkbox">
       cache:
       <input id="cache" type="checkbox">
       <button id="changeValues" style="height:5em;width:10em" disabled>
@@ -58,6 +63,7 @@
   <script src="/dist/flatworld_libraries.js"></script>
   <script src="/dist/flatworld.js"></script>
   <script src="/data/gameData.js"></script>
+  <script src="/data/graphicData.js"></script>
   <script src="/data/typeData.js"></script>
   <script src="/manual/stressTest.es6.js"></script>
 </body>
