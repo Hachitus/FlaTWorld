@@ -23,7 +23,7 @@
 
 ## Features
 * Scale mode can be changed with parameters.
-* Added buggy minimap (but working). I introduced too many changes when making the minimap and thus decided to add it to this update. It's still in development.
+* Added buggy minimap (but working). I introduced too many changes when making the minimap and thus decided to add it to this update. It's still in development, as not of priority right now!
 
 ## Others
 * Renamed horizontalHexaFactory -> hexaFactory, it will later support vertical too.
