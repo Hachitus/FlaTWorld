@@ -1,3 +1,11 @@
+<a name="0.2.1"></a>
+# 0.1.1 Bug fixes (2016-07-??)
+## Bug Fixes
+* Fog of War optimizations
+
+## Others
+* Eslint issues, it's not there atm.
+
 <a name="0.2.0"></a>
 # 0.1.1 Bug fixes (2016-07-??)
 ## Bug Fixes
