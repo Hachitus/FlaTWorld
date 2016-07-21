@@ -27,9 +27,9 @@
     };
     const baseFilter = new MapDataManipulator([{
       type: 'filter',
-      object: 'object',
-      property: 'type',
-      value: 'unit',
+      object: 'layer',
+      property: 'name',
+      value: 'unitLayer',
     }]);
     const maskSprite = new PIXI.Sprite();
     let FoWOverlay;
@@ -56,7 +56,7 @@
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
      *
-     * After plugin has been initialized by the flatworld, you must still call initFogOfWar to
+     * After plugin has been initialized by the flatworld, you must still call activateFogOfWar to
      * start showing it.
      *
      * @todo the offsets are really bad! For some reason they are needed, I don't know where the

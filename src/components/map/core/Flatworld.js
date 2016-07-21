@@ -664,7 +664,7 @@
         objects = this[_retrieveObjects](allCoords, filteredContainers);
       }
 
-      if (filters) {
+      if (filters && filters.doesItFilter("object")) {
         objects = filters.filter(objects);
       }
 

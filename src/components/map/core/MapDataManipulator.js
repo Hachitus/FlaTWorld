@@ -72,6 +72,10 @@
     addRule(rules) {
       this.rules.concat(rules);
     }
+
+    doesItFilter(type) {
+      return this.rules.find(o => o.object === type);
+    }
     /**
      * This is the actual method that runs through the rules and arranges the data
      *

@@ -223,6 +223,8 @@
      *
      * @static
      * @method resizeRenderer
+     * @param {PIXI.WebGLRenderer} renderer   The renderer for the map
+     * @param {Function} drawOnNextTick       Function that handles re-rendering canvas
      */
     function resizePIXIRenderer(renderer, drawOnNextTick) {
       const windowSize = getWindowSize();
