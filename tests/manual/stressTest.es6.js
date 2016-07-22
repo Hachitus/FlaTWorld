@@ -37,6 +37,7 @@
   const FOW_IMAGE = '/testAssets/images/FoW/FoWTest.png';
 
   var minimapCheckbox = document.getElementById('minimap');
+  var fowCheckbox = document.getElementById('fow');
   var minimapCanvas;
 
   /* REQUIRED FOR IE11 */
@@ -162,8 +163,7 @@
       mapZoom,
       mapDrag,
       hexagons.selectHexagonObject,
-      mapMovement,
-      simpleFogOfWar
+      mapMovement
     ];
     var sound = new Sound();
     var preload;
@@ -171,6 +171,9 @@
     if (minimapCheckbox.checked) {
       minimapCanvas = options.minimapCanvas;
       pluginsToActivate.push(pixelizedMinimap);
+    }
+    if (fowCheckbox.checked) {
+      pluginsToActivate.push(simpleFogOfWar);
     }
 
     /* This NEEDS to be set for the hexagon plugin to work correctly */
