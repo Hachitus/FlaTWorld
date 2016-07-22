@@ -1,5 +1,3 @@
-'use strict';
-
 /* POLYFILL (es6StringPolyfill)  IS NEEDED FOR IE11, maybe Symbol support or something missing:
  * http://babeljs.io/docs/usage/polyfill/
  * */

@@ -1,5 +1,3 @@
-'use strict';
-
 /*
  * This should bundle all engines functions
  */

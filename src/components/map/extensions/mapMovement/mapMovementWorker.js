@@ -4,8 +4,6 @@
  * NOT IN USE
  */
 
-'use strict';
-
 /* object.assign polyfill for IE11 */
 if (typeof Object.assign != 'function') {
   (function () {

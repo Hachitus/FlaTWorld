@@ -1,6 +1,4 @@
 (function () {
-  'use strict';
-
   window.flatworld_libraries = {};
   window.flatworld_libraries.PIXI = window.PIXI;
   window.flatworld_libraries.Q = window.Q;

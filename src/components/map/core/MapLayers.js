@@ -1,6 +1,4 @@
 (function () {
-  'use strict';
-
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
@@ -149,7 +147,10 @@
      * */
     getPrimaryLayers({ filters } = {}) {
       return this.children.filter(thisChild => {
-        if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
+        if ((filters &&
+            filters.doesItFilter("layer") &&
+            !filters.filter(thisChild).length) ||
+            thisChild.specialLayer) {
           return false;
         }
 
