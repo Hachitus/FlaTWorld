@@ -3,7 +3,7 @@
   --------- IMPORT --------
   -----------------------*/
   const { PIXI } = window.flatworld_libraries;
-  const { mapEvents, MapDataManipulator, utils } = window.flatworld;
+  const { mapEvents, MapDataManipulator } = window.flatworld;
 
   /*-----------------------
   ---------- API ----------
@@ -31,11 +31,9 @@
       property: 'name',
       value: 'unitLayer',
     }]);
-    const maskSprite = new PIXI.Sprite();
     let FoWOverlay;
     let alpha;
     let map;
-    let FoWRenderer;
     let texture;
     let maskContainer;
     let FoWCB;
@@ -45,7 +43,6 @@
       init,
       pluginName: 'simpleFogOfWar',
 
-      getFoWRenderer,
       getMaskContainer,
 
       activateFogOfWar,
@@ -93,13 +90,12 @@
       alpha = options.alpha;
       FoWCB = cb;
 
-      utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
-
       refreshFoW();
       setEvents();
     }
 
     function refreshFoW() {
+      const renderer = map.getRenderer();
       const staticLayer = map.getStaticLayer();
       resetFoW(FoWOverlay);
 
@@ -109,21 +105,16 @@
       if (spriteArray.length > 0) {
         maskContainer.addChild(...spriteArray);
       }
-      FoWRenderer.render(maskContainer);
-      maskContainer.removeChildren();
-      texture = PIXI.Texture.fromCanvas(FoWRenderer.view);
-      maskSprite.texture = texture;
+      const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(renderer.width, renderer.height));
+      renderer.render(maskContainer, renderTexture, true, null, false);
 
-      texture.update();
-      staticLayer.mask = maskSprite;
+      staticLayer.mask = new PIXI.Sprite(renderTexture);
     }
 
     function getFoWObjectArray(cb, filter = baseFilter) {
       return getCorrectObjects(filter).map(object => cb(calculateCorrectCoordinates(object)));
     }
-    /**
-     * @todo this artificial -119 HAS to be taken away
-     */
+
     function calculateCorrectCoordinates(object) {
       const coordinates = object.toGlobal(new PIXI.Point(0, 0));
 
@@ -139,6 +130,7 @@
     /**
      * @param  {MapDataManipulator} filter    REQUIRED
      * @return {Array}                        Array of objects to be used for creating FoW
+     * @todo  REFACTOR
      */
     function getCorrectObjects(filter) {
       return map.getObjectsUnderArea(
@@ -146,34 +138,18 @@
         { filters: filter });
     }
 
-    function setupRenderer(coordinates, resolution, rendererOptions) {
+    function setupRenderer(coordinates) {
       // Create the fog that cover everything and create holes to it later:
       FoWOverlay = createOverlay(coordinates);
-      // Clear old renderer IF it exists
-      clearRenderer(FoWRenderer);
-      // Create new renderer
-      FoWRenderer = setRenderer(coordinates, rendererOptions);
     }
 
     function getMaskContainer() {
       return maskContainer;
     }
 
-    function getFoWRenderer() {
-      return FoWRenderer;
-    }
-
     /** *************************************
     **************** PRIVATE ****************
     ****************************************/
-    function setRenderer(coordinates, rendererOptions) {
-      return new PIXI.WebGLRenderer(coordinates.width, coordinates.height, rendererOptions);
-    }
-
-    function clearRenderer(renderer) {
-      // Reset earlier fog of war renderer, if present
-      renderer && renderer.destroy && renderer.view && renderer.destroy(); // eslint-disable-line
-    }
     function resetFoW(overlay) {
       texture && texture.destroy && texture.destroy(); // eslint-disable-line no-unused-expressions
       maskContainer.children && maskContainer.removeChildren(); // eslint-disable-line 
@@ -191,9 +167,7 @@
       return graphics;
     }
     function setEvents() {
-      mapEvents.subscribe('mapResized', () => {
-        utils.resize.resizePIXIRenderer(FoWRenderer, map.drawOnNextTick.bind(map));
-      });
+      mapEvents.subscribe('mapResized', refreshFoW);
       mapEvents.subscribe('mapResized', refreshFoW);
       mapEvents.subscribe('mapMoved', refreshFoW);
     }
