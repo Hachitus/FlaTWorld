@@ -28,13 +28,14 @@
   function setupMapMovement() {
     const VIEWPORT_OFFSET = 0.2;
     const CHECK_INTERVAL = 20;
+    const SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT = 40;
     var queue = {};
     var changedCoordinates = {
       width: 0,
       height: 0,
     };
     var debug = false;
-    var map, currentScale;
+    var map;
 
     return {
       init,
@@ -58,7 +59,6 @@
      */
     function init(givenMap) {
       map = givenMap;
-      currentScale = map.getZoom();
 
       addAll();
       startEventListeners();
@@ -99,9 +99,8 @@
         window.FlaTWorld_mapMovement_deactivate = function () {
           map.getPrimaryLayers().forEach(layer => {
             var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
-            var visibleContainers;
 
-            visibleContainers = subcontainers.forEach(subcontainer => {
+            subcontainers.forEach(subcontainer => {
               subcontainer.visible = false;
             });
           });
@@ -178,8 +177,7 @@
       function resizeCb() {
         check();
       }
-      function zoomCb(ev) {
-        currentScale = ev.customData[0].newScale;
+      function zoomCb() {
         check();
       }
     }
@@ -240,7 +238,7 @@
           });
           containersUnderChangedArea = containersUnderChangedArea.concat(foundSubcontainers);
 
-          promise.resolve(true);
+          promise.resolve(containersUnderChangedArea);
         });
 
         return promise.promise;
@@ -251,17 +249,15 @@
 
         containersUnderChangedArea = arrays.flatten2Levels(containersUnderChangedArea);
 
-        subcontainers = arrays.chunkArray(containersUnderChangedArea, 40);
+        subcontainers = arrays.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
         promises = subcontainers.map((thesesContainers) => {
           var promise = window.Q.defer();
 
           window.setTimeout(function () {
-            thesesContainers.forEach((thisContainer) => {
-              thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
-            });
-
-            promise.resolve(true);
+            promise.resolve(thesesContainers.filter((thisContainer) => {
+              return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
+            }));
           });
 
           return promise.promise;
