@@ -1,13 +1,13 @@
 <a name="0.2.1"></a>
-# 0.1.1 Bug fixes (2016-07-??)
+# 0.2.1 Bug fixes (2016-07-??)
 ## Bug Fixes
 * Fog of War optimizations
 
 ## Others
-* Eslint issues, it's not there atm.
+* Eslint issues. It actually works.
 
 <a name="0.2.0"></a>
-# 0.1.1 Bug fixes (2016-07-??)
+# 0.2.0 Bug fixes (2016-07-??)
 ## Bug Fixes
 * If minimap canvas was not given flatworld main module threw an error.
 * Minimap optimizations (caching)
