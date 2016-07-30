@@ -21,6 +21,7 @@
   var mapEvents = window.flatworld.mapEvents;
   var mapAPI = window.flatworld.mapAPI;
   var UI = window.flatworld.UI;
+  var MapDataManipulator = window.flatworld.MapDataManipulator;
   /* DATA FILES used for testing */
   var gameData = window.gameData;
   var typeData = window.typeData;
@@ -361,15 +362,28 @@
       });
       */
 
-      map.activateFogOfWar(function(data) {
+      const FoWFilter = new MapDataManipulator([{
+          type: 'filter',
+          object: MapDataManipulator.OBJECT_LAYER,
+          property: 'name',
+          value: 'unitLayer'
+        },{
+          type: 'filter',
+          object: MapDataManipulator.OBJECT_OBJECT,
+          property: ['data', 'activeData', 'FoW'],
+          value: 'true'
+        }]);
+      function foWCallback(data) {
         const unitViewSprite = new PIXI.Sprite(fowTexture);
 
         unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
-        unitViewSprite.scale.set(data.scale, data.scale);
+        //unitViewSprite.scale.set(data.scale, data.scale);
         unitViewSprite.position.set(data.x, data.y);
 
         return unitViewSprite;
-      });
+      }
+
+      map.activateFogOfWar(foWCallback, FoWFilter);
       /* ----------- FOW stuff END------------ */
 
       /* Activate the fullscreen button: */
@@ -478,6 +492,7 @@
               y: y
             },
             data: {
+              FoW: ( Math.random() < 0.2 ) ? true : false,
               playerID: Math.floor(Math.random() * 10),
               hp: Math.floor(Math.random() * 100),
               someStuff: 'jalajajajajaja' + Math.random(),

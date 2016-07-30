@@ -503,11 +503,7 @@
      * want the map to move horizontally 5 pixels and vertically stay at the same position.
      * @param {Integer} coord.x              X coordinate
      * @param {Integer} coord.y              Y coordinate
-     * @param {Object} informCoordinates     THIS IS EXPERIMENTAL, TO FIX THE INCORRECT EVENT COORDINATES THIS SEND TO mapEvents, WHEN
-     * SCALING
-     * @param {Integer} informCoordinates.x  X coordinate
-     * @param {Integer} informCoordinates.y  Y coordinate
-     * @param {Integer} absolute              If the given coordinates are not relative, like move map 1 pixel, but instead absolute, like
+     * @param {Integer} absolute             If the given coordinates are not relative, like move map 1 pixel, but instead absolute, like
      * move map to coordinates { x: 1, y: 2 }. Defaults to false (relative).
      * @todo  the informcoordinates away and fix the issue they tried to fix!
      **/
@@ -522,8 +518,6 @@
       } else {
         _movableLayer.move(realCoordinates);
       }
-
-      // Would we need this? _movableLayer.displayObjectUpdateTransform();
 
       mapEvents.publish('mapMoved', realCoordinates);
       this.drawOnNextTick();
@@ -695,7 +689,7 @@
         let allObjs;
 
         if (layer.hasSubcontainers()) {
-          const subcontainers = generalUtils.arrays.flatten2Levels(layer.getSubcontainers());
+          const subcontainers = layer.getSubcontainers();
 
           allObjs = subcontainers.map((subContainer) => {
             theseObjs = subContainer.children.map((obj) => {
@@ -940,6 +934,7 @@
 
           _drawMapOnNextTick = false;
         }
+
         if (this.trackFPSCB) {
           FPSCount++;
 

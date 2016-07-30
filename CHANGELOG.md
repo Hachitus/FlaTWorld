@@ -1,7 +1,11 @@
-<a name="0.2.1"></a>
+<a name="0.3.0"></a>
 # 0.2.1 Bug fixes (2016-07-??)
 ## Bug Fixes
 * Fog of War optimizations
+* MapLayerParent.getSubcontainers should have flattened the arrays (breaking change).
+
+## Features
+* Added filtering option for MapLayer.getObjects-method.
 
 ## Others
 * Eslint issues. It actually works.

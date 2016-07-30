@@ -23,7 +23,7 @@
      * {
      *   type: 'filter',
      *   object: 'layer',
-     *   property: 'selectable',
+     *   property: 'selectable', // THIS can also be an array, like: ['data', 'a'] => data.a
      *   value: true,
      * }
      * For more information, please check the mapDataManipulatorSpec.js (test) for now.
@@ -73,8 +73,10 @@
       this.rules.concat(rules);
     }
 
+    /** @todo I think this should be implemented. But it's a small optimization so don't bother yet. Basically the idea is to ONLY use the filters that each situation requires. Not iterate through the unneeded filters */
+    getOnlyFiltersOf(/*type*/) { }
     doesItFilter(type) {
-      return this.rules.find(o => o.object === type);
+      return this.rules.some(o => o.object === type);
     }
     /**
      * This is the actual method that runs through the rules and arranges the data
@@ -119,9 +121,35 @@
      * @return {[type]} [description]
      **/
     _getObject(object, rule) {
-      return object[rule.property] === rule.value;
+      let result = false;
+
+      if (Array.isArray(rule.property)) {
+        try {
+          result = ''+MapDataManipulator.getPropertyWithArray(object, rule.property, 0) === ''+rule.value;
+        } catch(e) {
+          return false;
+        }
+      } else {
+        result = object[rule.property] === rule.value;
+      }
+      
+      return result;
+    }
+
+    static getPropertyWithArray(obj, array, index) {
+      const currentProperty = array[index];
+      const thisLevel = obj[currentProperty];
+
+      if (array[index + 1]) {
+        return MapDataManipulator.getPropertyWithArray(thisLevel, array, ++index);
+      } else {
+        return thisLevel;
+      }
     }
   }
+
+  MapDataManipulator.OBJECT_LAYER = 'layer';
+  MapDataManipulator.OBJECT_OBJECT = 'object';
 
   window.flatworld.MapDataManipulator = MapDataManipulator;
 }());

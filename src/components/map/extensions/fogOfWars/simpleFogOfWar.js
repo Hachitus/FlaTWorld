@@ -3,7 +3,8 @@
   --------- IMPORT --------
   -----------------------*/
   const { PIXI } = window.flatworld_libraries;
-  const { mapEvents, MapDataManipulator } = window.flatworld;
+  const { mapEvents, generalUtils } = window.flatworld;
+  const { resize } = window.flatworld.utils;
 
   /*-----------------------
   ---------- API ----------
@@ -21,29 +22,23 @@
    **/
   function setupSimpleFogOfWar() {
     const VIEWPORT_MULTIPLIER = 0.4;
-    const baseRendererOptions = {
-      transparent: true,
-      autoResize: true,
-    };
-    const baseFilter = new MapDataManipulator([{
-      type: 'filter',
-      object: 'layer',
-      property: 'name',
-      value: 'unitLayer',
-    }]);
-    let FoWOverlay;
-    let alpha;
+    const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
+    const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
+    const FoWOverlay = new PIXI.Graphics();
+    let movableLayer;
+    let staticLayer;
+    let mapRenderer;
     let map;
-    let texture;
-    let maskContainer;
+    let maskMovableContainer;
+    let maskStageContainer;
     let FoWCB;
+    let objectsForFoW;
+    let color;
 
     return {
       // These two are required by all plugins
       init,
       pluginName: 'simpleFogOfWar',
-
-      getMaskContainer,
 
       activateFogOfWar,
       refreshFoW,
@@ -67,52 +62,71 @@
     function init(givenMap) {
       map = givenMap;
       map.activateFogOfWar = activateFogOfWar;
-      const mapRenderer = map.getRenderer();
-      const coordinates = {
-        x: 0,
-        y: 0,
-        width: (mapRenderer.width + 0 + (mapRenderer.width / 2)) * map.getZoom(),
-        height: (mapRenderer.height + 0 + (mapRenderer.height / 2)) * map.getZoom(),
-      };
-      const rendererOptions = Object.assign(
-        baseRendererOptions, {
-          resolution: mapRenderer.resolution,
-        });
+      movableLayer = map.getMovableLayer();
+      staticLayer = map.getStaticLayer();
+      mapRenderer = map.getRenderer();
 
-      setupRenderer(coordinates, rendererOptions);
-
-      maskContainer = map.createSpecialLayer('FoWMaskLayer');
-      maskContainer.x = coordinates.x;
-      maskContainer.y = coordinates.y;
+      maskStageContainer = map.createSpecialLayer('FoWStageMaskLayer');
+      maskMovableContainer = map.createSpecialLayer('FoWMovableMaskLayer');
+      maskMovableContainer.x = movableLayer.x;
+      maskMovableContainer.y = movableLayer.y;
     }
 
-    function activateFogOfWar(cb, options = { alpha: 0.8 }) {
-      alpha = options.alpha;
+    function activateFogOfWar(cb, filter, options = {}) {
+      color = options.color || 0x222222;
       FoWCB = cb;
+      objectsForFoW = map.getPrimaryLayers({ filters: filter }).map(o => o.getObjects(filter));
+      objectsForFoW = generalUtils.arrays.flatten2Levels(objectsForFoW);
 
-      refreshFoW();
+      createOverlay();
+
+      setupFoW();
       setEvents();
     }
 
-    function refreshFoW() {
-      const renderer = map.getRenderer();
-      const staticLayer = map.getStaticLayer();
-      resetFoW(FoWOverlay);
-
-      map.getMovableLayer().updateTransform();
+    function setupFoW() {
       const spriteArray = getFoWObjectArray(FoWCB);
 
-      if (spriteArray.length > 0) {
-        maskContainer.addChild(...spriteArray);
-      }
-      const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(renderer.width, renderer.height));
-      renderer.render(maskContainer, renderTexture, true, null, false);
+      resetFoW(FoWOverlay);
 
-      staticLayer.mask = new PIXI.Sprite(renderTexture);
+      if (spriteArray.length > 0) {
+        maskMovableContainer.addChild(...spriteArray);
+      }
+
+      maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
+      resizeFoW();
+
+      staticLayer.mask = maskSprite;
     }
 
-    function getFoWObjectArray(cb, filter = baseFilter) {
-      return getCorrectObjects(filter).map(object => cb(calculateCorrectCoordinates(object)));
+    function refreshFoW() {
+      mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
+
+      maskSprite.texture = renderTexture;
+    }
+
+    function moveFoW(e) {
+      maskMovableContainer.position = movableLayer.position;
+
+      refreshFoW();
+    }
+
+    function zoomFoW() {
+      maskStageContainer.scale.x = map.getZoom();
+      maskStageContainer.scale.y = map.getZoom();
+
+      createOverlay();
+      refreshFoW();
+    }
+
+    function resizeFoW() {
+
+      createOverlay();
+      refreshFoW();
+    }
+
+    function getFoWObjectArray(cb) {
+      return objectsForFoW.map(object => cb(calculateCorrectCoordinates(object)));
     }
 
     function calculateCorrectCoordinates(object) {
@@ -127,49 +141,33 @@
       return coordinates;
     }
 
-    /**
-     * @param  {MapDataManipulator} filter    REQUIRED
-     * @return {Array}                        Array of objects to be used for creating FoW
-     * @todo  REFACTOR
-     */
-    function getCorrectObjects(filter) {
-      return map.getObjectsUnderArea(
-        map.getViewportArea(false, VIEWPORT_MULTIPLIER),
-        { filters: filter });
-    }
-
-    function setupRenderer(coordinates) {
-      // Create the fog that cover everything and create holes to it later:
-      FoWOverlay = createOverlay(coordinates);
-    }
-
-    function getMaskContainer() {
-      return maskContainer;
-    }
-
     /** *************************************
     **************** PRIVATE ****************
     ****************************************/
-    function resetFoW(overlay) {
-      texture && texture.destroy && texture.destroy(); // eslint-disable-line no-unused-expressions
-      maskContainer.children && maskContainer.removeChildren(); // eslint-disable-line 
-      maskContainer.addChild(overlay);
+    function resetFoW() {
+      maskMovableContainer.children && maskMovableContainer.removeChildren();
+      maskStageContainer.children && maskStageContainer.removeChildren();
+      maskStageContainer.addChild(FoWOverlay);
+      maskStageContainer.addChild(maskMovableContainer);
     }
 
-    function createOverlay(coordinates) {
-      const graphics = new PIXI.Graphics();
+    function createOverlay() {
+      const coordinates = {
+        x: -100,
+        y: -100,
+        width: mapRenderer.width + 200 + (mapRenderer.width / map.getZoom()),
+        height: mapRenderer.height + 200 + (mapRenderer.height / map.getZoom()),
+      };
 
-      graphics.clear();
-      graphics.beginFill(0x000000, alpha);
-      graphics.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
-      graphics.endFill();
-
-      return graphics;
+      FoWOverlay.clear();
+      FoWOverlay.beginFill(color);
+      FoWOverlay.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
+      FoWOverlay.endFill();
     }
     function setEvents() {
-      mapEvents.subscribe('mapResized', refreshFoW);
-      mapEvents.subscribe('mapResized', refreshFoW);
-      mapEvents.subscribe('mapMoved', refreshFoW);
+      mapEvents.subscribe('mapResized', resizeFoW);
+      mapEvents.subscribe('mapZoomed', zoomFoW);
+      mapEvents.subscribe('mapMoved', moveFoW);
     }
   }
 }());

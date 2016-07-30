@@ -74,7 +74,7 @@
          */
         window.FlaTWorld_mapMovement_subCheck = function () {
           map.getPrimaryLayers().forEach(layer => {
-            var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
+            var subcontainers = layer.getSubcontainers();
             var visibleContainers, invisibleContainers;
 
             visibleContainers = subcontainers.filter(subcontainer => {
@@ -98,7 +98,7 @@
          */
         window.FlaTWorld_mapMovement_deactivate = function () {
           map.getPrimaryLayers().forEach(layer => {
-            var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
+            var subcontainers = layer.getSubcontainers();
 
             subcontainers.forEach(subcontainer => {
               subcontainer.visible = false;
@@ -119,7 +119,7 @@
       viewportArea = map.getViewportArea(true);
 
       map.getPrimaryLayers().forEach(layer => {
-        var subcontainers = arrays.flatten2Levels(layer.getSubcontainers());
+        var subcontainers = layer.getSubcontainers();
 
         subcontainers.forEach(subcontainer => {
           subcontainer.visible = isObjectOutsideViewport(subcontainer, viewportArea) ? false : true;
@@ -143,7 +143,7 @@
         return false;
       }
       queue.processing = true;
-console.log("map movement");
+
       let viewportFn = setupHandleViewportArea();
       window.setTimeout(viewportFn, CHECK_INTERVAL);
 

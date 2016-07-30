@@ -3,6 +3,7 @@
   ------- IMPORT --------
   ----------------------*/
   var PIXI = window.flatworld_libraries.PIXI;
+  const { generalUtils } = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
@@ -107,7 +108,6 @@
     move(coord) {
       this.x += coord.x;
       this.y += coord.y;
-      this.drawThisChild = true;
     }
     /**
      * set layer zoom
@@ -158,21 +158,29 @@
       });
     }
     /**
-     * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects.
+     * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects. Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
      *
      * @method getObjects
-     * @return {Array}                            All the objects (not layers) found under this layer
+     * @return {Array}            All the objects (not layers) found under this layer
      * */
-    getObjects() {
-      var allObjects = [];
+    getObjects(filter) {
+      const allObjects = [];
+      const willFilter = filter && filter.doesItFilter("object");      
+      let objects;
 
       if (this.hasSubcontainers()) {
-        this.subcontainerList.forEach(subcontainer => {
-          allObjects.concat(subcontainer.children);
+        this.getSubcontainers().forEach(subcontainer => {
+          if (willFilter) {
+            objects = subcontainer.children.filter(o => !!filter.filter(o).length);
+          } else {
+            objects = subcontainer.children;
+          }
+
+          allObjects.push(objects);
         });
       }
 
-      return allObjects;
+      return generalUtils.arrays.flatten2Levels(allObjects);
     }
     /**
      * @todo IMPLEMENT CACHE PROPERLY! TAKE SUBCONTAINERS INTO ACCOUNT!
@@ -363,7 +371,7 @@
      * @method getSubcontainers
      */
     getSubcontainers() {
-      return this.subcontainerList;
+      return generalUtils.arrays.flatten2Levels(this.subcontainerList);
     }
   }
 

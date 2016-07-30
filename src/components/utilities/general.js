@@ -27,7 +27,7 @@
      * @return {Array}            Flattened array
      */
     function flatten2Levels(arr) {
-      return [].concat.apply([], arr);
+      return [].concat(...arr);
     }
     /**
      * This function takes an array and slices it to proper chunks.
