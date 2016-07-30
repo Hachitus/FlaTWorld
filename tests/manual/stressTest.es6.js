@@ -271,9 +271,9 @@
 
       map.init( pluginsToActivate, mapData.startPoint );
 
-      let minimapUIImage = new PIXI.Sprite();
-      let pixelRatio = minimapSize.width / map.getMapsize().x * hexaUtils.calcLongDiagonal();
-      let staticCB = function (obj) {
+      var minimapUIImage = new PIXI.Sprite();
+      var pixelRatio = minimapSize.width / map.getMapsize().x * hexaUtils.calcLongDiagonal();
+      var staticCB = function (obj) {
         var size = pixelRatio;
         var minimapColor = obj.minimapColor;
         var minimapShape, globalPoints;
@@ -293,7 +293,7 @@
 
         return minimapShape;
       };
-      let dynamicCB = function (obj) {
+      var dynamicCB = function (obj) {
         var minimapColor = obj.minimapColor;
         var size = pixelRatio;
         var minimapShape, globalPoints;
@@ -305,20 +305,20 @@
         minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: obj.minimapColor });
         globalPoints = obj.toGlobal(new PIXI.Point(obj.x,obj.y));
 
-        let indexes = new PIXI.Point(hexaUtils.calculateIndex(globalPoints));
+        var indexes = new PIXI.Point(hexaUtils.calculateIndex(globalPoints));
         minimapShape.x = Math.floor(pixelRatio * indexes.x);
         minimapShape.y = Math.floor(pixelRatio * indexes.y);
 
         return minimapShape;
       };
-      let coordinateConverterCB = function (globalCoordinates, toMinimap) {
+      var coordinateConverterCB = function (globalCoordinates, toMinimap) {
         var minimapLayer = map.getMinimapLayer();
         var minimapCoordinates = new PIXI.Point( globalCoordinates.x, globalCoordinates.y);
 
         if (toMinimap) {
           return minimapCoordinates;
         } else {
-          let minimapCoords = {
+          var minimapCoords = {
             x: -minimapCoordinates.x / minimapSize.width * map.getMapsize().x,
             y: -minimapCoordinates.y / minimapSize.height * map.getMapsize().y
           };
@@ -327,9 +327,9 @@
         }
       };
 
-      let minimapViewport = new PIXI.Graphics();
-      let viewportArea = map.getViewportArea();
-      let minimapViewportSize = {
+      var minimapViewport = new PIXI.Graphics();
+      var viewportArea = map.getViewportArea();
+      var minimapViewportSize = {
         width: minimapSize.width * viewportArea.width / map.getMapsize().x,
         height: minimapSize.height * viewportArea.height / map.getMapsize().y
       };
@@ -347,10 +347,10 @@
         transparent: true,
         autoResize: true,
       });
-      let fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
-      let currentScale = 1;
+      var fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
+      var currentScale = 1;
       /*
-      mapEvents.subscribe('mapZoomed', (ev) => {
+      mapEvents.subscribe('mapZoomed', function (ev) {
         const textureSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
         const cont = new PIXI.Container();
         cont.addChild(textureSprite);
@@ -361,7 +361,7 @@
       });
       */
 
-      map.activateFogOfWar((data) => {
+      map.activateFogOfWar(function(data) {
         const unitViewSprite = new PIXI.Sprite(fowTexture);
 
         unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
@@ -377,9 +377,9 @@
         map.setFullScreen();
       });
 
-      let showFowCanvas = document.getElementById('showFowCanvas');
+      var showFowCanvas = document.getElementById('showFowCanvas');
       if (showFowCanvas) {
-        document.getElementById('showFowCanvas').addEventListener('click', () => {
+        document.getElementById('showFowCanvas').addEventListener('click', function () {
           const coveringOverlay = new PIXI.Graphics();
           coveringOverlay.beginFill(0xFFFFFF, 1);
           coveringOverlay.drawRect(0, 0, 800, 800);
@@ -526,7 +526,7 @@
     };
 
     if (obj.parent) {
-      let parentCoords = _getCorrectGlobalCoords(obj.parent);
+      var parentCoords = _getCorrectGlobalCoords(obj.parent);
       coordinates.x += parentCoords.x;
       coordinates.y += parentCoords.y;
     }

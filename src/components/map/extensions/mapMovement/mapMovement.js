@@ -143,7 +143,7 @@
         return false;
       }
       queue.processing = true;
-
+console.log("map movement");
       let viewportFn = setupHandleViewportArea();
       window.setTimeout(viewportFn, CHECK_INTERVAL);
 
