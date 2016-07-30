@@ -12,11 +12,6 @@
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
   const VERSION = '0.0.0';
-  const _retrieveObjects = Symbol('_retrieveObjects');
-  const _getLayersWithAttributes = Symbol('_getLayersWithAttributes');
-  const _getSubcontainersUnderArea = Symbol('_getSubcontainersUnderArea');
-  const _defaultTick = Symbol('_defaultTick');
-  const _addObjectToUIlayer = Symbol('_addObjectToUIlayer');
   const _renderers = {};
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
@@ -301,7 +296,7 @@
       coord && Object.assign(_movableLayer, coord);
 
       /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
-      this[_defaultTick]();
+      this._defaultTick();
       tickCB && this.customTickOn(tickCB);
       isMapReadyPromises = allPromises;
 
@@ -348,10 +343,10 @@
     addUIObject(layerType, objects, UIName) {
       if (Array.isArray(objects)) {
         objects.forEach(object => {
-          this[_addObjectToUIlayer](layerType, object);
+          this._addObjectToUIlayer(layerType, object);
         });
       } else {
-        this[_addObjectToUIlayer](layerType, objects, UIName);
+        this._addObjectToUIlayer(layerType, objects, UIName);
       }
     }
     /**
@@ -649,9 +644,9 @@
       allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
       if (this.usesSubcontainers()) {
-        const allMatchingSubcontainers = this[_getSubcontainersUnderArea](allCoords, { filters });
+        const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
-        objects = this[_retrieveObjects](allCoords, allMatchingSubcontainers);
+        objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
       } else {
         const filteredContainers = this.getMovableLayer().children.filter(thisChild => {
           if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
@@ -661,7 +656,7 @@
           return true;
         });
 
-        objects = this[_retrieveObjects](allCoords, filteredContainers);
+        objects = this._retrieveObjects(allCoords, filteredContainers);
       }
 
       if (filters && filters.doesItFilter("object")) {
@@ -852,14 +847,6 @@
     activateFogOfWar() { return 'notImplementedYet. Activate with plugin'; }
 
     /*---------------------------------
-    ----------- FOR TESTING -----------
-    ---------------------------------*/
-    getSymbols() {
-      return {
-        _addObjectToUIlayer,
-      };
-    }
-    /*---------------------------------
     --------- PRIVATE METHODS ---------
     ---------------------------------*/
     /**
@@ -880,7 +867,7 @@
      * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
      * @return {Array}                                  Found objects
      */
-    [_retrieveObjects](allCoords, containers = [], { type = '' } = {}) {
+    _retrieveObjects(allCoords, containers = [], { type = '' } = {}) {
       return this.objectManager.retrieve(allCoords, containers, {
         type,
         size: {
@@ -898,7 +885,7 @@
      * @param {*} value
      * @return the current map instance
      **/
-    [_getLayersWithAttributes](attribute, value) {
+    _getLayersWithAttributes(attribute, value) {
       return this.getMovableLayer().children[0].children.filter(layer => {
         return layer[attribute] === value;
       });
@@ -913,7 +900,7 @@
      * @return {Array}                        All subcontainers that matched the critea
      */
 
-    [_getSubcontainersUnderArea](allCoords, { filters } = {}) {
+    _getSubcontainersUnderArea(allCoords, { filters } = {}) {
       const primaryLayers = this.getPrimaryLayers({ filters });
       let allMatchingSubcontainers = [];
       let thisLayersSubcontainers;
@@ -932,7 +919,7 @@
      * @private
      * @method _defaultTick
      */
-    [_defaultTick]() {
+    _defaultTick() {
       const ONE_SECOND = 1000;
       let FPSCount = 0;
       let fpsTimer = new Date().getTime();
@@ -971,7 +958,7 @@
         }
       });
     }
-    [_addObjectToUIlayer](layerType, object, name) {
+    _addObjectToUIlayer(layerType, object, name) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
           this.getStaticLayer().addUIObject(object, name);
