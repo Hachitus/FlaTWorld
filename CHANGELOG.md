@@ -1,7 +1,7 @@
 <a name="0.3.0"></a>
-# 0.2.1 Bug fixes (2016-07-??)
+# 0.3.0 Bug fixes (2016-08-02)
 ## Bug Fixes
-* Fog of War optimizations
+* Major Fog of War optimizations.
 * MapLayerParent.getSubcontainers should have flattened the arrays (breaking change).
 
 ## Features
