@@ -29,13 +29,11 @@
     const VIEWPORT_OFFSET = 0.2;
     const CHECK_INTERVAL = 20;
     const SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT = 40;
-    var queue = {};
-    var changedCoordinates = {
-      width: 0,
-      height: 0,
-    };
-    var debug = false;
-    var map;
+    let queue = {};
+    let debug = true;
+    let map;
+    let viewportArea;
+    let offsetSize;
 
     return {
       init,
@@ -116,7 +114,8 @@
     function addAll() {
       var viewportArea;
 
-      viewportArea = map.getViewportArea(true);
+      viewportArea = map.getViewportArea(true, 2);
+      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
 
       map.getPrimaryLayers().forEach(layer => {
         var subcontainers = layer.getSubcontainers();
@@ -144,13 +143,10 @@
       }
       queue.processing = true;
 
-      let viewportFn = setupHandleViewportArea();
-      window.setTimeout(viewportFn, CHECK_INTERVAL);
+      window.setTimeout(setupHandleViewportArea(), CHECK_INTERVAL);
 
       function setupHandleViewportArea() {
-        var viewportArea;
-
-        viewportArea = map.getViewportArea(true);
+        viewportArea = map.getViewportArea(true, VIEWPORT_OFFSET);
 
         viewportWorkerOnMessage(viewportArea, map.getPrimaryLayers());
       }
@@ -167,17 +163,15 @@
       /* We change the scale factor ONLY if the map is zoomed. We reserve resources */
       mapEvents.subscribe('mapZoomed', zoomCb);
 
-      function moveCb(type) {
-        var movedCoordinates = type.customData[0];
-
-        changedCoordinates.width += movedCoordinates.x;
-        changedCoordinates.height += movedCoordinates.y;
+      function moveCb() {
         check();
       }
       function resizeCb() {
+        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
         check();
       }
       function zoomCb() {
+        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
         check();
       }
     }
@@ -222,11 +216,7 @@
 
       largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
 
-      /* RESET */
-      changedCoordinates.width = 0;
-      changedCoordinates.height = 0;
-
-      primaryLayers = arrays.chunkArray(primaryLayers, 2);
+      primaryLayers = arrays.chunkArray(primaryLayers, VIEWPORT_OFFSET);
       promises = primaryLayers.map((theseLayers) => {
         var promise = window.Q.defer();
 
@@ -282,9 +272,7 @@
      * @param  {AreaSize} viewportArea          Given viewport area
      * @return {totalViewportArea}              The total viewportArea
      */
-    function getViewportWithOffset(viewportArea, options = { scale: 1 }) {
-      var offsetSize = calculateOffset(viewportArea, options);
-
+    function getViewportWithOffset(viewportArea) {
       return {
         x: Math.round(viewportArea.x - offsetSize),
         y: Math.round(viewportArea.y - offsetSize),
@@ -308,8 +296,8 @@
      * @static
      * @method calculateOffset
      */
-    function calculateOffset(viewportArea, options = { scale: 1 }) {
-      return Math.abs(viewportArea.width / options.scale * VIEWPORT_OFFSET);
+    function calculateOffset(viewportArea, options = { zoom: 1 }) {
+      return Math.abs(viewportArea.width / options.zoom * VIEWPORT_OFFSET);
     }
     /**
      * @private

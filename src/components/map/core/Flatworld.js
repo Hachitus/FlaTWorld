@@ -469,8 +469,8 @@
       return {
         x: Math.round(leftSide.x - offset.x),
         y: Math.round(leftSide.y - offset.y),
-        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) + offset.x),
-        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y),
+        width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) + offset.x * 2),
+        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y * 2),
       };
     }
     /**
