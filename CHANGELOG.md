@@ -1,3 +1,12 @@
+<a name="0.4.0"></a>
+# 0.3.0 Bug fixes (2016-08-02)
+## Bug Fixes
+* Caching functionality removed! From the whole library. Currently it was not working correctly and and should have been checked through anyway. It's not considered needed for now.
+
+## Features
+
+## Others
+
 <a name="0.3.0"></a>
 # 0.3.0 Bug fixes (2016-08-02)
 ## Bug Fixes

@@ -96,7 +96,6 @@
         height: 0,
         maxDetectionOffset: 0, // maxDetectionOffset default set later
       },
-      cache = false,
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
       /* Check for the required parameters! */
@@ -216,15 +215,6 @@
        **/
       this.objectManager = new ObjectManager();
       /**
-       * Is cache activated for this map at all. This is set for individual layers with a
-       * property, but without activating the cache for
-       * the whole map, the layers cache property is ignored.
-       *
-       * @attribute objectManager
-       * @type {ObjectManager}
-       **/
-      this.cache = cache;
-      /**
        * Set variable showing if the device supports touch or not.
        *
        * @attribute isTouch
@@ -299,10 +289,6 @@
       this._defaultTick();
       tickCB && this.customTickOn(tickCB);
       isMapReadyPromises = allPromises;
-
-      if (this.cache) {
-        this.cacheMap();
-      }
 
       this.drawOnNextTick();
 
@@ -521,34 +507,6 @@
 
       mapEvents.publish('mapMoved', realCoordinates);
       this.drawOnNextTick();
-    }
-    /**
-     * Is cache on
-     *
-     * @method isCacheActivated
-     * @return {Boolean}
-     **/
-    isCacheActivated() {
-      return this.cache;
-    }
-    /**
-     * Cache the map. This provides performance boost when used correctly. CacheMap iterates through all the layers on the map and caches
-     * the ones that return true from isCached-method. NOT WORKING YET. CACHING IMPLEMENTED SOON.
-     *
-     * @method cacheMap
-     * @param {Object} filters          filters from MapDataManipulator.js
-     **/
-    cacheMap() {
-      cacheLayers(true, this.usesSubcontainers());
-    }
-    /**
-     * unCache the map. NOT WORKING ATM. IMPLEMENTED SOON!
-     *
-     * @method unCacheMap
-     * @return {Map}        this map instance
-     * */
-    unCacheMap() {
-      cacheLayers(false, this.usesSubcontainers());
     }
     /**
      * Activate all plugins for the map. Iterates through the given plugins we wish to activate and does the actual work in activatePlugin-
@@ -962,32 +920,6 @@
           this.getMovableLayer().addUIObject(object, name);
           break;
       }
-    }
-  }
-
-  /*-------------------------------
-  ------- PRIVATE FUNCTIONS -------
-  -------------------------------*/
-  /**
-   * cacheLayers
-   *
-   * @method cacheLayers
-   * @private
-   * @static
-   * @param  {Boolean}  cacheOrNot        Do you want to cache or uncache?
-   * @param  {Boolean} hasSubcontainers   Does the map have subcontainers activated?
-   */
-  function cacheLayers(cacheOrNot, hasSubcontainers) {
-    if (hasSubcontainers) {
-      _movableLayer.children.forEach(child => {
-        if (child.isCached()) {
-          const subcontainers = child.getSubcontainers();
-
-          subcontainers.forEach(subcontainer => subcontainer.setCache(cacheOrNot));
-        }
-      });
-    } else {
-      _movableLayer.children.forEach(child => child.isCached() && child.setCache(cacheOrNot));
     }
   }
 

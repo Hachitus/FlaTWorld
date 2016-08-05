@@ -68,10 +68,8 @@
     document.body.appendChild( window.FPSElement );
 
     var mapsizeElement = document.getElementById('hexaTiles');
-    var cacheElement = document.getElementById('cache');
     var UIThemeIndex = document.getElementById('UItheme').value;
     var minimapCanvas;
-    var cacheMap = true;
     var currentMapSize, mapData;
 
     document.getElementById('testNotification').textContent = 'START THE TESTS BY SELECTING VALUES BELOW AND CLICKING START!';
@@ -80,13 +78,11 @@
     document.getElementById('changeValues').addEventListener('click', function() {
       document.getElementById('testNotification').style.display = 'none';
       currentMapSize = mapsizeElement.value;
-      cacheMap = cacheElement.checked;
 
       mapData = getMapData(currentMapSize);
 
       initFlatworld(mapData, {
         mapsize: currentMapSize,
-        cache: cacheMap,
         UITheme: window.flatworld.UIs[UIThemeIndex],
         mapCanvas: document.getElementById('mapCanvas'),
         automatic: window.automaticTest,
@@ -150,7 +146,6 @@
     var mapCanvas = options.mapCanvas;
     var trackFPSCB = options.trackFPSCB;
     var UITheme = options.UITheme;
-    var cache = options.cache;
     var automatic = options.automatic;
     var map = {};
     var globalMap = {
@@ -259,7 +254,6 @@
         {
           trackFPSCB: trackFPSCB,
           isHiddenByDefault: true,
-          cache: options.cache,
           scaleMode: PIXI.SCALE_MODES.NEAREST,
           minimapCanvas: minimapCanvas
         });
@@ -426,7 +420,6 @@
   function addBase_spriteLayerData(name, group, options) {
     options = options || {};
     var interactive = options.interactive || true;
-    var cache = options.cache || true;
 
     return {
       type: 'MapLayerParent',
@@ -436,9 +429,6 @@
       specials: [{
         interactive: interactive
       }],
-      options: {
-        cache: cache
-      },
       objectGroups: []
     };
   }

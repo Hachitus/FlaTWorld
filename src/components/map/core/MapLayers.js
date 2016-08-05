@@ -88,15 +88,6 @@
       return (this.subcontainersConfig.width && this.subcontainersConfig.height) ? true : false;
     }
     /**
-     * Is this layer cached at the moment or not.
-     *
-     * @method isCached
-     * @return {Boolean} true = is cached
-     */
-    isCached() {
-      return this.cacheAsBitmap;
-    }
-    /**
      * Move layer based on given amounts
      *
      * @method move
@@ -181,21 +172,6 @@
       }
 
       return generalUtils.arrays.flatten2Levels(allObjects);
-    }
-    /**
-     * @todo IMPLEMENT CACHE PROPERLY! TAKE SUBCONTAINERS INTO ACCOUNT!
-     *
-     * Sets layer cache on or off.
-     *
-     * @method setCache
-     * @param {Boolean} status      true = activate cache, false = disable cache
-     */
-    setCache(status) {
-      var toCacheStatus = status ? true : false;
-
-      this.cacheAsBitmap = toCacheStatus;
-
-      return toCacheStatus;
     }
     /**
      * Create and add special layer, that holds UI effects in it. UILayer is normally positioned as movableLayers 3rd child. And the
@@ -418,19 +394,6 @@
         height: Math.round(this.size.height),
       };
     }
-    /**
-     * Set cache on or off for this layer
-     *
-     * @method setCache
-     * @param {Boolean} status      true = activate cache, false = disable cache
-     */
-    setCache(status) {
-      var toCacheStatus = status ? true : false;
-
-      this.cacheAsBitmap = toCacheStatus;
-
-      return toCacheStatus;
-    }
   }
 
   class MinimapLayer extends PIXI.Container {
@@ -455,19 +418,6 @@
       this.specialLayer = true;
       this.targetSize = size;
       this.selectable = false;
-    }
-    /**
-     * Set cache on or off for this layer
-     *
-     * @method setCache
-     * @param {Boolean} status      true = activate cache, false = disable cache
-     */
-    setCache(status) {
-      var toCacheStatus = status ? true : false;
-
-      this.cacheAsBitmap = toCacheStatus;
-
-      return toCacheStatus;
     }
   }
   /*---------------------

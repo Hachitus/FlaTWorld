@@ -7,9 +7,6 @@ window.mapData = {
     type: 'layer',
     coord: { x: 0, y: 0 },
     name: 'terrainLayer',
-    options: {
-      cache: true
-    },
     objectGroups: [{
       type: 'ObjectTerrain',
       name: 'Terrain', // For quadTrees and debugging
@@ -65,9 +62,6 @@ window.mapData = {
       y: '0'
     },
     name: 'unitLayer',
-    options: {
-      cache: 'false'
-    },
     objectGroups: [{
       type: 'ObjectUnit',
       name: 'Unit', // I guess only for debugging?

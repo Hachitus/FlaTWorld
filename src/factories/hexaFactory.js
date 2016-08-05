@@ -33,7 +33,6 @@
   function hexaFactory(mapCanvas, datas, {
         trackFPSCB = false,
         isHiddenByDefault = true,
-        cache = false,
         minimapCanvas,
         scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
     log.debug('============== Hexagonal Map factory started =============');
@@ -71,7 +70,6 @@
         isHiddenByDefault,
       },
       trackFPSCB,
-      cache,
       defaultScaleMode: scaleMode,
       minimapCanvas,
     };

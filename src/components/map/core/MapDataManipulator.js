@@ -75,6 +75,13 @@
 
     /** @todo I think this should be implemented. But it's a small optimization so don't bother yet. Basically the idea is to ONLY use the filters that each situation requires. Not iterate through the unneeded filters */
     getOnlyFiltersOf(/*type*/) { }
+
+    /**
+     * Checks if this filter instance is set to filter the given type.
+     *
+     * @param  {string} type   Type of the filter we want to check
+     * @return {Boolean}
+     */
     doesItFilter(type) {
       return this.rules.some(o => o.object === type);
     }
