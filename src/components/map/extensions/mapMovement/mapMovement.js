@@ -8,7 +8,6 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  // var viewportWorker = new Worker('/components/map/extensions/mapMovement/mapMovementWorker.js');
 
   /*-----------------------
   ---------- API ----------
@@ -19,8 +18,11 @@
   /*-----------------------
   -------- PUBLIC ---------
   -----------------------*/
-  /** This module manages visibility of the objects, based on are they visible to the player (on the canvas / webgl) or outside of it.
-   * This makes the map a lot faster and reliable resource-wise and lags otherwise. Requires subcontainers atm.
+  /** This module manages visibility of the objects, based on are they visible to the player
+   * on the canvas / viewport or outside of it. It does this by getting object from larger area
+   * than the current viewport size and then checking if the subcontainers are actually inside the
+   * viewport or not. If inside mark them visible, if outside mark then hidden.
+   * This makes the map a lot faster and reliable resource-wise.
    *
    * @namespace flatworld.extensions
    * @class mapMovement
@@ -43,7 +45,7 @@
       startEventListeners,
       _testObject: {
         isObjectOutsideViewport,
-        viewportWorkerOnMessage,
+        checkAndSetSubcontainers,
         getViewportWithOffset,
         testRectangleIntersect,
         _setMap,
@@ -126,12 +128,14 @@
       });
     }
     /**
-     * This one checks the that the objects that should currently be visible in the viewport area are visible and outside
-     * of the viewport objects are set .visible = false. This affect performance a lot. Basically when the map moves, we
-     * set a check in the future based on the given intervalCheck milliseconds. And immediately after it we check if there
-     * is another map movement. If there is we set another timeout. This works better with timeouts.
-     *
-     * This uses webWorkers. They seemed to speed up the check, when timing with performance.now.
+     * This one checks the that the objects that should currently be visible in the viewport area
+     * are visible and outside
+     * of the viewport objects are set .visible = false. This affect performance a lot. Basically
+     * when the map moves, we
+     * set a check in the future based on the given intervalCheck milliseconds. And immediately
+     * after it we check if there
+     * is another map movement. If there is we set another timeout. This works better with
+     * timeouts.
      *
      * @method check
      * @param  {Map} map        The current Map instance
@@ -148,7 +152,7 @@
       function setupHandleViewportArea() {
         viewportArea = map.getViewportArea(true, VIEWPORT_OFFSET);
 
-        viewportWorkerOnMessage(viewportArea, map.getPrimaryLayers());
+        checkAndSetSubcontainers(viewportArea, map.getPrimaryLayers());
       }
 
       return;
@@ -203,14 +207,14 @@
       return isOutside;
     }
     /**
-     * Originally webworker onmessage function, but webworker got refactored away.
+     * Checks proper subcontainers and mark the correct ones visible or hidden
      *
      * @todo rename and generally refactor
-     * @method viewportWorkerOnMessage
+     * @method checkAndSetSubcontainers
      * @param  {Object} scaledViewport    Viewportarea that has been scaled.
      * @param  {Array} primaryLayers      The primarylayers that we handle
      */
-    function viewportWorkerOnMessage(scaledViewport, primaryLayers) {
+    function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
       var containersUnderChangedArea = [];
       var promises, largerViewportAreaWithOffset;
 
