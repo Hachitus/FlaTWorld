@@ -38,17 +38,19 @@
       <input id="hexaTiles" value="15500" type="text">,
       theme:
       <input id="UItheme" value="default" type="text">,
-      minimap:
-      <input id="minimap" type="checkbox">
+      graphics theme:
+      <select id="graphicsTheme">
+        <option value="hexagonTerrains">hexagonTerrains</option>
+        <option value="hexagonTerrains2">hexagonTerrains2</option>
+      </select>
+      <input id="UItheme" value="default" type="text">,
+      <!-- minimap:  .... I consider minimap is not working that super well and it's not our core features, so we don't show it -->
+      <input id="minimap" type="checkbox" style="display:hidden">
       FoW:
       <input id="fow" type="checkbox" checked>
       <button id="changeValues" style="height:3em;width:6em" disabled>
         START!
-      </button>
-      <button id="showFowCanvas" style="height:3em;width:6em">
-        Black FoW
-      </button>
-    </div>
+      </button>    </div>
   </div>
 
   <div id="dialog_select" style="display:none;">
@@ -60,7 +62,7 @@
   <script src="/dist/flatworld.js"></script>
   <script src="/data/gameData.js"></script>
   <script src="/data/graphicData.js"></script>
-  <script src="/data/typeData.js"></script>
+  <script src="/data/typeDataHexagons.js"></script>
   <script src="/manual/stressTest.es6.js"></script>
 </body>
 </html>

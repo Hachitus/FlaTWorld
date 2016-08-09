@@ -1,8 +1,11 @@
 'use strict';
 
 window.graphicData = {
-  terrainBase:{
-    json: '/testAssets/images/terrain/terrains.json'
+  hexagonTerrains: {
+    json: '/testAssets/images/terrain/hexagonTerrains.json'
+  },
+  hexagonTerrains2: {
+    json: '/testAssets/images/terrain/hexagonTerrains2.json'
   },
   unit:{
     json: '/testAssets/images/units/testHexagonUnits.json'

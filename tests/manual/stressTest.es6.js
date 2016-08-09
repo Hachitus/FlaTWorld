@@ -33,11 +33,12 @@
   var BASE_URL = '/requests/';
   var X_PADDING = 20;
   const Y_PADDING = 20;
-  const FOW_IMAGE = '/testAssets/images/FoW/FoWTest.png';
+  const FOW_IMAGE = '/testAssets/images/FoW/hexagonFoW.png';
 
   var minimapCheckbox = document.getElementById('minimap');
   var fowCheckbox = document.getElementById('fow');
   var minimapCanvas;
+  var graphicsTheme;
 
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
@@ -76,6 +77,7 @@
     document.getElementById('changeValues').disabled = false;
 
     document.getElementById('changeValues').addEventListener('click', function() {
+      graphicsTheme = document.getElementById('graphicsTheme').value;
       document.getElementById('testNotification').style.display = 'none';
       currentMapSize = mapsizeElement.value;
 
@@ -103,7 +105,7 @@
   ****** GENERATE RANDOM MAP DATA *******
   **************************************/
   function getMapData(mapsize) {
-    var TERRAIN_TYPE_COUNT = 5;
+    var TERRAIN_TYPE_COUNT = 7;
     var UNIT_TYPE_COUNT = 56;
     var coordMapsize = {
       x: mapsize,
@@ -185,7 +187,7 @@
     };
 
     preload = new Preload( '', { crossOrigin: false } );
-    preload.addResource( graphicData.terrainBase.json );
+    preload.addResource( graphicData[graphicsTheme].json );
     preload.addResource( graphicData.unit.json );
     preload.addResource( FOW_IMAGE );
     loadSounds();
