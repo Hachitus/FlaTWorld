@@ -1,11 +1,13 @@
 'use strict';
 
 window.graphicData = {
-  hexagonTerrains: {
-    json: '/testAssets/images/terrain/hexagonTerrains.json'
+  hexagonTerrainsSimple: {
+    json: '/testAssets/images/terrain/hexagonTerrainsSimple.json',
+    initialScale: 2
   },
-  hexagonTerrains2: {
-    json: '/testAssets/images/terrain/hexagonTerrains2.json'
+  hexagonTerrainsRealistic: {
+    json: '/testAssets/images/terrain/hexagonTerrainsRealistic.json',
+    initialScale: 2
   },
   unit:{
     json: '/testAssets/images/units/testHexagonUnits.json'

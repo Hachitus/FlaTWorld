@@ -40,7 +40,7 @@
     const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;
     const DATA_TYPE = (typeof datas.type === 'string') ? JSON.parse(datas.type) : datas.type;
     const DATA_GAME = (typeof datas.game === 'string') ? JSON.parse(datas.game) : datas.game;
-    // const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
+    const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
     const WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
@@ -130,8 +130,8 @@
               newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);
               /** @todo This is here to test using higher resolution sprites, that would handle zooming more gracefully. This should not really be here, but rather as some kind of option or in the object classes that are extended */
               if (objectGroup.type === 'ObjectTerrain') {
-                newObject.scale.x = 0.5;
-                newObject.scale.y = 0.5;
+                newObject.scale.x = DATA_GRAPHIC.initialScale;
+                newObject.scale.y = DATA_GRAPHIC.initialScale;
               }
 
               thisLayer.addChild(newObject);
