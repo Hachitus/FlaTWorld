@@ -7,7 +7,7 @@ The development is still in pre-alpha stage. Basic features are mostly done for 
 #Introduction
 2D turn-based strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games. I was frustrated at waiting for those games and decided to start making it on my own. Browser environment is a perfect match for turn-based multiplayer. You can continue your turn easily anywhere, any time!
 
-If you are interested contact me (http://hyytia.level7.fi/). I am very eager to get any feedback or help with the project.
+If you are interested contact me (http://hyytia.level7.fi/). I am eager and grateful to get any feedback or help with the project.
 
 Table of contents
 =================
@@ -160,38 +160,35 @@ These are still subject to change (both raised and lowered). The map is planned 
 * Total object count on map: ~50k
 * FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
 
-#Roadmap
-###2016-05###
-- Created own repository and very basic base for server-side
-
-###2016-06###
-- Minimap and Fog of War layer added
-
-###2016-07###
-- Simple example game working, that will be developed through the year
-
-###2016-08###
-* Preliminary server-side functionality ready
-  * Normal API works, with most likely mongoDB
-  * Receives and sends data correctly, but does not generate turns yet
 
 ###2016-09###
-- Map generator ready
+* Prototype graphics
+* Fog of war working correctly
+
+###2016-10###
+* Pathfinding and commading of units.
+* Setup webpack
 
 ###2016-11###
+* Redesign UI modules
+* Finish default UI theme
+  * Selection of more than one unit. Proper example graphics.
 
-- Server-side logic for turn-based strategy ready
-- The map has been extended with several more features
-  - animation
-  - offline functionality
-  - hotkeys
-  - push notifications
+###2016-12###
+* Setting up animations and polishing graphics to work correctly.
+  * Like no flickering, no disturbing blurriness.
 
 ###2017-01###
+* Not yet determined which extensions will be in the initial release, but at least half of these should be ready till this point:
+  * hotkeys
+  * push notifications (like turn changes)
+  * gamepad support
+  * offline functionality
 
-- Example game ready
-- Documentation finished
-- Front- and server-sides are ready for version 1.0
+###2017-02###
+* Example game that runs on browser, without server side. Though just simple example, not really suitable for actual playing.
+* Documentation polished.
+* Start server side functionality. Remains to be seen how much of it is in github...
 
 #Sponsors
 Thank you to browserstack for providing magnificient testing tools
