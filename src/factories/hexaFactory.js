@@ -129,9 +129,9 @@
 
               newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);
               /** @todo This is here to test using higher resolution sprites, that would handle zooming more gracefully. This should not really be here, but rather as some kind of option or in the object classes that are extended */
-              if (objectGroup.type === 'ObjectTerrain') {
-                newObject.scale.x = DATA_GRAPHIC.initialScale;
-                newObject.scale.y = DATA_GRAPHIC.initialScale;
+              if (DATA_GRAPHIC[objectGroup.typeImageData].initialScale) {
+                newObject.scale.x = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;
+                newObject.scale.y = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;
               }
 
               thisLayer.addChild(newObject);

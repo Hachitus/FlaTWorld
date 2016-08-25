@@ -187,8 +187,8 @@
     };
 
     preload = new Preload( '', { crossOrigin: false } );
-    preload.addResource( graphicData[graphicsTheme].json );
-    preload.addResource( graphicData.unit.json );
+    preload.addResource( graphicData[graphicsTheme].terrainBase.json );
+    preload.addResource( graphicData[graphicsTheme].unit.json );
     preload.addResource( FOW_IMAGE );
     loadSounds();
     mapEvents.subscribe('objectsSelected', unitSelectedSound);
@@ -251,7 +251,7 @@
           game: gameData,
           map: mapData,
           type: typeData,
-          graphic: graphicData
+          graphic: graphicData[graphicsTheme]
         },
         {
           trackFPSCB: trackFPSCB,

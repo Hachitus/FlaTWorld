@@ -1,404 +1,404 @@
 {
 	"frames": {
 		"antitank.png": {
-			"frame": {"x":0,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"tank.png": {
-			"frame": {"x":65,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"cruiser.png": {
-			"frame": {"x":130,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"bomber.png": {
-			"frame": {"x":195,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"mortar.png": {
-			"frame": {"x":260,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"camel.png": {
-			"frame": {"x":325,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"carrier.png": {
-			"frame": {"x":390,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"catapult.png": {
-			"frame": {"x":455,"y":0,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"missile.png": {
-			"frame": {"x":0,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"phalanx.png": {
-			"frame": {"x":65,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"soldier.png": {
-			"frame": {"x":130,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"sailboat.png": {
-			"frame": {"x":195,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"wagon.png": {
-			"frame": {"x":260,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"submarine.png": {
-			"frame": {"x":325,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"freighter.png": {
-			"frame": {"x":390,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"vikingboat.png": {
-			"frame": {"x":455,"y":52,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"marine.png": {
-			"frame": {"x":0,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"dude.png": {
-			"frame": {"x":65,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"tractor.png": {
-			"frame": {"x":130,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"cannon.png": {
-			"frame": {"x":195,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"helicopter.png": {
-			"frame": {"x":260,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"arctic.png": {
-			"frame": {"x":325,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"stealth.png": {
-			"frame": {"x":390,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"jet.png": {
-			"frame": {"x":455,"y":102,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"battleship.png": {
-			"frame": {"x":0,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"some.png": {
-			"frame": {"x":65,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"airplane.png": {
-			"frame": {"x":130,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"frigate.png": {
-			"frame": {"x":195,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"steamboat.png": {
-			"frame": {"x":260,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"knight.png": {
-			"frame": {"x":325,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"legionaire.png": {
-			"frame": {"x":390,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"apc.png": {
-			"frame": {"x":455,"y":154,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"missile2.png": {
-			"frame": {"x":0,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"corvette.png": {
-			"frame": {"x":65,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"horsey.png": {
-			"frame": {"x":130,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"donkeyPioneer.png": {
-			"frame": {"x":195,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"truck.png": {
-			"frame": {"x":260,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"superboat.png": {
-			"frame": {"x":325,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"greenninja.png": {
-			"frame": {"x":390,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"pikeman.png": {
-			"frame": {"x":455,"y":206,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"nomad.png": {
-			"frame": {"x":0,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"knight2.png": {
-			"frame": {"x":65,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"priest.png": {
-			"frame": {"x":130,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"awacs.png": {
-			"frame": {"x":195,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"oldman.png": {
-			"frame": {"x":260,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"king.png": {
-			"frame": {"x":325,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"blackie.png": {
-			"frame": {"x":390,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"ranger.png": {
-			"frame": {"x":455,"y":258,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"reddie.png": {
-			"frame": {"x":0,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"charriot.png": {
-			"frame": {"x":65,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"floatingfort.png": {
-			"frame": {"x":130,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"airborne.png": {
-			"frame": {"x":195,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"elephant.png": {
-			"frame": {"x":260,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"archer.png": {
-			"frame": {"x":325,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"rider.png": {
-			"frame": {"x":390,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		},
 		"crusader.png": {
-			"frame": {"x":455,"y":310,"w":65,"h":52},
+			"frame": {"x":0,"y":0,"w":244,"h":320},
 			"rotated": false,
 			"trimmed": false,
-			"sourceSize": {"w":65,"h":52},
+			"sourceSize": {"w":244,"h":320},
 			"pivot": {"x":0.5,"y":0.5}
 		}
 	},
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "testHexagonUnits.png",
+		"image": "../units/hexagonUnits.png",
 		"format": "RGBA8888",
-		"size": {"w":170,"h":98},
+		"size": {"w":2048,"h":2048},
 		"scale": "1",
 		"smartupdate": "$TexturePacker:SmartUpdate:debdde756fc607286361907e335b6558:05c88b3e0a0f5ff73ceeb97b4e2838a1:37e8101b77d69857c34985757668be00$"
 	}
