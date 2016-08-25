@@ -39,6 +39,7 @@
   var fowCheckbox = document.getElementById('fow');
   var minimapCanvas;
   var graphicsTheme;
+  var layerCount;
 
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
@@ -78,6 +79,7 @@
 
     document.getElementById('changeValues').addEventListener('click', function() {
       graphicsTheme = document.getElementById('graphicsTheme').value;
+      layerCount = document.getElementById('layerCount').value;
       document.getElementById('testNotification').style.display = 'none';
       currentMapSize = mapsizeElement.value;
 
@@ -124,23 +126,30 @@
       units: hexagons.utils.createHexagonGridCoordinates(gridSize),
       units2: hexagons.utils.createHexagonGridCoordinates(gridSizeHalf)
     };
-    var terrainLayer, terrainLayer2;
-
-    terrainLayer = populateTerrainLayer(hexagonGridCoordinates.terrains, TERRAIN_TYPE_COUNT);
-    terrainLayer2 = populateTerrainLayer(hexagonGridCoordinates.terrains, TERRAIN_TYPE_COUNT);
-
-    return {
+    var returnable = {
       gameID: '53837d47976fed3b24000005',
       turn: 1,
       startPoint: { x: 0, y: 0 },
       element: '#mapCanvas',
-      layers: [
-      terrainLayer,
-      terrainLayer2,
-      populateUnitLayer(hexagonGridCoordinates.units, UNIT_TYPE_COUNT),
-      populateUnitLayer(hexagonGridCoordinates.units2, UNIT_TYPE_COUNT)
-      ]
+      layers: []
     };
+    var terrainLayer, terrainLayer2, unitLayer, unitLayer2;
+
+    terrainLayer = populateTerrainLayer(hexagonGridCoordinates.terrains, TERRAIN_TYPE_COUNT);
+    terrainLayer2 = populateTerrainLayer(hexagonGridCoordinates.terrains, TERRAIN_TYPE_COUNT);
+    unitLayer = populateUnitLayer(hexagonGridCoordinates.units, UNIT_TYPE_COUNT)
+    unitLayer2 = populateUnitLayer(hexagonGridCoordinates.units2, UNIT_TYPE_COUNT)    
+
+    returnable.layers. push(terrainLayer);
+    if (layerCount > 3) {
+      returnable.layers. push(terrainLayer2);
+    } 
+    returnable.layers. push(unitLayer);
+    if (layerCount > 2) {
+      returnable.layers. push(unitLayer2);
+    }
+
+    return returnable;
   }
 
   function initFlatworld(mapData, options) {
