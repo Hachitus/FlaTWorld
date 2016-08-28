@@ -63,17 +63,33 @@ var config = {
   outputFile: 'flatworld.js'
 };
 
-gulp.task('deploy', ['clean', 'bundleLib', 'bundleCss', 'bundleProd']);
+gulp.task('deploy', ['clean', 'bundleLib', 'bundleCss', 'bundleProd', 'bundleES6Prod']);
 
-gulp.task('build', ['cleanDev', 'bundleLibDev', 'bundleCssDev', 'bundleDev']);
+gulp.task('build', ['cleanDev', 'bundleLibDev', 'bundleCssDev', 'bundleDev', 'bundleES6Dev']);
 
 gulp.task('bundleProd', function() {
   return gulp.src(config.entryFiles)
-    .pipe(babel())
+    .pipe(babel({
+      presets: ['es2015'],
+      sourceMaps: true
+    }))
     .pipe(concat('flatworld.js'))
     .pipe(gulp.dest(config.outputDir))
     .pipe(uglify())
     .pipe(concat('flatworld.min.js'))
+    .pipe(gulp.dest(config.outputDir));
+});
+
+gulp.task('bundleES6Prod', function() {
+  return gulp.src(config.entryFiles)
+    .pipe(babel({
+      presets: ['es2015'],
+      sourceMaps: true
+    }))
+    .pipe(concat('flatworld.es6.js'))
+    .pipe(gulp.dest(config.outputDir))
+    .pipe(uglify())
+    .pipe(concat('flatworld.es6.min.js'))
     .pipe(gulp.dest(config.outputDir));
 });
 
@@ -96,6 +112,12 @@ gulp.task('bundleDev', function() {
       sourceMaps: true
     }))
     .pipe(concat('flatworld.js'))
+    .pipe(gulp.dest(config.outputDirDev));
+});
+
+gulp.task('bundleES6Dev', function() {
+  return gulp.src(config.entryFiles)
+    .pipe(concat('flatworld.es6.js'))
     .pipe(gulp.dest(config.outputDirDev));
 });
 
