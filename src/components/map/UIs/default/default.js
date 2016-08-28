@@ -32,7 +32,8 @@
      * @param  {Object} options         optional options
      * @param  {Object} options.styles  styles for the UI
      */
-    constructor(modal, FTW, { styles = '#F0F0F0', elements } = {}) {
+    constructor(modal, FTW, { radius = 71, styles = '#F0F0F0', elements } = {}) {
+      this.RADIUS = radius;
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
@@ -187,13 +188,10 @@
       var movableLayer = this.FTW.getMovableLayer();
       var clonedObject;
 
-      clonedObject = object.clone(renderer);
+      clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
       var coord = object.toGlobal(new PIXI.Point(0, 0));
       coord = movableLayer.toLocal(coord);
-
-      coord.x -= object.width * object.anchor.x;
-      coord.y -= object.height * object.anchor.y;
 
       this.createHighlight(clonedObject, { coords: coord });
 
@@ -205,7 +203,6 @@
      * @method createHighlight
      */
     createHighlight(object, options = { coords: new PIXI.Point(0, 0) }) {
-      const RADIUS = 47;
       const UI_CONTAINER_NAME = 'unit highlight';
       const movableLayer = this.FTW.getMovableLayer();
       const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
@@ -215,9 +212,8 @@
       };
       var highlighterObject;
 
-      highlighterObject = createVisibleHexagon(RADIUS, { color: '#F0F0F0' });
-      highlighterObject.x = objCoords.x + 32;
-      highlighterObject.y = objCoords.y + 27;
+      highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
+      highlighterObject.position.set(objCoords.x, objCoords.y);
 
       highlighterObject.alpha = 0.5;
 

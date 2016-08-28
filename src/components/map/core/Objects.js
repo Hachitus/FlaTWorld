@@ -145,19 +145,16 @@
      * @param  {Object} options               position: Boolean, anchor: Boolean
      * @return {Object}                       cloned object
      */
-    clone(renderer, options = { position: false, anchor: false }) {
+    clone(renderer, options = { position: false, anchor: false, scale: false }) {
       var newSprite = new PIXI.Sprite();
 
       newSprite.texture = renderer.generateTexture(this);
 
-      if (options.anchor) {
-        newSprite.anchor = Object.assign({}, this.anchor);
-      }
-      if (options.position) {
-        newSprite.position = Object.assign({}, this.position);
-      }
+      options.anchor && newSprite.anchor.set(this.anchor.x, this.anchor.y);
+      options.position && newSprite.position.set(this.x, this.y);
+      options.scale && newSprite.scale.set(this.scale.x, this.scale.y);
 
-      newSprite.constructor.prototype = this.constructor.prototype;
+      Reflect.setPrototypeOf(newSprite, this.constructor.prototype);
 
       return newSprite;
     }
