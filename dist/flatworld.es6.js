@@ -2565,20 +2565,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'clone',
       value: function clone(renderer) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? { position: false, anchor: false } : arguments[1];
+        var options = arguments.length <= 1 || arguments[1] === undefined ? { position: false, anchor: false, scale: false } : arguments[1];
 
         var newSprite = new PIXI.Sprite();
 
         newSprite.texture = renderer.generateTexture(this);
 
-        if (options.anchor) {
-          newSprite.anchor = Object.assign({}, this.anchor);
-        }
-        if (options.position) {
-          newSprite.position = Object.assign({}, this.position);
-        }
+        options.anchor && newSprite.anchor.set(this.anchor.x, this.anchor.y);
+        options.position && newSprite.position.set(this.x, this.y);
+        options.scale && newSprite.scale.set(this.scale.x, this.scale.y);
 
-        newSprite.constructor.prototype = this.constructor.prototype;
+        Reflect.setPrototypeOf(newSprite, this.constructor.prototype);
 
         return newSprite;
       }
@@ -5652,12 +5649,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     function UIDefault(modal, FTW) {
       var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
+      var _ref$radius = _ref.radius;
+      var radius = _ref$radius === undefined ? 71 : _ref$radius;
       var _ref$styles = _ref.styles;
       var styles = _ref$styles === undefined ? '#F0F0F0' : _ref$styles;
       var elements = _ref.elements;
 
       _classCallCheck(this, UIDefault);
 
+      this.RADIUS = radius;
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
@@ -5823,13 +5823,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var movableLayer = this.FTW.getMovableLayer();
         var clonedObject;
 
-        clonedObject = object.clone(renderer);
+        clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
         var coord = object.toGlobal(new PIXI.Point(0, 0));
         coord = movableLayer.toLocal(coord);
-
-        coord.x -= object.width * object.anchor.x;
-        coord.y -= object.height * object.anchor.y;
 
         this.createHighlight(clonedObject, { coords: coord });
 
@@ -5846,7 +5843,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function createHighlight(object) {
         var options = arguments.length <= 1 || arguments[1] === undefined ? { coords: new PIXI.Point(0, 0) } : arguments[1];
 
-        var RADIUS = 47;
         var UI_CONTAINER_NAME = 'unit highlight';
         var movableLayer = this.FTW.getMovableLayer();
         var container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
@@ -5856,9 +5852,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
         var highlighterObject;
 
-        highlighterObject = createVisibleHexagon(RADIUS, { color: '#F0F0F0' });
-        highlighterObject.x = objCoords.x + 32;
-        highlighterObject.y = objCoords.y + 27;
+        highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
+        highlighterObject.position.set(objCoords.x, objCoords.y);
 
         highlighterObject.alpha = 0.5;
 
@@ -7144,7 +7139,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var DATA_MAP = typeof datas.map === 'string' ? JSON.parse(datas.map) : datas.map;
     var DATA_TYPE = typeof datas.type === 'string' ? JSON.parse(datas.type) : datas.type;
     var DATA_GAME = typeof datas.game === 'string' ? JSON.parse(datas.game) : datas.game;
-    // const DATA_GRAPHIC = (typeof datas.graphic === 'string') ? JSON.parse(datas.graphic) : datas.graphic;
+    var DATA_GRAPHIC = typeof datas.graphic === 'string' ? JSON.parse(datas.graphic) : datas.graphic;
     var WINDOW_SIZE = utils.resize.getWindowSize();
     /*---------------------
     ------ VARIABLES ------
@@ -7232,6 +7227,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               };
 
               newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);
+              /** @todo This is here to test using higher resolution sprites, that would handle zooming more gracefully. This should not really be here, but rather as some kind of option or in the object classes that are extended */
+              if (DATA_GRAPHIC[objectGroup.typeImageData].initialScale) {
+                newObject.scale.x = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;
+                newObject.scale.y = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;
+              }
 
               thisLayer.addChild(newObject);
             } catch (e) {
