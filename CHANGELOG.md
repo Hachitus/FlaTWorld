@@ -6,6 +6,7 @@
 ## Features
 
 ## Others
+* Added 2 different prototype graphics theme for the map.
 
 <a name="0.3.0"></a>
 # 0.3.0 Bug fixes (2016-08-02)
