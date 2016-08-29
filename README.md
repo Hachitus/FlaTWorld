@@ -200,5 +200,4 @@ Thank you to browserstack for providing magnificient testing tools
 Copyright (c) 2016 Janne Hyytiä
 
 Graphics:
-* http://kenney.nl/assets/hexagon-pack
-* Originally everything was from freeciv, but those are being refactored away.
+* Realistic units from freeciv.
