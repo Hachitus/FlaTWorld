@@ -4,6 +4,7 @@
   ----------------------*/
   var eventListeners = window.flatworld.eventListeners;
   var utils = window.flatworld.utils;
+  var log = window.flatworld.log
 
   /*---------------------
   --------- API ---------
@@ -239,7 +240,7 @@
           y: changeY,
         };
       } catch (ev) {
-        console.log('Error! ', ev);
+        log('Error! ', ev);
       }
     }
 
