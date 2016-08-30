@@ -701,7 +701,8 @@
      */
     setZoom(newScale) {
       this.getZoomLayer().setZoom(newScale);
-      mapEvents.publish('mapZoomed', { previousScale: this.getZoom(), newScale });
+
+      mapEvents.publish({ name: 'mapZoomed', cooldown: true }, { previousScale: this.getZoom(), newScale });
 
       return newScale;
     }

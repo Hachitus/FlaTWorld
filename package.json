@@ -43,5 +43,8 @@
     "jscs": "^2.3.0",
     "jshint": "^2.8.0",
     "yuidocjs": "^0.10.0"
+  },
+  "dependencies": {
+    "eventemitter3": "^1.2.0"
   }
 }

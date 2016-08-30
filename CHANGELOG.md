@@ -4,6 +4,7 @@
 * Caching functionality removed! From the whole library. Currently it was not working correctly and and should have been checked through anyway. It's not considered needed for now.
 
 ## Features
+* Added debounce functionality to mapEvents and the subcribe callback now receives better argument.
 
 ## Others
 * Added 2 different prototype graphics theme for the map.

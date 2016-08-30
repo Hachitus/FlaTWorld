@@ -7,6 +7,7 @@
   window.flatworld_libraries.Handlebars = window.Handlebars;
   window.flatworld_libraries.log = window.log;
   window.flatworld_libraries.Howler = window.Howl;
+  window.flatworld_libraries.EventEmitter = window.EventEmitter;
   window.flatworld = {};
   window.flatworld.generalUtils = {};
   window.flatworld.log = {};

@@ -140,13 +140,13 @@
 
       map.drawOnNextTick();
     }
-    function reactToMapScale(e) {
+    function reactToMapScale() {
       minimapViewport.scale.x += 0.1;
       minimapViewport.scale.y = 0.1;
     }
-    function moveViewport(e) {
-      var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(e);
-      var mapCoordinates = new PIXI.Point(e.srcEvent.layerX, e.srcEvent.layerY);
+    function moveViewport(datas) {
+      var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
+      var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
       globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, map.minimapCanvas);
 

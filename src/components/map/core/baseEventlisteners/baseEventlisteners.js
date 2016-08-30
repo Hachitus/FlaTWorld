@@ -2,7 +2,7 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  const { mapEvents, utils, mapStates, eventListeners, Flatworld } = window.flatworld;
+  const { mapEvents, utils, mapStates, eventListeners } = window.flatworld;
   const { Hammer, Hamster } = window.flatworld_libraries;
 
   /*-----------------------

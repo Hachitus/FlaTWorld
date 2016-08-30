@@ -105,7 +105,7 @@
       maskSprite.texture = renderTexture;
     }
 
-    function moveFoW(e) {
+    function moveFoW() {
       maskMovableContainer.position = movableLayer.position;
 
       refreshFoW();
