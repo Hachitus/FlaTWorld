@@ -1,13 +1,17 @@
 <a name="0.4.0"></a>
-# 0.3.0 Bug fixes (2016-08-02)
+# 0.4.0 Bug fixes (2016-08-31)
 ## Bug Fixes
 * Caching functionality removed! From the whole library. Currently it was not working correctly and and should have been checked through anyway. It's not considered needed for now.
+* Fog of war works correctly now.
+* Map movement edge white area flickering polished to be better.
 
 ## Features
 * Added debounce functionality to mapEvents and the subcribe callback now receives better argument.
+* Added ES6 version to dist-files
 
 ## Others
 * Added 2 different prototype graphics theme for the map.
+* Uses official PIXIv4 now
 
 <a name="0.3.0"></a>
 # 0.3.0 Bug fixes (2016-08-02)

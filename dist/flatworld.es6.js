@@ -9,6 +9,7 @@
   window.flatworld_libraries.Handlebars = window.Handlebars;
   window.flatworld_libraries.log = window.log;
   window.flatworld_libraries.Howler = window.Howl;
+  window.flatworld_libraries.EventEmitter = window.EventEmitter;
   window.flatworld = {};
   window.flatworld.generalUtils = {};
   window.flatworld.log = {};
@@ -1012,17 +1013,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 (function () {
   /*---------------------
+  ------- IMPORT --------
+  ----------------------*/
+  var EventEmitter = window.flatworld_libraries.EventEmitter;
+
+  /*---------------------
   --------- API ---------
   ----------------------*/
+
   window.flatworld.mapEvents = setupMapEvents();
 
   /*---------------------
   -------- PUBLIC -------
   ----------------------*/
   /**
-   * This module handles map events. Like informing map movement, object selection and other changes. Not that ALL the eventlisteners and
-   * their callbacks will throw one event! But that event will have no extra parameters, so when you do special things, like selecting
-   * objects on the map, you should throw another event when that happens and you can pass on the objects that were selected from the map.
+   * This module handles map events. Like informing map movement, object selection and other
+   * changes. Not that ALL the eventlisteners and their callbacks will throw one event!
+   * But that event will have no extra parameters, so when you do special things, like selecting
+   * objects on the map, you should throw another event when that happens and you can pass on
+   * the objects that were selected from the map.
+   * This uses https://github.com/primus/eventemitter3 and follows the nodeJS event
+   * conventions: https://nodejs.org/api/events.html
    * Events atm:
    * - mapdrag
    * - mapzoomed
@@ -1037,66 +1048,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   function setupMapEvents() {
     var TIMER_FOR_SAME_TYPE = 50;
     var lastTimePublished = {};
+    var EE = new EventEmitter();
 
     /*---------------------
     --------- API ---------
     ----------------------*/
     return {
       subscribe: subscribe,
-      publish: publish
+      publish: publish,
+      debounce: debounce,
+      removeAllListeners: EE.removeAllListeners.bind(EE)
     };
 
     /*---------------------
     -------- PUBLIC -------
     ----------------------*/
     function subscribe(type, cb) {
-      document.addEventListener(type, cb);
+      EE.on(type, cb);
       lastTimePublished[type] = 0;
     }
-    function publish(type) {
-      var timestamp;
+    /**
+     * publish
+     * @param  {String}    type   Type can be string or an object with:
+     * { name: String (required), cooldown: Int, debounce: Int }.
+     * @param  {...[]} data       Can hold any data with rest of the parameters
+     */
+    function publish() {
+      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+      var datas = arguments[1];
 
-      timestamp = new Date().getTime();
+      var timestamp = new Date().getTime();
+      var realType = type.name || type;
 
-      if (lastTimePublished[type] + TIMER_FOR_SAME_TYPE < timestamp) {
-        var eventToDispatch = void 0;
-
-        eventToDispatch = createCrossIeEvent(type);
-
-        for (var _len = arguments.length, data = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          data[_key - 1] = arguments[_key];
-        }
-
-        eventToDispatch.customData = data;
-
-        document.dispatchEvent(eventToDispatch);
-        lastTimePublished[type] = timestamp;
+      if (lastTimePublished[realType] + (type.cooldown || TIMER_FOR_SAME_TYPE) < timestamp) {
+        lastTimePublished[realType] = timestamp;
+        EE.emit(realType, datas);
       }
     }
-  }
 
-  /*---------------------
-  ------- PRIVATE -------
-  ----------------------*/
-  /**
-   * Basically custom events polyfill for IE11.
-   *
-   * @private
-   * @method createCrossIeEvent
-   * @param {String}            type
-   * @return {Event}            Created event object
-   */
-  function createCrossIeEvent(type) {
-    var event;
+    // Function from underscore.js
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds. If `immediate` is passed, trigger the function on the
+    // leading edge, instead of the trailing.
+    function debounce(func, wait, immediate) {
+      var timeout = void 0;
 
-    try {
-      event = new Event(type);
-    } catch (e) {
-      event = document.createEvent('Event');
-      event.initEvent(type, true, true);
+      return function () {
+        var context = this,
+            args = arguments;
+        var later = function later() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     }
-
-    return event;
   }
 })();
 'use strict';
@@ -2949,7 +2959,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var utils = _window$flatworld.utils;
   var mapStates = _window$flatworld.mapStates;
   var eventListeners = _window$flatworld.eventListeners;
-  var Flatworld = _window$flatworld.Flatworld;
   var _window$flatworld_lib = window.flatworld_libraries;
   var Hammer = _window$flatworld_lib.Hammer;
   var Hamster = _window$flatworld_lib.Hamster;
@@ -3426,6 +3435,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   ----------------------*/
   var eventListeners = window.flatworld.eventListeners;
   var utils = window.flatworld.utils;
+  var log = window.flatworld.log;
 
   /*---------------------
   --------- API ---------
@@ -3662,7 +3672,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           y: changeY
         };
       } catch (ev) {
-        console.log('Error! ', ev);
+        log('Error! ', ev);
       }
     }
 
@@ -4962,13 +4972,13 @@ window.flatworld.extensions.minimaps = {};
 
       map.drawOnNextTick();
     }
-    function reactToMapScale(e) {
+    function reactToMapScale() {
       minimapViewport.scale.x += 0.1;
       minimapViewport.scale.y = 0.1;
     }
-    function moveViewport(e) {
-      var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(e);
-      var mapCoordinates = new PIXI.Point(e.srcEvent.layerX, e.srcEvent.layerY);
+    function moveViewport(datas) {
+      var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
+      var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
       globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, map.minimapCanvas);
 
@@ -5260,7 +5270,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       maskSprite.texture = renderTexture;
     }
 
-    function moveFoW(e) {
+    function moveFoW() {
       maskMovableContainer.position = movableLayer.position;
 
       refreshFoW();
@@ -6780,7 +6790,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'setZoom',
       value: function setZoom(newScale) {
         this.getZoomLayer().setZoom(newScale);
-        mapEvents.publish('mapZoomed', { previousScale: this.getZoom(), newScale: newScale });
+
+        mapEvents.publish({ name: 'mapZoomed', cooldown: true }, { previousScale: this.getZoom(), newScale: newScale });
 
         return newScale;
       }
