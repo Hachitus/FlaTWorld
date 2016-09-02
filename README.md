@@ -35,7 +35,7 @@ Table of contents
   * [Credits](#credits)
 
 #Hot links
-* [API documentation](http://hachitus.github.io/FlaTWorld/documentation/)
+* [API documentation](http://hachitus.github.io/FlaTWorld/)
 * [Contribution guidelines](CONTRIBUTING.md)
 * [Chat in Gitter](https://gitter.im/Hachitus/FlaTWorld)
 * [Base plunkr](http://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview)
