@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/components/map/extensions/fogOfWars/simpleFogOfWar.js - FlaTWorld</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="FlaTWorld" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/flatworld.eventListeners.html">flatworld.eventListeners</a></li>
+                                <li><a href="../classes/flatworld.extensions.baseEventlisteners.html">flatworld.extensions.baseEventlisteners</a></li>
+                                <li><a href="../classes/flatworld.extensions.fogOfWars.extensions.hexagons.setupHexagonClick.html">flatworld.extensions.fogOfWars.extensions.hexagons.setupHexagonClick</a></li>
+                                <li><a href="../classes/flatworld.extensions.fogOfWars.extensions.hexagons.utils.html">flatworld.extensions.fogOfWars.extensions.hexagons.utils</a></li>
+                                <li><a href="../classes/flatworld.extensions.fogOfWars.pixelizedMinimap.html">flatworld.extensions.fogOfWars.pixelizedMinimap</a></li>
+                                <li><a href="../classes/flatworld.extensions.hexagons.ObjectHexaTerrain.html">flatworld.extensions.hexagons.ObjectHexaTerrain</a></li>
+                                <li><a href="../classes/flatworld.extensions.hexagons.ObjectHexaUnit.html">flatworld.extensions.hexagons.ObjectHexaUnit</a></li>
+                                <li><a href="../classes/flatworld.extensions.hexagons.selectHexagonObject.html">flatworld.extensions.hexagons.selectHexagonObject</a></li>
+                                <li><a href="../classes/flatworld.extensions.hexagons.utils.html">flatworld.extensions.hexagons.utils</a></li>
+                                <li><a href="../classes/flatworld.extensions.mapDrag.html">flatworld.extensions.mapDrag</a></li>
+                                <li><a href="../classes/flatworld.extensions.mapMovement.html">flatworld.extensions.mapMovement</a></li>
+                                <li><a href="../classes/flatworld.extensions.mapZoom.html">flatworld.extensions.mapZoom</a></li>
+                                <li><a href="../classes/flatworld.extensions.minimaps.pixelizedMinimap.html">flatworld.extensions.minimaps.pixelizedMinimap</a></li>
+                                <li><a href="../classes/flatworld.extensions.minimaps.scaledMinimap.html">flatworld.extensions.minimaps.scaledMinimap</a></li>
+                                <li><a href="../classes/flatworld.Flatworld.html">flatworld.Flatworld</a></li>
+                                <li><a href="../classes/flatworld.generalUtils.arrays.html">flatworld.generalUtils.arrays</a></li>
+                                <li><a href="../classes/flatworld.generalUtils.environmentDetections.html">flatworld.generalUtils.environmentDetections</a></li>
+                                <li><a href="../classes/flatworld.generalUtils.polyfills.html">flatworld.generalUtils.polyfills</a></li>
+                                <li><a href="../classes/flatworld.log.html">flatworld.log</a></li>
+                                <li><a href="../classes/flatworld.mapApi.html">flatworld.mapApi</a></li>
+                                <li><a href="../classes/flatworld.MapDataManipulator.html">flatworld.MapDataManipulator</a></li>
+                                <li><a href="../classes/flatworld.mapEvents.html">flatworld.mapEvents</a></li>
+                                <li><a href="../classes/flatworld.maplayers.MapLayer.html">flatworld.maplayers.MapLayer</a></li>
+                                <li><a href="../classes/flatworld.maplayers.MapLayerParent.html">flatworld.maplayers.MapLayerParent</a></li>
+                                <li><a href="../classes/flatworld.maplayers.MapSubcontainer.html">flatworld.maplayers.MapSubcontainer</a></li>
+                                <li><a href="../classes/flatworld.mapStates.html">flatworld.mapStates</a></li>
+                                <li><a href="../classes/flatworld.ObjectManager.html">flatworld.ObjectManager</a></li>
+                                <li><a href="../classes/flatworld.objects.ObjectSprite.html">flatworld.objects.ObjectSprite</a></li>
+                                <li><a href="../classes/flatworld.objects.ObjectSpriteTerrain.html">flatworld.objects.ObjectSpriteTerrain</a></li>
+                                <li><a href="../classes/flatworld.objects.ObjectSpriteUnit.html">flatworld.objects.ObjectSpriteUnit</a></li>
+                                <li><a href="../classes/flatworld.Preload.html">flatworld.Preload</a></li>
+                                <li><a href="../classes/flatworld.UI.html">flatworld.UI</a></li>
+                                <li><a href="../classes/flatworld.UIs.default.html">flatworld.UIs.default</a></li>
+                                <li><a href="../classes/flatworld.utils.dataManipulation.html">flatworld.utils.dataManipulation</a></li>
+                                <li><a href="../classes/flatworld.utils.effects.html">flatworld.utils.effects</a></li>
+                                <li><a href="../classes/flatworld.utils.environment.html">flatworld.utils.environment</a></li>
+                                <li><a href="../classes/flatworld.utils.general.html">flatworld.utils.general</a></li>
+                                <li><a href="../classes/flatworld.utils.mouse.html">flatworld.utils.mouse</a></li>
+                                <li><a href="../classes/flatworld.utils.Quadtree.html">flatworld.utils.Quadtree</a></li>
+                                <li><a href="../classes/flatworld.utils.resize.html">flatworld.utils.resize</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/components/map/extensions/fogOfWars/simpleFogOfWar.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+(function simpleFogOfWar() {
+  /*-----------------------
+  --------- IMPORT --------
+  -----------------------*/
+  const { PIXI } = window.flatworld_libraries;
+  const { mapEvents, generalUtils } = window.flatworld;
+  const { resize } = window.flatworld.utils;
+
+  /*-----------------------
+  ---------- API ----------
+  -----------------------*/
+  window.flatworld.extensions.fogOfWars.simpleFogOfWar = setupSimpleFogOfWar();
+
+  /*-----------------------
+  -------- PUBLIC ---------
+  -----------------------*/
+  /**
+   * Simple fog of war works with circles around objects
+   *
+   * @namespace flatworld.extensions.fogOfWars
+   * @class pixelizedMinimap
+   **/
+  function setupSimpleFogOfWar() {
+    const VIEWPORT_MULTIPLIER = 0.4;
+    const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
+    const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
+    const FoWOverlay = new PIXI.Graphics();
+    let movableLayer;
+    let staticLayer;
+    let mapRenderer;
+    let map;
+    let maskMovableContainer;
+    let maskStageContainer;
+    let FoWCB;
+    let objectsForFoW;
+    let color;
+
+    return {
+      // These two are required by all plugins
+      init,
+      pluginName: &#x27;simpleFogOfWar&#x27;,
+
+      activateFogOfWar,
+      refreshFoW,
+      getFoWObjectArray,
+      calculateCorrectCoordinates,
+    };
+    /**
+     * Ínitialize as a plugin. Done by the Flatworld class.
+     *
+     * After plugin has been initialized by the flatworld, you must still call activateFogOfWar to
+     * start showing it.
+     *
+     * @todo the offsets are really bad! For some reason they are needed, I don&#x27;t know where the
+     * issue lies :(. We probably need an offset for the renderer in the end anyway, but now it
+     * doesn&#x27;t even work properly without them.
+     * can be used here and in getViewportArea-method etc.
+     *
+     * @method init
+     * @param  {Map} givenMap     Instance of Map
+     */
+    function init(givenMap) {
+      map = givenMap;
+      map.activateFogOfWar = activateFogOfWar;
+      movableLayer = map.getMovableLayer();
+      staticLayer = map.getStaticLayer();
+      mapRenderer = map.getRenderer();
+
+      maskStageContainer = map.createSpecialLayer(&#x27;FoWStageMaskLayer&#x27;);
+      maskMovableContainer = map.createSpecialLayer(&#x27;FoWMovableMaskLayer&#x27;);
+      maskMovableContainer.x = movableLayer.x;
+      maskMovableContainer.y = movableLayer.y;
+    }
+
+    function activateFogOfWar(cb, filter, options = {}) {
+      color = options.color || 0x222222;
+      FoWCB = cb;
+      objectsForFoW = map.getPrimaryLayers({ filters: filter }).map(o =&gt; o.getObjects(filter));
+      objectsForFoW = generalUtils.arrays.flatten2Levels(objectsForFoW);
+
+      createOverlay();
+
+      setupFoW();
+      setEvents();
+    }
+
+    function setupFoW() {
+      const spriteArray = getFoWObjectArray(FoWCB);
+
+      resetFoW(FoWOverlay);
+
+      if (spriteArray.length &gt; 0) {
+        maskMovableContainer.addChild(...spriteArray);
+      }
+
+      maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
+      resizeFoW();
+
+      staticLayer.mask = maskSprite;
+    }
+
+    function refreshFoW() {
+      mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
+
+      maskSprite.texture = renderTexture;
+    }
+
+    function moveFoW() {
+      maskMovableContainer.position = movableLayer.position;
+
+      refreshFoW();
+    }
+
+    function zoomFoW() {
+      maskStageContainer.scale.x = map.getZoom();
+      maskStageContainer.scale.y = map.getZoom();
+
+      createOverlay();
+      refreshFoW();
+    }
+
+    function resizeFoW() {
+
+      createOverlay();
+      refreshFoW();
+    }
+
+    function getFoWObjectArray(cb) {
+      return objectsForFoW.map(object =&gt; cb(calculateCorrectCoordinates(object)));
+    }
+
+    function calculateCorrectCoordinates(object) {
+      const coordinates = object.toGlobal(new PIXI.Point(0, 0));
+
+      coordinates.x = Math.round(coordinates.x);
+      coordinates.y = Math.round(coordinates.y);
+      coordinates.anchor = object.anchor;
+      coordinates.pivot = object.pivot;
+      coordinates.scale = map.getZoom();
+
+      return coordinates;
+    }
+
+    /** *************************************
+    **************** PRIVATE ****************
+    ****************************************/
+    function resetFoW() {
+      maskMovableContainer.children &amp;&amp; maskMovableContainer.removeChildren();
+      maskStageContainer.children &amp;&amp; maskStageContainer.removeChildren();
+      maskStageContainer.addChild(FoWOverlay);
+      maskStageContainer.addChild(maskMovableContainer);
+    }
+
+    function createOverlay() {
+      const coordinates = {
+        x: -100,
+        y: -100,
+        width: mapRenderer.width + 200 + (mapRenderer.width / map.getZoom()),
+        height: mapRenderer.height + 200 + (mapRenderer.height / map.getZoom()),
+      };
+
+      FoWOverlay.clear();
+      FoWOverlay.beginFill(color);
+      FoWOverlay.drawRect(coordinates.x, coordinates.y, coordinates.width, coordinates.height);
+      FoWOverlay.endFill();
+    }
+    function setEvents() {
+      mapEvents.subscribe(&#x27;mapResized&#x27;, resizeFoW);
+      mapEvents.subscribe(&#x27;mapZoomed&#x27;, zoomFoW);
+      mapEvents.subscribe(&#x27;mapMoved&#x27;, moveFoW);
+    }
+  }
+}());
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
