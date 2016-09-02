@@ -19,7 +19,7 @@
     "build": "gulp build",
     "deploy": "gulp deploy",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
-    "document": "yuidoc -t node_modules/yuidoc-theme-blue",
+    "document": "yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
     "showDocuments": "echo 'starting instance in http://localhost:9002/' && forever start startDocument.js --uid FlaTWorldDocument",
     "init": "npm i -g forever && ln -s /usr/bin/nodejs /usr/bin/node && npm install",
     "lint": "node_modules/.bin/eslint ."
