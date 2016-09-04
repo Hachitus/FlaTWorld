@@ -93,7 +93,7 @@
       const filters = new MapDataManipulator({
         type: 'filter',
         object: 'layer',
-        property: 'staticLayer',
+        property: 'zoomLayer',
         value: true,
       });
       var backgroundContainer = createMinimapLayer();

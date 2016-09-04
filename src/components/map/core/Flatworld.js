@@ -16,7 +16,7 @@
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
   let _privateRenderers;
-  let _staticLayer;
+  let _zoomLayer;
   let _movableLayer;
   let _minimapLayer;
   let ParentLayerConstructor;
@@ -39,7 +39,7 @@
      *
      * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
      * structure is this:
-     * 1. StaticLayer: Handles things like scaling / zooming the map
+     * 1. ZoomLayer: Handles things like scaling / zooming the map
      * 2. MovableLayer: Obviously handles movement of the map. Also is a good place to get map coordinates. Since getting global
      * coordinates won't help you much, half of the time.
      * 3. Different layers: like units, terrain, fog of war, UIs etc. Can also contains special layers like dynamically changed UIlayers.
@@ -113,7 +113,7 @@
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
       _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
-      _renderers.main.getResponsibleLayer = this.getStaticLayer;
+      _renderers.main.getResponsibleLayer = this.getZoomLayer;
       /* Create PIXI renderer for minimap */
       if (minimapCanvas) {
         _renderers.minimap = minimapCanvas ?
@@ -133,16 +133,16 @@
           mapLayers.MapLayer;
 
       /* These are the 2 topmost layers on the map:
-       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map
+       * - zoomLayer: Keeps at the same coordinates always and is responsible for holding map
        * scale value and possible
-       * objects that do not move with the map. StaticLayer has only one child: _movableLayer
+       * objects that do not move with the map. ZoomLayer has only one child: _movableLayer
        * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move
        * with the map. Like
        * graphics that show which area or object is currently selected. */
-      _staticLayer = new mapLayers.MapLayer({ name: 'staticLayer', coord: { x: 0, y: 0 } });
+      _zoomLayer = new mapLayers.MapLayer({ name: 'zoomLayer', coord: { x: 0, y: 0 } });
       _movableLayer = new mapLayers.MapLayer({ name: 'movableLayer', coord: { x: 0, y: 0 } });
       _minimapLayer = new mapLayers.MapLayer({ name: 'minimapLayer', coord: { x: 0, y: 0 } });
-      _staticLayer.addChild(_movableLayer);
+      _zoomLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
       utils.general.fullsizeCanvasCSS(_renderers.main.view);
@@ -237,7 +237,7 @@
       this.layerTypes = {
         staticType: {
           id: LAYER_TYPE_STATIC,
-          layer: _staticLayer,
+          layer: _zoomLayer,
         },
         movableType: {
           id: LAYER_TYPE_MOVABLE,
@@ -345,7 +345,7 @@
     removeUIObject(layerType, UIName) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
-          this.getStaticLayer().deleteUIObjects(UIName);
+          this.getZoomLayer().deleteUIObjects(UIName);
           break;
         case LAYER_TYPE_MOVABLE:
           this.getMovableLayer().deleteUIObjects(UIName);
@@ -430,7 +430,7 @@
      * viewport
      **/
     getViewportArea(isLocal = false, multiplier = 0) {
-      const layer = isLocal ? this.getMovableLayer() : this.getStaticLayer();
+      const layer = isLocal ? this.getMovableLayer() : this.getZoomLayer();
       let leftSideCoords = new PIXI.Point(0, 0);
       let rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
 
@@ -495,8 +495,8 @@
      **/
     moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
       const realCoordinates = {
-        x: Math.round(x / this.getStaticLayer().getZoom()),
-        y: Math.round(y / this.getStaticLayer().getZoom()),
+        x: Math.round(x / this.getZoomLayer().getZoom()),
+        y: Math.round(y / this.getZoomLayer().getZoom()),
       };
 
       if (absolute) {
@@ -577,7 +577,7 @@
      * the way filters work now, we would have to filter layers first and then again objects.
      *
      * @method getObjectsUnderArea
-     * @param  {Object} globalCoords            Event coordinates on the staticLayer / canvas.
+     * @param  {Object} globalCoords            Event coordinates on the zoomLayer / canvas.
      * @param  {Integer} globalCoords.x         X coordinate
      * @param  {Integer} globalCoords.y         Y coordinate
      * @param  {Object} options                 Optional options
@@ -618,7 +618,7 @@
       return objects;
     }
     /**
-     * This returns the normal parent layers that we mostly use for manipulation everything. MovableLayer and staticLayer are built-in
+     * This returns the normal parent layers that we mostly use for manipulation everything. MovableLayer and zoomLayer are built-in
      * layers designed to provide the basic functionalities like zooming and moving the map. These layers provide everything that extends
      * the map more.
      *
@@ -690,7 +690,7 @@
      * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
      */
     getZoomLayer() {
-      return this.getStaticLayer();
+      return this.getZoomLayer();
     }
     /**
      * Set map zoom. 1 = no zoom. <1 zoom out, >1 zoom in.
@@ -727,10 +727,10 @@
     /**
      * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
      *
-     * @method getStaticLayer
+     * @method getZoomLayer
      */
-    getStaticLayer() {
-      return _staticLayer;
+    getZoomLayer() {
+      return _zoomLayer;
     }
     /**
      * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
@@ -915,7 +915,7 @@
     _addObjectToUIlayer(layerType, object, name) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
-          this.getStaticLayer().addUIObject(object, name);
+          this.getZoomLayer().addUIObject(object, name);
           break;
         case LAYER_TYPE_MOVABLE:
           this.getMovableLayer().addUIObject(object, name);

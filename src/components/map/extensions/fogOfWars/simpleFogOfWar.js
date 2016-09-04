@@ -26,7 +26,7 @@
     const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     const FoWOverlay = new PIXI.Graphics();
     let movableLayer;
-    let staticLayer;
+    let zoomLayer;
     let mapRenderer;
     let map;
     let maskMovableContainer;
@@ -63,7 +63,7 @@
       map = givenMap;
       map.activateFogOfWar = activateFogOfWar;
       movableLayer = map.getMovableLayer();
-      staticLayer = map.getStaticLayer();
+      zoomLayer = map.getZoomLayer();
       mapRenderer = map.getRenderer();
 
       maskStageContainer = map.createSpecialLayer('FoWStageMaskLayer');
@@ -96,7 +96,7 @@
       maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
       resizeFoW();
 
-      staticLayer.mask = maskSprite;
+      zoomLayer.mask = maskSprite;
     }
 
     function refreshFoW() {
