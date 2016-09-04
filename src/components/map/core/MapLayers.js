@@ -36,7 +36,7 @@
         name = '',
         coord = { x: 0, y: 0 },
         specialLayer = false,
-        staticLayer = true,
+        zoomLayer = true,
         selectable = false } = {}) {
       super();
       Object.assign(this, coord);
@@ -61,7 +61,7 @@
        * @attribute static
        * @type {Boolean}
        */
-      this.staticLayer = !!staticLayer;
+      this.zoomLayer = !!zoomLayer;
       /**
        * Can you select objects from this layer. For example with Map.getObjectsUnderArea
        *
@@ -287,7 +287,7 @@
         coord = { x: 0, y: 0 },
         subcontainers = { width: 0, height: 0, maxDetectionOffset: 100 },
         specialLayer = false,
-        staticLayer = true,
+        zoomLayer = true,
         selectable = false } = {}) {
       super(arguments[0]);
 
