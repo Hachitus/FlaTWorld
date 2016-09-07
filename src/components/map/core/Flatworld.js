@@ -372,7 +372,7 @@
           y: 0 },
         toLayer: false }) {
       const coord = options.coord || { x: 0, y: 0 };
-      const layer = new mapLayers.MapLayer(name, coord);
+      const layer = new mapLayers.MapLayer({ name, coord });
 
       layer.specialLayer = true;
       options.toLayer && options.toLayer.addChild(layer);
