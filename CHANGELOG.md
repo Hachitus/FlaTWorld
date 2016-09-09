@@ -1,3 +1,14 @@
+<a name="0.5.0"></a>
+# 0.5.0 Fog of war polish (2016-09-24)
+## Bug Fixes
+* Fog of war works is synced with map rendering by adding pre-rendering scripts to the engine.
+
+## Features
+* Map can have pre-rendering functions
+
+## Others
+* Using github issues, milestones, labels
+
 <a name="0.4.0"></a>
 # 0.4.0 Bug fixes (2016-08-31)
 ## Bug Fixes

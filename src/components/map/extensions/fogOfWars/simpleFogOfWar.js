@@ -97,6 +97,8 @@
       resizeFoW();
 
       zoomLayer.mask = maskSprite;
+
+      map.registerPreRenderer('renderFoW', moveFoW);
     }
 
     function refreshFoW() {
@@ -167,7 +169,7 @@
     function setEvents() {
       mapEvents.subscribe('mapResized', resizeFoW);
       mapEvents.subscribe('mapZoomed', zoomFoW);
-      mapEvents.subscribe('mapMoved', moveFoW);
+      /*mapEvents.subscribe('mapMoved', moveFoW);*/
     }
   }
 }());

@@ -255,6 +255,12 @@
        * @type {SEMVER}       http://semver.org/
        */
       this.VERSION = VERSION;
+
+      /**
+       * This holds callback functions executed before the actual map render is done
+       * @type {Objects}
+       */
+      this.preRenderers = {};
     }
     /**
      * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -551,6 +557,18 @@
       } catch (e) {
         log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
       }
+    }
+    registerPreRenderer(name, callback) {
+      if (!name && ! callback) {
+        throw new Error('name and callback required for registerPreRenderer');
+      }
+
+      this.preRenderers[name] = {
+        cb: callback
+      };
+    }
+    removePreRenderer(name) {
+      delete this.preRenderers[name];
     }
     /**
      * Setting new prototype methods for the Map instance
@@ -885,6 +903,7 @@
             renderStart = new Date().getTime();
           }
 
+          Object.keys(this.preRenderers).forEach(i => this.preRenderers[i].cb());
           _privateRenderers.forEach(renderer => renderer.render(renderer.getResponsibleLayer()));
 
           if (this.trackFPSCB) {
