@@ -1,6 +1,14 @@
 'use strict';
 
 window.graphicData = {
+  nonScaled: {
+    terrainBase: {
+      json: '/testAssets/images/terrain/hexagonTerrainsRealisticNonScaled.json'
+    },
+    unit: {
+      json: '/testAssets/images/units/testHexagonUnits.json'
+    }
+  },
   realistic: {
   	terrainBase: {
   		json: '/testAssets/images/terrain/hexagonTerrainsRealistic.json',
