@@ -1,0 +1,62 @@
+{
+	"frames": {
+		"grass": {
+			"frame": {"x":0,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"desert": {
+			"frame": {"x":123,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"wasteland": {
+			"frame": {"x":245,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"tundra": {
+			"frame": {"x":367,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"mountains": {
+			"frame": {"x":490,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"lake": {
+			"frame": {"x":612,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		},
+		"forest": {
+			"frame": {"x":735,"y":0,"w":122,"h":160},
+			"rotated": false,
+			"trimmed": false,
+			"sourceSize": {"w":122,"h":160},
+			"pivot": {"x":0.5,"y":0.5}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "hexagonTerrainsRealisticNonScaled.png",
+		"format": "RGBA8888",
+		"size": {"w":2048,"h":2048},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:debdde756fc607286361907e335b6558:05c88b3e0a0f5ff73ceeb97b4e2838a1:37e8101b77d69857c34985757668be00$"
+	}
+}
