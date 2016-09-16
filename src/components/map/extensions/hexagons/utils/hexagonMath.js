@@ -35,10 +35,14 @@
    * Set hexagon radius
    *
    * @static
-   * @method setRadius
+   * @method init
    * @param {Number} radius    The radius of the hexagon
    */
   function init(radius, startingPoint = { x: 0, y: 0 }, { orientation = 'horizontal' } = {}) {
+    if (!radius) {
+      mapLog.error('You need to pass radius as a parameter');
+    }
+
     globalRadius = radius;
     globalStartingPoint = startingPoint;
     globalOrientation = orientation;
@@ -63,9 +67,7 @@
     var angle = 2 * Math.PI / 6 * OFFSET;
     var x = CENTER.x * Math.cos(angle);
     var y = CENTER.y * Math.sin(angle);
-    var points = [];
-
-    points.push({ x, y });
+    var points = [{ x, y }];
 
     for (let i = 1; i < 7; i++) {
       angle = 2 * Math.PI / 6 * (i + OFFSET);
@@ -90,9 +92,7 @@
    * @param {string} {}.type          If you provide something else than radius, where the calculation is based from
    */
   function calcShortDiagonal({ radius = globalRadius, floorNumbers = true } = {}) {
-    var answer;
-
-    answer = radius * Math.sqrt(3);
+    let answer = radius * Math.sqrt(3);
     answer = floorNumbers ? Math.floor(answer) : answer;
 
     return answer;
@@ -109,9 +109,7 @@
    * @param {string} {}.type            If you provide something else than radius, where the calculation is based from
    */
   function calcLongDiagonal({ radius = globalRadius, floorNumbers = true } = {}) {
-    var answer;
-
-    answer = radius * 2;
+    let answer = radius * 2;
     answer = floorNumbers ? Math.floor(answer) : answer;
 
     return answer;
@@ -144,9 +142,7 @@
    */
 
   function hexaHitTest(points, hitCoords, offsetCoords = { x: 0, y: 0 }) {
-    var realPolygonPoints;
-
-    realPolygonPoints = points.map(point => {
+    const realPolygonPoints = points.map(point => {
       return {
         x: point.x + offsetCoords.x,
         y: point.y + offsetCoords.y,
@@ -170,14 +166,12 @@
    */
   function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = 'horizontal' } = {}) {
     const { rows, columns } = gridSize;
-    var gridArray = [];
-    var shortDistance = calcShortDiagonal(radius);
-    var longDistance = calcLongDiagonal(radius) - radius / 2;
-    var rowHeight, columnWidth;
-
+    const gridArray = [];
+    const shortDistance = calcShortDiagonal(radius);
+    const longDistance = calcLongDiagonal(radius) - radius / 2;
     /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
-    rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
-    columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
+    const rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
+    const columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
 
     for (let row = 0; rows > row; row++) {
       for (let column = 0; columns > column; column++) {
@@ -198,30 +192,29 @@
    *
    * @static
    * @method getClosestHexagonCenter
-   * @requires setRadius has to be set
+   * @requires init must have been called
    * @param {Object} coordinates              The coordinate where we want to find the closest hexagon center point
    */
   function getClosestHexagonCenter(coordinates) {
-    var radius = globalRadius;
-    var closestHexagonCenter;
+    let closestHexagonCenter;
 
-    if (!globalOrientation || !radius || !globalStartingPoint) {
+    if (!globalOrientation || !globalRadius || !globalStartingPoint) {
       throw new Error('getClosestHexagonCenter requirements not filled');
     }
 
     if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
         x: Math.round(coordinates.x -
-              (coordinates.x % calcShortDiagonal(radius)) +
-              calcShortDiagonal(radius) / 2 + globalStartingPoint.x),
+              (coordinates.x % calcShortDiagonal(globalRadius)) +
+              calcShortDiagonal(globalRadius) / 2 + globalStartingPoint.x),
         y: Math.round(coordinates.y -
-              (coordinates.y % calcSpecialDistance(radius)) +
-              calcLongDiagonal(radius) / 2 + globalStartingPoint.y),
+              (coordinates.y % calcSpecialDistance(globalRadius)) +
+              calcLongDiagonal(globalRadius) / 2 + globalStartingPoint.y),
       };
     } else {
       closestHexagonCenter = {
-        x: Math.floor(coordinates.x - (coordinates.x % calcSpecialDistance(radius)) + globalStartingPoint.x),
-        y: Math.floor(coordinates.y - (coordinates.y % calcShortDiagonal(radius)) + globalStartingPoint.y),
+        x: Math.floor(coordinates.x - (coordinates.x % calcSpecialDistance(globalRadius)) + globalStartingPoint.x),
+        y: Math.floor(coordinates.y - (coordinates.y % calcShortDiagonal(globalRadius)) + globalStartingPoint.y),
       };
     }
 
@@ -250,10 +243,10 @@
    * @return {Boolean}                  Is the coordinate inside the hexagon or not
    */
   function _pointInPolygon(point, vs) {
-    var x = point.x;
-    var y = point.y;
-    var inside = false;
-    var xi, xj, yi, yj, intersect;
+    const x = point.x;
+    const y = point.y;
+    let inside = false;
+    let xi, xj, yi, yj, intersect;
 
     for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
       xi = vs[i].x;

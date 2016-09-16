@@ -1353,8 +1353,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var coord = _ref$coord === undefined ? { x: 0, y: 0 } : _ref$coord;
       var _ref$specialLayer = _ref.specialLayer;
       var specialLayer = _ref$specialLayer === undefined ? false : _ref$specialLayer;
-      var _ref$staticLayer = _ref.staticLayer;
-      var staticLayer = _ref$staticLayer === undefined ? true : _ref$staticLayer;
+      var _ref$zoomLayer = _ref.zoomLayer;
+      var zoomLayer = _ref$zoomLayer === undefined ? true : _ref$zoomLayer;
       var _ref$selectable = _ref.selectable;
       var selectable = _ref$selectable === undefined ? false : _ref$selectable;
 
@@ -1384,7 +1384,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
        * @attribute static
        * @type {Boolean}
        */
-      _this.staticLayer = !!staticLayer;
+      _this.zoomLayer = !!zoomLayer;
       /**
        * Can you select objects from this layer. For example with Map.getObjectsUnderArea
        *
@@ -1665,8 +1665,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       var subcontainers = _ref3$subcontainers === undefined ? { width: 0, height: 0, maxDetectionOffset: 100 } : _ref3$subcontainers;
       var _ref3$specialLayer = _ref3.specialLayer;
       var specialLayer = _ref3$specialLayer === undefined ? false : _ref3$specialLayer;
-      var _ref3$staticLayer = _ref3.staticLayer;
-      var staticLayer = _ref3$staticLayer === undefined ? true : _ref3$staticLayer;
+      var _ref3$zoomLayer = _ref3.zoomLayer;
+      var zoomLayer = _ref3$zoomLayer === undefined ? true : _ref3$zoomLayer;
       var _ref3$selectable = _ref3.selectable;
       var selectable = _ref3$selectable === undefined ? false : _ref3$selectable;
 
@@ -3771,7 +3771,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
    * Set hexagon radius
    *
    * @static
-   * @method setRadius
+   * @method init
    * @param {Number} radius    The radius of the hexagon
    */
   function init(radius) {
@@ -3781,6 +3781,10 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
 
     var _ref$orientation = _ref.orientation;
     var orientation = _ref$orientation === undefined ? 'horizontal' : _ref$orientation;
+
+    if (!radius) {
+      mapLog.error('You need to pass radius as a parameter');
+    }
 
     globalRadius = radius;
     globalStartingPoint = startingPoint;
@@ -3813,9 +3817,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var angle = 2 * Math.PI / 6 * OFFSET;
     var x = CENTER.x * Math.cos(angle);
     var y = CENTER.y * Math.sin(angle);
-    var points = [];
-
-    points.push({ x: x, y: y });
+    var points = [{ x: x, y: y }];
 
     for (var i = 1; i < 7; i++) {
       angle = 2 * Math.PI / 6 * (i + OFFSET);
@@ -3847,9 +3849,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var _ref3$floorNumbers = _ref3.floorNumbers;
     var floorNumbers = _ref3$floorNumbers === undefined ? true : _ref3$floorNumbers;
 
-    var answer;
-
-    answer = radius * Math.sqrt(3);
+    var answer = radius * Math.sqrt(3);
     answer = floorNumbers ? Math.floor(answer) : answer;
 
     return answer;
@@ -3873,9 +3873,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var _ref4$floorNumbers = _ref4.floorNumbers;
     var floorNumbers = _ref4$floorNumbers === undefined ? true : _ref4$floorNumbers;
 
-    var answer;
-
-    answer = radius * 2;
+    var answer = radius * 2;
     answer = floorNumbers ? Math.floor(answer) : answer;
 
     return answer;
@@ -3915,9 +3913,7 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
   function hexaHitTest(points, hitCoords) {
     var offsetCoords = arguments.length <= 2 || arguments[2] === undefined ? { x: 0, y: 0 } : arguments[2];
 
-    var realPolygonPoints;
-
-    realPolygonPoints = points.map(function (point) {
+    var realPolygonPoints = points.map(function (point) {
       return {
         x: point.x + offsetCoords.x,
         y: point.y + offsetCoords.y
@@ -3952,11 +3948,9 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var gridArray = [];
     var shortDistance = calcShortDiagonal(radius);
     var longDistance = calcLongDiagonal(radius) - radius / 2;
-    var rowHeight, columnWidth;
-
     /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
-    rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
-    columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
+    var rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
+    var columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
 
     for (var row = 0; rows > row; row++) {
       for (var column = 0; columns > column; column++) {
@@ -3976,26 +3970,25 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
    *
    * @static
    * @method getClosestHexagonCenter
-   * @requires setRadius has to be set
+   * @requires init must have been called
    * @param {Object} coordinates              The coordinate where we want to find the closest hexagon center point
    */
   function getClosestHexagonCenter(coordinates) {
-    var radius = globalRadius;
-    var closestHexagonCenter;
+    var closestHexagonCenter = void 0;
 
-    if (!globalOrientation || !radius || !globalStartingPoint) {
+    if (!globalOrientation || !globalRadius || !globalStartingPoint) {
       throw new Error('getClosestHexagonCenter requirements not filled');
     }
 
     if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
-        x: Math.round(coordinates.x - coordinates.x % calcShortDiagonal(radius) + calcShortDiagonal(radius) / 2 + globalStartingPoint.x),
-        y: Math.round(coordinates.y - coordinates.y % calcSpecialDistance(radius) + calcLongDiagonal(radius) / 2 + globalStartingPoint.y)
+        x: Math.round(coordinates.x - coordinates.x % calcShortDiagonal(globalRadius) + calcShortDiagonal(globalRadius) / 2 + globalStartingPoint.x),
+        y: Math.round(coordinates.y - coordinates.y % calcSpecialDistance(globalRadius) + calcLongDiagonal(globalRadius) / 2 + globalStartingPoint.y)
       };
     } else {
       closestHexagonCenter = {
-        x: Math.floor(coordinates.x - coordinates.x % calcSpecialDistance(radius) + globalStartingPoint.x),
-        y: Math.floor(coordinates.y - coordinates.y % calcShortDiagonal(radius) + globalStartingPoint.y)
+        x: Math.floor(coordinates.x - coordinates.x % calcSpecialDistance(globalRadius) + globalStartingPoint.x),
+        y: Math.floor(coordinates.y - coordinates.y % calcShortDiagonal(globalRadius) + globalStartingPoint.y)
       };
     }
 
@@ -4027,7 +4020,11 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
     var x = point.x;
     var y = point.y;
     var inside = false;
-    var xi, xj, yi, yj, intersect;
+    var xi = void 0,
+        xj = void 0,
+        yi = void 0,
+        yj = void 0,
+        intersect = void 0;
 
     for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
       xi = vs[i].x;
@@ -4925,7 +4922,7 @@ window.flatworld.extensions.minimaps = {};
       var filters = new MapDataManipulator({
         type: 'filter',
         object: 'layer',
-        property: 'staticLayer',
+        property: 'zoomLayer',
         value: true
       });
       var backgroundContainer = createMinimapLayer();
@@ -5185,7 +5182,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     var FoWOverlay = new PIXI.Graphics();
     var movableLayer = void 0;
-    var staticLayer = void 0;
+    var zoomLayer = void 0;
     var mapRenderer = void 0;
     var map = void 0;
     var maskMovableContainer = void 0;
@@ -5222,7 +5219,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       map = givenMap;
       map.activateFogOfWar = activateFogOfWar;
       movableLayer = map.getMovableLayer();
-      staticLayer = map.getStaticLayer();
+      zoomLayer = map.getZoomLayer();
       mapRenderer = map.getRenderer();
 
       maskStageContainer = map.createSpecialLayer('FoWStageMaskLayer');
@@ -5261,7 +5258,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
       resizeFoW();
 
-      staticLayer.mask = maskSprite;
+      zoomLayer.mask = maskSprite;
+
+      map.registerPreRenderer('renderFoW', moveFoW);
     }
 
     function refreshFoW() {
@@ -5301,8 +5300,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       coordinates.x = Math.round(coordinates.x);
       coordinates.y = Math.round(coordinates.y);
-      coordinates.anchor = object.anchor;
-      coordinates.pivot = object.pivot;
+      coordinates.anchor = Object.assign({}, object.anchor);
+      coordinates.pivot = Object.assign({}, object.pivot);
       coordinates.scale = map.getZoom();
 
       return coordinates;
@@ -5334,7 +5333,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     function setEvents() {
       mapEvents.subscribe('mapResized', resizeFoW);
       mapEvents.subscribe('mapZoomed', zoomFoW);
-      mapEvents.subscribe('mapMoved', moveFoW);
+      /*mapEvents.subscribe('mapMoved', moveFoW);*/
     }
   }
 })();
@@ -5981,7 +5980,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var _drawMapOnNextTick = false;
   var isMapReadyPromises = [];
   var _privateRenderers = void 0;
-  var _staticLayer = void 0;
+  var _zoomLayer = void 0;
   var _movableLayer = void 0;
   var _minimapLayer = void 0;
   var ParentLayerConstructor = void 0;
@@ -6005,7 +6004,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      *
      * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
      * structure is this:
-     * 1. StaticLayer: Handles things like scaling / zooming the map
+     * 1. ZoomLayer: Handles things like scaling / zooming the map
      * 2. MovableLayer: Obviously handles movement of the map. Also is a good place to get map coordinates. Since getting global
      * coordinates won't help you much, half of the time.
      * 3. Different layers: like units, terrain, fog of war, UIs etc. Can also contains special layers like dynamically changed UIlayers.
@@ -6093,7 +6092,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
       _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
-      _renderers.main.getResponsibleLayer = this.getStaticLayer;
+      _renderers.main.getResponsibleLayer = this.getZoomLayer;
       /* Create PIXI renderer for minimap */
       if (minimapCanvas) {
         _renderers.minimap = minimapCanvas ? new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) : undefined;
@@ -6108,16 +6107,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       ParentLayerConstructor = subcontainers.width && subcontainers.height && subcontainers.maxDetectionOffset ? mapLayers.MapLayerParent : mapLayers.MapLayer;
 
       /* These are the 2 topmost layers on the map:
-       * - staticLayer: Keeps at the same coordinates always and is responsible for holding map
+       * - zoomLayer: Keeps at the same coordinates always and is responsible for holding map
        * scale value and possible
-       * objects that do not move with the map. StaticLayer has only one child: _movableLayer
+       * objects that do not move with the map. ZoomLayer has only one child: _movableLayer
        * - movableLayer: Moves the map, when the user commands. Can hold e.g. UI objects that move
        * with the map. Like
        * graphics that show which area or object is currently selected. */
-      _staticLayer = new mapLayers.MapLayer({ name: 'staticLayer', coord: { x: 0, y: 0 } });
+      _zoomLayer = new mapLayers.MapLayer({ name: 'zoomLayer', coord: { x: 0, y: 0 } });
       _movableLayer = new mapLayers.MapLayer({ name: 'movableLayer', coord: { x: 0, y: 0 } });
       _minimapLayer = new mapLayers.MapLayer({ name: 'minimapLayer', coord: { x: 0, y: 0 } });
-      _staticLayer.addChild(_movableLayer);
+      _zoomLayer.addChild(_movableLayer);
 
       /* needed to make the canvas fullsize canvas with PIXI */
       utils.general.fullsizeCanvasCSS(_renderers.main.view);
@@ -6214,7 +6213,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.layerTypes = {
         staticType: {
           id: LAYER_TYPE_STATIC,
-          layer: _staticLayer
+          layer: _zoomLayer
         },
         movableType: {
           id: LAYER_TYPE_MOVABLE,
@@ -6232,6 +6231,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @type {SEMVER}       http://semver.org/
        */
       this.VERSION = VERSION;
+
+      /**
+       * This holds callback functions executed before the actual map render is done
+       * @type {Objects}
+       */
+      this.preRenderers = {};
     }
     /**
      * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -6350,7 +6355,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function removeUIObject(layerType, UIName) {
         switch (layerType) {
           case LAYER_TYPE_STATIC:
-            this.getStaticLayer().deleteUIObjects(UIName);
+            this.getZoomLayer().deleteUIObjects(UIName);
             break;
           case LAYER_TYPE_MOVABLE:
             this.getMovableLayer().deleteUIObjects(UIName);
@@ -6382,7 +6387,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           toLayer: false } : arguments[1];
 
         var coord = options.coord || { x: 0, y: 0 };
-        var layer = new mapLayers.MapLayer(name, coord);
+        var layer = new mapLayers.MapLayer({ name: name, coord: coord });
 
         layer.specialLayer = true;
         options.toLayer && options.toLayer.addChild(layer);
@@ -6455,7 +6460,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var isLocal = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
         var multiplier = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
 
-        var layer = isLocal ? this.getMovableLayer() : this.getStaticLayer();
+        var layer = isLocal ? this.getMovableLayer() : this.getZoomLayer();
         var leftSideCoords = new PIXI.Point(0, 0);
         var rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
 
@@ -6539,8 +6544,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var absolute = _ref3$absolute === undefined ? false : _ref3$absolute;
 
         var realCoordinates = {
-          x: Math.round(x / this.getStaticLayer().getZoom()),
-          y: Math.round(y / this.getStaticLayer().getZoom())
+          x: Math.round(x / this.getZoomLayer().getZoom()),
+          y: Math.round(y / this.getZoomLayer().getZoom())
         };
 
         if (absolute) {
@@ -6606,6 +6611,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
         }
       }
+    }, {
+      key: 'registerPreRenderer',
+      value: function registerPreRenderer(name, callback) {
+        if (!name && !callback) {
+          throw new Error('name and callback required for registerPreRenderer');
+        }
+
+        this.preRenderers[name] = {
+          cb: callback
+        };
+      }
+    }, {
+      key: 'removePreRenderer',
+      value: function removePreRenderer(name) {
+        delete this.preRenderers[name];
+      }
       /**
        * Setting new prototype methods for the Map instance
        *
@@ -6634,7 +6655,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * the way filters work now, we would have to filter layers first and then again objects.
        *
        * @method getObjectsUnderArea
-       * @param  {Object} globalCoords            Event coordinates on the staticLayer / canvas.
+       * @param  {Object} globalCoords            Event coordinates on the zoomLayer / canvas.
        * @param  {Integer} globalCoords.x         X coordinate
        * @param  {Integer} globalCoords.y         Y coordinate
        * @param  {Object} options                 Optional options
@@ -6685,7 +6706,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return objects;
       }
       /**
-       * This returns the normal parent layers that we mostly use for manipulation everything. MovableLayer and staticLayer are built-in
+       * This returns the normal parent layers that we mostly use for manipulation everything. MovableLayer and zoomLayer are built-in
        * layers designed to provide the basic functionalities like zooming and moving the map. These layers provide everything that extends
        * the map more.
        *
@@ -6776,7 +6797,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getZoomLayer',
       value: function getZoomLayer() {
-        return this.getStaticLayer();
+        return this.getZoomLayer();
       }
       /**
        * Set map zoom. 1 = no zoom. <1 zoom out, >1 zoom in.
@@ -6822,13 +6843,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /**
        * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
        *
-       * @method getStaticLayer
+       * @method getZoomLayer
        */
 
     }, {
-      key: 'getStaticLayer',
-      value: function getStaticLayer() {
-        return _staticLayer;
+      key: 'getZoomLayer',
+      value: function getZoomLayer() {
+        return _zoomLayer;
       }
       /**
        * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
@@ -7046,6 +7067,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               renderStart = new Date().getTime();
             }
 
+            Object.keys(_this3.preRenderers).forEach(function (i) {
+              return _this3.preRenderers[i].cb();
+            });
             _privateRenderers.forEach(function (renderer) {
               return renderer.render(renderer.getResponsibleLayer());
             });
@@ -7080,7 +7104,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _addObjectToUIlayer(layerType, object, name) {
         switch (layerType) {
           case LAYER_TYPE_STATIC:
-            this.getStaticLayer().addUIObject(object, name);
+            this.getZoomLayer().addUIObject(object, name);
             break;
           case LAYER_TYPE_MOVABLE:
             this.getMovableLayer().addUIObject(object, name);
