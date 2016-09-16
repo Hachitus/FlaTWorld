@@ -21,7 +21,6 @@
    * @class pixelizedMinimap
    **/
   function setupSimpleFogOfWar() {
-    const VIEWPORT_MULTIPLIER = 0.4;
     const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
     const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     const FoWOverlay = new PIXI.Graphics();
@@ -44,6 +43,9 @@
       refreshFoW,
       getFoWObjectArray,
       calculateCorrectCoordinates,
+      FOR_TESTS: {
+        setObjectsForFoW: (o) => objectsForFoW = o
+      }
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
