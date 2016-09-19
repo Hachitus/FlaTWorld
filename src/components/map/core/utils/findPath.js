@@ -38,16 +38,19 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     const tramped = [xStart, yStart, 1];
     
     let counter = 0;
-    let d = Date.now();
+    const d = Date.now();
     
-    const path = recursiveAlg(xStart, yStart, maxSteps + 1, [xStart, yStart]);
+    let path = recursiveAlg(xStart, yStart, maxSteps + 1, [xStart, yStart], 1);
+    if (path) {
+        path = flattenNumberArray([], path);
+    }
     
     console.log(`${Date.now() - d} ms`, `${counter} oper`, `${maxSteps} cells`,
         `${counter / maxSteps / Math.log(maxSteps)} coeff`);
     
     return path;
     
-    function recursiveAlg(xLast, yLast, maxPathLen, currPath) {
+    function recursiveAlg(xLast, yLast, maxPathLen, currPath, len) {
         counter++;
         let resPath = null;
         let maxLen = maxPathLen;
@@ -59,10 +62,10 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
             
             if (x === xDest && y === yDest) {
                 currPath.push(x, y);
+                currPath._len = len + 1;
                 return currPath;
             }
             
-            const len = currPath.length / 2;
             const remainingSteps = maxLen - len;
             const noWay = !remainingSteps ||
                 getMinSteps(xDest - x, yDest - y) > remainingSteps ||
@@ -70,11 +73,10 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
                 isTramped(x, y, len);
             
             if (!noWay) {
-                const nextPath = currPath.concat([x, y]);
-                const finalPath = recursiveAlg(x, y, maxLen, nextPath);
-                if (finalPath) {
-                    resPath = finalPath;
-                    maxLen = finalPath.length / 2 - 1;
+                const newPath = recursiveAlg(x, y, maxLen, [currPath, x, y], len + 1);
+                if (newPath) {
+                    resPath = newPath;
+                    maxLen = newPath._len - 1;
                 }
             }
         }
@@ -91,6 +93,17 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
             tramped[j + 2] <= len || (tramped[j + 2] = len, false)
             : (tramped.splice(j, 0, x, y, len), false);
     }
+}
+
+function flattenNumberArray(res, arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length) {
+            flattenNumberArray(res, arr[i]);
+        } else {
+            res[res.length] = arr[i];
+        }
+    }
+    return res;
 }
 
 function binarySearch(sortFn, i0, i1) {
