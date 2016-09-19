@@ -40,15 +40,13 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     let counter = 0;
     const d = Date.now();
     
-    let path = recursiveAlg(xStart, yStart, maxSteps + 1, [xStart, yStart], 1);
-    if (path) {
-        path = flattenNumberArray([], path);
-    }
+    const pathObj = recursiveAlg(xStart, yStart, maxSteps + 1, { x: xStart, y: yStart }, 1);
+    const pathArr = pathObj && pathToArray(pathObj);
     
     console.log(`${Date.now() - d} ms`, `${counter} oper`, `${maxSteps} cells`,
         `${counter / maxSteps / Math.log(maxSteps)} coeff`);
     
-    return path;
+    return pathArr;
     
     function recursiveAlg(xLast, yLast, maxPathLen, currPath, len) {
         counter++;
@@ -61,9 +59,7 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
             const y = yLast + directions[i][1];
             
             if (x === xDest && y === yDest) {
-                currPath.push(x, y);
-                currPath._len = len + 1;
-                return currPath;
+                return { depth: len + 1, p: currPath, x: x, y: y };
             }
             
             const remainingSteps = maxLen - len;
@@ -73,10 +69,10 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
                 isTramped(x, y, len);
             
             if (!noWay) {
-                const newPath = recursiveAlg(x, y, maxLen, [currPath, x, y], len + 1);
+                const newPath = recursiveAlg(x, y, maxLen, { p: currPath, x: x, y: y }, len + 1);
                 if (newPath) {
                     resPath = newPath;
-                    maxLen = newPath._len - 1;
+                    maxLen = newPath.depth - 1;
                 }
             }
         }
@@ -95,13 +91,15 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     }
 }
 
-function flattenNumberArray(res, arr) {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].length) {
-            flattenNumberArray(res, arr[i]);
-        } else {
-            res[res.length] = arr[i];
-        }
+function pathToArray(pathObj) {
+    let p = pathObj;
+    let i = p.depth;
+    const res = new Array(i * 2);
+    
+    while (--i >= 0) {
+        res[i * 2] = p.x;
+        res[i * 2 + 1] = p.y;
+        p = p.p;
     }
     return res;
 }
