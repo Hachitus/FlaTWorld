@@ -35,75 +35,77 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     if (xStart == xDest && yStart == yDest) {
         throw new Error(`starting and destination points must be different: ${xStart}, ${yStart}`);
     }
-    const tramped = [xStart, yStart, 1];
     
     let counter = 0;
     const d = Date.now();
     
-    const pathObj = recursiveAlg(xStart, yStart, maxSteps + 1, { x: xStart, y: yStart }, 1);
-    const pathArr = pathObj && pathToArray(pathObj);
+    const pathList = bestDirectionAlg();
+    const pathArr = pathList && pathListToArray(pathList);
     
     console.log(`${Date.now() - d} ms`, `${counter} oper`, `${maxSteps} cells`,
         `${counter / maxSteps / Math.log(maxSteps)} coeff`);
     
     return pathArr;
     
-    function recursiveAlg(xLast, yLast, maxPathLen, currPath, len) {
-        counter++;
+    function bestDirectionAlg() {
+        const size = maxSteps + 1;
+        const visited = [];
+        const stack = [{
+            len: 1,
+            prev: null,
+            x: xStart,
+            y: yStart
+        }];
         let resPath = null;
-        let maxLen = maxPathLen;
-        const directions = getBestDirections(xDest - xLast, yDest - yLast);
+        let maxLen = maxSteps + 1;
+        let key;
         
-        for (let i = 0; i < directions.length; i++) {
-            const x = xLast + directions[i][0];
-            const y = yLast + directions[i][1];
+        while(stack.length) {
+            counter++;
+            const curr = stack.pop();
+            const remainingSteps = maxLen - curr.len;
             
-            if (x === xDest && y === yDest) {
-                return { depth: len + 1, p: currPath, x: x, y: y };
-            }
-            
-            const remainingSteps = maxLen - len;
-            const noWay = !remainingSteps ||
-                getMinSteps(xDest - x, yDest - y) > remainingSteps ||
-                isBlocked(x, y) ||
-                isTramped(x, y, len);
-            
-            if (!noWay) {
-                const newPath = recursiveAlg(x, y, maxLen, { p: currPath, x: x, y: y }, len + 1);
-                if (newPath) {
-                    resPath = newPath;
-                    maxLen = newPath.depth - 1;
+            if (remainingSteps && getMinSteps(xDest - curr.x, yDest - curr.y) <= remainingSteps) {
+                const directions = getBestDirections(xDest - curr.x, yDest - curr.y);
+                
+                for (let i = directions.length; i-- > 0; ) {
+                    const x = curr.x + directions[i][0];
+                    const y = curr.y + directions[i][1];
+                    
+                    if (x === xDest && y === yDest) {
+                        resPath = { len: curr.len + 1, prev: curr, x: x, y: y };
+                        maxLen = curr.len;
+                        break;
+                    }
+                    
+                    let next;
+                    const notVisited = visited[key = (x - xStart) * size + (y - yStart)] ?
+                        visited[key] > curr.len && (visited[key] = curr.len, true)
+                        : (visited[key] = curr.len, true);
+                    
+                    if (notVisited && !isBlocked(next = { len: curr.len + 1, prev: curr, x: x, y: y })) {
+                        stack.push(next);
+                    }
                 }
             }
         }
         return resPath;
     }
-    
-    function isTramped(x, y, len) {
-        const [index, match] = tramped.length ?
-            binarySearch(i => x - tramped[i *= 3] || y - tramped[i + 1], 0, tramped.length / 3)
-            : [0, false];
-        const j = index * 3;
-        
-        return match ?
-            tramped[j + 2] <= len || (tramped[j + 2] = len, false)
-            : (tramped.splice(j, 0, x, y, len), false);
-    }
 }
 
-function pathToArray(pathObj) {
-    let p = pathObj;
-    let i = p.depth;
-    const res = new Array(i * 2);
+function pathListToArray(pathList) {
+    let list = pathList;
+    let i = list.len;
+    const arr = new Array(i * 2);
     
     while (--i >= 0) {
-        res[i * 2] = p.x;
-        res[i * 2 + 1] = p.y;
-        p = p.p;
+        arr[i * 2] = list.x;
+        arr[i * 2 + 1] = list.y;
+        list = list.prev;
     }
-    return res;
+    return arr;
 }
-
+/*
 function binarySearch(sortFn, i0, i1) {
     const mid = Math.floor((i0 + i1) / 2);
     const res = sortFn(mid);
@@ -115,7 +117,7 @@ function binarySearch(sortFn, i0, i1) {
     }
     return [mid, true];
 }
-
+*/
 function isInteger(x) {
     return x === Math.floor(x) && isFinite(x);
 }

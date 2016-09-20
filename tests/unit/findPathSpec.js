@@ -161,7 +161,7 @@ function testField(field, total) {
     expect(cell(0, dy0 - height)).toBe('B');
     
     const maxSteps = width * height;
-    const isBlocked = (x, y) => cell(x, y) === 'B';
+    const isBlocked = next => cell(next.x, next.y) === 'B';
     
     if (total === undefined) {
         const Xs = field.match(/\x/g);
