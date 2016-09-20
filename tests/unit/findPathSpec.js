@@ -110,8 +110,8 @@ describe('findPath', () => {
         testField(`
             ...............................................................
             ....BBBBBBBB.......................................BBBBBBB.....
-            ...B.......B.......................................B.d....B....
-            BBBBBBB....B..................0....................B.......B...
+            ...B.......B.......................................B.d...BB....
+            BBBBBBB....B..................0....................B......BB...
             Bs......B...BB.....................................BBBBBBBBB...
             B........B....BBB..................................B...........
             B.........B......BBBBBBBBBBBBBBBBBB................B...........
@@ -173,6 +173,19 @@ function testField(field, total) {
     validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked));
     // now find the way back:
     validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked));
+    
+    const grid = Array.prototype.reduce.call(field, (res, s, i) => {
+        const v = +(s === 'B');
+        return (i % width ? res[res.length - 1].push(v) : res.push([v]), res);
+    }, []);
+    const pf = new PF.AStarFinder({ allowDiagonal: true });
+    
+    let d = Date.now();
+    let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
+    console.log('PH: ', `${-d + (d = Date.now())}ms`, res.length);
+    
+    res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
+    console.log('PH: ', `${-d + (d = Date.now())}ms`, res.length, 'reverse');
     
     function validatePath(path) {
         for (let i = 2; i < path && path.length; i += 2) {
