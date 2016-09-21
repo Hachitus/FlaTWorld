@@ -261,6 +261,13 @@
        * @type {Objects}
        */
       this.preRenderers = {};
+
+      /**
+       * Holds all the objects on the map. This is an alternative data structure to make some
+       * operations easier. Basically it will be populated with the primaryLayers, this is done in
+       * init method. More details there.
+       */
+      this.allMapObjects
     }
     /**
      * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -297,6 +304,9 @@
       isMapReadyPromises = allPromises;
 
       this.drawOnNextTick();
+
+      /* Create data structures */
+      this.allMapObjects = this._createArrayStructure();
 
       return allPromises || Promise.resolve();
     }
@@ -940,6 +950,15 @@
           this.getMovableLayer().addUIObject(object, name);
           break;
       }
+    }
+    _createArrayStructure() {
+      const allObjects = {};
+
+      this.getPrimaryLayers().forEach(layer => {
+        allObjects[layer.name] = layer.getObjects();
+      });
+
+      return allObjects;
     }
   }
 
