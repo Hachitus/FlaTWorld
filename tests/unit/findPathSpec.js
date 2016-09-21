@@ -21,9 +21,14 @@ describe('findPath', () => {
         expect(findPath(10, -5, 7, 4, 20, falseFn).length).toEqual(10 * 2);
         expect(findPath(-10, -5, 1, 1, 20, falseFn).length).toEqual(18 * 2);
         
+        expect(findPath(1, 1, 0, 0, 10, falseFn, false).length).toEqual(3 * 2);
+        expect(findPath(-10, 5, 0, 0, 20, falseFn, false).length).toEqual(16 * 2);
+        expect(findPath(10, -5, 7, 4, 20, falseFn, false).length).toEqual(13 * 2);
+        expect(findPath(-10, -5, 1, 1, 20, falseFn, false).length).toEqual(18 * 2);
+        
         testField(`
             s.....
-            .+.0..
+            .+....
             ..+...
             ...+d.
             `);
@@ -32,7 +37,7 @@ describe('findPath', () => {
     it('now there is a block', () => {
         testField(`
             s.....
-            .++0..
+            .++...
             ..B+..
             ....d.
             `);
@@ -43,7 +48,7 @@ describe('findPath', () => {
             ..Bd..
             ...B+.
             .++++.
-            s+..0.
+            s+....
             `);
     });
     
@@ -51,7 +56,7 @@ describe('findPath', () => {
         testField(`
             BBB........
             .s.B.+d.B..
-            ..+0B+B.B..
+            ..+.B+B.B..
             ...+B+.....
             ...+B+.B...
             ..BB++.....
@@ -69,14 +74,14 @@ describe('findPath', () => {
             B.+B.BBB+B.
             B.B+B..BB+.
             .B..+BB.B+.
-            0....+++++.
+            .....+++++.
             `);
     });
     
     it('bit longer path', () => {
         testField(`
             ....BBBBBB....
-            ....Bd+..0....
+            ....Bd+.......
             BBBBBB.+......
             Bs....BB+.....
             B.+.....B++++.
@@ -90,7 +95,7 @@ describe('findPath', () => {
             ...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.....
             ...xBBBBBBBB.......................................BBBBBBBx....
             ...Bxxx....B.......................................B.dxxxxx....
-            BBBBBBBx...B..................0....................B..+....B...
+            BBBBBBBx...B.......................................B..+....B...
             BsxxxxxxB...BB.....................................B...+.......
             B.+......B....BBB..................................B....+......
             B..+......B......BBBBBBBBBBBBBBBBBB................B.....+.....
@@ -111,7 +116,7 @@ describe('findPath', () => {
             ...............................................................
             ....BBBBBBBB.......................................BBBBBBB.....
             ...B.......B.......................................B.d...BB....
-            BBBBBBB....B..................0....................B......BB...
+            BBBBBBB....B.......................................B......BB...
             Bs......B...BB.....................................BBBBBBBBB...
             B........B....BBB..................................B...........
             B.........B......BBBBBBBBBBBBBBBBBB................B...........
@@ -126,66 +131,95 @@ describe('findPath', () => {
             ...............................................................
             `, 0);
     });
+    
+    it('random grids', () => {
+        testField(getRandomGrid(10));
+        testField(getRandomGrid(10));
+        testField(getRandomGrid(10));
+        testField(getRandomGrid(100, .7));
+        testField(getRandomGrid(300, .5));
+        testField(getRandomGrid(500, .4));
+    });
 });
 
 function testField(field, total) {
-    const width = field.trim().indexOf('\n');
-    if (!new RegExp(`^\\s*([sdB0\\.\\+x]{${width}}(\\n\\s*|$))+$`).test(field) ||
-            (field.match(/s/g) || []).length !== 1 ||
-            (field.match(/d/g) || []).length !== 1 ||
-            (field.match(/0/g) || []).length !== 1) {
-        throw new Error(`incorrect field: ${field}`);
+    let isMatrix = typeof field !== 'string';
+    let width = isMatrix && field[0].length;
+    
+    if (!isMatrix) {
+        width = field.trim().indexOf('\n');
+        if (!new RegExp(`^\\s*([sdB\\.\\+x]{${width}}(\\n\\s*|$))+$`).test(field) ||
+                (field.match(/s/g) || []).length !== 1 ||
+                (field.match(/d/g) || []).length !== 1) {
+            throw new Error(`incorrect field: ${field}`);
+        }
+        field = field.replace(/\s+/g, '');
     }
-    field = field.replace(/\s+/g, '');
     
-    const height = field.length / width;
-    const centerIndex = field.indexOf('0');
-    const startIndex = field.indexOf('s');
-    const destIndex = field.indexOf('d');
+    const height = isMatrix ? field.length : field.length / width;
+    const size = width * height;
+    const startIndex = isMatrix ? Math.floor(Math.random() * size) : field.indexOf('s');
+    let destIndex = isMatrix ? Math.floor(Math.random() * size) : field.indexOf('d');
+    if (destIndex === startIndex) {
+        destIndex = destIndex < size / 2 ? size - 1 : 0;
+    }
     
-    const dx0 = centerIndex % width;
-    const dy0 = Math.floor(centerIndex / width);
+    const dx0 = isMatrix ? 0 : Math.floor(Math.random() * width);
+    const dy0 = isMatrix ? 0 : Math.floor(Math.random() * height);
     const xStart = startIndex % width - dx0;
     const yStart = dy0 - Math.floor(startIndex / width);
     const xDest = destIndex % width - dx0;
     const yDest = dy0 - Math.floor(destIndex / width);
     
     // just making sure that everything is alright:
-    expect(height === Math.floor(height)).toBe(true);
-    expect(cell(xDest, yDest)).toBe('d');
-    expect(cell(xStart, yStart)).toBe('s');
-    expect(cell(0, 0)).toBe('0');
-    expect(cell(width - dx0, 0)).toBe('B');
-    expect(cell(-dx0 - 1, 0)).toBe('B');
-    expect(cell(0, dy0 + 1)).toBe('B');
-    expect(cell(0, dy0 - height)).toBe('B');
-    
-    const maxSteps = width * height;
-    const isBlocked = next => cell(next.x, next.y) === 'B';
-    
-    if (total === undefined) {
-        const Xs = field.match(/\x/g);
-        const Ps = field.match(/\+/g);
-        total = Xs && Ps ? Math.min(Xs.length, Ps.length) : (Xs || Ps || []).length;
-        total += 2;
+    if (!isMatrix) {
+        expect(height === Math.floor(height)).toBe(true);
+        expect(cell(xDest, yDest)).toBe('d');
+        expect(cell(xStart, yStart)).toBe('s');
+        expect(cell(width - dx0, 0)).toBe('B');
+        expect(cell(-dx0 - 1, 0)).toBe('B');
+        expect(cell(0, dy0 + 1)).toBe('B');
+        expect(cell(0, dy0 - height)).toBe('B');
     }
     
-    validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked));
-    // now find the way back:
-    validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked));
-    
-    const grid = Array.prototype.reduce.call(field, (res, s, i) => {
+    const maxSteps = size;
+    const grid = isMatrix ? field : Array.prototype.reduce.call(field, (res, s, i) => {
         const v = +(s === 'B');
         return (i % width ? res[res.length - 1].push(v) : res.push([v]), res);
     }, []);
-    const pf = new PF.AStarFinder({ allowDiagonal: true });
+    
+    const isBlocked = next => cell(next.x, next.y, true);
+    
+    if (!isMatrix) {
+        if (total === undefined) {
+            const Xs = field.match(/\x/g);
+            const Ps = field.match(/\+/g);
+            total = Xs && Ps ? Math.min(Xs.length, Ps.length) : (Xs || Ps || []).length;
+            total += 2;
+        }
+        
+        validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked));
+        // now find the way back:
+        validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked));
+    } else if (width < 20) {
+        const copy = grid.map(row => row.slice(0));
+        copy[dy0 - yStart][xStart + dx0] = 'S';
+        copy[dy0 - yDest][xDest + dx0] = 'D';
+        console.log(copy.map(row => row.join(' ')).join('\n'));
+    }
+    
+    const pf = new PF.AStarFinder({ allowDiagonal: false });
     
     let d = Date.now();
     let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
-    console.log('PH: ', `${-d + (d = Date.now())}ms`, res.length);
+    total = res.length || null;
+    console.log('PH: ', `${-d + (d = Date.now())}ms`, total);
+    validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, false));
     
     res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
-    console.log('PH: ', `${-d + (d = Date.now())}ms`, res.length, 'reverse');
+    total = res.length || null;
+    console.log('PH: ', `${-d + (d = Date.now())}ms`, total, 'reverse');
+    validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked, false));
     
     function validatePath(path) {
         for (let i = 2; i < path && path.length; i += 2) {
@@ -198,12 +232,24 @@ function testField(field, total) {
         expect(path && path.length / 2).toBe(total || null);
     }
     
-    function cell(x, y) {
+    function cell(x, y, useGrid) {
         x += dx0;
         y = dy0 - y;
-        return x < 0 || x >= width || y < 0 || y >= height ? 'B'
-            : field[y * width + x];
+        return x < 0 || x >= width || y < 0 || y >= height ? (useGrid ? 1 : 'B')
+            : useGrid ? grid[y][x] : field[y * width + x];
     }
+}
+
+function getRandomGrid(width, blockedRatio = .3, height = width) {
+    const res = [];
+    for (let i = 0; i < height; i++) {
+        const row = [];
+        for (let j = 0; j < width; j++) {
+            row.push(Math.random() < blockedRatio ? 1 : 0);
+        }
+        res.push(row);
+    }
+    return res;
 }
 
 }();

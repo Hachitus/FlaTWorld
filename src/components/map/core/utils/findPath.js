@@ -23,7 +23,7 @@ window.flatworld.utils.findPath = findPath;
  * @return {number[]} - path coordinates from start to destination (including starting point)
  */
 
-function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
+function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagonal) {
     for (let i = 0; i < 5; i++) {
         if (!isInteger(arguments[i])) {
             throw new Error(`argument #${i} must be an integer: ${arguments[i]}`);
@@ -39,10 +39,14 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     let counter = 0;
     const d = Date.now();
     
+    const hexagonGrid = allowDiagonal === undefined;
     const pathList = bestDirectionAlg();
     const pathArr = pathList && pathListToArray(pathList);
     
-    console.log(`${Date.now() - d} ms`, `${counter} oper`, `${maxSteps} cells`,
+    console.log(`${Date.now() - d}ms`,
+        pathArr && pathArr.length / 2,
+        `${counter} oper`,
+        `${maxSteps} cells`,
         `${counter / maxSteps / Math.log(maxSteps)} coeff`);
     
     return pathArr;
@@ -50,7 +54,7 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
     function bestDirectionAlg() {
         const size = maxSteps + 1;
         const visited = [];
-        const startMinSteps = getMinSteps(xDest - xStart, yDest - yStart);
+        const startMinSteps = getMinSteps(xDest - xStart, yDest - yStart, hexagonGrid);
         const queue = new PriorityQueue();
         queue.push({
             len: 1,
@@ -67,10 +71,10 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked) {
             counter++;
             const curr = queue.pop();
             const remainingSteps = maxLen - curr.len;
-            const minSteps = remainingSteps && getMinSteps(xDest - curr.x, yDest - curr.y);
+            const minSteps = remainingSteps && getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid);
             
             if (minSteps && minSteps <= remainingSteps) {
-                const directions = getBestDirections(xDest - curr.x, yDest - curr.y);
+                const directions = getBestDirections(xDest - curr.x, yDest - curr.y, hexagonGrid);
                 
                 for (let i = directions.length; i-- > 0; ) {
                     const x = curr.x + directions[i][0];
@@ -195,27 +199,57 @@ function isInteger(x) {
     return x === Math.floor(x) && isFinite(x);
 }
 
-function getBestDirections(dx, dy) {
+function getBestDirections(dx, dy, hexagonGrid) {
+    return hexagonGrid ? getBestHexDirections(dx, dy)
+        : getBestNormalDirections(dx, dy)
+}
+
+function getBestHexDirections(dx, dy) {
     return dx > 0 ?
-            (dy > 0 ? allDirections.north_east
+            (dy > 0 ? hexDirections.north_east
             : dy < 0 ?
-                (dx < -dy ? allDirections.south_south_east
-                : dx > -dy ? allDirections.south_east_east
-                : allDirections.south_east)
-            : allDirections.east)
+                (dx < -dy ? hexDirections.south_south_east
+                : dx > -dy ? hexDirections.south_east_east
+                : hexDirections.south_east)
+            : hexDirections.east)
         : dx < 0 ?
             (dy > 0 ?
-                (-dx < dy ? allDirections.north_north_west
-                : -dx > dy ? allDirections.north_west_west
-                : allDirections.north_west)
-            : dy < 0 ? allDirections.south_west
-            : allDirections.west)
-        : (dy > 0 ? allDirections.north
-            : dy < 0 ? allDirections.south
+                (-dx < dy ? hexDirections.north_north_west
+                : -dx > dy ? hexDirections.north_west_west
+                : hexDirections.north_west)
+            : dy < 0 ? hexDirections.south_west
+            : hexDirections.west)
+        : (dy > 0 ? hexDirections.north
+            : dy < 0 ? hexDirections.south
             : null);
 }
 
-const allDirections = {
+function getBestNormalDirections(dx, dy) {
+    return dx > 0 ?
+            (dy > 0 ? normalDirections.north_east
+            : dy < 0 ? normalDirections.south_east
+            : normalDirections.east)
+        : dx < 0 ?
+            (dy > 0 ? normalDirections.north_west
+            : dy < 0 ? normalDirections.south_west
+            : normalDirections.west)
+        : (dy > 0 ? normalDirections.north
+            : dy < 0 ? normalDirections.south
+            : null);
+}
+
+const normalDirections = {
+    north: [[0, 1, 1], [1, 0, 0], [-1, 0, 0], [0, -1, -1]],
+    south: [[0, -1, 1], [-1, 0, 0], [1, 0, 0], [0, 1, -1]],
+    east: [[1, 0, 1], [0, 1, 0], [0, -1, 0], [-1, 0, -1]],
+    west: [[-1, 0, 1], [0, -1, 0], [0, 1, 0], [1, 0, -1]],
+    north_east: [[0, 1, 1], [1, 0, 1], [0, -1, -1], [-1, 0, -1]],
+    south_west: [[0, -1, 1], [-1, 0, 1], [0, 1, -1], [1, 0, -1]],
+    north_west: [[0, 1, 1], [-1, 0, 1], [0, -1, -1], [1, 0, -1]],
+    south_east: [[0, -1, 1], [1, 0, 1], [0, 1, -1], [-1, 0, -1]]
+};
+
+const hexDirections = {
     north: [[0, 1, 1], [-1, 1, 0], [1, 0, 0], [1, -1, -1], [-1, 0, -1], [0, -1, -1]],
     south: [[0, -1, 1], [1, -1, 0], [-1, 0, 0], [-1, 1, -1], [1, 0, -1], [0, 1, -1]],
     east: [[1, 0, 1], [1, -1, 0], [0, 1, 0], [-1, 1, -1], [0, -1, -1], [-1, 0, -1]],
@@ -230,10 +264,14 @@ const allDirections = {
     south_east_east: [[1, 0, 1], [1, -1, 1], [0, -1, 0], [0, 1, 0], [-1, 1, -1], [-1, 0, -1]]
 };
 
-function getMinSteps(dx, dy) {
-    return dx > 0 && dy > 0 ? dx + dy
-        : dx < 0 && dy < 0 ? -dx - dy
-        : Math.max(Math.abs(dx), Math.abs(dy));
+function getMinSteps(dx, dy, hexagonGrid) {
+    if (hexagonGrid) {
+        return dx > 0 && dy > 0 ? dx + dy
+            : dx < 0 && dy < 0 ? -dx - dy
+            : Math.max(Math.abs(dx), Math.abs(dy));
+    } else {
+        return Math.abs(dx) + Math.abs(dy);
+    }
 }
 
 }();
