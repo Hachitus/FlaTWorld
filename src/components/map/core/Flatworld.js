@@ -712,13 +712,14 @@
       };
     }
     /**
-     * This returns the layer that is responsible for map zoom
+     * This returns the layer that is responsible for map zoom.  It handles zooming and normally
+     * other non-movable operations.
      *
      * @method getZoomLayer
      * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
      */
     getZoomLayer() {
-      return this.getZoomLayer();
+      return _zoomLayer;
     }
     /**
      * Set map zoom. 1 = no zoom. <1 zoom out, >1 zoom in.
@@ -751,14 +752,6 @@
      */
     getRenderer(type) {
       return type === 'minimap' ? _renderers.minimap : _renderers.main;
-    }
-    /**
-     * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
-     *
-     * @method getZoomLayer
-     */
-    getZoomLayer() {
-      return _zoomLayer;
     }
     /**
      * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
