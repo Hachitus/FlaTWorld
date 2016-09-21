@@ -11,9 +11,10 @@
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
-  var styleSheetElement;
-  var cssClasses;
-  var elementList = {};
+  const UINAME = 'movementArrow';
+  let styleSheetElement;
+  let cssClasses;
+  const elementList = {};
 
   /*---------------------
   --------- API ---------
@@ -80,7 +81,6 @@
      * @method showSelections
      * @param  {Object} objects     Objects that have been selected. See core.UI for more information
      * @param {Object} getDatas       See explanation in core.UI
-     * @param {Object} options        Extra options
      */
     showSelections(objects, getDatas, options) {
       var updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
@@ -156,20 +156,23 @@
     }
     /**
      * @method showUnitMovement
-     * @param {PIXI.Point} to       Global coordinates that were clicked
+     * @param { Object } object           The object that is being moved
+     * @param {PIXI.Point | Array} to     Coordinates as an object or array of waypoints / 
+     * coordinates where the unit is being moved to.
      */
     showUnitMovement(object, to) {
-      const UINAME = 'movementArrow';
-      var localTo, localFrom, currentArrow;
-
-      localTo = this.FTW.getMovableLayer().toLocal(to);
-      localFrom = this.FTW.getMovableLayer().toLocal(object.toGlobal(new PIXI.Point(0, 0)));
-
-      currentArrow = drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
+      const localFrom = this.FTW.getMovableLayer().toLocal(object.toGlobal(new PIXI.Point(0, 0)));
 
       this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id, UINAME);
 
-      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, currentArrow, UINAME);
+      if (Array.isArray(to)) {
+        to.forEach(coord => {
+          this._createArrow(localFrom, coord);
+        });
+      } else {
+        this._createArrow(localFrom, to);
+      }
+
       this.FTW.drawOnNextTick();
     }
 
@@ -196,6 +199,11 @@
       this.createHighlight(clonedObject, { coords: coord });
 
       return clonedObject;
+    }
+    _createArrow(localFrom, coord) {
+      const localTo = this.FTW.getMovableLayer().toLocal(coord);
+      const currentArrow = drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
+      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, currentArrow, UINAME);
     }
     /**
      * @private

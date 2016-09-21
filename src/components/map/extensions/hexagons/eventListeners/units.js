@@ -2,13 +2,8 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var utils = window.flatworld.utils;
-  var mapEvents = window.flatworld.mapEvents;
-  var UI = window.flatworld.UI;
-  var MapDataManipulator = window.flatworld.MapDataManipulator;
-  var eventListeners = window.flatworld.eventListeners;
-  var mapStates = window.flatworld.mapStates;
-  var mapLog = window.flatworld.log;
+  var { utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, mapLog } = window.flatworld;
+  var { findPath } = window.flatworld.extensions.hexagons;
 
   /*---------------------
   --------- API ---------
@@ -115,10 +110,12 @@
         globalCoords = utils.mouse.eventData.getPointerCoords(e);
       }
 
+      const pathsToCoordinates = pathFinding.findPath(selectedObject.position, globalCoords);
+
       selectedObject.move(globalCoords);
       mapEvents.publish('objectMoves', selectedObject);
 
-      ui.showUnitMovement(selectedObject, globalCoords);
+      ui.showUnitMovement(selectedObject, pathsToCoordinates);
 
       mapStates.objectOrderEnd();
       FTW.drawOnNextTick();

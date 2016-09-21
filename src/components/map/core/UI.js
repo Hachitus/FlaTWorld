@@ -87,7 +87,8 @@
      * @method showUnitMovement
      * @static
      * @param {Object} object         Unit that the player wants to move
-     * @param {Object} to             Coordinates where the unit is being moved to
+     * @param {Object | Array} to     Coordinates as an object or array of waypoints / coordinates
+     * where the unit is being moved to.
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      * */
     scope.showUnitMovement = function (objects, to, { UIThemeOptions } = {}) {
