@@ -95,17 +95,6 @@
      * @param  {Event} e      Event object
      */
     function orderListener(e) {
-      const filter = new MapDataManipulator({
-        type: 'filter',
-        object: 'layer',
-        property: 'name',
-        value: 'unitLayer',
-      });
-      var getData = {
-        allData(object) {
-          return object.data.typeData;
-        },
-      };
       var globalCoords, selectedObject;
 
       if (!FTW.currentlySelectedObjects) {
