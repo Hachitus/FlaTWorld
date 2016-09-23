@@ -4,6 +4,7 @@
 'use strict';
 
 const findPath = window.flatworld.utils.findPath;
+const compareToPathFindingJS = false;
 
 describe('findPath', () => {
     const falseFn = () => false;
@@ -132,7 +133,7 @@ describe('findPath', () => {
             `, 0);
     });
     
-    it('random grids', () => {
+    (compareToPathFindingJS ? it : xit)('random grids', () => {
         testField(getRandomGrid(10));
         testField(getRandomGrid(10));
         testField(getRandomGrid(10));
@@ -208,18 +209,20 @@ function testField(field, total) {
         console.log(copy.map(row => row.join(' ')).join('\n'));
     }
     
-    const pf = new PF.AStarFinder({ allowDiagonal: false });
-    
-    let d = Date.now();
-    let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
-    total = res.length || null;
-    console.log('PH: ', `${-d + (d = Date.now())}ms`, total);
-    validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, false));
-    
-    res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
-    total = res.length || null;
-    console.log('PH: ', `${-d + (d = Date.now())}ms`, total, 'reverse');
-    validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked, false));
+    if (compareToPathFindingJS) {
+        const pf = new PF.AStarFinder({ allowDiagonal: false });
+        
+        let d = Date.now();
+        let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
+        total = res.length || null;
+        console.log('PH: ', `${-d + (d = Date.now())}ms`, total);
+        validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, false));
+        
+        res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
+        total = res.length || null;
+        console.log('PH: ', `${-d + (d = Date.now())}ms`, total, 'reverse');
+        validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked, false));
+    }
     
     function validatePath(path) {
         for (let i = 2; i < path && path.length; i += 2) {
@@ -253,3 +256,20 @@ function getRandomGrid(width, blockedRatio = .3, height = width) {
 }
 
 }();
+
+
+/*
+// pathFinding.js fails on reverse:
+
+1 0 0 0 S 0 0 0 0 1
+0 0 1 0 1 0 0 0 1 0
+D 0 0 0 0 0 0 1 0 1
+1 0 1 0 0 0 0 0 0 0
+0 0 1 0 1 0 0 1 0 0
+0 1 1 1 0 1 0 1 0 1
+0 0 0 1 0 0 1 1 1 0
+0 0 0 0 0 1 1 0 0 0
+1 1 0 0 0 1 0 1 1 0
+1 1 0 0 0 0 1 0 0 0
+
+ */

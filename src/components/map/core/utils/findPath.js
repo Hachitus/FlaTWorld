@@ -79,16 +79,23 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagon
                 for (let i = directions.length; i-- > 0; ) {
                     const x = curr.x + directions[i][0];
                     const y = curr.y + directions[i][1];
+                    const newLen = curr.len + 1;
                     
                     if (x === xDest && y === yDest) {
-                        resPath = { len: curr.len + 1, prev: curr, x: x, y: y };
-                        maxLen = curr.len;
+                        resPath = { len: newLen, prev: curr, x: x, y: y };
+                        maxLen = newLen - 1;
                         break;
                     }
                     
                     let next;
-                    if (!isVisited(x, y, curr.len) && !isBlocked(next = { len: curr.len + 1, prev: curr, x: x, y: y })) {
-                        const loss = curr.len + minSteps - directions[i][2] - startMinSteps;
+                    if (!isVisited(x, y, newLen) && !isBlocked(next = { len: newLen, prev: curr, x: x, y: y })) {
+                        // if (minSteps - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
+                        //     console.error([x, y], [xDest, yDest], directions);
+                        //     throw new Error('directions loss is not correct!');
+                        // }
+                        
+                        const minTotalSteps = (/*current steps*/newLen - 1) + (/*min left steps*/minSteps - directions[i][2]);
+                        const loss = (minTotalSteps - startMinSteps)/* * size - newLen*/;
                         queue.push(next, loss);
                     }
                 }
@@ -152,33 +159,32 @@ class PriorityQueue {
 
 class PriorityQueue {
     constructor() {
-        this.stacks = [];
+        this.items = [];
     }
     
     get length() {
-        return this.stacks.length;
+        return this.items.length;
     }
     
     pop() {
-        const stack = this.stacks[this.stacks.length - 1];
+        const stack = this.items[this.items.length - 1].stack;
         const value = stack.pop();
         if (!stack.length) {
-            this.stacks.pop();
+            this.items.pop();
         }
         return value;
     }
     
     push(value, loss) {
-        const [index, match] = this.stacks.length ?
-            binarySearch(i => this.stacks[i]._loss - loss, 0, this.stacks.length)
+        const [index, match] = this.items.length ?
+            binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
             : [0, false];
         
         if (match) {
-            this.stacks[index].push(value);
+            this.items[index].stack.push(value);
         } else {
-            const stack = [value];
-            this.stacks.splice(index, 0, stack);
-            stack._loss = loss;
+            const newItem = { stack: [value], loss: loss };
+            this.items.splice(index, 0, newItem);
         }
     }
 }
@@ -239,10 +245,10 @@ function getBestNormalDirections(dx, dy) {
 }
 
 const normalDirections = {
-    north: [[0, 1, 1], [1, 0, 0], [-1, 0, 0], [0, -1, -1]],
-    south: [[0, -1, 1], [-1, 0, 0], [1, 0, 0], [0, 1, -1]],
-    east: [[1, 0, 1], [0, 1, 0], [0, -1, 0], [-1, 0, -1]],
-    west: [[-1, 0, 1], [0, -1, 0], [0, 1, 0], [1, 0, -1]],
+    north: [[0, 1, 1], [1, 0, -1], [-1, 0, -1], [0, -1, -1]],
+    south: [[0, -1, 1], [-1, 0, -1], [1, 0, -1], [0, 1, -1]],
+    east: [[1, 0, 1], [0, 1, -1], [0, -1, -1], [-1, 0, -1]],
+    west: [[-1, 0, 1], [0, -1, -1], [0, 1, -1], [1, 0, -1]],
     north_east: [[0, 1, 1], [1, 0, 1], [0, -1, -1], [-1, 0, -1]],
     south_west: [[0, -1, 1], [-1, 0, 1], [0, 1, -1], [1, 0, -1]],
     north_west: [[0, 1, 1], [-1, 0, 1], [0, -1, -1], [1, 0, -1]],
