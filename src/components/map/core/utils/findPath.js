@@ -19,7 +19,9 @@ window.flatworld.utils.findPath = findPath;
  * @param  {number} xDest - destination x-coordinate
  * @param  {number} yDest - destination y-coordinate
  * @param  {number} maxSteps - maximum allowed number of steps (must be at least 1)
- * @param  {(x: number, y: number) => boolean} isBlocked - function that returns true if coordinate is blocked
+ * @param  {{ len: number, x: number, y: number, prev: Object } => boolean} isBlocked -
+ *                 function that returns true if coordinate is blocked;
+ *                 it also can increase "len" property of passed object for weighted graph
  * @return {number[]} - path coordinates from start to destination (including starting point)
  */
 
@@ -71,7 +73,7 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagon
             counter++;
             const curr = queue.pop();
             const remainingSteps = maxLen - curr.len;
-            const minSteps = remainingSteps && getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid);
+            const minSteps = remainingSteps > 0 && getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid);
             
             if (minSteps && minSteps <= remainingSteps) {
                 const directions = getBestDirections(xDest - curr.x, yDest - curr.y, hexagonGrid);
@@ -79,23 +81,31 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagon
                 for (let i = directions.length; i-- > 0; ) {
                     const x = curr.x + directions[i][0];
                     const y = curr.y + directions[i][1];
-                    const newLen = curr.len + 1;
+                    const next = { len: curr.len + 1, prev: curr, x: x, y: y };
+                    
+                    if (isBlocked(next)) {
+                        // for debug purposes only:
+                        if (x === xDest && y === yDest) {
+                            throw new Error('destination must not be blocked!');
+                        }
+                        continue;
+                    }
                     
                     if (x === xDest && y === yDest) {
-                        resPath = { len: newLen, prev: curr, x: x, y: y };
-                        maxLen = newLen - 1;
+                        resPath = next;
+                        maxLen = next.len - 1;
                         break;
                     }
                     
-                    let next;
-                    if (!isVisited(x, y, newLen) && !isBlocked(next = { len: newLen, prev: curr, x: x, y: y })) {
-                        // if (minSteps - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
-                        //     console.error([x, y], [xDest, yDest], directions);
-                        //     throw new Error('directions loss is not correct!');
-                        // }
+                    if (!isVisited(x, y, next.len)) {
+                        // for debug purposes only:
+                        if (minSteps - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
+                            console.error([x, y], [xDest, yDest], directions);
+                            throw new Error('directions loss is not correct!');
+                        }
                         
-                        const minTotalSteps = (/*current steps*/newLen - 1) + (/*min left steps*/minSteps - directions[i][2]);
-                        const loss = (minTotalSteps - startMinSteps)/* * size - newLen*/;
+                        const minTotalSteps = (/*current steps*/next.len - 1) + (/*min left steps*/minSteps - directions[i][2]);
+                        const loss = (minTotalSteps - startMinSteps)/* * size - next.len*/;
                         queue.push(next, loss);
                     }
                 }
@@ -114,48 +124,13 @@ function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagon
 
 function pathListToArray(pathList) {
     let list = pathList;
-    let i = list.len;
-    const arr = new Array(i * 2);
+    const arr = [];
     
-    while (--i >= 0) {
-        arr[i * 2] = list.x;
-        arr[i * 2 + 1] = list.y;
-        list = list.prev;
-    }
-    return arr;
+    do arr.push(list.y, list.x);
+    while(list = list.prev);
+    
+    return arr.reverse();
 }
-/*
-class PriorityQueue {
-    constructor() {
-        this.stacks = [];
-        this.losses = [];
-    }
-    
-    get length() {
-        return this.losses.length;
-    }
-    
-    pop() {
-        const loss = this.losses[this.losses.length - 1];
-        const value = this.stacks[loss].pop();
-        if (!this.stacks[loss].length) {
-            delete this.stacks[loss];
-            this.losses.pop();
-        }
-        return value;
-    }
-    
-    push(value, loss) {
-        if (this.stacks[loss]) {
-            this.stacks[loss].push(value);
-        } else {
-            this.stacks[loss] = [value];
-            const index = binarySearch(i => this.losses[i] - loss, 0, this.losses.length)[0];
-            this.losses.splice(index, 0, loss);
-        }
-    }
-}
-*/
 
 class PriorityQueue {
     constructor() {

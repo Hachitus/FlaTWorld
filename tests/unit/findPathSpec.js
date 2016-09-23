@@ -4,7 +4,7 @@
 'use strict';
 
 const findPath = window.flatworld.utils.findPath;
-const compareToPathFindingJS = false;
+const compareToPathFindingJS = true;
 
 describe('findPath', () => {
     const falseFn = () => false;
@@ -189,6 +189,10 @@ function testField(field, total) {
         return (i % width ? res[res.length - 1].push(v) : res.push([v]), res);
     }, []);
     
+    // start and destionation should be walkable
+    grid[dy0 - yDest][xDest + dx0] = 0;
+    grid[dy0 - yStart][xStart + dx0] = 0;
+    
     const isBlocked = next => cell(next.x, next.y, true);
     
     if (!isMatrix) {
@@ -256,20 +260,3 @@ function getRandomGrid(width, blockedRatio = .3, height = width) {
 }
 
 }();
-
-
-/*
-// pathFinding.js fails on reverse:
-
-1 0 0 0 S 0 0 0 0 1
-0 0 1 0 1 0 0 0 1 0
-D 0 0 0 0 0 0 1 0 1
-1 0 1 0 0 0 0 0 0 0
-0 0 1 0 1 0 0 1 0 0
-0 1 1 1 0 1 0 1 0 1
-0 0 0 1 0 0 1 1 1 0
-0 0 0 0 0 1 1 0 0 0
-1 1 0 0 0 1 0 1 1 0
-1 1 0 0 0 0 1 0 0 0
-
- */
