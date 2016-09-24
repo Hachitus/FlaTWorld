@@ -85,7 +85,7 @@
      * @return {Boolean} true = uses subcontainers.
      */
     hasSubcontainers() {
-      return (this.subcontainersConfig.width && this.subcontainersConfig.height) ? true : false;
+      return (this.subcontainersConfig && this.subcontainersConfig.width && this.subcontainersConfig.height) ? true : false;
     }
     /**
      * Move layer based on given amounts
@@ -155,23 +155,7 @@
      * @return {Array}            All the objects (not layers) found under this layer
      * */
     getObjects(filter) {
-      const allObjects = [];
-      const willFilter = filter && filter.doesItFilter("object");      
-      let objects;
-
-      if (this.hasSubcontainers()) {
-        this.getSubcontainers().forEach(subcontainer => {
-          if (willFilter) {
-            objects = subcontainer.children.filter(o => !!filter.filter(o).length);
-          } else {
-            objects = subcontainer.children;
-          }
-
-          allObjects.push(objects);
-        });
-      }
-
-      return generalUtils.arrays.flatten2Levels(allObjects);
+      throw new Error('Has to be implemented in child class');
     }
     /**
      * Create and add special layer, that holds UI effects in it. UILayer is normally positioned as movableLayers 3rd child. And the
@@ -314,6 +298,29 @@
       }
 
       return displayObject;
+    }
+    /**
+     * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects. Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
+     *
+     * @method getObjects
+     * @return {Array}            All the objects (not layers) found under this layer
+     * */
+    getObjects(filter) {
+      const allObjects = [];
+      const willFilter = filter && filter.doesItFilter("object");      
+      let objects;
+
+      this.getSubcontainers().forEach(subcontainer => {
+        if (willFilter) {
+          objects = subcontainer.children.filter(o => !!filter.filter(o).length);
+        } else {
+          objects = subcontainer.children;
+        }
+
+        allObjects.push(objects);
+      });
+
+      return generalUtils.arrays.flatten2Levels(allObjects);
     }
     /**
      * Returns the configurations set for subcontainers.

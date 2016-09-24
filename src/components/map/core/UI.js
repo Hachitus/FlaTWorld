@@ -91,12 +91,12 @@
      * where the unit is being moved to.
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      * */
-    scope.showUnitMovement = function (objects, to, { UIThemeOptions } = {}) {
-      if (Array.isArray(objects) || typeof objects !== 'object' || objects === null) {
-        mapLog.error('Object was an Array, should be plain object: ' + objects.length);
+    scope.showUnitMovement = function (to, { UIThemeOptions } = {}) {
+      if (!Array.isArray(to)) {
+        mapLog.error('Array expected for showUnitMovement');
       }
 
-      return UITheme.showUnitMovement(objects, to, UIThemeOptions);
+      return UITheme.showUnitMovement(to, UIThemeOptions);
     };
 
     /**

@@ -11,8 +11,9 @@
   const LAYER_TYPE_STATIC = 0;
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
-  const VERSION = '0.0.0';
+  const VERSION = '0.5.0';
   const _renderers = {};
+  const zeroCoordinates = new PIXI.Point(0,0);
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
   let _privateRenderers;
@@ -127,10 +128,7 @@
 
       /* This defines which MapLayer class we use to generate layers on the map. Under movableLayer. These are layers like: Units,
        * terrain, fog of war, UIs etc. */
-      ParentLayerConstructor =
-        (subcontainers.width && subcontainers.height && subcontainers.maxDetectionOffset) ?
-          mapLayers.MapLayerParent :
-          mapLayers.MapLayer;
+      ParentLayerConstructor = mapLayers.MapLayerParent;
 
       /* These are the 2 topmost layers on the map:
        * - zoomLayer: Keeps at the same coordinates always and is responsible for holding map
@@ -267,7 +265,7 @@
        * operations easier. Basically it will be populated with the primaryLayers, this is done in
        * init method. More details there.
        */
-      this.allMapObjects
+      this.allMapObjects = {};
     }
     /**
      * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -291,12 +289,15 @@
 
       options.fullsize && this.toggleFullsize();
 
-      if (plugins.length) {
-        allPromises = this.activatePlugins(plugins);
-      }
+      /* Create data structures. Need to be done before activating plugins */
+      this.allMapObjects = this._createArrayStructure();
 
       /* Sets the correct Map starting coordinates */
       coord && Object.assign(_movableLayer, coord);
+
+      if (plugins.length) {
+        allPromises = this.activatePlugins(plugins);
+      }
 
       /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
       this._defaultTick();
@@ -304,9 +305,6 @@
       isMapReadyPromises = allPromises;
 
       this.drawOnNextTick();
-
-      /* Create data structures */
-      this.allMapObjects = this._createArrayStructure();
 
       return allPromises || Promise.resolve();
     }
@@ -623,11 +621,11 @@
       allCoords.localCoords.width = globalCoords.width / this.getZoom();
       allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
-      if (this.usesSubcontainers()) {
+/*      if (this.usesSubcontainers()) {*/
         const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
         objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
-      } else {
+/*      } else {
         const filteredContainers = this.getMovableLayer().children.filter(thisChild => {
           if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
             return false;
@@ -637,7 +635,7 @@
         });
 
         objects = this._retrieveObjects(allCoords, filteredContainers);
-      }
+      }*/
 
       if (filters && filters.doesItFilter("object")) {
         objects = filters.filter(objects);
@@ -689,13 +687,7 @@
             return generalUtils.arrays.flatten2Levels(theseObjs);
           });
         } else {
-          allObjs = layer.children.map((obj) => {
-            if (filters) {
-              return filters.filter(obj);
-            }
-
-            return obj;
-          });
+          return undefined;
         }
 
         return generalUtils.arrays.flatten2Levels(allObjs);
@@ -704,12 +696,6 @@
       allObjects = generalUtils.arrays.flatten2Levels(allObjects);
 
       return allObjects;
-    }
-    getMapCoordinates() {
-      return {
-        x: this.getMovableLayer().x,
-        y: this.getMovableLayer().y,
-      };
     }
     /**
      * This returns the layer that is responsible for map zoom.  It handles zooming and normally
@@ -763,6 +749,13 @@
      */
     getMovableLayer() {
       return _movableLayer;
+    }
+    getMapCoordinates(object) {
+      if (object.toGlobal) {
+        return _movableLayer.toLocal(zeroCoordinates, object);
+      } else {
+        return _movableLayer.toLocal(object);
+      }
     }
     /**
      * Return minimap layer. Holds minimap, if used in the game.

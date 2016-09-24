@@ -84,6 +84,10 @@
       expect(map.getMovableLayer().children[0].children[0].x).toBe(50);
       expect(map.getMovableLayer().children[0].children[0].children[0].x).toBe(40);
     });
+    it('getMapCoordinates', () => {
+      map.getMapCoordinates();
+      expect(true).toBe(false);
+    })
   });
 
   function initFlatworld(options) {

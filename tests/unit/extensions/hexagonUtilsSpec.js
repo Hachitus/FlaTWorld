@@ -98,5 +98,28 @@
         y: 240
       });
     });
+    it('calculateIndex', function () {
+      var indexes;
+
+      indexes = HEXAGONS_UTILS.calculateIndex({
+        x: 0,
+        y: 0
+      });
+
+      expect(indexes).toEqual({
+        x: 0,
+        y: 0
+      });
+
+      indexes = HEXAGONS_UTILS.calculateIndex({
+        x: 305,
+        y: 852
+      });
+
+      expect(indexes).toEqual({
+        x: 2,
+        y: 9
+      });
+    });
   });
 })();

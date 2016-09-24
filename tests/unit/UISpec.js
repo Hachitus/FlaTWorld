@@ -11,8 +11,8 @@
         highlightSelectedObject: function (object, getDatas, options) {
           return [ object, getDatas, options];
         },
-        showUnitMovement: function (object, getDatas, options) {
-          return [ object, getDatas, options];
+        showUnitMovement: function (coordinates, options) {
+          return [ coordinates, options];
         }
       };
       passedArguments = [
@@ -57,12 +57,14 @@
     });
 
     it('showUnitMovement', function () {
+      var point1 = new PIXI.Point(10,10);
+      var point2 = new PIXI.Point(100,100);
       var result;
       let ui = UI(UITheme, {});
 
-      result = ui.showUnitMovement.apply(ui, passedArguments);
+      result = ui.showUnitMovement([point1, point2]);
 
-      expect(result).toEqual(returnedArguments);
+      expect(JSON.stringify(result)).toEqual(JSON.stringify([[point1, point2], undefined]));
     });
 
     it('add methods', function () {

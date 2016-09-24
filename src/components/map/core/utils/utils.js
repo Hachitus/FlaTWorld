@@ -46,10 +46,7 @@
      * @return {Object}
      */
     function getPointerCoords(e) {
-      return {
-        x: e.offsetX,
-        y: e.offsetY,
-      };
+      return new PIXI.Point(e.offsetX, e.offsetY);
     }
     /**
      * @method getHAMMERPointerCoords
@@ -57,7 +54,7 @@
      * @return {Object}
      */
     function getHAMMERPointerCoords(e) {
-      return e.center;
+      return new PIXI.Point(e.center.x, e.center.y);
     }
     /**
      * Transform coordinates that are in the window to become relative with the given element

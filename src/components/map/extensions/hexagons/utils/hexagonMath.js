@@ -12,9 +12,11 @@
   window.flatworld.extensions.hexagons.utils.getHexagonPoints = getHexagonPoints;
   window.flatworld.extensions.hexagons.utils.calcShortDiagonal = calcShortDiagonal;
   window.flatworld.extensions.hexagons.utils.calcLongDiagonal = calcLongDiagonal;
+  window.flatworld.extensions.hexagons.utils.calcSpecialDistance = calcSpecialDistance;
   window.flatworld.extensions.hexagons.utils.hexaHitTest = hexaHitTest;
   window.flatworld.extensions.hexagons.utils.getClosestHexagonCenter = getClosestHexagonCenter;
   window.flatworld.extensions.hexagons.utils.calculateIndex = calculateIndex;
+  window.flatworld.extensions.hexagons.utils.indexToCoordinates = indexToCoordinates;
 
 
   /*-----------------------
@@ -85,7 +87,7 @@
    * - Vertical / Flat hexagons height
    * - Horizontal / pointy hexagons width
    *
-   * @method calcLongDiagonal
+   * @method calcShortDiagonal
    * @static
    * @param {Object} {}               *OPTIONAL*
    * @param {float} {}.radius         Usually the radius of the hexagon
@@ -213,8 +215,12 @@
       };
     } else {
       closestHexagonCenter = {
-        x: Math.floor(coordinates.x - (coordinates.x % calcSpecialDistance(globalRadius)) + globalStartingPoint.x),
-        y: Math.floor(coordinates.y - (coordinates.y % calcShortDiagonal(globalRadius)) + globalStartingPoint.y),
+        x: Math.round(coordinates.y -
+              (coordinates.y % calcSpecialDistance(globalRadius)) +
+              calcLongDiagonal(globalRadius) / 2 + globalStartingPoint.y),
+        y: Math.round(coordinates.x -
+              (coordinates.x % calcShortDiagonal(globalRadius)) +
+              calcShortDiagonal(globalRadius) / 2 + globalStartingPoint.x),
       };
     }
 
@@ -222,8 +228,14 @@
   }
   function calculateIndex(coordinates) {
     return {
-      x: coordinates.x / calcShortDiagonal(),
-      y: coordinates.y / calcLongDiagonal(),
+      x: Math.floor(coordinates.x / calcShortDiagonal()),
+      y: Math.floor(coordinates.y / calcSpecialDistance()),
+    };
+  }
+  function indexToCoordinates(indexes) {
+    return {
+      x: Math.floor(indexes.x * calcShortDiagonal()),
+      y: Math.floor(indexes.y * calcSpecialDistance()),
     };
   }
   /*-----------------------

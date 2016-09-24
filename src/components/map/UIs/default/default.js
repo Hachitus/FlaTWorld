@@ -160,18 +160,27 @@
      * @param {PIXI.Point | Array} to     Coordinates as an object or array of waypoints / 
      * coordinates where the unit is being moved to.
      */
-    showUnitMovement(object, to) {
-      const localFrom = this.FTW.getMovableLayer().toLocal(object.toGlobal(new PIXI.Point(0, 0)));
+    showUnitMovement(path) {
+      if (!Array.isArray(path)) {
+        throw new Error('showUnitMovement demands path array!');
+      }
+
+      const arrows = [];
+      let prev;
 
       this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id, UINAME);
 
-      if (Array.isArray(to)) {
-        to.forEach(coord => {
-          this._createArrow(localFrom, coord);
-        });
-      } else {
-        this._createArrow(localFrom, to);
-      }
+      path.forEach((coord, index) => {
+        if (index === 0) {
+          prev = coord;
+          return;          
+        }
+
+        arrows.push(this._createArrow(prev, coord));
+
+        prev = coord;
+      });
+      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, arrows, UINAME);
 
       this.FTW.drawOnNextTick();
     }
@@ -202,8 +211,7 @@
     }
     _createArrow(localFrom, coord) {
       const localTo = this.FTW.getMovableLayer().toLocal(coord);
-      const currentArrow = drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
-      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, currentArrow, UINAME);
+      return drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
     }
     /**
      * @private

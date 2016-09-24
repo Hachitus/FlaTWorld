@@ -52,7 +52,7 @@
      * @param  {Boolean} cb     REQUIRED. Callback to do it's eventlistener magic.
      */
     function on(type = '', cb = false) {
-      if (!detectors[type] && !detectors[type].size) {
+      if (!detectors[type] || !detectors[type].on) {
         throw new Error('eventlisteners.on needs to have detector set with this event type!');
       }
 

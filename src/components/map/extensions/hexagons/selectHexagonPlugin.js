@@ -2,12 +2,13 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var setupHexagonClick = window.flatworld.extensions.hexagons.setupHexagonClick;
+  const { setupHexagonClick, utils } = window.flatworld.extensions.hexagons;
 
   /*-----------------------
   ---------- API ----------
   -----------------------*/
   window.flatworld.extensions.hexagons.selectHexagonObject = setupObject_select_hexagon();
+  window.flatworld.extensions.hexagons._tests.createHexagonDataStructure = createHexagonDataStructure;
 
   /*-----------------------
   -------- PUBLIC ---------
@@ -34,6 +35,8 @@
     function init(givenMap) {
       map = givenMap;
 
+      map.hexagonIndexes = createHexagonDataStructure(map.getMovableLayer(), map.allMapObjects.terrainLayer);
+
       startClickListener(map);
     }
 
@@ -48,5 +51,23 @@
     function startClickListener(map) {
       return setupHexagonClick(map);
     }
+  }
+
+  function createHexagonDataStructure(movableLayer, objArray) {
+    const hexagonIndexes = {};
+    const zeroCoordinate = new PIXI.Point(0,0);
+    const usableGlobalCoords = new PIXI.Point(0,0);
+    let indexes, correctCoords;
+
+    objArray.forEach(obj => {
+      movableLayer.toLocal(zeroCoordinate, obj, usableGlobalCoords);
+      correctCoords = utils.getClosestHexagonCenter(usableGlobalCoords);
+      indexes = utils.calculateIndex(correctCoords);
+
+      hexagonIndexes[indexes.x] = hexagonIndexes[indexes.x] || {};
+      hexagonIndexes[indexes.x][indexes.y] = obj;
+    })
+
+    return hexagonIndexes;
   }
 })();
