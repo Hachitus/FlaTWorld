@@ -24,13 +24,11 @@ Table of contents
     * [Supported environments](#supported-environments)
     * [Aimed mapsize and efficiency](#aimed-mapsize-and-efficiency)
   * [Roadmap](#roadmap)
-    * [2016-05](#2016-05)
-    * [2016-06](#2016-06)
-    * [2016-07](#2016-07)
-    * [2016-08](#2016-08)
-    * [2016-09](#2016-09)
+    * [2016-10](#2016-10)
     * [2016-11](#2016-11)
+    * [2016-12](#2016-12)
     * [2017-01](#2017-01)
+    * [2017-02](#2017-02)
   * [Sponsors](#sponsors)
   * [Credits](#credits)
 
@@ -161,11 +159,6 @@ These are still subject to change (both raised and lowered). The map is planned 
 * Maximum map size: 225 000 000 pixels (15k * 15k)
 * Total object count on map: ~50k
 * FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
-
-
-###2016-09###
-* Prototype graphics
-* Fog of war working correctly
 
 ###2016-10###
 * Pathfinding and commading of units.
