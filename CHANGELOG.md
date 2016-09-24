@@ -1,5 +1,5 @@
 <a name="0.5.0"></a>
-# 0.5.0 Fog of war polish (2016-09-24)
+# 0.5.0 Fog of war polish and multi-development setups (2016-09-25)
 ## Bug Fixes
 * Fog of war works is synced with map rendering by adding pre-rendering scripts to the engine.
 
@@ -7,7 +7,8 @@
 * Map can have pre-rendering functions
 
 ## Others
-* Using github issues, milestones, labels
+* Using github issues for task tracking and milestones for roadmap.
+* Renamed staticLayer to zoomLayer
 
 <a name="0.4.0"></a>
 # 0.4.0 Bug fixes (2016-08-31)

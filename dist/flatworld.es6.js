@@ -2251,21 +2251,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      *
      * @method showUnitMovement
      * @static
+     * @param {Object} object         Unit that the player wants to move
+     * @param {Object} to             Coordinates where the unit is being moved to
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      * */
     scope.showUnitMovement = function (objects, to) {
       var _ref2 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
-      var filters = _ref2.filters;
       var UIThemeOptions = _ref2.UIThemeOptions;
-
-      if (filters) {
-        objects = filters.filterObjects(objects);
-      }
 
       if (Array.isArray(objects) || (typeof objects === 'undefined' ? 'undefined' : _typeof(objects)) !== 'object' || objects === null) {
         mapLog.error('Object was an Array, should be plain object: ' + objects.length);
       }
+
       return UITheme.showUnitMovement(objects, to, UIThemeOptions);
     };
 
@@ -4239,17 +4237,6 @@ window.flatworld.extensions.hexagons.eventlisteners = {};
      * @param  {Event} e      Event object
      */
     function orderListener(e) {
-      var filter = new MapDataManipulator({
-        type: 'filter',
-        object: 'layer',
-        property: 'name',
-        value: 'unitLayer'
-      });
-      var getData = {
-        allData: function allData(object) {
-          return object.data.typeData;
-        }
-      };
       var globalCoords, selectedObject;
 
       if (!FTW.currentlySelectedObjects) {
@@ -5177,7 +5164,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    * @class pixelizedMinimap
    **/
   function setupSimpleFogOfWar() {
-    var VIEWPORT_MULTIPLIER = 0.4;
     var maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
     var renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     var FoWOverlay = new PIXI.Graphics();
@@ -5199,7 +5185,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       activateFogOfWar: activateFogOfWar,
       refreshFoW: refreshFoW,
       getFoWObjectArray: getFoWObjectArray,
-      calculateCorrectCoordinates: calculateCorrectCoordinates
+      calculateCorrectCoordinates: calculateCorrectCoordinates,
+      FOR_TESTS: {
+        setObjectsForFoW: function setObjectsForFoW(o) {
+          return objectsForFoW = o;
+        }
+      }
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
@@ -5300,8 +5291,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       coordinates.x = Math.round(coordinates.x);
       coordinates.y = Math.round(coordinates.y);
-      coordinates.anchor = Object.assign({}, object.anchor);
-      coordinates.pivot = Object.assign({}, object.pivot);
+      coordinates.anchor = object.anchor;
+      coordinates.pivot = object.pivot;
       coordinates.scale = map.getZoom();
 
       return coordinates;
@@ -6237,6 +6228,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * @type {Objects}
        */
       this.preRenderers = {};
+
+      /**
+       * Holds all the objects on the map. This is an alternative data structure to make some
+       * operations easier. Basically it will be populated with the primaryLayers, this is done in
+       * init method. More details there.
+       */
+      this.allMapObjects;
     }
     /**
      * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -6282,6 +6280,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         isMapReadyPromises = allPromises;
 
         this.drawOnNextTick();
+
+        /* Create data structures */
+        this.allMapObjects = this._createArrayStructure();
 
         return allPromises || Promise.resolve();
       }
@@ -6788,7 +6789,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         };
       }
       /**
-       * This returns the layer that is responsible for map zoom
+       * This returns the layer that is responsible for map zoom.  It handles zooming and normally
+       * other non-movable operations.
        *
        * @method getZoomLayer
        * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
@@ -6797,7 +6799,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getZoomLayer',
       value: function getZoomLayer() {
-        return this.getZoomLayer();
+        return _zoomLayer;
       }
       /**
        * Set map zoom. 1 = no zoom. <1 zoom out, >1 zoom in.
@@ -6839,17 +6841,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'getRenderer',
       value: function getRenderer(type) {
         return type === 'minimap' ? _renderers.minimap : _renderers.main;
-      }
-      /**
-       * Return static layer. The static layer is the topmost of all layers. It handles zooming and other non-movable operations.
-       *
-       * @method getZoomLayer
-       */
-
-    }, {
-      key: 'getZoomLayer',
-      value: function getZoomLayer() {
-        return _zoomLayer;
       }
       /**
        * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
@@ -7110,6 +7101,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.getMovableLayer().addUIObject(object, name);
             break;
         }
+      }
+    }, {
+      key: '_createArrayStructure',
+      value: function _createArrayStructure() {
+        var allObjects = {};
+
+        this.getPrimaryLayers().forEach(function (layer) {
+          allObjects[layer.name] = layer.getObjects();
+        });
+
+        return allObjects;
       }
     }]);
 
