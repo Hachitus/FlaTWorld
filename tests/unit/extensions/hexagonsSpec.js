@@ -1,7 +1,7 @@
 (function hexagonsSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
   const { createHexagonDataStructure, _isBlocked, _orderListener } = window.flatworld.extensions.hexagons._tests;
-  const flatworldCreatorHelper = window.flatworldCreatorHelper;
+  const { creator } = window.flatworldCreatorHelper;
   const { UI, eventListeners, mapStates, mapEvents } = window.flatworld;
   const { selectHexagonObject, utils } = window.flatworld.extensions.hexagons;
 
@@ -22,7 +22,7 @@
       // We need to stub these, othewise the test will error. These are unrelevant to our tests.
       spyOn(eventListeners, 'on');
 
-      map = flatworldCreatorHelper(options);
+      map = creator(options);
 
       utils.init(radius);
 
@@ -41,7 +41,15 @@
         position: {
           x: 10,
           y: 10
-        }
+        },
+        toGlobal: function () {
+          return {
+            x: 10,
+            y: 10
+          };
+        },
+        x: 10,
+        y: 10
       }];
     })
 
@@ -86,7 +94,7 @@
       spyOn(mapStates, 'objectOrderEnd');
       spyOn(map, 'drawOnNextTick');
       map.getMovableLayer().toLocal = function(coord, object) {
-        return new PIXI.Point(object.x, object.y);
+        return object ? new PIXI.Point(object.x, object.y) : coord;
       };
 
       _orderListener(e);

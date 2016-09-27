@@ -1,5 +1,5 @@
 (function objectsSpec() {
-  const flatworldCreatorHelper = window.flatworldCreatorHelper;
+  const { creator } = window.flatworldCreatorHelper;
   const ObjectSprite = window.flatworld.objects.ObjectSprite;
   const ObjectSpriteTerrain = window.flatworld.objects.ObjectSpriteTerrain;
   const ObjectSpriteUnit = window.flatworld.objects.ObjectSpriteUnit;
@@ -9,7 +9,7 @@
   describe('object tests => ', () => {
 
     beforeEach(() => {
-      map = flatworldCreatorHelper();
+      map = creator();
     });      
 
     it('ObjectSprite', () => {
@@ -19,7 +19,7 @@
 
     it('ObjectSpriteUnit', () => {
       const movableLayer = map.getMovableLayer();
-      const unit10_10 = movableLayer.children[0].children[0];
+      const unit10_10 = movableLayer.children[1].children[0].children[0];
 
       map.moveMap({ x: -50 });
       movableLayer.updateTransform();

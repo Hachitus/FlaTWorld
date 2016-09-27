@@ -1,6 +1,6 @@
 (function flatworldSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
-  const flatworldCreatorHelper = window.flatworldCreatorHelper;
+  const { initFlatworld } = window.flatworldCreatorHelper;
   const { Flatworld, MapDataManipulator } = window.flatworld;
 
   describe('Flatworld unit tests => ', () => {
@@ -22,6 +22,7 @@
         { filters });
 
       expect(returnedObjects.length).toBe(1);
+      expect(returnedObjects[0]).toEqual(map.getMovableLayer().children[0].children[0].children[0]);
     });
     it('getObjectsUnderArea - objects', () => {
       const filters = new MapDataManipulator([{
@@ -39,9 +40,8 @@
         { x: 0, y: 0, width: 50, height: 50 },
         { filters });
 
-      expect(returnedObjects[0]).toBe(map.getMovableLayer().children[0].children[0]);
-    });
-    xit('getObjectsUnderArea with subcontainers', () => {
+      expect(returnedObjects.length).toBe(2);
+      expect(returnedObjects[0]).toEqual(map.getMovableLayer().children[1].children[0].children[0]);
     });
     it('addLayer with subcontainers and move it', () => {
       const renderer = new PIXI.WebGLRenderer();
@@ -85,22 +85,18 @@
       expect(map.getMovableLayer().children[0].children[0].children[0].x).toBe(40);
     });
     it('getMapCoordinates', () => {
-      map.getMapCoordinates();
-      expect(true).toBe(false);
+      var expectedCoordinates = new PIXI.Point(100, 100);
+      var coordinatesOnMap = map.getMapCoordinates(expectedCoordinates);
+
+      expect(JSON.stringify(coordinatesOnMap)).toBe(JSON.stringify(expectedCoordinates));
+
+      map.getMapCoordinates({
+        toGlobal: function () {
+          return expectedCoordinates;
+        }
+      });
+
+      expect(JSON.stringify(coordinatesOnMap)).toBe(JSON.stringify(expectedCoordinates));
     })
   });
-
-  function initFlatworld(options) {
-    const map = flatworldCreatorHelper(options);
-    map.getViewportArea = function getViewportAreaTest() {
-      return {
-        x: 0,
-        y: 0,
-        width: 100,
-        height: 100,
-      };
-    };
-
-    return map;
-  }
 })();

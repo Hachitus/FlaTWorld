@@ -49,6 +49,7 @@
         getViewportWithOffset,
         testRectangleIntersect,
         _setMap,
+        setupOffsetSize
       },
     };
     /**
@@ -114,8 +115,6 @@
      * @param  {Map} map     Instance of Map
      */
     function addAll() {
-      var viewportArea;
-
       viewportArea = map.getViewportArea(true, 2);
       offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
 
@@ -150,7 +149,7 @@
       window.setTimeout(setupHandleViewportArea(), CHECK_INTERVAL);
 
       function setupHandleViewportArea() {
-        viewportArea = map.getViewportArea(true, VIEWPORT_OFFSET);
+        setupViewportArea(true, VIEWPORT_OFFSET);
 
         checkAndSetSubcontainers(viewportArea, map.getPrimaryLayers());
       }
@@ -268,6 +267,28 @@
       });
     }
     /**
+     * Initializes the module variables viewportArea and offsetSize
+     *
+     * @private
+     * @static
+     * @method setupViewportArea
+     * @return {totalViewportArea}              The total viewportArea
+     */
+    function setupViewportArea(isLocal = true, multiplier = 2) {
+      viewportArea = map.getViewportArea(isLocal, multiplier);
+    }
+    /**
+     * Initializes the module variables viewportArea and offsetSize
+     *
+     * @private
+     * @static
+     * @method setupOffsetSize
+     * @return {totalViewportArea}              The total viewportArea
+     */
+    function setupOffsetSize(viewportArea) {
+      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+    }
+    /**
      * forms the total viewport parameters based on the given ones.
      *
      * @private
@@ -277,6 +298,10 @@
      * @return {totalViewportArea}              The total viewportArea
      */
     function getViewportWithOffset(viewportArea) {
+      if(!offsetSize) {
+        throw new Error('getViewportWithOffset requires module variable offsetSize to have been set');
+      }
+
       return {
         x: Math.round(viewportArea.x - offsetSize),
         y: Math.round(viewportArea.y - offsetSize),

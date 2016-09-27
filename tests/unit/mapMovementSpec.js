@@ -1,4 +1,6 @@
 (function mapMovementSpec() {
+  const { initFlatworld } = window.flatworldCreatorHelper;
+
   describe('mapMovement extension => ', function () {
     var subcontainerArea;
     var subContainer = {
@@ -6,9 +8,12 @@
         return subcontainerArea;
       }
     };
+    var ZOOM = 0.9;
     var viewportArea;
+    var map;
 
     beforeEach(function () {
+      map = initFlatworld();
       viewportArea = {
         x: 50,
         y: 50,
@@ -22,6 +27,12 @@
       flatworld.extensions.mapMovement._testObject._setMap({
         drawOnNextTick: function () {
           return true;
+        },
+        getViewportArea: function () {
+          return viewportArea;
+        },
+        getZoom: function () {
+          return ZOOM;
         }
       });
     });
@@ -29,8 +40,9 @@
     it('getViewportCoordinates', function () {
       var calculatedViewportArea;
 
+      flatworld.extensions.mapMovement._testObject.setupOffsetSize(viewportArea);
       calculatedViewportArea = flatworld.extensions.mapMovement._testObject.getViewportWithOffset(viewportArea, {
-        scale: 0.9
+        scale: ZOOM
       });
       expect(calculatedViewportArea).toEqual({
         x: -61,

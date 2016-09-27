@@ -93,8 +93,8 @@
       rendererOptions = { autoResize: true, antialias: false },
       minimapCanvas,
       subcontainers = {
-        width: 0,
-        height: 0,
+        width: 100,
+        height: 100,
         maxDetectionOffset: 0, // maxDetectionOffset default set later
       },
       trackFPSCB = false,
@@ -750,11 +750,11 @@
     getMovableLayer() {
       return _movableLayer;
     }
-    getMapCoordinates(object) {
-      if (object.toGlobal) {
-        return _movableLayer.toLocal(zeroCoordinates, object);
+    getMapCoordinates(coordinates) {
+      if (coordinates.toGlobal) {
+        return _movableLayer.toLocal(zeroCoordinates, coordinates);
       } else {
-        return _movableLayer.toLocal(object);
+        return _movableLayer.toLocal(coordinates);
       }
     }
     /**
