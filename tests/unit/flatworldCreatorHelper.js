@@ -23,7 +23,16 @@ function privateCreator(flatworldOptions) {
   const testTerrain = new objects.ObjectSpriteTerrain();
   testTerrain.x = 20;
   testTerrain.y = 20;
-  [testTerrain].forEach(o => terrrainLayer.addChild(o));
+  const testTerrain2 = new objects.ObjectSpriteTerrain();
+  testTerrain2.x = 123;
+  testTerrain2.y = 20;
+  const testTerrain3 = new objects.ObjectSpriteTerrain();
+  testTerrain3.x = 123;
+  testTerrain3.y = 110;
+  const testTerrain4 = new objects.ObjectSpriteTerrain();
+  testTerrain4.x = 20;
+  testTerrain4.y = 140;
+  [testTerrain, testTerrain2, testTerrain3, testTerrain4].forEach(o => terrrainLayer.addChild(o));
 
   map.getMovableLayer().addChild(terrrainLayer, unitLayer);
 

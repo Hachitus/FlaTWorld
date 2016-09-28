@@ -34,6 +34,21 @@
       this.minimapShape = minimapShape;
       calculateHexa.call(this, radius);
     }
+    /**
+     * Overwrite super method
+     * @method calculateHexa
+     * @return {[type]} [description]
+     */
+    getCenterCoordinates() {
+      if (!this.coordinates.center) {
+        this.coordinates.center = {
+          x: this.WIDTH / 2,
+          y: this.HEIGHT / 2
+        };
+      }
+
+      return this.coordinates.center;
+    }
   }
 
   class ObjectHexaUnit extends ObjectSpriteUnit {
@@ -59,6 +74,21 @@
       this.static = false;
 
       calculateHexa.call(this, radius);
+    }
+    /**
+     * Overwrite super method
+     * @method calculateHexa
+     * @return {[type]} [description]
+     */
+    getCenterCoordinates() {
+      if (!this.coordinates.center) {
+        this.coordinates.center = {
+          x: this.WIDTH / 2,
+          y: this.HEIGHT / 2
+        };
+      }
+
+      return this.coordinates.center;
     }
   }
   /*-----------------------

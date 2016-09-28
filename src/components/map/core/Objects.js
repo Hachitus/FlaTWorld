@@ -2,10 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var utils = window.flatworld.utils;
   var PIXI = window.flatworld_libraries.PIXI;
-  var mapAPI = window.flatworld.mapAPI;
-  var mapEvents = window.flatworld.mapEvents;
+  var { constants, utils, mapAPI, mapEvents } = window.flatworld;
 
   /*-----------------------
   ---------- API ----------
@@ -88,6 +86,16 @@
        * @type {Number}
        */
       this.minimapColor = 0xFF0000;
+      /**
+       * We pre-calculate global and map coordinates for all objects, to make calculations faster
+       * and the whole engine more easy to use.
+       *
+       * @type {Object}
+       */
+      this.coordinates = {
+        center: null,
+        map: null
+      };
     }
     /**
      * Drawing the object
@@ -157,6 +165,31 @@
       Reflect.setPrototypeOf(newSprite, this.constructor.prototype);
 
       return newSprite;
+    }
+    /**
+     * We pre-calculate global and map coordinates for all objects, to make calculations faster
+     * and the whole engine more easy to use.
+     */
+    initializeCoordinates(mapInstance) {
+      this.getMapCoordinates(mapInstance);
+      this.getCenterCoordinates();
+    }
+    getGlobalCoordinates(coordinates) {
+      return this.toGlobal(coordinates || constants.ZERO_COORDINATES);
+    }
+    getMapCoordinates(mapInstance) {
+      this.coordinates.map = this.coordinates.map || mapInstance.getMapCoordinates(this);
+      return Object.assign({}, this.coordinates.map);
+    }
+    getCenterCoordinates() {
+      if (!this.coordinates.center) {
+        this.coordinates.center = {
+          x: this.width / 2,
+          y: this.height / 2
+        };
+      }
+
+      return this.coordinates.center;
     }
   }
 

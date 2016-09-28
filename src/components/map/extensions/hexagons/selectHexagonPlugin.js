@@ -55,13 +55,10 @@
 
   function createHexagonDataStructure(movableLayer, objArray) {
     const hexagonIndexes = {};
-    const zeroCoordinate = new PIXI.Point(0,0);
-    const usableGlobalCoords = new PIXI.Point(0,0);
     let indexes, correctCoords;
 
     objArray.forEach(obj => {
-      movableLayer.toLocal(zeroCoordinate, obj, usableGlobalCoords);
-      correctCoords = utils.getClosestHexagonCenter(usableGlobalCoords);
+      correctCoords = utils.getClosestHexagonCenter(obj.getMapCoordinates());
       indexes = utils.calculateIndex(correctCoords);
 
       hexagonIndexes[indexes.x] = hexagonIndexes[indexes.x] || {};

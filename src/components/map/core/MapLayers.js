@@ -197,20 +197,19 @@
      * @return {Array}          All the UIObjects currently on this layer
      */
     addUIObject(object, UIName) {
-      var UILayer;
       _UIObjects = _UIObjects || [];
 
-      /* We remove the old UIObject with the same name, if it exists. */
-      if (UIName && this.UIObjectList[UIName]) {
-        this.deleteUIObjects(UIName);
+      if (this.UIObjectList[UIName] && Array.isArray(this.UIObjectList[UIName])) {
+        this.UIObjectList[UIName].push(object);
+      } else if (this.UIObjectList[UIName]) {
+        this.UIObjectList[UIName] = [this.UIObjectList[UIName]];
+        this.UIObjectList[UIName].push(object);
+      } else {
+        this.UIObjectList[UIName] = object;
       }
 
-      this.UIObjectList[UIName] = object;
-
       if (!this.getUILayer()) {
-        UILayer = this.createUILayer();
-      } else {
-        UILayer = this.getUILayer;
+        this.UILayer = this.createUILayer();
       }
 
       this.UILayer.addChild(object);
@@ -226,22 +225,24 @@
      * @return {Array} empty    UIObjects array
      * */
     deleteUIObjects(UIName) {
-      var UILayer = this.getUILayer();
+      const UILayer = this.getUILayer();
 
       if (UIName) {
-        let object = this.UIObjectList[UIName];
+        const object = this.UIObjectList[UIName];
 
-        UILayer.removeChild(object);
-        object = null;
+        _removeObjectsFromLayer(object, UILayer);
+        
+        this.UIObjectList[UIName] = undefined;
         return;
+      } else {
+        Object.keys(this.UIObjectList).map((index) => {
+          let object = this.UIObjectList[index];
+
+          _removeObjectsFromLayer(object, UILayer);
+
+          this.UIObjectList[index] = undefined;
+        });
       }
-
-      Object.keys(this.UIObjectList).map((index) => {
-        let object = this.UIObjectList[index];
-
-        UILayer.removeChild(object);
-        object = null;
-      });
 
       return _UIObjects;
     }
@@ -516,6 +517,16 @@
     }
 
     return allFoundSubcontainers;
+  }
+
+  function _removeObjectsFromLayer(object, layer) {
+    if (Array.isArray(object)) {
+      object.forEach(function (o) {
+        layer.removeChild(o);
+      });
+    } else {
+      layer.removeChild(object);
+    }
   }
 
   window.flatworld.mapLayers = window.flatworld.mapLayers || {};

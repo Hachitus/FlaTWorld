@@ -21,7 +21,7 @@
         { x: 0, y: 0, width: 50, height: 50 },
         { filters });
 
-      expect(returnedObjects.length).toBe(1);
+      expect(returnedObjects.length).toBe(4);
       expect(returnedObjects[0]).toEqual(map.getMovableLayer().children[0].children[0].children[0]);
     });
     it('getObjectsUnderArea - objects', () => {

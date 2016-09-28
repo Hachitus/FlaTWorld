@@ -200,42 +200,68 @@
   function getClosestHexagonCenter(coordinates) {
     let closestHexagonCenter;
 
-    if (!globalOrientation || !globalRadius || !globalStartingPoint) {
+    if (!globalOrientation || !globalStartingPoint) {
       throw new Error('getClosestHexagonCenter requirements not filled');
     }
 
     if (globalOrientation === 'horizontal') {
       closestHexagonCenter = {
         x: Math.round(coordinates.x -
-              (coordinates.x % calcShortDiagonal(globalRadius)) +
-              calcShortDiagonal(globalRadius) / 2 + globalStartingPoint.x),
+              (coordinates.x % calcShortDiagonal()) +
+              calcShortDiagonal() / 2 + globalStartingPoint.x),
         y: Math.round(coordinates.y -
-              (coordinates.y % calcSpecialDistance(globalRadius)) +
-              calcLongDiagonal(globalRadius) / 2 + globalStartingPoint.y),
+              (coordinates.y % calcSpecialDistance()) +
+              calcLongDiagonal() / 2 + globalStartingPoint.y),
       };
     } else {
       closestHexagonCenter = {
         x: Math.round(coordinates.y -
-              (coordinates.y % calcSpecialDistance(globalRadius)) +
-              calcLongDiagonal(globalRadius) / 2 + globalStartingPoint.y),
+              (coordinates.y % calcSpecialDistance()) +
+              calcLongDiagonal() / 2 + globalStartingPoint.y),
         y: Math.round(coordinates.x -
-              (coordinates.x % calcShortDiagonal(globalRadius)) +
-              calcShortDiagonal(globalRadius) / 2 + globalStartingPoint.x),
+              (coordinates.x % calcShortDiagonal()) +
+              calcShortDiagonal() / 2 + globalStartingPoint.x),
       };
     }
 
     return closestHexagonCenter;
   }
   function calculateIndex(coordinates) {
-    return {
-      x: Math.floor(coordinates.x / calcShortDiagonal()),
-      y: Math.floor(coordinates.y / calcSpecialDistance()),
+    if (!globalOrientation || !globalStartingPoint) {
+      throw new Error('calculateIndex requirements not filled');
+    }
+
+    const indexes = {
+      x: Math.floor((coordinates.x - globalStartingPoint.x) / calcShortDiagonal()),
+      y: Math.floor((coordinates.y - globalStartingPoint.y) / calcSpecialDistance()),
     };
+
+    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
+      indexes.x += 1;
+    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 1) {
+      indexes.y += 1;
+    }
+
+    return indexes;
   }
   function indexToCoordinates(indexes) {
+    if (!globalOrientation || !globalStartingPoint) {
+      throw new Error('indexToCoordinates requirements not filled');
+    }
+
+    let XIndexExtra = 0;
+    let YIndexExtra = 0;
+    let halfShortDiagonal = calcShortDiagonal() / 2;
+
+    if (globalOrientation === 'horizontal' && indexes.y % 2 === 0) {
+      XIndexExtra = halfShortDiagonal;
+    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 0) {
+      YIndexExtra = halfShortDiagonal;
+    }
+
     return {
-      x: Math.floor(indexes.x * calcShortDiagonal()),
-      y: Math.floor(indexes.y * calcSpecialDistance()),
+      x: Math.floor(indexes.x * halfShortDiagonal + XIndexExtra + globalStartingPoint.x),
+      y: Math.floor(indexes.y * calcSpecialDistance() + YIndexExtra + globalStartingPoint.y),
     };
   }
   /*-----------------------

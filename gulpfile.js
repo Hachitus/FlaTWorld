@@ -17,10 +17,11 @@ var config = {
   entryFiles: [
     './src/components/map/core/init.js',
     './src/components/map/core/log.js',
+    './src/components/preloading/Preload.js',
+    './src/components/map/core/constants.js',
     './src/components/utilities/polyfills.js',
     './src/components/utilities/general.js',
     './src/components/utilities/environment.js',
-    './src/components/preloading/Preload.js',
     './src/components/map/core/utils/dataManipulation.js',
     './src/components/map/core/utils/effects.js',
     './src/components/map/core/utils/utils.js',

@@ -126,7 +126,7 @@ function pathListToArray(pathList) {
     let list = pathList;
     const arr = [];
     
-    do arr.unshift({ x: list.y, y: list.x });
+    do arr.unshift({ x: list.x, y: list.y });
     while(list = list.prev);
     
     return arr;

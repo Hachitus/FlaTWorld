@@ -117,8 +117,18 @@
       });
 
       expect(indexes).toEqual({
-        x: 2,
+        x: 3,
         y: 9
+      });
+
+      indexes = HEXAGONS_UTILS.calculateIndex({
+        x: 305,
+        y: 800
+      });
+
+      expect(indexes).toEqual({
+        x: 2,
+        y: 8
       });
     });
   });

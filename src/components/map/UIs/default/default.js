@@ -209,8 +209,7 @@
 
       return clonedObject;
     }
-    _createArrow(localFrom, coord) {
-      const localTo = this.FTW.getMovableLayer().toLocal(coord);
+    _createArrow(localFrom, localTo) {
       return drawShapes.line(new PIXI.Graphics(), localFrom, localTo);
     }
     /**

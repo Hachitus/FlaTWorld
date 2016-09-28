@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, mapLog } = window.flatworld;
+  var { utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, log } = window.flatworld;
   var { hexagons } = window.flatworld.extensions;
 
   /*---------------------
@@ -79,7 +79,7 @@
 
     if (!objects.length) {
       FTW.currentlySelectedObjects = undefined;
-      mapLog.debug('No objects found for selection!');
+      log.debug('No objects found for selection!');
       // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
       ui.showSelections([]);
       return;
@@ -103,15 +103,17 @@
     let globalCoords, selectedObject;
 
     if (!FTW.currentlySelectedObjects) {
-      mapLog.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
+      log.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
       return;
     } else if (FTW.currentlySelectedObjects.length > 1) {
-      mapLog.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
+      log.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
       return;
     }
 
     selectedObject = FTW.currentlySelectedObjects[0];
-    selectedObjectsCoordinates = FTW.getMapCoordinates(selectedObject);
+    selectedObjectsCoordinates = selectedObject.getMapCoordinates();
+    selectedObjectsCoordinates.x += selectedObject.getCenterCoordinates().x;
+    selectedObjectsCoordinates.y += selectedObject.getCenterCoordinates().y;
 
     mapStates.objectOrder();
 
@@ -125,7 +127,17 @@
     const objectIndexes = hexagons.utils.calculateIndex(selectedObjectsCoordinates);
     const destinationIndexes = hexagons.utils.calculateIndex(globalCoords);
 
-    let pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes.x, objectIndexes.y, destinationIndexes.x, destinationIndexes.y, 100, _isBlocked);
+    let pathsToCoordinates
+    try {
+      pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes.x, objectIndexes.y, destinationIndexes.x, destinationIndexes.y, 100, _isBlocked);
+    } catch (e) {
+      if (e.message === 'destination must not be blocked!') {
+        log.debug('path finding destination is blocked. There should be a notification in the UI of this.');
+      }
+      alert('same path, dest blocked or such');
+      mapStates.objectOrderEnd();
+      return;
+    }
     pathsToCoordinates = pathsToCoordinates.map(coords => {
       return hexagons.utils.indexToCoordinates(coords);
     });
@@ -147,8 +159,8 @@
     const prevCoordinates = dataObject.prev;
     const selectedObject = FTW.currentlySelectedObjects[0];    
     const correctHexagon = FTW.hexagonIndexes[prevCoordinates.x][prevCoordinates.y];
-    const isBlocked = correctHexagon.mountain || (dataObject.len > selectedObject.data.typeData.move);
+    const isBlocked = (correctHexagon && correctHexagon.mountain) || (dataObject.len > selectedObject.data.typeData.move);
     
-    return isBlocked;
+    return !correctHexagon || isBlocked;
   }
 })();

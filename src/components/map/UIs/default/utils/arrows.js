@@ -249,7 +249,6 @@
       graphics.lineStyle(style, color);
       graphics.moveTo(from.x, from.y);
       graphics.lineTo(to.x, to.y);
-      graphics.endFill();
 
       return graphics;
     }

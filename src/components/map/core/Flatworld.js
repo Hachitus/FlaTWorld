@@ -3,7 +3,7 @@
   ------- IMPORT --------
   ----------------------*/
   const { Q, PIXI } = window.flatworld_libraries;
-  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils } = window.flatworld;
+  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils, constants } = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
@@ -11,9 +11,7 @@
   const LAYER_TYPE_STATIC = 0;
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
-  const VERSION = '0.5.0';
   const _renderers = {};
-  const zeroCoordinates = new PIXI.Point(0,0);
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
   let _privateRenderers;
@@ -252,7 +250,7 @@
        * @attribute VERSION
        * @type {SEMVER}       http://semver.org/
        */
-      this.VERSION = VERSION;
+      this.VERSION = constants.VERSION;
 
       /**
        * This holds callback functions executed before the actual map render is done
@@ -288,6 +286,12 @@
       var allPromises = [];
 
       options.fullsize && this.toggleFullsize();
+
+      this.getAllObjects().forEach(o => {
+        if (o && o.initializeCoordinates) {
+          o.initializeCoordinates(this);
+        }
+      })
 
       /* Create data structures. Need to be done before activating plugins */
       this.allMapObjects = this._createArrayStructure();
@@ -342,8 +346,8 @@
      */
     addUIObject(layerType, objects, UIName) {
       if (Array.isArray(objects)) {
-        objects.forEach(object => {
-          this._addObjectToUIlayer(layerType, object);
+        objects.forEach((object, index) => {
+          this._addObjectToUIlayer(layerType, object, UIName);
         });
       } else {
         this._addObjectToUIlayer(layerType, objects, UIName);
@@ -752,7 +756,7 @@
     }
     getMapCoordinates(coordinates) {
       if (coordinates.toGlobal) {
-        return _movableLayer.toLocal(zeroCoordinates, coordinates);
+        return _movableLayer.toLocal(constants.ZERO_COORDINATES, coordinates);
       } else {
         return _movableLayer.toLocal(coordinates);
       }
