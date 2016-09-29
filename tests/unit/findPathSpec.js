@@ -10,22 +10,22 @@ describe('findPath', () => {
     const falseFn = () => false;
     
     it('should fail', () => {
-        expect(() => findPath(0, 0, 1, 2, 0, falseFn)).toThrowError(/maxSteps/);
-        expect(() => findPath(0, '0', 1, 2, 5, falseFn)).toThrowError(/must be an integer/);
-        expect(() => findPath(0, Infinity, 1, 2, 5, falseFn)).toThrowError(/must be an integer/);
-        expect(() => findPath(4, 1, 4, 1, 100, falseFn)).toThrowError(/must be different/);
+        expect(() => findPath({ x: 0, y: 0 }, { x: 1, y: 2 }, 0, falseFn)).toThrowError(/maxAllowedDistance/);
+        expect(() => findPath({ x: 0, y: 0 }, { x: '1', y: 2 }, 5, falseFn)).toThrowError(/must be an integer/);
+        expect(() => findPath({ x: 0, y: Infinity }, { x: 1, y: 2 }, 5, falseFn)).toThrowError(/must be an integer/);
+        expect(() => findPath({ x: 4, y: 1 }, { x: 4, y: 1 }, 100, falseFn)).toThrowError(/must be different/);
     });
     
     it('should find path for simple fields without blocked cells', () => {
-        expect(findPath(1, 1, 0, 0, 10, falseFn).length).toEqual(3 * 2);
-        expect(findPath(-10, 5, 0, 0, 20, falseFn).length).toEqual(11 * 2);
-        expect(findPath(10, -5, 7, 4, 20, falseFn).length).toEqual(10 * 2);
-        expect(findPath(-10, -5, 1, 1, 20, falseFn).length).toEqual(18 * 2);
+        expect(findPath({ x: 1, y: 1 }, { x: 0, y: 0 }, 10, falseFn, () => 1, 1, 20).length).toEqual(3);
+        expect(findPath({ x: -10, y: 5 }, { x: 0, y: 0 }, 20, falseFn, () => 1, 1, 20).length).toEqual(11);
+        expect(findPath({ x: 10, y: -5 }, { x: 7, y: 4 }, 20, falseFn, () => 1, 1, 20).length).toEqual(10);
+        expect(findPath({ x: -10, y: -5 }, { x: 1, y: 1 }, 20, falseFn, () => 1, 1, 20).length).toEqual(18);
         
-        expect(findPath(1, 1, 0, 0, 10, falseFn, false).length).toEqual(3 * 2);
-        expect(findPath(-10, 5, 0, 0, 20, falseFn, false).length).toEqual(16 * 2);
-        expect(findPath(10, -5, 7, 4, 20, falseFn, false).length).toEqual(13 * 2);
-        expect(findPath(-10, -5, 1, 1, 20, falseFn, false).length).toEqual(18 * 2);
+        expect(findPath({ x: 1, y: 1 }, { x: 0, y: 0 }, 10, falseFn, () => 1, 1, 20, false).length).toEqual(3);
+        expect(findPath({ x: -10, y: 5 }, { x: 0, y: 0 }, 20, falseFn, () => 1, 1, 20, false).length).toEqual(16);
+        expect(findPath({ x: 10, y: -5 }, { x: 7, y: 4 }, 20, falseFn, () => 1, 1, 20, false).length).toEqual(13);
+        expect(findPath({ x: -10, y: -5 }, { x: 1, y: 1 }, 20, falseFn, () => 1, 1, 20, false).length).toEqual(18);
         
         testField(`
             s.....
@@ -183,7 +183,7 @@ function testField(field, total) {
         expect(cell(0, dy0 - height)).toBe('B');
     }
     
-    const maxSteps = size;
+    const maxStepDistance = size;
     const grid = isMatrix ? field : Array.prototype.reduce.call(field, (res, s, i) => {
         const v = +(s === 'B');
         return (i % width ? res[res.length - 1].push(v) : res.push([v]), res);
@@ -203,9 +203,9 @@ function testField(field, total) {
             total += 2;
         }
         
-        validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked));
+        validatePath(findPath({ x: xStart, y: yStart }, { x: xDest, y: yDest }, maxStepDistance, isBlocked));
         // now find the way back:
-        validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked));
+        validatePath(findPath({ x: xDest, y: yDest }, { x: xStart, y: yStart }, maxStepDistance, isBlocked));
     } else if (width < 20) {
         const copy = grid.map(row => row.slice(0));
         copy[dy0 - yStart][xStart + dx0] = 'S';
@@ -220,23 +220,23 @@ function testField(field, total) {
         let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
         total = res.length || null;
         console.log('PH: ', `${-d + (d = Date.now())}ms`, total);
-        validatePath(findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, false));
+        validatePath(findPath({ x: xStart, y: yStart }, { x: xDest, y: yDest }, maxStepDistance, isBlocked, () => 1, 1, undefined, false), true);
         
         res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
         total = res.length || null;
         console.log('PH: ', `${-d + (d = Date.now())}ms`, total, 'reverse');
-        validatePath(findPath(xDest, yDest, xStart, yStart, maxSteps, isBlocked, false));
+        validatePath(findPath({ x: xDest, y: yDest }, { x: xStart, y: yStart }, maxStepDistance, isBlocked, () => 1, 1, undefined, false), true);
     }
     
-    function validatePath(path) {
-        for (let i = 2; i < path && path.length; i += 2) {
-            const dx = path[i - 2] - path[i];
-            const dy = path[i - 1] - path[i + 1];
-            if (dx === dy || [-1, 0, 1].indexOf(dx) < 0 || [-1, 0, 1].indexOf(dy) < 0) {
+    function validatePath(path, normalGrid) {
+        for (let i = 1; i < path && path.length; i++) {
+            const dx = path[i - 1].x - path[i].x;
+            const dy = path[i - 1].y - path[i].y;
+            if (dx === dy || normalGrid && dx === -dy || [-1, 0, 1].indexOf(dx) < 0 || [-1, 0, 1].indexOf(dy) < 0) {
                 throw new Error(`invalid path returned: ${path}`);
             }
         }
-        expect(path && path.length / 2).toBe(total || null);
+        expect(path && path.length).toBe(total || null);
     }
     
     function cell(x, y, useGrid) {

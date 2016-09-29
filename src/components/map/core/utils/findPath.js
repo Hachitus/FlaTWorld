@@ -2,6 +2,8 @@
 
 window.flatworld.utils.findPath = findPath;
 
+const debug = true;
+
 // Any hexagon grid can be represented as a square grid
 // with intersections in hexagons centers (easy to see when you connect them).
 // The only difference is that there're 6 allowed directions where unit can move
@@ -13,121 +15,149 @@ window.flatworld.utils.findPath = findPath;
 // Now that we have set ground for the problem let's begin.
 
 /**
- * Finds shortest route on a hexagon grid
- * @param  {number} x - start x-coordinate
- * @param  {number} y - start y-coordinate
- * @param  {number} xDest - destination x-coordinate
- * @param  {number} yDest - destination y-coordinate
- * @param  {number} maxSteps - maximum allowed number of steps (must be at least 1)
- * @param  {{ len: number, x: number, y: number, prev: Object } => boolean} isBlocked -
- *                 function that returns true if coordinate is blocked;
- *                 it also can increase "len" property of passed object for weighted graph
- * @return {number[]} - path coordinates from start to destination (including starting point)
+ * Finds shortest route on a hexagon/normal grid
+ * @param  {int} options.x:  xStart - start x-coordinate
+ * @param  {int} options.y:  yStart - start y-coordinate
+ * @param  {int} options.x:  xDest - destination x-coordinate
+ * @param  {int} options.y:  yDest - destination y-coordinate
+ * @param  {int} maxAllowedDistance - maximal allowed distance to get to destination (must be at least 1)
+ * @param  {({ x: int, y: int }) => boolean} isBlocked - function that returns true if next (x, y) cell is blocked
+ * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weight - function that returns distance between two adjacent cells
+ * @param  {int} maxStepDistance - maximal possible distance between two adjacent cells
+ * @param  {int} maxYCoordDiff - maximal possible difference between yStart and other Y-coordinates
+ * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
+ * @return {{ x: int, y: int }[]} - path coordinates from start to destination (including starting point)
  */
-
-function findPath(xStart, yStart, xDest, yDest, maxSteps, isBlocked, allowDiagonal) {
-    for (let i = 0; i < 5; i++) {
-        if (!isInteger(arguments[i])) {
-            throw new Error(`argument #${i} must be an integer: ${arguments[i]}`);
-        }
-    }
-    if (maxSteps <= 0) {
-        throw new Error(`maxSteps must be greater or equal to 1: ${maxSteps}`);
-    }
-    if (xStart == xDest && yStart == yDest) {
-        throw new Error(`starting and destination points must be different: ${xStart}, ${yStart}`);
-    }
+function findPath(
+            { x: xStart, y: yStart},
+            { x: xDest, y: yDest },
+            maxAllowedDistance,
+            isBlocked,
+            weight = () => 1,
+            maxStepDistance = 1,
+            maxYCoordDiff = Math.ceil(Math.sqrt(maxAllowedDistance)),
+            allowDiagonal = null
+        ) {
+    
+    validateArgs();
     
     let counter = 0;
     const d = Date.now();
     
-    const hexagonGrid = allowDiagonal === undefined;
+    const hexagonGrid = allowDiagonal === null;
     const pathList = bestDirectionAlg();
     const pathArr = pathList && pathListToArray(pathList);
     
     console.log(`${Date.now() - d}ms`,
-        pathArr && pathArr.length / 2,
+        pathArr && pathArr.length,
         `${counter} oper`,
-        `${maxSteps} cells`,
-        `${counter / maxSteps / Math.log(maxSteps)} coeff`);
+        `${maxAllowedDistance} cells`,
+        `${counter / maxAllowedDistance / Math.log(maxAllowedDistance)} coeff`);
     
     return pathArr;
     
     function bestDirectionAlg() {
-        const size = maxSteps + 1;
         const visited = [];
-        const startMinSteps = getMinSteps(xDest - xStart, yDest - yStart, hexagonGrid);
+        const startMinDistance = getMinSteps(xDest - xStart, yDest - yStart, hexagonGrid);
         const queue = new PriorityQueue();
         queue.push({
-            len: 1,
-            prev: null,
             x: xStart,
-            y: yStart
+            y: yStart,
+            distance: 0,
+            prev: null
         }, 0);
         
         let resPath = null;
-        let maxLen = maxSteps + 1;
+        let allowedDistance = maxAllowedDistance;
         let key;
         
         while(queue.length) {
             counter++;
             const curr = queue.pop();
-            const remainingSteps = maxLen - curr.len;
-            const minSteps = remainingSteps > 0 && getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid);
+            const maxRemainingDistance = allowedDistance - curr.distance;
+            const minPossibleDistance = maxRemainingDistance > 0 ? getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid) : 1;
             
-            if (minSteps && minSteps <= remainingSteps) {
-                const directions = getBestDirections(xDest - curr.x, yDest - curr.y, hexagonGrid);
+            if (minPossibleDistance > maxRemainingDistance) {
+                continue;
+            }
+            
+            const directions = getBestDirections(xDest - curr.x, yDest - curr.y, hexagonGrid);
+            
+            for (let i = directions.length; i-- > 0; ) {
+                const x = curr.x + directions[i][0];
+                const y = curr.y + directions[i][1];
+                const next = { x: x, y: y };
                 
-                for (let i = directions.length; i-- > 0; ) {
-                    const x = curr.x + directions[i][0];
-                    const y = curr.y + directions[i][1];
-                    const next = { len: curr.len + 1, prev: curr, x: x, y: y };
-                    
-                    if (isBlocked(next)) {
-                        // for debug purposes only:
-                        if (x === xDest && y === yDest) {
-                            throw new Error('destination must not be blocked!');
-                        }
-                        continue;
+                if (debug && maxYCoordDiff < Math.abs(y - yStart)) {
+                    throw new Error(`maxYCoordDiff ${maxYCoordDiff} less than distance by "y" to (${x}, ${y}) from (${xStart}, ${yStart})`);
+                }
+                if (isBlocked(next)) {
+                    continue;
+                }
+                
+                const stepDistance = weight(curr, next);
+                if (debug && (!isInteger(stepDistance) || stepDistance < 1)) {
+                    throw new Error(`weight returned not positive integer for (${curr.x}, ${curr.y}), (${x}, ${y}): ${stepDistance}`);
+                }
+                next.distance = curr.distance + stepDistance;
+                next.prev = curr;
+                
+                if (x === xDest && y === yDest) {
+                    resPath = next;
+                    allowedDistance = next.distance - 1;
+                    break;
+                }
+                
+                if (!isVisited(next)) {
+                    // for debug purposes only:
+                    if (debug && minPossibleDistance - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
+                        console.error(next, [xDest, yDest], directions);
+                        throw new Error('directions loss is not correct!');
                     }
                     
-                    if (x === xDest && y === yDest) {
-                        resPath = next;
-                        maxLen = next.len - 1;
-                        break;
-                    }
-                    
-                    if (!isVisited(x, y, next.len)) {
-                        // for debug purposes only:
-                        if (minSteps - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
-                            console.error([x, y], [xDest, yDest], directions);
-                            throw new Error('directions loss is not correct!');
-                        }
-                        
-                        const minTotalSteps = (/*current steps*/next.len - 1) + (/*min left steps*/minSteps - directions[i][2]);
-                        const loss = (minTotalSteps - startMinSteps)/* * size - next.len*/;
-                        queue.push(next, loss);
-                    }
+                    const nextMinDistance = next.distance + minPossibleDistance - directions[i][2];
+                    const loss = (nextMinDistance - startMinDistance)/* * (maxAllowedDistance + 1) - next.distance*/;
+                    queue.push(next, loss);
                 }
             }
         }
         return resPath;
         
-        function isVisited(x, y, len) {
-            const key = (x - xStart) * size + (y - yStart);
-            return visited[key] ?
-                visited[key] <= len || (visited[key] = len, false)
-                : (visited[key] = len, false)
+        function isVisited(cell) {
+            const key = (cell.x - xStart) * (maxYCoordDiff + 1) + (cell.y - yStart);
+            return key in visited ?
+                visited[key] <= cell.distance || (visited[key] = cell.distance, false)
+                : (visited[key] = cell.distance, false)
+        }
+    }
+    
+    function validateArgs() {
+        [xStart, yStart, xDest, yDest, maxAllowedDistance, maxStepDistance].forEach((arg, i) => {
+            if (!isInteger(arg)) {
+                throw new Error(`argument #${i} must be an integer: ${arg}`);
+            }
+        });
+        if (maxAllowedDistance < 1) {
+            throw new Error(`maxAllowedDistance must be at least 1: ${maxAllowedDistance}`);
+        }
+        if (maxStepDistance < 1) {
+            throw new Error(`maxStepDistance must be at least 1: ${maxAllowedDistance}`);
+        }
+        if (xStart === xDest && yStart === yDest) {
+            throw new Error(`starting and destination points must be different: ${xStart}, ${yStart}`);
+        }
+        if (isBlocked({ x: xDest, y: yDest })) {
+            throw new Error(`destination must not be blocked: ${xDest}, ${yDest}`);
         }
     }
 }
 
 function pathListToArray(pathList) {
-    let list = pathList;
+    let link = pathList;
     const arr = [];
     
-    do arr.push(list.y, list.x);
-    while(list = list.prev);
+    do arr.push({ x: link.x, y: link.y });
+    while(link = link.prev);
     
     return arr.reverse();
 }
