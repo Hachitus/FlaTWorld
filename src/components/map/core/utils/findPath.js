@@ -1,6 +1,7 @@
 !function() {
 
 window.flatworld.utils.findPath = findPath;
+window.flatworld.utils.findAll = findAll;
 
 const debug = true;
 
@@ -15,6 +16,52 @@ const debug = true;
 // Now that we have set ground for the problem let's begin.
 
 /**
+ * Finds all possible cells that can be reached from starting point
+ * @param  {{ x: int, y: int }} start - start coordinates
+ * @param  {({ x: int, y: int }) => boolean} isBlocked - function that returns true if next (x, y) cell is blocked
+ * @param  {int} maxYCoordDiff - maximal possible difference between yStart and other Y-coordinates
+ * @return {{ x: int, y: int }[]} - cells which can be reached from starting point
+ */
+function findAll(start, isBlocked, maxYCoordDiff) {
+    validateArgs();
+    
+    const visited = [true];
+    const res = [start];
+    
+    for (let i = 0; i < res.length; i++) {
+        const curr = res[i];
+        for (let j = allHexDirections.length; j-- > 0; ) {
+            const next = {
+                x: curr.x + allHexDirections[j].x,
+                y: curr.y + allHexDirections[j].y
+            };
+            
+            if (!isBlocked(next) && !isVisited(next)) {
+                res.push(next);
+            }
+        }
+    }
+    
+    return res;
+    
+    function isVisited(cell) {
+        const key = (cell.x - start.x) * (maxYCoordDiff + 1) + (cell.y - start.y);
+        return visited[key] || !(visited[key] = true);
+    }
+    
+    function validateArgs() {
+        [start.x, start.y, maxYCoordDiff].forEach((arg, i) => {
+            if (!isInteger(arg)) {
+                throw new Error(`argument #${i} must be an integer: ${arg}`);
+            }
+        });
+    }
+}
+
+const allHexDirections = [{ x: 0, y: 1 }, { x: -1, y: 1 }, { x: 1, y: 0 }, { x: 1, y: -1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
+const allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
+
+/**
  * Finds shortest route on a hexagon/normal grid
  * @param  {int} options.x:  xStart - start x-coordinate
  * @param  {int} options.y:  yStart - start y-coordinate
@@ -23,7 +70,6 @@ const debug = true;
  * @param  {int} maxAllowedDistance - maximal allowed distance to get to destination (must be at least 1)
  * @param  {({ x: int, y: int }) => boolean} isBlocked - function that returns true if next (x, y) cell is blocked
  * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weight - function that returns distance between two adjacent cells
- * @param  {int} maxStepDistance - maximal possible distance between two adjacent cells
  * @param  {int} maxYCoordDiff - maximal possible difference between yStart and other Y-coordinates
  * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
  * @return {{ x: int, y: int }[]} - path coordinates from start to destination (including starting point)
@@ -34,7 +80,6 @@ function findPath(
             maxAllowedDistance,
             isBlocked,
             weight = () => 1,
-            maxStepDistance = 1,
             maxYCoordDiff = Math.ceil(Math.sqrt(maxAllowedDistance)),
             allowDiagonal = null
         ) {
@@ -57,7 +102,7 @@ function findPath(
     return pathArr;
     
     function bestDirectionAlg() {
-        const visited = [];
+        const visited = [0];
         const startMinDistance = getMinSteps(xDest - xStart, yDest - yStart, hexagonGrid);
         const queue = new PriorityQueue();
         queue.push({
@@ -81,11 +126,11 @@ function findPath(
                 continue;
             }
             
-            const directions = getBestDirections(xDest - curr.x, yDest - curr.y, hexagonGrid);
+            const directions = hexagonGrid ? allHexDirections : allNormalDirections;
             
             for (let i = directions.length; i-- > 0; ) {
-                const x = curr.x + directions[i][0];
-                const y = curr.y + directions[i][1];
+                const x = curr.x + directions[i].x;
+                const y = curr.y + directions[i].y;
                 const next = { x: x, y: y };
                 
                 if (debug && maxYCoordDiff < Math.abs(y - yStart)) {
@@ -109,13 +154,7 @@ function findPath(
                 }
                 
                 if (!isVisited(next)) {
-                    // for debug purposes only:
-                    if (debug && minPossibleDistance - directions[i][2] !== getMinSteps(xDest - x, yDest - y, hexagonGrid)) {
-                        console.error(next, [xDest, yDest], directions);
-                        throw new Error('directions loss is not correct!');
-                    }
-                    
-                    const nextMinDistance = next.distance + minPossibleDistance - directions[i][2];
+                    const nextMinDistance = next.distance + getMinSteps(xDest - x, yDest - y, hexagonGrid);
                     const loss = (nextMinDistance - startMinDistance)/* * (maxAllowedDistance + 1) - next.distance*/;
                     queue.push(next, loss);
                 }
@@ -132,16 +171,13 @@ function findPath(
     }
     
     function validateArgs() {
-        [xStart, yStart, xDest, yDest, maxAllowedDistance, maxStepDistance].forEach((arg, i) => {
+        [xStart, yStart, xDest, yDest, maxAllowedDistance, maxYCoordDiff].forEach((arg, i) => {
             if (!isInteger(arg)) {
                 throw new Error(`argument #${i} must be an integer: ${arg}`);
             }
         });
         if (maxAllowedDistance < 1) {
             throw new Error(`maxAllowedDistance must be at least 1: ${maxAllowedDistance}`);
-        }
-        if (maxStepDistance < 1) {
-            throw new Error(`maxStepDistance must be at least 1: ${maxAllowedDistance}`);
         }
         if (xStart === xDest && yStart === yDest) {
             throw new Error(`starting and destination points must be different: ${xStart}, ${yStart}`);
@@ -209,71 +245,6 @@ function binarySearch(sortFn, i0, i1) {
 function isInteger(x) {
     return x === Math.floor(x) && isFinite(x);
 }
-
-function getBestDirections(dx, dy, hexagonGrid) {
-    return hexagonGrid ? getBestHexDirections(dx, dy)
-        : getBestNormalDirections(dx, dy)
-}
-
-function getBestHexDirections(dx, dy) {
-    return dx > 0 ?
-            (dy > 0 ? hexDirections.north_east
-            : dy < 0 ?
-                (dx < -dy ? hexDirections.south_south_east
-                : dx > -dy ? hexDirections.south_east_east
-                : hexDirections.south_east)
-            : hexDirections.east)
-        : dx < 0 ?
-            (dy > 0 ?
-                (-dx < dy ? hexDirections.north_north_west
-                : -dx > dy ? hexDirections.north_west_west
-                : hexDirections.north_west)
-            : dy < 0 ? hexDirections.south_west
-            : hexDirections.west)
-        : (dy > 0 ? hexDirections.north
-            : dy < 0 ? hexDirections.south
-            : null);
-}
-
-function getBestNormalDirections(dx, dy) {
-    return dx > 0 ?
-            (dy > 0 ? normalDirections.north_east
-            : dy < 0 ? normalDirections.south_east
-            : normalDirections.east)
-        : dx < 0 ?
-            (dy > 0 ? normalDirections.north_west
-            : dy < 0 ? normalDirections.south_west
-            : normalDirections.west)
-        : (dy > 0 ? normalDirections.north
-            : dy < 0 ? normalDirections.south
-            : null);
-}
-
-const normalDirections = {
-    north: [[0, 1, 1], [1, 0, -1], [-1, 0, -1], [0, -1, -1]],
-    south: [[0, -1, 1], [-1, 0, -1], [1, 0, -1], [0, 1, -1]],
-    east: [[1, 0, 1], [0, 1, -1], [0, -1, -1], [-1, 0, -1]],
-    west: [[-1, 0, 1], [0, -1, -1], [0, 1, -1], [1, 0, -1]],
-    north_east: [[0, 1, 1], [1, 0, 1], [0, -1, -1], [-1, 0, -1]],
-    south_west: [[0, -1, 1], [-1, 0, 1], [0, 1, -1], [1, 0, -1]],
-    north_west: [[0, 1, 1], [-1, 0, 1], [0, -1, -1], [1, 0, -1]],
-    south_east: [[0, -1, 1], [1, 0, 1], [0, 1, -1], [-1, 0, -1]]
-};
-
-const hexDirections = {
-    north: [[0, 1, 1], [-1, 1, 0], [1, 0, 0], [1, -1, -1], [-1, 0, -1], [0, -1, -1]],
-    south: [[0, -1, 1], [1, -1, 0], [-1, 0, 0], [-1, 1, -1], [1, 0, -1], [0, 1, -1]],
-    east: [[1, 0, 1], [1, -1, 0], [0, 1, 0], [-1, 1, -1], [0, -1, -1], [-1, 0, -1]],
-    west: [[-1, 0, 1], [-1, 1, 0], [0, -1, 0], [1, -1, -1], [0, 1, -1], [1, 0, -1]],
-    north_west: [[-1, 1, 1], [0, 1, 0], [-1, 0, 0], [0, -1, -1], [1, 0, -1], [1, -1, -1]],
-    south_east: [[1, -1, 1], [0, -1, 0], [1, 0, 0], [0, 1, -1], [-1, 0, -1], [-1, 1, -1]],
-    north_east: [[0, 1, 1], [1, 0, 1], [1, -1, 0], [-1, 1, 0], [-1, 0, -1], [0, -1, -1]],
-    south_west: [[0, -1, 1], [-1, 0, 1], [-1, 1, 0], [1, -1, 0], [1, 0, -1], [0, 1, -1]],
-    north_north_west: [[0, 1, 1], [-1, 1, 1], [-1, 0, 0], [1, 0, 0], [1, -1, -1], [0, -1, -1]],
-    south_south_east: [[0, -1, 1], [1, -1, 1], [1, 0, 0], [-1, 0, 0], [-1, 1, -1], [0, 1, -1]],
-    north_west_west: [[-1, 0, 1], [-1, 1, 1], [0, 1, 0], [0, -1, 0], [1, -1, -1], [1, 0, -1]],
-    south_east_east: [[1, 0, 1], [1, -1, 1], [0, -1, 0], [0, 1, 0], [-1, 1, -1], [-1, 0, -1]]
-};
 
 function getMinSteps(dx, dy, hexagonGrid) {
     if (hexagonGrid) {
