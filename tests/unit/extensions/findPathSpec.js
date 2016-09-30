@@ -1,10 +1,8 @@
-
 !function() {
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-const findPath = window.flatworld.utils.findPath;
-const compareToPathFindingJS = true;
+const findPath = window.flatworld.extensions.hexagons.pathfinding.findPath;
 
 describe('findPath', () => {
     const falseFn = () => false;
@@ -132,15 +130,6 @@ describe('findPath', () => {
             ...............................................................
             `, 0);
     });
-    
-    (compareToPathFindingJS ? it : xit)('random grids', () => {
-        testField(getRandomGrid(10));
-        testField(getRandomGrid(10));
-        testField(getRandomGrid(10));
-        testField(getRandomGrid(100, .7));
-        testField(getRandomGrid(300, .5));
-        testField(getRandomGrid(500, .4));
-    });
 });
 
 function testField(field, total) {
@@ -211,21 +200,6 @@ function testField(field, total) {
         copy[dy0 - yStart][xStart + dx0] = 'S';
         copy[dy0 - yDest][xDest + dx0] = 'D';
         console.log(copy.map(row => row.join(' ')).join('\n'));
-    }
-    
-    if (compareToPathFindingJS) {
-        const pf = new PF.AStarFinder({ allowDiagonal: false });
-        
-        let d = Date.now();
-        let res = pf.findPath(xStart + dx0, dy0 - yStart, xDest + dx0, dy0 - yDest, new PF.Grid(grid));
-        total = res.length || null;
-        console.log('PH: ', `${-d + (d = Date.now())}ms`, total);
-        validatePath(findPath({ x: xStart, y: yStart }, { x: xDest, y: yDest }, maxStepDistance, isBlocked, () => 1, 1, undefined, false), true);
-        
-        res = pf.findPath(xDest + dx0, dy0 - yDest, xStart + dx0, dy0 - yStart, new PF.Grid(grid));
-        total = res.length || null;
-        console.log('PH: ', `${-d + (d = Date.now())}ms`, total, 'reverse');
-        validatePath(findPath({ x: xDest, y: yDest }, { x: xStart, y: yStart }, maxStepDistance, isBlocked, () => 1, 1, undefined, false), true);
     }
     
     function validatePath(path, normalGrid) {

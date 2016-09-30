@@ -9,6 +9,7 @@
   --------- API ---------
   ----------------------*/
   window.flatworld.extensions.hexagons.setupHexagonClick = _setupUnitsHexagonClick;
+  window.flatworld.extensions.hexagons.activate = activate;
   window.flatworld.extensions.hexagons._tests._isBlocked = _isBlocked;
   window.flatworld.extensions.hexagons._tests._orderListener = _orderListener;
   window.flatworld.extensions.hexagons._tests._tapListener = _tapListener;
@@ -16,7 +17,7 @@
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
-  let FTW, ui;
+  let FTW, ui, isBlockedCb, weight;
 
   /*---------------------
   ------- PUBLIC --------
@@ -43,12 +44,22 @@
     eventListeners.on('select', _tapListener);
     eventListeners.on('order', _orderListener);
 
+    /* This is here only because I'm lazy to implement it properly as cb now */
+    isBlockedCb = function (correctHexagon, selectedObject, dataObject) {
+      return (correctHexagon && correctHexagon.mountain) || (dataObject.len > selectedObject.data.typeData.move);
+    };
+    weight = function (/*curr, next*/) {
+      return 1;
+    };
+
     return true;
   }
 
-  /*----------------------
-  ------- PUBLIC ---------
-  ----------------------*/
+  function activate(isBlockedFn, weightFn) {
+    isBlockedCb = isBlockedFn;
+    weight = weightFn;
+  }
+
   /**
    * the listener that received the event object
    *
@@ -129,7 +140,7 @@
 
     let pathsToCoordinates
     try {
-      pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes.x, objectIndexes.y, destinationIndexes.x, destinationIndexes.y, 100, _isBlocked);
+      pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, 100, _isBlocked, weight);
     } catch (e) {
       if (e.message === 'destination must not be blocked!') {
         log.debug('path finding destination is blocked. There should be a notification in the UI of this.');
@@ -151,15 +162,13 @@
     FTW.drawOnNextTick();
   }
 
-  function _isBlocked(dataObject) {
+  function _isBlocked(coordinates) {
     /* We use the EARLIER path to test, how much moving to the next area will require. We can
      * not use the next area to test it, as that could lead to nasty surpises (like units
      * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
      */
-    const prevCoordinates = dataObject.prev;
-    const selectedObject = FTW.currentlySelectedObjects[0];    
-    const correctHexagon = FTW.hexagonIndexes[prevCoordinates.x][prevCoordinates.y];
-    const isBlocked = (correctHexagon && correctHexagon.mountain) || (dataObject.len > selectedObject.data.typeData.move);
+    const correctHexagon = FTW.hexagonIndexes[coordinates.x] && FTW.hexagonIndexes[coordinates.x][coordinates.y];
+    const isBlocked = isBlockedCb(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
     
     return !correctHexagon || isBlocked;
   }

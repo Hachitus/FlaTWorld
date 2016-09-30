@@ -49,7 +49,19 @@
           };
         },
         x: 10,
-        y: 10
+        y: 10,
+        getMapCoordinates() {
+          return {
+            x: 10,
+            y: 10
+          };
+        },
+        getCenterCoordinates() {
+          return {
+            x: 61,
+            y: 71
+          };
+        }
       }];
     })
 

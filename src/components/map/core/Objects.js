@@ -92,10 +92,8 @@
        *
        * @type {Object}
        */
-      this.coordinates = {
-        center: null,
-        map: null
-      };
+      this.coordinates = {};
+      _initializeCoordinates(this.coordinates);
     }
     /**
      * Drawing the object
@@ -171,6 +169,7 @@
      * and the whole engine more easy to use.
      */
     initializeCoordinates(mapInstance) {
+      _initializeCoordinates(this.coordinates);
       this.getMapCoordinates(mapInstance);
       this.getCenterCoordinates();
     }
@@ -295,6 +294,11 @@
         to,
       });
     }
+  }
+
+  function _initializeCoordinates(object) {
+    object.center = null;
+    object.map = null;
   }
 
   window.flatworld.objects.ObjectSprite = ObjectSprite;

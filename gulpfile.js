@@ -59,6 +59,7 @@ var config = {
     './src/components/map/UIs/default/default.js',
     './src/components/map/core/Flatworld.js',
     './src/factories/*.js'],
+  libraryFolder: './src/assets/lib/',
   cssFiles: ['./src/assets/lib/pace/css/loadingBar.css'],
   outputDir: './dist/',
   outputDirDev: './tests/dist/',
@@ -96,13 +97,13 @@ gulp.task('bundleES6Prod', function() {
 });
 
 gulp.task('bundleLib', function() {
-  return gulp.src('./src/assets/lib/**/*.js', { base: './src/assets/lib/' })
+  return gulp.src(config.libraryFolder + '**/*.js', { base: config.libraryFolder })
     .pipe(concat('flatworld_libraries.js'))
     .pipe(gulp.dest(config.outputDir));
 });
 
 gulp.task('bundleLibDev', function() {
-  return gulp.src('./src/assets/lib/**/*.js', { base: './src/assets/lib/' })
+  return gulp.src(config.libraryFolder + '**/*.js', { base: config.libraryFolder })
     .pipe(concat('flatworld_libraries.js'))
     .pipe(gulp.dest(config.outputDirDev));
 });
