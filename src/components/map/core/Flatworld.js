@@ -614,7 +614,13 @@
      * @param  {Object} options.filter          The filter to apply to subcontainers
      * @return {Array}                          Array of object found on the map.
      */
-    getObjectsUnderArea(globalCoords = { x: 0, y: 0, width: 0, height: 0 }, { filters = null } = {}) {
+    getObjectsUnderArea({ x = 0, y = 0, width = 0, height = 0 }, { filters = null } = {}) {
+      const globalCoords = {
+        x,
+        y,
+        width,
+        height
+      };
       /* We need both coordinates later on and it's logical to do the work here */
       const allCoords = {
         globalCoords,
@@ -626,9 +632,9 @@
       allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
 /*      if (this.usesSubcontainers()) {*/
-        const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
+      const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
-        objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
+      objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
 /*      } else {
         const filteredContainers = this.getMovableLayer().children.filter(thisChild => {
           if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {

@@ -14,7 +14,6 @@
   window.flatworld.extensions.hexagons.utils.calcLongDiagonal = calcLongDiagonal;
   window.flatworld.extensions.hexagons.utils.calcSpecialDistance = calcSpecialDistance;
   window.flatworld.extensions.hexagons.utils.hexaHitTest = hexaHitTest;
-  window.flatworld.extensions.hexagons.utils.getClosestHexagonCenter = getClosestHexagonCenter;
   window.flatworld.extensions.hexagons.utils.coordinatesToIndexes = coordinatesToIndexes;
   window.flatworld.extensions.hexagons.utils.indexesToCoordinates = indexesToCoordinates;
 
@@ -187,44 +186,6 @@
     }
 
     return gridArray;
-  }
-  /**
-   * Calculates the closest hexagon center coordinates, for the given coordinates. So aligning the given coordinates to proper hexagon
-   * coordinates
-   *
-   * @static
-   * @method getClosestHexagonCenter
-   * @requires init must have been called
-   * @param {Object} coordinates              The coordinate where we want to find the closest hexagon center point
-   */
-  function getClosestHexagonCenter(coordinates) {
-    let closestHexagonCenter;
-
-    if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('getClosestHexagonCenter requirements not filled');
-    }
-
-    if (globalOrientation === 'horizontal') {
-      closestHexagonCenter = {
-        x: Math.round(coordinates.x -
-              (coordinates.x % calcShortDiagonal()) +
-              calcShortDiagonal() / 2 + globalStartingPoint.x),
-        y: Math.round(coordinates.y -
-              (coordinates.y % calcSpecialDistance()) +
-              calcLongDiagonal() / 2 + globalStartingPoint.y),
-      };
-    } else {
-      closestHexagonCenter = {
-        x: Math.round(coordinates.y -
-              (coordinates.y % calcSpecialDistance()) +
-              calcLongDiagonal() / 2 + globalStartingPoint.y),
-        y: Math.round(coordinates.x -
-              (coordinates.x % calcShortDiagonal()) +
-              calcShortDiagonal() / 2 + globalStartingPoint.x),
-      };
-    }
-
-    return closestHexagonCenter;
   }
   function coordinatesToIndexes(coordinates) {
     if (!globalOrientation || !globalStartingPoint) {

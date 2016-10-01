@@ -17,6 +17,18 @@
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
+  const unitLayerFilter = new MapDataManipulator({
+    type: 'filter',
+    object: 'layer',
+    property: 'name',
+    value: 'unitLayer',
+  });
+  const terrainLayerFilter = new MapDataManipulator({
+    type: 'filter',
+    object: 'layer',
+    property: 'name',
+    value: 'terrainLayer',
+  });
   let FTW, ui, isBlockedCb, weight;
 
   /*---------------------
@@ -74,17 +86,11 @@
         return object.data.typeData;
       },
     };
-    const containerFilter = new MapDataManipulator({
-      type: 'filter',
-      object: 'layer',
-      property: 'name',
-      value: 'unitLayer',
-    });
     var objects;
 
     mapStates.objectSelect();
 
-    objects = FTW.getObjectsUnderArea(globalCoords, { filters: containerFilter });
+    objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
     objects = utils.dataManipulation.mapObjectsToArray(objects);
     objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
@@ -129,23 +135,33 @@
     mapStates.objectOrder();
 
     if (FTW.isSupportedTouch) {
-      globalCoords = FTW.getMapCoordinates(utils.mouse.eventData.getHAMMERPointerCoords(e));
+      globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
     } else {
-      globalCoords = FTW.getMapCoordinates(utils.mouse.eventData.getPointerCoords(e));
+      globalCoords = utils.mouse.eventData.getPointerCoords(e);
     }
-    globalCoords = hexagons.utils.getClosestHexagonCenter(globalCoords);
+    const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
+
+    if (!objects.length) {
+      log.error('No terrain objects found for destination!');
+      mapStates.objectOrderEnd();
+      return;
+    }
 
     const objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
-    const destinationIndexes = hexagons.utils.coordinatesToIndexes(globalCoords);
+    const centerCoords = {
+      x: objects[0].getMapCoordinates().x + objects[0].getCenterCoordinates().x,
+      y: objects[0].getMapCoordinates().y + objects[0].getCenterCoordinates().y
+    } ;
+    const destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
 
-    let pathsToCoordinates
+    let pathsToCoordinates;
     try {
       pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, 100, _isBlocked, weight);
     } catch (e) {
       if (e.message === 'destination must not be blocked!') {
         log.debug('path finding destination is blocked. There should be a notification in the UI of this.');
       }
-      alert('same path, dest blocked or such');
+      log.error('same path, dest blocked or such');
       mapStates.objectOrderEnd();
       return;
     }

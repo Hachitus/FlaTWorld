@@ -75,29 +75,6 @@
 
       expect(isHit).toEqual(false);
     });
-    it('getClosestHexagonCenter', function () {
-      var closestCenter;
-
-      closestCenter = HEXAGONS_UTILS.getClosestHexagonCenter({
-        x: 199,
-        y: 199
-      });
-
-      expect(closestCenter).toEqual({
-        x: 155,
-        y: 240
-      });
-
-      closestCenter = HEXAGONS_UTILS.getClosestHexagonCenter({
-        x: 199.12,
-        y: 199.55
-      });
-
-      expect(closestCenter).toEqual({
-        x: 155,
-        y: 240
-      });
-    });
     it('coordinatesToIndexes', function () {
       var indexes;
 

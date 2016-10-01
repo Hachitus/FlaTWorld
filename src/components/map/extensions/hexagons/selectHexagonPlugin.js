@@ -55,10 +55,13 @@
 
   function createHexagonDataStructure(movableLayer, objArray) {
     const hexagonIndexes = {};
-    let indexes, correctCoords;
+    let indexes;
 
     objArray.forEach(obj => {
-      correctCoords = utils.getClosestHexagonCenter(obj.getMapCoordinates());
+      let correctCoords = obj.getMapCoordinates();
+      correctCoords.x += obj.getCenterCoordinates().x;
+      correctCoords.y += obj.getCenterCoordinates().y;
+
       indexes = utils.coordinatesToIndexes(correctCoords);
 
       hexagonIndexes[indexes.x] = hexagonIndexes[indexes.x] || {};

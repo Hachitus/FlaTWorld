@@ -122,7 +122,7 @@
 
       localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
 
-      return this.hitArea.contains(localCoords.x, localCoords.y);
+      return this.hitArea.contains(localCoords.x * this.scale.x, localCoords.y * this.scale.y);
     };
   }
   /**
