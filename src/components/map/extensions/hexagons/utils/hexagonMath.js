@@ -251,17 +251,16 @@
 
     let XIndexExtra = 0;
     let YIndexExtra = 0;
-    let halfShortDiagonal = calcShortDiagonal() / 2;
 
-    if (globalOrientation === 'horizontal' && indexes.y % 2 === 0) {
-      XIndexExtra = halfShortDiagonal;
+    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
+      XIndexExtra = calcShortDiagonal() + (calcShortDiagonal() / 2);
     } else if (globalOrientation === 'vertical' && indexes.x % 2 === 0) {
-      YIndexExtra = halfShortDiagonal;
+      YIndexExtra = calcShortDiagonal() + (calcShortDiagonal() / 2);
     }
 
     return {
-      x: Math.floor(indexes.x * halfShortDiagonal + XIndexExtra + globalStartingPoint.x),
-      y: Math.floor(indexes.y * calcSpecialDistance() + YIndexExtra + globalStartingPoint.y),
+      x: Math.floor(indexes.x * calcShortDiagonal() - XIndexExtra + globalStartingPoint.x),
+      y: Math.floor(indexes.y * calcSpecialDistance() - YIndexExtra + globalStartingPoint.y),
     };
   }
   /*-----------------------
