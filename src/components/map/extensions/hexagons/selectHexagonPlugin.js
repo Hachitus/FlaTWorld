@@ -59,7 +59,7 @@
 
     objArray.forEach(obj => {
       correctCoords = utils.getClosestHexagonCenter(obj.getMapCoordinates());
-      indexes = utils.calculateIndex(correctCoords);
+      indexes = utils.coordinatesToIndexes(correctCoords);
 
       hexagonIndexes[indexes.x] = hexagonIndexes[indexes.x] || {};
       hexagonIndexes[indexes.x][indexes.y] = obj;

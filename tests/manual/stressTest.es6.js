@@ -311,7 +311,7 @@
         minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: obj.minimapColor });
         globalPoints = obj.toGlobal(new PIXI.Point(obj.x,obj.y));
 
-        var indexes = new PIXI.Point(hexaUtils.calculateIndex(globalPoints));
+        var indexes = new PIXI.Point(hexaUtils.coordinatesToIndexes(globalPoints));
         minimapShape.x = Math.floor(pixelRatio * indexes.x);
         minimapShape.y = Math.floor(pixelRatio * indexes.y);
 

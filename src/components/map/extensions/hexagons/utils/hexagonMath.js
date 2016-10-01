@@ -15,8 +15,8 @@
   window.flatworld.extensions.hexagons.utils.calcSpecialDistance = calcSpecialDistance;
   window.flatworld.extensions.hexagons.utils.hexaHitTest = hexaHitTest;
   window.flatworld.extensions.hexagons.utils.getClosestHexagonCenter = getClosestHexagonCenter;
-  window.flatworld.extensions.hexagons.utils.calculateIndex = calculateIndex;
-  window.flatworld.extensions.hexagons.utils.indexToCoordinates = indexToCoordinates;
+  window.flatworld.extensions.hexagons.utils.coordinatesToIndexes = coordinatesToIndexes;
+  window.flatworld.extensions.hexagons.utils.indexesToCoordinates = indexesToCoordinates;
 
 
   /*-----------------------
@@ -226,9 +226,9 @@
 
     return closestHexagonCenter;
   }
-  function calculateIndex(coordinates) {
+  function coordinatesToIndexes(coordinates) {
     if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('calculateIndex requirements not filled');
+      throw new Error('coordinatesToIndexes requirements not filled');
     }
 
     const indexes = {
@@ -244,9 +244,9 @@
 
     return indexes;
   }
-  function indexToCoordinates(indexes) {
+  function indexesToCoordinates(indexes) {
     if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('indexToCoordinates requirements not filled');
+      throw new Error('indexesToCoordinates requirements not filled');
     }
 
     let XIndexExtra = 0;

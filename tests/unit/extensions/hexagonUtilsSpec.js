@@ -98,10 +98,10 @@
         y: 240
       });
     });
-    it('calculateIndex', function () {
+    it('coordinatesToIndexes', function () {
       var indexes;
 
-      indexes = HEXAGONS_UTILS.calculateIndex({
+      indexes = HEXAGONS_UTILS.coordinatesToIndexes({
         x: 0,
         y: 0
       });
@@ -111,7 +111,7 @@
         y: 0
       });
 
-      indexes = HEXAGONS_UTILS.calculateIndex({
+      indexes = HEXAGONS_UTILS.coordinatesToIndexes({
         x: 305,
         y: 852
       });
@@ -121,7 +121,7 @@
         y: 9
       });
 
-      indexes = HEXAGONS_UTILS.calculateIndex({
+      indexes = HEXAGONS_UTILS.coordinatesToIndexes({
         x: 305,
         y: 800
       });

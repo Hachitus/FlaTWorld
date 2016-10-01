@@ -135,8 +135,8 @@
     }
     globalCoords = hexagons.utils.getClosestHexagonCenter(globalCoords);
 
-    const objectIndexes = hexagons.utils.calculateIndex(selectedObjectsCoordinates);
-    const destinationIndexes = hexagons.utils.calculateIndex(globalCoords);
+    const objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
+    const destinationIndexes = hexagons.utils.coordinatesToIndexes(globalCoords);
 
     let pathsToCoordinates
     try {
@@ -150,7 +150,7 @@
       return;
     }
     pathsToCoordinates = pathsToCoordinates.map(coords => {
-      return hexagons.utils.indexToCoordinates(coords);
+      return hexagons.utils.indexesToCoordinates(coords);
     });
     
     selectedObject.move(globalCoords);
