@@ -46,7 +46,7 @@ var config = {
     './src/components/map/extensions/hexagons/utils/hexagonMath.js',
     './src/components/map/extensions/hexagons/utils/createHexagon.js',
     './src/components/map/extensions/hexagons/eventListeners/*.js',
-    './src/components/map/extensions/hexagons/pathfinding/*.js',
+    './src/components/map/extensions/hexagons/pathFinding/*.js',
     './src/components/map/extensions/hexagons/*.js',
     './src/components/map/extensions/mapMovement/mapMovement.js',
     './src/components/map/extensions/minimaps/init.js',
