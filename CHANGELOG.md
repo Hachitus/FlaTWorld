@@ -1,3 +1,19 @@
+<a name="0.6.0"></a>
+# 0.6.0 Pathfinding (2016-10-30)
+## Bug Fixes
+* Added hexagon pathfinding
+* Removed getMovableLayer from flatworld, those are internals, not meant for using!
+
+## Features
+* Added allMapObjects, alternative data structure, so that you don't always have to retrieve them from individual layers.
+* Added pre-calculated map coordinates for objects, so that we don't always need to make conversions for objects to map coordinates
+* Added getMapCoordinates in flatworld
+* Changed coordinates to work based on PIXI.Point, instead of object literal
+
+## Others
+* Added constants.js
+* Support for non-subcontainer layer structure removed
+
 <a name="0.5.0"></a>
 # 0.5.0 Fog of war polish and multi-development setups (2016-09-25)
 ## Bug Fixes
