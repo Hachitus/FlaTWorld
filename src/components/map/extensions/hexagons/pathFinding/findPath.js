@@ -1,13 +1,6 @@
 !function() {
-  /*---------------------
-  ------- IMPORT --------
-  ----------------------*/
-  const { log } = window.flatworld;
-
-  /*---------------------
-  ------ VARIABLES ------
-  ----------------------*/
-  const debug = true;
+  /* This module was created by Dmitry Steblyuk (https://github.com/dmitrysteblyuk/), so all
+   * credits go to him. */
 
   // Any hexagon grid can be represented as a square grid
   // with intersections in hexagons centers (easy to see when you connect them).
@@ -126,7 +119,7 @@
           const y = curr.y + directions[i].y;
           const next = { x: x, y: y };
                 
-          if (debug && maxYCoordDiff < Math.abs(y - yStart)) {
+          if (maxYCoordDiff < Math.abs(y - yStart)) {
             throw new Error(`maxYCoordDiff ${maxYCoordDiff} less than distance by "y" to (${x}, ${y}) from (${xStart}, ${yStart})`);
           }
           if (isBlocked(next)) {
@@ -134,7 +127,7 @@
           }
                 
           const stepDistance = weight(curr, next);
-          if (debug && (!isInteger(stepDistance) || stepDistance < 1)) {
+          if (!isInteger(stepDistance) || stepDistance < 1) {
             throw new Error(`weight returned not positive integer for (${curr.x}, ${curr.y}), (${x}, ${y}): ${stepDistance}`);
           }
           next.distance = curr.distance + stepDistance;
