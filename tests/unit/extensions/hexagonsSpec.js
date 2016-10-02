@@ -91,16 +91,25 @@
     });
 
     it('_orderListener', () => {
+      const x = 150;
+      const y = 100;
       const e = {
         center: {
-          x: 100,
-          y: 100
+          x,
+          y
         },
-        offsetX: 100,
-        offsetY: 100
+        offsetX: x,
+        offsetY: y
       }
+      // We need to create this, as normally hexagon objects create the hitTest method, but in
+      // this case we do not use the hexagon objects.
+      Object.getPrototypeOf(map.currentlySelectedObjects[0]).hitTest = function () {
+        return false;
+      };
+      spyOn(map.allMapObjects.terrainLayer[1], 'hitTest').and.returnValue(true);
       
       spyOn(mapStates, 'objectOrder');
+      
       spyOn(map.currentlySelectedObjects[0], 'move');
       spyOn(mapEvents, 'publish');
       spyOn(mapStates, 'objectOrderEnd');
@@ -112,15 +121,15 @@
       _orderListener(e);
 
       expect(mapStates.objectOrder).toHaveBeenCalled();
-      expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith({
-        x: 52,
-        y: 150
-      });
+      expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith(new PIXI.Point(
+        x,
+        y
+      );
       expect(mapEvents.publish).toHaveBeenCalledWith('objectMoves', map.currentlySelectedObjects[0]);
-      expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith({
-        x: 52,
-        y: 150
-      });
+      expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith(new PIXI.Point(
+        x,
+        y
+      );
       expect(mapStates.objectOrderEnd).toHaveBeenCalled();
       expect(map.drawOnNextTick).toHaveBeenCalled();
     });
