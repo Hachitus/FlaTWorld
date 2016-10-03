@@ -29,7 +29,10 @@
     property: 'name',
     value: 'terrainLayer',
   });
-  let FTW, ui, isBlockedCb, weight;
+  let isBlockedCb = function (/*correctHexagon, selectedObject, dataObject*/) {
+    throw new Error('isBlocked is not defined. Please override this.');
+  };
+  let FTW, ui, weight;
 
   /*---------------------
   ------- PUBLIC --------
@@ -56,10 +59,6 @@
     eventListeners.on('select', _tapListener);
     eventListeners.on('order', _orderListener);
 
-    /* This is here only because I'm lazy to implement it properly as cb now */
-    isBlockedCb = function (correctHexagon, selectedObject, dataObject) {
-      return (correctHexagon && correctHexagon.mountain) || (dataObject.len > selectedObject.data.typeData.move);
-    };
     weight = function (/*curr, next*/) {
       return 1;
     };
