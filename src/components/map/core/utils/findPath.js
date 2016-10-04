@@ -41,12 +41,15 @@ function findPath({ x: xStart, y: yStart }, dest, width, height, maxTime, weight
         const visited = [];
         const startMinTime = dest && getMinSteps(dest.x - xStart, dest.y - yStart, hexagonGrid);
         const queue = new PriorityQueue();
-        queue.push({
+        const start = {
             x: xStart,
             y: yStart,
             time: 0,
             prev: null
-        }, 0);
+        };
+        
+        isVisited(start);
+        queue.push(start, 0);
         
         let resPath = null;
         let allowedTime = maxTime;
@@ -101,15 +104,15 @@ function findPath({ x: xStart, y: yStart }, dest, width, height, maxTime, weight
             return resPath && pathListToArray(resPath);
         }
         
-        const res = [];
-        for (let i = 0; i < visited.length; i++) {
-            if (visited[i]) {
-                const y = i % height + yStart;
-                const x = (i - y) / height + xStart - width;
-                res.push({ x: x, y: y, time: visited[i] });
+        return visited.reduce((res, time, i) => {
+            const dy = i % height;
+            const dx = (i - dy) / height - width;
+            if (dx || dy) {
+                // do not include starting point
+                res.push({ x: dx + xStart, y: dy + yStart, time: time });
             }
-        }
-        return res;
+            return res;
+        }, []);
         
         function isVisited(cell) {
             // if width and height are chosen right then the key should not be negative
@@ -126,11 +129,15 @@ function findPath({ x: xStart, y: yStart }, dest, width, height, maxTime, weight
     }
     
     function validateArgs() {
-        [xStart, yStart].concat(dest ? [dest.x, dest.y] : []).concat([width, height, maxTime]).forEach((arg, i) => {
-            if (!isInteger(arg)) {
-                throw new Error(`argument #${i} must be an integer: ${arg}`);
-            }
-        });
+        [xStart, yStart]
+            .concat(dest ? [dest.x, dest.y] : [])
+            .concat([width, height, maxTime])
+            .forEach((arg, i) => {
+                if (!isInteger(arg)) {
+                    throw new Error(`argument #${i} must be an integer: ${arg}`);
+                }
+            });
+        
         if (maxTime < 1) {
             throw new Error(`maxTime must be at least 1: ${maxTime}`);
         }
