@@ -197,33 +197,25 @@
       y: Math.floor((coordinates.y - globalStartingPoint.y) / calcSpecialDistance()),
     };
 
-    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
-      indexes.x += 1;
-    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 1) {
-      indexes.y += 1;
-    }
+    indexes.x -= Math.floor(coordinates.y / (calcSpecialDistance() * 2));
 
     return indexes;
   }
   function indexesToCoordinates(indexes) {
     if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('indexesToCoordinates requirements not filled');
+      throw new Error('coordinatesToIndexes requirements not filled');
     }
 
-    let XIndexExtra = 0;
-    let YIndexExtra = 0;
-
-    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
-      XIndexExtra = calcShortDiagonal() + (calcShortDiagonal() / 2);
-    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 0) {
-      YIndexExtra = calcShortDiagonal() + (calcShortDiagonal() / 2);
-    }
-
-    return {
-      x: Math.floor(indexes.x * calcShortDiagonal() - XIndexExtra + globalStartingPoint.x),
-      y: Math.floor(indexes.y * calcSpecialDistance() - YIndexExtra + globalStartingPoint.y),
+    const coordinates = {
+      x: Math.floor((indexes.x * calcShortDiagonal()) + globalStartingPoint.x),
+      y: Math.floor((indexes.y * calcSpecialDistance()) + globalStartingPoint.y),
     };
+
+    coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));
+
+    return coordinates;
   }
+
   /*-----------------------
   --------- PRIVATE -------
   -----------------------*/

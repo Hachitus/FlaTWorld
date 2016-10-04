@@ -29,8 +29,9 @@
     property: 'name',
     value: 'terrainLayer',
   });
+  /* This must be changed to outside the module */
   let isBlockedCb = function (/*correctHexagon, selectedObject, dataObject*/) {
-    throw new Error('isBlocked is not defined. Please override this.');
+    return false;
   };
   let FTW, ui, weight;
 
@@ -128,8 +129,6 @@
 
     selectedObject = FTW.currentlySelectedObjects[0];
     selectedObjectsCoordinates = selectedObject.getMapCoordinates();
-    selectedObjectsCoordinates.x += selectedObject.getCenterCoordinates().x;
-    selectedObjectsCoordinates.y += selectedObject.getCenterCoordinates().y;
 
     mapStates.objectOrder();
 
@@ -148,8 +147,8 @@
 
     const objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
     const centerCoords = {
-      x: objects[0].getMapCoordinates().x + objects[0].getCenterCoordinates().x,
-      y: objects[0].getMapCoordinates().y + objects[0].getCenterCoordinates().y
+      x: objects[0].getMapCoordinates().x,
+      y: objects[0].getMapCoordinates().y
     } ;
     const destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
 
