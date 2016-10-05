@@ -18,7 +18,7 @@
    * Simple fog of war works with circles around objects
    *
    * @namespace flatworld.extensions.fogOfWars
-   * @class pixelizedMinimap
+   * @class pixelizedMiniMap
    **/
   function setupSimpleFogOfWar() {
     const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
@@ -27,12 +27,12 @@
     let movableLayer;
     let zoomLayer;
     let mapRenderer;
-    let map;
     let maskMovableContainer;
     let maskStageContainer;
     let FoWCB;
     let objectsForFoW;
     let color;
+    let mapInstance;
 
     return {
       // These two are required by all plugins
@@ -59,25 +59,30 @@
      * can be used here and in getViewportArea-method etc.
      *
      * @method init
-     * @param  {Map} givenMap     Instance of Map
+     * @param  {Object} parameters    This plugin requires cb and filter properties!
      */
-    function init(givenMap) {
-      map = givenMap;
-      map.activateFogOfWar = activateFogOfWar;
-      movableLayer = map.getMovableLayer();
-      zoomLayer = map.getZoomLayer();
-      mapRenderer = map.getRenderer();
+    function init(parameters) {
+      if (!(parameters.cb || parameters.filter)) {
+        throw new Error('SimpleFogOfWar plugin requires cb and filter properties')
+      }
+      mapInstance = this.mapInstance;
+      movableLayer = this.mapInstance.getMovableLayer();
+      zoomLayer = this.mapInstance.getZoomLayer();
+      mapRenderer = this.mapInstance.getRenderer();
 
-      maskStageContainer = map.createSpecialLayer('FoWStageMaskLayer');
-      maskMovableContainer = map.createSpecialLayer('FoWMovableMaskLayer');
+      maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
+      maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
       maskMovableContainer.x = movableLayer.x;
       maskMovableContainer.y = movableLayer.y;
+
+      activateFogOfWar(this.mapInstance, parameters.cb, parameters.filter);
     }
 
-    function activateFogOfWar(cb, filter, options = {}) {
+    function activateFogOfWar(mapInstance, cb, filterCreator, options = {}) {
       color = options.color || 0x222222;
       FoWCB = cb;
-      objectsForFoW = map.getPrimaryLayers({ filters: filter }).map(o => o.getObjects(filter));
+      let filter = filterCreator();
+      objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(o => o.getObjects(filter));
       objectsForFoW = generalUtils.arrays.flatten2Levels(objectsForFoW);
 
       createOverlay();
@@ -100,7 +105,7 @@
 
       zoomLayer.mask = maskSprite;
 
-      map.registerPreRenderer('renderFoW', moveFoW);
+      mapInstance.registerPreRenderer('renderFoW', moveFoW);
     }
 
     function refreshFoW() {
@@ -116,8 +121,8 @@
     }
 
     function zoomFoW() {
-      maskStageContainer.scale.x = map.getZoom();
-      maskStageContainer.scale.y = map.getZoom();
+      maskStageContainer.scale.x = mapInstance.getZoom();
+      maskStageContainer.scale.y = mapInstance.getZoom();
 
       createOverlay();
       refreshFoW();
@@ -140,7 +145,7 @@
       coordinates.y = Math.round(coordinates.y);
       coordinates.anchor = object.anchor;
       coordinates.pivot = object.pivot;
-      coordinates.scale = map.getZoom();
+      coordinates.scale = mapInstance.getZoom();
 
       return coordinates;
     }
@@ -159,8 +164,8 @@
       const coordinates = {
         x: -100,
         y: -100,
-        width: mapRenderer.width + 200 + (mapRenderer.width / map.getZoom()),
-        height: mapRenderer.height + 200 + (mapRenderer.height / map.getZoom()),
+        width: mapRenderer.width + 200 + (mapRenderer.width / mapInstance.getZoom()),
+        height: mapRenderer.height + 200 + (mapRenderer.height / mapInstance.getZoom()),
       };
 
       FoWOverlay.clear();
@@ -171,7 +176,7 @@
     function setEvents() {
       mapEvents.subscribe('mapResized', resizeFoW);
       mapEvents.subscribe('mapZoomed', zoomFoW);
-      /*mapEvents.subscribe('mapMoved', moveFoW);*/
+      /* mapEvents.subscribe('mapMoved', moveFoW); */
     }
   }
 }());

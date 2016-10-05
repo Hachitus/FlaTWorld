@@ -12,13 +12,10 @@
   const LAYER_TYPE_MOVABLE = 1;
   const LAYER_TYPE_MINIMAP = 2;
   const _renderers = {};
+  const protectedProperties = {};
   let _drawMapOnNextTick = false;
   let isMapReadyPromises = [];
-  let _privateRenderers;
-  let _zoomLayer;
-  let _movableLayer;
-  let _minimapLayer;
-  let ParentLayerConstructor;
+  let _privateRenderers, _zoomLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
 
   /*---------------------
   --------- API ---------
@@ -283,7 +280,9 @@
      * for, if it contains promises, you have to wait for them to finish for the plugins to work and map be ready.
      **/
     init(plugins = [], coord = { x: 0, y: 0 }, tickCB = null, options = { fullsize: true }) {
-      var allPromises = [];
+      if (!this.getPrimaryLayers().length) {
+        throw new Error('You should have layers created for the map, before initializing the map');
+      }
 
       options.fullsize && this.toggleFullsize();
 
@@ -299,16 +298,12 @@
       /* Sets the correct Map starting coordinates */
       coord && Object.assign(_movableLayer, coord);
 
-      if (plugins.length) {
-        allPromises = this.activatePlugins(plugins);
-      }
+      let allPromises = plugins.length && this.initPlugins(plugins);
 
       /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
       this._defaultTick();
       tickCB && this.customTickOn(tickCB);
       isMapReadyPromises = allPromises;
-
-      this.drawOnNextTick();
 
       return allPromises || Promise.resolve();
     }
@@ -527,22 +522,33 @@
       this.drawOnNextTick();
     }
     /**
-     * Activate all plugins for the map. Iterates through the given plugins we wish to activate and does the actual work in activatePlugin-
-     * method.
-     *
-     * @method pluginsArray
+     * Initializes all plugins for the map. Iterates through the given plugins we wish to
+     * initialize and does the actual work in initPlugin-method.
+      *
+     * @method initPlugins
      * @param {Object[]} pluginsArray   Array that consists the plugin modules to be activated
      * @return {Promise}                Promise. If string are provided resolved those with System.import, otherwise resolves immediately.
      * */
-    activatePlugins(pluginsArray = []) {
+    initPlugins(pluginsArray = []) {
       const allPromises = [];
 
       /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
-      pluginsArray.forEach(plugin => {
-        if (typeof plugin === 'object') {
-          this.activatePlugin(plugin);
+      pluginsArray.forEach(data => {
+        if (typeof data.plugin === 'object') {
+          let params = {};
+          data.parameters = data.parameters || {};
+
+          Object.keys(data.parameters).forEach(i => {
+            if (!data.parameters[i].bind) {
+              throw new Error('All parameters to plugins must be functions with bind-method!');
+            }
+
+            params[i] = data.parameters[i].bind(data.plugin);
+          });
+
+          this.initPlugin(data.plugin, params);
         } else {
-          log.error('problem with initializing a plugin: ' + plugin.name);
+          log.error(new Error(`Plugin '${data.plugin.pluginName}' was not an object`));
         }
       });
 
@@ -552,11 +558,11 @@
      * Activate plugin for the map. Plugins need .pluginName property and .init-method. Plugins init-method activates the plugins and we
      * call them in Map. Plugins init-metho receivse this (Map instance) as their only parameter.
      *
-     * @method activatePlugin
+     * @method initPlugin
      * @throws {Error} Throws a general error if there is an issue activating the plugin
      * @param {Object} plugin        Plugin module
      * */
-    activatePlugin(plugin) {
+    initPlugin(plugin, params = []) {
       try {
         if (!plugin || !plugin.pluginName || !plugin.init) {
           throw new Error('plugin, plugin.pluginName or plugin.init import is missing!');
@@ -564,10 +570,13 @@
 
         this.plugins.add(plugin[plugin.pluginName]);
         if (this.plugins.has(plugin[plugin.pluginName])) {
-          plugin.init(this);
+          plugin.mapInstance = this;
+          plugin._properties = protectedProperties;
+          plugin.init(params);
         }
       } catch (e) {
-        log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
+        e.message += ' INFO: An error initializing plugin. JSON.stringify: "' + plugin.pluginName + '" ';
+        log.error(e);
       }
     }
     registerPreRenderer(name, callback) {

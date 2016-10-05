@@ -2,11 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
-  var eventListeners = window.flatworld.eventListeners;
-  var MapDataManipulator = window.flatworld.MapDataManipulator;
-  var utils = window.flatworld.utils;
-  var Hammer = window.flatworld_libraries.Hammer;
+  const { PIXI, Hammer } = window.flatworld_libraries;
+  const { mapEvents, eventListeners, MapDataManipulator, utils } = window.flatworld.mapEvents;
 
   /*-----------------------
   ---------- API ----------
@@ -29,7 +26,7 @@
   function setupPixelizedMinimap() {
     var paddingX = 0;
     var paddingY = 0;
-    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
+    var minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
 
     return {
       init,
@@ -45,11 +42,10 @@
      * @method init
      * @param  {Map} givenMap     Instance of Map
      */
-    function init(givenMap) {
-      map = givenMap;
-      hammer = new Hammer.Manager(map.minimapCanvas);
-      map.initMinimap = initMinimap;
-      minimap = map.getMinimapLayer();
+    function init() {
+      hammer = new Hammer.Manager(this.mapInstance.minimapCanvas);
+      this.mapInstance.initMinimap = initMinimap;
+      minimap = this.mapInstance.getMinimapLayer();
     }
     /**
      * initMinimap requires some data, to initialize and show the actual minimap.
@@ -98,7 +94,7 @@
       });
       var backgroundContainer = createMinimapLayer();
 
-      map.getAllObjects({ filters }).forEach((obj) => {
+      this.mapInstance.getAllObjects({ filters }).forEach((obj) => {
         backgroundContainer.addChild(staticCB(obj));
       });
 
@@ -115,7 +111,7 @@
       });
       dynamicContainer = createMinimapLayer();
 
-      map.getAllObjects({ filters }).forEach((obj) => {
+      this.mapInstance.getAllObjects({ filters }).forEach((obj) => {
         dynamicContainer.addChild(updateCB(obj));
       });
 
@@ -133,12 +129,12 @@
         return;
       }
 
-      var minimapCoordinates = coordinateConverterCB(map.getMovableLayer(), true);
+      var minimapCoordinates = coordinateConverterCB(this.mapInstance.getMovableLayer(), true);
 
       minimapViewport.x = minimapCoordinates.x;
       minimapViewport.y = minimapCoordinates.y;
 
-      map.drawOnNextTick();
+      this.mapInstance.drawOnNextTick();
     }
     function reactToMapScale() {
       minimapViewport.scale.x += 0.1;
@@ -148,7 +144,7 @@
       var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
       var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
-      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, map.minimapCanvas);
+      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, this.mapInstance.minimapCanvas);
 
       /* We need to keep track when the map was moved, so we don't react to this movement */
       mapMoveTimestamp = Date.now();
@@ -161,9 +157,9 @@
       minimapViewport.x = mapCoordinates.x;
       minimapViewport.y = mapCoordinates.y;
       mapCoordinates = coordinateConverterCB(globalCoordinates, false);
-      map.moveMap(mapCoordinates, { absolute: true, noEvent: true });
+      this.mapInstance.moveMap(mapCoordinates, { absolute: true, noEvent: true });
 
-      map.drawOnNextTick();
+      this.mapInstance.drawOnNextTick();
     }
     function setupMinimapClickEvent() {
       var activeCB;
@@ -196,13 +192,13 @@
      * @param {Integer} height
      */
     function _setMinimapArea(x, y, width, height) {
-      var _minimapRenderer = map.getRenderer('minimap');
+      var _minimapRenderer = this.mapInstance.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;
       _minimapRenderer.resize(width + (paddingX * 2), height + (paddingY * 2));
 
-      map.drawOnNextTick();
+      this.mapInstance.drawOnNextTick();
     }
     /**
      * Creates minimap layer with proper starting coordinates

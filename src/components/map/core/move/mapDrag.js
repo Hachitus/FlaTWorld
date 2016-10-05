@@ -47,8 +47,8 @@
      * @method init
      * @param {Map} mapObj        The current instance of Map class
      * */
-    function init(map) {
-      eventListenerCB = _startDragListener(map);
+    function init() {
+      eventListenerCB = _startDragListener(this.mapInstance);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
       eventListeners.on('drag', eventListenerCB);

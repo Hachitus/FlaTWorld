@@ -163,22 +163,33 @@
       data: {}
     };
     var minimapSize = { x: 0, y: 0, width: 200, height: 200 };
-    var pluginsToActivate = [
-      baseEventlisteners,
-      mapZoom,
-      mapDrag,
-      hexagons.selectHexagonObject,
-      mapMovement
+    var pluginsToActivate = [{
+        plugin: baseEventlisteners
+      }, {
+        plugin: mapZoom,
+      }, {
+        plugin: mapDrag,
+      }, {
+        plugin: hexagons.selectHexagonObject,
+      }, {
+        plugin: mapMovement
+      }
     ];
     var sound = new Sound();
     var preload;
 
     if (minimapCheckbox.checked) {
       minimapCanvas = options.minimapCanvas;
-      pluginsToActivate.push(pixelizedMinimap);
+      pluginsToActivate.push({
+        plugin: pixelizedMinimap,
+        dependencies: ['hexa']
+      });
     }
     if (fowCheckbox.checked) {
-      pluginsToActivate.push(simpleFogOfWar);
+      pluginsToActivate.push({
+        plugin: simpleFogOfWar,
+        parameters: _createFoWStuff()
+      });
     }
 
     /* This NEEDS to be set for the hexagon plugin to work correctly */
@@ -348,48 +359,7 @@
           xPadding: X_PADDING, yPadding: Y_PADDING,
         });
 
-      /* ----------- FOW stuff ------------ */
-      const textureRenderer = new PIXI.WebGLRenderer(500, 500, {
-        transparent: true,
-        autoResize: true,
-      });
-      var fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
-      var currentScale = 1;
-      /*
-      mapEvents.subscribe('mapZoomed', function (ev) {
-        const textureSprite = new PIXI.Sprite.fromImage(FOW_IMAGE);
-        const cont = new PIXI.Container();
-        cont.addChild(textureSprite);
-        currentScale = ev.customData[0].newScale;
-        cont.scale.set(ev.customData[0].newScale, ev.customData[0].newScale);
-        textureRenderer.render(cont);
-        fowTexture = new PIXI.Texture.fromCanvas(textureRenderer.view);
-      });
-      */
 
-      const FoWFilter = new MapDataManipulator([{
-          type: 'filter',
-          object: MapDataManipulator.OBJECT_LAYER,
-          property: 'name',
-          value: 'unitLayer'
-        },{
-          type: 'filter',
-          object: MapDataManipulator.OBJECT_OBJECT,
-          property: ['data', 'activeData', 'FoW'],
-          value: 'true'
-        }]);
-      function foWCallback(data) {
-        const unitViewSprite = new PIXI.Sprite(fowTexture);
-
-        unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
-        //unitViewSprite.scale.set(data.scale, data.scale);
-        unitViewSprite.position.set(data.x, data.y);
-
-        return unitViewSprite;
-      }
-
-      map.activateFogOfWar(foWCallback, FoWFilter);
-      /* ----------- FOW stuff END------------ */
 
       /* Activate the fullscreen button: */
       document.getElementById('testFullscreen').addEventListener('click', function () {
@@ -548,5 +518,33 @@
     }
 
     return coordinates;
+  }
+
+  function _createFoWStuff() {
+    /* ----------- FOW stuff ------------ */
+    var fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
+    const FoWFilter = () => new MapDataManipulator([{
+        type: 'filter',
+        object: MapDataManipulator.OBJECT_LAYER,
+        property: 'name',
+        value: 'unitLayer'
+      },{
+        type: 'filter',
+        object: MapDataManipulator.OBJECT_OBJECT,
+        property: ['data', 'activeData', 'FoW'],
+        value: 'true'
+      }]);
+    function foWCallback(data) {
+      const unitViewSprite = new PIXI.Sprite(fowTexture);
+
+      unitViewSprite.anchor.set(data.anchor.x, data.anchor.y);
+      //unitViewSprite.scale.set(data.scale, data.scale);
+      unitViewSprite.position.set(data.x, data.y);
+
+      return unitViewSprite;
+    }
+
+    return { cb: foWCallback, filter: FoWFilter };
+    /* ----------- FOW stuff END------------ */
   }
 })();

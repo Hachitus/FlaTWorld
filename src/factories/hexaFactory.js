@@ -112,8 +112,9 @@
             try {
               objTypeData = DATA_TYPE[spritesheetType][object.objType];
               if (!objTypeData) {
-                log.error('Bad mapData for type:', spritesheetType, object.objType, object.name);
-                throw new Error('Bad mapData for type:', spritesheetType, object.objType, object.name);
+                let error = new Error('Bad mapData for type:' + spritesheetType.toString() + object.objType.toString() + object.name.toString());
+                log.error(error);
+                throw error;
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);

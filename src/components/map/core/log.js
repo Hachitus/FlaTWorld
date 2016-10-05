@@ -11,11 +11,11 @@
    * @requires loglevel.js for frontend logging, or something similar
    **/
   window.flatworld.log = {
-    debug(e, errorText) {
-      loglevel.debug(errorText, e);
+    debug(e) {
+      loglevel.debug(e);
     },
-    error(e, errorText) {
-      loglevel.error(errorText, e);
+    error(e) {
+      loglevel.error(e);
     },
   };
 })();

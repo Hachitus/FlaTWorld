@@ -56,19 +56,19 @@
      *
      * @method init
      */
-    function init(map) {
+    function init() {
+      mapInstance = this.mapInstance;
       const orderToggle = toggleOrder();
       const selectToggle = toggleSelect();
 
-      mapInstance = map;
-      hammer = new Hammer.Manager(map.canvas);
-      hamster = new Hamster(map.canvas);
+      hammer = new Hammer.Manager(this.mapInstance.canvas);
+      hamster = new Hamster(this.mapInstance.canvas);
 
       eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
       eventListeners.on('fullSize', resizeCanvas);
 
       eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
-      map.setPrototype('setFullScreen', () => {
+      this.mapInstance.setPrototype('setFullScreen', () => {
         eventListeners.on('fullscreen', _setFullScreen);
       });
 

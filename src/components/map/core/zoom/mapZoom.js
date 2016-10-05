@@ -68,12 +68,11 @@
      * @todo think through should setZoomLimits and setZoomModifier be in map.prototype?
      * But zoomLimit and modifier need to be setable in creation, init or later with setters
      **/
-    function init(thisMap) {
-      map = thisMap;
-      map.setPrototype('zoomIn', zoomIn);
-      map.setPrototype('zoomOut', zoomOut);
-      map.setPrototype('setZoomLimits', setZoomLimits);
-      map.setPrototype('setZoomModifier', setZoomModifier);
+    function init() {
+      this.mapInstance.setPrototype('zoomIn', zoomIn);
+      this.mapInstance.setPrototype('zoomOut', zoomOut);
+      this.mapInstance.setPrototype('setZoomLimits', setZoomLimits);
+      this.mapInstance.setPrototype('setZoomModifier', setZoomModifier);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
       eventListeners.on('zoom', unifiedEventCB);

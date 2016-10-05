@@ -21,8 +21,6 @@
    * @return {Object}       Return methods inside object
    */
   function setupObject_select_hexagon() {
-    var map = {};
-
     return {
       init,
       pluginName: 'selectHexagonObject',
@@ -30,14 +28,14 @@
 
     /**
      * @method  init
-     * @param {Map} givenMap         Instantiated Map class object
+     * @param {Map} givenMap                  Instantiated Map class object
+     * @param {Object} protectedProperties    Holds all the non-public properties to use
+     * @param {Array} params                  Rest of the parameters
      */
-    function init(givenMap) {
-      map = givenMap;
+    function init() {
+      this.mapInstance.hexagonIndexes = createHexagonDataStructure(this.mapInstance.getMovableLayer(), () => this.mapInstance.allMapObjects.terrainLayer);
 
-      map.hexagonIndexes = createHexagonDataStructure(map.getMovableLayer(), map.allMapObjects.terrainLayer);
-
-      startClickListener(map);
+      startClickListener(this.mapInstance);
     }
 
     /*-----------------------
@@ -53,8 +51,9 @@
     }
   }
 
-  function createHexagonDataStructure(movableLayer, objArray) {
+  function createHexagonDataStructure(movableLayer, getLayers) {
     const hexagonIndexes = {};
+    const objArray = getLayers();
     let indexes;
 
     objArray.forEach(obj => {

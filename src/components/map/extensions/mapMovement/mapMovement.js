@@ -33,9 +33,7 @@
     const SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT = 40;
     let queue = {};
     let debug = true;
-    let map;
-    let viewportArea;
-    let offsetSize;
+    let viewportArea, offsetSize, mapInstance;
 
     return {
       init,
@@ -58,12 +56,11 @@
      * @method init
      * @param  {Map} map     Instance of Map
      */
-    function init(givenMap) {
-      map = givenMap;
-
-      addAll();
+    function init() {
+      mapInstance = this.mapInstance;
+      addAll(this.mapInstance);
       startEventListeners();
-      map.drawOnNextTick();
+      this.mapInstance.drawOnNextTick();
 
       if (debug) {
         /**
@@ -74,7 +71,7 @@
          * @static
          */
         window.FlaTWorld_mapMovement_subCheck = function () {
-          map.getPrimaryLayers().forEach(layer => {
+          mapInstance.getPrimaryLayers().forEach(layer => {
             var subcontainers = layer.getSubcontainers();
             var visibleContainers, invisibleContainers;
 
@@ -98,7 +95,7 @@
          * @static
          */
         window.FlaTWorld_mapMovement_deactivate = function () {
-          map.getPrimaryLayers().forEach(layer => {
+          mapInstance.getPrimaryLayers().forEach(layer => {
             var subcontainers = layer.getSubcontainers();
 
             subcontainers.forEach(subcontainer => {
@@ -109,16 +106,16 @@
       }
     }
     /**
-     * Ínitialize as a plugin
+     * Ínitialize the plugin
      *
      * @method addAll
      * @param  {Map} map     Instance of Map
      */
-    function addAll() {
-      viewportArea = map.getViewportArea(true, 2);
-      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+    function addAll(mapInstance) {
+      viewportArea = mapInstance.getViewportArea(true, 2);
+      offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
 
-      map.getPrimaryLayers().forEach(layer => {
+      mapInstance.getPrimaryLayers().forEach(layer => {
         var subcontainers = layer.getSubcontainers();
 
         subcontainers.forEach(subcontainer => {
@@ -151,7 +148,7 @@
       function setupHandleViewportArea() {
         setupViewportArea(true, VIEWPORT_OFFSET);
 
-        checkAndSetSubcontainers(viewportArea, map.getPrimaryLayers());
+        checkAndSetSubcontainers(viewportArea, mapInstance.getPrimaryLayers());
       }
 
       return;
@@ -170,11 +167,11 @@
         check();
       }
       function resizeCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+        offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
         check();
       }
       function zoomCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+        offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
         check();
       }
     }
@@ -261,7 +258,7 @@
       window.Q.all(promises).then(() => {
         queue.processing = false;
 
-        map.drawOnNextTick();
+        mapInstance.drawOnNextTick();
       }).then(null, (err) => {
         window.flatworld.log.debug(err);
       });
@@ -275,7 +272,7 @@
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupViewportArea(isLocal = true, multiplier = 2) {
-      viewportArea = map.getViewportArea(isLocal, multiplier);
+      viewportArea = mapInstance.getViewportArea(isLocal, multiplier);
     }
     /**
      * Initializes the module variables viewportArea and offsetSize
@@ -286,7 +283,7 @@
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupOffsetSize(viewportArea) {
-      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+      offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
     }
     /**
      * forms the total viewport parameters based on the given ones.
@@ -334,7 +331,7 @@
      * @method _setMap
      */
     function _setMap(givenMap) {
-      map = givenMap;
+      this.mapInstance = mapInstance = givenMap;
     }
   }
 })();
