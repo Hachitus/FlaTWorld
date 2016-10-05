@@ -171,6 +171,7 @@
         plugin: mapDrag,
       }, {
         plugin: hexagons.selectHexagonObject,
+        parameters: _createHexagonParams(globalMap)
       }, {
         plugin: mapMovement
       }
@@ -188,7 +189,7 @@
     if (fowCheckbox.checked) {
       pluginsToActivate.push({
         plugin: simpleFogOfWar,
-        parameters: _createFoWStuff()
+        parameters: _createFoWParams()
       });
     }
 
@@ -520,7 +521,7 @@
     return coordinates;
   }
 
-  function _createFoWStuff() {
+  function _createFoWParams() {
     /* ----------- FOW stuff ------------ */
     var fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
     const FoWFilter = () => new MapDataManipulator([{
@@ -547,4 +548,9 @@
     return { cb: foWCallback, filter: FoWFilter };
     /* ----------- FOW stuff END------------ */
   }
+
+  function _createHexagonParams(map) {
+    return { isBlocked: (correctHexagon, selectedObject) => correctHexagon.data.typeData.movement < 0 };
+  }
+
 })();

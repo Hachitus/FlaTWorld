@@ -32,10 +32,14 @@
      * @param {Object} protectedProperties    Holds all the non-public properties to use
      * @param {Array} params                  Rest of the parameters
      */
-    function init() {
+    function init(params) {
+      if (!params.isBlocked) {
+        throw new Error('hexagon pathFinding plugin requires cb and filter properties')
+      }
+
       this.mapInstance.hexagonIndexes = createHexagonDataStructure(this.mapInstance.getMovableLayer(), () => this.mapInstance.allMapObjects.terrainLayer);
 
-      startClickListener(this.mapInstance);
+      startClickListener(this.mapInstance, params.isBlocked);
     }
 
     /*-----------------------
@@ -46,8 +50,8 @@
      * @method startClickListener
      * @param {Map} map              Instantiated Map class object
      */
-    function startClickListener(map) {
-      return setupHexagonClick(map);
+    function startClickListener(mapInstance, isBlocked) {
+      return setupHexagonClick(mapInstance, isBlocked);
     }
   }
 

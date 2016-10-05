@@ -4,24 +4,32 @@ window.typeData = {
     terrainBase:[{
         image:'desert',
         attachedToTerrains:['0'],
+        type: 'desert',
+        movement: '1',
         propability:'100%',
         name: 'forDebugging - desert',
         minimapColor: 0xe9d9b5
       },{
         image:'grass',
         attachedToTerrains:['0'],
+        type: 'grass',
+        movement: '1',
         propability:'100%',
         name: 'forDebugging - grass',
         minimapColor: 0x24b160
       },{
         image:'wasteland',
         attachedToTerrains:['0'],
+        type: 'wasteland',
+        movement: '1',
         propability:'100%',
         name: 'forDebugging - wasteland',
         minimapColor: 0x24b160
       },{
         image:'tundra',
         attachedToTerrains:['0'],
+        type: 'tundra',
+        movement: '1',
         propability:'100%',
         name: 'forDebugging - tundra',
         minimapColor: 0x24b160
@@ -29,17 +37,23 @@ window.typeData = {
         image:'lake',
         attachedToTerrains:['0'],
         propability:'100%',
+        type: 'lake',
+        movement: '1',
         name: 'forDebugging - lake',
         minimapColor: 0x24b160
       },{
         image:'mountains',
         attachedToTerrains:['0'],
+        type: 'mountain',
+        movement: '-1',
         propability:'100%',
         name: 'forDebugging - mountains',
         minimapColor: 0x24b160
       },{
         image:'forest',
         attachedToTerrains:['0'],
+        type: 'forest',
+        movement: '2',
         propability:'100%',
         name: 'forDebugging - forest',
         minimapColor: 0x24b160

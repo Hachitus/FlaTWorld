@@ -9,7 +9,6 @@
   --------- API ---------
   ----------------------*/
   window.flatworld.extensions.hexagons.setupHexagonClick = _setupUnitsHexagonClick;
-  window.flatworld.extensions.hexagons.activate = activate;
   window.flatworld.extensions.hexagons._tests._isBlocked = _isBlocked;
   window.flatworld.extensions.hexagons._tests._orderListener = _orderListener;
   window.flatworld.extensions.hexagons._tests._tapListener = _tapListener;
@@ -30,9 +29,7 @@
     value: 'terrainLayer',
   });
   /* This must be changed to outside the module */
-  let isBlockedCb = function (/*correctHexagon, selectedObject, dataObject*/) {
-    return false;
-  };
+  let isBlockedCb = () => false;
   let FTW, ui, weight;
 
   /*---------------------
@@ -48,7 +45,7 @@
    * @param  {Map} map      The currently use Map instance
    * @return {Boolean}      True
    */
-  function _setupUnitsHexagonClick(mapInstance) {
+  function _setupUnitsHexagonClick(mapInstance, isBlocked) {
     if (!mapInstance) {
       throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
     }
@@ -64,12 +61,9 @@
       return 1;
     };
 
-    return true;
-  }
+    isBlockedCb = isBlocked || isBlockedCb;
 
-  function activate(isBlockedFn, weightFn) {
-    isBlockedCb = isBlockedFn;
-    weight = weightFn;
+    return true;
   }
 
   /**

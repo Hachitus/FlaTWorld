@@ -61,8 +61,8 @@
      * @method init
      * @param  {Object} parameters    This plugin requires cb and filter properties!
      */
-    function init(parameters) {
-      if (!(parameters.cb || parameters.filter)) {
+    function init(params) {
+      if (!(params.cb || params.filter)) {
         throw new Error('SimpleFogOfWar plugin requires cb and filter properties')
       }
       mapInstance = this.mapInstance;
@@ -75,7 +75,7 @@
       maskMovableContainer.x = movableLayer.x;
       maskMovableContainer.y = movableLayer.y;
 
-      activateFogOfWar(this.mapInstance, parameters.cb, parameters.filter);
+      activateFogOfWar(this.mapInstance, params.cb, params.filter);
     }
 
     function activateFogOfWar(mapInstance, cb, filterCreator, options = {}) {
