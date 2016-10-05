@@ -120,6 +120,7 @@ You most likely need to implement your own factory function for your game, if th
 The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to just couple rules:
 * Be careful when constructing an extension. They have a lot of freedom to mess around with the map data (which might change in the future).
 * When extension is initialized, it will create this.mapInstance and this.protectedProperties. First has the current instantiated map and second the private methods and properties for plugins to use
+* Extensions init-method must return promise, to verify, when the plugin is ready
 * Must return an object containing:
   * init-method
   * 'PluginName' variable, which has same value as the exported library name
