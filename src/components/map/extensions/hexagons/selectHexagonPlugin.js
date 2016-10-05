@@ -59,8 +59,6 @@
 
     objArray.forEach(obj => {
       let correctCoords = obj.getMapCoordinates();
-      correctCoords.x += obj.getCenterCoordinates().x;
-      correctCoords.y += obj.getCenterCoordinates().y;
 
       indexes = utils.coordinatesToIndexes(correctCoords);
 

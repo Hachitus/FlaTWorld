@@ -116,64 +116,66 @@
    * @param  {Event} e      Event object
    */
   function _orderListener(e) {
-    var selectedObjectsCoordinates;
-    let globalCoords, selectedObject;
-
-    if (!FTW.currentlySelectedObjects) {
-      log.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
-      return;
-    } else if (FTW.currentlySelectedObjects.length > 1) {
-      log.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
-      return;
-    }
-
-    selectedObject = FTW.currentlySelectedObjects[0];
-    selectedObjectsCoordinates = selectedObject.getMapCoordinates();
-
-    mapStates.objectOrder();
-
-    if (FTW.isSupportedTouch) {
-      globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-    } else {
-      globalCoords = utils.mouse.eventData.getPointerCoords(e);
-    }
-    const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
-
-    if (!objects.length) {
-      log.error('No terrain objects found for destination!');
-      mapStates.objectOrderEnd();
-      return;
-    }
-
-    const objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
-    const centerCoords = {
-      x: objects[0].getMapCoordinates().x,
-      y: objects[0].getMapCoordinates().y
-    } ;
-    const destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
-
-    let pathsToCoordinates;
+    // We want to wrap the whole functionality in try catch, to cancel the order state, if any
+    // errors occur. Otherwise the states can get stuck more easily in a situation, where you can
+    // not move anything (if objectOrder stays on, then the map won't allow you to move units)
     try {
-      pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, 100, _isBlocked, weight);
-    } catch (e) {
-      if (e.message === 'destination must not be blocked!') {
-        log.debug('path finding destination is blocked. There should be a notification in the UI of this.');
+      mapStates.objectOrder();
+
+      var selectedObjectsCoordinates;
+      let globalCoords, selectedObject;
+
+      if (!FTW.currentlySelectedObjects) {
+        throw 'No objects selected for orders! ' + JSON.stringify(selectedObject);
+      } else if (FTW.currentlySelectedObjects.length > 1) {
+        throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects);
       }
-      log.error('same path, dest blocked or such');
+
+      selectedObject = FTW.currentlySelectedObjects[0];
+      selectedObjectsCoordinates = selectedObject.getMapCoordinates();
+
+      if (FTW.isSupportedTouch) {
+        globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
+      } else {
+        globalCoords = utils.mouse.eventData.getPointerCoords(e);
+      }
+      const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
+
+      if (!objects.length) {
+        throw 'No terrain objects found for destination!';
+      }
+
+      const objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
+      const centerCoords = {
+        x: objects[0].getMapCoordinates().x,
+        y: objects[0].getMapCoordinates().y
+      } ;
+      const destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
+
+      let pathsToCoordinates;
+      try {
+        const timeUnits = selectedObject.data.typeData.move;
+        pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, +timeUnits, _isBlocked, weight);
+        pathsToCoordinates = pathsToCoordinates.map(coords => {
+          return hexagons.utils.indexesToCoordinates(coords);
+        });
+      } catch (e) {
+        e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+        throw e;
+      }
+      
+      selectedObject.move(globalCoords);
+      mapEvents.publish('objectMoves', selectedObject);
+
+      ui.showUnitMovement(pathsToCoordinates);
+
       mapStates.objectOrderEnd();
+      FTW.drawOnNextTick();
+    } catch(e) {
+      mapStates.objectOrderEnd();
+      log.debug(e);
       return;
     }
-    pathsToCoordinates = pathsToCoordinates.map(coords => {
-      return hexagons.utils.indexesToCoordinates(coords);
-    });
-    
-    selectedObject.move(globalCoords);
-    mapEvents.publish('objectMoves', selectedObject);
-
-    ui.showUnitMovement(pathsToCoordinates);
-
-    mapStates.objectOrderEnd();
-    FTW.drawOnNextTick();
   }
 
   function _isBlocked(coordinates) {
