@@ -117,10 +117,11 @@ Factories are the ones that get the server-side data, iterate through it and cre
 You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [horizontalHexaFactory.js](src/factories/horizontalHexaFactory.js) and create your own based on that.
 
 ##Extensions
-The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to just couple rules:
+The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to few rules:
 * Be careful when constructing an extension. They have a lot of freedom to mess around with the map data (which might change in the future).
 * When extension is initialized, it will create this.mapInstance and this.protectedProperties. First has the current instantiated map and second the private methods and properties for plugins to use
 * Extensions init-method must return promise, to verify, when the plugin is ready
+* All parameters extensions can receive are functions, that are bound in plugin context
 * Must return an object containing:
   * init-method
   * 'PluginName' variable, which has same value as the exported library name
