@@ -40,6 +40,8 @@
       this.mapInstance.hexagonIndexes = createHexagonDataStructure(this.mapInstance.getMovableLayer(), () => this.mapInstance.allMapObjects.terrainLayer);
 
       startClickListener(this.mapInstance, params.isBlocked);
+
+      return Promise.resolve();
     }
 
     /*-----------------------

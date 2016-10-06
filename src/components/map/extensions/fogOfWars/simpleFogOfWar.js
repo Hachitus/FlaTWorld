@@ -76,6 +76,8 @@
       maskMovableContainer.y = movableLayer.y;
 
       activateFogOfWar(this.mapInstance, params.cb, params.filter);
+
+      return Promise.resolve();
     }
 
     function activateFogOfWar(mapInstance, cb, filterCreator, options = {}) {

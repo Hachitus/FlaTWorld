@@ -104,6 +104,8 @@
           });
         };
       }
+
+      return Promise.resolve();
     }
     /**
      * Ínitialize the plugin

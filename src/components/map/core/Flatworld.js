@@ -298,14 +298,13 @@
       /* Sets the correct Map starting coordinates */
       coord && Object.assign(_movableLayer, coord);
 
-      let allPromises = plugins.length && this.initPlugins(plugins);
+      isMapReadyPromises = plugins.length && this.initPlugins(plugins);
 
       /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
       this._defaultTick();
       tickCB && this.customTickOn(tickCB);
-      isMapReadyPromises = allPromises;
 
-      return allPromises || Promise.resolve();
+      return isMapReadyPromises || Promise.resolve();
     }
     /**
      * Returns a promise that resolves after the map is fully initialized
@@ -546,7 +545,7 @@
             params[i] = data.parameters[i].bind(data.plugin);
           });
 
-          this.initPlugin(data.plugin, params);
+          allPromises.push(this.initPlugin(data.plugin, params));
         } else {
           log.error(new Error(`Plugin '${data.plugin.pluginName}' was not an object`));
         }
@@ -563,6 +562,8 @@
      * @param {Object} plugin        Plugin module
      * */
     initPlugin(plugin, params = []) {
+      let promise;
+
       try {
         if (!plugin || !plugin.pluginName || !plugin.init) {
           throw new Error('plugin, plugin.pluginName or plugin.init import is missing!');
@@ -572,12 +573,15 @@
         if (this.plugins.has(plugin[plugin.pluginName])) {
           plugin.mapInstance = this;
           plugin._properties = protectedProperties;
-          plugin.init(params);
+          promise = plugin.init(params);
         }
       } catch (e) {
         e.message += ' INFO: An error initializing plugin. JSON.stringify: "' + plugin.pluginName + '" ';
         log.error(e);
+        promise = Q.reject();
       }
+
+      return promise;
     }
     registerPreRenderer(name, callback) {
       if (!name && ! callback) {
