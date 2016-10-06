@@ -66,16 +66,12 @@
           const x = curr.x + directions[i].x;
           const y = curr.y + directions[i].y;
           const next = { x: x, y: y };
-          const weight = weightFn(next, curr);
+          const weight = +weightFn(next, curr);
               
-          if (!isInteger(weight) || weight < 0) {
-            throw new Error(`weightFn didn't return non-negative integer: ${weight}`);
-          }
-              
-          if (!weight) {
+          if (weight < 0 || curr.time + weight > maxTime) {
             continue;
           }
-              
+
           next.time = curr.time + weight;
           next.prev = curr;
               

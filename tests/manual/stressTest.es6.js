@@ -550,7 +550,7 @@
   }
 
   function _createHexagonParams(map) {
-    return { isBlocked: (correctHexagon, selectedObject) => correctHexagon.data.typeData.movement < 0 };
+    return { isBlocked: (correctHexagon, selectedObject) => correctHexagon.data.typeData.movement };
   }
 
 })();

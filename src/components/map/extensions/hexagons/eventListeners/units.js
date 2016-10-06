@@ -29,8 +29,8 @@
     value: 'terrainLayer',
   });
   /* This must be changed to outside the module */
-  let isBlockedCb = () => false;
-  let FTW, ui, weight;
+  let weight = () => 0;
+  let FTW, ui;
 
   /*---------------------
   ------- PUBLIC --------
@@ -45,7 +45,7 @@
    * @param  {Map} map      The currently use Map instance
    * @return {Boolean}      True
    */
-  function _setupUnitsHexagonClick(mapInstance, isBlocked) {
+  function _setupUnitsHexagonClick(mapInstance, weightFn) {
     if (!mapInstance) {
       throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
     }
@@ -57,11 +57,7 @@
     eventListeners.on('select', _tapListener);
     eventListeners.on('order', _orderListener);
 
-    weight = function (/*curr, next*/) {
-      return 1;
-    };
-
-    isBlockedCb = isBlocked || isBlockedCb;
+    weight = weightFn || weight;
 
     return true;
   }
@@ -149,12 +145,16 @@
       let pathsToCoordinates;
       try {
         const timeUnits = selectedObject.data.typeData.move;
-        pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, +timeUnits, _isBlocked, weight);
+        pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
         pathsToCoordinates = pathsToCoordinates.map(coords => {
           return hexagons.utils.indexesToCoordinates(coords);
         });
       } catch (e) {
-        e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+        if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+          e.message = 'the destination was farther than the given maximum distance';
+        } else {
+          e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+        }
         throw e;
       }
       
@@ -178,8 +178,14 @@
      * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
      */
     const correctHexagon = FTW.hexagonIndexes[coordinates.x] && FTW.hexagonIndexes[coordinates.x][coordinates.y];
-    const isBlocked = isBlockedCb(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
+    const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
     
-    return !correctHexagon || isBlocked;
+    if (!correctHexagon) {
+      return -1;
+    } else if (returnedWeight) {
+      return returnedWeight;
+    }
+
+    return -1;
   }
 })();
