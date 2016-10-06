@@ -56,10 +56,7 @@
    * @param {object} options    extra options, like generating horizontal hexagon points and
    * how many decimals to round
   */
-  function getHexagonPoints({ radius = globalRadius, orientation = 'horizontal' } = {}) {
-    if (!radius) {
-      mapLog.error('You need to define at least globalRadius for the hexagonMath utils class');
-    }
+  function getHexagonPoints({ radius = globalRadius, orientation = globalOrientation } = {}) {
     const OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     const CENTER = {
       x: radius,
@@ -165,7 +162,7 @@
    * @param {String} {}.orientation     Is it horizontal or vertical hexagon grid. Default: horizontal
    * @return {[]}                       Array that holds the coordinates for the hexagon grid, like [{x: ?, y: ?}]
    */
-  function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = 'horizontal' } = {}) {
+  function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = globalOrientation } = {}) {
     const { rows, columns } = gridSize;
     const gridArray = [];
     const shortDistance = calcShortDiagonal(radius);
@@ -187,28 +184,20 @@
 
     return gridArray;
   }
-  function coordinatesToIndexes(coordinates) {
-    if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('coordinatesToIndexes requirements not filled');
-    }
-
+  function coordinatesToIndexes(coordinates, { startingPoint = globalStartingPoint } = {}) {
     const indexes = {
-      x: Math.floor((coordinates.x - globalStartingPoint.x) / calcShortDiagonal()),
-      y: Math.floor((coordinates.y - globalStartingPoint.y) / calcSpecialDistance()),
+      x: Math.floor((coordinates.x - startingPoint.x) / calcShortDiagonal()),
+      y: Math.floor((coordinates.y - startingPoint.y) / calcSpecialDistance()),
     };
 
     indexes.x -= Math.floor(coordinates.y / (calcSpecialDistance() * 2));
 
     return indexes;
   }
-  function indexesToCoordinates(indexes) {
-    if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('coordinatesToIndexes requirements not filled');
-    }
-
+  function indexesToCoordinates(indexes, { startingPoint = globalStartingPoint } = {}) {
     const coordinates = {
-      x: Math.floor((indexes.x * calcShortDiagonal()) + globalStartingPoint.x),
-      y: Math.floor((indexes.y * calcSpecialDistance()) + globalStartingPoint.y),
+      x: Math.floor((indexes.x * calcShortDiagonal()) + startingPoint.x),
+      y: Math.floor((indexes.y * calcSpecialDistance()) + startingPoint.y),
     };
 
     coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));
