@@ -24,9 +24,9 @@
    * @class pixelizedMinimap
    **/
   function setupPixelizedMinimap() {
-    var paddingX = 0;
-    var paddingY = 0;
-    var minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
+    let paddingX = 0;
+    let paddingY = 0;
+    let minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer, mapInstance;
 
     return {
       init,
@@ -46,6 +46,8 @@
       hammer = new Hammer.Manager(this.mapInstance.minimapCanvas);
       this.mapInstance.initMinimap = initMinimap;
       minimap = this.mapInstance.getMinimapLayer();
+
+      return Promise.resolve();
     }
     /**
      * initMinimap requires some data, to initialize and show the actual minimap.
@@ -94,7 +96,7 @@
       });
       var backgroundContainer = createMinimapLayer();
 
-      this.mapInstance.getAllObjects({ filters }).forEach((obj) => {
+      mapInstance.getAllObjects({ filters }).forEach((obj) => {
         backgroundContainer.addChild(staticCB(obj));
       });
 
@@ -111,7 +113,7 @@
       });
       dynamicContainer = createMinimapLayer();
 
-      this.mapInstance.getAllObjects({ filters }).forEach((obj) => {
+      mapInstance.getAllObjects({ filters }).forEach((obj) => {
         dynamicContainer.addChild(updateCB(obj));
       });
 
@@ -129,12 +131,12 @@
         return;
       }
 
-      var minimapCoordinates = coordinateConverterCB(this.mapInstance.getMovableLayer(), true);
+      var minimapCoordinates = coordinateConverterCB(mapInstance.getMovableLayer(), true);
 
       minimapViewport.x = minimapCoordinates.x;
       minimapViewport.y = minimapCoordinates.y;
 
-      this.mapInstance.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     function reactToMapScale() {
       minimapViewport.scale.x += 0.1;
@@ -144,7 +146,7 @@
       var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
       var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
-      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, this.mapInstance.minimapCanvas);
+      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, mapInstance.minimapCanvas);
 
       /* We need to keep track when the map was moved, so we don't react to this movement */
       mapMoveTimestamp = Date.now();
@@ -157,9 +159,9 @@
       minimapViewport.x = mapCoordinates.x;
       minimapViewport.y = mapCoordinates.y;
       mapCoordinates = coordinateConverterCB(globalCoordinates, false);
-      this.mapInstance.moveMap(mapCoordinates, { absolute: true, noEvent: true });
+      mapInstance.moveMap(mapCoordinates, { absolute: true, noEvent: true });
 
-      this.mapInstance.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     function setupMinimapClickEvent() {
       var activeCB;
@@ -192,13 +194,13 @@
      * @param {Integer} height
      */
     function _setMinimapArea(x, y, width, height) {
-      var _minimapRenderer = this.mapInstance.getRenderer('minimap');
+      var _minimapRenderer = mapInstance.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;
       _minimapRenderer.resize(width + (paddingX * 2), height + (paddingY * 2));
 
-      this.mapInstance.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     /**
      * Creates minimap layer with proper starting coordinates
