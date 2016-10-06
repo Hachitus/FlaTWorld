@@ -138,7 +138,7 @@ describe('findPath', () => {
         testField(getRandomGrid(100, .7));
         testField(getRandomGrid(300, .5));
         testField(getRandomGrid(500, .4));
-        // testField(getRandomGrid(1000, .4));
+        testField(getRandomGrid(1000, .4));
     });
 });
 

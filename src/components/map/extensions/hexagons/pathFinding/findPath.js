@@ -104,9 +104,9 @@ function findPath({ x: xStart, y: yStart }, dest, width, height, maxTime, weight
             return resPath && pathListToArray(resPath);
         }
         
-        return visited.reduce((res, time, i) => {
-            const dy = i % height;
-            const dx = (i - dy) / height - width;
+        return visited.reduce((res, time, key) => {
+            const dy = key % height;
+            const dx = (key - dy) / height - width;
             if (dx || dy) {
                 // do not include starting point
                 res.push({ x: dx + xStart, y: dy + yStart, time: time });
