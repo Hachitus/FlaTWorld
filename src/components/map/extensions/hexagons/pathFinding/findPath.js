@@ -1,6 +1,8 @@
 !function() {
   window.flatworld.utils.findPath = findPath;
 
+  const debug = false;
+
   const allHexDirections = [{ x: 0, y: 1 }, { x: -1, y: 1 }, { x: 1, y: 0 }, { x: 1, y: -1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
   const allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
 
@@ -27,10 +29,22 @@
         ) {
     
     validateArgs();
+
+    let counter = 0;
+    const d = Date.now();
     
     const hexagonGrid = allowDiagonal === null;
     const pathArr = bestDirectionAlg();
-    
+
+    if (debug) {
+      console.log(...(dest ? [] : ['reachable: ']), // eslint-disable-line no-console
+          `${Date.now() - d}ms`,
+          pathArr && pathArr.length,
+          `${counter} oper`,
+          `${maxTime} cells`,
+          `${counter / maxTime / Math.log(maxTime)} coeff`);
+    }
+
     return pathArr;
     
     function bestDirectionAlg() {
@@ -51,6 +65,7 @@
       let allowedTime = maxTime;
       
       while(queue.length) {
+        counter++;
         const curr = queue.pop();
         const maxRemainingTime = allowedTime - curr.time;
         const minPossibleTime = !dest || maxRemainingTime < 1 ? 1
@@ -66,7 +81,7 @@
           const x = curr.x + directions[i].x;
           const y = curr.y + directions[i].y;
           const next = { x: x, y: y };
-          const weight = +weightFn(next, curr);
+          const weight = weightFn(next, curr);
               
           if (weight < 0 || curr.time + weight > maxTime) {
             continue;
