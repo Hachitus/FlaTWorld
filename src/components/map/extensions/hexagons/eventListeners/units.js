@@ -76,11 +76,9 @@
         return object.data.typeData;
       }
     };
-    var objects;
-
     mapStates.objectSelect();
 
-    objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
+    let objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
     objects = utils.dataManipulation.mapObjectsToArray(objects);
     objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
@@ -112,23 +110,16 @@
     try {
       mapStates.objectOrder();
 
-      var selectedObjectsCoordinates;
-      let globalCoords, selectedObject;
-
       if (!FTW.currentlySelectedObjects) {
-        throw 'No objects selected for orders! ' + JSON.stringify(selectedObject);
+        throw 'No objects selected for orders!';
       } else if (FTW.currentlySelectedObjects.length > 1) {
-        throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects);
+        throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]);
       }
 
-      selectedObject = FTW.currentlySelectedObjects[0];
-      selectedObjectsCoordinates = selectedObject.getMapCoordinates();
+      const selectedObject = FTW.currentlySelectedObjects[0];
+      const selectedObjectsCoordinates = selectedObject.getMapCoordinates();
+      const globalCoords = utils.mouse.eventData.getGlobalCoordinates(e, FTW.isSupportedTouch);
 
-      if (FTW.isSupportedTouch) {
-        globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-      } else {
-        globalCoords = utils.mouse.eventData.getPointerCoords(e);
-      }
       const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
 
       if (!objects.length) {
@@ -158,7 +149,7 @@
         throw e;
       }
       
-      selectedObject.move(globalCoords);
+      selectedObject.move(pathsToCoordinates[pathsToCoordinates.length - 1]);
       mapEvents.publish('objectMoves', selectedObject);
 
       ui.showUnitMovement(pathsToCoordinates);

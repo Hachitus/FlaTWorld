@@ -22,7 +22,8 @@
       disableContextMenu,
       eventData: {
         getPointerCoords,
-        getHAMMERPointerCoords
+        getHAMMERPointerCoords,
+        getGlobalCoordinates
       },
       coordinatesFromGlobalToRelative,
       eventMouseCoords
@@ -61,6 +62,11 @@
     function getHAMMERPointerCoords(e) {
       return new PIXI.Point(e.center.x, e.center.y);
     }
+
+
+    function getGlobalCoordinates(e, isSupportedTouch) {
+      return isSupportedTouch ? getHAMMERPointerCoords(e) : getPointerCoords(e);
+    }
     /**
      * Transform coordinates that are in the window to become relative with the given element
      *
@@ -69,7 +75,7 @@
      * @return {[type]}             [description]
      */
     function coordinatesFromGlobalToRelative(coordinates, element) {
-      var elementPosition = getElementPositionInWindow(element);
+      const elementPosition = getElementPositionInWindow(element);
 
       return {
         x: coordinates.x - elementPosition.x,
@@ -83,14 +89,14 @@
      * @return {[type]}    [description]
      */
     function getElementPositionInWindow(el) {
-      var xPos = 0;
-      var yPos = 0;
+      let xPos = 0;
+      let yPos = 0;
 
       while (el) {
         if (el.tagName.toLowerCase() === 'body') {
           // deal with browser quirks with body/window/document and page scroll
-          var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-          var yScroll = el.scrollTop || document.documentElement.scrollTop;
+          const xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+          const yScroll = el.scrollTop || document.documentElement.scrollTop;
 
           xPos += (el.offsetLeft - xScroll + el.clientLeft);
           yPos += (el.offsetTop - yScroll + el.clientTop);
@@ -114,7 +120,7 @@
      * @return {Object}
      */
     function eventMouseCoords(e) {
-      var pos = {
+      const pos = {
         x: 0,
         y: 0
       };
@@ -150,8 +156,8 @@
      * @method toggleFullScreen
      */
     function toggleFullScreen() {
-      var elem = document.body; // Make the body go full screen.
-      var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||
+      const elem = document.body; // Make the body go full screen.
+      const isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||
          (
          document.mozFullScreen || document.webkitIsFullScreen);
 
@@ -164,20 +170,20 @@
       -------------------------*/
       /* global ActiveXObject */
       function cancelFullScreen(el) {
-        var requestMethod = el.cancelFullScreen ||
+        const requestMethod = el.cancelFullScreen ||
            el.webkitCancelFullScreen ||
            el.mozCancelFullScreen ||
            el.exitFullscreen;
         if (requestMethod) { // cancel full screen.
           requestMethod.call(el);
         } else if (typeof window.ActiveXObject !== 'undefined') { // Older IE.
-          var wscript = new ActiveXObject('WScript.Shell');
+          const wscript = new ActiveXObject('WScript.Shell');
           wscript !== null && wscript.SendKeys('{F11}');
         }
       }
       function requestFullScreen(el) {
         // Supports most browsers and their versions.
-        var requestMethod = el.requestFullScreen ||
+        const requestMethod = el.requestFullScreen ||
            el.webkitRequestFullScreen ||
            el.mozRequestFullScreen ||
            el.msRequestFullScreen;
@@ -185,7 +191,7 @@
         if (requestMethod) { // Native full screen.
           requestMethod.call(el);
         } else if (typeof window.ActiveXObject !== 'undefined') { // Older IE.
-          var wscript = new ActiveXObject('WScript.Shell');
+          const wscript = new ActiveXObject('WScript.Shell');
           wscript !== null && wscript.SendKeys('{F11}');
         }
         return false;
@@ -253,8 +259,8 @@
      */
     function getPixelRatio(canvasElement) {
       const DPR = window.devicePixelRatio || 1;
-      var ctx = (canvasElement && canvasElement.getContext('2d')) || document.createElement('canvas').getContext('2d');
-      var bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio ||
+      const ctx = (canvasElement && canvasElement.getContext('2d')) || document.createElement('canvas').getContext('2d');
+      const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio ||
                 ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio ||
                 ctx.backingStorePixelRatio || 1;
 
