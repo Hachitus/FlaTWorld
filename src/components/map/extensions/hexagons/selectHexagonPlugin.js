@@ -23,7 +23,7 @@
   function setupObject_select_hexagon() {
     return {
       init,
-      pluginName: 'selectHexagonObject',
+      pluginName: 'selectHexagonObject'
     };
 
     /**

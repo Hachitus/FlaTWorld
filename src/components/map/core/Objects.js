@@ -27,7 +27,7 @@
       /* We need to round the numbers. If there are decimal values, the graphics will get blurry */
       let exactCoords = {
         x: Math.round(coord.x),
-        y: Math.round(coord.y),
+        y: Math.round(coord.y)
       };
       this.position.set(exactCoords.x, exactCoords.y);
       /**
@@ -140,7 +140,7 @@
         x: Math.round(coordinates.x),
         y: Math.round(coordinates.y),
         width: Math.round(this.width),
-        height: Math.round(this.height),
+        height: Math.round(this.height)
       };
     }
     /**
@@ -289,9 +289,9 @@
         id: this.id,
         from: {
           x: this.x,
-          y: this.y,
+          y: this.y
         },
-        to,
+        to
       });
     }
   }

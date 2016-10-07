@@ -15,7 +15,7 @@
   function setupEnvironmentDetection() {
     return {
       isMobile,
-      isTouchDevice,
+      isTouchDevice
     };
 
     /**

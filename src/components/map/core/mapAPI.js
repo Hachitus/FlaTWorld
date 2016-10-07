@@ -31,7 +31,7 @@
       add,
       remove,
       update,
-      getAllAPIs,
+      getAllAPIs
     };
 
     /*---------------------
@@ -42,7 +42,8 @@
      *
      * @method get
      * @param  {String} name    The indentifier for this API call / endpoint
-     * @param  {Array} params   Params that are sent to the callbacks that have been attached to handle this API data
+     * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+     * handle this API data
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function get(type, params) {
@@ -53,8 +54,10 @@
      *
      * @method post
      * @param  {String} name    The indentifier for this API call / endpoint
-     * @param  {Array} params   Params that are sent to the callbacks that have been attached to handle this API data. E.g. at least the
-     * POST data that will be sent to server needs to be set in the callback to the object.body property.
+     * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+     * handle this API data. E.g. at least the
+     * POST data that will be sent to server needs to be set in the callback to the object.body
+     * property.
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function post(type, params) {
@@ -65,7 +68,8 @@
      *
      * @method add
      * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
-     * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint. Callback gets these parameters
+     * @param {Function}  cb              Callback that returns the data that is sent to this API
+     * endpoint. Callback gets these parameters
      * 1. request type: post, get etc.
      * 2. completeData: { baseUrl, cbs }
      * 3. params: params that were sent to the mapAPI function as extra, like in post(type, params)
@@ -81,7 +85,7 @@
 
       APIs[type] = {
         baseUrl,
-        cbs: cb ? [cb] : [],
+        cbs: cb ? [cb] : []
       };
     }
     /**
@@ -102,10 +106,10 @@
      *
      * @method update
      * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
-     * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint
-     * @param {Function}  what            The update made
+     * @param {Function}  cb              Callback that returns the data that is sent to this API
+     * endpoint
      */
-    function update(type, cb, what) {
+    function update(type, cb) {
       if (!APIs[type] || !APIs[type].cbs) {
         mapLog.debug('API endpoint not found for updating!');
       }
@@ -119,8 +123,10 @@
      * @private
      * @param  {String} fetchType   post or get
      * @param  {String} type        name of the endpoint
-     * @param  {Array} params       Params that are sent to the callbacks that have been attached to handle this API data. E.g. at least
-     * the POST data that will be sent to server needs to be set in the callback to the object.body property.
+     * @param  {Array} params       Params that are sent to the callbacks that have been attached
+     * to handle this API data. E.g. at least
+     * the POST data that will be sent to server needs to be set in the callback to the
+     * object.body property.
      * @return {Promise}            The result of the fetch
      */
     function _doFetch(fetchType, type, params) {
@@ -137,7 +143,7 @@
 
       return fetch(completeData.url, {
         method: fetchType,
-        body: completeData.body,
+        body: completeData.body
       })
         .then(function (response) {
           return response.json();
@@ -148,7 +154,8 @@
         });
     }
     /**
-     * Just returns all API endpoint definitions to be checked or modified as pleased. Only for advanced use.
+     * Just returns all API endpoint definitions to be checked or modified as pleased. Only for
+     * advanced use.
      *
      * @method getAllAPIs
      * @return {Object} returns object that hosts all the API endpoint definitions

@@ -47,7 +47,7 @@
     ----------------------*/
     const functionsInObj = {
       ObjectTerrain: hexagonPlugin.objects.ObjectHexaTerrain,
-      ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit,
+      ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit
     };
     var mapProperties = {
       mapSize: DATA_GAME.mapSize,
@@ -55,23 +55,23 @@
         x: 0,
         y: 0,
         width: WINDOW_SIZE.x,
-        height: WINDOW_SIZE.y,
+        height: WINDOW_SIZE.y
       },
       rendererOptions: {
         resolution: pixelRatio, // We might need this later on, when doing mobile optimizations, for different pizel density devices
         autoResize: true,
         transparent: true,
-        antialias: false, // TEST. Only should work in chrome atm.?
+        antialias: false // TEST. Only should work in chrome atm.?
       },
       subcontainers: {
         width: 500,
         height: 500,
         maxDetectionOffset: 100,
-        isHiddenByDefault,
+        isHiddenByDefault
       },
       trackFPSCB,
       defaultScaleMode: scaleMode,
-      minimapCanvas,
+      minimapCanvas
     };
     var map = new Flatworld(mapCanvas, mapProperties);
 
@@ -89,9 +89,9 @@
         coord: layerData.coord,
         drawOutsideViewport: {
           x: renderer.width,
-          y: renderer.height,
+          y: renderer.height
         },
-        selectable: layerData.name === 'unitLayer' ? true : false,
+        selectable: layerData.name === 'unitLayer' ? true : false
       };
       var thisLayer;
 
@@ -121,11 +121,11 @@
               objectOptions = {
                 data: {
                   typeData: objTypeData,
-                  activeData: object.data,
+                  activeData: object.data
                 },
                 radius: DATA_GAME.hexagonRadius,
                 minimapColor: objTypeData.minimapColor,
-                minimapSize: objTypeData.minimapSize,
+                minimapSize: objTypeData.minimapSize
               };
 
               newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);

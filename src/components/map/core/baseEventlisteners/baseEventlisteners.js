@@ -48,7 +48,7 @@
        * @attribute pluginName
        * @type {String}
        */
-      pluginName: 'baseEventlisteners',
+      pluginName: 'baseEventlisteners'
     };
 
     /**
@@ -95,7 +95,7 @@
           },
           off: () => {
             window.removeEventListener('resize', activeCB);
-          },
+          }
         };
       }
 
@@ -120,7 +120,7 @@
           },
           off: () => {
             window.removeEventListener('fullscreen', activeCB);
-          },
+          }
         };
 
         return caches['fullscreen'];
@@ -152,7 +152,7 @@
           off: () => {
             hammer.on('pinch', activeCB);
             hamster.unwheel(activeCB);
-          },
+          }
         };
       }
 
@@ -182,7 +182,7 @@
           },
           off: () => {
             hammer.off('pan', activeCB);
-          },
+          }
         };
       }
 
@@ -209,7 +209,7 @@
           },
           off: () => {
             hammer.off('tap', activeCB);
-          },
+          }
         };
       }
 
@@ -245,7 +245,7 @@
           off: () => {
             hammer.off('press', clickListener);
             mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
-          },
+          }
         };
       }
 

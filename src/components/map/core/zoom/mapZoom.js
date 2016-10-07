@@ -38,7 +38,7 @@
      */
     var zoomLimit = {
       farther: 0.4,
-      closer: 2.5,
+      closer: 2.5
     };
     /**
      * How much one step of zooming affects
@@ -53,7 +53,7 @@
     ---------------------*/
     return {
       init,
-      pluginName: 'mapZoom',
+      pluginName: 'mapZoom'
     };
 
     /*---------------------
@@ -194,10 +194,10 @@
       var pointers = e.pointers;
       var coords = [{
         x: pointers[0].pageX,
-        y: pointers[0].pageY,
+        y: pointers[0].pageY
       }, {
         x: pointers[1].pageX,
-        y: pointers[1].pageY,
+        y: pointers[1].pageY
       }];
       var changeX = Math.abs(coords[0].x - coords[1].x);
       var changeY = Math.abs(coords[0].y - coords[1].y);
@@ -208,7 +208,7 @@
         if (!initialized) {
           difference = {
             x: changeX,
-            y: changeY,
+            y: changeY
           };
           eventListeners.setActivityState('zoom', true);
           initialized = true;
@@ -236,7 +236,7 @@
 
         difference = {
           x: changeX,
-          y: changeY,
+          y: changeY
         };
       } catch (ev) {
         log('Error! ', ev);
@@ -269,11 +269,11 @@
       var windowSize = utils.resize.getWindowSize();
       var halfWindowSize = {
         x: (windowSize.x / 2) / scale,
-        y: (windowSize.y / 2) / scale,
+        y: (windowSize.y / 2) / scale
       };
       var realMovement = {
         x: (halfWindowSize.x) * ((isZoomIn ? -zoomModifier : zoomModifier)),
-        y: (halfWindowSize.y) * ((isZoomIn ? -zoomModifier : zoomModifier)),
+        y: (halfWindowSize.y) * ((isZoomIn ? -zoomModifier : zoomModifier))
       };
 
       return realMovement;

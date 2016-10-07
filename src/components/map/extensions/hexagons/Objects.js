@@ -144,6 +144,6 @@
   -----------------------*/
   window.flatworld.extensions.hexagons.objects = {
     ObjectHexaTerrain,
-    ObjectHexaUnit,
+    ObjectHexaUnit
   };
 })();

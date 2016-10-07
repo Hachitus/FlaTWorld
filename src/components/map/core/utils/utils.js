@@ -1,5 +1,10 @@
 (function () {
   /*---------------------
+  ------- IMPORT --------
+  ----------------------*/
+  const { PIXI } = window.flatworld_libraries;
+
+  /*---------------------
   --------- API ---------
   ----------------------*/
   window.flatworld.utils.mouse = setupMouseUtils();
@@ -17,10 +22,10 @@
       disableContextMenu,
       eventData: {
         getPointerCoords,
-        getHAMMERPointerCoords,
+        getHAMMERPointerCoords
       },
       coordinatesFromGlobalToRelative,
-      eventMouseCoords,
+      eventMouseCoords
     };
 
     /**
@@ -68,7 +73,7 @@
 
       return {
         x: coordinates.x - elementPosition.x,
-        y: coordinates.y - elementPosition.y,
+        y: coordinates.y - elementPosition.y
       };
     }
     /**
@@ -99,7 +104,7 @@
       }
       return {
         x: xPos,
-        y: yPos,
+        y: yPos
       };
     }
 
@@ -111,7 +116,7 @@
     function eventMouseCoords(e) {
       var pos = {
         x: 0,
-        y: 0,
+        y: 0
       };
 
       if (!e) {
@@ -138,7 +143,7 @@
       toggleFullScreen,
       setToFullSize,
       getWindowSize,
-      resizePIXIRenderer,
+      resizePIXIRenderer
     };
 
     /**
@@ -209,7 +214,7 @@
     function getWindowSize() {
       return {
         x: window.innerWidth,
-        y: window.innerHeight,
+        y: window.innerHeight
       };
     }
     /**
@@ -235,7 +240,7 @@
    */
   function setupEnvironmentDetection() {
     return {
-      getPixelRatio, // ,
+      getPixelRatio // ,
       // isMobile,
       // isMobile_detectUserAgent
     };
@@ -266,7 +271,7 @@
     return {
       pixelEpsilonEquality: epsilonEquality,
       fullsizeCanvasCSS,
-      requireParameter,
+      requireParameter
     };
 
     /**

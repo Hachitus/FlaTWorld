@@ -6,7 +6,7 @@
     return {
       normal: drawArrow,
       arced: drawArcedArrow,
-      line,
+      line
     };
 
     /* =============== Functions for drawing arrows ================ */

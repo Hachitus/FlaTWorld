@@ -64,7 +64,7 @@
          *
          * @method UIClose
          */
-        { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' },
+        { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' }
       ] });
   }
 })();

@@ -94,7 +94,7 @@
         cb = () => {
           this.modal.innerHTML = templates.multiSelection({
             title: 'Objects',
-            objects,
+            objects
           });
 
           this.showModal(this.modal, cssClasses);
@@ -133,8 +133,8 @@
       this.modal.innerHTML = templates.singleSelection({
         title: 'Selected',
         object: {
-          name: objectDatas.name,
-        },
+          name: objectDatas.name
+        }
       });
       this.showModal(this.modal, cssClasses);
 
@@ -145,7 +145,7 @@
         distance: shadow.distance,
         alpha: shadow.alpha,
         angle: shadow.angle,
-        blur: shadow.blur,
+        blur: shadow.blur
       });
 
       this.FTW.drawOnNextTick();
@@ -223,7 +223,7 @@
       const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
       const objCoords = {
         x: Number(object.x),
-        y: Number(object.y),
+        y: Number(object.y)
       };
       var highlighterObject;
 

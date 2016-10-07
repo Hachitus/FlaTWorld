@@ -18,7 +18,7 @@
     return {
       arrayFind,
       objectAssign,
-      es6String,
+      es6String
     };
 
     /**
@@ -126,7 +126,7 @@
             defineProperty(String.prototype, 'repeat', {
               value: repeat,
               configurable: true,
-              writable: true,
+              writable: true
             });
           } else {
             String.prototype.repeat = repeat;

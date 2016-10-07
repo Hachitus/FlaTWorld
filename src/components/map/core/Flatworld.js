@@ -90,7 +90,7 @@
       subcontainers = {
         width: 100,
         height: 100,
-        maxDetectionOffset: 0, // maxDetectionOffset default set later
+        maxDetectionOffset: 0 // maxDetectionOffset default set later
       },
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
@@ -230,16 +230,16 @@
       this.layerTypes = {
         staticType: {
           id: LAYER_TYPE_STATIC,
-          layer: _zoomLayer,
+          layer: _zoomLayer
         },
         movableType: {
           id: LAYER_TYPE_MOVABLE,
-          layer: _movableLayer,
+          layer: _movableLayer
         },
         minimapType: {
           id: LAYER_TYPE_MINIMAP,
-          layer: _minimapLayer,
-        },
+          layer: _minimapLayer
+        }
       };
       /**
        * Self explanatory
@@ -340,7 +340,7 @@
      */
     addUIObject(layerType, objects, UIName) {
       if (Array.isArray(objects)) {
-        objects.forEach((object, index) => {
+        objects.forEach((object) => {
           this._addObjectToUIlayer(layerType, object, UIName);
         });
       } else {
@@ -399,13 +399,11 @@
      * @return {MapLayer}          created MapLayer instance
      **/
     addLayer(layerOptions) {
-      let newLayer;
-
       if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
         layerOptions.subcontainers = this.getSubcontainerConfigs();
       }
 
-      newLayer = new ParentLayerConstructor(layerOptions);
+      const newLayer = new ParentLayerConstructor(layerOptions);
       this.getMovableLayer().addChild(newLayer);
 
       return newLayer;
@@ -453,22 +451,22 @@
 
       const leftSide = {
         x: leftSideCoords.x,
-        y: leftSideCoords.y,
+        y: leftSideCoords.y
       };
       const rightSide = {
         x2: rightSideCoords.x,
-        y2: rightSideCoords.y,
+        y2: rightSideCoords.y
       };
 
       const offset = {
         x: (Math.abs(rightSide.x2) - leftSide.x) * multiplier,
-        y: (Math.abs(rightSide.y2) - leftSide.y) * multiplier,
+        y: (Math.abs(rightSide.y2) - leftSide.y) * multiplier
       };
       return {
         x: Math.round(leftSide.x - offset.x),
         y: Math.round(leftSide.y - offset.y),
         width: Math.round(Math.abs(Math.abs(rightSide.x2) - leftSide.x) + offset.x * 2),
-        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y * 2),
+        height: Math.round(Math.abs(Math.abs(rightSide.y2) - leftSide.y) + offset.y * 2)
       };
     }
     /**
@@ -508,7 +506,7 @@
     moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
       const realCoordinates = {
         x: Math.round(x / this.getZoomLayer().getZoom()),
-        y: Math.round(y / this.getZoomLayer().getZoom()),
+        y: Math.round(y / this.getZoomLayer().getZoom())
       };
 
       if (absolute) {
@@ -534,7 +532,7 @@
       /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
       pluginsArray.forEach(data => {
         if (typeof data.plugin === 'object') {
-          let params = {};
+          const params = {};
           data.parameters = data.parameters || {};
 
           Object.keys(data.parameters).forEach(i => {
@@ -637,7 +635,7 @@
       /* We need both coordinates later on and it's logical to do the work here */
       const allCoords = {
         globalCoords,
-        localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y)),
+        localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
       };
       let objects = [];
 
@@ -862,8 +860,8 @@
         type,
         size: {
           width: allCoords.globalCoords.width,
-          height: allCoords.globalCoords.height,
-        },
+          height: allCoords.globalCoords.height
+        }
       });
     }
     /**
@@ -940,7 +938,7 @@
               FPS: FPSCount,
               FPStime: fpsTimer,
               renderTime: totalRenderTime,
-              drawCount: _renderers.main.drawCount,
+              drawCount: _renderers.main.drawCount
             });
 
             FPSCount = 0;

@@ -20,13 +20,13 @@
     type: 'filter',
     object: 'layer',
     property: 'name',
-    value: 'unitLayer',
+    value: 'unitLayer'
   });
   const terrainLayerFilter = new MapDataManipulator({
     type: 'filter',
     object: 'layer',
     property: 'name',
-    value: 'terrainLayer',
+    value: 'terrainLayer'
   });
   /* This must be changed to outside the module */
   let weight = () => 0;
@@ -74,7 +74,7 @@
     const getData = {
       allData(object) {
         return object.data.typeData;
-      },
+      }
     };
     var objects;
 

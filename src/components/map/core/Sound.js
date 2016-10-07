@@ -34,7 +34,7 @@
         urls: [url],
         autoplay: false,
         loop,
-        volume,
+        volume
       });
 
       return this._allSounds[name];

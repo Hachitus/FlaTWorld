@@ -4,8 +4,6 @@
   ----------------------*/
   var eventListeners = window.flatworld.eventListeners;
   var utils = window.flatworld.utils;
-  var mapStates = window.flatworld.mapStates;
-  var mapLog = window.flatworld.log;
 
   /*---------------------
   --------- API ---------
@@ -25,9 +23,9 @@
    */
   function setupMap_drag() {
     /* Function for setting and getting the mouse offset. Private functions declared bottom */
-    var offsetCoords = _offsetCoords();
-    var mapMoved = false;
-    var eventListenerCB;
+    const offsetCoords = _offsetCoords();
+    let mapMoved = false;
+    let eventListenerCB;
 
     /*--------------------
     ------- API ----------
@@ -35,7 +33,7 @@
     return {
       init,
       pluginName: 'mapDrag',
-      _startDragListener, /* Function revealed for testing */
+      _startDragListener /* Function revealed for testing */
     };
 
     /*---------------------
@@ -85,7 +83,7 @@
         if (!initialized) {
           offsetCoords.setOffset({
             x: coords.x,
-            y: coords.y,
+            y: coords.y
           });
           initialized = true;
 
@@ -116,7 +114,7 @@
       offset = offsetCoords.getOffset();
       moved = {
         x: coords.x - offset.x,
-        y: coords.y - offset.y,
+        y: coords.y - offset.y
       };
 
       if (moved.x > 0 || moved.y > 0 || moved.x < 0 || moved.y < 0) {
@@ -129,7 +127,7 @@
 
       offsetCoords.setOffset({
         x: coords.x,
-        y: coords.y,
+        y: coords.y
       });
 
       e.preventDefault();
@@ -144,18 +142,18 @@
      * @method _offsetCoords
      */
     function _offsetCoords() {
-      var offsetCoords;
+      let offsetCoordsPrivate;
 
       return {
         setOffset,
-        getOffset,
+        getOffset
       };
 
       function setOffset(coords) {
-        return (offsetCoords = coords);
+        return (offsetCoordsPrivate = coords);
       }
       function getOffset() {
-        return offsetCoords;
+        return offsetCoordsPrivate;
       }
     }
   }

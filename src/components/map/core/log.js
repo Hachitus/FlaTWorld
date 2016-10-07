@@ -16,6 +16,6 @@
     },
     error(e) {
       loglevel.error(e);
-    },
+    }
   };
 })();

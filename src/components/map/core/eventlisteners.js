@@ -37,7 +37,7 @@
       setActivityState,
       getActivityState,
       setDetector,
-      clearDetector,
+      clearDetector
     };
 
     /*---------------------------
@@ -118,7 +118,7 @@
       detectors[type] = {};
       detectors[type] = {
         on: cbOn,
-        off: cbOff,
+        off: cbOff
       };
     }
     /**

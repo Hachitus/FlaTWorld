@@ -60,7 +60,7 @@
     const OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     const CENTER = {
       x: radius,
-      y: radius,
+      y: radius
     };
     var angle = 2 * Math.PI / 6 * OFFSET;
     var x = CENTER.x * Math.cos(angle);
@@ -143,7 +143,7 @@
     const realPolygonPoints = points.map(point => {
       return {
         x: point.x + offsetCoords.x,
-        y: point.y + offsetCoords.y,
+        y: point.y + offsetCoords.y
       };
     });
 
@@ -177,7 +177,7 @@
         gridArray.push({
           x: Math.round((column * columnWidth) +
             (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
-          y: row * rowHeight,
+          y: row * rowHeight
         });
       }
     }
@@ -187,7 +187,7 @@
   function coordinatesToIndexes(coordinates, { startingPoint = globalStartingPoint } = {}) {
     const indexes = {
       x: Math.floor((coordinates.x - startingPoint.x) / calcShortDiagonal()),
-      y: Math.floor((coordinates.y - startingPoint.y) / calcSpecialDistance()),
+      y: Math.floor((coordinates.y - startingPoint.y) / calcSpecialDistance())
     };
 
     indexes.x -= Math.floor(coordinates.y / (calcSpecialDistance() * 2));
@@ -197,7 +197,7 @@
   function indexesToCoordinates(indexes, { startingPoint = globalStartingPoint } = {}) {
     const coordinates = {
       x: Math.floor((indexes.x * calcShortDiagonal()) + startingPoint.x),
-      y: Math.floor((indexes.y * calcSpecialDistance()) + startingPoint.y),
+      y: Math.floor((indexes.y * calcSpecialDistance()) + startingPoint.y)
     };
 
     coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));

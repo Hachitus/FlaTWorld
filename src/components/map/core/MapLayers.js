@@ -131,7 +131,8 @@
       return _UIObjects;
     }
     /**
-     * Get primary layers, that this layer holds as children. So basically all children that are not special layers (such as UI layers etc.)
+     * Get primary layers, that this layer holds as children. So basically all children that are
+     * not special layers (such as UI layers etc.)
      *
      * @method getPrimaryLayers
      * @return {Array}                            Primary children layers under this layer
@@ -149,16 +150,20 @@
       });
     }
     /**
-     * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects. Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
+     * Get all objects that are this layers children or subcontainers children. Does not return
+     * layers, but the objects. Works on primary layer only currently. So can not seek for
+     * complicated children structure, seeks only inside subcontainers.
      *
      * @method getObjects
-     * @return {Array}            All the objects (not layers) found under this layer
+     * @param {MapDataManipulator}  filter  filter for filtering correct objects
+     * @return {Array}                      All the objects (not layers) found under this layer
      * */
-    getObjects(filter) {
+    getObjects(filter) { // eslint-disable-line no-unused-vars
       throw new Error('Has to be implemented in child class');
     }
     /**
-     * Create and add special layer, that holds UI effects in it. UILayer is normally positioned as movableLayers 3rd child. And the
+     * Create and add special layer, that holds UI effects in it. UILayer is normally positioned
+     * as movableLayers 3rd child. And the
      * actual UI stuff is added there.
      *
      * @method createUILayer
@@ -268,11 +273,11 @@
      * @param {Boolean} options.specialLayer           Is this special layer or not.
      */
     constructor({
-        name = '',
-        coord = { x: 0, y: 0 },
+        name = '', // eslint-disable-line no-unused-vars
+        coord = { x: 0, y: 0 }, // eslint-disable-line no-unused-vars
         subcontainers = { width: 0, height: 0, maxDetectionOffset: 100 },
         specialLayer = false,
-        zoomLayer = true,
+        zoomLayer = true, // eslint-disable-line no-unused-vars
         selectable = false } = {}) {
       super(arguments[0]);
 
@@ -399,7 +404,7 @@
         x: Math.round(coordinates.x),
         y: Math.round(coordinates.y),
         width: Math.round(this.size.width),
-        height: Math.round(this.size.height),
+        height: Math.round(this.size.height)
       };
     }
   }
@@ -458,7 +463,7 @@
         x: xIndex * subcontainersConfig.width,
         y: yIndex * subcontainersConfig.height,
         width: subcontainersConfig.width,
-        height: subcontainersConfig.height,
+        height: subcontainersConfig.height
       });
 
       subcontainerList[xIndex][yIndex] = thisSubcontainer;
@@ -495,7 +500,7 @@
       x: givenCoordinates.x >= 0 ? givenCoordinates.x - maxDetectionOffset : -maxDetectionOffset,
       y: givenCoordinates.y >= 0 ? givenCoordinates.y - maxDetectionOffset : -maxDetectionOffset,
       width: (givenCoordinates.width || 0) + maxDetectionOffset * 2,
-      height: (givenCoordinates.height || 0) + maxDetectionOffset * 2,
+      height: (givenCoordinates.height || 0) + maxDetectionOffset * 2
     };
     var allFoundSubcontainers = [];
     var xIndex = Math.floor(coordinates.x / width);

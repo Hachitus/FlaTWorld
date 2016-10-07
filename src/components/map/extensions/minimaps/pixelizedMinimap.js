@@ -34,7 +34,7 @@
       initMinimap,
       _testObject: {
 
-      },
+      }
     };
     /**
      * Ínitialize as a plugin. Done by the Flatworld class.
@@ -92,9 +92,9 @@
         type: 'filter',
         object: 'layer',
         property: 'zoomLayer',
-        value: true,
+        value: true
       });
-      var backgroundContainer = createMinimapLayer();
+      const backgroundContainer = createMinimapLayer();
 
       mapInstance.getAllObjects({ filters }).forEach((obj) => {
         backgroundContainer.addChild(staticCB(obj));
@@ -109,7 +109,7 @@
         type: 'filter',
         object: 'object',
         property: 'static',
-        value: false,
+        value: false
       });
       dynamicContainer = createMinimapLayer();
 
@@ -131,7 +131,7 @@
         return;
       }
 
-      var minimapCoordinates = coordinateConverterCB(mapInstance.getMovableLayer(), true);
+      const minimapCoordinates = coordinateConverterCB(mapInstance.getMovableLayer(), true);
 
       minimapViewport.x = minimapCoordinates.x;
       minimapViewport.y = minimapCoordinates.y;
@@ -143,8 +143,8 @@
       minimapViewport.scale.y = 0.1;
     }
     function moveViewport(datas) {
-      var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
-      var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
+      let globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
+      let mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
       globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, mapInstance.minimapCanvas);
 
@@ -164,10 +164,10 @@
       mapInstance.drawOnNextTick();
     }
     function setupMinimapClickEvent() {
-      var activeCB;
-      var minimapClickDetector = {
+      let activeCB;
+      const minimapClickDetector = {
         on: (cb) => {
-          var tap = new Hammer.Tap();
+          const tap = new Hammer.Tap();
           activeCB = cb;
 
           hammer.add(tap);
@@ -175,7 +175,7 @@
         },
         off: () => {
           hammer.on('tap', activeCB);
-        },
+        }
       };
 
       eventListeners.setDetector('minimapClicked', minimapClickDetector.on, minimapClickDetector.off);
@@ -194,7 +194,7 @@
      * @param {Integer} height
      */
     function _setMinimapArea(x, y, width, height) {
-      var _minimapRenderer = mapInstance.getRenderer('minimap');
+      const _minimapRenderer = mapInstance.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;
@@ -208,7 +208,7 @@
      * @return {PIXI.Container}
      */
     function createMinimapLayer() {
-      var container = new PIXI.Container();
+      const container = new PIXI.Container();
 
       container.x = paddingX;
       container.y = paddingY;

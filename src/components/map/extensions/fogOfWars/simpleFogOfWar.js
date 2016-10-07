@@ -167,7 +167,7 @@
         x: -100,
         y: -100,
         width: mapRenderer.width + 200 + (mapRenderer.width / mapInstance.getZoom()),
-        height: mapRenderer.height + 200 + (mapRenderer.height / mapInstance.getZoom()),
+        height: mapRenderer.height + 200 + (mapRenderer.height / mapInstance.getZoom())
       };
 
       FoWOverlay.clear();

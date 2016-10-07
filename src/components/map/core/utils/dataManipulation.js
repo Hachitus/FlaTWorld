@@ -19,7 +19,7 @@
     --------------------*/
     return {
       mapObjectsToArray,
-      flattenArrayBy1Level,
+      flattenArrayBy1Level
     };
 
     /*----------------------

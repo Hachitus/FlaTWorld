@@ -48,7 +48,7 @@
         testRectangleIntersect,
         _setMap,
         setupOffsetSize
-      },
+      }
     };
     /**
      * Ínitialize as a plugin
@@ -305,7 +305,7 @@
         x: Math.round(viewportArea.x - offsetSize),
         y: Math.round(viewportArea.y - offsetSize),
         width: Math.round(viewportArea.width + offsetSize * 2),
-        height: Math.round(viewportArea.height + offsetSize * 2),
+        height: Math.round(viewportArea.height + offsetSize * 2)
       };
     }
     /**

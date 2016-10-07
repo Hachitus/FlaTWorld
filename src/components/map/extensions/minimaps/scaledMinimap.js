@@ -2,7 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
+  const mapEvents = window.flatworld.mapEvents;
+  const { PIXI } = window.flatworld_libraries;
 
   /*-----------------------
   ---------- API ----------
@@ -12,7 +13,7 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  var _minimapLayer;
+  let _minimapLayer;
 
   /*-----------------------
   -------- PUBLIC ---------
@@ -23,14 +24,14 @@
    * @class scaledMinimap
    **/
   function setupScaledMinimap() {
-    var map, minimap;
+    let map, minimap;
 
     return {
       init,
       pluginName: 'scaledMinimap',
       _testObject: {
 
-      },
+      }
     };
     /**
      * Ínitialize as a plugin
@@ -45,8 +46,6 @@
     }
 
     function initMinimap({ width, height }, UIImage, backgroundImage, { x = 0, y = 0 } = {}) {
-      var UITexture = PIXI.Texture.fromFrame(UIImage);
-
       _minimapLayer.targetSize.x = width;
       _minimapLayer.targetSize.y = height;
       setMinimapUI(UIImage);
@@ -56,8 +55,8 @@
       mapEvents.publish('minimapInitialized', minimap);
     }
     function setMinimapUI(UIImage) {
-      var UITexture = PIXI.Texture.fromFrame(UIImage);
-      var UISprite = new PIXI.Sprite(UITexture);
+      const UITexture = PIXI.Texture.fromFrame(UIImage);
+      const UISprite = new PIXI.Sprite(UITexture);
 
       map.getMinimapLayer().addChild(UISprite);
     }

@@ -1,9 +1,14 @@
 (function () {
   /*---------------------
+  ------- IMPORT --------
+  ----------------------*/
+  const { PIXI } = window.flatworld_libraries;
+
+  /*---------------------
   --------- API ---------
   ----------------------*/
   window.flatworld.utils.shapes = {
-    createSquare,
+    createSquare
   };
 
   function createSquare() {

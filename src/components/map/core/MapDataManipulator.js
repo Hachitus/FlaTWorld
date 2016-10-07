@@ -38,7 +38,7 @@
       this.rules = Array.isArray(rules) ? rules : [rules];
       this.classes = {
         layer: Object.keys(mapLayers).map((k) => mapLayers[k]),
-        object: Object.keys(objects).map((k) => objects[k]),
+        object: Object.keys(objects).map((k) => objects[k])
       };
     }
     /**

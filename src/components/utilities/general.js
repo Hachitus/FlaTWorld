@@ -16,7 +16,7 @@
   function setupArrays() {
     return {
       flatten2Levels,
-      chunkArray,
+      chunkArray
     };
 
     /**

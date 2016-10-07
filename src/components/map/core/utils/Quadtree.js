@@ -80,7 +80,7 @@
         x: coords.x,
         y: coords.y,
         width: size.width,
-        height: size.height,
+        height: size.height
       };
       var objects = [];
 
