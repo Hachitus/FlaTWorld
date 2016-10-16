@@ -2,9 +2,9 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var Q = window.flatworld_libraries.Q;
-  var Howl = window.flatworld_libraries.Howler;
-  var log = window.flatworld.mapLayers;
+  const Q = window.flatworld_libraries.Q;
+  const Howl = window.flatworld_libraries.Howler;
+  //const log = window.flatworld.mapLayers;
 
   /*---------------------
   --------- API ---------
@@ -25,13 +25,13 @@
      * @param {Object} options.volume     The volume of the sound (0 - 1)
      * @return {Object}                   Created instance of sound
      */
-    add(name, url, options = { loop: false, volume: 1 }) {
-      const ERROR_STRING = 'The sound "' + name + '" was unable to load!';
-      var { loop, volume } = options;
+    add(name, urls, options = { loop: false, volume: 1 }) {
+      //const ERROR_STRING = 'The sound "' + name + '" was unable to load!';
+      const { loop, volume } = options;
 
       this._allSounds[name] = {};
       this._allSounds[name] = new Howl({
-        src: [url],
+        src: [].concat(urls),
         autoplay: false,
         loop,
         volume
@@ -55,7 +55,7 @@
      * @param  {String} name      Name of the sound to play
      */
     play(name) {
-      var promise = Q.defer();
+      const promise = Q.defer();
 
       this._allSounds[name]._onend = () => {
         promise.resolve(true);
@@ -82,9 +82,8 @@
      * @return {Promise}                Promise that resolves after fade is complete
      */
     fade(name, from, to, duration) {
-      var promise = Q.defer();
-      var cb;
-      cb = () => {
+      const promise = Q.defer();
+      const cb = () => {
         promise.resolve(true);
       };
 
