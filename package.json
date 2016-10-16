@@ -45,6 +45,7 @@
     "yuidocjs": "^0.10.0"
   },
   "dependencies": {
-    "eventemitter3": "^1.2.0"
+    "eventemitter3": "^1.2.0",
+    "howler": "2.0.1"
   }
 }
