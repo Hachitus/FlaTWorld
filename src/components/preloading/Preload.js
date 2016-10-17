@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { Q, PIXI } = window.flatworld_libraries;
+  const { Q, PIXI } = window.flatworld_libraries;
 
   /*-----------------------
   ---------- API ----------
@@ -18,7 +18,7 @@
      * @todo should you use PIXI here or just https://github.com/englercj/resource-loader straight?
      */
     constructor(baseUrl, options = { concurrency: 15, crossOrigin: false }) {
-      var { concurrency } = options;
+      const { concurrency } = options;
 
       this.preloaderClass = new PIXI.loaders.Loader(baseUrl, concurrency);
     }
@@ -27,7 +27,7 @@
      * @return {Promise} Return promise object, that will be resolved when the preloading is finished
      **/
     resolveOnComplete() {
-      var promise = Q.defer();
+      const promise = Q.defer();
 
       this.preloaderClass.load();
 

@@ -37,9 +37,9 @@
      * @todo add checks for rectangles. Now we can only check with width = 0 && height = 0
      */
     retrieve(allCoords, containers = [], options = { type: undefined, size: { width: 0, height: 0 } }) {
-      var { size, type } = options;
-      var { globalCoords } = allCoords;
-      var foundObjs = [];
+      const { size, type } = options;
+      const { globalCoords } = allCoords;
+      let foundObjs = [];
 
       if (containers.length > 0) {
         containers.forEach(container => {

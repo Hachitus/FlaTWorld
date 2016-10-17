@@ -2,11 +2,11 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { PIXI } = window.flatworld_libraries;
-  var templates = window.flatworld.UIs.default.templates;
-  var createVisibleHexagon = window.flatworld.extensions.hexagons.utils.createVisibleHexagon;
-  var drawShapes = window.flatworld.UIs.default.utils.drawShapes;
-  var mapLog = window.flatworld.log;
+  const { PIXI } = window.flatworld_libraries;
+  const templates = window.flatworld.UIs.default.templates;
+  const createVisibleHexagon = window.flatworld.extensions.hexagons.utils.createVisibleHexagon;
+  const drawShapes = window.flatworld.UIs.default.utils.drawShapes;
+  const mapLog = window.flatworld.log;
 
   /*---------------------
   ------ VARIABLES ------
@@ -38,7 +38,7 @@
       cssClasses = elements;
       styleSheetElement = this.addStyleElement();
       /* For testing. This is deeefinitely supposed to not be here, but it has stayed there for testing. */
-      let createdCSS = `
+      const createdCSS = `
         ${cssClasses.select} {
           z-index: 9999;
           opacity: 0.9;
@@ -82,10 +82,10 @@
      * @param  {Object} objects     Objects that have been selected. See core.UI for more information
      * @param {Object} getDatas       See explanation in core.UI
      */
-    showSelections(objects, getDatas, options) {
-      var updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
-      var UILayer = this.FTW.getMovableLayer();
-      var cb;
+    showSelections(objects) {
+      const updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
+      const UILayer = this.FTW.getMovableLayer();
+      let cb;
 
       /* We add the objects to be highlighted to the correct UI layer */
       // objectsToUI(UILayer, objects);
@@ -125,10 +125,9 @@
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      */
     highlightSelectedObject(object, getDatas, options = { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } }) {
-      var { shadow } = options;
-      var highlightableObject, objectDatas;
-
-      objectDatas = getDatas.allData(object);
+      const { shadow } = options;
+      const objectDatas = getDatas.allData(object);
+      const highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
 
       this.modal.innerHTML = templates.singleSelection({
         title: 'Selected',
@@ -137,8 +136,6 @@
         }
       });
       this.showModal(this.modal, cssClasses);
-
-      highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
 
       highlightableObject.dropShadow({
         color: shadow.color,
@@ -197,12 +194,10 @@
      * @param  {PIXI.Renderer} renderer
      */
     _highlightSelectedObject(object, renderer) {
-      var movableLayer = this.FTW.getMovableLayer();
-      var clonedObject;
+      const movableLayer = this.FTW.getMovableLayer();
+      const clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
-      clonedObject = object.clone(renderer, { anchor: true, scale: true });
-
-      var coord = object.toGlobal(new PIXI.Point(0, 0));
+      let coord = object.toGlobal(new PIXI.Point(0, 0));
       coord = movableLayer.toLocal(coord);
 
       this.createHighlight(clonedObject, { coords: coord });
@@ -225,9 +220,7 @@
         x: Number(object.x),
         y: Number(object.y)
       };
-      var highlighterObject;
-
-      highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
+      const highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
       highlighterObject.position.set(objCoords.x, objCoords.y);
 
       highlighterObject.alpha = 0.5;
@@ -255,7 +248,7 @@
      * @method addStyleElement
      */
     addStyleElement() {
-      var _styleElement = document.createElement('style');
+      const _styleElement = document.createElement('style');
       // WebKit hack :(
       _styleElement.appendChild(document.createTextNode(''));
       document.head.appendChild(_styleElement);
@@ -288,7 +281,7 @@
    */
   function _getElement(which) {
     if (!elementList[which]) {
-      let element = document.querySelector(cssClasses[which]);
+      const element = document.querySelector(cssClasses[which]);
       elementList[which] = element;
     }
 

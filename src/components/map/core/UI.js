@@ -2,12 +2,12 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var mapLog = window.flatworld.log;
+  const mapLog = window.flatworld.log;
 
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
-  var scope;
+  let scope;
 
   /*---------------------
   -------- PUBLIC -------
@@ -26,7 +26,6 @@
    * @return {Object}               UI module
   */
   function UI(UITheme, givenMap) {
-    var map;
 
     /* SINGLETON MODULE */
     if (scope) {
@@ -34,11 +33,9 @@
     }
 
     if (!UITheme || !givenMap) {
-      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been ' +
-        'already called earlier');
+      throw new Error(`UI-module requires UITheme and map object, This is a singleton class, so it's possible it should have been already called earlier`);
     }
 
-    map = givenMap;
     scope = {};
 
     /**
@@ -77,9 +74,6 @@
         // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
         return UITheme.showSelections([]);
       }
-
-      mapLog.error('No objects found' + objects.length);
-      return [];
     };
     /**
      * Shows arrow or movement or what ever to indicate the selected unit is moving to the given location

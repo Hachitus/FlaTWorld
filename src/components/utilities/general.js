@@ -38,9 +38,9 @@
      * from: http://stackoverflow.com/a/34847417/1523545
      */
     function chunkArray(array, chunkSize) {
-      var result = [];
+      const result = [];
 
-      for (var i = 0; i < array.length; i += chunkSize) {
+      for (let i = 0; i < array.length; i += chunkSize) {
         result.push(array.slice(i, chunkSize + i));
       }
 

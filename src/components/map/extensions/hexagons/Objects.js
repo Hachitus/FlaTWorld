@@ -2,14 +2,14 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var { ObjectSpriteTerrain, ObjectSpriteUnit } = window.flatworld.objects;
-  var { calcLongDiagonal, calcShortDiagonal, createHexagon } = window.flatworld.extensions.hexagons.utils;
-  var PIXI = window.flatworld_libraries.PIXI;
+  const { ObjectSpriteTerrain, ObjectSpriteUnit } = window.flatworld.objects;
+  const { calcLongDiagonal, calcShortDiagonal, createHexagon } = window.flatworld.extensions.hexagons.utils;
+  const PIXI = window.flatworld_libraries.PIXI;
 
   /*-----------------------
   -------- VARIABLES ------
   -----------------------*/
-  var shape;
+  let shape;
 
   class ObjectHexaTerrain extends ObjectSpriteTerrain {
     /**
@@ -118,9 +118,7 @@
     /* Draw hexagon to test the hits with hitArea */
     this.hitArea = setAndGetShape(radius);
     this.hitTest = function (coords) {
-      var localCoords;
-
-      localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
+      const localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
 
       return this.hitArea.contains(localCoords.x * this.scale.x, localCoords.y * this.scale.y);
     };

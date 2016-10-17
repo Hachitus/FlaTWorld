@@ -2,8 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var PIXI = window.flatworld_libraries.PIXI;
-  var { constants, utils, mapAPI, mapEvents } = window.flatworld;
+  const PIXI = window.flatworld_libraries.PIXI;
+  const { constants, utils, mapAPI, mapEvents } = window.flatworld;
 
   /*-----------------------
   ---------- API ----------
@@ -25,7 +25,7 @@
       super(texture);
 
       /* We need to round the numbers. If there are decimal values, the graphics will get blurry */
-      let exactCoords = {
+      const exactCoords = {
         x: Math.round(coord.x),
         y: Math.round(coord.y)
       };
@@ -132,9 +132,7 @@
      * @return {AreaSize}               { x: Number, y: Number, width: Number, height: Number}
      */
     getGraphicalArea(options = { toGlobal: true }) {
-      var coordinates;
-
-      coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
+      const coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
       return {
         x: Math.round(coordinates.x),
@@ -152,7 +150,7 @@
      * @return {Object}                       cloned object
      */
     clone(renderer, options = { position: false, anchor: false, scale: false }) {
-      var newSprite = new PIXI.Sprite();
+      const newSprite = new PIXI.Sprite();
 
       newSprite.texture = renderer.generateTexture(this);
 

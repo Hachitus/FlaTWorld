@@ -2,13 +2,18 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var eventListeners = window.flatworld.eventListeners;
-  var utils = window.flatworld.utils;
+  const eventListeners = window.flatworld.eventListeners;
+  const utils = window.flatworld.utils;
 
   /*---------------------
   --------- API ---------
   ----------------------*/
   window.flatworld.extensions.mapDrag = setupMap_drag();
+
+  /*---------------------
+  ------ VARIABLES ------
+  ----------------------*/
+  let mapMoved = false;
 
   /*---------------------
   -------- PUBLIC -------
@@ -24,7 +29,6 @@
   function setupMap_drag() {
     /* Function for setting and getting the mouse offset. Private functions declared bottom */
     const offsetCoords = _offsetCoords();
-    let mapMoved = false;
     let eventListenerCB;
 
     /*--------------------
@@ -65,15 +69,13 @@
      * @param {Map} map           The current instance of Map class
      */
     function _startDragListener(map) {
-      var initialized = false;
+      let initialized = false;
 
       return function startDrag(e) {
-        var coords;
-
         if (eventListeners.getActivityState('zoom')) {
           return false;
         }
-        coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
+        const coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
 
         mapMoved = true;
 
@@ -109,10 +111,8 @@
      * @param  {Coordinates} coords             Current pointer coordinates
      */
     function _mapMovement(e, map, coords) {
-      var offset, moved;
-
-      offset = offsetCoords.getOffset();
-      moved = {
+      const offset = offsetCoords.getOffset();
+      const moved = {
         x: coords.x - offset.x,
         y: coords.y - offset.y
       };

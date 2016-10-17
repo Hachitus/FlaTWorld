@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var mapLog = window.flatworld.log;
+  const mapLog = window.flatworld.log;
 
   /*---------------------
   --------- API ---------

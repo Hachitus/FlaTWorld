@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var QuadMod = require('/assets/lib/quadtree-js/quadtree-js-hitman');
+  const QuadMod = require('/assets/lib/quadtree-js/quadtree-js-hitman');
 
   /*---------------------
   --------- API ---------
@@ -23,7 +23,7 @@
      * @return                    Quadtree instance
      */
     constructor(options, max) {
-      var { objects: max_objects, levels: max_levels } = max;
+      const { objects: max_objects, levels: max_levels } = max;
 
       this.quadtree = new QuadMod(options, max_objects, max_levels);
     }
@@ -41,7 +41,7 @@
      * @return                                      Quadtree instance
      */
     add(coords, size, data) {
-      var objToAdd = _creteQuadtreeObject(coords, size, data);
+      const objToAdd = _creteQuadtreeObject(coords, size, data);
 
       this.quadtree.insert(objToAdd);
     }
@@ -61,7 +61,7 @@
      * @return                                      Quadtree instance
      */
     remove(coords, size, data, refresh) {
-      var objToRemove = _creteQuadtreeObject(coords, size, data);
+      const objToRemove = _creteQuadtreeObject(coords, size, data);
 
       this.quadtree.removeObject(objToRemove);
       refresh && this.quadtree.cleanup();
@@ -82,9 +82,8 @@
         width: size.width,
         height: size.height
       };
-      var objects = [];
 
-      objects = this.quadtree.retrieve(hitDimensions).map((object) => {
+      const objects = this.quadtree.retrieve(hitDimensions).map((object) => {
         return object.data;
       });
 
@@ -106,7 +105,7 @@
      * @return {Boolean}                            True of false
      */
     move(coords, size, data, to) {
-      var foundObject = this.findObject(coords, size, data);
+      const foundObject = this.findObject(coords, size, data);
 
       if (foundObject) {
         this.quadtree.removeObject(foundObject);
@@ -142,7 +141,7 @@
      * @return {Object}                             Found object
      */
     findObject(coords, size, data) {
-      var foundObject = this.retrieve(coords, size).filter(function (object) {
+      const foundObject = this.retrieve(coords, size).filter(function (object) {
         return object.data === data ? true : false;
       });
 
@@ -167,7 +166,7 @@
    * @return {Object}                     Added quadtree object
    */
   function _creteQuadtreeObject(coords, size = { width: 0, height: 0 }, data = undefined) {
-    var objToAdd = coords;
+    const objToAdd = coords;
 
     if (coords.x === undefined && coords.y === undefined) {
       throw new Error('_createQuadtreeObject requires x and y coordinates as parameters');

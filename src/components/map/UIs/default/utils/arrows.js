@@ -54,6 +54,8 @@
       Modified to support easelJS (no context editing, instead graphics-object)
 
       */
+     
+     /* eslint-disable */
     function drawArrow(shape, x1, y1, x2, y2, style, which, angle, d) {
       var graphics = shape.graphics,
         color = '#000',
@@ -199,6 +201,8 @@
         }
       }
     }
+    /* eslint-enable */
+    /* eslint-disable */
     function drawArcedArrow(graphics, x, y, r, startangle, endangle, anticlockwise,
        style, which, angle, d) {
       var sx, sy, lineangle, destx, desty;
@@ -241,10 +245,11 @@
         drawArrow(graphics, sx, sy, destx, desty, style, 2, angle, d);
       }
     }
+    /* eslint-enable */
     /* =============================== */
 
     function line(graphics, from, to, options = { color: '#000000', style: 5 }) {
-      var { color, style } = options;
+      const { color, style } = options;
 
       graphics.lineStyle(style, color);
       graphics.moveTo(from.x, from.y);

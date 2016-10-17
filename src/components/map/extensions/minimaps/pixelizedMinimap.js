@@ -215,9 +215,9 @@
 
       return container;
     }
-    function updateMinimapLayer() {
+/*    function updateMinimapLayer() {
       dynamicContainer.cacheAsBitmap = false;
       dynamicContainer.cacheAsBitmap = true;
-    }
+    }*/
   }
 })();

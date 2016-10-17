@@ -33,7 +33,7 @@
    */
   function setupMapEvents() {
     const TIMER_FOR_SAME_TYPE = 50;
-    let lastTimePublished = {};
+    const lastTimePublished = {};
     const EE = new EventEmitter();
 
     /*---------------------

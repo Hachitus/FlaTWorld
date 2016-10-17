@@ -51,7 +51,7 @@
      * @return {Array}                      The found objects in an Array
      */
     filter(objects) {
-      var found;
+      let found;
 
       if (!Array.isArray(objects)) {
         found = this._runRule(objects) ? [objects] : [];
@@ -93,11 +93,11 @@
      * @param {Array} [varname] [description]
      **/
     _runRule(object) {
-      var ruleMatches = true;
-      var matchedType;
+      let ruleMatches = true;
+      let matchedType;
 
       Object.keys(this.classes).forEach((type) => {
-        var filtered = this.classes[type].filter((thisClass) => {
+        const filtered = this.classes[type].filter((thisClass) => {
           return object instanceof thisClass;
         });
 

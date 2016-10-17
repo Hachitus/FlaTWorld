@@ -2,8 +2,8 @@
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
-  var arrays = window.flatworld.generalUtils.arrays;
+  const mapEvents = window.flatworld.mapEvents;
+  const arrays = window.flatworld.generalUtils.arrays;
 
   /*-----------------------
   ------- VARIABLES -------
@@ -27,12 +27,11 @@
    * @namespace flatworld.extensions
    * @class mapMovement
    **/
-  function setupMapMovement() {
+  function setupMapMovement(debug = false) {
     const VIEWPORT_OFFSET = 0.2;
     const CHECK_INTERVAL = 20;
     const SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT = 40;
-    let queue = {};
-    let debug = true;
+    const queue = {};
     let viewportArea, offsetSize, mapInstance;
 
     return {
@@ -72,17 +71,15 @@
          */
         window.FlaTWorld_mapMovement_subCheck = function () {
           mapInstance.getPrimaryLayers().forEach(layer => {
-            var subcontainers = layer.getSubcontainers();
-            var visibleContainers, invisibleContainers;
-
-            visibleContainers = subcontainers.filter(subcontainer => {
+            const subcontainers = layer.getSubcontainers();
+            const visibleContainers = subcontainers.filter(subcontainer => {
               return subcontainer.visible;
             });
-            invisibleContainers = subcontainers.filter(subcontainer => {
+            const invisibleContainers = subcontainers.filter(subcontainer => {
               return !subcontainer.visible;
             });
 
-            let containerCoords = visibleContainers.reduce((all, cont2) => { all + cont2.x + ''; });
+            const containerCoords = visibleContainers.reduce((all, cont2) => { all + cont2.x + ''; });
             window.flatworld.log.debug(
               'visible subcontainers: ' + visibleContainers.length + ', ' + containerCoords + '\n\ninvisible: ' +
               invisibleContainers.length);
@@ -96,9 +93,8 @@
          */
         window.FlaTWorld_mapMovement_deactivate = function () {
           mapInstance.getPrimaryLayers().forEach(layer => {
-            var subcontainers = layer.getSubcontainers();
 
-            subcontainers.forEach(subcontainer => {
+            layer.getSubcontainers().forEach(subcontainer => {
               subcontainer.visible = false;
             });
           });
@@ -118,9 +114,7 @@
       offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
 
       mapInstance.getPrimaryLayers().forEach(layer => {
-        var subcontainers = layer.getSubcontainers();
-
-        subcontainers.forEach(subcontainer => {
+        layer.getSubcontainers().forEach(subcontainer => {
           subcontainer.visible = isObjectOutsideViewport(subcontainer, viewportArea) ? false : true;
         });
       });
@@ -196,11 +190,9 @@
      * @return {Boolean}
      */
     function isObjectOutsideViewport(object, viewportArea) {
-      var isOutside, globalArea;
+      const globalArea = object.getSubcontainerArea({ toGlobal: false });
 
-      globalArea = object.getSubcontainerArea({ toGlobal: false });
-
-      isOutside = !testRectangleIntersect(globalArea, viewportArea);
+      const isOutside = !testRectangleIntersect(globalArea, viewportArea);
 
       return isOutside;
     }
@@ -213,19 +205,16 @@
      * @param  {Array} primaryLayers      The primarylayers that we handle
      */
     function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
-      var containersUnderChangedArea = [];
-      var promises, largerViewportAreaWithOffset;
-
-      largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
+      const largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
+      let containersUnderChangedArea = [];
+      let promises;
 
       primaryLayers = arrays.chunkArray(primaryLayers, VIEWPORT_OFFSET);
       promises = primaryLayers.map((theseLayers) => {
-        var promise = window.Q.defer();
+        const promise = window.Q.defer();
 
         window.setTimeout(function () {
-          var foundSubcontainers;
-
-          foundSubcontainers = theseLayers.map((layer) => {
+          const foundSubcontainers = theseLayers.map((layer) => {
             return layer.getSubcontainersByCoordinates(largerViewportAreaWithOffset);
           });
           containersUnderChangedArea = containersUnderChangedArea.concat(foundSubcontainers);
@@ -237,14 +226,12 @@
       });
 
       promises = window.Q.all(promises).then(() => {
-        var subcontainers, promises;
-
         containersUnderChangedArea = arrays.flatten2Levels(containersUnderChangedArea);
 
-        subcontainers = arrays.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
+        const subcontainers = arrays.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
-        promises = subcontainers.map((thesesContainers) => {
-          var promise = window.Q.defer();
+        const promises = subcontainers.map((thesesContainers) => {
+          const promise = window.Q.defer();
 
           window.setTimeout(function () {
             promise.resolve(thesesContainers.filter((thisContainer) => {

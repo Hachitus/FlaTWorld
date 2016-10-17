@@ -2,9 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var eventListeners = window.flatworld.eventListeners;
-  var utils = window.flatworld.utils;
-  var log = window.flatworld.log
+  const { utils, log, eventListeners } = window.flatworld;
 
   /*---------------------
   --------- API ---------
@@ -26,17 +24,17 @@
     ------ VARIABLES ------
     ----------------------*/
     const TIMEOUT_AFTER_ZOOM = 40;
-    var initialized = false;
-    var mobileInitialized = false;
-    var difference = {};
-    var map;
+    let initialized = false;
+    let mobileInitialized = false;
+    let difference = {};
+    let map;
     /**
      * Maximum and minimum amount, the player can zoom the map
      *
      * @attribute zoomLimit
      * @type {{ farther: Number, closer: Number }}
      */
-    var zoomLimit = {
+    const zoomLimit = {
       farther: 0.4,
       closer: 2.5
     };
@@ -46,7 +44,7 @@
      * @attribute zoomModifier
      * @type {Number}
      */
-    var zoomModifier = 0.1;
+    let zoomModifier = 0.1;
 
     /*---------------------
     --------- API ---------
@@ -69,6 +67,7 @@
      * But zoomLimit and modifier need to be setable in creation, init or later with setters
      **/
     function init() {
+      map = this.mapInstance;
       this.mapInstance.setPrototype('zoomIn', zoomIn);
       this.mapInstance.setPrototype('zoomOut', zoomOut);
       this.mapInstance.setPrototype('setZoomLimits', setZoomLimits);
@@ -115,7 +114,7 @@
      * @param {Number} amount how much map is zoomed in
      * */
     function zoomIn(amount) {
-      var presentScale = this.getZoom();
+      const presentScale = this.getZoom();
       const IS_ZOOM_IN = true;
 
       return _zoom(this, presentScale, Math.abs(amount) || zoomModifier, IS_ZOOM_IN);
@@ -127,7 +126,7 @@
      * @param {Number} amount how much map is zoomed out
      * */
     function zoomOut(amount) {
-      var presentScale = this.getZoom();
+      const presentScale = this.getZoom();
       const IS_ZOOM_IN = false;
 
       amount = amount < 0 ? amount : -amount;
@@ -167,9 +166,9 @@
      * @param  {Map} map             Map instance
      */
     function handleZoomEventDesktop(e, delta, deltaX, deltaY) {
-      var mouseWheelDelta = deltaY;
+      const mouseWheelDelta = deltaY;
       /* Scale changes when the map is drawn. We make calculations with the old scale before draw */
-      var oldScale = map.getZoom();
+      const oldScale = map.getZoom();
 
       /* No nasty scrolling side-effects */
       e.preventDefault();
@@ -191,16 +190,16 @@
      * @param  {Event} e
      */
     function handleZoomEventMobile(e) {
-      var pointers = e.pointers;
-      var coords = [{
+      const pointers = e.pointers;
+      const coords = [{
         x: pointers[0].pageX,
         y: pointers[0].pageY
       }, {
         x: pointers[1].pageX,
         y: pointers[1].pageY
       }];
-      var changeX = Math.abs(coords[0].x - coords[1].x);
-      var changeY = Math.abs(coords[0].y - coords[1].y);
+      const changeX = Math.abs(coords[0].x - coords[1].x);
+      const changeY = Math.abs(coords[0].y - coords[1].y);
 
       e.preventDefault();
 
@@ -266,12 +265,12 @@
      * @method _calculateCenterMoveCoordinates
      **/
     function _calculateCenterMoveCoordinates(scale, isZoomIn) {
-      var windowSize = utils.resize.getWindowSize();
-      var halfWindowSize = {
+      const windowSize = utils.resize.getWindowSize();
+      const halfWindowSize = {
         x: (windowSize.x / 2) / scale,
         y: (windowSize.y / 2) / scale
       };
-      var realMovement = {
+      const realMovement = {
         x: (halfWindowSize.x) * ((isZoomIn ? -zoomModifier : zoomModifier)),
         y: (halfWindowSize.y) * ((isZoomIn ? -zoomModifier : zoomModifier))
       };
@@ -285,7 +284,7 @@
      * @todo zoom should always product integers, not floats (this seems to happen)
      **/
     function _zoom(map, presentScale, amount, isZoomIn) {
-      var newScale;
+      let newScale;
 
       if (!_isOverZoomLimit(presentScale, isZoomIn)) {
         newScale = map.setZoom(amount ? presentScale + amount : presentScale + zoomModifier);

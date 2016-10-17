@@ -2,14 +2,14 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  var stateOfEvents = {};
-  var activeEventListeners = {};
-  var detectors = {};
+  const stateOfEvents = {};
+  const activeEventListeners = {};
+  const detectors = {};
 
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
+  const mapEvents = window.flatworld.mapEvents;
 
   /*-----------------------
   ---------- API ----------
@@ -79,11 +79,7 @@
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
     function isOn(type = '', cb = false) {
-      var answer;
-
-      answer = cb ? activeEventListeners[type].has(cb) : !!activeEventListeners[type].size;
-
-      return answer;
+      return cb ? activeEventListeners[type].has(cb) : !!activeEventListeners[type].size;
     }
     /**
      * Sets the state of the event. State is very important e.g. for fluent dragging and selecting. When we start to drag, we avoid

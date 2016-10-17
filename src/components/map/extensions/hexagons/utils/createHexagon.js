@@ -2,8 +2,8 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { PIXI } = window.flatworld_libraries;
-  var getHexagonPoints = window.flatworld.extensions.hexagons.utils.getHexagonPoints;
+  const { PIXI } = window.flatworld_libraries;
+  const getHexagonPoints = window.flatworld.extensions.hexagons.utils.getHexagonPoints;
 
   /*-----------------------
   ---------- API ----------
@@ -32,12 +32,10 @@
    * @return {PIXI.Polygon}           Hexagon shaped PIXI.Polygon object. That houses the hexagons corner points.
    */
   function createHexagon(radius, { orientation = 'horizontal' } = {}) {
-    var points = [];
-
     if (orientation !== 'horizontal') {
       throw new Error('Nothing else than horizontal supported so far!');
     }
-    points = coordsToPixiPoints(radius);
+    const points = coordsToPixiPoints(radius);
 
     return new PIXI.Polygon(points);
   }
@@ -53,8 +51,8 @@
    * @return {PIXI.Graphics}      Graphics object that is shaped as hexagon, based on given radius and options.
    */
   function createVisibleHexagon(radius, { color = 0xFF0000, isFlatTop = false } = {}) {
-    var graphics = new PIXI.Graphics();
-    var points = coordsToPixiPoints(radius, isFlatTop);
+    const graphics = new PIXI.Graphics();
+    const points = coordsToPixiPoints(radius, isFlatTop);
 
     graphics.beginFill(color, 1);
     graphics.drawPolygon(points, isFlatTop);

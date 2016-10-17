@@ -2,9 +2,9 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var PIXI = window.flatworld_libraries.PIXI;
-  var { Flatworld, utils, log } = window.flatworld;
-  var hexagonPlugin = window.flatworld.extensions.hexagons;
+  const PIXI = window.flatworld_libraries.PIXI;
+  const { Flatworld, utils, log } = window.flatworld;
+  const hexagonPlugin = window.flatworld.extensions.hexagons;
 
   /*---------------------
   --------- API ---------
@@ -49,7 +49,7 @@
       ObjectTerrain: hexagonPlugin.objects.ObjectHexaTerrain,
       ObjectUnit: hexagonPlugin.objects.ObjectHexaUnit
     };
-    var mapProperties = {
+    const mapProperties = {
       mapSize: DATA_GAME.mapSize,
       bounds: {
         x: 0,
@@ -73,7 +73,7 @@
       defaultScaleMode: scaleMode,
       minimapCanvas
     };
-    var map = new Flatworld(mapCanvas, mapProperties);
+    const map = new Flatworld(mapCanvas, mapProperties);
 
     PIXI.SCALE_MODES.DEFAULT = 1;
 
@@ -83,8 +83,8 @@
         throw new Error('Problem in hexaFactory, with layerData:', layerData);
       }
 
-      var renderer = map.getRenderer();
-      var layerOptions = {
+      const renderer = map.getRenderer();
+      const layerOptions = {
         name: layerData.name,
         coord: layerData.coord,
         drawOutsideViewport: {
@@ -93,13 +93,13 @@
         },
         selectable: layerData.name === 'unitLayer' ? true : false
       };
-      var thisLayer;
+      let thisLayer;
 
       try {
         thisLayer = map.addLayer(layerOptions);
 
         layerData.objectGroups.forEach(objectGroup => {
-          let spritesheetType = objectGroup.typeImageData;
+          const spritesheetType = objectGroup.typeImageData;
 
           if (!spritesheetType) {
             log.error('Error with spritesheetType-data');
@@ -107,12 +107,12 @@
           }
 
           objectGroup.objects.forEach(object => {
-            var objTypeData, objectOptions, texture, newObject;
+            let objTypeData, objectOptions, texture, newObject;
 
             try {
               objTypeData = DATA_TYPE[spritesheetType][object.objType];
               if (!objTypeData) {
-                let error = new Error('Bad mapData for type:' + spritesheetType.toString() + object.objType.toString() + object.name.toString());
+                const error = new Error('Bad mapData for type:' + spritesheetType.toString() + object.objType.toString() + object.name.toString());
                 log.error(error);
                 throw error;
               }

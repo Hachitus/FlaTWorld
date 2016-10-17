@@ -83,7 +83,7 @@
     function activateFogOfWar(mapInstance, cb, filterCreator, options = {}) {
       color = options.color || 0x222222;
       FoWCB = cb;
-      let filter = filterCreator();
+      const filter = filterCreator();
       objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(o => o.getObjects(filter));
       objectsForFoW = generalUtils.arrays.flatten2Levels(objectsForFoW);
 

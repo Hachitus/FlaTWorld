@@ -2,7 +2,7 @@
   /*---------------------
   --------- API ---------
   ----------------------*/
-  var loglevel = window.flatworld_libraries.log;
+  const loglevel = window.flatworld_libraries.log;
 
   loglevel.enableAll();
   /**

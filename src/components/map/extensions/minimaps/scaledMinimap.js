@@ -67,9 +67,6 @@
 
       _minimapLayer.addChild(backgroundImage);
     }
-    function setupDynamicLayer(updateCB) {
-
-    }
     /*-----------------------
     -------- PRIVATE --------
     -----------------------*/

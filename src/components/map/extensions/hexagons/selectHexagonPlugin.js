@@ -63,7 +63,7 @@
     let indexes;
 
     objArray.forEach(obj => {
-      let correctCoords = obj.getMapCoordinates();
+      const correctCoords = obj.getMapCoordinates();
 
       indexes = utils.coordinatesToIndexes(correctCoords);
 

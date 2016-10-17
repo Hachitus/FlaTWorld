@@ -2,13 +2,13 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var PIXI = window.flatworld_libraries.PIXI;
+  const PIXI = window.flatworld_libraries.PIXI;
   const { generalUtils } = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
   ---------------------*/
-  var _UIObjects = [];
+  let _UIObjects = [];
 
   /*---------------------
   -------- EXPORT -------
@@ -174,7 +174,7 @@
      * @return {MapLayer}            The created UI layer
      **/
     createUILayer(name = 'default UI layer', coord = { x: 0, y: 0 }) {
-      var layer = new MapLayer(name, coord);
+      const layer = new MapLayer(name, coord);
 
       layer.specialLayer = true;
       this.addChild(layer);
@@ -241,7 +241,7 @@
         return;
       } else {
         Object.keys(this.UIObjectList).map((index) => {
-          let object = this.UIObjectList[index];
+          const object = this.UIObjectList[index];
 
           _removeObjectsFromLayer(object, UILayer);
 
@@ -350,9 +350,7 @@
         throw new Error('tried to retrieve subcontainers, when they are not present');
       }
 
-      var foundSubcontainers;
-
-      foundSubcontainers = _getClosestSubcontainers(this, coordinates);
+      const foundSubcontainers = _getClosestSubcontainers(this, coordinates);
 
       return foundSubcontainers;
     }
@@ -396,9 +394,7 @@
      * @return {Object}                                   x, y, width and height returned inside object.
      */
     getSubcontainerArea(options = { toGlobal: true }) {
-      var coordinates;
-
-      coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
+      const coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
       return {
         x: Math.round(coordinates.x),
@@ -450,10 +446,10 @@
    * @param {Object} parentLayer
    */
   function setCorrectSubcontainer(displayObject, parentLayer) {
-    var { subcontainersConfig, subcontainerList } = parentLayer;
-    var xIndex = Math.floor(displayObject.x / subcontainersConfig.width);
-    var yIndex = Math.floor(displayObject.y / subcontainersConfig.height);
-    var thisSubcontainer;
+    const { subcontainersConfig, subcontainerList } = parentLayer;
+    const xIndex = Math.floor(displayObject.x / subcontainersConfig.width);
+    const yIndex = Math.floor(displayObject.y / subcontainersConfig.height);
+    let thisSubcontainer;
 
     subcontainerList[xIndex] = subcontainerList[xIndex] || [];
     thisSubcontainer = subcontainerList[xIndex][yIndex] = subcontainerList[xIndex][yIndex] || [];
@@ -495,21 +491,21 @@
    * @return {Array}                                Array of found subcontainers.
    */
   function _getClosestSubcontainers(layer, givenCoordinates) {
-    var { width, height, maxDetectionOffset } = layer.getSubcontainerConfigs();
-    var coordinates = {
+    const { width, height, maxDetectionOffset } = layer.getSubcontainerConfigs();
+    const coordinates = {
       x: givenCoordinates.x >= 0 ? givenCoordinates.x - maxDetectionOffset : -maxDetectionOffset,
       y: givenCoordinates.y >= 0 ? givenCoordinates.y - maxDetectionOffset : -maxDetectionOffset,
       width: (givenCoordinates.width || 0) + maxDetectionOffset * 2,
       height: (givenCoordinates.height || 0) + maxDetectionOffset * 2
     };
-    var allFoundSubcontainers = [];
-    var xIndex = Math.floor(coordinates.x / width);
-    var yIndex = Math.floor(coordinates.y / height);
-    var x2 = coordinates.width ? coordinates.x + coordinates.width : +coordinates.x;
-    var y2 = coordinates.height ? coordinates.y + coordinates.height : +coordinates.y;
-    var widthIndex = Math.floor(x2 / width);
-    var heightIndex = Math.floor(y2 / height);
-    var subcontainerList = layer.subcontainerList;
+    const allFoundSubcontainers = [];
+    const xIndex = Math.floor(coordinates.x / width);
+    const yIndex = Math.floor(coordinates.y / height);
+    const x2 = coordinates.width ? coordinates.x + coordinates.width : +coordinates.x;
+    const y2 = coordinates.height ? coordinates.y + coordinates.height : +coordinates.y;
+    const widthIndex = Math.floor(x2 / width);
+    const heightIndex = Math.floor(y2 / height);
+    const subcontainerList = layer.subcontainerList;
 
     for (let thisXIndex = xIndex; thisXIndex <= widthIndex; thisXIndex++) {
       if (thisXIndex >= 0 && subcontainerList && subcontainerList[thisXIndex]) {

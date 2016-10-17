@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var mapLog = window.flatworld.log;
+  const mapLog = window.flatworld.log;
 
   /*-----------------------
   ---------- API ----------
@@ -21,7 +21,7 @@
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  var globalRadius, globalStartingPoint, globalOrientation;
+  let globalRadius, globalStartingPoint, globalOrientation;
 
   /**
    * Utility module, for making different calculations and tests when hexagon based grid map in use
@@ -62,10 +62,11 @@
       x: radius,
       y: radius
     };
-    var angle = 2 * Math.PI / 6 * OFFSET;
-    var x = CENTER.x * Math.cos(angle);
-    var y = CENTER.y * Math.sin(angle);
-    var points = [{ x, y }];
+    const points = [];
+    let angle = 2 * Math.PI / 6 * OFFSET;
+    let x = CENTER.x * Math.cos(angle);
+    let y = CENTER.y * Math.sin(angle);
+    points.push({ x, y });
 
     for (let i = 1; i < 7; i++) {
       angle = 2 * Math.PI / 6 * (i + OFFSET);

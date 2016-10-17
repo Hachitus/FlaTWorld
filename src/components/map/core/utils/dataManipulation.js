@@ -53,7 +53,7 @@
      * @param  {Array} objects
      */
     function flattenArrayBy1Level(objects) {
-      let merged = [];
+      const merged = [];
 
       return merged.concat.apply(merged, objects);
     }

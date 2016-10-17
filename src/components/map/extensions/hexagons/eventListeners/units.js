@@ -2,8 +2,8 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var { utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, log } = window.flatworld;
-  var { hexagons } = window.flatworld.extensions;
+  const { utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, log } = window.flatworld;
+  const { hexagons } = window.flatworld.extensions;
 
   /*---------------------
   --------- API ---------

@@ -2,7 +2,7 @@
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var StateMachine = window.StateMachine;
+  const StateMachine = window.StateMachine;
 
   /*---------------------
   --------- API ---------

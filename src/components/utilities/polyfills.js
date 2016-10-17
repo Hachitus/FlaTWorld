@@ -34,12 +34,12 @@
           if (typeof predicate !== 'function') {
             throw new TypeError('predicate must be a function');
           }
-          var list = Object(this);
-          var length = list.length >>> 0;
-          var thisArg = arguments[1];
-          var value;
+          const list = Object(this);
+          const length = list.length >>> 0;
+          const thisArg = arguments[1];
+          let value;
 
-          for (var i = 0; i < length; i++) {
+          for (let i = 0; i < length; i++) {
             value = list[i];
             if (predicate.call(thisArg, value, i, list)) {
               return value;
@@ -58,18 +58,18 @@
      * @static
      */
     function objectAssign() {
-      if (typeof Object.assign != 'function') {
+      if (typeof Object.assign != 'function') { // eslint-disable-line eqeqeq
         (function () {
           Object.assign = function (target) {
             if (target === undefined || target === null) {
               throw new TypeError('Cannot convert undefined or null to object');
             }
 
-            var output = Object(target);
-            for (var index = 1; index < arguments.length; index++) {
-              var source = arguments[index];
+            const output = Object(target);
+            for (let index = 1; index < arguments.length; index++) {
+              const source = arguments[index];
               if (source !== undefined && source !== null) {
-                for (var nextKey in source) {
+                for (const nextKey in source) {
                   if (source.hasOwnProperty(nextKey)) {
                     output[nextKey] = source[nextKey];
                   }
@@ -87,32 +87,37 @@
       if (!String.prototype.repeat) {
         (function () {
           'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
-          var defineProperty = (function () {
+
+          let result;
+
+          const defineProperty = (function () {
             // IE 8 only supports `Object.defineProperty` on DOM elements
             try {
-              var object = {};
-              var defineProperty = Object.defineProperty;
-              var result = defineProperty(object, object, object) && defineProperty;
-            } catch (error) {}
+              const object = {};
+              const defineProperty = Object.defineProperty;
+              result = defineProperty(object, object, object) && defineProperty;
+            } catch (error) {
+              return result;
+            }
             return result;
           }());
-          var repeat = function (count) {
-            if (this == null) {
+          const repeat = function (count) {
+            if (this == null) { // eslint-disable-line eqeqeq
               throw TypeError();
             }
-            var string = String(this);
+            let string = String(this);
             // `ToInteger`
-            var n = count ? Number(count) : 0;
-            if (n != n) { // better `isNaN`
+            let n = count ? Number(count) : 0;
+            if (n != n) { // eslint-disable-line eqeqeq
               n = 0;
             }
             // Account for out-of-bounds indices
-            if (n < 0 || n == Infinity) {
+            if (n < 0 || n == Infinity) { // eslint-disable-line eqeqeq
               throw RangeError();
             }
-            var result = '';
+            let result = '';
             while (n) {
-              if (n % 2 == 1) {
+              if (n % 2 == 1) { // eslint-disable-line eqeqeq
                 result += string;
               }
               if (n > 1) {
