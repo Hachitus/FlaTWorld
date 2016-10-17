@@ -93,7 +93,8 @@
         maxDetectionOffset: 0 // maxDetectionOffset default set later
       },
       trackFPSCB = false,
-      defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
+      defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {},
+      mouseTextSelection = false) {
       /* Check for the required parameters! */
       if (!mapCanvas) {
         throw new Error(`${this.constructor.name} needs canvas element!`);
@@ -143,6 +144,9 @@
       mapCanvas.style.overflow = 'hidden';
 
       utils.mouse.disableContextMenu(_renderers.main.view);
+
+      // Disable the selection of text by dragging, from the whole body element
+      !mouseTextSelection && utils.general.toggleMouseTextSelection();
 
       /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
        * Setting this separately in each

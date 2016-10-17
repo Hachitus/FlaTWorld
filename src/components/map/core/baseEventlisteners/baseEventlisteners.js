@@ -27,7 +27,7 @@
    */
   function baseEventlistenersModule() {
     const caches = {};
-    var hammer, hamster, mapInstance;
+    let hammer, hamster, mapInstance;
 
     /*---------------------------
     ----------- API -------------
@@ -40,7 +40,6 @@
       toggleDrag,
       toggleSelect,
       toggleOrder,
-      toggleMouseTextSelection,
 
       /**
        * Plugins name
@@ -84,7 +83,7 @@
      * @method toggleFullSize
      */
     function toggleFullSize() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['fullsize']) {
         caches['fullsize'] = {
@@ -109,7 +108,7 @@
      * @return {Boolean}        Return the state of this event
      */
     function toggleFullscreen() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['fullscreen']) {
         caches['fullscreen'] = {
@@ -136,12 +135,12 @@
      * @return {Boolean}            Return the state of this event
      */
     function toggleZoom() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['zoom']) {
         caches['zoom'] = {
           on: (cb) => {
-            var pinch = new Hammer.Pinch();
+            const pinch = new Hammer.Pinch();
             activeCB = cb;
 
             hammer.add(pinch);
@@ -166,12 +165,12 @@
      * @return {Boolean}        Return the state of this event
      */
     function toggleDrag() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['drag']) {
         caches['drag'] = {
           on: (cb) => {
-            var pan = new Hammer.Pan({
+            const pan = new Hammer.Pan({
               pointers: 1,
               threshold: 5,
               direction: Hammer.DIRECTION_ALL });
@@ -196,12 +195,12 @@
      * @return {Boolean}        Return the state of this event
      */
     function toggleSelect() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['select']) {
         caches['select'] = {
           on: (cb) => {
-            var tap = new Hammer.Tap();
+            const tap = new Hammer.Tap();
             activeCB = cb;
 
             hammer.add(tap);
@@ -224,14 +223,14 @@
      * @return {Boolean}        Return the state of this event
      */
     function toggleOrder() {
-      var activeCB;
+      let activeCB;
 
       if (!caches['order']) {
         caches['order'] = {
           on: (cb) => {
             activeCB = cb;
 
-            var press = new Hammer.Press();
+            const press = new Hammer.Press();
 
             hammer.add(press);
             hammer.on('press', clickListener);
@@ -263,21 +262,6 @@
 
         activeCB(e);
       }
-    }
-    /**
-     * Deactivate the selection of text, by dragging
-     *
-     * @method toggleMouseTextSelection
-     */
-    function toggleMouseTextSelection() {
-      var bodyStyles = document.getElementsByTagName('body')[0].style;
-
-      bodyStyles.webkitTouchCallout = 'none';
-      bodyStyles.webkitUserSelect = 'none';
-      bodyStyles.khtmlUserSelect = 'none';
-      bodyStyles.mozUserSelect = 'none';
-      bodyStyles.msUserSelect = 'none';
-      bodyStyles.userSelect = 'none';
     }
 
     /**

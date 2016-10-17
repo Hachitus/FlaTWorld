@@ -277,7 +277,8 @@
     return {
       pixelEpsilonEquality: epsilonEquality,
       fullsizeCanvasCSS,
-      requireParameter
+      requireParameter,
+      toggleMouseTextSelection
     };
 
     /**
@@ -307,6 +308,20 @@
      */
     function requireParameter(className, paramName) {
       throw new Error(`Function '${className}' requires parameter ${paramName}`);
+    }
+
+    /**
+     * Deactivate the selection of text, by dragging
+     *
+     * @method toggleMouseTextSelection
+     */
+    function toggleMouseTextSelection(element = document.getElementsByTagName('body')[0]) {
+      element.style.webkitTouchCallout = 'none';
+      element.style.webkitUserSelect = 'none';
+      element.style.khtmlUserSelect = 'none';
+      element.style.mozUserSelect = 'none';
+      element.style.msUserSelect = 'none';
+      element.style.userSelect = 'none';
     }
   }
 })();

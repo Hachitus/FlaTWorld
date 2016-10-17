@@ -1,14 +1,13 @@
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
-## Bug Fixes
-* Added hexagon pathfinding
-
 ## Features
+* Added hexagon pathfinding
 * Added allMapObjects, alternative data structure, so that you don't always have to retrieve them from individual layers.
 * Added pre-calculated map coordinates for objects, so that we don't always need to make conversions for objects to map coordinates
 * Added getMapCoordinates in flatworld
 * Changed coordinates to work based on PIXI.Point, instead of object literal
 * Extensions have a bit different initialization now and can receive parameters.
+* Added a default prevention of selecting text with mouse. Optional parameter to activate.
 
 ## Others
 * Added constants.js
