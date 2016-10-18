@@ -35,6 +35,8 @@
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
   polyfills.es6String();
+  /* REQUIRED FOR iPhones / safari */
+  polyfills.setPrototypeOf();
 
   hexagons.utils.init(HEXAGON_RADIUS);
 

@@ -18,7 +18,8 @@
     return {
       arrayFind,
       objectAssign,
-      es6String
+      es6String,
+      setPrototypeOf
     };
 
     /**
@@ -137,6 +138,13 @@
             String.prototype.repeat = repeat;
           }
         }());
+      }
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
+    function setPrototypeOf() {
+      Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
+        obj.__proto__ = proto;
+        return obj; 
       }
     }
   }
