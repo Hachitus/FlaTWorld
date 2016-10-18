@@ -1,10 +1,43 @@
 !function() {
+  /*---------------------
+  ------- EXPORT --------
+  ----------------------*/
   window.flatworld.utils.findPath = findPath;
-
-  const debug = false;
 
   const allHexDirections = [{ x: 0, y: 1 }, { x: -1, y: 1 }, { x: 1, y: 0 }, { x: 1, y: -1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
   const allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
+
+  class PriorityQueue {
+    constructor() {
+      this.items = [];
+    }
+    
+    get length() {
+      return this.items.length;
+    }
+    
+    pop() {
+      const stack = this.items[this.items.length - 1].stack;
+      const value = stack.pop();
+      if (!stack.length) {
+        this.items.pop();
+      }
+      return value;
+    }
+    
+    push(value, loss) {
+      const [index, match] = this.items.length ?
+            binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
+            : [0, false];
+        
+      if (match) {
+        this.items[index].stack.push(value);
+      } else {
+        const newItem = { stack: [value], loss: loss };
+        this.items.splice(index, 0, newItem);
+      }
+    }
+  }
 
   /**
    * Finds shortest route on a hexagon/normal grid
@@ -25,7 +58,8 @@
             height,
             maxTime,
             weightFn,
-            allowDiagonal = null
+            allowDiagonal = null,
+            debug = false
         ) {
     
     validateArgs();
@@ -154,43 +188,13 @@
     let link = pathList;
     const arr = [];
     
-    do arr.push(link);
-    while(link = link.prev);
+    do {
+      arr.push(link);
+      link = link.prev
+    } while(link);
     
     return arr.reverse();
   }
-
-  class PriorityQueue {
-    constructor() {
-      this.items = [];
-    }
-    
-    get length() {
-      return this.items.length;
-    }
-    
-    pop() {
-      const stack = this.items[this.items.length - 1].stack;
-      const value = stack.pop();
-      if (!stack.length) {
-        this.items.pop();
-      }
-      return value;
-    }
-    
-    push(value, loss) {
-      const [index, match] = this.items.length ?
-            binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
-            : [0, false];
-        
-      if (match) {
-        this.items[index].stack.push(value);
-      } else {
-        const newItem = { stack: [value], loss: loss };
-        this.items.splice(index, 0, newItem);
-      }
-    }
-}
 
   function binarySearch(sortFn, i0, i1) {
     const mid = Math.floor((i0 + i1) / 2);

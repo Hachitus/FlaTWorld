@@ -3,16 +3,14 @@
 ## Features
 * Added hexagon pathfinding
 * Added allMapObjects, alternative data structure, so that you don't always have to retrieve them from individual layers.
-* Added pre-calculated map coordinates for objects, so that we don't always need to make conversions for objects to map coordinates
+* Added pre-calculated map coordinates for objects, so that we don't always need to make conversions for objects to map coordinates (in ObjectSprite as in new ObjectSprite().coordinates)
 * Added getMapCoordinates in flatworld
-* Changed coordinates to work based on PIXI.Point, instead of object literal
 * Extensions have a bit different initialization now and can receive parameters.
 * Added a default prevention of selecting text with mouse. Optional parameter to activate.
 
 ## Others
 * Added constants.js
 * Support for non-subcontainer layer structure removed
-* Removed getMovableLayer from flatworld, those are internals, not meant for using!
 
 <a name="0.5.0"></a>
 # 0.5.0 Fog of war polish and multi-development setups (2016-09-25)

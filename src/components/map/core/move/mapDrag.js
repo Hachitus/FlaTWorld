@@ -11,11 +11,6 @@
   window.flatworld.extensions.mapDrag = setupMap_drag();
 
   /*---------------------
-  ------ VARIABLES ------
-  ----------------------*/
-  let mapMoved = false;
-
-  /*---------------------
   -------- PUBLIC -------
   ----------------------*/
   /**
@@ -77,8 +72,6 @@
         }
         const coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
 
-        mapMoved = true;
-
         coords.x = Math.round(coords.x);
         coords.y = Math.round(coords.y);
 
@@ -92,7 +85,6 @@
           return;
         } else if (e.isFinal === true) {
           initialized = false;
-          mapMoved = false;
         }
 
         _mapMovement(e, map, coords);
@@ -119,10 +111,6 @@
 
       if (moved.x > 0 || moved.y > 0 || moved.x < 0 || moved.y < 0) {
         map.moveMap(moved);
-      }
-
-      if (e.isFinal) {
-        mapMoved = false;
       }
 
       offsetCoords.setOffset({
