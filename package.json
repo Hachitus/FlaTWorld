@@ -1,6 +1,7 @@
 {
   "name": "flatworld",
   "description": "Game engine for 2D turn-based strategy games in browsers",
+  "keywords": ["2D game engine", "game-engine", "game engine", "HTML5 game engine", "turn-based strategy game", "turn-based", "multiplayer", "singleplayer", "cooperative", "strategy", "game", "webGL", "canvas", "HTML5"],
   "version": "0.5.0",
   "main": "src/dist/flatworld.js",
   "author": "Janne Hyytiä",
