@@ -783,6 +783,10 @@
     getMovableLayer() {
       return _movableLayer;
     }
+    getCurrentMapCoordinates() {
+      return _movableLayer.position;
+    }
+    // toGlobal is there to check if the "coordinates" are a PIXI object and we can use that
     getMapCoordinates(coordinates) {
       if (coordinates.toGlobal) {
         return _movableLayer.toLocal(constants.ZERO_COORDINATES, coordinates);
