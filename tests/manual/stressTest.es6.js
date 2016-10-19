@@ -549,13 +549,16 @@
       return unitViewSprite;
     }
 
-    return { cb: foWCallback, filter: FoWFilter };
+    return {
+      cb: foWCallback,
+      filter: FoWFilter
+    };
     /* ----------- FOW stuff END------------ */
   }
 
   function _createHexagonParams(map) {
     return { isBlocked: function (correctHexagon, selectedObject) {
-        correctHexagon.data.typeData.movement
+        return +correctHexagon.data.typeData.movement;
       }
     };
   }

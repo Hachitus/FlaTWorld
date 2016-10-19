@@ -173,10 +173,16 @@
     
     if (!correctHexagon) {
       return -1;
-    } else if (returnedWeight) {
+    } else if (returnedWeight && isInteger(returnedWeight)) {
       return returnedWeight;
+    } else if (returnedWeight && !isInteger(returnedWeight)) {
+      throw new Error('weight callback has to return an integer');
     }
 
     return -1;
+  }
+
+  function isInteger(x) {
+    return x === Math.floor(x) && isFinite(x);
   }
 })();
