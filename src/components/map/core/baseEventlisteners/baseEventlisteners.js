@@ -67,9 +67,7 @@
       eventListeners.on('fullSize', resizeCanvas);
 
       eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
-      this.mapInstance.setPrototype('setFullScreen', () => {
-        eventListeners.on('fullscreen', _setFullScreen);
-      });
+      this.mapInstance.setPrototype('setFullScreen', _setFullScreen);
 
       eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off);
       eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
@@ -272,8 +270,8 @@
      */
     function _setFullScreen() {
       utils.resize.toggleFullScreen();
-      mapEvents.publish('mapResized');
       resizeCanvas();
+      mapEvents.publish('mapResized');
     }
     /**
      * Resizes the canvas to the current most wide and high element status.
