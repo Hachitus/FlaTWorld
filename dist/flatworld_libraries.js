@@ -1,3 +1,292 @@
+(function () {
+  'use strict';
+
+  var has = Object.prototype.hasOwnProperty;
+
+  //
+  // We store our EE objects in a plain object whose properties are event names.
+  // If `Object.create(null)` is not supported we prefix the event names with a
+  // `~` to make sure that the built-in object properties are not overridden or
+  // used as an attack vector.
+  // We also assume that `Object.create(null)` is available when the event name
+  // is an ES6 Symbol.
+  //
+  var prefix = typeof Object.create !== 'function' ? '~' : false;
+
+  /**
+   * Representation of a single EventEmitter function.
+   *
+   * @param {Function} fn Event handler to be called.
+   * @param {Mixed} context Context for function execution.
+   * @param {Boolean} [once=false] Only emit once
+   * @api private
+   */
+  function EE(fn, context, once) {
+    this.fn = fn;
+    this.context = context;
+    this.once = once || false;
+  }
+
+  /**
+   * Minimal EventEmitter interface that is molded against the Node.js
+   * EventEmitter interface.
+   *
+   * @constructor
+   * @api public
+   */
+  function EventEmitter() { /* Nothing to set */ }
+
+  /**
+   * Hold the assigned EventEmitters by name.
+   *
+   * @type {Object}
+   * @private
+   */
+  EventEmitter.prototype._events = undefined;
+
+  /**
+   * Return an array listing the events for which the emitter has registered
+   * listeners.
+   *
+   * @returns {Array}
+   * @api public
+   */
+  EventEmitter.prototype.eventNames = function eventNames() {
+    var events = this._events
+      , names = []
+      , name;
+
+    if (!events) return names;
+
+    for (name in events) {
+      if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
+    }
+
+    if (Object.getOwnPropertySymbols) {
+      return names.concat(Object.getOwnPropertySymbols(events));
+    }
+
+    return names;
+  };
+
+  /**
+   * Return a list of assigned event listeners.
+   *
+   * @param {String} event The events that should be listed.
+   * @param {Boolean} exists We only need to know if there are listeners.
+   * @returns {Array|Boolean}
+   * @api public
+   */
+  EventEmitter.prototype.listeners = function listeners(event, exists) {
+    var evt = prefix ? prefix + event : event
+      , available = this._events && this._events[evt];
+
+    if (exists) return !!available;
+    if (!available) return [];
+    if (available.fn) return [available.fn];
+
+    for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
+      ee[i] = available[i].fn;
+    }
+
+    return ee;
+  };
+
+  /**
+   * Emit an event to all registered event listeners.
+   *
+   * @param {String} event The name of the event.
+   * @returns {Boolean} Indication if we've emitted an event.
+   * @api public
+   */
+  EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
+    var evt = prefix ? prefix + event : event;
+
+    if (!this._events || !this._events[evt]) return false;
+
+    var listeners = this._events[evt]
+      , len = arguments.length
+      , args
+      , i;
+
+    if ('function' === typeof listeners.fn) {
+      if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
+
+      switch (len) {
+        case 1: return listeners.fn.call(listeners.context), true;
+        case 2: return listeners.fn.call(listeners.context, a1), true;
+        case 3: return listeners.fn.call(listeners.context, a1, a2), true;
+        case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
+        case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
+        case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
+      }
+
+      for (i = 1, args = new Array(len -1); i < len; i++) {
+        args[i - 1] = arguments[i];
+      }
+
+      listeners.fn.apply(listeners.context, args);
+    } else {
+      var length = listeners.length
+        , j;
+
+      for (i = 0; i < length; i++) {
+        if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
+
+        switch (len) {
+          case 1: listeners[i].fn.call(listeners[i].context); break;
+          case 2: listeners[i].fn.call(listeners[i].context, a1); break;
+          case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
+          default:
+            if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
+              args[j - 1] = arguments[j];
+            }
+
+            listeners[i].fn.apply(listeners[i].context, args);
+        }
+      }
+    }
+
+    return true;
+  };
+
+  /**
+   * Register a new EventListener for the given event.
+   *
+   * @param {String} event Name of the event.
+   * @param {Function} fn Callback function.
+   * @param {Mixed} [context=this] The context of the function.
+   * @api public
+   */
+  EventEmitter.prototype.on = function on(event, fn, context) {
+    var listener = new EE(fn, context || this)
+      , evt = prefix ? prefix + event : event;
+
+    if (!this._events) this._events = prefix ? {} : Object.create(null);
+    if (!this._events[evt]) this._events[evt] = listener;
+    else {
+      if (!this._events[evt].fn) this._events[evt].push(listener);
+      else this._events[evt] = [
+        this._events[evt], listener
+      ];
+    }
+
+    return this;
+  };
+
+  /**
+   * Add an EventListener that's only called once.
+   *
+   * @param {String} event Name of the event.
+   * @param {Function} fn Callback function.
+   * @param {Mixed} [context=this] The context of the function.
+   * @api public
+   */
+  EventEmitter.prototype.once = function once(event, fn, context) {
+    var listener = new EE(fn, context || this, true)
+      , evt = prefix ? prefix + event : event;
+
+    if (!this._events) this._events = prefix ? {} : Object.create(null);
+    if (!this._events[evt]) this._events[evt] = listener;
+    else {
+      if (!this._events[evt].fn) this._events[evt].push(listener);
+      else this._events[evt] = [
+        this._events[evt], listener
+      ];
+    }
+
+    return this;
+  };
+
+  /**
+   * Remove event listeners.
+   *
+   * @param {String} event The event we want to remove.
+   * @param {Function} fn The listener that we need to find.
+   * @param {Mixed} context Only remove listeners matching this context.
+   * @param {Boolean} once Only remove once listeners.
+   * @api public
+   */
+  EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
+    var evt = prefix ? prefix + event : event;
+
+    if (!this._events || !this._events[evt]) return this;
+
+    var listeners = this._events[evt]
+      , events = [];
+
+    if (fn) {
+      if (listeners.fn) {
+        if (
+             listeners.fn !== fn
+          || (once && !listeners.once)
+          || (context && listeners.context !== context)
+        ) {
+          events.push(listeners);
+        }
+      } else {
+        for (var i = 0, length = listeners.length; i < length; i++) {
+          if (
+               listeners[i].fn !== fn
+            || (once && !listeners[i].once)
+            || (context && listeners[i].context !== context)
+          ) {
+            events.push(listeners[i]);
+          }
+        }
+      }
+    }
+
+    //
+    // Reset the array, or remove it completely if we have no more listeners.
+    //
+    if (events.length) {
+      this._events[evt] = events.length === 1 ? events[0] : events;
+    } else {
+      delete this._events[evt];
+    }
+
+    return this;
+  };
+
+  /**
+   * Remove all listeners or only the listeners for the specified event.
+   *
+   * @param {String} event The event want to remove all listeners for.
+   * @api public
+   */
+  EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
+    if (!this._events) return this;
+
+    if (event) delete this._events[prefix ? prefix + event : event];
+    else this._events = prefix ? {} : Object.create(null);
+
+    return this;
+  };
+
+  //
+  // Alias methods names because people roll like that.
+  //
+  EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+  EventEmitter.prototype.addListener = EventEmitter.prototype.on;
+
+  //
+  // This function doesn't apply anymore.
+  //
+  EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
+    return this;
+  };
+
+  //
+  // Expose the prefix.
+  //
+  EventEmitter.prefixed = prefix;
+
+  //
+  // Expose the module.
+  //
+  window.EventEmitter = EventEmitter;
+})();
 /*! Hammer.JS - v2.0.6 - 2015-12-23
  * http://hammerjs.github.io/
  *
@@ -2566,295 +2855,6 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })(window, document, 'Hammer');
-(function () {
-  'use strict';
-
-  var has = Object.prototype.hasOwnProperty;
-
-  //
-  // We store our EE objects in a plain object whose properties are event names.
-  // If `Object.create(null)` is not supported we prefix the event names with a
-  // `~` to make sure that the built-in object properties are not overridden or
-  // used as an attack vector.
-  // We also assume that `Object.create(null)` is available when the event name
-  // is an ES6 Symbol.
-  //
-  var prefix = typeof Object.create !== 'function' ? '~' : false;
-
-  /**
-   * Representation of a single EventEmitter function.
-   *
-   * @param {Function} fn Event handler to be called.
-   * @param {Mixed} context Context for function execution.
-   * @param {Boolean} [once=false] Only emit once
-   * @api private
-   */
-  function EE(fn, context, once) {
-    this.fn = fn;
-    this.context = context;
-    this.once = once || false;
-  }
-
-  /**
-   * Minimal EventEmitter interface that is molded against the Node.js
-   * EventEmitter interface.
-   *
-   * @constructor
-   * @api public
-   */
-  function EventEmitter() { /* Nothing to set */ }
-
-  /**
-   * Hold the assigned EventEmitters by name.
-   *
-   * @type {Object}
-   * @private
-   */
-  EventEmitter.prototype._events = undefined;
-
-  /**
-   * Return an array listing the events for which the emitter has registered
-   * listeners.
-   *
-   * @returns {Array}
-   * @api public
-   */
-  EventEmitter.prototype.eventNames = function eventNames() {
-    var events = this._events
-      , names = []
-      , name;
-
-    if (!events) return names;
-
-    for (name in events) {
-      if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
-    }
-
-    if (Object.getOwnPropertySymbols) {
-      return names.concat(Object.getOwnPropertySymbols(events));
-    }
-
-    return names;
-  };
-
-  /**
-   * Return a list of assigned event listeners.
-   *
-   * @param {String} event The events that should be listed.
-   * @param {Boolean} exists We only need to know if there are listeners.
-   * @returns {Array|Boolean}
-   * @api public
-   */
-  EventEmitter.prototype.listeners = function listeners(event, exists) {
-    var evt = prefix ? prefix + event : event
-      , available = this._events && this._events[evt];
-
-    if (exists) return !!available;
-    if (!available) return [];
-    if (available.fn) return [available.fn];
-
-    for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
-      ee[i] = available[i].fn;
-    }
-
-    return ee;
-  };
-
-  /**
-   * Emit an event to all registered event listeners.
-   *
-   * @param {String} event The name of the event.
-   * @returns {Boolean} Indication if we've emitted an event.
-   * @api public
-   */
-  EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
-    var evt = prefix ? prefix + event : event;
-
-    if (!this._events || !this._events[evt]) return false;
-
-    var listeners = this._events[evt]
-      , len = arguments.length
-      , args
-      , i;
-
-    if ('function' === typeof listeners.fn) {
-      if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
-
-      switch (len) {
-        case 1: return listeners.fn.call(listeners.context), true;
-        case 2: return listeners.fn.call(listeners.context, a1), true;
-        case 3: return listeners.fn.call(listeners.context, a1, a2), true;
-        case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
-        case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
-        case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
-      }
-
-      for (i = 1, args = new Array(len -1); i < len; i++) {
-        args[i - 1] = arguments[i];
-      }
-
-      listeners.fn.apply(listeners.context, args);
-    } else {
-      var length = listeners.length
-        , j;
-
-      for (i = 0; i < length; i++) {
-        if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
-
-        switch (len) {
-          case 1: listeners[i].fn.call(listeners[i].context); break;
-          case 2: listeners[i].fn.call(listeners[i].context, a1); break;
-          case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
-          default:
-            if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
-              args[j - 1] = arguments[j];
-            }
-
-            listeners[i].fn.apply(listeners[i].context, args);
-        }
-      }
-    }
-
-    return true;
-  };
-
-  /**
-   * Register a new EventListener for the given event.
-   *
-   * @param {String} event Name of the event.
-   * @param {Function} fn Callback function.
-   * @param {Mixed} [context=this] The context of the function.
-   * @api public
-   */
-  EventEmitter.prototype.on = function on(event, fn, context) {
-    var listener = new EE(fn, context || this)
-      , evt = prefix ? prefix + event : event;
-
-    if (!this._events) this._events = prefix ? {} : Object.create(null);
-    if (!this._events[evt]) this._events[evt] = listener;
-    else {
-      if (!this._events[evt].fn) this._events[evt].push(listener);
-      else this._events[evt] = [
-        this._events[evt], listener
-      ];
-    }
-
-    return this;
-  };
-
-  /**
-   * Add an EventListener that's only called once.
-   *
-   * @param {String} event Name of the event.
-   * @param {Function} fn Callback function.
-   * @param {Mixed} [context=this] The context of the function.
-   * @api public
-   */
-  EventEmitter.prototype.once = function once(event, fn, context) {
-    var listener = new EE(fn, context || this, true)
-      , evt = prefix ? prefix + event : event;
-
-    if (!this._events) this._events = prefix ? {} : Object.create(null);
-    if (!this._events[evt]) this._events[evt] = listener;
-    else {
-      if (!this._events[evt].fn) this._events[evt].push(listener);
-      else this._events[evt] = [
-        this._events[evt], listener
-      ];
-    }
-
-    return this;
-  };
-
-  /**
-   * Remove event listeners.
-   *
-   * @param {String} event The event we want to remove.
-   * @param {Function} fn The listener that we need to find.
-   * @param {Mixed} context Only remove listeners matching this context.
-   * @param {Boolean} once Only remove once listeners.
-   * @api public
-   */
-  EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
-    var evt = prefix ? prefix + event : event;
-
-    if (!this._events || !this._events[evt]) return this;
-
-    var listeners = this._events[evt]
-      , events = [];
-
-    if (fn) {
-      if (listeners.fn) {
-        if (
-             listeners.fn !== fn
-          || (once && !listeners.once)
-          || (context && listeners.context !== context)
-        ) {
-          events.push(listeners);
-        }
-      } else {
-        for (var i = 0, length = listeners.length; i < length; i++) {
-          if (
-               listeners[i].fn !== fn
-            || (once && !listeners[i].once)
-            || (context && listeners[i].context !== context)
-          ) {
-            events.push(listeners[i]);
-          }
-        }
-      }
-    }
-
-    //
-    // Reset the array, or remove it completely if we have no more listeners.
-    //
-    if (events.length) {
-      this._events[evt] = events.length === 1 ? events[0] : events;
-    } else {
-      delete this._events[evt];
-    }
-
-    return this;
-  };
-
-  /**
-   * Remove all listeners or only the listeners for the specified event.
-   *
-   * @param {String} event The event want to remove all listeners for.
-   * @api public
-   */
-  EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
-    if (!this._events) return this;
-
-    if (event) delete this._events[prefix ? prefix + event : event];
-    else this._events = prefix ? {} : Object.create(null);
-
-    return this;
-  };
-
-  //
-  // Alias methods names because people roll like that.
-  //
-  EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
-  EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-
-  //
-  // This function doesn't apply anymore.
-  //
-  EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
-    return this;
-  };
-
-  //
-  // Expose the prefix.
-  //
-  EventEmitter.prefixed = prefix;
-
-  //
-  // Expose the module.
-  //
-  window.EventEmitter = EventEmitter;
-})();
 /*
  * Hamster.js v1.0.5
  * (c) 2013 Monospaced http://monospaced.com
@@ -7782,1358 +7782,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-/*!
- *  howler.js v1.1.29
- *  howlerjs.com
- *
- *  (c) 2013-2016, James Simpson of GoldFire Studios
- *  goldfirestudios.com
- *
- *  MIT License
- */
-
-(function() {
-  // setup
-  var cache = {};
-
-  // setup the audio context
-  var ctx = null,
-    usingWebAudio = true,
-    noAudio = false;
-  try {
-    if (typeof AudioContext !== 'undefined') {
-      ctx = new AudioContext();
-    } else if (typeof webkitAudioContext !== 'undefined') {
-      ctx = new webkitAudioContext();
-    } else {
-      usingWebAudio = false;
-    }
-  } catch(e) {
-    usingWebAudio = false;
-  }
-
-  if (!usingWebAudio) {
-    if (typeof Audio !== 'undefined') {
-      try {
-        new Audio();
-      } catch(e) {
-        noAudio = true;
-      }
-    } else {
-      noAudio = true;
-    }
-  }
-
-  // create a master gain node
-  if (usingWebAudio) {
-    var masterGain = (typeof ctx.createGain === 'undefined') ? ctx.createGainNode() : ctx.createGain();
-    masterGain.gain.value = 1;
-    masterGain.connect(ctx.destination);
-  }
-
-  // create global controller
-  var HowlerGlobal = function(codecs) {
-    this._volume = 1;
-    this._muted = false;
-    this.usingWebAudio = usingWebAudio;
-    this.ctx = ctx;
-    this.noAudio = noAudio;
-    this._howls = [];
-    this._codecs = codecs;
-    this.iOSAutoEnable = true;
-  };
-  HowlerGlobal.prototype = {
-    /**
-     * Get/set the global volume for all sounds.
-     * @param  {Float} vol Volume from 0.0 to 1.0.
-     * @return {Howler/Float}     Returns self or current volume.
-     */
-    volume: function(vol) {
-      var self = this;
-
-      // make sure volume is a number
-      vol = parseFloat(vol);
-
-      if (vol >= 0 && vol <= 1) {
-        self._volume = vol;
-
-        if (usingWebAudio) {
-          masterGain.gain.value = vol;
-        }
-
-        // loop through cache and change volume of all nodes that are using HTML5 Audio
-        for (var key in self._howls) {
-          if (self._howls.hasOwnProperty(key) && self._howls[key]._webAudio === false) {
-            // loop through the audio nodes
-            for (var i=0; i<self._howls[key]._audioNode.length; i++) {
-              self._howls[key]._audioNode[i].volume = self._howls[key]._volume * self._volume;
-            }
-          }
-        }
-
-        return self;
-      }
-
-      // return the current global volume
-      return (usingWebAudio) ? masterGain.gain.value : self._volume;
-    },
-
-    /**
-     * Mute all sounds.
-     * @return {Howler}
-     */
-    mute: function() {
-      this._setMuted(true);
-
-      return this;
-    },
-
-    /**
-     * Unmute all sounds.
-     * @return {Howler}
-     */
-    unmute: function() {
-      this._setMuted(false);
-
-      return this;
-    },
-
-    /**
-     * Handle muting and unmuting globally.
-     * @param  {Boolean} muted Is muted or not.
-     */
-    _setMuted: function(muted) {
-      var self = this;
-
-      self._muted = muted;
-
-      if (usingWebAudio) {
-        masterGain.gain.value = muted ? 0 : self._volume;
-      }
-
-      for (var key in self._howls) {
-        if (self._howls.hasOwnProperty(key) && self._howls[key]._webAudio === false) {
-          // loop through the audio nodes
-          for (var i=0; i<self._howls[key]._audioNode.length; i++) {
-            self._howls[key]._audioNode[i].muted = muted;
-          }
-        }
-      }
-    },
-
-    /**
-     * Check for codec support.
-     * @param  {String} ext Audio file extension.
-     * @return {Boolean}
-     */
-    codecs: function(ext) {
-      return this._codecs[ext];
-    },
-
-    /**
-     * iOS will only allow audio to be played after a user interaction.
-     * Attempt to automatically unlock audio on the first user interaction.
-     * Concept from: http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
-     * @return {Howler}
-     */
-    _enableiOSAudio: function() {
-      var self = this;
-
-      // only run this on iOS if audio isn't already eanbled
-      if (ctx && (self._iOSEnabled || !/iPhone|iPad|iPod/i.test(navigator.userAgent))) {
-        return;
-      }
-
-      self._iOSEnabled = false;
-
-      // call this method on touch start to create and play a buffer,
-      // then check if the audio actually played to determine if
-      // audio has now been unlocked on iOS
-      var unlock = function() {
-        // create an empty buffer
-        var buffer = ctx.createBuffer(1, 1, 22050);
-        var source = ctx.createBufferSource();
-        source.buffer = buffer;
-        source.connect(ctx.destination);
-
-        // play the empty buffer
-        if (typeof source.start === 'undefined') {
-          source.noteOn(0);
-        } else {
-          source.start(0);
-        }
-
-        // setup a timeout to check that we are unlocked on the next event loop
-        setTimeout(function() {
-          if ((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
-            // update the unlocked state and prevent this check from happening again
-            self._iOSEnabled = true;
-            self.iOSAutoEnable = false;
-
-            // remove the touch start listener
-            window.removeEventListener('touchend', unlock, false);
-          }
-        }, 0);
-      };
-
-      // setup a touch start listener to attempt an unlock in
-      window.addEventListener('touchend', unlock, false);
-
-      return self;
-    }
-  };
-
-  // check for browser codec support
-  var audioTest = null;
-  var codecs = {};
-  if (!noAudio) {
-    audioTest = new Audio();
-    codecs = {
-      mp3: !!audioTest.canPlayType('audio/mpeg;').replace(/^no$/, ''),
-      opus: !!audioTest.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/, ''),
-      ogg: !!audioTest.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/, ''),
-      wav: !!audioTest.canPlayType('audio/wav; codecs="1"').replace(/^no$/, ''),
-      aac: !!audioTest.canPlayType('audio/aac;').replace(/^no$/, ''),
-      m4a: !!(audioTest.canPlayType('audio/x-m4a;') || audioTest.canPlayType('audio/m4a;') || audioTest.canPlayType('audio/aac;')).replace(/^no$/, ''),
-      mp4: !!(audioTest.canPlayType('audio/x-mp4;') || audioTest.canPlayType('audio/mp4;') || audioTest.canPlayType('audio/aac;')).replace(/^no$/, ''),
-      weba: !!audioTest.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/, '')
-    };
-  }
-
-  // allow access to the global audio controls
-  var Howler = new HowlerGlobal(codecs);
-
-  // setup the audio object
-  var Howl = function(o) {
-    var self = this;
-
-    // setup the defaults
-    self._autoplay = o.autoplay || false;
-    self._buffer = o.buffer || false;
-    self._duration = o.duration || 0;
-    self._format = o.format || null;
-    self._loop = o.loop || false;
-    self._loaded = false;
-    self._sprite = o.sprite || {};
-    self._src = o.src || '';
-    self._pos3d = o.pos3d || [0, 0, -0.5];
-    self._volume = o.volume !== undefined ? o.volume : 1;
-    self._urls = o.urls || [];
-    self._rate = o.rate || 1;
-
-    // allow forcing of a specific panningModel ('equalpower' or 'HRTF'),
-    // if none is specified, defaults to 'equalpower' and switches to 'HRTF'
-    // if 3d sound is used
-    self._model = o.model || null;
-
-    // setup event functions
-    self._onload = [o.onload || function() {}];
-    self._onloaderror = [o.onloaderror || function() {}];
-    self._onend = [o.onend || function() {}];
-    self._onpause = [o.onpause || function() {}];
-    self._onplay = [o.onplay || function() {}];
-
-    self._onendTimer = [];
-
-    // Web Audio or HTML5 Audio?
-    self._webAudio = usingWebAudio && !self._buffer;
-
-    // check if we need to fall back to HTML5 Audio
-    self._audioNode = [];
-    if (self._webAudio) {
-      self._setupAudioNode();
-    }
-
-    // automatically try to enable audio on iOS
-    if (typeof ctx !== 'undefined' && ctx && Howler.iOSAutoEnable) {
-      Howler._enableiOSAudio();
-    }
-
-    // add this to an array of Howl's to allow global control
-    Howler._howls.push(self);
-
-    // load the track
-    self.load();
-  };
-
-  // setup all of the methods
-  Howl.prototype = {
-    /**
-     * Load an audio file.
-     * @return {Howl}
-     */
-    load: function() {
-      var self = this,
-        url = null;
-
-      // if no audio is available, quit immediately
-      if (noAudio) {
-        self.on('loaderror', new Error('No audio support.'));
-        return;
-      }
-
-      // loop through source URLs and pick the first one that is compatible
-      for (var i=0; i<self._urls.length; i++) {
-        var ext, urlItem;
-
-        if (self._format) {
-          // use specified audio format if available
-          ext = self._format;
-        } else {
-          // figure out the filetype (whether an extension or base64 data)
-          urlItem = self._urls[i];
-          ext = /^data:audio\/([^;,]+);/i.exec(urlItem);
-          if (!ext) {
-            ext = /\.([^.]+)$/.exec(urlItem.split('?', 1)[0]);
-          }
-
-          if (ext) {
-            ext = ext[1].toLowerCase();
-          } else {
-            self.on('loaderror', new Error('Could not extract format from passed URLs, please add format parameter.'));
-            return;
-          }
-        }
-
-        if (codecs[ext]) {
-          url = self._urls[i];
-          break;
-        }
-      }
-
-      if (!url) {
-        self.on('loaderror', new Error('No codec support for selected audio sources.'));
-        return;
-      }
-
-      self._src = url;
-
-      if (self._webAudio) {
-        loadBuffer(self, url);
-      } else {
-        var newNode = new Audio();
-
-        // listen for errors with HTML5 audio (http://dev.w3.org/html5/spec-author-view/spec.html#mediaerror)
-        newNode.addEventListener('error', function () {
-          if (newNode.error && newNode.error.code === 4) {
-            HowlerGlobal.noAudio = true;
-          }
-
-          self.on('loaderror', {type: newNode.error ? newNode.error.code : 0});
-        }, false);
-
-        self._audioNode.push(newNode);
-
-        // setup the new audio node
-        newNode.src = url;
-        newNode._pos = 0;
-        newNode.preload = 'auto';
-        newNode.volume = (Howler._muted) ? 0 : self._volume * Howler.volume();
-
-        // setup the event listener to start playing the sound
-        // as soon as it has buffered enough
-        var listener = function() {
-          // round up the duration when using HTML5 Audio to account for the lower precision
-          self._duration = Math.ceil(newNode.duration * 10) / 10;
-
-          // setup a sprite if none is defined
-          if (Object.getOwnPropertyNames(self._sprite).length === 0) {
-            self._sprite = {_default: [0, self._duration * 1000]};
-          }
-
-          if (!self._loaded) {
-            self._loaded = true;
-            self.on('load');
-          }
-
-          if (self._autoplay) {
-            self.play();
-          }
-
-          // clear the event listener
-          newNode.removeEventListener('canplaythrough', listener, false);
-        };
-        newNode.addEventListener('canplaythrough', listener, false);
-        newNode.load();
-      }
-
-      return self;
-    },
-
-    /**
-     * Get/set the URLs to be pulled from to play in this source.
-     * @param  {Array} urls  Arry of URLs to load from
-     * @return {Howl}        Returns self or the current URLs
-     */
-    urls: function(urls) {
-      var self = this;
-
-      if (urls) {
-        self.stop();
-        self._urls = (typeof urls === 'string') ? [urls] : urls;
-        self._loaded = false;
-        self.load();
-
-        return self;
-      } else {
-        return self._urls;
-      }
-    },
-
-    /**
-     * Play a sound from the current time (0 by default).
-     * @param  {String}   sprite   (optional) Plays from the specified position in the sound sprite definition.
-     * @param  {Function} callback (optional) Returns the unique playback id for this sound instance.
-     * @return {Howl}
-     */
-    play: function(sprite, callback) {
-      var self = this;
-
-      // if no sprite was passed but a callback was, update the variables
-      if (typeof sprite === 'function') {
-        callback = sprite;
-      }
-
-      // use the default sprite if none is passed
-      if (!sprite || typeof sprite === 'function') {
-        sprite = '_default';
-      }
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('load', function() {
-          self.play(sprite, callback);
-        });
-
-        return self;
-      }
-
-      // if the sprite doesn't exist, play nothing
-      if (!self._sprite[sprite]) {
-        if (typeof callback === 'function') callback();
-        return self;
-      }
-
-      // get the node to playback
-      self._inactiveNode(function(node) {
-        // persist the sprite being played
-        node._sprite = sprite;
-
-        // determine where to start playing from
-        var pos = (node._pos > 0) ? node._pos : self._sprite[sprite][0] / 1000;
-
-        // determine how long to play for
-        var duration = 0;
-        if (self._webAudio) {
-          duration = self._sprite[sprite][1] / 1000 - node._pos;
-          if (node._pos > 0) {
-            pos = self._sprite[sprite][0] / 1000 + pos;
-          }
-        } else {
-          duration = self._sprite[sprite][1] / 1000 - (pos - self._sprite[sprite][0] / 1000);
-        }
-
-        // determine if this sound should be looped
-        var loop = !!(self._loop || self._sprite[sprite][2]);
-
-        // set timer to fire the 'onend' event
-        var soundId = (typeof callback === 'string') ? callback : Math.round(Date.now() * Math.random()) + '',
-          timerId;
-        (function() {
-          var data = {
-            id: soundId,
-            sprite: sprite,
-            loop: loop
-          };
-          timerId = setTimeout(function() {
-            // if looping, restart the track
-            if (!self._webAudio && loop) {
-              self.stop(data.id).play(sprite, data.id);
-            }
-
-            // set web audio node to paused at end
-            if (self._webAudio && !loop) {
-              self._nodeById(data.id).paused = true;
-              self._nodeById(data.id)._pos = 0;
-
-              // clear the end timer
-              self._clearEndTimer(data.id);
-            }
-
-            // end the track if it is HTML audio and a sprite
-            if (!self._webAudio && !loop) {
-              self.stop(data.id);
-            }
-
-            // fire ended event
-            self.on('end', soundId);
-          }, (duration / self._rate) * 1000);
-
-          // store the reference to the timer
-          self._onendTimer.push({timer: timerId, id: data.id});
-        })();
-
-        if (self._webAudio) {
-          var loopStart = self._sprite[sprite][0] / 1000,
-            loopEnd = self._sprite[sprite][1] / 1000;
-
-          // set the play id to this node and load into context
-          node.id = soundId;
-          node.paused = false;
-          refreshBuffer(self, [loop, loopStart, loopEnd], soundId);
-          self._playStart = ctx.currentTime;
-          node.gain.value = self._volume;
-
-          if (typeof node.bufferSource.start === 'undefined') {
-            loop ? node.bufferSource.noteGrainOn(0, pos, 86400) : node.bufferSource.noteGrainOn(0, pos, duration);
-          } else {
-            loop ? node.bufferSource.start(0, pos, 86400) : node.bufferSource.start(0, pos, duration);
-          }
-        } else {
-          if (node.readyState === 4 || !node.readyState && navigator.isCocoonJS) {
-            node.readyState = 4;
-            node.id = soundId;
-            node.currentTime = pos;
-            node.muted = Howler._muted || node.muted;
-            node.volume = self._volume * Howler.volume();
-            setTimeout(function() { node.play(); }, 0);
-          } else {
-            self._clearEndTimer(soundId);
-
-            (function(){
-              var sound = self,
-                playSprite = sprite,
-                fn = callback,
-                newNode = node;
-              var listener = function() {
-                sound.play(playSprite, fn);
-
-                // clear the event listener
-                newNode.removeEventListener('canplaythrough', listener, false);
-              };
-              newNode.addEventListener('canplaythrough', listener, false);
-            })();
-
-            return self;
-          }
-        }
-
-        // fire the play event and send the soundId back in the callback
-        self.on('play');
-        if (typeof callback === 'function') callback(soundId);
-
-        return self;
-      });
-
-      return self;
-    },
-
-    /**
-     * Pause playback and save the current position.
-     * @param {String} id (optional) The play instance ID.
-     * @return {Howl}
-     */
-    pause: function(id) {
-      var self = this;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('play', function() {
-          self.pause(id);
-        });
-
-        return self;
-      }
-
-      // clear 'onend' timer
-      self._clearEndTimer(id);
-
-      var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-      if (activeNode) {
-        activeNode._pos = self.pos(null, id);
-
-        if (self._webAudio) {
-          // make sure the sound has been created
-          if (!activeNode.bufferSource || activeNode.paused) {
-            return self;
-          }
-
-          activeNode.paused = true;
-          if (typeof activeNode.bufferSource.stop === 'undefined') {
-            activeNode.bufferSource.noteOff(0);
-          } else {
-            activeNode.bufferSource.stop(0);
-          }
-        } else {
-          activeNode.pause();
-        }
-      }
-
-      self.on('pause');
-
-      return self;
-    },
-
-    /**
-     * Stop playback and reset to start.
-     * @param  {String} id  (optional) The play instance ID.
-     * @return {Howl}
-     */
-    stop: function(id) {
-      var self = this;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('play', function() {
-          self.stop(id);
-        });
-
-        return self;
-      }
-
-      // clear 'onend' timer
-      self._clearEndTimer(id);
-
-      var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-      if (activeNode) {
-        activeNode._pos = 0;
-
-        if (self._webAudio) {
-          // make sure the sound has been created
-          if (!activeNode.bufferSource || activeNode.paused) {
-            return self;
-          }
-
-          activeNode.paused = true;
-
-          if (typeof activeNode.bufferSource.stop === 'undefined') {
-            activeNode.bufferSource.noteOff(0);
-          } else {
-            activeNode.bufferSource.stop(0);
-          }
-        } else if (!isNaN(activeNode.duration)) {
-          activeNode.pause();
-          activeNode.currentTime = 0;
-        }
-      }
-
-      return self;
-    },
-
-    /**
-     * Mute this sound.
-     * @param  {String} id (optional) The play instance ID.
-     * @return {Howl}
-     */
-    mute: function(id) {
-      var self = this;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('play', function() {
-          self.mute(id);
-        });
-
-        return self;
-      }
-
-      var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-      if (activeNode) {
-        if (self._webAudio) {
-          activeNode.gain.value = 0;
-        } else {
-          activeNode.muted = true;
-        }
-      }
-
-      return self;
-    },
-
-    /**
-     * Unmute this sound.
-     * @param  {String} id (optional) The play instance ID.
-     * @return {Howl}
-     */
-    unmute: function(id) {
-      var self = this;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('play', function() {
-          self.unmute(id);
-        });
-
-        return self;
-      }
-
-      var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-      if (activeNode) {
-        if (self._webAudio) {
-          activeNode.gain.value = self._volume;
-        } else {
-          activeNode.muted = false;
-        }
-      }
-
-      return self;
-    },
-
-    /**
-     * Get/set volume of this sound.
-     * @param  {Float}  vol Volume from 0.0 to 1.0.
-     * @param  {String} id  (optional) The play instance ID.
-     * @return {Howl/Float}     Returns self or current volume.
-     */
-    volume: function(vol, id) {
-      var self = this;
-
-      // make sure volume is a number
-      vol = parseFloat(vol);
-
-      if (vol >= 0 && vol <= 1) {
-        self._volume = vol;
-
-        // if the sound hasn't been loaded, add it to the event queue
-        if (!self._loaded) {
-          self.on('play', function() {
-            self.volume(vol, id);
-          });
-
-          return self;
-        }
-
-        var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-        if (activeNode) {
-          if (self._webAudio) {
-            activeNode.gain.value = vol;
-          } else {
-            activeNode.volume = vol * Howler.volume();
-          }
-        }
-
-        return self;
-      } else {
-        return self._volume;
-      }
-    },
-
-    /**
-     * Get/set whether to loop the sound.
-     * @param  {Boolean} loop To loop or not to loop, that is the question.
-     * @return {Howl/Boolean}      Returns self or current looping value.
-     */
-    loop: function(loop) {
-      var self = this;
-
-      if (typeof loop === 'boolean') {
-        self._loop = loop;
-
-        return self;
-      } else {
-        return self._loop;
-      }
-    },
-
-    /**
-     * Get/set sound sprite definition.
-     * @param  {Object} sprite Example: {spriteName: [offset, duration, loop]}
-     *                @param {Integer} offset   Where to begin playback in milliseconds
-     *                @param {Integer} duration How long to play in milliseconds
-     *                @param {Boolean} loop     (optional) Set true to loop this sprite
-     * @return {Howl}        Returns current sprite sheet or self.
-     */
-    sprite: function(sprite) {
-      var self = this;
-
-      if (typeof sprite === 'object') {
-        self._sprite = sprite;
-
-        return self;
-      } else {
-        return self._sprite;
-      }
-    },
-
-    /**
-     * Get/set the position of playback.
-     * @param  {Float}  pos The position to move current playback to.
-     * @param  {String} id  (optional) The play instance ID.
-     * @return {Howl/Float}      Returns self or current playback position.
-     */
-    pos: function(pos, id) {
-      var self = this;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('load', function() {
-          self.pos(pos);
-        });
-
-        return typeof pos === 'number' ? self : self._pos || 0;
-      }
-
-      // make sure we are dealing with a number for pos
-      pos = parseFloat(pos);
-
-      var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-      if (activeNode) {
-        if (pos >= 0) {
-          self.pause(id);
-          activeNode._pos = pos;
-          self.play(activeNode._sprite, id);
-
-          return self;
-        } else {
-          return self._webAudio ? activeNode._pos + (ctx.currentTime - self._playStart) : activeNode.currentTime;
-        }
-      } else if (pos >= 0) {
-        return self;
-      } else {
-        // find the first inactive node to return the pos for
-        for (var i=0; i<self._audioNode.length; i++) {
-          if (self._audioNode[i].paused && self._audioNode[i].readyState === 4) {
-            return (self._webAudio) ? self._audioNode[i]._pos : self._audioNode[i].currentTime;
-          }
-        }
-      }
-    },
-
-    /**
-     * Get/set the 3D position of the audio source.
-     * The most common usage is to set the 'x' position
-     * to affect the left/right ear panning. Setting any value higher than
-     * 1.0 will begin to decrease the volume of the sound as it moves further away.
-     * NOTE: This only works with Web Audio API, HTML5 Audio playback
-     * will not be affected.
-     * @param  {Float}  x  The x-position of the playback from -1000.0 to 1000.0
-     * @param  {Float}  y  The y-position of the playback from -1000.0 to 1000.0
-     * @param  {Float}  z  The z-position of the playback from -1000.0 to 1000.0
-     * @param  {String} id (optional) The play instance ID.
-     * @return {Howl/Array}   Returns self or the current 3D position: [x, y, z]
-     */
-    pos3d: function(x, y, z, id) {
-      var self = this;
-
-      // set a default for the optional 'y' & 'z'
-      y = (typeof y === 'undefined' || !y) ? 0 : y;
-      z = (typeof z === 'undefined' || !z) ? -0.5 : z;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('play', function() {
-          self.pos3d(x, y, z, id);
-        });
-
-        return self;
-      }
-
-      if (x >= 0 || x < 0) {
-        if (self._webAudio) {
-          var activeNode = (id) ? self._nodeById(id) : self._activeNode();
-          if (activeNode) {
-            self._pos3d = [x, y, z];
-            activeNode.panner.setPosition(x, y, z);
-            activeNode.panner.panningModel = self._model || 'HRTF';
-          }
-        }
-      } else {
-        return self._pos3d;
-      }
-
-      return self;
-    },
-
-    /**
-     * Fade a currently playing sound between two volumes.
-     * @param  {Number}   from     The volume to fade from (0.0 to 1.0).
-     * @param  {Number}   to       The volume to fade to (0.0 to 1.0).
-     * @param  {Number}   len      Time in milliseconds to fade.
-     * @param  {Function} callback (optional) Fired when the fade is complete.
-     * @param  {String}   id       (optional) The play instance ID.
-     * @return {Howl}
-     */
-    fade: function(from, to, len, callback, id) {
-      var self = this,
-        diff = Math.abs(from - to),
-        dir = from > to ? 'down' : 'up',
-        steps = diff / 0.01,
-        stepTime = len / steps;
-
-      // if the sound hasn't been loaded, add it to the event queue
-      if (!self._loaded) {
-        self.on('load', function() {
-          self.fade(from, to, len, callback, id);
-        });
-
-        return self;
-      }
-
-      // set the volume to the start position
-      self.volume(from, id);
-
-      for (var i=1; i<=steps; i++) {
-        (function() {
-          var change = self._volume + (dir === 'up' ? 0.01 : -0.01) * i,
-            vol = Math.round(1000 * change) / 1000,
-            toVol = to;
-
-          setTimeout(function() {
-            self.volume(vol, id);
-
-            if (vol === toVol) {
-              if (callback) callback();
-            }
-          }, stepTime * i);
-        })();
-      }
-    },
-
-    /**
-     * [DEPRECATED] Fade in the current sound.
-     * @param  {Float}    to      Volume to fade to (0.0 to 1.0).
-     * @param  {Number}   len     Time in milliseconds to fade.
-     * @param  {Function} callback
-     * @return {Howl}
-     */
-    fadeIn: function(to, len, callback) {
-      return this.volume(0).play().fade(0, to, len, callback);
-    },
-
-    /**
-     * [DEPRECATED] Fade out the current sound and pause when finished.
-     * @param  {Float}    to       Volume to fade to (0.0 to 1.0).
-     * @param  {Number}   len      Time in milliseconds to fade.
-     * @param  {Function} callback
-     * @param  {String}   id       (optional) The play instance ID.
-     * @return {Howl}
-     */
-    fadeOut: function(to, len, callback, id) {
-      var self = this;
-
-      return self.fade(self._volume, to, len, function() {
-        if (callback) callback();
-        self.pause(id);
-
-        // fire ended event
-        self.on('end');
-      }, id);
-    },
-
-    /**
-     * Get an audio node by ID.
-     * @return {Howl} Audio node.
-     */
-    _nodeById: function(id) {
-      var self = this,
-        node = self._audioNode[0];
-
-      // find the node with this ID
-      for (var i=0; i<self._audioNode.length; i++) {
-        if (self._audioNode[i].id === id) {
-          node = self._audioNode[i];
-          break;
-        }
-      }
-
-      return node;
-    },
-
-    /**
-     * Get the first active audio node.
-     * @return {Howl} Audio node.
-     */
-    _activeNode: function() {
-      var self = this,
-        node = null;
-
-      // find the first playing node
-      for (var i=0; i<self._audioNode.length; i++) {
-        if (!self._audioNode[i].paused) {
-          node = self._audioNode[i];
-          break;
-        }
-      }
-
-      // remove excess inactive nodes
-      self._drainPool();
-
-      return node;
-    },
-
-    /**
-     * Get the first inactive audio node.
-     * If there is none, create a new one and add it to the pool.
-     * @param  {Function} callback Function to call when the audio node is ready.
-     */
-    _inactiveNode: function(callback) {
-      var self = this,
-        node = null;
-
-      // find first inactive node to recycle
-      for (var i=0; i<self._audioNode.length; i++) {
-        if (self._audioNode[i].paused && self._audioNode[i].readyState === 4) {
-          // send the node back for use by the new play instance
-          callback(self._audioNode[i]);
-          node = true;
-          break;
-        }
-      }
-
-      // remove excess inactive nodes
-      self._drainPool();
-
-      if (node) {
-        return;
-      }
-
-      // create new node if there are no inactives
-      var newNode;
-      if (self._webAudio) {
-        newNode = self._setupAudioNode();
-        callback(newNode);
-      } else {
-        self.load();
-        newNode = self._audioNode[self._audioNode.length - 1];
-
-        // listen for the correct load event and fire the callback
-        var listenerEvent = navigator.isCocoonJS ? 'canplaythrough' : 'loadedmetadata';
-        var listener = function() {
-          newNode.removeEventListener(listenerEvent, listener, false);
-          callback(newNode);
-        };
-        newNode.addEventListener(listenerEvent, listener, false);
-      }
-    },
-
-    /**
-     * If there are more than 5 inactive audio nodes in the pool, clear out the rest.
-     */
-    _drainPool: function() {
-      var self = this,
-        inactive = 0,
-        i;
-
-      // count the number of inactive nodes
-      for (i=0; i<self._audioNode.length; i++) {
-        if (self._audioNode[i].paused) {
-          inactive++;
-        }
-      }
-
-      // remove excess inactive nodes
-      for (i=self._audioNode.length-1; i>=0; i--) {
-        if (inactive <= 5) {
-          break;
-        }
-
-        if (self._audioNode[i].paused) {
-          // disconnect the audio source if using Web Audio
-          if (self._webAudio) {
-            self._audioNode[i].disconnect(0);
-          }
-
-          inactive--;
-          self._audioNode.splice(i, 1);
-        }
-      }
-    },
-
-    /**
-     * Clear 'onend' timeout before it ends.
-     * @param  {String} soundId  The play instance ID.
-     */
-    _clearEndTimer: function(soundId) {
-      var self = this,
-        index = -1;
-
-      // loop through the timers to find the one associated with this sound
-      for (var i=0; i<self._onendTimer.length; i++) {
-        if (self._onendTimer[i].id === soundId) {
-          index = i;
-          break;
-        }
-      }
-
-      var timer = self._onendTimer[index];
-      if (timer) {
-        clearTimeout(timer.timer);
-        self._onendTimer.splice(index, 1);
-      }
-    },
-
-    /**
-     * Setup the gain node and panner for a Web Audio instance.
-     * @return {Object} The new audio node.
-     */
-    _setupAudioNode: function() {
-      var self = this,
-        node = self._audioNode,
-        index = self._audioNode.length;
-
-      // create gain node
-      node[index] = (typeof ctx.createGain === 'undefined') ? ctx.createGainNode() : ctx.createGain();
-      node[index].gain.value = self._volume;
-      node[index].paused = true;
-      node[index]._pos = 0;
-      node[index].readyState = 4;
-      node[index].connect(masterGain);
-
-      // create the panner
-      node[index].panner = ctx.createPanner();
-      node[index].panner.panningModel = self._model || 'equalpower';
-      node[index].panner.setPosition(self._pos3d[0], self._pos3d[1], self._pos3d[2]);
-      node[index].panner.connect(node[index]);
-
-      return node[index];
-    },
-
-    /**
-     * Call/set custom events.
-     * @param  {String}   event Event type.
-     * @param  {Function} fn    Function to call.
-     * @return {Howl}
-     */
-    on: function(event, fn) {
-      var self = this,
-        events = self['_on' + event];
-
-      if (typeof fn === 'function') {
-        events.push(fn);
-      } else {
-        for (var i=0; i<events.length; i++) {
-          if (fn) {
-            events[i].call(self, fn);
-          } else {
-            events[i].call(self);
-          }
-        }
-      }
-
-      return self;
-    },
-
-    /**
-     * Remove a custom event.
-     * @param  {String}   event Event type.
-     * @param  {Function} fn    Listener to remove.
-     * @return {Howl}
-     */
-    off: function(event, fn) {
-      var self = this,
-        events = self['_on' + event];
-
-      if (fn) {
-        // loop through functions in the event for comparison
-        for (var i=0; i<events.length; i++) {
-          if (fn === events[i]) {
-            events.splice(i, 1);
-            break;
-          }
-        }
-      } else {
-        self['_on' + event] = [];
-      }
-
-      return self;
-    },
-
-    /**
-     * Unload and destroy the current Howl object.
-     * This will immediately stop all play instances attached to this sound.
-     */
-    unload: function() {
-      var self = this;
-
-      // stop playing any active nodes
-      var nodes = self._audioNode;
-      for (var i=0; i<self._audioNode.length; i++) {
-        // stop the sound if it is currently playing
-        if (!nodes[i].paused) {
-          self.stop(nodes[i].id);
-          self.on('end', nodes[i].id);
-        }
-
-        if (!self._webAudio) {
-          // remove the source if using HTML5 Audio
-          nodes[i].src = '';
-        } else {
-          // disconnect the output from the master gain
-          nodes[i].disconnect(0);
-        }
-      }
-
-      // make sure all timeouts are cleared
-      for (i=0; i<self._onendTimer.length; i++) {
-        clearTimeout(self._onendTimer[i].timer);
-      }
-
-      // remove the reference in the global Howler object
-      var index = Howler._howls.indexOf(self);
-      if (index !== null && index >= 0) {
-        Howler._howls.splice(index, 1);
-      }
-
-      // delete this sound from the cache
-      delete cache[self._src];
-      self = null;
-    }
-
-  };
-
-  // only define these functions when using WebAudio
-  if (usingWebAudio) {
-
-    /**
-     * Buffer a sound from URL (or from cache) and decode to audio source (Web Audio API).
-     * @param  {Object} obj The Howl object for the sound to load.
-     * @param  {String} url The path to the sound file.
-     */
-    var loadBuffer = function(obj, url) {
-      // check if the buffer has already been cached
-      if (url in cache) {
-        // set the duration from the cache
-        obj._duration = cache[url].duration;
-
-        // load the sound into this object
-        loadSound(obj);
-        return;
-      }
-      
-      if (/^data:[^;]+;base64,/.test(url)) {
-        // Decode base64 data-URIs because some browsers cannot load data-URIs with XMLHttpRequest.
-        var data = atob(url.split(',')[1]);
-        var dataView = new Uint8Array(data.length);
-        for (var i=0; i<data.length; ++i) {
-          dataView[i] = data.charCodeAt(i);
-        }
-        
-        decodeAudioData(dataView.buffer, obj, url);
-      } else {
-        // load the buffer from the URL
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.responseType = 'arraybuffer';
-        xhr.onload = function() {
-          decodeAudioData(xhr.response, obj, url);
-        };
-        xhr.onerror = function() {
-          // if there is an error, switch the sound to HTML Audio
-          if (obj._webAudio) {
-            obj._buffer = true;
-            obj._webAudio = false;
-            obj._audioNode = [];
-            delete obj._gainNode;
-            delete cache[url];
-            obj.load();
-          }
-        };
-        try {
-          xhr.send();
-        } catch (e) {
-          xhr.onerror();
-        }
-      }
-    };
-
-    /**
-     * Decode audio data from an array buffer.
-     * @param  {ArrayBuffer} arraybuffer The audio data.
-     * @param  {Object} obj The Howl object for the sound to load.
-     * @param  {String} url The path to the sound file.
-     */
-    var decodeAudioData = function(arraybuffer, obj, url) {
-      // decode the buffer into an audio source
-      ctx.decodeAudioData(
-        arraybuffer,
-        function(buffer) {
-          if (buffer) {
-            cache[url] = buffer;
-            loadSound(obj, buffer);
-          }
-        },
-        function(err) {
-          obj.on('loaderror', err);
-        }
-      );
-    };
-
-    /**
-     * Finishes loading the Web Audio API sound and fires the loaded event
-     * @param  {Object}  obj    The Howl object for the sound to load.
-     * @param  {Objecct} buffer The decoded buffer sound source.
-     */
-    var loadSound = function(obj, buffer) {
-      // set the duration
-      obj._duration = (buffer) ? buffer.duration : obj._duration;
-
-      // setup a sprite if none is defined
-      if (Object.getOwnPropertyNames(obj._sprite).length === 0) {
-        obj._sprite = {_default: [0, obj._duration * 1000]};
-      }
-
-      // fire the loaded event
-      if (!obj._loaded) {
-        obj._loaded = true;
-        obj.on('load');
-      }
-
-      if (obj._autoplay) {
-        obj.play();
-      }
-    };
-
-    /**
-     * Load the sound back into the buffer source.
-     * @param  {Object} obj   The sound to load.
-     * @param  {Array}  loop  Loop boolean, pos, and duration.
-     * @param  {String} id    (optional) The play instance ID.
-     */
-    var refreshBuffer = function(obj, loop, id) {
-      // determine which node to connect to
-      var node = obj._nodeById(id);
-
-      // setup the buffer source for playback
-      node.bufferSource = ctx.createBufferSource();
-      node.bufferSource.buffer = cache[obj._src];
-      node.bufferSource.connect(node.panner);
-      node.bufferSource.loop = loop[0];
-      if (loop[0]) {
-        node.bufferSource.loopStart = loop[1];
-        node.bufferSource.loopEnd = loop[1] + loop[2];
-      }
-      node.bufferSource.playbackRate.value = obj._rate;
-    };
-
-  }
-
-  /**
-   * Add support for AMD (Asynchronous Module Definition) libraries such as require.js.
-   */
-  if (typeof define === 'function' && define.amd) {
-    define(function() {
-      return {
-        Howler: Howler,
-        Howl: Howl
-      };
-    });
-  }
-
-  /**
-   * Add support for CommonJS libraries such as browserify.
-   */
-  if (typeof exports !== 'undefined') {
-    exports.Howler = Howler;
-    exports.Howl = Howl;
-  }
-
-  // define globally in case AMD is not available or available but not used
-
-  if (typeof window !== 'undefined') {
-    window.Howler = Howler;
-    window.Howl = Howl;
-  }
-
-})();
+/*! howler.js v2.0.1 | (c) 2013-2016, James Simpson of GoldFire Studios | MIT License | howlerjs.com */
+!function(){"use strict";var e=function(){this.init()};e.prototype={init:function(){var e=this||n;return e._codecs={},e._howls=[],e._muted=!1,e._volume=1,e._canPlayEvent="canplaythrough",e._navigator="undefined"!=typeof window&&window.navigator?window.navigator:null,e.masterGain=null,e.noAudio=!1,e.usingWebAudio=!0,e.autoSuspend=!0,e.ctx=null,e.mobileAutoEnable=!0,e._setup(),e},volume:function(e){var o=this||n;if(e=parseFloat(e),o.ctx||_(),"undefined"!=typeof e&&e>=0&&e<=1){if(o._volume=e,o._muted)return o;o.usingWebAudio&&(o.masterGain.gain.value=e);for(var t=0;t<o._howls.length;t++)if(!o._howls[t]._webAudio)for(var r=o._howls[t]._getSoundIds(),a=0;a<r.length;a++){var u=o._howls[t]._soundById(r[a]);u&&u._node&&(u._node.volume=u._volume*e)}return o}return o._volume},mute:function(e){var o=this||n;o.ctx||_(),o._muted=e,o.usingWebAudio&&(o.masterGain.gain.value=e?0:o._volume);for(var t=0;t<o._howls.length;t++)if(!o._howls[t]._webAudio)for(var r=o._howls[t]._getSoundIds(),a=0;a<r.length;a++){var u=o._howls[t]._soundById(r[a]);u&&u._node&&(u._node.muted=!!e||u._muted)}return o},unload:function(){for(var e=this||n,o=e._howls.length-1;o>=0;o--)e._howls[o].unload();return e.usingWebAudio&&"undefined"!=typeof e.ctx.close&&(e.ctx.close(),e.ctx=null,_()),e},codecs:function(e){return(this||n)._codecs[e.replace(/^x-/,"")]},_setup:function(){var e=this||n;return e.state=e.ctx?e.ctx.state||"running":"running",e._autoSuspend(),e.noAudio||e._setupCodecs(),e},_setupCodecs:function(){var e=this||n,o="undefined"!=typeof Audio?new Audio:null;if(!o||"function"!=typeof o.canPlayType)return e;var t=o.canPlayType("audio/mpeg;").replace(/^no$/,""),r=e._navigator&&e._navigator.userAgent.match(/OPR\/([0-6].)/g),a=r&&parseInt(r[0].split("/")[1],10)<33;return e._codecs={mp3:!(a||!t&&!o.canPlayType("audio/mp3;").replace(/^no$/,"")),mpeg:!!t,opus:!!o.canPlayType('audio/ogg; codecs="opus"').replace(/^no$/,""),ogg:!!o.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,""),oga:!!o.canPlayType('audio/ogg; codecs="vorbis"').replace(/^no$/,""),wav:!!o.canPlayType('audio/wav; codecs="1"').replace(/^no$/,""),aac:!!o.canPlayType("audio/aac;").replace(/^no$/,""),caf:!!o.canPlayType("audio/x-caf;").replace(/^no$/,""),m4a:!!(o.canPlayType("audio/x-m4a;")||o.canPlayType("audio/m4a;")||o.canPlayType("audio/aac;")).replace(/^no$/,""),mp4:!!(o.canPlayType("audio/x-mp4;")||o.canPlayType("audio/mp4;")||o.canPlayType("audio/aac;")).replace(/^no$/,""),weba:!!o.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/,""),webm:!!o.canPlayType('audio/webm; codecs="vorbis"').replace(/^no$/,""),dolby:!!o.canPlayType('audio/mp4; codecs="ec-3"').replace(/^no$/,""),flac:!!(o.canPlayType("audio/x-flac;")||o.canPlayType("audio/flac;")).replace(/^no$/,"")},e},_enableMobileAudio:function(){var e=this||n,o=/iPhone|iPad|iPod|Android|BlackBerry|BB10|Silk|Mobi/i.test(e._navigator&&e._navigator.userAgent),t=!!("ontouchend"in window||e._navigator&&e._navigator.maxTouchPoints>0||e._navigator&&e._navigator.msMaxTouchPoints>0);if(!e._mobileEnabled&&e.ctx&&(o||t)){e._mobileEnabled=!1,e._mobileUnloaded||44100===e.ctx.sampleRate||(e._mobileUnloaded=!0,e.unload()),e._scratchBuffer=e.ctx.createBuffer(1,1,22050);var r=function(){var n=e.ctx.createBufferSource();n.buffer=e._scratchBuffer,n.connect(e.ctx.destination),"undefined"==typeof n.start?n.noteOn(0):n.start(0),n.onended=function(){n.disconnect(0),e._mobileEnabled=!0,e.mobileAutoEnable=!1,document.removeEventListener("touchend",r,!0)}};return document.addEventListener("touchend",r,!0),e}},_autoSuspend:function(){var e=this;if(e.autoSuspend&&e.ctx&&"undefined"!=typeof e.ctx.suspend&&n.usingWebAudio){for(var o=0;o<e._howls.length;o++)if(e._howls[o]._webAudio)for(var t=0;t<e._howls[o]._sounds.length;t++)if(!e._howls[o]._sounds[t]._paused)return e;return e._suspendTimer&&clearTimeout(e._suspendTimer),e._suspendTimer=setTimeout(function(){e.autoSuspend&&(e._suspendTimer=null,e.state="suspending",e.ctx.suspend().then(function(){e.state="suspended",e._resumeAfterSuspend&&(delete e._resumeAfterSuspend,e._autoResume())}))},3e4),e}},_autoResume:function(){var e=this;if(e.ctx&&"undefined"!=typeof e.ctx.resume&&n.usingWebAudio)return"running"===e.state&&e._suspendTimer?(clearTimeout(e._suspendTimer),e._suspendTimer=null):"suspended"===e.state?(e.state="resuming",e.ctx.resume().then(function(){e.state="running"}),e._suspendTimer&&(clearTimeout(e._suspendTimer),e._suspendTimer=null)):"suspending"===e.state&&(e._resumeAfterSuspend=!0),e}};var n=new e,o=function(e){var n=this;return e.src&&0!==e.src.length?void n.init(e):void console.error("An array of source files must be passed with any new Howl.")};o.prototype={init:function(e){var o=this;return n.ctx||_(),o._autoplay=e.autoplay||!1,o._format="string"!=typeof e.format?e.format:[e.format],o._html5=e.html5||!1,o._muted=e.mute||!1,o._loop=e.loop||!1,o._pool=e.pool||5,o._preload="boolean"!=typeof e.preload||e.preload,o._rate=e.rate||1,o._sprite=e.sprite||{},o._src="string"!=typeof e.src?e.src:[e.src],o._volume=void 0!==e.volume?e.volume:1,o._duration=0,o._state="unloaded",o._sounds=[],o._endTimers={},o._queue=[],o._onend=e.onend?[{fn:e.onend}]:[],o._onfade=e.onfade?[{fn:e.onfade}]:[],o._onload=e.onload?[{fn:e.onload}]:[],o._onloaderror=e.onloaderror?[{fn:e.onloaderror}]:[],o._onpause=e.onpause?[{fn:e.onpause}]:[],o._onplay=e.onplay?[{fn:e.onplay}]:[],o._onstop=e.onstop?[{fn:e.onstop}]:[],o._onmute=e.onmute?[{fn:e.onmute}]:[],o._onvolume=e.onvolume?[{fn:e.onvolume}]:[],o._onrate=e.onrate?[{fn:e.onrate}]:[],o._onseek=e.onseek?[{fn:e.onseek}]:[],o._webAudio=n.usingWebAudio&&!o._html5,"undefined"!=typeof n.ctx&&n.ctx&&n.mobileAutoEnable&&n._enableMobileAudio(),n._howls.push(o),o._preload&&o.load(),o},load:function(){var e=this,o=null;if(n.noAudio)return void e._emit("loaderror",null,"No audio support.");"string"==typeof e._src&&(e._src=[e._src]);for(var r=0;r<e._src.length;r++){var u,d;if(e._format&&e._format[r])u=e._format[r];else{if(d=e._src[r],"string"!=typeof d){e._emit("loaderror",null,"Non-string found in selected audio sources - ignoring.");continue}u=/^data:audio\/([^;,]+);/i.exec(d),u||(u=/\.([^.]+)$/.exec(d.split("?",1)[0])),u&&(u=u[1].toLowerCase())}if(n.codecs(u)){o=e._src[r];break}}return o?(e._src=o,e._state="loading","https:"===window.location.protocol&&"http:"===o.slice(0,5)&&(e._html5=!0,e._webAudio=!1),new t(e),e._webAudio&&a(e),e):void e._emit("loaderror",null,"No codec support for selected audio sources.")},play:function(e,o){var t=this,r=null;if("number"==typeof e)r=e,e=null;else{if("string"==typeof e&&"loaded"===t._state&&!t._sprite[e])return null;if("undefined"==typeof e){e="__default";for(var a=0,u=0;u<t._sounds.length;u++)t._sounds[u]._paused&&!t._sounds[u]._ended&&(a++,r=t._sounds[u]._id);1===a?e=null:r=null}}var d=r?t._soundById(r):t._inactiveSound();if(!d)return null;if(r&&!e&&(e=d._sprite||"__default"),"loaded"!==t._state&&!t._sprite[e])return t._queue.push({event:"play",action:function(){t.play(t._soundById(d._id)?d._id:void 0)}}),d._id;if(r&&!d._paused)return o||setTimeout(function(){t._emit("play",d._id)},0),d._id;t._webAudio&&n._autoResume();var i=d._seek>0?d._seek:t._sprite[e][0]/1e3,_=(t._sprite[e][0]+t._sprite[e][1])/1e3-i,s=1e3*_/Math.abs(d._rate);d._paused=!1,d._ended=!1,d._sprite=e,d._seek=i,d._start=t._sprite[e][0]/1e3,d._stop=(t._sprite[e][0]+t._sprite[e][1])/1e3,d._loop=!(!d._loop&&!t._sprite[e][2]);var l=d._node;if(t._webAudio){var f=function(){t._refreshBuffer(d);var e=d._muted||t._muted?0:d._volume;l.gain.setValueAtTime(e,n.ctx.currentTime),d._playStart=n.ctx.currentTime,"undefined"==typeof l.bufferSource.start?d._loop?l.bufferSource.noteGrainOn(0,i,86400):l.bufferSource.noteGrainOn(0,i,_):d._loop?l.bufferSource.start(0,i,86400):l.bufferSource.start(0,i,_),s!==1/0&&(t._endTimers[d._id]=setTimeout(t._ended.bind(t,d),s)),o||setTimeout(function(){t._emit("play",d._id)},0)};"loaded"===t._state?f():(t.once("load",f,d._id),t._clearTimer(d._id))}else{var c=function(){l.currentTime=i,l.muted=d._muted||t._muted||n._muted||l.muted,l.volume=d._volume*n.volume(),l.playbackRate=d._rate,setTimeout(function(){l.play(),s!==1/0&&(t._endTimers[d._id]=setTimeout(t._ended.bind(t,d),s)),o||t._emit("play",d._id)},0)},p="loaded"===t._state&&(window&&window.ejecta||!l.readyState&&n._navigator.isCocoonJS);if(4===l.readyState||p)c();else{var m=function(){c(),l.removeEventListener(n._canPlayEvent,m,!1)};l.addEventListener(n._canPlayEvent,m,!1),t._clearTimer(d._id)}}return d._id},pause:function(e){var n=this;if("loaded"!==n._state)return n._queue.push({event:"pause",action:function(){n.pause(e)}}),n;for(var o=n._getSoundIds(e),t=0;t<o.length;t++){n._clearTimer(o[t]);var r=n._soundById(o[t]);if(r&&!r._paused){if(r._seek=n.seek(o[t]),r._rateSeek=0,r._paused=!0,n._stopFade(o[t]),r._node)if(n._webAudio){if(!r._node.bufferSource)return n;"undefined"==typeof r._node.bufferSource.stop?r._node.bufferSource.noteOff(0):r._node.bufferSource.stop(0),n._cleanBuffer(r._node)}else isNaN(r._node.duration)&&r._node.duration!==1/0||r._node.pause();arguments[1]||n._emit("pause",r._id)}}return n},stop:function(e,n){var o=this;if("loaded"!==o._state)return o._queue.push({event:"stop",action:function(){o.stop(e)}}),o;for(var t=o._getSoundIds(e),r=0;r<t.length;r++){o._clearTimer(t[r]);var a=o._soundById(t[r]);if(a&&(a._seek=a._start||0,a._rateSeek=0,a._paused=!0,a._ended=!0,o._stopFade(t[r]),a._node))if(o._webAudio){if(!a._node.bufferSource)return n||o._emit("stop",a._id),o;"undefined"==typeof a._node.bufferSource.stop?a._node.bufferSource.noteOff(0):a._node.bufferSource.stop(0),o._cleanBuffer(a._node)}else isNaN(a._node.duration)&&a._node.duration!==1/0||(a._node.currentTime=a._start||0,a._node.pause());a&&!n&&o._emit("stop",a._id)}return o},mute:function(e,o){var t=this;if("loaded"!==t._state)return t._queue.push({event:"mute",action:function(){t.mute(e,o)}}),t;if("undefined"==typeof o){if("boolean"!=typeof e)return t._muted;t._muted=e}for(var r=t._getSoundIds(o),a=0;a<r.length;a++){var u=t._soundById(r[a]);u&&(u._muted=e,t._webAudio&&u._node?u._node.gain.setValueAtTime(e?0:u._volume,n.ctx.currentTime):u._node&&(u._node.muted=!!n._muted||e),t._emit("mute",u._id))}return t},volume:function(){var e,o,t=this,r=arguments;if(0===r.length)return t._volume;if(1===r.length||2===r.length&&"undefined"==typeof r[1]){var a=t._getSoundIds(),u=a.indexOf(r[0]);u>=0?o=parseInt(r[0],10):e=parseFloat(r[0])}else r.length>=2&&(e=parseFloat(r[0]),o=parseInt(r[1],10));var d;if(!("undefined"!=typeof e&&e>=0&&e<=1))return d=o?t._soundById(o):t._sounds[0],d?d._volume:0;if("loaded"!==t._state)return t._queue.push({event:"volume",action:function(){t.volume.apply(t,r)}}),t;"undefined"==typeof o&&(t._volume=e),o=t._getSoundIds(o);for(var i=0;i<o.length;i++)d=t._soundById(o[i]),d&&(d._volume=e,r[2]||t._stopFade(o[i]),t._webAudio&&d._node&&!d._muted?d._node.gain.setValueAtTime(e,n.ctx.currentTime):d._node&&!d._muted&&(d._node.volume=e*n.volume()),t._emit("volume",d._id));return t},fade:function(e,o,t,r){var a=this,u=Math.abs(e-o),d=e>o?"out":"in",i=u/.01,_=i>0?t/i:t;if(_<4&&(i=Math.ceil(i/(4/_)),_=4),"loaded"!==a._state)return a._queue.push({event:"fade",action:function(){a.fade(e,o,t,r)}}),a;a.volume(e,r);for(var s=a._getSoundIds(r),l=0;l<s.length;l++){var f=a._soundById(s[l]);if(f){if(r||a._stopFade(s[l]),a._webAudio&&!f._muted){var c=n.ctx.currentTime,p=c+t/1e3;f._volume=e,f._node.gain.setValueAtTime(e,c),f._node.gain.linearRampToValueAtTime(o,p)}var m=e;f._interval=setInterval(function(e,n){i>0&&(m+="in"===d?.01:-.01),m=Math.max(0,m),m=Math.min(1,m),m=Math.round(100*m)/100,a._webAudio?("undefined"==typeof r&&(a._volume=m),n._volume=m):a.volume(m,e,!0),m===o&&(clearInterval(n._interval),n._interval=null,a.volume(m,e),a._emit("fade",e))}.bind(a,s[l],f),_)}}return a},_stopFade:function(e){var o=this,t=o._soundById(e);return t&&t._interval&&(o._webAudio&&t._node.gain.cancelScheduledValues(n.ctx.currentTime),clearInterval(t._interval),t._interval=null,o._emit("fade",e)),o},loop:function(){var e,n,o,t=this,r=arguments;if(0===r.length)return t._loop;if(1===r.length){if("boolean"!=typeof r[0])return o=t._soundById(parseInt(r[0],10)),!!o&&o._loop;e=r[0],t._loop=e}else 2===r.length&&(e=r[0],n=parseInt(r[1],10));for(var a=t._getSoundIds(n),u=0;u<a.length;u++)o=t._soundById(a[u]),o&&(o._loop=e,t._webAudio&&o._node&&o._node.bufferSource&&(o._node.bufferSource.loop=e,e&&(o._node.bufferSource.loopStart=o._start||0,o._node.bufferSource.loopEnd=o._stop)));return t},rate:function(){var e,o,t=this,r=arguments;if(0===r.length)o=t._sounds[0]._id;else if(1===r.length){var a=t._getSoundIds(),u=a.indexOf(r[0]);u>=0?o=parseInt(r[0],10):e=parseFloat(r[0])}else 2===r.length&&(e=parseFloat(r[0]),o=parseInt(r[1],10));var d;if("number"!=typeof e)return d=t._soundById(o),d?d._rate:t._rate;if("loaded"!==t._state)return t._queue.push({event:"rate",action:function(){t.rate.apply(t,r)}}),t;"undefined"==typeof o&&(t._rate=e),o=t._getSoundIds(o);for(var i=0;i<o.length;i++)if(d=t._soundById(o[i])){d._rateSeek=t.seek(o[i]),d._playStart=t._webAudio?n.ctx.currentTime:d._playStart,d._rate=e,t._webAudio&&d._node&&d._node.bufferSource?d._node.bufferSource.playbackRate.value=e:d._node&&(d._node.playbackRate=e);var _=t.seek(o[i]),s=(t._sprite[d._sprite][0]+t._sprite[d._sprite][1])/1e3-_,l=1e3*s/Math.abs(d._rate);!t._endTimers[o[i]]&&d._paused||(t._clearTimer(o[i]),t._endTimers[o[i]]=setTimeout(t._ended.bind(t,d),l)),t._emit("rate",d._id)}return t},seek:function(){var e,o,t=this,r=arguments;if(0===r.length)o=t._sounds[0]._id;else if(1===r.length){var a=t._getSoundIds(),u=a.indexOf(r[0]);u>=0?o=parseInt(r[0],10):(o=t._sounds[0]._id,e=parseFloat(r[0]))}else 2===r.length&&(e=parseFloat(r[0]),o=parseInt(r[1],10));if("undefined"==typeof o)return t;if("loaded"!==t._state)return t._queue.push({event:"seek",action:function(){t.seek.apply(t,r)}}),t;var d=t._soundById(o);if(d){if(!("number"==typeof e&&e>=0)){if(t._webAudio){var i=t.playing(o)?n.ctx.currentTime-d._playStart:0,_=d._rateSeek?d._rateSeek-d._seek:0;return d._seek+(_+i*Math.abs(d._rate))}return d._node.currentTime}var s=t.playing(o);s&&t.pause(o,!0),d._seek=e,d._ended=!1,t._clearTimer(o),s&&t.play(o,!0),!t._webAudio&&d._node&&(d._node.currentTime=e),t._emit("seek",o)}return t},playing:function(e){var n=this;if("number"==typeof e){var o=n._soundById(e);return!!o&&!o._paused}for(var t=0;t<n._sounds.length;t++)if(!n._sounds[t]._paused)return!0;return!1},duration:function(e){var n=this,o=n._duration,t=n._soundById(e);return t&&(o=n._sprite[t._sprite][1]/1e3),o},state:function(){return this._state},unload:function(){for(var e=this,o=e._sounds,t=0;t<o.length;t++){o[t]._paused||(e.stop(o[t]._id),e._emit("end",o[t]._id)),e._webAudio||(o[t]._node.src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=",o[t]._node.removeEventListener("error",o[t]._errorFn,!1),o[t]._node.removeEventListener(n._canPlayEvent,o[t]._loadFn,!1)),delete o[t]._node,e._clearTimer(o[t]._id);var a=n._howls.indexOf(e);a>=0&&n._howls.splice(a,1)}var u=!0;for(t=0;t<n._howls.length;t++)if(n._howls[t]._src===e._src){u=!1;break}return r&&u&&delete r[e._src],n.noAudio=!1,e._state="unloaded",e._sounds=[],e=null,null},on:function(e,n,o,t){var r=this,a=r["_on"+e];return"function"==typeof n&&a.push(t?{id:o,fn:n,once:t}:{id:o,fn:n}),r},off:function(e,n,o){var t=this,r=t["_on"+e],a=0;if(n){for(a=0;a<r.length;a++)if(n===r[a].fn&&o===r[a].id){r.splice(a,1);break}}else if(e)t["_on"+e]=[];else{var u=Object.keys(t);for(a=0;a<u.length;a++)0===u[a].indexOf("_on")&&Array.isArray(t[u[a]])&&(t[u[a]]=[])}return t},once:function(e,n,o){var t=this;return t.on(e,n,o,1),t},_emit:function(e,n,o){for(var t=this,r=t["_on"+e],a=r.length-1;a>=0;a--)r[a].id&&r[a].id!==n&&"load"!==e||(setTimeout(function(e){e.call(this,n,o)}.bind(t,r[a].fn),0),r[a].once&&t.off(e,r[a].fn,r[a].id));return t},_loadQueue:function(){var e=this;if(e._queue.length>0){var n=e._queue[0];e.once(n.event,function(){e._queue.shift(),e._loadQueue()}),n.action()}return e},_ended:function(e){var o=this,t=e._sprite,r=!(!e._loop&&!o._sprite[t][2]);if(o._emit("end",e._id),!o._webAudio&&r&&o.stop(e._id,!0).play(e._id),o._webAudio&&r){o._emit("play",e._id),e._seek=e._start||0,e._rateSeek=0,e._playStart=n.ctx.currentTime;var a=1e3*(e._stop-e._start)/Math.abs(e._rate);o._endTimers[e._id]=setTimeout(o._ended.bind(o,e),a)}return o._webAudio&&!r&&(e._paused=!0,e._ended=!0,e._seek=e._start||0,e._rateSeek=0,o._clearTimer(e._id),o._cleanBuffer(e._node),n._autoSuspend()),o._webAudio||r||o.stop(e._id),o},_clearTimer:function(e){var n=this;return n._endTimers[e]&&(clearTimeout(n._endTimers[e]),delete n._endTimers[e]),n},_soundById:function(e){for(var n=this,o=0;o<n._sounds.length;o++)if(e===n._sounds[o]._id)return n._sounds[o];return null},_inactiveSound:function(){var e=this;e._drain();for(var n=0;n<e._sounds.length;n++)if(e._sounds[n]._ended)return e._sounds[n].reset();return new t(e)},_drain:function(){var e=this,n=e._pool,o=0,t=0;if(!(e._sounds.length<n)){for(t=0;t<e._sounds.length;t++)e._sounds[t]._ended&&o++;for(t=e._sounds.length-1;t>=0;t--){if(o<=n)return;e._sounds[t]._ended&&(e._webAudio&&e._sounds[t]._node&&e._sounds[t]._node.disconnect(0),e._sounds.splice(t,1),o--)}}},_getSoundIds:function(e){var n=this;if("undefined"==typeof e){for(var o=[],t=0;t<n._sounds.length;t++)o.push(n._sounds[t]._id);return o}return[e]},_refreshBuffer:function(e){var o=this;return e._node.bufferSource=n.ctx.createBufferSource(),e._node.bufferSource.buffer=r[o._src],e._panner?e._node.bufferSource.connect(e._panner):e._node.bufferSource.connect(e._node),e._node.bufferSource.loop=e._loop,e._loop&&(e._node.bufferSource.loopStart=e._start||0,e._node.bufferSource.loopEnd=e._stop),e._node.bufferSource.playbackRate.value=e._rate,o},_cleanBuffer:function(e){var n=this;if(n._scratchBuffer){e.bufferSource.onended=null,e.bufferSource.disconnect(0);try{e.bufferSource.buffer=n._scratchBuffer}catch(e){}}return e.bufferSource=null,n}};var t=function(e){this._parent=e,this.init()};t.prototype={init:function(){var e=this,n=e._parent;return e._muted=n._muted,e._loop=n._loop,e._volume=n._volume,e._muted=n._muted,e._rate=n._rate,e._seek=0,e._paused=!0,e._ended=!0,e._sprite="__default",e._id=Math.round(Date.now()*Math.random()),n._sounds.push(e),e.create(),e},create:function(){var e=this,o=e._parent,t=n._muted||e._muted||e._parent._muted?0:e._volume;return o._webAudio?(e._node="undefined"==typeof n.ctx.createGain?n.ctx.createGainNode():n.ctx.createGain(),e._node.gain.setValueAtTime(t,n.ctx.currentTime),e._node.paused=!0,e._node.connect(n.masterGain)):(e._node=new Audio,e._errorFn=e._errorListener.bind(e),e._node.addEventListener("error",e._errorFn,!1),e._loadFn=e._loadListener.bind(e),e._node.addEventListener(n._canPlayEvent,e._loadFn,!1),e._node.src=o._src,e._node.preload="auto",e._node.volume=t*n.volume(),e._node.load()),e},reset:function(){var e=this,n=e._parent;return e._muted=n._muted,e._loop=n._loop,e._volume=n._volume,e._muted=n._muted,e._rate=n._rate,e._seek=0,e._rateSeek=0,e._paused=!0,e._ended=!0,e._sprite="__default",e._id=Math.round(Date.now()*Math.random()),e},_errorListener:function(){var e=this;e._parent._emit("loaderror",e._id,e._node.error?e._node.error.code:0),e._node.removeEventListener("error",e._errorListener,!1)},_loadListener:function(){var e=this,o=e._parent;o._duration=Math.ceil(10*e._node.duration)/10,0===Object.keys(o._sprite).length&&(o._sprite={__default:[0,1e3*o._duration]}),"loaded"!==o._state&&(o._state="loaded",o._emit("load"),o._loadQueue()),o._autoplay&&o.play(),e._node.removeEventListener(n._canPlayEvent,e._loadFn,!1)}};var r={},a=function(e){var n=e._src;if(r[n])return e._duration=r[n].duration,void i(e);if(/^data:[^;]+;base64,/.test(n)){for(var o=atob(n.split(",")[1]),t=new Uint8Array(o.length),a=0;a<o.length;++a)t[a]=o.charCodeAt(a);d(t.buffer,e)}else{var _=new XMLHttpRequest;_.open("GET",n,!0),_.responseType="arraybuffer",_.onload=function(){var n=(_.status+"")[0];return"0"!==n&&"2"!==n&&"3"!==n?void e._emit("loaderror",null,"Failed loading audio file with status: "+_.status+"."):void d(_.response,e)},_.onerror=function(){e._webAudio&&(e._html5=!0,e._webAudio=!1,e._sounds=[],delete r[n],e.load())},u(_)}},u=function(e){try{e.send()}catch(n){e.onerror()}},d=function(e,o){n.ctx.decodeAudioData(e,function(e){e&&o._sounds.length>0&&(r[o._src]=e,i(o,e))},function(){o._emit("loaderror",null,"Decoding audio data failed.")})},i=function(e,n){n&&!e._duration&&(e._duration=n.duration),0===Object.keys(e._sprite).length&&(e._sprite={__default:[0,1e3*e._duration]}),"loaded"!==e._state&&(e._state="loaded",e._emit("load"),e._loadQueue()),e._autoplay&&e.play()},_=function(){n.noAudio=!1;try{"undefined"!=typeof AudioContext?n.ctx=new AudioContext:"undefined"!=typeof webkitAudioContext?n.ctx=new webkitAudioContext:n.usingWebAudio=!1}catch(e){n.usingWebAudio=!1}if(!n.usingWebAudio)if("undefined"!=typeof Audio)try{var e=new Audio;"undefined"==typeof e.oncanplaythrough&&(n._canPlayEvent="canplay")}catch(e){n.noAudio=!0}else n.noAudio=!0;try{var e=new Audio;e.muted&&(n.noAudio=!0)}catch(e){}var o=/iP(hone|od|ad)/.test(n._navigator&&n._navigator.platform),t=n._navigator&&n._navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/),r=t?parseInt(t[1],10):null;if(o&&r&&r<9){var a=/safari/.test(n._navigator&&n._navigator.userAgent.toLowerCase());(n._navigator&&n._navigator.standalone&&!a||n._navigator&&!n._navigator.standalone&&!a)&&(n.usingWebAudio=!1)}n.usingWebAudio&&(n.masterGain="undefined"==typeof n.ctx.createGain?n.ctx.createGainNode():n.ctx.createGain(),n.masterGain.gain.value=1,n.masterGain.connect(n.ctx.destination)),n._setup()};"function"==typeof define&&define.amd&&define([],function(){return{Howler:n,Howl:o}}),"undefined"!=typeof exports&&(exports.Howler=n,exports.Howl=o),"undefined"!=typeof window?(window.HowlerGlobal=e,window.Howler=n,window.Howl=o,window.Sound=t):"undefined"!=typeof global&&(global.HowlerGlobal=e,global.Howler=n,global.Howl=o,global.Sound=t)}();
+/*! Spatial Plugin */
+!function(){"use strict";HowlerGlobal.prototype._pos=[0,0,0],HowlerGlobal.prototype._orientation=[0,0,-1,0,1,0],HowlerGlobal.prototype.stereo=function(e){var n=this;if(!n.ctx||!n.ctx.listener)return n;for(var t=n._howls.length-1;t>=0;t--)n._howls[t].stereo(e);return n},HowlerGlobal.prototype.pos=function(e,n,t){var o=this;return o.ctx&&o.ctx.listener?(n="number"!=typeof n?o._pos[1]:n,t="number"!=typeof t?o._pos[2]:t,"number"!=typeof e?o._pos:(o._pos=[e,n,t],o.ctx.listener.setPosition(o._pos[0],o._pos[1],o._pos[2]),o)):o},HowlerGlobal.prototype.orientation=function(e,n,t,o,r,i){var a=this;if(!a.ctx||!a.ctx.listener)return a;var p=a._orientation;return n="number"!=typeof n?p[1]:n,t="number"!=typeof t?p[2]:t,o="number"!=typeof o?p[3]:o,r="number"!=typeof r?p[4]:r,i="number"!=typeof i?p[5]:i,"number"!=typeof e?p:(a._orientation=[e,n,t,o,r,i],a.ctx.listener.setOrientation(e,n,t,o,r,i),a)},Howl.prototype.init=function(e){return function(n){var t=this;return t._orientation=n.orientation||[1,0,0],t._stereo=n.stereo||null,t._pos=n.pos||null,t._pannerAttr={coneInnerAngle:"undefined"!=typeof n.coneInnerAngle?n.coneInnerAngle:360,coneOuterAngle:"undefined"!=typeof n.coneOuterAngle?n.coneOuterAngle:360,coneOuterGain:"undefined"!=typeof n.coneOuterGain?n.coneOuterGain:0,distanceModel:"undefined"!=typeof n.distanceModel?n.distanceModel:"inverse",maxDistance:"undefined"!=typeof n.maxDistance?n.maxDistance:1e4,panningModel:"undefined"!=typeof n.panningModel?n.panningModel:"HRTF",refDistance:"undefined"!=typeof n.refDistance?n.refDistance:1,rolloffFactor:"undefined"!=typeof n.rolloffFactor?n.rolloffFactor:1},t._onstereo=n.onstereo?[{fn:n.onstereo}]:[],t._onpos=n.onpos?[{fn:n.onpos}]:[],t._onorientation=n.onorientation?[{fn:n.onorientation}]:[],e.call(this,n)}}(Howl.prototype.init),Howl.prototype.stereo=function(n,t){var o=this;if(!o._webAudio)return o;if("loaded"!==o._state)return o._queue.push({event:"stereo",action:function(){o.stereo(n,t)}}),o;var r="undefined"==typeof Howler.ctx.createStereoPanner?"spatial":"stereo";if("undefined"==typeof t){if("number"!=typeof n)return o._stereo;o._stereo=n,o._pos=[n,0,0]}for(var i=o._getSoundIds(t),a=0;a<i.length;a++){var p=o._soundById(i[a]);if(p){if("number"!=typeof n)return p._stereo;p._stereo=n,p._pos=[n,0,0],p._node&&(p._pannerAttr.panningModel="equalpower",p._panner&&p._panner.pan||e(p,r),"spatial"===r?p._panner.setPosition(n,0,0):p._panner.pan.value=n),o._emit("stereo",p._id)}}return o},Howl.prototype.pos=function(n,t,o,r){var i=this;if(!i._webAudio)return i;if("loaded"!==i._state)return i._queue.push({event:"pos",action:function(){i.pos(n,t,o,r)}}),i;if(t="number"!=typeof t?0:t,o="number"!=typeof o?-.5:o,"undefined"==typeof r){if("number"!=typeof n)return i._pos;i._pos=[n,t,o]}for(var a=i._getSoundIds(r),p=0;p<a.length;p++){var f=i._soundById(a[p]);if(f){if("number"!=typeof n)return f._pos;f._pos=[n,t,o],f._node&&(f._panner&&!f._panner.pan||e(f,"spatial"),f._panner.setPosition(n,t,o)),i._emit("pos",f._id)}}return i},Howl.prototype.orientation=function(n,t,o,r){var i=this;if(!i._webAudio)return i;if("loaded"!==i._state)return i._queue.push({event:"orientation",action:function(){i.orientation(n,t,o,r)}}),i;if(t="number"!=typeof t?i._orientation[1]:t,o="number"!=typeof o?i._orientation[2]:o,"undefined"==typeof r){if("number"!=typeof n)return i._orientation;i._orientation=[n,t,o]}for(var a=i._getSoundIds(r),p=0;p<a.length;p++){var f=i._soundById(a[p]);if(f){if("number"!=typeof n)return f._orientation;f._orientation=[n,t,o],f._node&&(f._panner||(f._pos||(f._pos=i._pos||[0,0,-.5]),e(f,"spatial")),f._panner.setOrientation(n,t,o)),i._emit("orientation",f._id)}}return i},Howl.prototype.pannerAttr=function(){var n,t,o,r=this,i=arguments;if(!r._webAudio)return r;if(0===i.length)return r._pannerAttr;if(1===i.length){if("object"!=typeof i[0])return o=r._soundById(parseInt(i[0],10)),o?o._pannerAttr:r._pannerAttr;n=i[0],"undefined"==typeof t&&(r._pannerAttr={coneInnerAngle:"undefined"!=typeof n.coneInnerAngle?n.coneInnerAngle:r._coneInnerAngle,coneOuterAngle:"undefined"!=typeof n.coneOuterAngle?n.coneOuterAngle:r._coneOuterAngle,coneOuterGain:"undefined"!=typeof n.coneOuterGain?n.coneOuterGain:r._coneOuterGain,distanceModel:"undefined"!=typeof n.distanceModel?n.distanceModel:r._distanceModel,maxDistance:"undefined"!=typeof n.maxDistance?n.maxDistance:r._maxDistance,panningModel:"undefined"!=typeof n.panningModel?n.panningModel:r._panningModel,refDistance:"undefined"!=typeof n.refDistance?n.refDistance:r._refDistance,rolloffFactor:"undefined"!=typeof n.rolloffFactor?n.rolloffFactor:r._rolloffFactor})}else 2===i.length&&(n=i[0],t=parseInt(i[1],10));for(var a=r._getSoundIds(t),p=0;p<a.length;p++)if(o=r._soundById(a[p])){var f=o._pannerAttr;f={coneInnerAngle:"undefined"!=typeof n.coneInnerAngle?n.coneInnerAngle:f.coneInnerAngle,coneOuterAngle:"undefined"!=typeof n.coneOuterAngle?n.coneOuterAngle:f.coneOuterAngle,coneOuterGain:"undefined"!=typeof n.coneOuterGain?n.coneOuterGain:f.coneOuterGain,distanceModel:"undefined"!=typeof n.distanceModel?n.distanceModel:f.distanceModel,maxDistance:"undefined"!=typeof n.maxDistance?n.maxDistance:f.maxDistance,panningModel:"undefined"!=typeof n.panningModel?n.panningModel:f.panningModel,refDistance:"undefined"!=typeof n.refDistance?n.refDistance:f.refDistance,rolloffFactor:"undefined"!=typeof n.rolloffFactor?n.rolloffFactor:f.rolloffFactor};var s=o._panner;s?(s.coneInnerAngle=f.coneInnerAngle,s.coneOuterAngle=f.coneOuterAngle,s.coneOuterGain=f.coneOuterGain,s.distanceModel=f.distanceModel,s.maxDistance=f.maxDistance,s.panningModel=f.panningModel,s.refDistance=f.refDistance,s.rolloffFactor=f.rolloffFactor):(o._pos||(o._pos=r._pos||[0,0,-.5]),e(o,"spatial"))}return r},Sound.prototype.init=function(e){return function(){var n=this,t=n._parent;n._orientation=t._orientation,n._stereo=t._stereo,n._pos=t._pos,n._pannerAttr=t._pannerAttr,e.call(this),n._stereo?t.stereo(n._stereo):n._pos&&t.pos(n._pos[0],n._pos[1],n._pos[2],n._id)}}(Sound.prototype.init),Sound.prototype.reset=function(e){return function(){var n=this,t=n._parent;return n._orientation=t._orientation,n._pos=t._pos,n._pannerAttr=t._pannerAttr,e.call(this)}}(Sound.prototype.reset);var e=function(e,n){n=n||"spatial","spatial"===n?(e._panner=Howler.ctx.createPanner(),e._panner.coneInnerAngle=e._pannerAttr.coneInnerAngle,e._panner.coneOuterAngle=e._pannerAttr.coneOuterAngle,e._panner.coneOuterGain=e._pannerAttr.coneOuterGain,e._panner.distanceModel=e._pannerAttr.distanceModel,e._panner.maxDistance=e._pannerAttr.maxDistance,e._panner.panningModel=e._pannerAttr.panningModel,e._panner.refDistance=e._pannerAttr.refDistance,e._panner.rolloffFactor=e._pannerAttr.rolloffFactor,e._panner.setPosition(e._pos[0],e._pos[1],e._pos[2]),e._panner.setOrientation(e._orientation[0],e._orientation[1],e._orientation[2])):(e._panner=Howler.ctx.createStereoPanner(),e._panner.pan.value=e._stereo),e._panner.connect(e._node),e._paused||e._parent.pause(e._id,!0).play(e._id)}}();
 /*
 
   Javascript State Machine Library - https://github.com/jakesgordon/javascript-state-machine

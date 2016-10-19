@@ -21,6 +21,7 @@
    * @class pixelizedMiniMap
    **/
   function setupSimpleFogOfWar() {
+    const RESIZE_OFFSET = 50;
     const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
     const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     const FoWOverlay = new PIXI.Graphics();
@@ -102,12 +103,13 @@
         maskMovableContainer.addChild(...spriteArray);
       }
 
-      maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
       resizeFoW();
 
       zoomLayer.mask = maskSprite;
 
       mapInstance.registerPreRenderer('renderFoW', moveFoW);
+
+      resizeFoW();
     }
 
     function refreshFoW() {
@@ -131,9 +133,22 @@
     }
 
     function resizeFoW() {
-
+      changeMaskSize();
       createOverlay();
       refreshFoW();
+    }
+
+    function changeMaskSize() {
+      resize.resizePIXIRenderer(
+        renderTexture,
+        () => {}
+      );
+
+      //renderTexture.resize(resize.getWindowSize().x, resize.getWindowSize().y);
+      maskSprite.width = resize.getWindowSize().x;
+      maskSprite.height = resize.getWindowSize().y;
+      // MaskSprites bounds create a filterArea to the zoomLayer as the maskSprite is a mask for it. This causes resizing not to work correctly, if the bounds are not changed and bounds are not updated without this call (for some reason just width and height change is not enough).
+      maskSprite.getBounds();
     }
 
     function getFoWObjectArray(cb) {

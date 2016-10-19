@@ -36,11 +36,11 @@
    * @requires loglevel.js for frontend logging, or something similar
    **/
   window.flatworld.log = {
-    debug: function debug(e, errorText) {
-      loglevel.debug(errorText, e);
+    debug: function debug(e) {
+      loglevel.debug(e);
     },
-    error: function error(e, errorText) {
-      loglevel.error(errorText, e);
+    error: function error(e) {
+      loglevel.error(e);
     }
   };
 })();
@@ -72,9 +72,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @requires Q for promises
      * @todo should you use PIXI here or just https://github.com/englercj/resource-loader straight?
      */
-
     function Preload(baseUrl) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? { concurrency: 15, crossOrigin: false } : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { concurrency: 15, crossOrigin: false };
 
       _classCallCheck(this, Preload);
 
@@ -204,7 +203,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return {
       arrayFind: arrayFind,
       objectAssign: objectAssign,
-      es6String: es6String
+      es6String: es6String,
+      setPrototypeOf: setPrototypeOf
     };
 
     /**
@@ -223,7 +223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var list = Object(this);
           var length = list.length >>> 0;
           var thisArg = arguments[1];
-          var value;
+          var value = void 0;
 
           for (var i = 0; i < length; i++) {
             value = list[i];
@@ -245,6 +245,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      */
     function objectAssign() {
       if (typeof Object.assign != 'function') {
+        // eslint-disable-line eqeqeq
         (function () {
           Object.assign = function (target) {
             if (target === undefined || target === null) {
@@ -274,33 +275,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         (function () {
           'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
 
+          var result = void 0;
+
           var defineProperty = function () {
             // IE 8 only supports `Object.defineProperty` on DOM elements
             try {
               var object = {};
-              var defineProperty = Object.defineProperty;
-              var result = defineProperty(object, object, object) && defineProperty;
-            } catch (error) {}
+              var _defineProperty = Object.defineProperty;
+              result = _defineProperty(object, object, object) && _defineProperty;
+            } catch (error) {
+              return result;
+            }
             return result;
           }();
           var repeat = function repeat(count) {
             if (this == null) {
+              // eslint-disable-line eqeqeq
               throw TypeError();
             }
             var string = String(this);
             // `ToInteger`
             var n = count ? Number(count) : 0;
             if (n != n) {
-              // better `isNaN`
+              // eslint-disable-line eqeqeq
               n = 0;
             }
             // Account for out-of-bounds indices
             if (n < 0 || n == Infinity) {
+              // eslint-disable-line eqeqeq
               throw RangeError();
             }
             var result = '';
             while (n) {
               if (n % 2 == 1) {
+                // eslint-disable-line eqeqeq
                 result += string;
               }
               if (n > 1) {
@@ -321,6 +329,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         })();
       }
+    }
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
+    function setPrototypeOf() {
+      Object.setPrototypeOf = Object.setPrototypeOf || function (obj, proto) {
+        obj.__proto__ = proto;
+        return obj;
+      };
     }
   }
 })();
@@ -492,13 +507,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     }
   }
 })();
-'use strict';
+"use strict";
 
 (function () {
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var PIXI = window.flatworld_libraries.PIXI;
 
   /*---------------------
   --------- API ---------
@@ -530,7 +544,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @method dropShadow
      * @param  {Object} options
      */
-    function dropShadow() {
+    function dropShadow() /*options = { color: '#000000', distance: 5, alpha: 0.5, amgöe: 45, blur: 5 }*/{
       /*
       var shadow  = new PIXI.filters.DropShadowFilter();
         shadow.color  = options.color;
@@ -540,8 +554,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       shadow.blur   = options.blur;
         this.filters = [shadow];
       */
-
-      var options = arguments.length <= 0 || arguments[0] === undefined ? { color: '#000000', distance: 5, alpha: 0.5, amgöe: 45, blur: 5 } : arguments[0];
     }
   }
 })();
@@ -549,8 +561,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 (function () {
   /*---------------------
+  ------- IMPORT --------
+  ----------------------*/
+  var PIXI = window.flatworld_libraries.PIXI;
+
+  /*---------------------
   --------- API ---------
   ----------------------*/
+
   window.flatworld.utils.mouse = setupMouseUtils();
   window.flatworld.utils.resize = setupResizeUtils();
   window.flatworld.utils.environmentDetection = setupEnvironmentDetection();
@@ -566,7 +584,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       disableContextMenu: disableContextMenu,
       eventData: {
         getPointerCoords: getPointerCoords,
-        getHAMMERPointerCoords: getHAMMERPointerCoords
+        getHAMMERPointerCoords: getHAMMERPointerCoords,
+        getGlobalCoordinates: getGlobalCoordinates
       },
       coordinatesFromGlobalToRelative: coordinatesFromGlobalToRelative,
       eventMouseCoords: eventMouseCoords
@@ -604,6 +623,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      */
     function getHAMMERPointerCoords(e) {
       return new PIXI.Point(e.center.x, e.center.y);
+    }
+
+    function getGlobalCoordinates(e, isSupportedTouch) {
+      return isSupportedTouch ? getHAMMERPointerCoords(e) : getPointerCoords(e);
     }
     /**
      * Transform coordinates that are in the window to become relative with the given element
@@ -780,7 +803,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    */
   function setupEnvironmentDetection() {
     return {
-      getPixelRatio: getPixelRatio };
+      getPixelRatio: getPixelRatio // ,
+      // isMobile,
+      // isMobile_detectUserAgent
+    };
 
     /**
      * @method getPixelRatio
@@ -788,9 +814,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param  {HTMLElement} canvasElement       HTML canvas element
      * @return {Number}
      */
-    // ,
-    // isMobile,
-    // isMobile_detectUserAgent
     function getPixelRatio(canvasElement) {
       var DPR = window.devicePixelRatio || 1;
       var ctx = canvasElement && canvasElement.getContext('2d') || document.createElement('canvas').getContext('2d');
@@ -809,7 +832,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     return {
       pixelEpsilonEquality: epsilonEquality,
       fullsizeCanvasCSS: fullsizeCanvasCSS,
-      requireParameter: requireParameter
+      requireParameter: requireParameter,
+      toggleMouseTextSelection: toggleMouseTextSelection
     };
 
     /**
@@ -840,14 +864,36 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     function requireParameter(className, paramName) {
       throw new Error('Function \'' + className + '\' requires parameter ' + paramName);
     }
+
+    /**
+     * Deactivate the selection of text, by dragging
+     *
+     * @method toggleMouseTextSelection
+     */
+    function toggleMouseTextSelection() {
+      var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.getElementsByTagName('body')[0];
+
+      element.style.webkitTouchCallout = 'none';
+      element.style.webkitUserSelect = 'none';
+      element.style.khtmlUserSelect = 'none';
+      element.style.mozUserSelect = 'none';
+      element.style.msUserSelect = 'none';
+      element.style.userSelect = 'none';
+    }
   }
 })();
 "use strict";
 
 (function () {
   /*---------------------
+  ------- IMPORT --------
+  ----------------------*/
+  var PIXI = window.flatworld_libraries.PIXI;
+
+  /*---------------------
   --------- API ---------
   ----------------------*/
+
   window.flatworld.utils.shapes = {
     createSquare: createSquare
   };
@@ -907,7 +953,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      *
      * @method get
      * @param  {String} name    The indentifier for this API call / endpoint
-     * @param  {Array} params   Params that are sent to the callbacks that have been attached to handle this API data
+     * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+     * handle this API data
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function get(type, params) {
@@ -918,8 +965,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      *
      * @method post
      * @param  {String} name    The indentifier for this API call / endpoint
-     * @param  {Array} params   Params that are sent to the callbacks that have been attached to handle this API data. E.g. at least the
-     * POST data that will be sent to server needs to be set in the callback to the object.body property.
+     * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+     * handle this API data. E.g. at least the
+     * POST data that will be sent to server needs to be set in the callback to the object.body
+     * property.
      * @return {Promise}        ES6 native Promise as the API advances
      */
     function post(type, params) {
@@ -930,7 +979,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      *
      * @method add
      * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
-     * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint. Callback gets these parameters
+     * @param {Function}  cb              Callback that returns the data that is sent to this API
+     * endpoint. Callback gets these parameters
      * 1. request type: post, get etc.
      * 2. completeData: { baseUrl, cbs }
      * 3. params: params that were sent to the mapAPI function as extra, like in post(type, params)
@@ -967,10 +1017,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      *
      * @method update
      * @param {String}    type            Basically the name of the mapAPI. Like 'moveUnit'.
-     * @param {Function}  cb              Callback that returns the data that is sent to this API endpoint
-     * @param {Function}  what            The update made
+     * @param {Function}  cb              Callback that returns the data that is sent to this API
+     * endpoint
      */
-    function update(type, cb, what) {
+    function update(type, cb) {
       if (!APIs[type] || !APIs[type].cbs) {
         mapLog.debug('API endpoint not found for updating!');
       }
@@ -984,8 +1034,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @private
      * @param  {String} fetchType   post or get
      * @param  {String} type        name of the endpoint
-     * @param  {Array} params       Params that are sent to the callbacks that have been attached to handle this API data. E.g. at least
-     * the POST data that will be sent to server needs to be set in the callback to the object.body property.
+     * @param  {Array} params       Params that are sent to the callbacks that have been attached
+     * to handle this API data. E.g. at least
+     * the POST data that will be sent to server needs to be set in the callback to the
+     * object.body property.
      * @return {Promise}            The result of the fetch
      */
     function _doFetch(fetchType, type, params) {
@@ -1012,7 +1064,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
     }
     /**
-     * Just returns all API endpoint definitions to be checked or modified as pleased. Only for advanced use.
+     * Just returns all API endpoint definitions to be checked or modified as pleased. Only for
+     * advanced use.
      *
      * @method getAllAPIs
      * @return {Object} returns object that hosts all the API endpoint definitions
@@ -1087,7 +1140,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param  {...[]} data       Can hold any data with rest of the parameters
      */
     function publish() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var datas = arguments[1];
 
       var timestamp = new Date().getTime();
@@ -1178,8 +1231,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param  {Boolean} cb     REQUIRED. Callback to do it's eventlistener magic.
      */
     function on() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-      var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (!detectors[type] || !detectors[type].on) {
         throw new Error('eventlisteners.on needs to have detector set with this event type!');
@@ -1197,8 +1250,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
     function off() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-      var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       detectors[type].off(cb);
       cb ? activeEventListeners[type].delete(cb) : delete activeEventListeners[type];
@@ -1211,14 +1264,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param  {Boolean} cb     Callback to do it's eventlistener magic.
      */
     function isOn() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-      var cb = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      var answer;
-
-      answer = cb ? activeEventListeners[type].has(cb) : !!activeEventListeners[type].size;
-
-      return answer;
+      return cb ? activeEventListeners[type].has(cb) : !!activeEventListeners[type].size;
     }
     /**
      * Sets the state of the event. State is very important e.g. for fluent dragging and selecting. When we start to drag, we avoid
@@ -1239,7 +1288,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @return {Boolean}
      */
     function getActivityState() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       return stateOfEvents[type];
     }
@@ -1252,9 +1301,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param {Function} cbOff   Callback which sets deactivates the detector
      */
     function setDetector() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-      var cbOn = arguments.length <= 1 || arguments[1] === undefined ? function () {} : arguments[1];
-      var cbOff = arguments.length <= 2 || arguments[2] === undefined ? function () {} : arguments[2];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var cbOn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+      var cbOff = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
       detectors[type] = {};
       detectors[type] = {
@@ -1269,7 +1318,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * @param {String}   type  Event type
      */
     function clearDetector() {
-      var type = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       /* remove all event listeners before we empty the data */
       activeEventListeners[type].forEach(function (cb) {
@@ -1356,9 +1405,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Integer} options.specialLayer.x         X coordinate
      * @param  {Integer} options.specialLayer.y         Y coordinate
      **/
-
     function MapLayer() {
-      var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       var _ref$name = _ref.name;
       var name = _ref$name === undefined ? '' : _ref$name;
@@ -1373,7 +1421,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       _classCallCheck(this, MapLayer);
 
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MapLayer).call(this));
+      var _this = _possibleConstructorReturn(this, (MapLayer.__proto__ || Object.getPrototypeOf(MapLayer)).call(this));
 
       Object.assign(_this, coord);
 
@@ -1484,7 +1532,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         return _UIObjects;
       }
       /**
-       * Get primary layers, that this layer holds as children. So basically all children that are not special layers (such as UI layers etc.)
+       * Get primary layers, that this layer holds as children. So basically all children that are
+       * not special layers (such as UI layers etc.)
        *
        * @method getPrimaryLayers
        * @return {Array}                            Primary children layers under this layer
@@ -1493,7 +1542,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'getPrimaryLayers',
       value: function getPrimaryLayers() {
-        var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
         var filters = _ref2.filters;
 
@@ -1506,19 +1555,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         });
       }
       /**
-       * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects. Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
+       * Get all objects that are this layers children or subcontainers children. Does not return
+       * layers, but the objects. Works on primary layer only currently. So can not seek for
+       * complicated children structure, seeks only inside subcontainers.
        *
        * @method getObjects
-       * @return {Array}            All the objects (not layers) found under this layer
+       * @param {MapDataManipulator}  filter  filter for filtering correct objects
+       * @return {Array}                      All the objects (not layers) found under this layer
        * */
 
     }, {
       key: 'getObjects',
       value: function getObjects(filter) {
+        // eslint-disable-line no-unused-vars
         throw new Error('Has to be implemented in child class');
       }
       /**
-       * Create and add special layer, that holds UI effects in it. UILayer is normally positioned as movableLayers 3rd child. And the
+       * Create and add special layer, that holds UI effects in it. UILayer is normally positioned
+       * as movableLayers 3rd child. And the
        * actual UI stuff is added there.
        *
        * @method createUILayer
@@ -1532,8 +1586,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'createUILayer',
       value: function createUILayer() {
-        var name = arguments.length <= 0 || arguments[0] === undefined ? 'default UI layer' : arguments[0];
-        var coord = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default UI layer';
+        var coord = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
         var layer = new MapLayer(name, coord);
 
@@ -1649,9 +1703,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Integer} options.subcontainers.height  height (in pixels)
      * @param {Boolean} options.specialLayer           Is this special layer or not.
      */
-
     function MapLayerParent() {
-      var _ref3 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       var _ref3$name = _ref3.name;
       var name = _ref3$name === undefined ? '' : _ref3$name;
@@ -1668,9 +1721,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       _classCallCheck(this, MapLayerParent);
 
-      var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(MapLayerParent).call(this, arguments[0]));
+      var _this3 = _possibleConstructorReturn(this, (MapLayerParent.__proto__ || Object.getPrototypeOf(MapLayerParent)).call(this, arguments[0]));
 
-      _this3.oldAddChild = _get(Object.getPrototypeOf(MapLayerParent.prototype), 'addChild', _this3).bind(_this3);
+      _this3.oldAddChild = _get(MapLayerParent.prototype.__proto__ || Object.getPrototypeOf(MapLayerParent.prototype), 'addChild', _this3).bind(_this3);
       _this3.subcontainersConfig = subcontainers;
       _this3.subcontainerList = [];
       _this3.selectable = selectable;
@@ -1755,9 +1808,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           throw new Error('tried to retrieve subcontainers, when they are not present');
         }
 
-        var foundSubcontainers;
-
-        foundSubcontainers = _getClosestSubcontainers(this, coordinates);
+        var foundSubcontainers = _getClosestSubcontainers(this, coordinates);
 
         return foundSubcontainers;
       }
@@ -1793,11 +1844,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Integer} size.width       width (in pixels)
      * @param  {Integer} size.height      height (in pixels)
      */
-
     function MapSubcontainer(size) {
       _classCallCheck(this, MapSubcontainer);
 
-      var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(MapSubcontainer).call(this));
+      var _this4 = _possibleConstructorReturn(this, (MapSubcontainer.__proto__ || Object.getPrototypeOf(MapSubcontainer)).call(this));
 
       _this4.specialLayer = true;
       _this4.size = size;
@@ -1817,11 +1867,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     _createClass(MapSubcontainer, [{
       key: 'getSubcontainerArea',
       value: function getSubcontainerArea() {
-        var options = arguments.length <= 0 || arguments[0] === undefined ? { toGlobal: true } : arguments[0];
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { toGlobal: true };
 
-        var coordinates;
-
-        coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
+        var coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
         return {
           x: Math.round(coordinates.x),
@@ -1853,11 +1901,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Integer} size.width       width (in pixels)
      * @param  {Integer} size.height      height (in pixels)
      */
-
     function MinimapLayer(size) {
       _classCallCheck(this, MinimapLayer);
 
-      var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(MinimapLayer).call(this));
+      var _this5 = _possibleConstructorReturn(this, (MinimapLayer.__proto__ || Object.getPrototypeOf(MinimapLayer)).call(this));
 
       _this5.specialLayer = true;
       _this5.targetSize = size;
@@ -1891,7 +1938,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     var xIndex = Math.floor(displayObject.x / subcontainersConfig.width);
     var yIndex = Math.floor(displayObject.y / subcontainersConfig.height);
-    var thisSubcontainer;
+    var thisSubcontainer = void 0;
 
     subcontainerList[xIndex] = subcontainerList[xIndex] || [];
     thisSubcontainer = subcontainerList[xIndex][yIndex] = subcontainerList[xIndex][yIndex] || [];
@@ -2025,9 +2072,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Array|Object} rules        REQUIRED. The rules that apply for this instance.
      * Multiple rules in Array or one as Object.
      **/
-
     function MapDataManipulator() {
-      var rules = arguments.length <= 0 || arguments[0] === undefined ? utils.general.requireParameter('MapDataManipulator', 'rules') : arguments[0];
+      var rules = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : utils.general.requireParameter('MapDataManipulator', 'rules');
 
       _classCallCheck(this, MapDataManipulator);
 
@@ -2057,7 +2103,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function filter(objects) {
         var _this = this;
 
-        var found;
+        var found = void 0;
 
         if (!Array.isArray(objects)) {
           found = this._runRule(objects) ? [objects] : [];
@@ -2116,7 +2162,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _this2 = this;
 
         var ruleMatches = true;
-        var matchedType;
+        var matchedType = void 0;
 
         Object.keys(this.classes).forEach(function (type) {
           var filtered = _this2.classes[type].filter(function (thisClass) {
@@ -2200,7 +2246,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
-  var scope;
+  var scope = void 0;
 
   /*---------------------
   -------- PUBLIC -------
@@ -2219,7 +2265,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * @return {Object}               UI module
   */
   function UI(UITheme, givenMap) {
-    var map;
 
     /* SINGLETON MODULE */
     if (scope) {
@@ -2227,10 +2272,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     if (!UITheme || !givenMap) {
-      throw new Error('UI-module requires UITheme and map object, This is an singletong class, so it\'s possible it should have been ' + 'already called earlier');
+      throw new Error('UI-module requires UITheme and map object, This is a singleton class, so it\'s possible it should have been already called earlier');
     }
 
-    map = givenMap;
     scope = {};
 
     /**
@@ -2255,7 +2299,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @todo the getDatas function should be standardized, so that most UIs would work with most different setups.
      * */
     scope.showSelections = function (objects, getDatas) {
-      var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var filters = _ref.filters;
       var UIThemeOptions = _ref.UIThemeOptions;
@@ -2274,9 +2318,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
         return UITheme.showSelections([]);
       }
-
-      mapLog.error('No objects found' + objects.length);
-      return [];
     };
     /**
      * Shows arrow or movement or what ever to indicate the selected unit is moving to the given location
@@ -2289,7 +2330,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param {Object} options        Extra options. Like dropping a shadow etc.
      * */
     scope.showUnitMovement = function (to) {
-      var _ref2 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       var UIThemeOptions = _ref2.UIThemeOptions;
 
@@ -2331,7 +2372,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /*---------------------
   --------- API ---------
   ----------------------*/
-
   var ObjectManager = function () {
     /**
      * this module is responsible for doing hitTesting, like returning the units on certain clicked coordinates or when objects or areas
@@ -2343,7 +2383,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @todo It might be a good idea to make the hitDetection more extensive. Now it just uses point or rectangle / bounds to detect hits.
      * It could use sprites or forms.
      */
-
     function ObjectManager() {
       _classCallCheck(this, ObjectManager);
     }
@@ -2374,8 +2413,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(ObjectManager, [{
       key: "retrieve",
       value: function retrieve(allCoords) {
-        var containers = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
-        var options = arguments.length <= 2 || arguments[2] === undefined ? { type: undefined, size: { width: 0, height: 0 } } : arguments[2];
+        var containers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { type: undefined, size: { width: 0, height: 0 } };
         var size = options.size;
         var type = options.type;
         var globalCoords = allCoords.globalCoords;
@@ -2405,8 +2444,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })();
 
 function filterChildren(globalCoords) {
-  var children = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
-  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+  var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 
   return children.filter(function (obj) {
     if (type && type !== obj.type) {
@@ -2458,11 +2497,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param {Object} {}.data          objects data, that will be used in the game. It will not actually be mainly used
      * in graphical but rather things  like unit-data and city-data presentations etc.
      */
-
     function ObjectSprite(texture) {
-      var coord = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+      var coord = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
-      var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var _ref$data = _ref.data;
       var data = _ref$data === undefined ? null : _ref$data;
@@ -2470,8 +2508,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       _classCallCheck(this, ObjectSprite);
 
       /* We need to round the numbers. If there are decimal values, the graphics will get blurry */
-
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectSprite).call(this, texture));
+      var _this = _possibleConstructorReturn(this, (ObjectSprite.__proto__ || Object.getPrototypeOf(ObjectSprite)).call(this, texture));
 
       var exactCoords = {
         x: Math.round(coord.x),
@@ -2591,11 +2628,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'getGraphicalArea',
       value: function getGraphicalArea() {
-        var options = arguments.length <= 0 || arguments[0] === undefined ? { toGlobal: true } : arguments[0];
+        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { toGlobal: true };
 
-        var coordinates;
-
-        coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
+        var coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
         return {
           x: Math.round(coordinates.x),
@@ -2616,7 +2651,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     }, {
       key: 'clone',
       value: function clone(renderer) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? { position: false, anchor: false, scale: false } : arguments[1];
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { position: false, anchor: false, scale: false };
 
         var newSprite = new PIXI.Sprite();
 
@@ -2626,7 +2661,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         options.position && newSprite.position.set(this.x, this.y);
         options.scale && newSprite.scale.set(this.scale.x, this.scale.y);
 
-        Reflect.setPrototypeOf(newSprite, this.constructor.prototype);
+        Object.setPrototypeOf(newSprite, this.constructor.prototype);
 
         return newSprite;
       }
@@ -2683,16 +2718,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param {Coordinates} coords        format: {x: Number, y: Number}. Coordinates for the object relative to it's parent
      * @param {object} data               This units custom data
      */
-
     function ObjectSpriteTerrain(texture, coords) {
-      var _ref2 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var _ref2$data = _ref2.data;
       var data = _ref2$data === undefined ? null : _ref2$data;
 
       _classCallCheck(this, ObjectSpriteTerrain);
 
-      var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectSpriteTerrain).call(this, texture, coords, { data: data }));
+      var _this2 = _possibleConstructorReturn(this, (ObjectSpriteTerrain.__proto__ || Object.getPrototypeOf(ObjectSpriteTerrain)).call(this, texture, coords, { data: data }));
 
       _this2.name = 'DefaultTerrainObject';
       _this2.type = 'terrain';
@@ -2719,16 +2753,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param {Integer} coords.y            Y coordinate
      * @param {object} data                 This units data
      */
-
     function ObjectSpriteUnit(texture, coords) {
-      var _ref3 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref3 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var _ref3$data = _ref3.data;
       var data = _ref3$data === undefined ? null : _ref3$data;
 
       _classCallCheck(this, ObjectSpriteUnit);
 
-      var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectSpriteUnit).call(this, texture, coords, { data: data }));
+      var _this3 = _possibleConstructorReturn(this, (ObjectSpriteUnit.__proto__ || Object.getPrototypeOf(ObjectSpriteUnit)).call(this, texture, coords, { data: data }));
 
       _this3.name = 'DefaultUnitObjects';
       _this3.type = 'unit';
@@ -2828,7 +2861,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   window.flatworld.objects.ObjectSpriteTerrain = ObjectSpriteTerrain;
   window.flatworld.objects.ObjectSpriteUnit = ObjectSpriteUnit;
 })();
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2840,7 +2873,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   ----------------------*/
   var Q = window.flatworld_libraries.Q;
   var Howl = window.flatworld_libraries.Howler;
-  var log = window.flatworld.mapLayers;
+  //const log = window.flatworld.mapLayers;
 
   /*---------------------
   --------- API ---------
@@ -2867,18 +2900,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     _createClass(Sound, [{
-      key: 'add',
-      value: function add(name, url) {
-        var options = arguments.length <= 2 || arguments[2] === undefined ? { loop: false, volume: 1 } : arguments[2];
+      key: "add",
+      value: function add(name, urls) {
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { loop: false, volume: 1 };
 
-        var ERROR_STRING = 'The sound "' + name + '" was unable to load!';
+        //const ERROR_STRING = 'The sound "' + name + '" was unable to load!';
         var loop = options.loop;
         var volume = options.volume;
 
 
         this._allSounds[name] = {};
         this._allSounds[name] = new Howl({
-          urls: [url],
+          src: [].concat(urls),
           autoplay: false,
           loop: loop,
           volume: volume
@@ -2894,7 +2927,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'remove',
+      key: "remove",
       value: function remove(name) {
         delete this._allSounds[name];
       }
@@ -2906,7 +2939,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'play',
+      key: "play",
       value: function play(name) {
         var promise = Q.defer();
 
@@ -2923,7 +2956,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'stop',
+      key: "stop",
       value: function stop(name) {
         this._allSounds[name].stop();
       }
@@ -2939,11 +2972,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        */
 
     }, {
-      key: 'fade',
+      key: "fade",
       value: function fade(name, from, to, duration) {
         var promise = Q.defer();
-        var cb;
-        cb = function cb() {
+        var cb = function cb() {
           promise.resolve(true);
         };
 
@@ -3067,7 +3099,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    */
   function baseEventlistenersModule() {
     var caches = {};
-    var hammer, hamster, mapInstance;
+    var hammer = void 0,
+        hamster = void 0,
+        mapInstance = void 0;
 
     /*---------------------------
     ----------- API -------------
@@ -3080,7 +3114,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       toggleDrag: toggleDrag,
       toggleSelect: toggleSelect,
       toggleOrder: toggleOrder,
-      toggleMouseTextSelection: toggleMouseTextSelection,
 
       /**
        * Plugins name
@@ -3096,19 +3129,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      *
      * @method init
      */
-    function init(map) {
+    function init() {
+      mapInstance = this.mapInstance;
       var orderToggle = toggleOrder();
       var selectToggle = toggleSelect();
 
-      mapInstance = map;
-      hammer = new Hammer.Manager(map.canvas);
-      hamster = new Hamster(map.canvas);
+      hammer = new Hammer.Manager(this.mapInstance.canvas);
+      hamster = new Hamster(this.mapInstance.canvas);
 
       eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
       eventListeners.on('fullSize', resizeCanvas);
 
       eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
-      map.setPrototype('setFullScreen', function () {
+      this.mapInstance.setPrototype('setFullScreen', function () {
         eventListeners.on('fullscreen', _setFullScreen);
       });
 
@@ -3124,7 +3157,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @method toggleFullSize
      */
     function toggleFullSize() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['fullsize']) {
         caches['fullsize'] = {
@@ -3149,7 +3182,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}        Return the state of this event
      */
     function toggleFullscreen() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['fullscreen']) {
         caches['fullscreen'] = {
@@ -3176,7 +3209,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}            Return the state of this event
      */
     function toggleZoom() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['zoom']) {
         caches['zoom'] = {
@@ -3206,7 +3239,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}        Return the state of this event
      */
     function toggleDrag() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['drag']) {
         caches['drag'] = {
@@ -3236,7 +3269,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}        Return the state of this event
      */
     function toggleSelect() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['select']) {
         caches['select'] = {
@@ -3264,7 +3297,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @return {Boolean}        Return the state of this event
      */
     function toggleOrder() {
-      var activeCB;
+      var activeCB = void 0;
 
       if (!caches['order']) {
         caches['order'] = {
@@ -3304,21 +3337,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         activeCB(e);
       }
     }
-    /**
-     * Deactivate the selection of text, by dragging
-     *
-     * @method toggleMouseTextSelection
-     */
-    function toggleMouseTextSelection() {
-      var bodyStyles = document.getElementsByTagName('body')[0].style;
-
-      bodyStyles.webkitTouchCallout = 'none';
-      bodyStyles.webkitUserSelect = 'none';
-      bodyStyles.khtmlUserSelect = 'none';
-      bodyStyles.mozUserSelect = 'none';
-      bodyStyles.msUserSelect = 'none';
-      bodyStyles.userSelect = 'none';
-    }
 
     /**
      * Activate the browsers fullScreen mode and expand the canvas to fullsize
@@ -3352,8 +3370,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   ----------------------*/
   var eventListeners = window.flatworld.eventListeners;
   var utils = window.flatworld.utils;
-  var mapStates = window.flatworld.mapStates;
-  var mapLog = window.flatworld.log;
 
   /*---------------------
   --------- API ---------
@@ -3374,8 +3390,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   function setupMap_drag() {
     /* Function for setting and getting the mouse offset. Private functions declared bottom */
     var offsetCoords = _offsetCoords();
-    var mapMoved = false;
-    var eventListenerCB;
+    var eventListenerCB = void 0;
 
     /*--------------------
     ------- API ----------
@@ -3383,7 +3398,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return {
       init: init,
       pluginName: 'mapDrag',
-      _startDragListener: _startDragListener };
+      _startDragListener: _startDragListener /* Function revealed for testing */
+    };
 
     /*---------------------
     -------- PUBLIC -------
@@ -3394,9 +3410,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @method init
      * @param {Map} mapObj        The current instance of Map class
      * */
-    /* Function revealed for testing */
-    function init(map) {
-      eventListenerCB = _startDragListener(map);
+    function init() {
+      eventListenerCB = _startDragListener(this.mapInstance);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
       eventListeners.on('drag', eventListenerCB);
@@ -3418,14 +3433,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var initialized = false;
 
       return function startDrag(e) {
-        var coords;
-
         if (eventListeners.getActivityState('zoom')) {
           return false;
         }
-        coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-
-        mapMoved = true;
+        var coords = utils.mouse.eventData.getHAMMERPointerCoords(e);
 
         coords.x = Math.round(coords.x);
         coords.y = Math.round(coords.y);
@@ -3440,7 +3451,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return;
         } else if (e.isFinal === true) {
           initialized = false;
-          mapMoved = false;
         }
 
         _mapMovement(e, map, coords);
@@ -3459,20 +3469,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {Coordinates} coords             Current pointer coordinates
      */
     function _mapMovement(e, map, coords) {
-      var offset, moved;
-
-      offset = offsetCoords.getOffset();
-      moved = {
+      var offset = offsetCoords.getOffset();
+      var moved = {
         x: coords.x - offset.x,
         y: coords.y - offset.y
       };
 
       if (moved.x > 0 || moved.y > 0 || moved.x < 0 || moved.y < 0) {
         map.moveMap(moved);
-      }
-
-      if (e.isFinal) {
-        mapMoved = false;
       }
 
       offsetCoords.setOffset({
@@ -3492,7 +3496,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @method _offsetCoords
      */
     function _offsetCoords() {
-      var offsetCoords;
+      var offsetCoordsPrivate = void 0;
 
       return {
         setOffset: setOffset,
@@ -3500,10 +3504,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
 
       function setOffset(coords) {
-        return offsetCoords = coords;
+        return offsetCoordsPrivate = coords;
       }
       function getOffset() {
-        return offsetCoords;
+        return offsetCoordsPrivate;
       }
     }
   }
@@ -3514,13 +3518,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /*---------------------
   ------- IMPORT --------
   ----------------------*/
-  var eventListeners = window.flatworld.eventListeners;
-  var utils = window.flatworld.utils;
-  var log = window.flatworld.log;
+  var _window$flatworld = window.flatworld;
+  var utils = _window$flatworld.utils;
+  var log = _window$flatworld.log;
+  var eventListeners = _window$flatworld.eventListeners;
 
   /*---------------------
   --------- API ---------
   ----------------------*/
+
   window.flatworld.extensions.mapZoom = setupMap_zoom();
 
   /*---------------------
@@ -3541,7 +3547,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var initialized = false;
     var mobileInitialized = false;
     var difference = {};
-    var map;
+    var map = void 0;
     /**
      * Maximum and minimum amount, the player can zoom the map
      *
@@ -3580,12 +3586,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @todo think through should setZoomLimits and setZoomModifier be in map.prototype?
      * But zoomLimit and modifier need to be setable in creation, init or later with setters
      **/
-    function init(thisMap) {
-      map = thisMap;
-      map.setPrototype('zoomIn', zoomIn);
-      map.setPrototype('zoomOut', zoomOut);
-      map.setPrototype('setZoomLimits', setZoomLimits);
-      map.setPrototype('setZoomModifier', setZoomModifier);
+    function init() {
+      map = this.mapInstance;
+      this.mapInstance.setPrototype('zoomIn', zoomIn);
+      this.mapInstance.setPrototype('zoomOut', zoomOut);
+      this.mapInstance.setPrototype('setZoomLimits', setZoomLimits);
+      this.mapInstance.setPrototype('setZoomModifier', setZoomModifier);
 
       /* Singleton should have been instantiated before, we only retrieve it with 0 params */
       eventListeners.on('zoom', unifiedEventCB);
@@ -3799,7 +3805,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @todo zoom should always product integers, not floats (this seems to happen)
      **/
     function _zoom(map, presentScale, amount, isZoomIn) {
-      var newScale;
+      var newScale = void 0;
 
       if (!_isOverZoomLimit(presentScale, isZoomIn)) {
         newScale = map.setZoom(amount ? presentScale + amount : presentScale + zoomModifier);
@@ -3840,7 +3846,9 @@ window.flatworld.extensions.hexagons._tests = {};
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  var globalRadius, globalStartingPoint, globalOrientation;
+  var globalRadius = void 0,
+      globalStartingPoint = void 0,
+      globalOrientation = void 0;
 
   /**
    * Utility module, for making different calculations and tests when hexagon based grid map in use
@@ -3859,9 +3867,9 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param {Number} radius    The radius of the hexagon
    */
   function init(radius) {
-    var startingPoint = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+    var startingPoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
-    var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     var _ref$orientation = _ref.orientation;
     var orientation = _ref$orientation === undefined ? 'horizontal' : _ref$orientation;
@@ -3883,25 +3891,23 @@ window.flatworld.extensions.hexagons._tests = {};
    * how many decimals to round
   */
   function getHexagonPoints() {
-    var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var _ref2$radius = _ref2.radius;
     var radius = _ref2$radius === undefined ? globalRadius : _ref2$radius;
     var _ref2$orientation = _ref2.orientation;
-    var orientation = _ref2$orientation === undefined ? 'horizontal' : _ref2$orientation;
+    var orientation = _ref2$orientation === undefined ? globalOrientation : _ref2$orientation;
 
-    if (!radius) {
-      mapLog.error('You need to define at least globalRadius for the hexagonMath utils class');
-    }
     var OFFSET = orientation === 'horizontal' ? 0.5 : 0;
     var CENTER = {
       x: radius,
       y: radius
     };
+    var points = [];
     var angle = 2 * Math.PI / 6 * OFFSET;
     var x = CENTER.x * Math.cos(angle);
     var y = CENTER.y * Math.sin(angle);
-    var points = [{ x: x, y: y }];
+    points.push({ x: x, y: y });
 
     for (var i = 1; i < 7; i++) {
       angle = 2 * Math.PI / 6 * (i + OFFSET);
@@ -3926,7 +3932,7 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param {string} {}.type          If you provide something else than radius, where the calculation is based from
    */
   function calcShortDiagonal() {
-    var _ref3 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var _ref3$radius = _ref3.radius;
     var radius = _ref3$radius === undefined ? globalRadius : _ref3$radius;
@@ -3950,7 +3956,7 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param {string} {}.type            If you provide something else than radius, where the calculation is based from
    */
   function calcLongDiagonal() {
-    var _ref4 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var _ref4$radius = _ref4.radius;
     var radius = _ref4$radius === undefined ? globalRadius : _ref4$radius;
@@ -3970,7 +3976,7 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param {float} {}.radius             Usually the radius of the hexagon
    */
   function calcSpecialDistance() {
-    var _ref5 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     var _ref5$radius = _ref5.radius;
     var radius = _ref5$radius === undefined ? globalRadius : _ref5$radius;
@@ -3995,7 +4001,7 @@ window.flatworld.extensions.hexagons._tests = {};
    */
 
   function hexaHitTest(points, hitCoords) {
-    var offsetCoords = arguments.length <= 2 || arguments[2] === undefined ? { x: 0, y: 0 } : arguments[2];
+    var offsetCoords = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { x: 0, y: 0 };
 
     var realPolygonPoints = points.map(function (point) {
       return {
@@ -4020,12 +4026,12 @@ window.flatworld.extensions.hexagons._tests = {};
    * @return {[]}                       Array that holds the coordinates for the hexagon grid, like [{x: ?, y: ?}]
    */
   function createHexagonGridCoordinates(gridSize) {
-    var _ref6 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var _ref6 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     var _ref6$radius = _ref6.radius;
     var radius = _ref6$radius === undefined ? globalRadius : _ref6$radius;
     var _ref6$orientation = _ref6.orientation;
-    var orientation = _ref6$orientation === undefined ? 'horizontal' : _ref6$orientation;
+    var orientation = _ref6$orientation === undefined ? globalOrientation : _ref6$orientation;
     var rows = gridSize.rows;
     var columns = gridSize.columns;
 
@@ -4049,42 +4055,36 @@ window.flatworld.extensions.hexagons._tests = {};
     return gridArray;
   }
   function coordinatesToIndexes(coordinates) {
-    if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('coordinatesToIndexes requirements not filled');
-    }
+    var _ref7 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var _ref7$startingPoint = _ref7.startingPoint;
+    var startingPoint = _ref7$startingPoint === undefined ? globalStartingPoint : _ref7$startingPoint;
 
     var indexes = {
-      x: Math.floor((coordinates.x - globalStartingPoint.x) / calcShortDiagonal()),
-      y: Math.floor((coordinates.y - globalStartingPoint.y) / calcSpecialDistance())
+      x: Math.floor((coordinates.x - startingPoint.x) / calcShortDiagonal()),
+      y: Math.floor((coordinates.y - startingPoint.y) / calcSpecialDistance())
     };
 
-    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
-      indexes.x += 1;
-    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 1) {
-      indexes.y += 1;
-    }
+    indexes.x -= Math.floor(coordinates.y / (calcSpecialDistance() * 2));
 
     return indexes;
   }
   function indexesToCoordinates(indexes) {
-    if (!globalOrientation || !globalStartingPoint) {
-      throw new Error('indexesToCoordinates requirements not filled');
-    }
+    var _ref8 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    var XIndexExtra = 0;
-    var YIndexExtra = 0;
+    var _ref8$startingPoint = _ref8.startingPoint;
+    var startingPoint = _ref8$startingPoint === undefined ? globalStartingPoint : _ref8$startingPoint;
 
-    if (globalOrientation === 'horizontal' && indexes.y % 2 === 1) {
-      XIndexExtra = calcShortDiagonal() + calcShortDiagonal() / 2;
-    } else if (globalOrientation === 'vertical' && indexes.x % 2 === 0) {
-      YIndexExtra = calcShortDiagonal() + calcShortDiagonal() / 2;
-    }
-
-    return {
-      x: Math.floor(indexes.x * calcShortDiagonal() - XIndexExtra + globalStartingPoint.x),
-      y: Math.floor(indexes.y * calcSpecialDistance() - YIndexExtra + globalStartingPoint.y)
+    var coordinates = {
+      x: Math.floor(indexes.x * calcShortDiagonal() + startingPoint.x),
+      y: Math.floor(indexes.y * calcSpecialDistance() + startingPoint.y)
     };
+
+    coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));
+
+    return coordinates;
   }
+
   /*-----------------------
   --------- PRIVATE -------
   -----------------------*/
@@ -4163,17 +4163,15 @@ window.flatworld.extensions.hexagons._tests = {};
    * @return {PIXI.Polygon}           Hexagon shaped PIXI.Polygon object. That houses the hexagons corner points.
    */
   function createHexagon(radius) {
-    var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     var _ref$orientation = _ref.orientation;
     var orientation = _ref$orientation === undefined ? 'horizontal' : _ref$orientation;
 
-    var points = [];
-
     if (orientation !== 'horizontal') {
       throw new Error('Nothing else than horizontal supported so far!');
     }
-    points = coordsToPixiPoints(radius);
+    var points = coordsToPixiPoints(radius);
 
     return new PIXI.Polygon(points);
   }
@@ -4189,7 +4187,7 @@ window.flatworld.extensions.hexagons._tests = {};
    * @return {PIXI.Graphics}      Graphics object that is shaped as hexagon, based on given radius and options.
    */
   function createVisibleHexagon(radius) {
-    var _ref2 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     var _ref2$color = _ref2.color;
     var color = _ref2$color === undefined ? 0xFF0000 : _ref2$color;
@@ -4246,7 +4244,6 @@ window.flatworld.extensions.hexagons._tests = {};
   ----------------------*/
 
   window.flatworld.extensions.hexagons.setupHexagonClick = _setupUnitsHexagonClick;
-  window.flatworld.extensions.hexagons.activate = activate;
   window.flatworld.extensions.hexagons._tests._isBlocked = _isBlocked;
   window.flatworld.extensions.hexagons._tests._orderListener = _orderListener;
   window.flatworld.extensions.hexagons._tests._tapListener = _tapListener;
@@ -4266,10 +4263,12 @@ window.flatworld.extensions.hexagons._tests = {};
     property: 'name',
     value: 'terrainLayer'
   });
+  /* This must be changed to outside the module */
+  var weight = function weight() {
+    return 0;
+  };
   var FTW = void 0,
-      ui = void 0,
-      isBlockedCb = void 0,
-      weight = void 0;
+      ui = void 0;
 
   /*---------------------
   ------- PUBLIC --------
@@ -4284,7 +4283,7 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param  {Map} map      The currently use Map instance
    * @return {Boolean}      True
    */
-  function _setupUnitsHexagonClick(mapInstance) {
+  function _setupUnitsHexagonClick(mapInstance, weightFn) {
     if (!mapInstance) {
       throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
     }
@@ -4296,20 +4295,9 @@ window.flatworld.extensions.hexagons._tests = {};
     eventListeners.on('select', _tapListener);
     eventListeners.on('order', _orderListener);
 
-    /* This is here only because I'm lazy to implement it properly as cb now */
-    isBlockedCb = function isBlockedCb(correctHexagon, selectedObject, dataObject) {
-      return correctHexagon && correctHexagon.mountain || dataObject.len > selectedObject.data.typeData.move;
-    };
-    weight = function weight() /*curr, next*/{
-      return 1;
-    };
+    weight = weightFn || weight;
 
     return true;
-  }
-
-  function activate(isBlockedFn, weightFn) {
-    isBlockedCb = isBlockedFn;
-    weight = weightFn;
   }
 
   /**
@@ -4326,11 +4314,9 @@ window.flatworld.extensions.hexagons._tests = {};
         return object.data.typeData;
       }
     };
-    var objects;
-
     mapStates.objectSelect();
 
-    objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
+    var objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
     objects = utils.dataManipulation.mapObjectsToArray(objects);
     objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
@@ -4356,67 +4342,63 @@ window.flatworld.extensions.hexagons._tests = {};
    * @param  {Event} e      Event object
    */
   function _orderListener(e) {
-    var selectedObjectsCoordinates;
-    var globalCoords = void 0,
-        selectedObject = void 0;
-
-    if (!FTW.currentlySelectedObjects) {
-      log.debug('No objects selected for orders! ' + JSON.stringify(selectedObject));
-      return;
-    } else if (FTW.currentlySelectedObjects.length > 1) {
-      log.debug('the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects));
-      return;
-    }
-
-    selectedObject = FTW.currentlySelectedObjects[0];
-    selectedObjectsCoordinates = selectedObject.getMapCoordinates();
-    selectedObjectsCoordinates.x += selectedObject.getCenterCoordinates().x;
-    selectedObjectsCoordinates.y += selectedObject.getCenterCoordinates().y;
-
-    mapStates.objectOrder();
-
-    if (FTW.isSupportedTouch) {
-      globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-    } else {
-      globalCoords = utils.mouse.eventData.getPointerCoords(e);
-    }
-    var objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
-
-    if (!objects.length) {
-      log.error('No terrain objects found for destination!');
-      mapStates.objectOrderEnd();
-      return;
-    }
-
-    var objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
-    var centerCoords = {
-      x: objects[0].getMapCoordinates().x + objects[0].getCenterCoordinates().x,
-      y: objects[0].getMapCoordinates().y + objects[0].getCenterCoordinates().y
-    };
-    var destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
-
-    var pathsToCoordinates = void 0;
+    // We want to wrap the whole functionality in try catch, to cancel the order state, if any
+    // errors occur. Otherwise the states can get stuck more easily in a situation, where you can
+    // not move anything (if objectOrder stays on, then the map won't allow you to move units)
     try {
-      pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, 100, _isBlocked, weight);
-    } catch (e) {
-      if (e.message === 'destination must not be blocked!') {
-        log.debug('path finding destination is blocked. There should be a notification in the UI of this.');
+      mapStates.objectOrder();
+
+      if (!FTW.currentlySelectedObjects) {
+        throw 'No objects selected for orders!';
+      } else if (FTW.currentlySelectedObjects.length > 1) {
+        throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]);
       }
-      log.error('same path, dest blocked or such');
+
+      var selectedObject = FTW.currentlySelectedObjects[0];
+      var selectedObjectsCoordinates = selectedObject.getMapCoordinates();
+      var globalCoords = utils.mouse.eventData.getGlobalCoordinates(e, FTW.isSupportedTouch);
+
+      var objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
+
+      if (!objects.length) {
+        throw 'No terrain objects found for destination!';
+      }
+
+      var objectIndexes = hexagons.utils.coordinatesToIndexes(selectedObjectsCoordinates);
+      var centerCoords = {
+        x: objects[0].getMapCoordinates().x,
+        y: objects[0].getMapCoordinates().y
+      };
+      var destinationIndexes = hexagons.utils.coordinatesToIndexes(centerCoords);
+
+      var pathsToCoordinates = void 0;
+      try {
+        var timeUnits = selectedObject.data.typeData.move;
+        pathsToCoordinates = hexagons.pathfinding.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
+        pathsToCoordinates = pathsToCoordinates.map(function (coords) {
+          return hexagons.utils.indexesToCoordinates(coords);
+        });
+      } catch (e) {
+        if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+          e.message = 'the destination was farther than the given maximum distance';
+        } else {
+          e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+        }
+        throw e;
+      }
+
+      selectedObject.move(pathsToCoordinates[pathsToCoordinates.length - 1]);
+      mapEvents.publish('objectMoves', selectedObject);
+
+      ui.showUnitMovement(pathsToCoordinates);
+
       mapStates.objectOrderEnd();
+      FTW.drawOnNextTick();
+    } catch (e) {
+      mapStates.objectOrderEnd();
+      log.debug(e);
       return;
     }
-    pathsToCoordinates = pathsToCoordinates.map(function (coords) {
-      return hexagons.utils.indexesToCoordinates(coords);
-    });
-
-    selectedObject.move(globalCoords);
-    mapEvents.publish('objectMoves', selectedObject);
-
-    ui.showUnitMovement(pathsToCoordinates);
-
-    mapStates.objectOrderEnd();
-    FTW.drawOnNextTick();
   }
 
   function _isBlocked(coordinates) {
@@ -4425,213 +4407,41 @@ window.flatworld.extensions.hexagons._tests = {};
      * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
      */
     var correctHexagon = FTW.hexagonIndexes[coordinates.x] && FTW.hexagonIndexes[coordinates.x][coordinates.y];
-    var isBlocked = isBlockedCb(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
+    var returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
 
-    return !correctHexagon || isBlocked;
+    if (!correctHexagon) {
+      return -1;
+    } else if (returnedWeight && isInteger(returnedWeight)) {
+      return returnedWeight;
+    } else if (returnedWeight && !isInteger(returnedWeight)) {
+      throw new Error('weight callback has to return an integer');
+    }
+
+    return -1;
+  }
+
+  function isInteger(x) {
+    return x === Math.floor(x) && isFinite(x);
   }
 })();
-"use strict";
+'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 !function () {
   /*---------------------
-  ------- IMPORT --------
+  ------- EXPORT --------
   ----------------------*/
-  var log = window.flatworld.log;
-
-  /*---------------------
-  ------ VARIABLES ------
-  ----------------------*/
-
-  var debug = true;
-
-  // Any hexagon grid can be represented as a square grid
-  // with intersections in hexagons centers (easy to see when you connect them).
-  // The only difference is that there're 6 allowed directions where unit can move
-  // from one intersection (hexagon center) to another in one step.
-  // Imagine we have coordinate axis with Y-axis pointing to top-left corner
-  // and X-axis pointing to top-right-corner.
-  // Thus, it will take two steps to go in direction [1, 1] and [-1, -1]
-  // and only one step to go in directions [1, 0], [1, -1], [0, -1], [-1, 0], [0, 1].
-  // Now that we have set ground for the problem let's begin.
-
-  /**
-   * Finds all possible cells that can be reached from starting point
-   * @param  {{ x: int, y: int }} start - start coordinates
-   * @param  {({ x: int, y: int }) => boolean} isBlocked - function that returns true if next (x, y) cell is blocked
-   * @param  {int} maxYCoordDiff - maximal possible difference between yStart and other Y-coordinates
-   * @return {{ x: int, y: int }[]} - cells which can be reached from starting point
-   */
-  function findAll(start, isBlocked, maxYCoordDiff) {
-    validateArgs();
-
-    var visited = [true];
-    var res = [start];
-
-    for (var i = 0; i < res.length; i++) {
-      var curr = res[i];
-      for (var j = allHexDirections.length; j-- > 0;) {
-        var next = {
-          x: curr.x + allHexDirections[j].x,
-          y: curr.y + allHexDirections[j].y
-        };
-
-        if (!isBlocked(next) && !isVisited(next)) {
-          res.push(next);
-        }
-      }
-    }
-
-    return res;
-
-    function isVisited(cell) {
-      var key = (cell.x - start.x) * (maxYCoordDiff + 1) + (cell.y - start.y);
-      return visited[key] || !(visited[key] = true);
-    }
-
-    function validateArgs() {
-      [start.x, start.y, maxYCoordDiff].forEach(function (arg, i) {
-        if (!isInteger(arg)) {
-          throw new Error("argument #" + i + " must be an integer: " + arg);
-        }
-      });
-    }
-  }
+  window.flatworld.utils.findPath = findPath;
 
   var allHexDirections = [{ x: 0, y: 1 }, { x: -1, y: 1 }, { x: 1, y: 0 }, { x: 1, y: -1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
   var allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
-
-  /**
-   * Finds shortest route on a hexagon/normal grid
-   * @param  {int} options.x:  xStart - start x-coordinate
-   * @param  {int} options.y:  yStart - start y-coordinate
-   * @param  {int} options.x:  xDest - destination x-coordinate
-   * @param  {int} options.y:  yDest - destination y-coordinate
-   * @param  {int} maxAllowedDistance - maximal allowed distance to get to destination (must be at least 1)
-   * @param  {({ x: int, y: int }) => boolean} isBlocked - function that returns true if next (x, y) cell is blocked
-   * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weight - function that returns distance between two adjacent cells
-   * @param  {int} maxYCoordDiff - maximal possible difference between yStart and other Y-coordinates
-   * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
-   * @return {{ x: int, y: int }[]} - path coordinates from start to destination (including starting point)
-   */
-  function findPath(_ref, _ref2, maxAllowedDistance, isBlocked) {
-    var xStart = _ref.x;
-    var yStart = _ref.y;
-    var xDest = _ref2.x;
-    var yDest = _ref2.y;
-    var weight = arguments.length <= 4 || arguments[4] === undefined ? function () {
-      return 1;
-    } : arguments[4];
-    var maxYCoordDiff = arguments.length <= 5 || arguments[5] === undefined ? Math.ceil(Math.sqrt(maxAllowedDistance)) : arguments[5];
-    var allowDiagonal = arguments.length <= 6 || arguments[6] === undefined ? null : arguments[6];
-
-
-    validateArgs();
-
-    var hexagonGrid = allowDiagonal === null;
-    var pathList = bestDirectionAlg();
-    var pathArr = pathList && pathListToArray(pathList);
-
-    return pathArr;
-
-    function bestDirectionAlg() {
-      var visited = [0];
-      var startMinDistance = getMinSteps(xDest - xStart, yDest - yStart, hexagonGrid);
-      var queue = new PriorityQueue();
-      queue.push({
-        x: xStart,
-        y: yStart,
-        distance: 0,
-        prev: null
-      }, 0);
-
-      var resPath = null;
-      var allowedDistance = maxAllowedDistance;
-
-      while (queue.length) {
-        var curr = queue.pop();
-        var maxRemainingDistance = allowedDistance - curr.distance;
-        var minPossibleDistance = maxRemainingDistance > 0 ? getMinSteps(xDest - curr.x, yDest - curr.y, hexagonGrid) : 1;
-
-        if (minPossibleDistance > maxRemainingDistance) {
-          continue;
-        }
-
-        var directions = hexagonGrid ? allHexDirections : allNormalDirections;
-
-        for (var i = directions.length; i-- > 0;) {
-          var x = curr.x + directions[i].x;
-          var y = curr.y + directions[i].y;
-          var next = { x: x, y: y };
-
-          if (debug && maxYCoordDiff < Math.abs(y - yStart)) {
-            throw new Error("maxYCoordDiff " + maxYCoordDiff + " less than distance by \"y\" to (" + x + ", " + y + ") from (" + xStart + ", " + yStart + ")");
-          }
-          if (isBlocked(next)) {
-            continue;
-          }
-
-          var stepDistance = weight(curr, next);
-          if (debug && (!isInteger(stepDistance) || stepDistance < 1)) {
-            throw new Error("weight returned not positive integer for (" + curr.x + ", " + curr.y + "), (" + x + ", " + y + "): " + stepDistance);
-          }
-          next.distance = curr.distance + stepDistance;
-          next.prev = curr;
-
-          if (x === xDest && y === yDest) {
-            resPath = next;
-            allowedDistance = next.distance - 1;
-            break;
-          }
-
-          if (!isVisited(next)) {
-            var nextMinDistance = next.distance + getMinSteps(xDest - x, yDest - y, hexagonGrid);
-            var loss = nextMinDistance - startMinDistance /* * (maxAllowedDistance + 1) - next.distance*/;
-            queue.push(next, loss);
-          }
-        }
-      }
-      return resPath;
-
-      function isVisited(cell) {
-        var key = (cell.x - xStart) * (maxYCoordDiff + 1) + (cell.y - yStart);
-        return key in visited ? visited[key] <= cell.distance || (visited[key] = cell.distance, false) : (visited[key] = cell.distance, false);
-      }
-    }
-
-    function validateArgs() {
-      [xStart, yStart, xDest, yDest, maxAllowedDistance, maxYCoordDiff].forEach(function (arg, i) {
-        if (!isInteger(arg)) {
-          throw new Error("argument #" + i + " must be an integer: " + arg);
-        }
-      });
-      if (maxAllowedDistance < 1) {
-        throw new Error("maxAllowedDistance must be at least 1: " + maxAllowedDistance);
-      }
-      if (xStart === xDest && yStart === yDest) {
-        throw new Error("starting and destination points must be different: " + xStart + ", " + yStart);
-      }
-      if (isBlocked({ x: xDest, y: yDest })) {
-        throw new Error("destination must not be blocked: " + xDest + ", " + yDest);
-      }
-    }
-  }
-
-  function pathListToArray(pathList) {
-    var link = pathList;
-    var arr = [];
-
-    do {
-      arr.push({ x: link.x, y: link.y });
-    } while (link = link.prev);
-
-    return arr.reverse();
-  }
 
   var PriorityQueue = function () {
     function PriorityQueue() {
@@ -4641,7 +4451,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _createClass(PriorityQueue, [{
-      key: "pop",
+      key: 'pop',
       value: function pop() {
         var stack = this.items[this.items.length - 1].stack;
         var value = stack.pop();
@@ -4651,18 +4461,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return value;
       }
     }, {
-      key: "push",
+      key: 'push',
       value: function push(value, loss) {
         var _this = this;
 
-        var _ref3 = this.items.length ? binarySearch(function (i) {
+        var _ref = this.items.length ? binarySearch(function (i) {
           return _this.items[i].loss - loss;
         }, 0, this.items.length) : [0, false];
 
-        var _ref4 = _slicedToArray(_ref3, 2);
+        var _ref2 = _slicedToArray(_ref, 2);
 
-        var index = _ref4[0];
-        var match = _ref4[1];
+        var index = _ref2[0];
+        var match = _ref2[1];
 
 
         if (match) {
@@ -4673,7 +4483,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
-      key: "length",
+      key: 'length',
       get: function get() {
         return this.items.length;
       }
@@ -4681,6 +4491,152 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return PriorityQueue;
   }();
+
+  /**
+   * Finds shortest route on a hexagon/normal grid
+   * @param  {int} options.x:  xStart - start x-coordinate
+   * @param  {int} options.y:  yStart - start y-coordinate
+   * @param  {{ x: int, y: int }} - destination coordinates; if destination is null, then look for all reachable cells
+   * @param  {int} width - width of the grid
+   * @param  {int} height - height of the grid
+   * @param  {int} maxTime - maximal allowed time to get to destination (must be at least 1)
+   * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weightFn - function that returns time between two adjacent cells
+   * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
+   * @return {{ x: int, y: int, time: int }[]} - path coordinates from start to destination (including starting point)
+   */
+
+
+  function findPath(_ref3, dest, width, height, maxTime, weightFn) {
+    var xStart = _ref3.x;
+    var yStart = _ref3.y;
+    var allowDiagonal = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+    var debug = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
+
+
+    validateArgs();
+
+    var counter = 0;
+    var d = Date.now();
+
+    var hexagonGrid = allowDiagonal === null;
+    var pathArr = bestDirectionAlg();
+
+    if (debug) {
+      var _console;
+
+      (_console = console).log.apply(_console, _toConsumableArray(dest ? [] : ['reachable: ']).concat([// eslint-disable-line no-console
+      Date.now() - d + 'ms', pathArr && pathArr.length, counter + ' oper', maxTime + ' cells', counter / maxTime / Math.log(maxTime) + ' coeff']));
+    }
+
+    return pathArr;
+
+    function bestDirectionAlg() {
+      var visited = [];
+      var startMinTime = dest && getMinSteps(dest.x - xStart, dest.y - yStart, hexagonGrid);
+      var queue = new PriorityQueue();
+      var start = {
+        x: xStart,
+        y: yStart,
+        time: 0,
+        prev: null
+      };
+
+      isVisited(start);
+      queue.push(start, 0);
+
+      var resPath = null;
+      var allowedTime = maxTime;
+
+      while (queue.length) {
+        counter++;
+        var curr = queue.pop();
+        var maxRemainingTime = allowedTime - curr.time;
+        var minPossibleTime = !dest || maxRemainingTime < 1 ? 1 : getMinSteps(dest.x - curr.x, dest.y - curr.y, hexagonGrid);
+
+        if (minPossibleTime > maxRemainingTime) {
+          continue;
+        }
+
+        var directions = hexagonGrid ? allHexDirections : allNormalDirections;
+
+        for (var i = directions.length; i-- > 0;) {
+          var x = curr.x + directions[i].x;
+          var y = curr.y + directions[i].y;
+          var next = { x: x, y: y };
+          var weight = weightFn(next, curr);
+
+          if (weight < 0 || curr.time + weight > maxTime) {
+            continue;
+          }
+
+          next.time = curr.time + weight;
+          next.prev = curr;
+
+          if (dest && x === dest.x && y === dest.y) {
+            resPath = next;
+            allowedTime = next.time - 1;
+            break;
+          }
+
+          if (!isVisited(next)) {
+            var loss = next.time + (dest ? getMinSteps(dest.x - x, dest.y - y, hexagonGrid) - startMinTime : 0);
+            queue.push(next, loss /* * (maxTime + 1) - next.time*/);
+          }
+        }
+      }
+
+      if (dest) {
+        return resPath && pathListToArray(resPath);
+      }
+
+      return visited.reduce(function (res, time, key) {
+        var dy = key % height;
+        var dx = (key - dy) / height - width;
+        if (dx || dy) {
+          // do not include starting point
+          res.push({ x: dx + xStart, y: dy + yStart, time: time });
+        }
+        return res;
+      }, []);
+
+      function isVisited(cell) {
+        // if width and height are chosen right then the key should not be negative
+        var key = (cell.x - xStart + width) * height + (cell.y - yStart);
+        if (key < 0) {
+          throw new Error('negative key: ' + key);
+        }
+
+        return visited[key] ? visited[key] <= cell.time || (visited[key] = cell.time, false) : (visited[key] = cell.time, false);
+      }
+    }
+
+    function validateArgs() {
+      [xStart, yStart].concat(dest ? [dest.x, dest.y] : []).concat([width, height, maxTime]).forEach(function (arg, i) {
+        if (!isInteger(arg)) {
+          throw new Error('argument #' + i + ' must be an integer: ' + arg);
+        }
+      });
+
+      if (maxTime < 1) {
+        throw new Error('maxTime must be at least 1: ' + maxTime);
+      }
+      if (dest && xStart === dest.x && yStart === dest.y) {
+        throw new Error('starting and destination points must be different: ' + xStart + ', ' + yStart);
+      }
+    }
+  }
+
+  function pathListToArray(pathList) {
+    var link = pathList;
+    var arr = [];
+
+    do {
+      arr.push(link);
+      link = link.prev;
+    } while (link);
+
+    return arr.reverse();
+  }
 
   function binarySearch(sortFn, i0, i1) {
     var mid = Math.floor((i0 + i1) / 2);
@@ -4707,7 +4663,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
 
   window.flatworld.extensions.hexagons.pathfinding.findPath = findPath;
-  window.flatworld.extensions.hexagons.pathfinding.findAll = findAll;
 }();
 'use strict';
 
@@ -4736,7 +4691,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   /*-----------------------
   -------- VARIABLES ------
   -----------------------*/
-  var shape;
+  var shape = void 0;
 
   var ObjectHexaTerrain = function (_ObjectSpriteTerrain) {
     _inherits(ObjectHexaTerrain, _ObjectSpriteTerrain);
@@ -4755,11 +4710,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param {Object} options            options.radius REQUIRED.
      * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
      */
-
     function ObjectHexaTerrain(texture) {
-      var coords = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+      var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
-      var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var data = _ref.data;
       var radius = _ref.radius;
@@ -4768,7 +4722,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       _classCallCheck(this, ObjectHexaTerrain);
 
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectHexaTerrain).call(this, texture, coords, { data: data }));
+      var _this = _possibleConstructorReturn(this, (ObjectHexaTerrain.__proto__ || Object.getPrototypeOf(ObjectHexaTerrain)).call(this, texture, coords, { data: data }));
 
       _this.name = 'DefaultTerrainObject_hexa';
       _this.minimapColor = minimapColor;
@@ -4816,11 +4770,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param {Object} options            options.radius REQUIRED
      * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
      */
-
     function ObjectHexaUnit(texture) {
-      var coords = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+      var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
-      var _ref2 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var data = _ref2.data;
       var radius = _ref2.radius;
@@ -4829,7 +4782,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
       _classCallCheck(this, ObjectHexaUnit);
 
-      var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(ObjectHexaUnit).call(this, texture, coords, { data: data }));
+      var _this2 = _possibleConstructorReturn(this, (ObjectHexaUnit.__proto__ || Object.getPrototypeOf(ObjectHexaUnit)).call(this, texture, coords, { data: data }));
 
       _this2.name = 'DefaultUnitObjects_hexa';
       _this2.minimapColor = minimapColor;
@@ -4891,9 +4844,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     /* Draw hexagon to test the hits with hitArea */
     this.hitArea = setAndGetShape(radius);
     this.hitTest = function (coords) {
-      var localCoords;
-
-      localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
+      var localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
 
       return this.hitArea.contains(localCoords.x * this.scale.x, localCoords.y * this.scale.y);
     };
@@ -4948,8 +4899,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
    * @return {Object}       Return methods inside object
    */
   function setupObject_select_hexagon() {
-    var map = {};
-
     return {
       init: init,
       pluginName: 'selectHexagonObject'
@@ -4957,14 +4906,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
     /**
      * @method  init
-     * @param {Map} givenMap         Instantiated Map class object
+     * @param {Map} givenMap                  Instantiated Map class object
+     * @param {Object} protectedProperties    Holds all the non-public properties to use
+     * @param {Array} params                  Rest of the parameters
      */
-    function init(givenMap) {
-      map = givenMap;
+    function init(params) {
+      var _this = this;
 
-      map.hexagonIndexes = createHexagonDataStructure(map.getMovableLayer(), map.allMapObjects.terrainLayer);
+      if (!params.isBlocked) {
+        throw new Error('hexagon pathFinding plugin requires cb and filter properties');
+      }
 
-      startClickListener(map);
+      this.mapInstance.hexagonIndexes = createHexagonDataStructure(this.mapInstance.getMovableLayer(), function () {
+        return _this.mapInstance.allMapObjects.terrainLayer;
+      });
+
+      startClickListener(this.mapInstance, params.isBlocked);
+
+      return Promise.resolve();
     }
 
     /*-----------------------
@@ -4975,19 +4934,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @method startClickListener
      * @param {Map} map              Instantiated Map class object
      */
-    function startClickListener(map) {
-      return setupHexagonClick(map);
+    function startClickListener(mapInstance, isBlocked) {
+      return setupHexagonClick(mapInstance, isBlocked);
     }
   }
 
-  function createHexagonDataStructure(movableLayer, objArray) {
+  function createHexagonDataStructure(movableLayer, getLayers) {
     var hexagonIndexes = {};
+    var objArray = getLayers();
     var indexes = void 0;
 
     objArray.forEach(function (obj) {
       var correctCoords = obj.getMapCoordinates();
-      correctCoords.x += obj.getCenterCoordinates().x;
-      correctCoords.y += obj.getCenterCoordinates().y;
 
       indexes = utils.coordinatesToIndexes(correctCoords);
 
@@ -5030,14 +4988,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
    * @class mapMovement
    **/
   function setupMapMovement() {
+    var debug = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
     var VIEWPORT_OFFSET = 0.2;
     var CHECK_INTERVAL = 20;
     var SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT = 40;
     var queue = {};
-    var debug = true;
-    var map = void 0;
-    var viewportArea = void 0;
-    var offsetSize = void 0;
+    var viewportArea = void 0,
+        offsetSize = void 0,
+        mapInstance = void 0;
 
     return {
       init: init,
@@ -5060,12 +5019,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @method init
      * @param  {Map} map     Instance of Map
      */
-    function init(givenMap) {
-      map = givenMap;
-
-      addAll();
+    function init() {
+      mapInstance = this.mapInstance;
+      addAll(this.mapInstance);
       startEventListeners();
-      map.drawOnNextTick();
+      this.mapInstance.drawOnNextTick();
 
       if (debug) {
         /**
@@ -5076,14 +5034,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
          * @static
          */
         window.FlaTWorld_mapMovement_subCheck = function () {
-          map.getPrimaryLayers().forEach(function (layer) {
+          mapInstance.getPrimaryLayers().forEach(function (layer) {
             var subcontainers = layer.getSubcontainers();
-            var visibleContainers, invisibleContainers;
-
-            visibleContainers = subcontainers.filter(function (subcontainer) {
+            var visibleContainers = subcontainers.filter(function (subcontainer) {
               return subcontainer.visible;
             });
-            invisibleContainers = subcontainers.filter(function (subcontainer) {
+            var invisibleContainers = subcontainers.filter(function (subcontainer) {
               return !subcontainer.visible;
             });
 
@@ -5100,30 +5056,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
          * @static
          */
         window.FlaTWorld_mapMovement_deactivate = function () {
-          map.getPrimaryLayers().forEach(function (layer) {
-            var subcontainers = layer.getSubcontainers();
+          mapInstance.getPrimaryLayers().forEach(function (layer) {
 
-            subcontainers.forEach(function (subcontainer) {
+            layer.getSubcontainers().forEach(function (subcontainer) {
               subcontainer.visible = false;
             });
           });
         };
       }
+
+      return Promise.resolve();
     }
     /**
-     * Ínitialize as a plugin
+     * Ínitialize the plugin
      *
      * @method addAll
      * @param  {Map} map     Instance of Map
      */
-    function addAll() {
-      viewportArea = map.getViewportArea(true, 2);
-      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+    function addAll(mapInstance) {
+      viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
+      offsetSize = setupOffsetSize(viewportArea);
 
-      map.getPrimaryLayers().forEach(function (layer) {
-        var subcontainers = layer.getSubcontainers();
-
-        subcontainers.forEach(function (subcontainer) {
+      mapInstance.getPrimaryLayers().forEach(function (layer) {
+        layer.getSubcontainers().forEach(function (subcontainer) {
           subcontainer.visible = isObjectOutsideViewport(subcontainer, viewportArea) ? false : true;
         });
       });
@@ -5151,9 +5106,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       window.setTimeout(setupHandleViewportArea(), CHECK_INTERVAL);
 
       function setupHandleViewportArea() {
-        setupViewportArea(true, VIEWPORT_OFFSET);
+        viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
 
-        checkAndSetSubcontainers(viewportArea, map.getPrimaryLayers());
+        checkAndSetSubcontainers(viewportArea, mapInstance.getPrimaryLayers());
       }
 
       return;
@@ -5172,11 +5127,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         check();
       }
       function resizeCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+        offsetSize = setupOffsetSize(viewportArea);
         check();
       }
       function zoomCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+        offsetSize = setupOffsetSize(viewportArea);
         check();
       }
     }
@@ -5199,11 +5154,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @return {Boolean}
      */
     function isObjectOutsideViewport(object, viewportArea) {
-      var isOutside, globalArea;
+      var globalArea = object.getSubcontainerArea({ toGlobal: false });
 
-      globalArea = object.getSubcontainerArea({ toGlobal: false });
-
-      isOutside = !testRectangleIntersect(globalArea, viewportArea);
+      var isOutside = !testRectangleIntersect(globalArea, viewportArea);
 
       return isOutside;
     }
@@ -5216,19 +5169,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @param  {Array} primaryLayers      The primarylayers that we handle
      */
     function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
+      var largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
       var containersUnderChangedArea = [];
-      var promises, largerViewportAreaWithOffset;
-
-      largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
+      var promises = void 0;
 
       primaryLayers = arrays.chunkArray(primaryLayers, VIEWPORT_OFFSET);
       promises = primaryLayers.map(function (theseLayers) {
         var promise = window.Q.defer();
 
         window.setTimeout(function () {
-          var foundSubcontainers;
-
-          foundSubcontainers = theseLayers.map(function (layer) {
+          var foundSubcontainers = theseLayers.map(function (layer) {
             return layer.getSubcontainersByCoordinates(largerViewportAreaWithOffset);
           });
           containersUnderChangedArea = containersUnderChangedArea.concat(foundSubcontainers);
@@ -5240,13 +5190,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       });
 
       promises = window.Q.all(promises).then(function () {
-        var subcontainers, promises;
-
         containersUnderChangedArea = arrays.flatten2Levels(containersUnderChangedArea);
 
-        subcontainers = arrays.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
+        var subcontainers = arrays.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
-        promises = subcontainers.map(function (thesesContainers) {
+        var promises = subcontainers.map(function (thesesContainers) {
           var promise = window.Q.defer();
 
           window.setTimeout(function () {
@@ -5263,7 +5211,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       window.Q.all(promises).then(function () {
         queue.processing = false;
 
-        map.drawOnNextTick();
+        mapInstance.drawOnNextTick();
       }).then(null, function (err) {
         window.flatworld.log.debug(err);
       });
@@ -5277,13 +5225,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupViewportArea() {
-      var isLocal = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-      var multiplier = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
+      var isLocal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      var multiplier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
 
-      viewportArea = map.getViewportArea(isLocal, multiplier);
+      return mapInstance.getViewportArea(isLocal, multiplier);
     }
     /**
-     * Initializes the module variables viewportArea and offsetSize
+     * Initializes the module variable offsetSize
      *
      * @private
      * @static
@@ -5291,7 +5239,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupOffsetSize(viewportArea) {
-      offsetSize = calculateOffset(viewportArea, { zoom: map.getZoom() });
+      return calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
     }
     /**
      * forms the total viewport parameters based on the given ones.
@@ -5328,7 +5276,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @method calculateOffset
      */
     function calculateOffset(viewportArea) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? { zoom: 1 } : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { zoom: 1 };
 
       return Math.abs(viewportArea.width / options.zoom * VIEWPORT_OFFSET);
     }
@@ -5338,7 +5286,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
      * @method _setMap
      */
     function _setMap(givenMap) {
-      map = givenMap;
+      this.mapInstance = mapInstance = givenMap;
     }
   }
 })();
@@ -5351,15 +5299,19 @@ window.flatworld.extensions.minimaps = {};
   /*-----------------------
   --------- IMPORT --------
   -----------------------*/
-  var mapEvents = window.flatworld.mapEvents;
-  var eventListeners = window.flatworld.eventListeners;
-  var MapDataManipulator = window.flatworld.MapDataManipulator;
-  var utils = window.flatworld.utils;
-  var Hammer = window.flatworld_libraries.Hammer;
+  var _window$flatworld_lib = window.flatworld_libraries;
+  var PIXI = _window$flatworld_lib.PIXI;
+  var Hammer = _window$flatworld_lib.Hammer;
+  var _window$flatworld$map = window.flatworld.mapEvents;
+  var mapEvents = _window$flatworld$map.mapEvents;
+  var eventListeners = _window$flatworld$map.eventListeners;
+  var MapDataManipulator = _window$flatworld$map.MapDataManipulator;
+  var utils = _window$flatworld$map.utils;
 
   /*-----------------------
   ---------- API ----------
   -----------------------*/
+
   window.flatworld.extensions.minimaps.pixelizedMinimap = setupPixelizedMinimap();
 
   /*-----------------------
@@ -5378,7 +5330,13 @@ window.flatworld.extensions.minimaps = {};
   function setupPixelizedMinimap() {
     var paddingX = 0;
     var paddingY = 0;
-    var map, minimap, minimapViewport, hammer, coordinateConverterCB, mapMoveTimestamp, dynamicContainer;
+    var minimap = void 0,
+        minimapViewport = void 0,
+        hammer = void 0,
+        coordinateConverterCB = void 0,
+        mapMoveTimestamp = void 0,
+        dynamicContainer = void 0,
+        mapInstance = void 0;
 
     return {
       init: init,
@@ -5392,11 +5350,12 @@ window.flatworld.extensions.minimaps = {};
      * @method init
      * @param  {Map} givenMap     Instance of Map
      */
-    function init(givenMap) {
-      map = givenMap;
-      hammer = new Hammer.Manager(map.minimapCanvas);
-      map.initMinimap = initMinimap;
-      minimap = map.getMinimapLayer();
+    function init() {
+      hammer = new Hammer.Manager(this.mapInstance.minimapCanvas);
+      this.mapInstance.initMinimap = initMinimap;
+      minimap = this.mapInstance.getMinimapLayer();
+
+      return Promise.resolve();
     }
     /**
      * initMinimap requires some data, to initialize and show the actual minimap.
@@ -5407,7 +5366,7 @@ window.flatworld.extensions.minimaps = {};
      * @return {PIXI.Container}                     minimap layer
      */
     function initMinimap(UIImage, minimapSize, staticCB, dynamicCB, coordinateConvCB, givenMinimapViewport) {
-      var _ref = arguments.length <= 6 || arguments[6] === undefined ? {} : arguments[6];
+      var _ref = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {};
 
       var _ref$xPadding = _ref.xPadding;
       var xPadding = _ref$xPadding === undefined ? 10 : _ref$xPadding;
@@ -5450,7 +5409,7 @@ window.flatworld.extensions.minimaps = {};
       });
       var backgroundContainer = createMinimapLayer();
 
-      map.getAllObjects({ filters: filters }).forEach(function (obj) {
+      mapInstance.getAllObjects({ filters: filters }).forEach(function (obj) {
         backgroundContainer.addChild(staticCB(obj));
       });
 
@@ -5467,7 +5426,7 @@ window.flatworld.extensions.minimaps = {};
       });
       dynamicContainer = createMinimapLayer();
 
-      map.getAllObjects({ filters: filters }).forEach(function (obj) {
+      mapInstance.getAllObjects({ filters: filters }).forEach(function (obj) {
         dynamicContainer.addChild(updateCB(obj));
       });
 
@@ -5485,12 +5444,12 @@ window.flatworld.extensions.minimaps = {};
         return;
       }
 
-      var minimapCoordinates = coordinateConverterCB(map.getMovableLayer(), true);
+      var minimapCoordinates = coordinateConverterCB(mapInstance.getMovableLayer(), true);
 
       minimapViewport.x = minimapCoordinates.x;
       minimapViewport.y = minimapCoordinates.y;
 
-      map.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     function reactToMapScale() {
       minimapViewport.scale.x += 0.1;
@@ -5500,7 +5459,7 @@ window.flatworld.extensions.minimaps = {};
       var globalCoordinates = utils.mouse.eventData.getHAMMERPointerCoords(datas);
       var mapCoordinates = new PIXI.Point(datas.srcEvent.layerX, datas.srcEvent.layerY);
 
-      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, map.minimapCanvas);
+      globalCoordinates = utils.mouse.coordinatesFromGlobalToRelative(globalCoordinates, mapInstance.minimapCanvas);
 
       /* We need to keep track when the map was moved, so we don't react to this movement */
       mapMoveTimestamp = Date.now();
@@ -5513,12 +5472,12 @@ window.flatworld.extensions.minimaps = {};
       minimapViewport.x = mapCoordinates.x;
       minimapViewport.y = mapCoordinates.y;
       mapCoordinates = coordinateConverterCB(globalCoordinates, false);
-      map.moveMap(mapCoordinates, { absolute: true, noEvent: true });
+      mapInstance.moveMap(mapCoordinates, { absolute: true, noEvent: true });
 
-      map.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     function setupMinimapClickEvent() {
-      var activeCB;
+      var activeCB = void 0;
       var minimapClickDetector = {
         on: function on(cb) {
           var tap = new Hammer.Tap();
@@ -5548,13 +5507,13 @@ window.flatworld.extensions.minimaps = {};
      * @param {Integer} height
      */
     function _setMinimapArea(x, y, width, height) {
-      var _minimapRenderer = map.getRenderer('minimap');
+      var _minimapRenderer = mapInstance.getRenderer('minimap');
 
       minimap.position = new PIXI.Point(x, y);
       _minimapRenderer.autoResize = true;
       _minimapRenderer.resize(width + paddingX * 2, height + paddingY * 2);
 
-      map.drawOnNextTick();
+      mapInstance.drawOnNextTick();
     }
     /**
      * Creates minimap layer with proper starting coordinates
@@ -5569,10 +5528,10 @@ window.flatworld.extensions.minimaps = {};
 
       return container;
     }
-    function updateMinimapLayer() {
-      dynamicContainer.cacheAsBitmap = false;
-      dynamicContainer.cacheAsBitmap = true;
-    }
+    /*    function updateMinimapLayer() {
+          dynamicContainer.cacheAsBitmap = false;
+          dynamicContainer.cacheAsBitmap = true;
+        }*/
   }
 })();
 'use strict';
@@ -5582,16 +5541,18 @@ window.flatworld.extensions.minimaps = {};
   --------- IMPORT --------
   -----------------------*/
   var mapEvents = window.flatworld.mapEvents;
+  var PIXI = window.flatworld_libraries.PIXI;
 
   /*-----------------------
   ---------- API ----------
   -----------------------*/
+
   window.flatworld.extensions.minimaps.scaledMinimap = setupScaledMinimap();
 
   /*-----------------------
   ------- VARIABLES -------
   -----------------------*/
-  var _minimapLayer;
+  var _minimapLayer = void 0;
 
   /*-----------------------
   -------- PUBLIC ---------
@@ -5602,7 +5563,8 @@ window.flatworld.extensions.minimaps = {};
    * @class scaledMinimap
    **/
   function setupScaledMinimap() {
-    var map, minimap;
+    var map = void 0,
+        minimap = void 0;
 
     return {
       init: init,
@@ -5625,14 +5587,12 @@ window.flatworld.extensions.minimaps = {};
       var width = _ref.width;
       var height = _ref.height;
 
-      var _ref2 = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+      var _ref2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
       var _ref2$x = _ref2.x;
       var x = _ref2$x === undefined ? 0 : _ref2$x;
       var _ref2$y = _ref2.y;
       var y = _ref2$y === undefined ? 0 : _ref2$y;
-
-      var UITexture = PIXI.Texture.fromFrame(UIImage);
 
       _minimapLayer.targetSize.x = width;
       _minimapLayer.targetSize.y = height;
@@ -5655,7 +5615,6 @@ window.flatworld.extensions.minimaps = {};
 
       _minimapLayer.addChild(backgroundImage);
     }
-    function setupDynamicLayer(updateCB) {}
     /*-----------------------
     -------- PRIVATE --------
     -----------------------*/
@@ -5697,7 +5656,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
    * Simple fog of war works with circles around objects
    *
    * @namespace flatworld.extensions.fogOfWars
-   * @class pixelizedMinimap
+   * @class pixelizedMiniMap
    **/
   function setupSimpleFogOfWar() {
     var maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
@@ -5706,12 +5665,12 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var movableLayer = void 0;
     var zoomLayer = void 0;
     var mapRenderer = void 0;
-    var map = void 0;
     var maskMovableContainer = void 0;
     var maskStageContainer = void 0;
     var FoWCB = void 0;
     var objectsForFoW = void 0;
     var color = void 0;
+    var mapInstance = void 0;
 
     return {
       // These two are required by all plugins
@@ -5740,27 +5699,34 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
      * can be used here and in getViewportArea-method etc.
      *
      * @method init
-     * @param  {Map} givenMap     Instance of Map
+     * @param  {Object} parameters    This plugin requires cb and filter properties!
      */
-    function init(givenMap) {
-      map = givenMap;
-      map.activateFogOfWar = activateFogOfWar;
-      movableLayer = map.getMovableLayer();
-      zoomLayer = map.getZoomLayer();
-      mapRenderer = map.getRenderer();
+    function init(params) {
+      if (!(params.cb || params.filter)) {
+        throw new Error('SimpleFogOfWar plugin requires cb and filter properties');
+      }
+      mapInstance = this.mapInstance;
+      movableLayer = this.mapInstance.getMovableLayer();
+      zoomLayer = this.mapInstance.getZoomLayer();
+      mapRenderer = this.mapInstance.getRenderer();
 
-      maskStageContainer = map.createSpecialLayer('FoWStageMaskLayer');
-      maskMovableContainer = map.createSpecialLayer('FoWMovableMaskLayer');
+      maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
+      maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
       maskMovableContainer.x = movableLayer.x;
       maskMovableContainer.y = movableLayer.y;
+
+      activateFogOfWar(this.mapInstance, params.cb, params.filter);
+
+      return Promise.resolve();
     }
 
-    function activateFogOfWar(cb, filter) {
-      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    function activateFogOfWar(mapInstance, cb, filterCreator) {
+      var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
       color = options.color || 0x222222;
       FoWCB = cb;
-      objectsForFoW = map.getPrimaryLayers({ filters: filter }).map(function (o) {
+      var filter = filterCreator();
+      objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(function (o) {
         return o.getObjects(filter);
       });
       objectsForFoW = generalUtils.arrays.flatten2Levels(objectsForFoW);
@@ -5782,12 +5748,11 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         (_maskMovableContainer = maskMovableContainer).addChild.apply(_maskMovableContainer, _toConsumableArray(spriteArray));
       }
 
-      maskStageContainer.filterArea = new PIXI.Rectangle(0, 0, mapRenderer.width, mapRenderer.height);
       resizeFoW();
 
       zoomLayer.mask = maskSprite;
 
-      map.registerPreRenderer('renderFoW', moveFoW);
+      mapInstance.registerPreRenderer('renderFoW', moveFoW);
     }
 
     function refreshFoW() {
@@ -5803,8 +5768,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     }
 
     function zoomFoW() {
-      maskStageContainer.scale.x = map.getZoom();
-      maskStageContainer.scale.y = map.getZoom();
+      maskStageContainer.scale.x = mapInstance.getZoom();
+      maskStageContainer.scale.y = mapInstance.getZoom();
 
       createOverlay();
       refreshFoW();
@@ -5829,7 +5794,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       coordinates.y = Math.round(coordinates.y);
       coordinates.anchor = object.anchor;
       coordinates.pivot = object.pivot;
-      coordinates.scale = map.getZoom();
+      coordinates.scale = mapInstance.getZoom();
 
       return coordinates;
     }
@@ -5848,8 +5813,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       var coordinates = {
         x: -100,
         y: -100,
-        width: mapRenderer.width + 200 + mapRenderer.width / map.getZoom(),
-        height: mapRenderer.height + 200 + mapRenderer.height / map.getZoom()
+        width: mapRenderer.width + 200 + mapRenderer.width / mapInstance.getZoom(),
+        height: mapRenderer.height + 200 + mapRenderer.height / mapInstance.getZoom()
       };
 
       FoWOverlay.clear();
@@ -5860,7 +5825,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     function setEvents() {
       mapEvents.subscribe('mapResized', resizeFoW);
       mapEvents.subscribe('mapZoomed', zoomFoW);
-      /*mapEvents.subscribe('mapMoved', moveFoW);*/
+      /* mapEvents.subscribe('mapMoved', moveFoW); */
     }
   }
 })();
@@ -5925,6 +5890,8 @@ window.flatworld.UIs.default.layout = {};
       }
         Modified to support easelJS (no context editing, instead graphics-object)
         */
+
+    /* eslint-disable */
     function drawArrow(shape, x1, y1, x2, y2, style, which, angle, d) {
       var graphics = shape.graphics,
           color = '#000',
@@ -6064,6 +6031,8 @@ window.flatworld.UIs.default.layout = {};
         }
       }
     }
+    /* eslint-enable */
+    /* eslint-disable */
     function drawArcedArrow(graphics, x, y, r, startangle, endangle, anticlockwise, style, which, angle, d) {
       var sx, sy, lineangle, destx, desty;
 
@@ -6107,10 +6076,11 @@ window.flatworld.UIs.default.layout = {};
         drawArrow(graphics, sx, sy, destx, desty, style, 2, angle, d);
       }
     }
+    /* eslint-enable */
     /* =============================== */
 
     function line(graphics, from, to) {
-      var options = arguments.length <= 3 || arguments[3] === undefined ? { color: '#000000', style: 5 } : arguments[3];
+      var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { color: '#000000', style: 5 };
       var color = options.color;
       var style = options.style;
 
@@ -6181,9 +6151,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      * @param  {Object} options         optional options
      * @param  {Object} options.styles  styles for the UI
      */
-
     function UIDefault(modal, FTW) {
-      var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+      var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
       var _ref$radius = _ref.radius;
       var radius = _ref$radius === undefined ? 71 : _ref$radius;
@@ -6239,12 +6208,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }, {
       key: 'showSelections',
-      value: function showSelections(objects, getDatas, options) {
+      value: function showSelections(objects) {
         var _this = this;
 
         var updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
         var UILayer = this.FTW.getMovableLayer();
-        var cb;
+        var cb = void 0;
 
         /* We add the objects to be highlighted to the correct UI layer */
         // objectsToUI(UILayer, objects);
@@ -6287,12 +6256,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'highlightSelectedObject',
       value: function highlightSelectedObject(object, getDatas) {
-        var options = arguments.length <= 2 || arguments[2] === undefined ? { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } } : arguments[2];
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } };
         var shadow = options.shadow;
 
-        var highlightableObject, objectDatas;
-
-        objectDatas = getDatas.allData(object);
+        var objectDatas = getDatas.allData(object);
+        var highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
 
         this.modal.innerHTML = templates.singleSelection({
           title: 'Selected',
@@ -6301,8 +6269,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         });
         this.showModal(this.modal, cssClasses);
-
-        highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
 
         highlightableObject.dropShadow({
           color: shadow.color,
@@ -6370,9 +6336,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_highlightSelectedObject',
       value: function _highlightSelectedObject(object, renderer) {
         var movableLayer = this.FTW.getMovableLayer();
-        var clonedObject;
-
-        clonedObject = object.clone(renderer, { anchor: true, scale: true });
+        var clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
         var coord = object.toGlobal(new PIXI.Point(0, 0));
         coord = movableLayer.toLocal(coord);
@@ -6395,7 +6359,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'createHighlight',
       value: function createHighlight(object) {
-        var options = arguments.length <= 1 || arguments[1] === undefined ? { coords: new PIXI.Point(0, 0) } : arguments[1];
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { coords: new PIXI.Point(0, 0) };
 
         var UI_CONTAINER_NAME = 'unit highlight';
         var movableLayer = this.FTW.getMovableLayer();
@@ -6404,9 +6368,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           x: Number(object.x),
           y: Number(object.y)
         };
-        var highlighterObject;
-
-        highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
+        var highlighterObject = createVisibleHexagon(this.RADIUS, { color: '#F0F0F0' });
         highlighterObject.position.set(objCoords.x, objCoords.y);
 
         highlighterObject.alpha = 0.5;
@@ -6492,7 +6454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6522,13 +6484,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var LAYER_TYPE_MOVABLE = 1;
   var LAYER_TYPE_MINIMAP = 2;
   var _renderers = {};
+  var protectedProperties = {};
   var _drawMapOnNextTick = false;
   var isMapReadyPromises = [];
-  var _privateRenderers = void 0;
-  var _zoomLayer = void 0;
-  var _movableLayer = void 0;
-  var _minimapLayer = void 0;
-  var ParentLayerConstructor = void 0;
+  var _privateRenderers = void 0,
+      _zoomLayer = void 0,
+      _movableLayer = void 0,
+      _minimapLayer = void 0,
+      ParentLayerConstructor = void 0;
 
   /*---------------------
   --------- API ---------
@@ -6596,11 +6559,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      *
      * @return {Object}                                      New Map instance
      */
-
     function Flatworld() {
-      var mapCanvas = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+      var mapCanvas = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-      var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       var _ref$bounds = _ref.bounds;
       var bounds = _ref$bounds === undefined ? { width: 0, height: 0 } : _ref$bounds;
@@ -6613,12 +6575,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var subcontainers = _ref$subcontainers === undefined ? {
         width: 100,
         height: 100,
-        maxDetectionOffset: 0 } : _ref$subcontainers;
+        maxDetectionOffset: 0 // maxDetectionOffset default set later
+      } : _ref$subcontainers;
       var _ref$trackFPSCB = _ref.trackFPSCB;
-      var // maxDetectionOffset default set later
-      trackFPSCB = _ref$trackFPSCB === undefined ? false : _ref$trackFPSCB;
+      var trackFPSCB = _ref$trackFPSCB === undefined ? false : _ref$trackFPSCB;
       var _ref$defaultScaleMode = _ref.defaultScaleMode;
       var defaultScaleMode = _ref$defaultScaleMode === undefined ? PIXI.SCALE_MODES.DEFAULT : _ref$defaultScaleMode;
+      var mouseTextSelection = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       _classCallCheck(this, Flatworld);
 
@@ -6669,6 +6632,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       mapCanvas.style.overflow = 'hidden';
 
       utils.mouse.disableContextMenu(_renderers.main.view);
+
+      // Disable the selection of text by dragging, from the whole body element
+      !mouseTextSelection && utils.general.toggleMouseTextSelection();
 
       /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
        * Setting this separately in each
@@ -6812,15 +6778,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(Flatworld, [{
       key: 'init',
       value: function init() {
-        var plugins = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-        var coord = arguments.length <= 1 || arguments[1] === undefined ? { x: 0, y: 0 } : arguments[1];
+        var plugins = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+        var coord = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
 
         var _this = this;
 
-        var tickCB = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
-        var options = arguments.length <= 3 || arguments[3] === undefined ? { fullsize: true } : arguments[3];
+        var tickCB = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+        var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : { fullsize: true };
 
-        var allPromises = [];
+        if (!this.getPrimaryLayers().length) {
+          throw new Error('You should have layers created for the map, before initializing the map');
+        }
 
         options.fullsize && this.toggleFullsize();
 
@@ -6836,18 +6804,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /* Sets the correct Map starting coordinates */
         coord && Object.assign(_movableLayer, coord);
 
-        if (plugins.length) {
-          allPromises = this.activatePlugins(plugins);
-        }
+        isMapReadyPromises = plugins.length && this.initPlugins(plugins);
 
         /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
         this._defaultTick();
         tickCB && this.customTickOn(tickCB);
-        isMapReadyPromises = allPromises;
 
-        this.drawOnNextTick();
-
-        return allPromises || Promise.resolve();
+        return isMapReadyPromises || Promise.resolve();
       }
       /**
        * Returns a promise that resolves after the map is fully initialized
@@ -6899,7 +6862,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _this2 = this;
 
         if (Array.isArray(objects)) {
-          objects.forEach(function (object, index) {
+          objects.forEach(function (object) {
             _this2._addObjectToUIlayer(layerType, object, UIName);
           });
         } else {
@@ -6943,12 +6906,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'createSpecialLayer',
       value: function createSpecialLayer() {
-        var name = arguments.length <= 0 || arguments[0] === undefined ? 'default special layer' : arguments[0];
-        var options = arguments.length <= 1 || arguments[1] === undefined ? {
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default special layer';
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
           coord: {
             x: 0,
             y: 0 },
-          toLayer: false } : arguments[1];
+          toLayer: false };
 
         var coord = options.coord || { x: 0, y: 0 };
         var layer = new mapLayers.MapLayer({ name: name, coord: coord });
@@ -6969,13 +6932,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'addLayer',
       value: function addLayer(layerOptions) {
-        var newLayer = void 0;
-
         if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
           layerOptions.subcontainers = this.getSubcontainerConfigs();
         }
 
-        newLayer = new ParentLayerConstructor(layerOptions);
+        var newLayer = new ParentLayerConstructor(layerOptions);
         this.getMovableLayer().addChild(newLayer);
 
         return newLayer;
@@ -7021,8 +6982,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getViewportArea',
       value: function getViewportArea() {
-        var isLocal = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-        var multiplier = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+        var isLocal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var multiplier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
         var layer = isLocal ? this.getMovableLayer() : this.getZoomLayer();
         var leftSideCoords = new PIXI.Point(0, 0);
@@ -7102,7 +7063,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _ref2$y = _ref2.y;
         var y = _ref2$y === undefined ? 0 : _ref2$y;
 
-        var _ref3 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         var _ref3$absolute = _ref3.absolute;
         var absolute = _ref3$absolute === undefined ? false : _ref3$absolute;
@@ -7122,29 +7083,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.drawOnNextTick();
       }
       /**
-       * Activate all plugins for the map. Iterates through the given plugins we wish to activate and does the actual work in activatePlugin-
-       * method.
-       *
-       * @method pluginsArray
+       * Initializes all plugins for the map. Iterates through the given plugins we wish to
+       * initialize and does the actual work in initPlugin-method.
+        *
+       * @method initPlugins
        * @param {Object[]} pluginsArray   Array that consists the plugin modules to be activated
        * @return {Promise}                Promise. If string are provided resolved those with System.import, otherwise resolves immediately.
        * */
 
     }, {
-      key: 'activatePlugins',
-      value: function activatePlugins() {
+      key: 'initPlugins',
+      value: function initPlugins() {
         var _this3 = this;
 
-        var pluginsArray = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+        var pluginsArray = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
         var allPromises = [];
 
         /* Iterates over given plugins Array and calls their init-method, depeding if it is String or Object */
-        pluginsArray.forEach(function (plugin) {
-          if ((typeof plugin === 'undefined' ? 'undefined' : _typeof(plugin)) === 'object') {
-            _this3.activatePlugin(plugin);
+        pluginsArray.forEach(function (data) {
+          if (_typeof(data.plugin) === 'object') {
+            (function () {
+              var params = {};
+              data.parameters = data.parameters || {};
+
+              Object.keys(data.parameters).forEach(function (i) {
+                if (!data.parameters[i].bind) {
+                  throw new Error('All parameters to plugins must be functions with bind-method!');
+                }
+
+                params[i] = data.parameters[i].bind(data.plugin);
+              });
+
+              allPromises.push(_this3.initPlugin(data.plugin, params));
+            })();
           } else {
-            log.error('problem with initializing a plugin: ' + plugin.name);
+            log.error(new Error('Plugin \'' + data.plugin.pluginName + '\' was not an object'));
           }
         });
 
@@ -7154,14 +7128,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * Activate plugin for the map. Plugins need .pluginName property and .init-method. Plugins init-method activates the plugins and we
        * call them in Map. Plugins init-metho receivse this (Map instance) as their only parameter.
        *
-       * @method activatePlugin
+       * @method initPlugin
        * @throws {Error} Throws a general error if there is an issue activating the plugin
        * @param {Object} plugin        Plugin module
        * */
 
     }, {
-      key: 'activatePlugin',
-      value: function activatePlugin(plugin) {
+      key: 'initPlugin',
+      value: function initPlugin(plugin) {
+        var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+        var promise = void 0;
+
         try {
           if (!plugin || !plugin.pluginName || !plugin.init) {
             throw new Error('plugin, plugin.pluginName or plugin.init import is missing!');
@@ -7169,11 +7147,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           this.plugins.add(plugin[plugin.pluginName]);
           if (this.plugins.has(plugin[plugin.pluginName])) {
-            plugin.init(this);
+            plugin.mapInstance = this;
+            plugin._properties = protectedProperties;
+            promise = plugin.init(params);
           }
         } catch (e) {
-          log.error('An error initializing plugin. JSON.stringify: "' + JSON.stringify(plugin) + '" ', e);
+          e.message += ' INFO: An error initializing plugin. JSON.stringify: "' + plugin.pluginName + '" ';
+          log.error(e);
+          promise = Q.reject();
         }
+
+        return promise;
       }
     }, {
       key: 'registerPreRenderer',
@@ -7239,7 +7223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _ref4$height = _ref4.height;
         var height = _ref4$height === undefined ? 0 : _ref4$height;
 
-        var _ref5 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         var _ref5$filters = _ref5.filters;
         var filters = _ref5$filters === undefined ? null : _ref5$filters;
@@ -7295,7 +7279,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getPrimaryLayers',
       value: function getPrimaryLayers() {
-        var _ref6 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
         var filters = _ref6.filters;
 
@@ -7315,7 +7299,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'getAllObjects',
       value: function getAllObjects() {
-        var _ref7 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+        var _ref7 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
         var filters = _ref7.filters;
 
@@ -7544,9 +7528,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_retrieveObjects',
       value: function _retrieveObjects(allCoords) {
-        var containers = arguments.length <= 1 || arguments[1] === undefined ? [] : arguments[1];
+        var containers = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-        var _ref8 = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+        var _ref8 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
         var _ref8$type = _ref8.type;
         var type = _ref8$type === undefined ? '' : _ref8$type;
@@ -7589,7 +7573,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_getSubcontainersUnderArea',
       value: function _getSubcontainersUnderArea(allCoords) {
-        var _ref9 = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+        var _ref9 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         var filters = _ref9.filters;
 
@@ -7693,7 +7677,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })();
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
   /*---------------------
@@ -7732,7 +7716,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * @param {Function} {}.trackFPSCB             Callback to track FPS
    **/
   function hexaFactory(mapCanvas, datas) {
-    var _ref = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     var _ref$trackFPSCB = _ref.trackFPSCB;
     var trackFPSCB = _ref$trackFPSCB === undefined ? false : _ref$trackFPSCB;
@@ -7768,8 +7752,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         resolution: pixelRatio, // We might need this later on, when doing mobile optimizations, for different pizel density devices
         autoResize: true,
         transparent: true,
-        antialias: false },
-      // TEST. Only should work in chrome atm.?
+        antialias: false // TEST. Only should work in chrome atm.?
+      },
       subcontainers: {
         width: 500,
         height: 500,
@@ -7800,7 +7784,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         selectable: layerData.name === 'unitLayer' ? true : false
       };
-      var thisLayer;
+      var thisLayer = void 0;
 
       try {
         thisLayer = map.addLayer(layerOptions);
@@ -7814,13 +7798,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }
 
           objectGroup.objects.forEach(function (object) {
-            var objTypeData, objectOptions, texture, newObject;
+            var objTypeData = void 0,
+                objectOptions = void 0,
+                texture = void 0,
+                newObject = void 0;
 
             try {
               objTypeData = DATA_TYPE[spritesheetType][object.objType];
               if (!objTypeData) {
-                log.error('Bad mapData for type:', spritesheetType, object.objType, object.name);
-                throw new Error('Bad mapData for type:', spritesheetType, object.objType, object.name);
+                var error = new Error('Bad mapData for type:' + spritesheetType.toString() + object.objType.toString() + object.name.toString());
+                log.error(error);
+                throw error;
               }
 
               texture = PIXI.Texture.fromFrame(objTypeData.image);

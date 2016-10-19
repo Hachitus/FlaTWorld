@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "eventemitter3": "^1.2.0",
-    "howler": "2.0.1"
+    "howler": "2.0.1",
+    "pixi.js": "^4.1.0"
   }
 }
