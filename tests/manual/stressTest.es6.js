@@ -173,7 +173,7 @@
         plugin: mapDrag,
       }, {
         plugin: hexagons.selectHexagonObject,
-        parameters: _createHexagonParams(globalMap)
+        parameters: _createHexagonParams()
       }, {
         plugin: mapMovement
       }
@@ -556,7 +556,7 @@
     /* ----------- FOW stuff END------------ */
   }
 
-  function _createHexagonParams(map) {
+  function _createHexagonParams() {
     return { isBlocked: function (correctHexagon, selectedObject) {
         return +correctHexagon.data.typeData.movement;
       }
