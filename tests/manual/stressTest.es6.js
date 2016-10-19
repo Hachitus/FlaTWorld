@@ -251,10 +251,10 @@
               y: direction === 1 ? -quantifier : quantifier
             });
 
-            if (map.getCurrentMapCoordinates().x > 500) {
+            if (map.getMapCoordinates().x > 500) {
               round ++;
               direction = 1;
-            } else if (map.getCurrentMapCoordinates().x < - 7000) {
+            } else if (map.getMapCoordinates().x < - 7000) {
               direction = 2;
             }
 

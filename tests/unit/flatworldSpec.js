@@ -67,7 +67,7 @@
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getCurrentMapCoordinates().x).toBe(1000);
+      expect(map.getMapCoordinates().x).toBe(1000);
       expect(map._getMovableLayer().children[0].x).toBe(0);
       expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
       expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
@@ -79,7 +79,7 @@
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getCurrentMapCoordinates().x).toBe(2000);
+      expect(map.getMapCoordinates().x).toBe(2000);
       expect(map._getMovableLayer().children[0].x).toBe(0);
       expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
       expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
