@@ -84,7 +84,6 @@
      */
     showSelections(objects) {
       const updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
-      const UILayer = this.FTW._getMovableLayer();
       let cb;
 
       /* We add the objects to be highlighted to the correct UI layer */
@@ -107,7 +106,7 @@
         };
       } else {
         cb = () => {
-          UILayer.deleteUIObjects();
+          this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
           updateCB();
           mapLog.debug('Error occured selecting the objects on this coordinates! Nothing found');
         };
@@ -198,7 +197,7 @@
       const clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
       let coord = object.toGlobal(new PIXI.Point(0, 0));
-      coord = movableLayer.toLocal(coord);
+      coord = this.FTW.getMapCoordinates(coord);
 
       this.createHighlight(clonedObject, { coords: coord });
 
@@ -215,7 +214,7 @@
     createHighlight(object, options = { coords: new PIXI.Point(0, 0) }) {
       const UI_CONTAINER_NAME = 'unit highlight';
       const movableLayer = this.FTW._getMovableLayer();
-      const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
+      const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: this.FTW.layerTypes.movableType.id });
       const objCoords = {
         x: Number(object.x),
         y: Number(object.y)

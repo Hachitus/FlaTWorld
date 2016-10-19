@@ -67,7 +67,7 @@
         throw new Error('SimpleFogOfWar plugin requires cb and filter properties')
       }
       mapInstance = this.mapInstance;
-      zoomLayer = this.mapInstance.getZoomLayer();
+      zoomLayer = this._properties.zoomLayer;
       mapRenderer = this.mapInstance.getRenderer();
 
       maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');

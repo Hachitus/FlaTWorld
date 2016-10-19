@@ -62,7 +62,7 @@
       testLayer.addChild(sprite1);
       testLayer.addChild(sprite2);
 
-      expect(testLayer instanceof map.layerTypes.staticType.layer.constructor).toBe(true);
+      expect(testLayer instanceof map.layerTypes.staticType.constructor).toBe(true);
       expect(map._getMovableLayer().children[0].children.length).toBe(2);
 
       map.moveMap({ x: 1000, y: 1000 });

@@ -118,7 +118,7 @@
       rendererOptions.view = mapCanvas;
       /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
       _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
-      _renderers.main.getResponsibleLayer = this.getZoomLayer;
+      _renderers.main.getResponsibleLayer = () => _zoomLayer;
       /* Create PIXI renderer for minimap */
       if (minimapCanvas) {
         _renderers.minimap = minimapCanvas ?
@@ -156,14 +156,16 @@
       // Disable the selection of text by dragging, from the whole body element
       !mouseTextSelection && utils.general.toggleMouseTextSelection();
 
+      /* We cache the privateRenderers in array format to a module variable */
+      _privateRenderers = Object.keys(_renderers).map(idx => _renderers[idx]);
+
+      protectedProperties.zoomLayer = _zoomLayer;
+      protectedProperties.movableLayer = _movableLayer;
+
       /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
        * Setting this separately in each
        * baseTexture, would seem stupid, so we do it like this for now. */
       this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
-
-      /* We cache the privateRenderers in array format to a module variable */
-      _privateRenderers = Object.keys(_renderers).map(idx => _renderers[idx]);
-
       /**
        * canvas element that was generated and is being used by this new generated Map instance.
        *
@@ -241,16 +243,13 @@
        */
       this.layerTypes = {
         staticType: {
-          id: LAYER_TYPE_STATIC,
-          layer: _zoomLayer
+          id: LAYER_TYPE_STATIC
         },
         movableType: {
-          id: LAYER_TYPE_MOVABLE,
-          layer: _movableLayer
+          id: LAYER_TYPE_MOVABLE
         },
         minimapType: {
-          id: LAYER_TYPE_MINIMAP,
-          layer: _minimapLayer
+          id: LAYER_TYPE_MINIMAP
         }
       };
       /**
@@ -369,7 +368,7 @@
     removeUIObject(layerType, UIName) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
-          this.getZoomLayer().deleteUIObjects(UIName);
+          _zoomLayer.deleteUIObjects(UIName);
           break;
         case LAYER_TYPE_MOVABLE:
           _movableLayer.deleteUIObjects(UIName);
@@ -399,7 +398,15 @@
       const layer = new mapLayers.MapLayer({ name, coord });
 
       layer.specialLayer = true;
-      options.toLayer && options.toLayer.addChild(layer);
+
+      switch (options.toLayer) {
+        case LAYER_TYPE_STATIC:
+          _zoomLayer.addChild(layer);
+          break;
+        case LAYER_TYPE_MOVABLE:
+          _movableLayer.addChild(layer);
+          break;
+      }
 
       return layer;
     }
@@ -452,7 +459,7 @@
      * viewport
      **/
     getViewportArea(isLocal = false, multiplier = 0) {
-      const layer = isLocal ? _movableLayer : this.getZoomLayer();
+      const layer = isLocal ? _movableLayer : _zoomLayer;
       let leftSideCoords = new PIXI.Point(0, 0);
       let rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
 
@@ -517,8 +524,8 @@
      **/
     moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
       const realCoordinates = {
-        x: Math.round(x / this.getZoomLayer().getZoom()),
-        y: Math.round(y / this.getZoomLayer().getZoom())
+        x: Math.round(x / _zoomLayer.getZoom()),
+        y: Math.round(y / _zoomLayer.getZoom())
       };
 
       if (absolute) {
@@ -731,16 +738,6 @@
       return allObjects;
     }
     /**
-     * This returns the layer that is responsible for map zoom.  It handles zooming and normally
-     * other non-movable operations.
-     *
-     * @method getZoomLayer
-     * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
-     */
-    getZoomLayer() {
-      return _zoomLayer;
-    }
-    /**
      * Set map zoom. 1 = no zoom. <1 zoom out, >1 zoom in.
      *
      * @method setZoom
@@ -748,7 +745,7 @@
      * @return {Number}         The amount of zoom applied
      */
     setZoom(newScale) {
-      this.getZoomLayer().setZoom(newScale);
+      _zoomLayer.setZoom(newScale);
 
       mapEvents.publish({ name: 'mapZoomed', cooldown: true }, { previousScale: this.getZoom(), newScale });
 
@@ -761,7 +758,7 @@
      * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
      */
     getZoom() {
-      return this.getZoomLayer().getZoom();
+      return _zoomLayer.getZoom();
     }
     /**
      * Returns the PIXI renderer. Don't use this unless you must. For more advanced or PIXI specific cases.
@@ -773,7 +770,7 @@
       return type === 'minimap' ? _renderers.minimap : _renderers.main;
     }
     /**
-     * BEING DEPRECATED
+     * BEING DEPRECATED. ONLY USED IN UNIT TESTS
      */
     _getMovableLayer() {
       return _movableLayer;
@@ -962,7 +959,7 @@
     _addObjectToUIlayer(layerType, object, name) {
       switch (layerType) {
         case LAYER_TYPE_STATIC:
-          this.getZoomLayer().addUIObject(object, name);
+          _zoomLayer.addUIObject(object, name);
           break;
         case LAYER_TYPE_MOVABLE:
           _movableLayer.addUIObject(object, name);
