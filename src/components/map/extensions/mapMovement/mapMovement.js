@@ -110,8 +110,8 @@
      * @param  {Map} map     Instance of Map
      */
     function addAll(mapInstance) {
-      viewportArea = mapInstance.getViewportArea(true, 2);
-      offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+      viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
+      offsetSize = setupOffsetSize(viewportArea);
 
       mapInstance.getPrimaryLayers().forEach(layer => {
         layer.getSubcontainers().forEach(subcontainer => {
@@ -142,7 +142,7 @@
       window.setTimeout(setupHandleViewportArea(), CHECK_INTERVAL);
 
       function setupHandleViewportArea() {
-        setupViewportArea(true, VIEWPORT_OFFSET);
+        viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
 
         checkAndSetSubcontainers(viewportArea, mapInstance.getPrimaryLayers());
       }
@@ -163,11 +163,11 @@
         check();
       }
       function resizeCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+        offsetSize = setupOffsetSize(viewportArea);
         check();
       }
       function zoomCb() {
-        offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+        offsetSize = setupOffsetSize(viewportArea);
         check();
       }
     }
@@ -261,10 +261,10 @@
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupViewportArea(isLocal = true, multiplier = 2) {
-      viewportArea = mapInstance.getViewportArea(isLocal, multiplier);
+      return mapInstance.getViewportArea(isLocal, multiplier);
     }
     /**
-     * Initializes the module variables viewportArea and offsetSize
+     * Initializes the module variable offsetSize
      *
      * @private
      * @static
@@ -272,7 +272,7 @@
      * @return {totalViewportArea}              The total viewportArea
      */
     function setupOffsetSize(viewportArea) {
-      offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+      return calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
     }
     /**
      * forms the total viewport parameters based on the given ones.
