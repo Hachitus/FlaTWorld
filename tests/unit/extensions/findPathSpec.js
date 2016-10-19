@@ -33,7 +33,7 @@ describe('findPath', () => {
             `);
     });
     
-    it('now there is a block', () => {
+    xit('now there is a block', () => {
         testField(`
             s.....
             .++...
@@ -42,7 +42,7 @@ describe('findPath', () => {
             `);
     });
     
-    it('a couple of them', () => {
+    xit('a couple of them', () => {
         testField(`
             ..Bd..
             ...B+.
@@ -51,7 +51,7 @@ describe('findPath', () => {
             `);
     });
     
-    it('more complicated stuff', () => {
+    xit('more complicated stuff', () => {
         testField(`
             BBB........
             .s.B.+d.B..
@@ -64,7 +64,7 @@ describe('findPath', () => {
             `);
     });
     
-    it('too many blocks', () => {
+    xit('too many blocks', () => {
         testField(`
             BBB........
             Bs.B.Bd.B..
@@ -77,7 +77,7 @@ describe('findPath', () => {
             `);
     });
     
-    it('bit longer path', () => {
+    xit('bit longer path', () => {
         testField(`
             ....BBBBBB....
             ....Bd+.......
@@ -89,7 +89,7 @@ describe('findPath', () => {
             `, 8);
     });
     
-    it('large field', () => {
+    xit('large field', () => {
         testField(`
             ...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.....
             ...xBBBBBBBB.......................................BBBBBBBx....
@@ -110,7 +110,7 @@ describe('findPath', () => {
             `, 0, 74);
     });
     
-    it('no way', () => {
+    xit('no way', () => {
         testField(`
             ...............................................................
             ....BBBBBBBB.......................................BBBBBBB.....
@@ -202,7 +202,8 @@ function testField(field, unreachable = 0, total = null) {
             total += 2;
         }
         
-        validatePath(findPath({ x: xStart, y: yStart }, { x: xDest, y: yDest }, width, height, maxTime, weightFn));
+        debugger;
+        validatePath(findPath({ x: xStart, y: yStart }, { x: xDest, y: yDest }, 100000, 100000, maxTime, weightFn));
         // now find the way back:
         validatePath(findPath({ x: xDest, y: yDest }, { x: xStart, y: yStart }, width, height, maxTime, weightFn));
         

@@ -372,7 +372,7 @@
           this.getZoomLayer().deleteUIObjects(UIName);
           break;
         case LAYER_TYPE_MOVABLE:
-          this.getMovableLayer().deleteUIObjects(UIName);
+          _movableLayer.deleteUIObjects(UIName);
           break;
       }
     }
@@ -416,7 +416,7 @@
       }
 
       const newLayer = new ParentLayerConstructor(layerOptions);
-      this.getMovableLayer().addChild(newLayer);
+      _movableLayer.addChild(newLayer);
 
       return newLayer;
     }
@@ -452,7 +452,7 @@
      * viewport
      **/
     getViewportArea(isLocal = false, multiplier = 0) {
-      const layer = isLocal ? this.getMovableLayer() : this.getZoomLayer();
+      const layer = isLocal ? _movableLayer : this.getZoomLayer();
       let leftSideCoords = new PIXI.Point(0, 0);
       let rightSideCoords = new PIXI.Point(window.innerWidth, window.innerHeight);
 
@@ -647,7 +647,7 @@
       /* We need both coordinates later on and it's logical to do the work here */
       const allCoords = {
         globalCoords,
-        localCoords: this.getMovableLayer().toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
+        localCoords: _movableLayer.toLocal(new PIXI.Point(globalCoords.x, globalCoords.y))
       };
       let objects = [];
 
@@ -659,7 +659,7 @@
 
       objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
 /*      } else {
-        const filteredContainers = this.getMovableLayer().children.filter(thisChild => {
+        const filteredContainers = _movableLayer.children.filter(thisChild => {
           if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
             return false;
           }
@@ -686,7 +686,7 @@
      * @return {Object} Basically anything in the map that is used as a layer (not really counting subcontainers).
      */
     getPrimaryLayers({ filters } = {}) {
-      return this.getMovableLayer().getPrimaryLayers({ filters });
+      return _movableLayer.getPrimaryLayers({ filters });
     }
     /**
      * Get all objects on the map, from layers and subcontainers.
@@ -773,14 +773,9 @@
       return type === 'minimap' ? _renderers.minimap : _renderers.main;
     }
     /**
-     * Returns movable layer. This layer is the one that moves when the player moves the map. So this is used for things that are relative
-     * to the current map position the player is seeing. This can be used e.g. when you want to display some objects on the map or UI
-     * elements, like effects that happen on certain point on the map.
-     *
-     * @method getMovableLayer
-     * @return {MapLayer|PIXI.Container|PIXI.ParticleContainer}
+     * BEING DEPRECATED
      */
-    getMovableLayer() {
+    _getMovableLayer() {
       return _movableLayer;
     }
     getCurrentMapCoordinates() {
@@ -890,7 +885,7 @@
      * @return the current map instance
      **/
     _getLayersWithAttributes(attribute, value) {
-      return this.getMovableLayer().children[0].children.filter(layer => {
+      return _movableLayer.children[0].children.filter(layer => {
         return layer[attribute] === value;
       });
     }
@@ -970,7 +965,7 @@
           this.getZoomLayer().addUIObject(object, name);
           break;
         case LAYER_TYPE_MOVABLE:
-          this.getMovableLayer().addUIObject(object, name);
+          _movableLayer.addUIObject(object, name);
           break;
       }
     }

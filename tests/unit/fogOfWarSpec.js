@@ -19,7 +19,7 @@
     })
 
     it('calculateCorrectCoordinates', () => {
-      const testUnit = map.getMovableLayer().children[0].children[0];
+      const testUnit = map._getMovableLayer().children[0].children[0];
       const testPoint = new PIXI.Point(10, 10);
       const testPoint2 = new PIXI.Point(20, 10);
       const testPoint3 = new PIXI.Point(-1980, 10);
@@ -33,7 +33,7 @@
       expect(`{ x: ${testCoordinates.x}, y: ${testCoordinates.y} }`).toEqual(`{ x: ${testPoint2.x}, y: ${testPoint2.y} }`, 'OBJECT');
 
       map.moveMap({ x: -2000 });
-      map.getMovableLayer().updateTransform();
+      map._getMovableLayer().updateTransform();
       testCoordinates = fogOfWarModule.calculateCorrectCoordinates(testUnit);
       expect(`{ x: ${testCoordinates.x}, y: ${testCoordinates.y} }`).toEqual(`{ x: ${testPoint3.x}, y: ${testPoint3.y} }`, 'OBJECT');
     });

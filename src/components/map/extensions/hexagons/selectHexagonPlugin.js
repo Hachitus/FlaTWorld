@@ -37,7 +37,7 @@
         throw new Error('hexagon pathFinding plugin requires cb and filter properties')
       }
 
-      this.mapInstance.hexagonIndexes = createHexagonDataStructure(this.mapInstance.getMovableLayer(), () => this.mapInstance.allMapObjects.terrainLayer);
+      this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
 
       startClickListener(this.mapInstance, params.isBlocked);
 
@@ -57,7 +57,7 @@
     }
   }
 
-  function createHexagonDataStructure(movableLayer, getLayers) {
+  function createHexagonDataStructure(getLayers) {
     const hexagonIndexes = {};
     const objArray = getLayers();
     let indexes;

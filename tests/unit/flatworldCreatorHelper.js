@@ -34,8 +34,6 @@ function privateCreator(flatworldOptions) {
   testTerrain4.y = 140;
   [testTerrain, testTerrain2, testTerrain3, testTerrain4].forEach(o => terrrainLayer.addChild(o));
 
-  map.getMovableLayer().addChild(terrrainLayer, unitLayer);
-
   return map;
 }
 

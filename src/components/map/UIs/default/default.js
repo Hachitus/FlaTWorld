@@ -84,7 +84,7 @@
      */
     showSelections(objects) {
       const updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
-      const UILayer = this.FTW.getMovableLayer();
+      const UILayer = this.FTW._getMovableLayer();
       let cb;
 
       /* We add the objects to be highlighted to the correct UI layer */
@@ -194,7 +194,7 @@
      * @param  {PIXI.Renderer} renderer
      */
     _highlightSelectedObject(object, renderer) {
-      const movableLayer = this.FTW.getMovableLayer();
+      const movableLayer = this.FTW._getMovableLayer();
       const clonedObject = object.clone(renderer, { anchor: true, scale: true });
 
       let coord = object.toGlobal(new PIXI.Point(0, 0));
@@ -214,7 +214,7 @@
      */
     createHighlight(object, options = { coords: new PIXI.Point(0, 0) }) {
       const UI_CONTAINER_NAME = 'unit highlight';
-      const movableLayer = this.FTW.getMovableLayer();
+      const movableLayer = this.FTW._getMovableLayer();
       const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: movableLayer });
       const objCoords = {
         x: Number(object.x),

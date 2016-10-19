@@ -22,7 +22,7 @@
         { filters });
 
       expect(returnedObjects.length).toBe(4);
-      expect(returnedObjects[0]).toEqual(map.getMovableLayer().children[0].children[0].children[0]);
+      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[0].children[0].children[0]);
     });
     it('getObjectsUnderArea - objects', () => {
       const filters = new MapDataManipulator([{
@@ -41,7 +41,7 @@
         { filters });
 
       expect(returnedObjects.length).toBe(2);
-      expect(returnedObjects[0]).toEqual(map.getMovableLayer().children[1].children[0].children[0]);
+      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[1].children[0].children[0]);
     });
     it('addLayer with subcontainers and move it', () => {
       const renderer = new PIXI.WebGLRenderer();
@@ -63,14 +63,14 @@
       testLayer.addChild(sprite2);
 
       expect(testLayer instanceof map.layerTypes.staticType.layer.constructor).toBe(true);
-      expect(map.getMovableLayer().children[0].children.length).toBe(2);
+      expect(map._getMovableLayer().children[0].children.length).toBe(2);
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getMovableLayer().x).toBe(1000);
-      expect(map.getMovableLayer().children[0].x).toBe(0);
-      expect(map.getMovableLayer().children[0].children[0].x).toBe(50);
-      expect(map.getMovableLayer().children[0].children[0].children[0].x).toBe(40);
+      expect(map.getCurrentMapCoordinates().x).toBe(1000);
+      expect(map._getMovableLayer().children[0].x).toBe(0);
+      expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
+      expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
 
       expect(
         map.getMovableLayer().children[0].getSubcontainerConfigs().width)
@@ -79,10 +79,10 @@
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getMovableLayer().x).toBe(2000);
-      expect(map.getMovableLayer().children[0].x).toBe(0);
-      expect(map.getMovableLayer().children[0].children[0].x).toBe(50);
-      expect(map.getMovableLayer().children[0].children[0].children[0].x).toBe(40);
+      expect(map.getCurrentMapCoordinates().x).toBe(2000);
+      expect(map._getMovableLayer().children[0].x).toBe(0);
+      expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
+      expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
     });
     it('getMapCoordinates', () => {
       var expectedCoordinates = new PIXI.Point(100, 100);

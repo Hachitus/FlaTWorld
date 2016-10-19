@@ -68,7 +68,7 @@
     it('createHexagonDataStructure', () => {
       selectHexagonObject.init(map);
 
-    	const createdStructure = createHexagonDataStructure(map.getMovableLayer(), map.allMapObjects.terrainLayer);
+    	const createdStructure = createHexagonDataStructure(map.allMapObjects.terrainLayer);
 
     	expect(createdStructure[0][0]).toBe(map.allMapObjects.terrainLayer[0]);
 		});
@@ -114,7 +114,7 @@
       spyOn(mapEvents, 'publish');
       spyOn(mapStates, 'objectOrderEnd');
       spyOn(map, 'drawOnNextTick');
-      map.getMovableLayer().toLocal = function(coord, object) {
+      map._getMovableLayer().toLocal = function(coord, object) {
         return object ? new PIXI.Point(object.x, object.y) : coord;
       };
 

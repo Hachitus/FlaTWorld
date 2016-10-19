@@ -25,7 +25,7 @@
     const maskSprite = new PIXI.Sprite(PIXI.Texture.EMPTY);
     const renderTexture = new PIXI.RenderTexture(new PIXI.BaseRenderTexture(resize.getWindowSize().x, resize.getWindowSize().y));
     const FoWOverlay = new PIXI.Graphics();
-    let movableLayer;
+    let mapPosition;
     let zoomLayer;
     let mapRenderer;
     let maskMovableContainer;
@@ -67,14 +67,12 @@
         throw new Error('SimpleFogOfWar plugin requires cb and filter properties')
       }
       mapInstance = this.mapInstance;
-      movableLayer = this.mapInstance.getMovableLayer();
       zoomLayer = this.mapInstance.getZoomLayer();
       mapRenderer = this.mapInstance.getRenderer();
 
       maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
       maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
-      maskMovableContainer.x = movableLayer.x;
-      maskMovableContainer.y = movableLayer.y;
+      maskMovableContainer.position = mapInstance.getCurrentMapCoordinates();
 
       activateFogOfWar(this.mapInstance, params.cb, params.filter);
 
@@ -119,7 +117,7 @@
     }
 
     function moveFoW() {
-      maskMovableContainer.position = movableLayer.position;
+      maskMovableContainer.position = mapInstance.getCurrentMapCoordinates();
 
       refreshFoW();
     }

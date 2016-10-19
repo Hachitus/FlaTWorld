@@ -131,7 +131,7 @@
         return;
       }
 
-      const minimapCoordinates = coordinateConverterCB(mapInstance.getMovableLayer(), true);
+      const minimapCoordinates = coordinateConverterCB(mapInstance.getCurrentMapCoordinates(), true);
 
       minimapViewport.x = minimapCoordinates.x;
       minimapViewport.y = minimapCoordinates.y;
