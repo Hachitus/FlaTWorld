@@ -1,5 +1,11 @@
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
+## Big breaking changes
+* flatworld.getMovableLayer and flatworld.getZoomLayer removed
+
+## Bug fixes
+* Fix several issues with iPhones
+
 ## Features
 * Added hexagon pathfinding
 * Added allMapObjects, alternative data structure, so that you don't always have to retrieve them from individual layers.
@@ -7,6 +13,7 @@
 * Added getMapCoordinates in flatworld
 * Extensions have a bit different initialization now and can receive parameters.
 * Added a default prevention of selecting text with mouse. Optional parameter to activate.
+* Added utils.general.toggleMouseTextSelection
 
 ## Others
 * Added constants.js
