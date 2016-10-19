@@ -44,6 +44,8 @@
   /* REQUIRED FOR IE11 */
   polyfills.arrayFind();
   polyfills.es6String();
+  polyfills.setPrototypeOf();
+
   hexagons.utils.init(HEXAGON_RADIUS);
   /* This will suppress the fetch errors and make later possible to emulate http-requests */
   window.fetch = function () {
@@ -524,7 +526,8 @@
   function _createFoWParams() {
     /* ----------- FOW stuff ------------ */
     var fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
-    const FoWFilter = () => new MapDataManipulator([{
+    const FoWFilter = function () {
+      return new MapDataManipulator([{
         type: 'filter',
         object: MapDataManipulator.OBJECT_LAYER,
         property: 'name',
@@ -534,7 +537,8 @@
         object: MapDataManipulator.OBJECT_OBJECT,
         property: ['data', 'activeData', 'FoW'],
         value: 'true'
-      }]);
+      }])
+    };
     function foWCallback(data) {
       const unitViewSprite = new PIXI.Sprite(fowTexture);
 
@@ -550,7 +554,10 @@
   }
 
   function _createHexagonParams(map) {
-    return { isBlocked: (correctHexagon, selectedObject) => correctHexagon.data.typeData.movement };
+    return { isBlocked: function (correctHexagon, selectedObject) {
+        correctHexagon.data.typeData.movement
+      }
+    };
   }
 
 })();

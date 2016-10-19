@@ -158,7 +158,7 @@
       options.position && newSprite.position.set(this.x, this.y);
       options.scale && newSprite.scale.set(this.scale.x, this.scale.y);
 
-      Reflect.setPrototypeOf(newSprite, this.constructor.prototype);
+      Object.setPrototypeOf(newSprite, this.constructor.prototype);
 
       return newSprite;
     }
