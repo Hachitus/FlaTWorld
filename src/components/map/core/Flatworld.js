@@ -95,10 +95,18 @@
       trackFPSCB = false,
       defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {},
       mouseTextSelection = false) {
+      if (!utils.general.isWebglSupported()) {
+        const error = new Error('Webgl is not supported');
+        log.error(error);
+        throw error;
+      }
       /* Check for the required parameters! */
       if (!mapCanvas) {
-        throw new Error(`${this.constructor.name} needs canvas element!`);
+        const error = new Error(`${this.constructor.name} needs canvas element!`);
+        log.error(error);
+        throw error;
       }
+
       /* If the constructor was passed mapCanvas as a string and not as an Element, we get the element */
       if (typeof mapCanvas === 'string') {
         mapCanvas = document.querySelector(mapCanvas);

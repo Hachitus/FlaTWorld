@@ -278,7 +278,8 @@
       pixelEpsilonEquality: epsilonEquality,
       fullsizeCanvasCSS,
       requireParameter,
-      toggleMouseTextSelection
+      toggleMouseTextSelection,
+      isWebglSupported
     };
 
     /**
@@ -322,6 +323,23 @@
       element.style.mozUserSelect = 'none';
       element.style.msUserSelect = 'none';
       element.style.userSelect = 'none';
+    }
+    /**
+     * Detects wether webGL is supported or not
+     *
+     * @author alteredq / http://alteredqualia.com/
+     * @author author mr.doob / http://mrdoob.com/
+     * From three.js: https://github.com/mrdoob/three.js/blob/master/examples/js/Detector.js
+     */
+    function isWebglSupported() {
+      try {
+        var canvas = document.createElement( 'canvas' );
+
+        return !! ( window.WebGLRenderingContext &&
+          ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) );
+      } catch ( e ) {
+        return false;
+      }
     }
   }
 })();

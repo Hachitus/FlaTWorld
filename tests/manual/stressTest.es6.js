@@ -269,19 +269,24 @@
       });
 
     function onComplete(loader, resources) {
-      window.worldMap = map = globalMap.data = factories.hexaFactory(
-        mapCanvas, {
-          game: gameData,
-          map: mapData,
-          type: typeData,
-          graphic: graphicData[graphicsTheme]
-        },
-        {
-          trackFPSCB: trackFPSCB,
-          isHiddenByDefault: true,
-          scaleMode: PIXI.SCALE_MODES.NEAREST,
-          minimapCanvas: minimapCanvas
-        });
+      try {
+        window.worldMap = map = globalMap.data = factories.hexaFactory(
+          mapCanvas, {
+            game: gameData,
+            map: mapData,
+            type: typeData,
+            graphic: graphicData[graphicsTheme]
+          },
+          {
+            trackFPSCB: trackFPSCB,
+            isHiddenByDefault: true,
+            scaleMode: PIXI.SCALE_MODES.NEAREST,
+            minimapCanvas: minimapCanvas
+          });
+      } catch(e) {
+        alert('Error: ' + e.message);
+        throw e;
+      }
 
       var dialog_selection = document.getElementById('selectionDialog');
       var initializedUITheme = new UITheme.init(dialog_selection, map, { elements: {
