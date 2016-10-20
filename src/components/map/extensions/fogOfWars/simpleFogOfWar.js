@@ -72,7 +72,7 @@
 
       maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
       maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
-      maskMovableContainer.position = mapInstance.getCurrentMapCoordinates();
+      maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
       activateFogOfWar(this.mapInstance, params.cb, params.filter);
 
@@ -117,7 +117,7 @@
     }
 
     function moveFoW() {
-      maskMovableContainer.position = mapInstance.getCurrentMapCoordinates();
+      maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
       refreshFoW();
     }
