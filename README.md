@@ -143,10 +143,9 @@ The format for these rules as an example:
 ```
 
 ##Templates
-UI interface is implemented so that map uses the UI.js module to implement API and to that API you pass in the UITheme
-module you want to use in the game. All UIThemes should implement at least the core functionality API.
+All UIThemes should extend the UIParent module and they have to implement methods listed in UIs private function validateUITheme.
 
-UI Templates use the methods that UI.js offers them. They do not need to inherit anything, but they will be used through UI.js and must comply to the necessary methods that UI.js uses.
+You have to initialize the UI by calling UIInit method in flatworld.
 
 ##Events
 For events involved with the FlaTWorld map, you should check the current list from the [mapEvents.js](src/components/map/core/mapEvents.js) file. We try to keep it as up-to-date as possible.

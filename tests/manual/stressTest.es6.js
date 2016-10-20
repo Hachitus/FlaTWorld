@@ -292,7 +292,7 @@
       var initializedUITheme = new UITheme.init(dialog_selection, map, { elements: {
           select: '#dialog_select'
         }});
-      UI(initializedUITheme, map);
+      map.initUI(initializedUITheme);
 
       map.init( pluginsToActivate, mapData.startPoint );
 

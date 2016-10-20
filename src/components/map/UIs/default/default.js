@@ -3,10 +3,11 @@
   ------- IMPORT --------
   ----------------------*/
   const { PIXI } = window.flatworld_libraries;
+  const { UIParent } = window.flatworld;
+  const mapLog = window.flatworld.log;
   const templates = window.flatworld.UIs.default.templates;
   const createVisibleHexagon = window.flatworld.extensions.hexagons.utils.createVisibleHexagon;
   const drawShapes = window.flatworld.UIs.default.utils.drawShapes;
-  const mapLog = window.flatworld.log;
 
   /*---------------------
   ------ VARIABLES ------

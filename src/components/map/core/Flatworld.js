@@ -3,7 +3,7 @@
   ------- IMPORT --------
   ----------------------*/
   const { Q, PIXI } = window.flatworld_libraries;
-  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils, constants } = window.flatworld;
+  const { mapLayers, ObjectManager, mapEvents, generalUtils, log, utils, constants, UI } = window.flatworld;
 
   /*---------------------
   ------ VARIABLES ------
@@ -316,6 +316,13 @@
       tickCB && this.customTickOn(tickCB);
 
       return isMapReadyPromises || Promise.resolve();
+    }
+    /**
+     * This method will initialize the UI module. It requires constructed UI theme module as param
+     * @param {Object} UITheme This is the UI theme module created to work with UI module
+     */
+    initUI(UITheme) {
+      UI(UITheme, this, protectedProperties);
     }
     /**
      * Returns a promise that resolves after the map is fully initialized
@@ -776,9 +783,11 @@
       return _movableLayer;
     }
     // toGlobal is there to check if the "coordinates" are a PIXI object and we can use that
-    getMapCoordinates(coordinates = constants.ZERO_COORDINATES)) {
+    getMapCoordinates(coordinates = constants.ZERO_COORDINATES, revert = false) {
       if (coordinates.toGlobal) {
         return _movableLayer.toLocal(constants.ZERO_COORDINATES, coordinates);
+      } else  if (revert) {
+        return _movableLayer.position;
       } else {
         return _movableLayer.toLocal(coordinates);
       }

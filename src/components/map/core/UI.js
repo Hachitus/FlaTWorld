@@ -7,28 +7,33 @@
   /*---------------------
   ------ VARIABLES ------
   ----------------------*/
-  let scope;
+  const scope = {};
 
   /*---------------------
   -------- PUBLIC -------
   ----------------------*/
   /**
-   * Main class for showing UI on the map, like unit selections, movements and such. Has nothing to do with showing off-map data, like
+   * Main class for showing UI on the map, like unit selections, movements and such. Has nothing
+   * to do with showing off-map data, like
    * datagrams of the resources player has or other players status etc.
-   * Good examples for what this shows are: selected units-list, selection highlight (like a circle on the selected unit), unit movement.
-   * How it works is that this is basically the interface that shows what the UI theme class can (or must) implement.
+   * Good examples for what this shows are: selected units-list, selection highlight (like a
+   * circle on the selected unit), unit movement.
+   * How it works is that this is basically the interface that shows what the UI theme class can
+   * (or must) implement.
    *
    * @namespace flatworld
    * @class UI
    * @static
    * @param {Object} UITheme        Module that will be used for the UI theme
    * @param {Map} givenMap          Map instance that is used
+   * @throws {Error}                If either param isn't given or UITheme doesn't implement all
+   * the requires methods, this class throws an error.
    * @return {Object}               UI module
   */
-  function UI(UITheme, givenMap) {
+  function UI(UITheme, givenMap, protectedProperties) {
 
     /* SINGLETON MODULE */
-    if (scope) {
+    if (Object.keys(scope).length !== 0) {
       return scope;
     }
 
@@ -36,7 +41,12 @@
       throw new Error(`UI-module requires UITheme and map object, This is a singleton class, so it's possible it should have been already called earlier`);
     }
 
-    scope = {};
+    validateUITheme([
+        'highlightSelectedObject',
+        'showSelections',
+        'showUnitMovement'
+      ],
+      UITheme);
 
     /**
      * Responsible for showing what objects have been selected for inspection or if the player selects only one object, we hightlihgt it.
@@ -64,16 +74,22 @@
         objects = filters.filterObjects(objects);
       }
 
+      let returnable;
+
       objects = Array.isArray(objects) ? objects : [objects];
 
       if (objects.length === 1) {
-        return UITheme.highlightSelectedObject(objects[0], getDatas, UIThemeOptions);
+        returnable = UITheme.highlightSelectedObject(objects[0], getDatas, UIThemeOptions);
       } else if (objects.length > 1) {
-        return UITheme.showSelections(objects, getDatas, UIThemeOptions);
+        returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
       } else {
         // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-        return UITheme.showSelections([]);
+        returnable = UITheme.showSelections([]);
       }
+
+      givenMap.drawOnNextTick();
+
+      return returnable;
     };
     /**
      * Shows arrow or movement or what ever to indicate the selected unit is moving to the given location
@@ -90,23 +106,22 @@
         mapLog.error('Array expected for showUnitMovement');
       }
 
-      return UITheme.showUnitMovement(to, UIThemeOptions);
-    };
+      const returnable = UITheme.showUnitMovement(to, UIThemeOptions);
 
-    /**
-     * Adds a new method to this class
-     *
-     * @method extend
-     * @static
-     * @param  {String} newMethod   Name of the new method
-     */
-    scope.extend = function (newMethod) {
-      scope[newMethod] = function () {
-        UITheme[newMethod]();
-      };
+      givenMap.drawOnNextTick();
+
+      return returnable;
     };
 
     return scope;
+  }
+
+  function validateUITheme(allRequiredMethods, UITheme) {
+    allRequiredMethods.forEach(method => {
+      if (!UITheme[method]) {
+        throw new Error(`UItheme module need to implement methods defined in flatword UI module`);
+      }
+    })
   }
 
   /*---------------------
