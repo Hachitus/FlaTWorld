@@ -144,8 +144,6 @@
         blur: shadow.blur
       });
 
-      this.FTW.drawOnNextTick();
-
       _getElement('select').style.display = 'block';
 
       return highlightableObject;
@@ -177,8 +175,6 @@
         prev = coord;
       });
       this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, arrows, UINAME);
-
-      this.FTW.drawOnNextTick();
     }
 
     /*----------------------
