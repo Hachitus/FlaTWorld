@@ -1,4 +1,8 @@
 !function() {
+  /**
+   * Author: https://github.com/dmitrysteblyuk
+   * Thank you for the awesome path finding :)
+   */
   /*---------------------
   ------- EXPORT --------
   ----------------------*/

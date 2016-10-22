@@ -197,3 +197,6 @@ Copyright (c) 2016 Janne Hyytiä
 
 Graphics:
 * Realistic units from freeciv.
+
+#Thank yous
+https://github.com/dmitrysteblyuk (Pathfinding module)
