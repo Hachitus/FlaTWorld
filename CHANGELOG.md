@@ -18,6 +18,7 @@
 ## Others
 * Added constants.js
 * Support for non-subcontainer layer structure removed
+* Officially moved to alpha development stage
 
 <a name="0.5.0"></a>
 # 0.5.0 Fog of war polish and multi-development setups (2016-09-25)

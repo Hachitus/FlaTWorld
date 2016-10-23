@@ -1,8 +1,8 @@
 [![GPLv3 Affero License](http://img.shields.io/badge/license-LGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl.html)
 [![Gitter](https://badges.gitter.im/Hachitus/FlaTWorld.svg)](https://gitter.im/Hachitus/FlaTWorld)
 
-#PRE-ALPHA!
-The development is still in pre-alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under dramatic changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
+#ALPHA!
+The development is still in alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under dramatic changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
 
 #Introduction
 2D turn-based strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games. I was frustrated at waiting for those games and decided to start making it on my own. Browser environment is a perfect match for turn-based multiplayer. You can continue your turn easily anywhere, any time!
