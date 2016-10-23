@@ -215,6 +215,7 @@
     preload.addResource( FOW_IMAGE );
     loadSounds();
     mapEvents.subscribe('objectsSelected', unitSelectedSound);
+    mapEvents.subscribe('objectMove', unitOrderSound);
 
     preload.setErrorHandler(function(e) {
       console.log('preloader error:', e);
@@ -395,10 +396,18 @@
       console.log('PRELOADER ERROR', err );
     }
     function unitSelectedSound() {
-      sound.play('cheer');
+      sound.play('select');
+    }
+    function unitOrderSound() {
+      sound.play('order');
     }
     function loadSounds() {
-      sound.add( 'cheer', '/testAssets/sounds/personCheering.mp3' );
+      sound.add( 'order', '/testAssets/sounds/confirm.wav', {
+        volume: 0.50
+      });
+      sound.add( 'select', '/testAssets/sounds/what.wav', {
+        volume: 0.5
+      });
     }
   }
 

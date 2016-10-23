@@ -150,7 +150,6 @@
       }
       
       selectedObject.move(pathsToCoordinates[pathsToCoordinates.length - 1]);
-      mapEvents.publish('objectMoves', selectedObject);
 
       ui.showUnitMovement(pathsToCoordinates);
 
