@@ -6,9 +6,9 @@
   /***********************
   ******** IMPORT ********
   ***********************/
-  var polyfills = window.flatworld.generalUtils.polyfills;
+  var polyfills = window.flatworld.utils.polyfills;
   var factories = window.flatworld.factories;
-  var Preload = window.flatworld.Preload;
+  var Preload = window.flatworld.preloading.Preload;
   var baseEventlisteners = window.flatworld.extensions.baseEventlisteners;
   var mapZoom = window.flatworld.extensions.mapZoom;
   var mapDrag = window.flatworld.extensions.mapDrag;
@@ -46,7 +46,7 @@
   polyfills.es6String();
   polyfills.setPrototypeOf();
 
-  hexagons.utils.init(HEXAGON_RADIUS);
+  hexagons.utils.hexagonMath.init(HEXAGON_RADIUS);
   /* This will suppress the fetch errors and make later possible to emulate http-requests */
   window.fetch = function () {
     return {
@@ -116,17 +116,17 @@
       y: mapsize
     };
     var gridSize = {
-      rows: Math.floor(coordMapsize.x / hexagons.utils.calcShortDiagonal()),
-      columns: Math.floor(coordMapsize.y / hexagons.utils.calcLongDiagonal())
+      rows: Math.floor(coordMapsize.x / hexagons.utils.hexagonMath.calcShortDiagonal()),
+      columns: Math.floor(coordMapsize.y / hexagons.utils.hexagonMath.calcLongDiagonal())
     };
     var gridSizeHalf = {
       rows: Math.floor(gridSize.rows / 2),
       columns: Math.floor(gridSize.columns / 2)
     };
     var hexagonGridCoordinates = {
-      terrains: hexagons.utils.createHexagonGridCoordinates(gridSize),
-      units: hexagons.utils.createHexagonGridCoordinates(gridSize),
-      units2: hexagons.utils.createHexagonGridCoordinates(gridSizeHalf)
+      terrains: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
+      units: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
+      units2: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSizeHalf)
     };
     var returnable = {
       gameID: '53837d47976fed3b24000005',
@@ -196,7 +196,7 @@
     }
 
     /* This NEEDS to be set for the hexagon plugin to work correctly */
-    hexagons.utils.init(gameData.hexagonRadius);
+    hexagons.utils.hexagonMath.init(gameData.hexagonRadius);
     activateAPIs();
 
     /* Determines how much stuff we show on screen for stress testing */
@@ -285,7 +285,7 @@
             minimapCanvas: minimapCanvas
           });
       } catch(e) {
-        alert('Error: ' + e.message);
+        console.log('Error: ' + e.message);
         throw e;
       }
 
@@ -298,7 +298,7 @@
       map.init( pluginsToActivate, mapData.startPoint );
 
       var minimapUIImage = new PIXI.Sprite();
-      var pixelRatio = minimapSize.width / map.getMapsize().x * hexaUtils.calcLongDiagonal();
+      var pixelRatio = minimapSize.width / map.getMapsize().x * hexaUtils.hexagonMath.calcLongDiagonal();
       var staticCB = function (obj) {
         var size = pixelRatio;
         var minimapColor = obj.minimapColor;
@@ -311,11 +311,11 @@
           minimapColor = 0x55FF55;
           size = size / 2;
         }
-        minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: minimapColor });
+        minimapShape = obj.minimapShape || hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: minimapColor });
         globalPoints = _getCorrectGlobalCoords(obj);
 
-        minimapShape.x = Math.floor(pixelRatio * globalPoints.x / hexaUtils.calcShortDiagonal());
-        minimapShape.y = Math.floor(pixelRatio * globalPoints.y / hexaUtils.calcLongDiagonal());
+        minimapShape.x = Math.floor(pixelRatio * globalPoints.x / hexaUtils.hexagonMath.calcShortDiagonal());
+        minimapShape.y = Math.floor(pixelRatio * globalPoints.y / hexaUtils.hexagonMath.calcLongDiagonal());
 
         return minimapShape;
       };
@@ -328,10 +328,10 @@
           minimapColor = 0x55FF55;
           size = size / 2;
         }
-        minimapShape = obj.minimapShape || hexagons.utils.createVisibleHexagon(size / 2, { color: obj.minimapColor });
+        minimapShape = obj.minimapShape || hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: obj.minimapColor });
         globalPoints = obj.toGlobal(new PIXI.Point(obj.x,obj.y));
 
-        var indexes = new PIXI.Point(hexaUtils.coordinatesToIndexes(globalPoints));
+        var indexes = new PIXI.Point(hexaUtils.hexagonMath.coordinatesToIndexes(globalPoints));
         minimapShape.x = Math.floor(pixelRatio * indexes.x);
         minimapShape.y = Math.floor(pixelRatio * indexes.y);
 
