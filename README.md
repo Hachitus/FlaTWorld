@@ -195,8 +195,12 @@ Thank you to browserstack for providing magnificient testing tools
 #Credits
 Copyright (c) 2016 Janne Hyytiä
 
-Graphics:
+Graphics (for testing):
 * Realistic units from freeciv.
+
+Sounds (for testing):
+* http://www.freesound.org/people/_hash_Hazard/sounds/127601/
+* http://www.freesound.org/people/Artmasterrich/sounds/345458/
 
 #Thank yous
 https://github.com/dmitrysteblyuk (Pathfinding module)
