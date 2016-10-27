@@ -24,12 +24,6 @@ Table of contents
   * [Requirements and restrictions](#requirements-and-efficiency-goals)
     * [Supported environments](#supported-environments)
     * [Aimed mapsize and efficiency](#aimed-mapsize-and-efficiency)
-  * [Roadmap](#roadmap)
-    * [2016-10](#2016-10)
-    * [2016-11](#2016-11)
-    * [2016-12](#2016-12)
-    * [2017-01](#2017-01)
-    * [2017-02](#2017-02)
   * [Sponsors](#sponsors)
   * [Credits](#credits)
 
@@ -162,31 +156,6 @@ These are still subject to change (both raised and lowered). The map is planned 
 * Maximum map size: 225 000 000 pixels (15k * 15k)
 * Total object count on map: ~50k
 * FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
-
-###2016-10###
-* Pathfinding and commading of units.
-* Setup webpack
-
-###2016-11###
-* Redesign UI modules
-* Finish default UI theme
-  * Selection of more than one unit. Proper example graphics.
-
-###2016-12###
-* Setting up animations and polishing graphics to work correctly.
-  * Like no flickering, no disturbing blurriness.
-
-###2017-01###
-* Not yet determined which extensions will be in the initial release, but at least half of these should be ready till this point:
-  * hotkeys
-  * push notifications (like turn changes)
-  * gamepad support
-  * offline functionality
-
-###2017-02###
-* Example game that runs on browser, without server side. Though just simple example, not really suitable for actual playing.
-* Documentation polished.
-* Start server side functionality. Remains to be seen how much of it is in github...
 
 #Sponsors
 Thank you to browserstack for providing magnificient testing tools
