@@ -1,7 +1,10 @@
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
-## Big breaking changes
+## Possible breaking changes
 * flatworld.getMovableLayer and flatworld.getZoomLayer removed
+* Added a default prevention of selecting text with mouse. Optional parameter to activate.
+* Everything under webpack
+* Support for non-subcontainer layer structure removed
 
 ## Bug fixes
 * Fix several issues with iPhones
@@ -12,13 +15,10 @@
 * Added pre-calculated map coordinates for objects, so that we don't always need to make conversions for objects to map coordinates (in ObjectSprite as in new ObjectSprite().coordinates)
 * Added getMapCoordinates in flatworld
 * Extensions have a bit different initialization now and can receive parameters.
-* Added a default prevention of selecting text with mouse. Optional parameter to activate.
 * Added utils.general.toggleMouseTextSelection
-* Everything under webpack
 
 ## Others
 * Added constants.js
-* Support for non-subcontainer layer structure removed
 * Officially moved to alpha development stage
 
 <a name="0.5.0"></a>
