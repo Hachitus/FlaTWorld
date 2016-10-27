@@ -32,8 +32,9 @@
   "scripts": {
     "start": "echo 'starting instance in http://localhost:9001/' && forever start startEngine.js",
     "stop": "forever stop startEngine.js",
-    "build": "gulp build",
-    "deploy": "gulp deploy",
+    "build": "webpack",
+    "watch": "webpack --progress --colors --watch",
+    "deploy": "webpack --output-path=./dist",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
     "document": "yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
     "showDocuments": "echo 'starting instance in http://localhost:9002/' && forever start startDocument.js --uid FlaTWorldDocument",

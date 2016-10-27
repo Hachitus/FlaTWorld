@@ -14,6 +14,7 @@
 * Extensions have a bit different initialization now and can receive parameters.
 * Added a default prevention of selecting text with mouse. Optional parameter to activate.
 * Added utils.general.toggleMouseTextSelection
+* Everything under webpack
 
 ## Others
 * Added constants.js
