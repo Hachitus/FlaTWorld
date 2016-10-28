@@ -1,4 +1,4 @@
-import { default as baseEventlisteners } from './baseEventListeners/baseEventListeners';
+import { default as baseEventlisteners } from './baseEventListeners/baseEventlisteners';
 import { default as fogOfWars } from './fogOfWars/index';
 import { default as hexagons } from './hexagons/index';
 import { default as mapMovement } from './mapMovement/mapMovement';

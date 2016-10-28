@@ -1,6 +1,6 @@
 import * as eventListeners from './eventListeners/units.js';
 import * as hexagonPlugin from './selectHexagonPlugin';
-import * as pathfinding from './pathfinding/findPath';
+import * as pathfinding from './pathFinding/findPath';
 import * as utils from './utils/'
 
 const toBeExported = {};
