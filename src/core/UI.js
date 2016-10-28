@@ -26,7 +26,7 @@ const scope = {};
  * the requires methods, this class throws an error.
  * @return {Object}               UI module
 */
-function UI(UITheme, givenMap, protectedProperties) {
+function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-unused-vars
 
   /* SINGLETON MODULE */
   if (Object.keys(scope).length !== 0) {
@@ -38,11 +38,10 @@ function UI(UITheme, givenMap, protectedProperties) {
   }
 
   validateUITheme([
-      'highlightSelectedObject',
-      'showSelections',
-      'showUnitMovement'
-    ],
-    UITheme);
+    'highlightSelectedObject',
+    'showSelections',
+    'showUnitMovement'
+  ], UITheme);
 
   /**
    * Responsible for showing what objects have been selected for inspection or if the player selects only one object, we hightlihgt it.
