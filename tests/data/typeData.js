@@ -2,35 +2,61 @@
 
 window.typeData = {
     terrainBase:[{
-        image:'parkingLot',
+        image:'desert',
+        attachedToTerrains:['0'],
+        type: 'desert',
+        movement: '1',
+        propability:'100%',
+        name: 'forDebugging - desert',
+        minimapColor: 0xe9d9b5
+      },{
+        image:'grass',
+        attachedToTerrains:['0'],
+        type: 'grass',
+        movement: '1',
+        propability:'100%',
+        name: 'forDebugging - grass',
+        minimapColor: 0x24b160
+      },{
+        image:'wasteland',
+        attachedToTerrains:['0'],
+        type: 'wasteland',
+        movement: '1',
+        propability:'100%',
+        name: 'forDebugging - wasteland',
+        minimapColor: 0x24b160
+      },{
+        image:'tundra',
+        attachedToTerrains:['0'],
+        type: 'tundra',
+        movement: '1',
+        propability:'100%',
+        name: 'forDebugging - tundra',
+        minimapColor: 0x24b160
+      },{
+        image:'lake',
         attachedToTerrains:['0'],
         propability:'100%',
-        name: 'forDebugging - parkingLot',
-        minimapColor: 0xa4afaf
+        type: 'lake',
+        movement: '1',
+        name: 'forDebugging - lake',
+        minimapColor: 0x24b160
       },{
-        image:'park',
-        attachedToTerrains:['2'],
+        image:'mountains',
+        attachedToTerrains:['0'],
+        type: 'mountain',
+        movement: '-1',
         propability:'100%',
-        name: 'forDebugging - park',
-        minimapColor: 0x168344
+        name: 'forDebugging - mountains',
+        minimapColor: 0x24b160
       },{
-        image:'fountainPark',
-        attachedToTerrains:['1'],
+        image:'forest',
+        attachedToTerrains:['0'],
+        type: 'forest',
+        movement: '2',
         propability:'100%',
-        name: 'forDebugging - fountainPark',
-        minimapColor: 0x66FFFF
-      },{
-        image:'fountain',
-        attachedToTerrains:['4'],
-        propability:'100%',
-        name: 'forDebugging - fountain',
-        minimapColor: 0xd1f4ff
-      },{
-        image:'crystalMountain',
-        attachedToTerrains:['4'],
-        propability:'100%',
-        name: 'forDebugging - crystalMountain',
-        minimapColor: 0xb55f40
+        name: 'forDebugging - forest',
+        minimapColor: 0x24b160
       }],
     terrain:[{
       name:'desert',

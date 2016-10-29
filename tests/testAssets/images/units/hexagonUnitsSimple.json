@@ -396,7 +396,7 @@
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "../units/hexagonUnits.png",
+		"image": "../units/hexagonUnitsSimple.png",
 		"format": "RGBA8888",
 		"size": {"w":2048,"h":2048},
 		"scale": "1",
