@@ -167,6 +167,13 @@ function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orienta
 
   return gridArray;
 }
+/**
+ * This converts pixel-based coordinates to hexagon indexes. Uses axial coordinate system
+ * (http://www.redblobgames.com/grids/hexagons/)
+ * @param  {Object} coordinates           Coordinates with x and y
+ * @param  {Object} options.startingPoint Starting point coordinates with x and y
+ * @return {Object}                       Index coordinates with x and y
+ */
 function coordinatesToIndexes(coordinates, { startingPoint = globalStartingPoint } = {}) {
   const indexes = {
     x: Math.floor((coordinates.x - startingPoint.x) / calcShortDiagonal()),
@@ -177,6 +184,13 @@ function coordinatesToIndexes(coordinates, { startingPoint = globalStartingPoint
 
   return indexes;
 }
+/**
+ * This converts hexagon indexes to pixel-based coordinates. Uses axial coordinate system
+ * (http://www.redblobgames.com/grids/hexagons/)
+ * @param  {Object} indexes               Coordinates with x and y
+ * @param  {Object} options.startingPoint Starting point coordinates with x and y
+ * @return {Object}                       Pixel coordinates with x and y
+ */
 function indexesToCoordinates(indexes, { startingPoint = globalStartingPoint } = {}) {
   const coordinates = {
     x: Math.floor((indexes.x * calcShortDiagonal()) + startingPoint.x),

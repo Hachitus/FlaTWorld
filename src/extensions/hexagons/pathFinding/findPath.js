@@ -115,7 +115,12 @@ function findPath(
         const y = curr.y + directions[i].y;
         const next = { x: x, y: y };
         const weight = weightFn(next, curr);
-            
+
+        if (debug && (!isInteger(weight) || weight < 0)) {
+          console.error(next, curr); // eslint-disable-line no-console
+          throw new Error(`weightFn didn't return non-negative integer: ${weight}`);
+        }
+
         if (weight < 0 || curr.time + weight > maxTime) {
           continue;
         }
@@ -154,7 +159,11 @@ function findPath(
     function isVisited(cell) {
         // if width and height are chosen right then the key should not be negative
       const key = (cell.x - xStart + width) * height + (cell.y - yStart);
+
       if (key < 0) {
+        if (debug) {
+          console.error(cell); // eslint-disable-line no-console
+        }
         throw new Error(`negative key: ${key}`);
       }
         
