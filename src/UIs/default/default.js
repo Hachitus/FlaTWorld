@@ -280,6 +280,4 @@ function _getElement(which) {
 /*---------------------
 --------- API ---------
 ----------------------*/
-export default {
-  init: UIDefault
-};
+export default UIDefault;

@@ -290,7 +290,7 @@
       }
 
       var dialog_selection = document.getElementById('selectionDialog');
-      var initializedUITheme = new UITheme.init(dialog_selection, map, { elements: {
+      var initializedUITheme = new UITheme(dialog_selection, map, { elements: {
           select: '#dialog_select'
         }});
       map.initUI(initializedUITheme);
