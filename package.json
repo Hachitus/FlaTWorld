@@ -18,7 +18,7 @@
     "HTML5"
   ],
   "version": "0.6.0",
-  "main": "src/dist/flatworld.js",
+  "main": "dist/flatworld.js",
   "author": "Janne Hyytiä",
   "license": "AGPL-3.0",
   "repository": {
