@@ -57,7 +57,7 @@ If you need files for production, deploy
 And the production files (uglified) will be in: dist/ (flatworld.js and flatworld_libraries.js)
 
 ##Examples
-Best example is found in [plunkr](http://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview). This is the base map created with the engine. The latest example will be found from the engines manual tests (in src/tests/-folder). A working example should also be found in: *http://warmapengine.level7.fi/tests/*, but not quaranteed that it is always on (as server can be down or dns changed).
+Best example is found in [plunkr](http://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview). This is the base map created with the engine. The latest example will be found from the engines manual tests (in src/tests/-folder). A working example should also be found in: *http://flatworld.level7.fi/manualStressTest.html*, but not quaranteed that it is always on (as server can be down or dns changed).
 
 ##Setup a simple map
 The main module for the whole map is core.Flatworld, so you should always primarily look through it's API and then dig deeper. The best examples for setting up a map at the moment is still going through the code. Check the test-files: tests/manualTest.html and tests/manualStressTest.html (which are more comprehensive). They use horizontalHexaFactory to go through the map data and setup objects based on that data. You can use horizontalHexaFactory if you want or setup your own factory and own data structure. Factories always have to follow a certain data structure so they might not be something everyone wants or can cope with.
