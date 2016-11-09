@@ -62,15 +62,15 @@ var flatworld =
 	
 	var _extensions2 = _interopRequireDefault(_extensions);
 	
-	var _UIs = __webpack_require__(53);
+	var _UIs = __webpack_require__(52);
 	
 	var UIModule = _interopRequireWildcard(_UIs);
 	
-	var _Preload = __webpack_require__(79);
+	var _Preload = __webpack_require__(78);
 	
 	var preloading = _interopRequireWildcard(_Preload);
 	
-	var _hexaFactory = __webpack_require__(80);
+	var _hexaFactory = __webpack_require__(79);
 	
 	var hexaFactory = _interopRequireWildcard(_hexaFactory);
 	
@@ -131,9 +131,9 @@ var flatworld =
 	
 	var _mapEvents2 = _interopRequireDefault(_mapEvents);
 	
-	var _mapLayers = __webpack_require__(25);
+	var _MapLayers = __webpack_require__(25);
 	
-	var _mapLayers2 = _interopRequireDefault(_mapLayers);
+	var _MapLayers2 = _interopRequireDefault(_MapLayers);
 	
 	var _mapStates = __webpack_require__(26);
 	
@@ -143,9 +143,9 @@ var flatworld =
 	
 	var _ObjectManager2 = _interopRequireDefault(_ObjectManager);
 	
-	var _objects = __webpack_require__(29);
+	var _Objects = __webpack_require__(29);
 	
-	var _objects2 = _interopRequireDefault(_objects);
+	var _Objects2 = _interopRequireDefault(_Objects);
 	
 	var _Sound = __webpack_require__(30);
 	
@@ -169,10 +169,10 @@ var flatworld =
 	exports.mapAPI = _mapAPI2.default;
 	exports.MapDataManipulator = _MapDataManipulator2.default;
 	exports.mapEvents = _mapEvents2.default;
-	exports.mapLayers = _mapLayers2.default;
+	exports.mapLayers = _MapLayers2.default;
 	exports.mapStates = _mapStates2.default;
 	exports.ObjectManager = _ObjectManager2.default;
-	exports.objects = _objects2.default;
+	exports.objects = _Objects2.default;
 	exports.Sound = _Sound2.default;
 	exports.UI = _UI2.default;
 	exports.UIStates = _UIStates2.default;
@@ -1001,7 +1001,7 @@ var flatworld =
 	
 	var constants = {
 	  ZERO_COORDINATES: new PIXI.Point(0, 0),
-	  VERSION: '0.6.0'
+	  VERSION: '0.6.1'
 	};
 	
 	/*---------------------
@@ -5107,7 +5107,7 @@ var flatworld =
 	   */
 	  function add(type, cb, baseUrl) {
 	    if (APIs[type]) {
-	      _index.mapLog.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
+	      _index.log.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
 	    }
 	
 	    APIs[type] = {
@@ -5123,7 +5123,7 @@ var flatworld =
 	   */
 	  function remove(type) {
 	    if (!APIs[type]) {
-	      _index.mapLog.debug('API endpoint not found for removing!');
+	      _index.log.debug('API endpoint not found for removing!');
 	    }
 	
 	    delete APIs[type];
@@ -5138,7 +5138,7 @@ var flatworld =
 	   */
 	  function update(type, cb) {
 	    if (!APIs[type] || !APIs[type].cbs) {
-	      _index.mapLog.debug('API endpoint not found for updating!');
+	      _index.log.debug('API endpoint not found for updating!');
 	    }
 	
 	    APIs[type].cbs.push(cb);
@@ -5158,7 +5158,7 @@ var flatworld =
 	   */
 	  function _doFetch(fetchType, type, params) {
 	    if (!APIs[type]) {
-	      _index.mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
+	      _index.log.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
 	      return;
 	    }
 	
@@ -5174,9 +5174,9 @@ var flatworld =
 	    }).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
-	      _index.mapLog.debug('parsed json', json);
+	      _index.log.debug('parsed json', json);
 	    }).catch(function (ev) {
-	      _index.mapLog.debug('mapAPI http request failed', ev);
+	      _index.log.debug('mapAPI http request failed', ev);
 	    });
 	  }
 	  /**
@@ -10279,6 +10279,7 @@ var flatworld =
 	 * @return {Object}               UI module
 	*/
 	function UI(UITheme, givenMap, protectedProperties) {
+	  // eslint-disable-line no-unused-vars
 	
 	  /* SINGLETON MODULE */
 	  if (Object.keys(scope).length !== 0) {
@@ -10289,7 +10290,7 @@ var flatworld =
 	    throw new Error('UI-module requires UITheme and map object, This is a singleton class, so it\'s possible it should have been already called earlier');
 	  }
 	
-	  validateUITheme(['highlightSelectedObject', 'showSelections', 'showUnitMovement'], UITheme);
+	  validateUITheme(['highlightSelectedObject', 'showSelections', 'showUnitMovement', 'unSelect'], UITheme);
 	
 	  /**
 	   * Responsible for showing what objects have been selected for inspection or if the player selects only one object, we hightlihgt it.
@@ -10321,18 +10322,9 @@ var flatworld =
 	      objects = filters.filterObjects(objects);
 	    }
 	
-	    var returnable = void 0;
-	
 	    objects = Array.isArray(objects) ? objects : [objects];
 	
-	    if (objects.length === 1) {
-	      returnable = UITheme.highlightSelectedObject(objects[0], getDatas, UIThemeOptions);
-	    } else if (objects.length > 1) {
-	      returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
-	    } else {
-	      // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-	      returnable = UITheme.showSelections([]);
-	    }
+	    var returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
 	
 	    givenMap.drawOnNextTick();
 	
@@ -10395,9 +10387,9 @@ var flatworld =
 	  value: true
 	});
 	
-	var _baseEventListeners = __webpack_require__(35);
+	var _baseEventlisteners = __webpack_require__(35);
 	
-	var _baseEventListeners2 = _interopRequireDefault(_baseEventListeners);
+	var _baseEventlisteners2 = _interopRequireDefault(_baseEventlisteners);
 	
 	var _index = __webpack_require__(38);
 	
@@ -10407,26 +10399,26 @@ var flatworld =
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _mapMovement = __webpack_require__(48);
+	var _mapMovement = __webpack_require__(47);
 	
 	var _mapMovement2 = _interopRequireDefault(_mapMovement);
 	
-	var _index5 = __webpack_require__(49);
+	var _index5 = __webpack_require__(48);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _mapDrag = __webpack_require__(51);
+	var _mapDrag = __webpack_require__(50);
 	
 	var _mapDrag2 = _interopRequireDefault(_mapDrag);
 	
-	var _mapZoom = __webpack_require__(52);
+	var _mapZoom = __webpack_require__(51);
 	
 	var _mapZoom2 = _interopRequireDefault(_mapZoom);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  baseEventlisteners: _baseEventListeners2.default,
+	  baseEventlisteners: _baseEventlisteners2.default,
 	  fogOfWars: _index2.default,
 	  hexagons: _index4.default,
 	  mapMovement: _mapMovement2.default,
@@ -10589,7 +10581,9 @@ var flatworld =
 	    if (!caches['zoom']) {
 	      caches['zoom'] = {
 	        on: function on(cb) {
-	          var pinch = new Hammer.Pinch();
+	          var pinch = new Hammer.Pinch({
+	            threshold: 0.08
+	          });
 	          activeCB = cb;
 	
 	          hammer.add(pinch);
@@ -13770,7 +13764,7 @@ var flatworld =
 	-------- PUBLIC ---------
 	-----------------------*/
 	/**
-	 * Simple fog of war works with circles around objects
+	 * Simple fog of war works with hexagon sized holes around objects
 	 *
 	 * @namespace flatworld.extensions.fogOfWars
 	 * @class pixelizedMiniMap
@@ -13827,7 +13821,9 @@ var flatworld =
 	    mapRenderer = this.mapInstance.getRenderer();
 	
 	    maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-	    maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
+	    // We create a particle container, because it's faster for this purpose. We don't need any
+	    // fancy special effects for the container currently, so particle container works.
+	    maskMovableContainer = new PIXI.ParticleContainer();
 	    maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 	
 	    activateFogOfWar(this.mapInstance, params.cb, params.filter);
@@ -13841,6 +13837,7 @@ var flatworld =
 	    color = options.color || 0x222222;
 	    FoWCB = cb;
 	    var filter = filterCreator();
+	    // Get layers with filters. So it filters layers and objects
 	    objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(function (o) {
 	      return o.getObjects(filter);
 	    });
@@ -13873,9 +13870,12 @@ var flatworld =
 	  }
 	
 	  function refreshFoW() {
+	    /*    var t0 = performance.now();*/
 	    mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
 	
 	    maskSprite.texture = renderTexture;
+	    /*    var t1 = performance.now();
+	        console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")*/
 	  }
 	
 	  function moveFoW() {
@@ -13979,7 +13979,7 @@ var flatworld =
 	
 	var hexagonPlugin = _interopRequireWildcard(_selectHexagonPlugin);
 	
-	var _findPath = __webpack_require__(47);
+	var _findPath = __webpack_require__(42);
 	
 	var pathfinding = _interopRequireWildcard(_findPath);
 	
@@ -14038,9 +14038,13 @@ var flatworld =
 	  property: 'name',
 	  value: 'terrainLayer'
 	});
-	/* This must be changed to outside the module */
+	/* @todo This must be changed to outside the module */
 	var weight = function weight() {
 	  return 0;
+	};
+	/* @todo This must be changed to game logic too! */
+	var getObjectData = function getObjectData(object) {
+	  return object.data.typeData;
 	};
 	var FTW = void 0,
 	    ui = void 0;
@@ -14086,7 +14090,7 @@ var flatworld =
 	  var globalCoords = _core.utils.mouse.eventData.getHAMMERPointerCoords(e);
 	  var getData = {
 	    allData: function allData(object) {
-	      return object.data.typeData;
+	      return getObjectData(object);
 	    }
 	  };
 	  _core.mapStates.objectSelect();
@@ -14354,6 +14358,11 @@ var flatworld =
 	        var next = { x: x, y: y };
 	        var weight = weightFn(next, curr);
 	
+	        if (debug && (!isInteger(weight) || weight < 0)) {
+	          console.error(next, curr); // eslint-disable-line no-console
+	          throw new Error('weightFn didn\'t return non-negative integer: ' + weight);
+	        }
+	
 	        if (weight < 0 || curr.time + weight > maxTime) {
 	          continue;
 	        }
@@ -14391,7 +14400,11 @@ var flatworld =
 	    function isVisited(cell) {
 	      // if width and height are chosen right then the key should not be negative
 	      var key = (cell.x - xStart + width) * height + (cell.y - yStart);
+	
 	      if (key < 0) {
+	        if (debug) {
+	          console.error(cell); // eslint-disable-line no-console
+	        }
 	        throw new Error('negative key: ' + key);
 	      }
 	
@@ -14803,6 +14816,13 @@ var flatworld =
 	
 	  return gridArray;
 	}
+	/**
+	 * This converts pixel-based coordinates to hexagon indexes. Uses axial coordinate system
+	 * (http://www.redblobgames.com/grids/hexagons/)
+	 * @param  {Object} coordinates           Coordinates with x and y
+	 * @param  {Object} options.startingPoint Starting point coordinates with x and y
+	 * @return {Object}                       Index coordinates with x and y
+	 */
 	function coordinatesToIndexes(coordinates) {
 	  var _ref7 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
 	      _ref7$startingPoint = _ref7.startingPoint,
@@ -14817,6 +14837,13 @@ var flatworld =
 	
 	  return indexes;
 	}
+	/**
+	 * This converts hexagon indexes to pixel-based coordinates. Uses axial coordinate system
+	 * (http://www.redblobgames.com/grids/hexagons/)
+	 * @param  {Object} indexes               Coordinates with x and y
+	 * @param  {Object} options.startingPoint Starting point coordinates with x and y
+	 * @return {Object}                       Pixel coordinates with x and y
+	 */
 	function indexesToCoordinates(indexes) {
 	  var _ref8 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
 	      _ref8$startingPoint = _ref8.startingPoint,
@@ -14980,253 +15007,6 @@ var flatworld =
 
 /***/ },
 /* 47 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * Author: https://github.com/dmitrysteblyuk
-	 * Thank you for the awesome path finding :)
-	 */
-	
-	var allHexDirections = [{ x: 0, y: 1 }, { x: -1, y: 1 }, { x: 1, y: 0 }, { x: 1, y: -1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
-	var allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
-	
-	var PriorityQueue = function () {
-	  function PriorityQueue() {
-	    _classCallCheck(this, PriorityQueue);
-	
-	    this.items = [];
-	  }
-	
-	  _createClass(PriorityQueue, [{
-	    key: 'pop',
-	    value: function pop() {
-	      var stack = this.items[this.items.length - 1].stack;
-	      var value = stack.pop();
-	      if (!stack.length) {
-	        this.items.pop();
-	      }
-	      return value;
-	    }
-	  }, {
-	    key: 'push',
-	    value: function push(value, loss) {
-	      var _this = this;
-	
-	      var _ref = this.items.length ? binarySearch(function (i) {
-	        return _this.items[i].loss - loss;
-	      }, 0, this.items.length) : [0, false],
-	          _ref2 = _slicedToArray(_ref, 2),
-	          index = _ref2[0],
-	          match = _ref2[1];
-	
-	      if (match) {
-	        this.items[index].stack.push(value);
-	      } else {
-	        var newItem = { stack: [value], loss: loss };
-	        this.items.splice(index, 0, newItem);
-	      }
-	    }
-	  }, {
-	    key: 'length',
-	    get: function get() {
-	      return this.items.length;
-	    }
-	  }]);
-	
-	  return PriorityQueue;
-	}();
-	
-	/**
-	 * Finds shortest route on a hexagon/normal grid
-	 * @param  {int} options.x:  xStart - start x-coordinate
-	 * @param  {int} options.y:  yStart - start y-coordinate
-	 * @param  {{ x: int, y: int }} - destination coordinates; if destination is null, then look for all reachable cells
-	 * @param  {int} width - width of the grid
-	 * @param  {int} height - height of the grid
-	 * @param  {int} maxTime - maximal allowed time to get to destination (must be at least 1)
-	 * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weightFn - function that returns time between two adjacent cells
-	 * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
-	 * @return {{ x: int, y: int, time: int }[]} - path coordinates from start to destination (including starting point)
-	 */
-	
-	
-	function findPath(_ref3, dest, width, height, maxTime, weightFn) {
-	  var xStart = _ref3.x,
-	      yStart = _ref3.y;
-	  var allowDiagonal = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-	  var debug = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
-	
-	
-	  validateArgs();
-	
-	  var counter = 0;
-	  var d = Date.now();
-	
-	  var hexagonGrid = allowDiagonal === null;
-	  var pathArr = bestDirectionAlg();
-	
-	  if (debug) {
-	    var _console;
-	
-	    (_console = console).log.apply(_console, _toConsumableArray(dest ? [] : ['reachable: ']).concat([// eslint-disable-line no-console
-	    Date.now() - d + 'ms', pathArr && pathArr.length, counter + ' oper', maxTime + ' cells', counter / maxTime / Math.log(maxTime) + ' coeff']));
-	  }
-	
-	  return pathArr;
-	
-	  function bestDirectionAlg() {
-	    var visited = [];
-	    var startMinTime = dest && getMinSteps(dest.x - xStart, dest.y - yStart, hexagonGrid);
-	    var queue = new PriorityQueue();
-	    var start = {
-	      x: xStart,
-	      y: yStart,
-	      time: 0,
-	      prev: null
-	    };
-	
-	    isVisited(start);
-	    queue.push(start, 0);
-	
-	    var resPath = null;
-	    var allowedTime = maxTime;
-	
-	    while (queue.length) {
-	      counter++;
-	      var curr = queue.pop();
-	      var maxRemainingTime = allowedTime - curr.time;
-	      var minPossibleTime = !dest || maxRemainingTime < 1 ? 1 : getMinSteps(dest.x - curr.x, dest.y - curr.y, hexagonGrid);
-	
-	      if (minPossibleTime > maxRemainingTime) {
-	        continue;
-	      }
-	
-	      var directions = hexagonGrid ? allHexDirections : allNormalDirections;
-	
-	      for (var i = directions.length; i-- > 0;) {
-	        var x = curr.x + directions[i].x;
-	        var y = curr.y + directions[i].y;
-	        var next = { x: x, y: y };
-	        var weight = weightFn(next, curr);
-	
-	        if (weight < 0 || curr.time + weight > maxTime) {
-	          continue;
-	        }
-	
-	        next.time = curr.time + weight;
-	        next.prev = curr;
-	
-	        if (dest && x === dest.x && y === dest.y) {
-	          resPath = next;
-	          allowedTime = next.time - 1;
-	          break;
-	        }
-	
-	        if (!isVisited(next)) {
-	          var loss = next.time + (dest ? getMinSteps(dest.x - x, dest.y - y, hexagonGrid) - startMinTime : 0);
-	          queue.push(next, loss /* * (maxTime + 1) - next.time*/);
-	        }
-	      }
-	    }
-	
-	    if (dest) {
-	      return resPath && pathListToArray(resPath);
-	    }
-	
-	    return visited.reduce(function (res, time, key) {
-	      var dy = key % height;
-	      var dx = (key - dy) / height - width;
-	      if (dx || dy) {
-	        // do not include starting point
-	        res.push({ x: dx + xStart, y: dy + yStart, time: time });
-	      }
-	      return res;
-	    }, []);
-	
-	    function isVisited(cell) {
-	      // if width and height are chosen right then the key should not be negative
-	      var key = (cell.x - xStart + width) * height + (cell.y - yStart);
-	      if (key < 0) {
-	        throw new Error('negative key: ' + key);
-	      }
-	
-	      return visited[key] ? visited[key] <= cell.time || (visited[key] = cell.time, false) : (visited[key] = cell.time, false);
-	    }
-	  }
-	
-	  function validateArgs() {
-	    [xStart, yStart].concat(dest ? [dest.x, dest.y] : []).concat([width, height, maxTime]).forEach(function (arg, i) {
-	      if (!isInteger(arg)) {
-	        throw new Error('argument #' + i + ' must be an integer: ' + arg);
-	      }
-	    });
-	
-	    if (maxTime < 1) {
-	      throw new Error('maxTime must be at least 1: ' + maxTime);
-	    }
-	    if (dest && xStart === dest.x && yStart === dest.y) {
-	      throw new Error('starting and destination points must be different: ' + xStart + ', ' + yStart);
-	    }
-	  }
-	}
-	
-	function pathListToArray(pathList) {
-	  var link = pathList;
-	  var arr = [];
-	
-	  do {
-	    arr.push(link);
-	    link = link.prev;
-	  } while (link);
-	
-	  return arr.reverse();
-	}
-	
-	function binarySearch(sortFn, i0, i1) {
-	  var mid = Math.floor((i0 + i1) / 2);
-	  var res = sortFn(mid);
-	
-	  if (res < 0) {
-	    return mid > i0 ? binarySearch(sortFn, i0, mid) : [i0, false];
-	  } else if (res > 0) {
-	    return mid + 1 < i1 ? binarySearch(sortFn, mid + 1, i1) : [i1, false];
-	  }
-	  return [mid, true];
-	}
-	
-	function isInteger(x) {
-	  return x === Math.floor(x) && isFinite(x);
-	}
-	
-	function getMinSteps(dx, dy, hexagonGrid) {
-	  if (hexagonGrid) {
-	    return dx > 0 && dy > 0 ? dx + dy : dx < 0 && dy < 0 ? -dx - dy : Math.max(Math.abs(dx), Math.abs(dy));
-	  } else {
-	    return Math.abs(dx) + Math.abs(dy);
-	  }
-	}
-	
-	/*---------------------
-	------- EXPORT --------
-	----------------------*/
-	exports.findPath = findPath;
-
-/***/ },
-/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15278,7 +15058,7 @@ var flatworld =
 	      getViewportWithOffset: getViewportWithOffset,
 	      testRectangleIntersect: testRectangleIntersect,
 	      _setMap: _setMap,
-	      setupOffsetSize: setupOffsetSize
+	      setOffsetSize: setOffsetSize
 	    }
 	  };
 	  /**
@@ -15343,7 +15123,7 @@ var flatworld =
 	   */
 	  function addAll(mapInstance) {
 	    viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
-	    offsetSize = setupOffsetSize(viewportArea);
+	    setOffsetSize(viewportArea);
 	
 	    mapInstance.getPrimaryLayers().forEach(function (layer) {
 	      layer.getSubcontainers().forEach(function (subcontainer) {
@@ -15395,11 +15175,11 @@ var flatworld =
 	      check();
 	    }
 	    function resizeCb() {
-	      offsetSize = setupOffsetSize(viewportArea);
+	      setOffsetSize(viewportArea);
 	      check();
 	    }
 	    function zoomCb() {
-	      offsetSize = setupOffsetSize(viewportArea);
+	      setOffsetSize(viewportArea);
 	      check();
 	    }
 	  }
@@ -15503,11 +15283,11 @@ var flatworld =
 	   *
 	   * @private
 	   * @static
-	   * @method setupOffsetSize
+	   * @method setOffsetSize
 	   * @return {totalViewportArea}              The total viewportArea
 	   */
-	  function setupOffsetSize(viewportArea) {
-	    return calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+	  function setOffsetSize(viewportArea) {
+	    offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
 	  }
 	  /**
 	   * forms the total viewport parameters based on the given ones.
@@ -15565,7 +15345,7 @@ var flatworld =
 	exports.default = mapMovement;
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15574,7 +15354,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _pixelizedMinimap = __webpack_require__(50);
+	var _pixelizedMinimap = __webpack_require__(49);
 	
 	var _pixelizedMinimap2 = _interopRequireDefault(_pixelizedMinimap);
 	
@@ -15585,7 +15365,7 @@ var flatworld =
 	};
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15833,7 +15613,7 @@ var flatworld =
 	exports.default = pixelizedMinimap;
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15986,7 +15766,7 @@ var flatworld =
 	exports.default = mapDrag;
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16102,7 +15882,7 @@ var flatworld =
 	   * @param {Number} amount how much map is zoomed in
 	   * */
 	  function zoomIn(amount) {
-	    var presentScale = this.getZoom();
+	    var presentScale = map.getZoom();
 	    var IS_ZOOM_IN = true;
 	
 	    return _zoom(this, presentScale, Math.abs(amount) || zoomModifier, IS_ZOOM_IN);
@@ -16114,7 +15894,7 @@ var flatworld =
 	   * @param {Number} amount how much map is zoomed out
 	   * */
 	  function zoomOut(amount) {
-	    var presentScale = this.getZoom();
+	    var presentScale = map.getZoom();
 	    var IS_ZOOM_IN = false;
 	
 	    amount = amount < 0 ? amount : -amount;
@@ -16179,6 +15959,7 @@ var flatworld =
 	   */
 	  function handleZoomEventMobile(e) {
 	    var pointers = e.pointers;
+	    var oldScale = map.getZoom();
 	    var coords = [{
 	      x: pointers[0].pageX,
 	      y: pointers[0].pageY
@@ -16214,11 +15995,11 @@ var flatworld =
 	
 	      if (difference.x + difference.y < changeX + changeY) {
 	        if (map.zoomIn()) {
-	          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom(), true));
+	          map.moveMap(_calculateCenterMoveCoordinates(oldScale, true));
 	        }
 	      } else {
 	        if (map.zoomOut()) {
-	          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom()));
+	          map.moveMap(_calculateCenterMoveCoordinates(oldScale));
 	        }
 	      }
 	
@@ -16289,7 +16070,7 @@ var flatworld =
 	exports.default = mapZoom;
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16299,7 +16080,7 @@ var flatworld =
 	});
 	exports.UIs = undefined;
 	
-	var _default = __webpack_require__(54);
+	var _default = __webpack_require__(53);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -16308,7 +16089,7 @@ var flatworld =
 	var UIs = exports.UIs = _default2.default;
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16317,18 +16098,18 @@ var flatworld =
 	  value: true
 	});
 	
-	var _default = __webpack_require__(55);
+	var _default = __webpack_require__(54);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  defaultUI: _default2.default
+	  UIDefault: _default2.default
 	};
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16345,11 +16126,11 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _layout = __webpack_require__(56);
+	var _layout = __webpack_require__(55);
 	
 	var templates = _interopRequireWildcard(_layout);
 	
-	var _arrows = __webpack_require__(78);
+	var _arrows = __webpack_require__(77);
 	
 	var _createHexagon = __webpack_require__(44);
 	
@@ -16405,44 +16186,23 @@ var flatworld =
 	    // style.setAttribute('media', 'only screen and (max-width : 1024px)')
 	
 	    this.FTW = FTW;
-	    this.modal = modal || document.getElementById('dialog_select');
+	    this.modal = modal;
 	    this.styles = styles;
 	  }
 	  /**
-	   * @method getTemplates
-	   * Required by the map/core/UI.js API
+	   * Required by the map.UI API
+	   *
+	   * @method showSelections
+	   * @param  {Object} objects     Objects that have been selected. See core.UI for more information
+	   * @param {Object} getDatas       See explanation in core.UI
 	   */
 	
 	
 	  _createClass(UIDefault, [{
-	    key: 'setFlatworld',
-	    value: function setFlatworld(FTW) {
-	      this.FTW = FTW;
-	    }
-	    /**
-	     * @method getTemplates
-	     * Required by the map/core/UI.js API
-	     */
-	
-	  }, {
-	    key: 'getTemplates',
-	    value: function getTemplates() {
-	      return templates;
-	    }
-	    /**
-	     * Required by the map.UI API
-	     *
-	     * @method showSelections
-	     * @param  {Object} objects     Objects that have been selected. See core.UI for more information
-	     * @param {Object} getDatas       See explanation in core.UI
-	     */
-	
-	  }, {
 	    key: 'showSelections',
-	    value: function showSelections(objects) {
+	    value: function showSelections(objects, getDatas /*, UIThemeOptions*/) {
 	      var _this = this;
 	
-	      var updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
 	      var cb = void 0;
 	
 	      /* We add the objects to be highlighted to the correct UI layer */
@@ -16450,23 +16210,16 @@ var flatworld =
 	
 	      if (objects && objects.length > 1) {
 	        cb = function cb() {
-	          _this.modal.innerHTML = templates.multiSelection({
-	            title: 'Objects',
-	            objects: objects
-	          });
-	
-	          _this.showModal(_this.modal, cssClasses);
-	
-	          _getElement('select').style.display = 'block';
+	          _this.showModal(objects, getDatas);
 	        };
 	      } else if (objects && objects.length === 1) {
 	        cb = function cb() {
 	          _this.highlightSelectedObject(objects[0]);
+	          _this.showModal(objects[0], getDatas);
 	        };
 	      } else {
 	        cb = function cb() {
-	          _this.FTW.removeUIObject(_this.FTW.layerTypes.movableType.id);
-	          updateCB();
+	          _this.unSelect();
 	          _core.log.debug('Error occured selecting the objects on this coordinates! Nothing found');
 	        };
 	      }
@@ -16479,26 +16232,16 @@ var flatworld =
 	     *
 	     * @method highlightSelectedObject
 	     * @param  {Object} object        Object that has been selected. See core.UI for more information
-	     * @param {Object} getDatas       See explanation in core.UI
 	     * @param {Object} options        Extra options. Like dropping a shadow etc.
 	     */
 	
 	  }, {
 	    key: 'highlightSelectedObject',
-	    value: function highlightSelectedObject(object, getDatas) {
-	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } };
+	    value: function highlightSelectedObject(object) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } };
 	      var shadow = options.shadow;
 	
-	      var objectDatas = getDatas.allData(object);
 	      var highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
-	
-	      this.modal.innerHTML = templates.singleSelection({
-	        title: 'Selected',
-	        object: {
-	          name: objectDatas.name
-	        }
-	      });
-	      this.showModal(this.modal, cssClasses);
 	
 	      highlightableObject.dropShadow({
 	        color: shadow.color,
@@ -16507,8 +16250,6 @@ var flatworld =
 	        angle: shadow.angle,
 	        blur: shadow.blur
 	      });
-	
-	      _getElement('select').style.display = 'block';
 	
 	      return highlightableObject;
 	    }
@@ -16544,6 +16285,18 @@ var flatworld =
 	        prev = coord;
 	      });
 	      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, arrows, UINAME);
+	    }
+	    /**
+	     * Simply clear all selected objects and close object selection menus etc.
+	     *
+	     * @method unSelect
+	     */
+	
+	  }, {
+	    key: 'unSelect',
+	    value: function unSelect() {
+	      this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
+	      this.FTW.drawOnNextTick();
 	    }
 	
 	    /*----------------------
@@ -16643,10 +16396,30 @@ var flatworld =
 	
 	  }, {
 	    key: 'showModal',
-	    value: function showModal(modalElem, cssClasses) {
-	      modalElem.classList.add(cssClasses.select);
-	      /* Would be HTML 5.1 standard, but that might be a long way
-	        this.modal.show();*/
+	    value: function showModal(data, getDatas) {
+	      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'select';
+	
+	      //const objectDatas = getDatas.allData(object);
+	      if (Array.isArray(data)) {
+	        data = data.map(function (o) {
+	          return getDatas.allData(o);
+	        });
+	        this.modal.innerHTML = templates.multiSelection({
+	          title: 'Objects',
+	          data: data
+	        });
+	      } else {
+	        this.modal.innerHTML = templates.singleSelection({
+	          title: 'Selected',
+	          object: {
+	            name: getDatas.allData(data).name
+	          }
+	        });
+	      }
+	
+	      _getElement('select').style.display = 'block';
+	
+	      this.modal.classList.add(cssClasses[type]);
 	    }
 	  }]);
 	
@@ -16677,12 +16450,10 @@ var flatworld =
 	/*---------------------
 	--------- API ---------
 	----------------------*/
-	exports.default = {
-	  init: UIDefault
-	};
+	exports.default = UIDefault;
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16692,11 +16463,11 @@ var flatworld =
 	});
 	exports.singleSelection = exports.multiSelection = undefined;
 	
-	var _multiSelection = __webpack_require__(57);
+	var _multiSelection = __webpack_require__(56);
 	
 	var _multiSelection2 = _interopRequireDefault(_multiSelection);
 	
-	var _singleSelection = __webpack_require__(77);
+	var _singleSelection = __webpack_require__(76);
 	
 	var _singleSelection2 = _interopRequireDefault(_singleSelection);
 	
@@ -16706,16 +16477,14 @@ var flatworld =
 	exports.singleSelection = _singleSelection2.default;
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(58);
+	var Handlebars = __webpack_require__(57);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-	
-	  return "  <li>\r\n    "
-	    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.typeData : stack1)) != null ? stack1.name : stack1), depth0))
+	    return "  <li>\r\n    "
+	    + container.escapeExpression(container.lambda((depth0 != null ? depth0.name : depth0), depth0))
 	    + "\r\n  </li>\r\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
@@ -16728,16 +16497,16 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Create a simple path alias to allow browserify to resolve
 	// the runtime on a supported path.
-	module.exports = __webpack_require__(59)['default'];
+	module.exports = __webpack_require__(58)['default'];
 
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16751,30 +16520,30 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _handlebarsBase = __webpack_require__(60);
+	var _handlebarsBase = __webpack_require__(59);
 	
 	var base = _interopRequireWildcard(_handlebarsBase);
 	
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 	
-	var _handlebarsSafeString = __webpack_require__(74);
+	var _handlebarsSafeString = __webpack_require__(73);
 	
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 	
-	var _handlebarsException = __webpack_require__(62);
+	var _handlebarsException = __webpack_require__(61);
 	
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 	
-	var _handlebarsUtils = __webpack_require__(61);
+	var _handlebarsUtils = __webpack_require__(60);
 	
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 	
-	var _handlebarsRuntime = __webpack_require__(75);
+	var _handlebarsRuntime = __webpack_require__(74);
 	
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 	
-	var _handlebarsNoConflict = __webpack_require__(76);
+	var _handlebarsNoConflict = __webpack_require__(75);
 	
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 	
@@ -16809,7 +16578,7 @@ var flatworld =
 
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16820,17 +16589,17 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(61);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _helpers = __webpack_require__(63);
+	var _helpers = __webpack_require__(62);
 	
-	var _decorators = __webpack_require__(71);
+	var _decorators = __webpack_require__(70);
 	
-	var _logger = __webpack_require__(73);
+	var _logger = __webpack_require__(72);
 	
 	var _logger2 = _interopRequireDefault(_logger);
 	
@@ -16919,7 +16688,7 @@ var flatworld =
 
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17049,7 +16818,7 @@ var flatworld =
 
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17095,7 +16864,7 @@ var flatworld =
 
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17106,31 +16875,31 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _helpersBlockHelperMissing = __webpack_require__(64);
+	var _helpersBlockHelperMissing = __webpack_require__(63);
 	
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 	
-	var _helpersEach = __webpack_require__(65);
+	var _helpersEach = __webpack_require__(64);
 	
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 	
-	var _helpersHelperMissing = __webpack_require__(66);
+	var _helpersHelperMissing = __webpack_require__(65);
 	
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 	
-	var _helpersIf = __webpack_require__(67);
+	var _helpersIf = __webpack_require__(66);
 	
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 	
-	var _helpersLog = __webpack_require__(68);
+	var _helpersLog = __webpack_require__(67);
 	
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 	
-	var _helpersLookup = __webpack_require__(69);
+	var _helpersLookup = __webpack_require__(68);
 	
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 	
-	var _helpersWith = __webpack_require__(70);
+	var _helpersWith = __webpack_require__(69);
 	
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 	
@@ -17147,14 +16916,14 @@ var flatworld =
 
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -17192,7 +16961,7 @@ var flatworld =
 
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17202,9 +16971,9 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(61);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17292,7 +17061,7 @@ var flatworld =
 
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17302,7 +17071,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(61);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17323,14 +17092,14 @@ var flatworld =
 
 
 /***/ },
-/* 67 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -17358,7 +17127,7 @@ var flatworld =
 
 
 /***/ },
-/* 68 */
+/* 67 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17390,7 +17159,7 @@ var flatworld =
 
 
 /***/ },
-/* 69 */
+/* 68 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17408,14 +17177,14 @@ var flatworld =
 
 
 /***/ },
-/* 70 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -17447,7 +17216,7 @@ var flatworld =
 
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17458,7 +17227,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _decoratorsInline = __webpack_require__(72);
+	var _decoratorsInline = __webpack_require__(71);
 	
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 	
@@ -17469,14 +17238,14 @@ var flatworld =
 
 
 /***/ },
-/* 72 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -17504,14 +17273,14 @@ var flatworld =
 
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -17557,7 +17326,7 @@ var flatworld =
 
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -17578,7 +17347,7 @@ var flatworld =
 
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17598,15 +17367,15 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(60);
 	
 	var Utils = _interopRequireWildcard(_utils);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(61);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _base = __webpack_require__(60);
+	var _base = __webpack_require__(59);
 	
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -17876,7 +17645,7 @@ var flatworld =
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -17903,10 +17672,10 @@ var flatworld =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(58);
+	var Handlebars = __webpack_require__(57);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=container.escapeExpression;
@@ -17919,7 +17688,7 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18179,7 +17948,7 @@ var flatworld =
 	exports.drawLine = drawLine;
 
 /***/ },
-/* 79 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18314,7 +18083,7 @@ var flatworld =
 	exports.Preload = Preload;
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18332,7 +18101,7 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _Objects = __webpack_require__(81);
+	var _Objects = __webpack_require__(80);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -18490,7 +18259,7 @@ var flatworld =
 	exports.hexaFactory = hexaFactory;
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

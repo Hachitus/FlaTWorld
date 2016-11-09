@@ -164,10 +164,10 @@ Thank you to browserstack for providing magnificient testing tools
 #Credits
 Copyright (c) 2016 Janne Hyytiä
 
-Graphics (for testing):
-* Realistic units from freeciv.
+Graphics:
+* Realistic units from freecivs amplio set (http://download.gna.org/freeciv/contrib/tilesets/amplio/Readme).
 
-Sounds (for testing):
+Sounds:
 * http://www.freesound.org/people/_hash_Hazard/sounds/127601/
 * http://www.freesound.org/people/Artmasterrich/sounds/345458/
 

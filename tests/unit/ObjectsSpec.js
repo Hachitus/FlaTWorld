@@ -19,7 +19,7 @@
 
     it('ObjectSpriteUnit', () => {
       const movableLayer = map._getMovableLayer();
-      const unit10_10 = movableLayer.children[1].children[0].children[0];
+      const unit10_10 = movableLayer.children[0].children[0].children[0];
 
       map.moveMap({ x: -50 });
       movableLayer.updateTransform();

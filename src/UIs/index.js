@@ -1,3 +1,3 @@
-import { default as defaultUI } from './default/';
+import { default as UIDefault } from './default/';
 
-export const UIs = defaultUI;
+export const UIs = UIDefault;

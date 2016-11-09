@@ -1,7 +1,7 @@
 /*---------------------
 ------- IMPORT --------
 ----------------------*/
-import { mapLog } from './index';
+import { log as mapLog } from './index';
 
 /*---------------------
 -------- PUBLIC -------

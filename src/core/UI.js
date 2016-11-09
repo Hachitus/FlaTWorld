@@ -40,7 +40,8 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
   validateUITheme([
     'highlightSelectedObject',
     'showSelections',
-    'showUnitMovement'
+    'showUnitMovement',
+    'unSelect'
   ], UITheme);
 
   /**
@@ -69,18 +70,9 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
       objects = filters.filterObjects(objects);
     }
 
-    let returnable;
-
     objects = Array.isArray(objects) ? objects : [objects];
 
-    if (objects.length === 1) {
-      returnable = UITheme.highlightSelectedObject(objects[0], getDatas, UIThemeOptions);
-    } else if (objects.length > 1) {
-      returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
-    } else {
-      // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-      returnable = UITheme.showSelections([]);
-    }
+    const returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
 
     givenMap.drawOnNextTick();
 

@@ -22,7 +22,7 @@
         { filters });
 
       expect(returnedObjects.length).toBe(4);
-      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[0].children[0].children[0]);
+      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[1].children[0].children[0]);
     });
     it('getObjectsUnderArea - objects', () => {
       const filters = new MapDataManipulator([{
@@ -41,7 +41,7 @@
         { filters });
 
       expect(returnedObjects.length).toBe(2);
-      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[1].children[0].children[0]);
+      expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[0].children[0].children[0]);
     });
     it('addLayer with subcontainers and move it', () => {
       const renderer = new PIXI.WebGLRenderer();
@@ -67,19 +67,19 @@
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getMapCoordinates().x).toBe(1000);
+      expect(map.getMapCoordinates().x).toBe(-1000);
       expect(map._getMovableLayer().children[0].x).toBe(0);
       expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
       expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
 
       expect(
-        map.getMovableLayer().children[0].getSubcontainerConfigs().width)
+        map._getMovableLayer().children[0].getSubcontainerConfigs().width)
       .toBe(
-        map.getMovableLayer().children[0].children[0].x);
+        map._getMovableLayer().children[0].children[0].x);
 
       map.moveMap({ x: 1000, y: 1000 });
 
-      expect(map.getMapCoordinates().x).toBe(2000);
+      expect(map.getMapCoordinates().x).toBe(-2000);
       expect(map._getMovableLayer().children[0].x).toBe(0);
       expect(map._getMovableLayer().children[0].children[0].x).toBe(50);
       expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);

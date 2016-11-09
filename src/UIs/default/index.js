@@ -1,5 +1,5 @@
-import { default as defaultUI } from './default';
+import { default as UIDefault } from './default';
 
 export default {
-  defaultUI
+  UIDefault
 };

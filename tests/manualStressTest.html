@@ -37,7 +37,7 @@
       mapsize (pixels):
       <input id="hexaTiles" value="15500" type="text">,
       theme:
-      <input id="UItheme" value="defaultUI" type="text">,
+      <input id="UItheme" value="UIDefault" type="text">,
       graphics theme:
       <select id="graphicsTheme">
         <option value="realistic">Realistic</option>
@@ -66,10 +66,16 @@
     MODAL WINDOW
   </div>
 
+  <script src="/lib/touch-emulator/touch-emulator.js"></script>
+  <script>
+    if (window.location.search.includes('touchEmulation=true')) {
+      TouchEmulator();
+    }
+  </script>
   <script src="/dist/flatworld.js"></script>
   <script src="/data/gameData.js"></script>
   <script src="/data/graphicData.js"></script>
-  <script src="/data/typeDataHexagons.js"></script>
+  <script src="/data/typeData.js"></script>
   <script src="/manual/stressTest.es6.js"></script>
 </body>
 </html>

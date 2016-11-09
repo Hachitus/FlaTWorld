@@ -1,7 +1,7 @@
 (function UISpec() {
   describe('UI and UI themes => ', function () {
     const UI = window.flatworld.UI;
-    var UITheme, passedArguments, returnedArguments;
+    var UITheme, passedArguments, returnedArguments, mockedMap;
 
     beforeEach(function () {
       UITheme = {
@@ -31,10 +31,13 @@
         2,
         3
       ];
+      mockedMap = {
+        drawOnNextTick: function() {}
+      };
     });
 
     it('everything defined', function () {
-      let ui = UI(UITheme, {});
+      let ui = UI(UITheme, mockedMap);
 
       expect(ui).toBeDefined();
       expect(UITheme).toBeDefined();
@@ -42,7 +45,7 @@
 
     it('showSelections', function () {
       var result;
-      let ui = UI(UITheme, {});
+      let ui = UI(UITheme, mockedMap);
 
       result = ui.showSelections.apply(ui, passedArguments);
 
@@ -60,7 +63,7 @@
       var point1 = new PIXI.Point(10,10);
       var point2 = new PIXI.Point(100,100);
       var result;
-      let ui = UI(UITheme, {});
+      let ui = UI(UITheme, mockedMap);
 
       result = ui.showUnitMovement([point1, point2]);
 
@@ -68,7 +71,7 @@
     });
 
     it('add methods', function () {
-      let ui = UI(UITheme, {});
+      let ui = UI(UITheme, mockedMap);
 
       ui.testFunc = function () {
         return 55;

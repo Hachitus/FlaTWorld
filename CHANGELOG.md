@@ -1,3 +1,15 @@
+<a name="0.6.1"></a>
+# 0.6.1 Tiny milestone for UI (2016-11-09)
+## Possible breaking changes
+* Changed UI.showSelections-method logic, not API.
+
+## Bug fixes
+* Pinch was moving the map when zooming (github: #29)
+
+## Others
+* Added some methods regarding UIs: flatworld.initUI, UI.unSelect
+* Added validation to UI.js for themes.
+
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
 ## Possible breaking changes

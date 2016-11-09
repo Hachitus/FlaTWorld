@@ -40,7 +40,7 @@
     it('getViewportCoordinates', function () {
       var calculatedViewportArea;
 
-      flatworld.extensions.mapMovement._testObject.setupOffsetSize(viewportArea);
+      flatworld.extensions.mapMovement._testObject.setOffsetSize(viewportArea);
       calculatedViewportArea = flatworld.extensions.mapMovement._testObject.getViewportWithOffset(viewportArea, {
         scale: ZOOM
       });

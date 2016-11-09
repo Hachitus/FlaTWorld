@@ -6,7 +6,7 @@ const { resize } = utils;
 -------- PUBLIC ---------
 -----------------------*/
 /**
- * Simple fog of war works with circles around objects
+ * Simple fog of war works with hexagon sized holes around objects
  *
  * @namespace flatworld.extensions.fogOfWars
  * @class pixelizedMiniMap
@@ -60,7 +60,9 @@ const simpleFogOfWar = (function() {
     mapRenderer = this.mapInstance.getRenderer();
 
     maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-    maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
+    // We create a particle container, because it's faster for this purpose. We don't need any
+    // fancy special effects for the container currently, so particle container works.
+    maskMovableContainer = new PIXI.ParticleContainer();
     maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
     activateFogOfWar(this.mapInstance, params.cb, params.filter);
@@ -72,6 +74,7 @@ const simpleFogOfWar = (function() {
     color = options.color || 0x222222;
     FoWCB = cb;
     const filter = filterCreator();
+    // Get layers with filters. So it filters layers and objects
     objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(o => o.getObjects(filter));
     objectsForFoW = utils.general.flatten2Levels(objectsForFoW);
 
@@ -100,9 +103,12 @@ const simpleFogOfWar = (function() {
   }
 
   function refreshFoW() {
+/*    var t0 = performance.now();*/
     mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
 
     maskSprite.texture = renderTexture;
+/*    var t1 = performance.now();
+    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")*/
   }
 
   function moveFoW() {

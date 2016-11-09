@@ -32,7 +32,7 @@ const mapMovement = (function(debug = false) {
       getViewportWithOffset,
       testRectangleIntersect,
       _setMap,
-      setupOffsetSize
+      setOffsetSize
     }
   };
   /**
@@ -97,7 +97,7 @@ const mapMovement = (function(debug = false) {
    */
   function addAll(mapInstance) {
     viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
-    offsetSize = setupOffsetSize(viewportArea);
+    setOffsetSize(viewportArea);
 
     mapInstance.getPrimaryLayers().forEach(layer => {
       layer.getSubcontainers().forEach(subcontainer => {
@@ -149,11 +149,11 @@ const mapMovement = (function(debug = false) {
       check();
     }
     function resizeCb() {
-      offsetSize = setupOffsetSize(viewportArea);
+      setOffsetSize(viewportArea);
       check();
     }
     function zoomCb() {
-      offsetSize = setupOffsetSize(viewportArea);
+      setOffsetSize(viewportArea);
       check();
     }
   }
@@ -254,11 +254,11 @@ const mapMovement = (function(debug = false) {
    *
    * @private
    * @static
-   * @method setupOffsetSize
+   * @method setOffsetSize
    * @return {totalViewportArea}              The total viewportArea
    */
-  function setupOffsetSize(viewportArea) {
-    return calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+  function setOffsetSize(viewportArea) {
+    offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
   }
   /**
    * forms the total viewport parameters based on the given ones.

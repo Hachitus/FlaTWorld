@@ -105,7 +105,7 @@ const mapZoom = (function() {
    * @param {Number} amount how much map is zoomed in
    * */
   function zoomIn(amount) {
-    const presentScale = this.getZoom();
+    const presentScale = map.getZoom();
     const IS_ZOOM_IN = true;
 
     return _zoom(this, presentScale, Math.abs(amount) || zoomModifier, IS_ZOOM_IN);
@@ -117,7 +117,7 @@ const mapZoom = (function() {
    * @param {Number} amount how much map is zoomed out
    * */
   function zoomOut(amount) {
-    const presentScale = this.getZoom();
+    const presentScale = map.getZoom();
     const IS_ZOOM_IN = false;
 
     amount = amount < 0 ? amount : -amount;
@@ -182,6 +182,7 @@ const mapZoom = (function() {
    */
   function handleZoomEventMobile(e) {
     const pointers = e.pointers;
+    const oldScale = map.getZoom();
     const coords = [{
       x: pointers[0].pageX,
       y: pointers[0].pageY
@@ -216,11 +217,11 @@ const mapZoom = (function() {
 
       if (difference.x + difference.y < changeX + changeY) {
         if (map.zoomIn()) {
-          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom(), true));
+          map.moveMap(_calculateCenterMoveCoordinates(oldScale, true));
         }
       } else {
         if (map.zoomOut()) {
-          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom()));
+          map.moveMap(_calculateCenterMoveCoordinates(oldScale));
         }
       }
 
