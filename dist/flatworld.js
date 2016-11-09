@@ -1001,7 +1001,7 @@ var flatworld =
 	
 	var constants = {
 	  ZERO_COORDINATES: new PIXI.Point(0, 0),
-	  VERSION: '0.6.0'
+	  VERSION: '0.6.1'
 	};
 	
 	/*---------------------
@@ -5107,7 +5107,7 @@ var flatworld =
 	   */
 	  function add(type, cb, baseUrl) {
 	    if (APIs[type]) {
-	      _index.mapLog.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
+	      _index.log.debug('API endpoint already exists and has been defined ' + type + ', ' + baseUrl + ', ' + JSON.stringify(cb));
 	    }
 	
 	    APIs[type] = {
@@ -5123,7 +5123,7 @@ var flatworld =
 	   */
 	  function remove(type) {
 	    if (!APIs[type]) {
-	      _index.mapLog.debug('API endpoint not found for removing!');
+	      _index.log.debug('API endpoint not found for removing!');
 	    }
 	
 	    delete APIs[type];
@@ -5138,7 +5138,7 @@ var flatworld =
 	   */
 	  function update(type, cb) {
 	    if (!APIs[type] || !APIs[type].cbs) {
-	      _index.mapLog.debug('API endpoint not found for updating!');
+	      _index.log.debug('API endpoint not found for updating!');
 	    }
 	
 	    APIs[type].cbs.push(cb);
@@ -5158,7 +5158,7 @@ var flatworld =
 	   */
 	  function _doFetch(fetchType, type, params) {
 	    if (!APIs[type]) {
-	      _index.mapLog.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
+	      _index.log.error('API endpoint for fetch not found: ' + fetchType + '/' + type + ', ' + (params ? params[0] : 'no params'));
 	      return;
 	    }
 	
@@ -5174,9 +5174,9 @@ var flatworld =
 	    }).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {
-	      _index.mapLog.debug('parsed json', json);
+	      _index.log.debug('parsed json', json);
 	    }).catch(function (ev) {
-	      _index.mapLog.debug('mapAPI http request failed', ev);
+	      _index.log.debug('mapAPI http request failed', ev);
 	    });
 	  }
 	  /**
@@ -10290,7 +10290,7 @@ var flatworld =
 	    throw new Error('UI-module requires UITheme and map object, This is a singleton class, so it\'s possible it should have been already called earlier');
 	  }
 	
-	  validateUITheme(['highlightSelectedObject', 'showSelections', 'showUnitMovement'], UITheme);
+	  validateUITheme(['highlightSelectedObject', 'showSelections', 'showUnitMovement', 'unSelect'], UITheme);
 	
 	  /**
 	   * Responsible for showing what objects have been selected for inspection or if the player selects only one object, we hightlihgt it.
@@ -10322,18 +10322,9 @@ var flatworld =
 	      objects = filters.filterObjects(objects);
 	    }
 	
-	    var returnable = void 0;
-	
 	    objects = Array.isArray(objects) ? objects : [objects];
 	
-	    if (objects.length === 1) {
-	      returnable = UITheme.highlightSelectedObject(objects[0], getDatas, UIThemeOptions);
-	    } else if (objects.length > 1) {
-	      returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
-	    } else {
-	      // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-	      returnable = UITheme.showSelections([]);
-	    }
+	    var returnable = UITheme.showSelections(objects, getDatas, UIThemeOptions);
 	
 	    givenMap.drawOnNextTick();
 	
@@ -10590,7 +10581,9 @@ var flatworld =
 	    if (!caches['zoom']) {
 	      caches['zoom'] = {
 	        on: function on(cb) {
-	          var pinch = new Hammer.Pinch();
+	          var pinch = new Hammer.Pinch({
+	            threshold: 0.08
+	          });
 	          activeCB = cb;
 	
 	          hammer.add(pinch);
@@ -13771,7 +13764,7 @@ var flatworld =
 	-------- PUBLIC ---------
 	-----------------------*/
 	/**
-	 * Simple fog of war works with circles around objects
+	 * Simple fog of war works with hexagon sized holes around objects
 	 *
 	 * @namespace flatworld.extensions.fogOfWars
 	 * @class pixelizedMiniMap
@@ -13828,7 +13821,9 @@ var flatworld =
 	    mapRenderer = this.mapInstance.getRenderer();
 	
 	    maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-	    maskMovableContainer = this.mapInstance.createSpecialLayer('FoWMovableMaskLayer');
+	    // We create a particle container, because it's faster for this purpose. We don't need any
+	    // fancy special effects for the container currently, so particle container works.
+	    maskMovableContainer = new PIXI.ParticleContainer();
 	    maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 	
 	    activateFogOfWar(this.mapInstance, params.cb, params.filter);
@@ -13842,6 +13837,7 @@ var flatworld =
 	    color = options.color || 0x222222;
 	    FoWCB = cb;
 	    var filter = filterCreator();
+	    // Get layers with filters. So it filters layers and objects
 	    objectsForFoW = mapInstance.getPrimaryLayers({ filters: filter }).map(function (o) {
 	      return o.getObjects(filter);
 	    });
@@ -13874,9 +13870,12 @@ var flatworld =
 	  }
 	
 	  function refreshFoW() {
+	    /*    var t0 = performance.now();*/
 	    mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
 	
 	    maskSprite.texture = renderTexture;
+	    /*    var t1 = performance.now();
+	        console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")*/
 	  }
 	
 	  function moveFoW() {
@@ -14039,9 +14038,13 @@ var flatworld =
 	  property: 'name',
 	  value: 'terrainLayer'
 	});
-	/* This must be changed to outside the module */
+	/* @todo This must be changed to outside the module */
 	var weight = function weight() {
 	  return 0;
+	};
+	/* @todo This must be changed to game logic too! */
+	var getObjectData = function getObjectData(object) {
+	  return object.data.typeData;
 	};
 	var FTW = void 0,
 	    ui = void 0;
@@ -14087,7 +14090,7 @@ var flatworld =
 	  var globalCoords = _core.utils.mouse.eventData.getHAMMERPointerCoords(e);
 	  var getData = {
 	    allData: function allData(object) {
-	      return object.data.typeData;
+	      return getObjectData(object);
 	    }
 	  };
 	  _core.mapStates.objectSelect();
@@ -14355,6 +14358,11 @@ var flatworld =
 	        var next = { x: x, y: y };
 	        var weight = weightFn(next, curr);
 	
+	        if (debug && (!isInteger(weight) || weight < 0)) {
+	          console.error(next, curr); // eslint-disable-line no-console
+	          throw new Error('weightFn didn\'t return non-negative integer: ' + weight);
+	        }
+	
 	        if (weight < 0 || curr.time + weight > maxTime) {
 	          continue;
 	        }
@@ -14392,7 +14400,11 @@ var flatworld =
 	    function isVisited(cell) {
 	      // if width and height are chosen right then the key should not be negative
 	      var key = (cell.x - xStart + width) * height + (cell.y - yStart);
+	
 	      if (key < 0) {
+	        if (debug) {
+	          console.error(cell); // eslint-disable-line no-console
+	        }
 	        throw new Error('negative key: ' + key);
 	      }
 	
@@ -14804,6 +14816,13 @@ var flatworld =
 	
 	  return gridArray;
 	}
+	/**
+	 * This converts pixel-based coordinates to hexagon indexes. Uses axial coordinate system
+	 * (http://www.redblobgames.com/grids/hexagons/)
+	 * @param  {Object} coordinates           Coordinates with x and y
+	 * @param  {Object} options.startingPoint Starting point coordinates with x and y
+	 * @return {Object}                       Index coordinates with x and y
+	 */
 	function coordinatesToIndexes(coordinates) {
 	  var _ref7 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
 	      _ref7$startingPoint = _ref7.startingPoint,
@@ -14818,6 +14837,13 @@ var flatworld =
 	
 	  return indexes;
 	}
+	/**
+	 * This converts hexagon indexes to pixel-based coordinates. Uses axial coordinate system
+	 * (http://www.redblobgames.com/grids/hexagons/)
+	 * @param  {Object} indexes               Coordinates with x and y
+	 * @param  {Object} options.startingPoint Starting point coordinates with x and y
+	 * @return {Object}                       Pixel coordinates with x and y
+	 */
 	function indexesToCoordinates(indexes) {
 	  var _ref8 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
 	      _ref8$startingPoint = _ref8.startingPoint,
@@ -15032,7 +15058,7 @@ var flatworld =
 	      getViewportWithOffset: getViewportWithOffset,
 	      testRectangleIntersect: testRectangleIntersect,
 	      _setMap: _setMap,
-	      setupOffsetSize: setupOffsetSize
+	      setOffsetSize: setOffsetSize
 	    }
 	  };
 	  /**
@@ -15097,7 +15123,7 @@ var flatworld =
 	   */
 	  function addAll(mapInstance) {
 	    viewportArea = setupViewportArea(true, VIEWPORT_OFFSET);
-	    offsetSize = setupOffsetSize(viewportArea);
+	    setOffsetSize(viewportArea);
 	
 	    mapInstance.getPrimaryLayers().forEach(function (layer) {
 	      layer.getSubcontainers().forEach(function (subcontainer) {
@@ -15149,11 +15175,11 @@ var flatworld =
 	      check();
 	    }
 	    function resizeCb() {
-	      offsetSize = setupOffsetSize(viewportArea);
+	      setOffsetSize(viewportArea);
 	      check();
 	    }
 	    function zoomCb() {
-	      offsetSize = setupOffsetSize(viewportArea);
+	      setOffsetSize(viewportArea);
 	      check();
 	    }
 	  }
@@ -15257,11 +15283,11 @@ var flatworld =
 	   *
 	   * @private
 	   * @static
-	   * @method setupOffsetSize
+	   * @method setOffsetSize
 	   * @return {totalViewportArea}              The total viewportArea
 	   */
-	  function setupOffsetSize(viewportArea) {
-	    return calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
+	  function setOffsetSize(viewportArea) {
+	    offsetSize = calculateOffset(viewportArea, { zoom: mapInstance.getZoom() });
 	  }
 	  /**
 	   * forms the total viewport parameters based on the given ones.
@@ -15856,7 +15882,7 @@ var flatworld =
 	   * @param {Number} amount how much map is zoomed in
 	   * */
 	  function zoomIn(amount) {
-	    var presentScale = this.getZoom();
+	    var presentScale = map.getZoom();
 	    var IS_ZOOM_IN = true;
 	
 	    return _zoom(this, presentScale, Math.abs(amount) || zoomModifier, IS_ZOOM_IN);
@@ -15868,7 +15894,7 @@ var flatworld =
 	   * @param {Number} amount how much map is zoomed out
 	   * */
 	  function zoomOut(amount) {
-	    var presentScale = this.getZoom();
+	    var presentScale = map.getZoom();
 	    var IS_ZOOM_IN = false;
 	
 	    amount = amount < 0 ? amount : -amount;
@@ -15933,6 +15959,7 @@ var flatworld =
 	   */
 	  function handleZoomEventMobile(e) {
 	    var pointers = e.pointers;
+	    var oldScale = map.getZoom();
 	    var coords = [{
 	      x: pointers[0].pageX,
 	      y: pointers[0].pageY
@@ -15968,11 +15995,11 @@ var flatworld =
 	
 	      if (difference.x + difference.y < changeX + changeY) {
 	        if (map.zoomIn()) {
-	          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom(), true));
+	          map.moveMap(_calculateCenterMoveCoordinates(oldScale, true));
 	        }
 	      } else {
 	        if (map.zoomOut()) {
-	          map.moveMap(_calculateCenterMoveCoordinates(map.getZoom()));
+	          map.moveMap(_calculateCenterMoveCoordinates(oldScale));
 	        }
 	      }
 	
@@ -16078,7 +16105,7 @@ var flatworld =
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  defaultUI: _default2.default
+	  UIDefault: _default2.default
 	};
 
 /***/ },
@@ -16159,44 +16186,23 @@ var flatworld =
 	    // style.setAttribute('media', 'only screen and (max-width : 1024px)')
 	
 	    this.FTW = FTW;
-	    this.modal = modal || document.getElementById('dialog_select');
+	    this.modal = modal;
 	    this.styles = styles;
 	  }
 	  /**
-	   * @method getTemplates
-	   * Required by the map/core/UI.js API
+	   * Required by the map.UI API
+	   *
+	   * @method showSelections
+	   * @param  {Object} objects     Objects that have been selected. See core.UI for more information
+	   * @param {Object} getDatas       See explanation in core.UI
 	   */
 	
 	
 	  _createClass(UIDefault, [{
-	    key: 'setFlatworld',
-	    value: function setFlatworld(FTW) {
-	      this.FTW = FTW;
-	    }
-	    /**
-	     * @method getTemplates
-	     * Required by the map/core/UI.js API
-	     */
-	
-	  }, {
-	    key: 'getTemplates',
-	    value: function getTemplates() {
-	      return templates;
-	    }
-	    /**
-	     * Required by the map.UI API
-	     *
-	     * @method showSelections
-	     * @param  {Object} objects     Objects that have been selected. See core.UI for more information
-	     * @param {Object} getDatas       See explanation in core.UI
-	     */
-	
-	  }, {
 	    key: 'showSelections',
-	    value: function showSelections(objects) {
+	    value: function showSelections(objects, getDatas /*, UIThemeOptions*/) {
 	      var _this = this;
 	
-	      var updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
 	      var cb = void 0;
 	
 	      /* We add the objects to be highlighted to the correct UI layer */
@@ -16204,23 +16210,16 @@ var flatworld =
 	
 	      if (objects && objects.length > 1) {
 	        cb = function cb() {
-	          _this.modal.innerHTML = templates.multiSelection({
-	            title: 'Objects',
-	            objects: objects
-	          });
-	
-	          _this.showModal(_this.modal, cssClasses);
-	
-	          _getElement('select').style.display = 'block';
+	          _this.showModal(objects, getDatas);
 	        };
 	      } else if (objects && objects.length === 1) {
 	        cb = function cb() {
 	          _this.highlightSelectedObject(objects[0]);
+	          _this.showModal(objects[0], getDatas);
 	        };
 	      } else {
 	        cb = function cb() {
-	          _this.FTW.removeUIObject(_this.FTW.layerTypes.movableType.id);
-	          updateCB();
+	          _this.unSelect();
 	          _core.log.debug('Error occured selecting the objects on this coordinates! Nothing found');
 	        };
 	      }
@@ -16233,26 +16232,16 @@ var flatworld =
 	     *
 	     * @method highlightSelectedObject
 	     * @param  {Object} object        Object that has been selected. See core.UI for more information
-	     * @param {Object} getDatas       See explanation in core.UI
 	     * @param {Object} options        Extra options. Like dropping a shadow etc.
 	     */
 	
 	  }, {
 	    key: 'highlightSelectedObject',
-	    value: function highlightSelectedObject(object, getDatas) {
-	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } };
+	    value: function highlightSelectedObject(object) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } };
 	      var shadow = options.shadow;
 	
-	      var objectDatas = getDatas.allData(object);
 	      var highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
-	
-	      this.modal.innerHTML = templates.singleSelection({
-	        title: 'Selected',
-	        object: {
-	          name: objectDatas.name
-	        }
-	      });
-	      this.showModal(this.modal, cssClasses);
 	
 	      highlightableObject.dropShadow({
 	        color: shadow.color,
@@ -16261,8 +16250,6 @@ var flatworld =
 	        angle: shadow.angle,
 	        blur: shadow.blur
 	      });
-	
-	      _getElement('select').style.display = 'block';
 	
 	      return highlightableObject;
 	    }
@@ -16298,6 +16285,18 @@ var flatworld =
 	        prev = coord;
 	      });
 	      this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, arrows, UINAME);
+	    }
+	    /**
+	     * Simply clear all selected objects and close object selection menus etc.
+	     *
+	     * @method unSelect
+	     */
+	
+	  }, {
+	    key: 'unSelect',
+	    value: function unSelect() {
+	      this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
+	      this.FTW.drawOnNextTick();
 	    }
 	
 	    /*----------------------
@@ -16397,10 +16396,30 @@ var flatworld =
 	
 	  }, {
 	    key: 'showModal',
-	    value: function showModal(modalElem, cssClasses) {
-	      modalElem.classList.add(cssClasses.select);
-	      /* Would be HTML 5.1 standard, but that might be a long way
-	        this.modal.show();*/
+	    value: function showModal(data, getDatas) {
+	      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'select';
+	
+	      //const objectDatas = getDatas.allData(object);
+	      if (Array.isArray(data)) {
+	        data = data.map(function (o) {
+	          return getDatas.allData(o);
+	        });
+	        this.modal.innerHTML = templates.multiSelection({
+	          title: 'Objects',
+	          data: data
+	        });
+	      } else {
+	        this.modal.innerHTML = templates.singleSelection({
+	          title: 'Selected',
+	          object: {
+	            name: getDatas.allData(data).name
+	          }
+	        });
+	      }
+	
+	      _getElement('select').style.display = 'block';
+	
+	      this.modal.classList.add(cssClasses[type]);
 	    }
 	  }]);
 	
@@ -16431,9 +16450,7 @@ var flatworld =
 	/*---------------------
 	--------- API ---------
 	----------------------*/
-	exports.default = {
-	  init: UIDefault
-	};
+	exports.default = UIDefault;
 
 /***/ },
 /* 55 */
@@ -16466,10 +16483,8 @@ var flatworld =
 	var Handlebars = __webpack_require__(57);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-	    var stack1;
-	
-	  return "  <li>\r\n    "
-	    + container.escapeExpression(container.lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.data : depth0)) != null ? stack1.typeData : stack1)) != null ? stack1.name : stack1), depth0))
+	    return "  <li>\r\n    "
+	    + container.escapeExpression(container.lambda((depth0 != null ? depth0.name : depth0), depth0))
 	    + "\r\n  </li>\r\n";
 	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
