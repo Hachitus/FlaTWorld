@@ -66,6 +66,12 @@
     MODAL WINDOW
   </div>
 
+  <script src="/lib/touch-emulator/touch-emulator.js"></script>
+  <script>
+    if (window.location.search.includes('touchEmulation=true')) {
+      TouchEmulator();
+    }
+  </script>
   <script src="/dist/flatworld.js"></script>
   <script src="/data/gameData.js"></script>
   <script src="/data/graphicData.js"></script>
