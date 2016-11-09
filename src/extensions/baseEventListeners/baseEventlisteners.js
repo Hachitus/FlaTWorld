@@ -130,7 +130,9 @@ const baseEventlisteners = (function () {
     if (!caches['zoom']) {
       caches['zoom'] = {
         on: (cb) => {
-          const pinch = new Hammer.Pinch();
+          const pinch = new Hammer.Pinch({
+            threshold: 0.08
+          });
           activeCB = cb;
 
           hammer.add(pinch);
