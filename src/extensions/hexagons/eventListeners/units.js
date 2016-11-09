@@ -21,8 +21,12 @@ const terrainLayerFilter = new MapDataManipulator({
   property: 'name',
   value: 'terrainLayer'
 });
-/* This must be changed to outside the module */
+/* @todo This must be changed to outside the module */
 let weight = () => 0;
+/* @todo This must be changed to game logic too! */
+const getObjectData = (object) => {
+  return object.data.typeData;
+}
 let FTW, ui;
 
 /*---------------------
@@ -66,7 +70,7 @@ function _tapListener(e) {
   const globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
   const getData = {
     allData(object) {
-      return object.data.typeData;
+      return getObjectData(object);
     }
   };
   mapStates.objectSelect();

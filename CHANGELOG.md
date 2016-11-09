@@ -1,3 +1,7 @@
+<a name="0.7.0"></a>
+# 0.7.0 Pathfinding (2016-11-30)
+## Possible breaking changes
+* UI.showSelections does not pre-select and do actions based on how many objects were selected. It acts more dumb and just passes the data to the UI theme.
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
 ## Possible breaking changes

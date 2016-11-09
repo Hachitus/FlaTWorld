@@ -289,7 +289,7 @@
         throw e;
       }
 
-      var dialog_selection = document.getElementById('selectionDialog');
+      var dialog_selection = document.getElementById('dialog_select');
       var initializedUITheme = new UITheme(dialog_selection, map, { elements: {
           select: '#dialog_select'
         }});

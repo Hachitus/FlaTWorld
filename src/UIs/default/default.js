@@ -54,22 +54,8 @@ class UIDefault {
     // style.setAttribute('media', 'only screen and (max-width : 1024px)')
 
     this.FTW = FTW;
-    this.modal = modal || document.getElementById('dialog_select');
+    this.modal = modal;
     this.styles = styles;
-  }
-  /**
-   * @method getTemplates
-   * Required by the map/core/UI.js API
-   */
-  setFlatworld(FTW) {
-    this.FTW = FTW;
-  }
-  /**
-   * @method getTemplates
-   * Required by the map/core/UI.js API
-   */
-  getTemplates() {
-    return templates;
   }
   /**
    * Required by the map.UI API
@@ -78,8 +64,7 @@ class UIDefault {
    * @param  {Object} objects     Objects that have been selected. See core.UI for more information
    * @param {Object} getDatas       See explanation in core.UI
    */
-  showSelections(objects) {
-    const updateCB = this.FTW.drawOnNextTick.bind(this.FTW);
+  showSelections(objects, getDatas/*, UIThemeOptions*/) {
     let cb;
 
     /* We add the objects to be highlighted to the correct UI layer */
@@ -87,23 +72,16 @@ class UIDefault {
 
     if (objects && objects.length > 1) {
       cb = () => {
-        this.modal.innerHTML = templates.multiSelection({
-          title: 'Objects',
-          objects
-        });
-
-        this.showModal(this.modal, cssClasses);
-
-        _getElement('select').style.display = 'block';
+        this.showModal(objects, getDatas);
       };
     } else if (objects && objects.length === 1) {
       cb = () => {
         this.highlightSelectedObject(objects[0]);
+        this.showModal(objects[0], getDatas);
       };
     } else {
       cb = () => {
-        this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
-        updateCB();
+        this.unSelect();
         mapLog.debug('Error occured selecting the objects on this coordinates! Nothing found');
       };
     }
@@ -116,21 +94,11 @@ class UIDefault {
    *
    * @method highlightSelectedObject
    * @param  {Object} object        Object that has been selected. See core.UI for more information
-   * @param {Object} getDatas       See explanation in core.UI
    * @param {Object} options        Extra options. Like dropping a shadow etc.
    */
-  highlightSelectedObject(object, getDatas, options = { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } }) {
+  highlightSelectedObject(object, options = { shadow: { color: '0x0000', distance: 5, alpha: 0.55, angle: 45, blur: 5 } }) {
     const { shadow } = options;
-    const objectDatas = getDatas.allData(object);
     const highlightableObject = this._highlightSelectedObject(object, this.FTW.getRenderer());
-
-    this.modal.innerHTML = templates.singleSelection({
-      title: 'Selected',
-      object: {
-        name: objectDatas.name
-      }
-    });
-    this.showModal(this.modal, cssClasses);
 
     highlightableObject.dropShadow({
       color: shadow.color,
@@ -139,8 +107,6 @@ class UIDefault {
       angle: shadow.angle,
       blur: shadow.blur
     });
-
-    _getElement('select').style.display = 'block';
 
     return highlightableObject;
   }
@@ -171,6 +137,15 @@ class UIDefault {
       prev = coord;
     });
     this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, arrows, UINAME);
+  }
+  /**
+   * Simply clear all selected objects and close object selection menus etc.
+   *
+   * @method unSelect
+   */
+  unSelect() {
+    this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
+    this.FTW.drawOnNextTick();
   }
 
   /*----------------------
@@ -251,10 +226,26 @@ class UIDefault {
    * @param {Object} cssClasses
    * @todo make sure / check, that modalElem.classList.add gets added only once
    */
-  showModal(modalElem, cssClasses) {
-    modalElem.classList.add(cssClasses.select);
-    /* Would be HTML 5.1 standard, but that might be a long way
-      this.modal.show();*/
+  showModal(data, getDatas, type = 'select') {
+    //const objectDatas = getDatas.allData(object);
+    if(Array.isArray(data)) {
+      data = data.map(o => getDatas.allData(o));
+      this.modal.innerHTML = templates.multiSelection({
+        title: 'Objects',
+        data
+      });
+    } else {
+      this.modal.innerHTML = templates.singleSelection({
+        title: 'Selected',
+        object: {
+          name: getDatas.allData(data).name
+        }
+      });            
+    }
+
+    _getElement('select').style.display = 'block';
+
+    this.modal.classList.add(cssClasses[type]);
   }
 }
 
