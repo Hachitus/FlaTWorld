@@ -88,11 +88,7 @@ class ObjectHexaUnit extends ObjectSpriteUnit {
     return this.coordinates.center;
   }
 }
-/*-----------------------
---------- PRIVATE -------
------------------------*/
 /**
- * @private
  * @static
  * @method calculateHexa
  * @param {Number} radius       Hexagon radius
@@ -120,6 +116,9 @@ function calculateHexa(radius) {
     return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
   };
 }
+/*-----------------------
+--------- PRIVATE -------
+-----------------------*/
 /**
  * @private
  * @static
@@ -166,6 +165,7 @@ function bugFixedContains (x, y)
 --------- API ---------
 ----------------------*/
 export {
+  calculateHexa,
   ObjectHexaTerrain,
   ObjectHexaUnit
 };
