@@ -39,8 +39,8 @@ class ObjectHexaTerrain extends ObjectSpriteTerrain {
   getCenterCoordinates() {
     if (!this.coordinates.center) {
       this.coordinates.center = {
-        x: this.WIDTH / 2,
-        y: this.HEIGHT / 2
+        x: this.HEXA_WIDTH / 2,
+        y: this.HEXA_HEIGHT / 2
       };
     }
 
@@ -80,19 +80,15 @@ class ObjectHexaUnit extends ObjectSpriteUnit {
   getCenterCoordinates() {
     if (!this.coordinates.center) {
       this.coordinates.center = {
-        x: this.WIDTH / 2,
-        y: this.HEIGHT / 2
+        x: this.HEXA_WIDTH / 2,
+        y: this.HEXA_HEIGHT / 2
       };
     }
 
     return this.coordinates.center;
   }
 }
-/*-----------------------
---------- PRIVATE -------
------------------------*/
 /**
- * @private
  * @static
  * @method calculateHexa
  * @param {Number} radius       Hexagon radius
@@ -102,15 +98,15 @@ function calculateHexa(radius) {
     throw new Error('Need radius!');
   }
 
-  const HEIGHT = Math.round(hexagonMath.calcLongDiagonal(radius));
-  const WIDTH = Math.round(hexagonMath.calcShortDiagonal(radius));
+  const HEXA_HEIGHT = Math.round(hexagonMath.calcLongDiagonal(radius));
+  const HEXA_WIDTH = Math.round(hexagonMath.calcShortDiagonal(radius));
   const SIDE = Math.round(radius);
 
   this.anchor.set(0.5, 0.5);
-  this.areaHeight = this.HEIGHT = HEIGHT;
-  this.areaWidth = this.WIDTH = WIDTH;
+  this.areaHeight = this.HEXA_HEIGHT = HEXA_HEIGHT;
+  this.areaWidth = this.HEXA_WIDTH = HEXA_WIDTH;
   this.SIDE = SIDE;
-  this.ROW_HEIGHT = Math.round(HEIGHT * 0.75);
+  this.ROW_HEIGHT = Math.round(HEXA_HEIGHT * 0.75);
 
   /* Draw hexagon to test the hits with hitArea */
   this.hitArea = setAndGetShape(radius);
@@ -120,6 +116,9 @@ function calculateHexa(radius) {
     return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
   };
 }
+/*-----------------------
+--------- PRIVATE -------
+-----------------------*/
 /**
  * @private
  * @static
@@ -166,6 +165,7 @@ function bugFixedContains (x, y)
 --------- API ---------
 ----------------------*/
 export {
+  calculateHexa,
   ObjectHexaTerrain,
   ObjectHexaUnit
 };

@@ -1,5 +1,14 @@
-var flatworld =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["flatworld"] = factory();
+	else
+		root["flatworld"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -58,19 +67,19 @@ var flatworld =
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _extensions = __webpack_require__(34);
+	var _extensions = __webpack_require__(35);
 	
 	var _extensions2 = _interopRequireDefault(_extensions);
 	
-	var _UIs = __webpack_require__(52);
+	var _UIs = __webpack_require__(54);
 	
 	var UIModule = _interopRequireWildcard(_UIs);
 	
-	var _Preload = __webpack_require__(78);
+	var _Preload = __webpack_require__(80);
 	
 	var preloading = _interopRequireWildcard(_Preload);
 	
-	var _hexaFactory = __webpack_require__(79);
+	var _hexaFactory = __webpack_require__(81);
 	
 	var hexaFactory = _interopRequireWildcard(_hexaFactory);
 	
@@ -123,39 +132,39 @@ var flatworld =
 	
 	var _mapAPI2 = _interopRequireDefault(_mapAPI);
 	
-	var _MapDataManipulator = __webpack_require__(22);
+	var _MapDataManipulator = __webpack_require__(23);
 	
 	var _MapDataManipulator2 = _interopRequireDefault(_MapDataManipulator);
 	
-	var _mapEvents = __webpack_require__(23);
+	var _mapEvents = __webpack_require__(24);
 	
 	var _mapEvents2 = _interopRequireDefault(_mapEvents);
 	
-	var _MapLayers = __webpack_require__(25);
+	var _MapLayers = __webpack_require__(26);
 	
 	var _MapLayers2 = _interopRequireDefault(_MapLayers);
 	
-	var _mapStates = __webpack_require__(26);
+	var _mapStates = __webpack_require__(27);
 	
 	var _mapStates2 = _interopRequireDefault(_mapStates);
 	
-	var _ObjectManager = __webpack_require__(28);
+	var _ObjectManager = __webpack_require__(29);
 	
 	var _ObjectManager2 = _interopRequireDefault(_ObjectManager);
 	
-	var _Objects = __webpack_require__(29);
+	var _Objects = __webpack_require__(30);
 	
 	var _Objects2 = _interopRequireDefault(_Objects);
 	
-	var _Sound = __webpack_require__(30);
+	var _Sound = __webpack_require__(31);
 	
 	var _Sound2 = _interopRequireDefault(_Sound);
 	
-	var _UI = __webpack_require__(32);
+	var _UI = __webpack_require__(33);
 	
 	var _UI2 = _interopRequireDefault(_UI);
 	
-	var _UIStates = __webpack_require__(33);
+	var _UIStates = __webpack_require__(34);
 	
 	var _UIStates2 = _interopRequireDefault(_UIStates);
 	
@@ -231,6 +240,7 @@ var flatworld =
 	  resize: _resize2.default,
 	  shapes: _shapes2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 4 */
@@ -291,6 +301,7 @@ var flatworld =
 	  mapObjectsToArray: mapObjectsToArray,
 	  flattenArrayBy1Level: flattenArrayBy1Level
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 5 */
@@ -334,6 +345,7 @@ var flatworld =
 	exports.default = {
 	    dropShadow: dropShadow
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 6 */
@@ -416,6 +428,7 @@ var flatworld =
 	  isTouchDevice: isTouchDevice,
 	  isMobile: isMobile
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 7 */
@@ -493,6 +506,7 @@ var flatworld =
 	  flatten2Levels: flatten2Levels,
 	  chunkArray: chunkArray
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 8 */
@@ -653,6 +667,7 @@ var flatworld =
 	  eventMouseCoords: eventMouseCoords,
 	  toggleMouseTextSelection: toggleMouseTextSelection
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 9 */
@@ -830,6 +845,7 @@ var flatworld =
 	  es6String: es6String,
 	  setPrototypeOf: setPrototypeOf
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 11 */
@@ -948,6 +964,7 @@ var flatworld =
 	  resizePIXIRenderer: resizePIXIRenderer,
 	  fullsizeCanvasCSS: fullsizeCanvasCSS
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 12 */
@@ -980,6 +997,7 @@ var flatworld =
 	exports.default = {
 	  createSquare: createSquare
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 13 */
@@ -1001,13 +1019,14 @@ var flatworld =
 	
 	var constants = {
 	  ZERO_COORDINATES: new PIXI.Point(0, 0),
-	  VERSION: '0.6.1'
+	  VERSION: '0.6.2'
 	};
 	
 	/*---------------------
 	--------- API ---------
 	----------------------*/
 	exports.default = constants;
+	module.exports = exports['default'];
 
 /***/ },
 /* 14 */
@@ -1192,6 +1211,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = eventListeners;
+	module.exports = exports['default'];
 
 /***/ },
 /* 15 */
@@ -2435,6 +2455,7 @@ var flatworld =
 	
 	
 	exports.default = Flatworld;
+	module.exports = exports['default'];
 
 /***/ },
 /* 16 */
@@ -4794,6 +4815,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = log;
+	module.exports = exports['default'];
 
 /***/ },
 /* 20 */
@@ -5034,6 +5056,8 @@ var flatworld =
 	  value: true
 	});
 	
+	__webpack_require__(22);
+	
 	var _index = __webpack_require__(2);
 	
 	/*---------------------
@@ -5046,6 +5070,9 @@ var flatworld =
 	 * @class mapApi
 	 * @static
 	 */
+	/*---------------------
+	------- IMPORT --------
+	----------------------*/
 	var mapAPI = function () {
 	  var APIs = {};
 	
@@ -5194,13 +5221,469 @@ var flatworld =
 	/*---------------------
 	--------- API ---------
 	----------------------*/
-	/*---------------------
-	------- IMPORT --------
-	----------------------*/
 	exports.default = mapAPI;
+	module.exports = exports['default'];
 
 /***/ },
 /* 22 */
+/***/ function(module, exports) {
+
+	(function(self) {
+	  'use strict';
+	
+	  if (self.fetch) {
+	    return
+	  }
+	
+	  var support = {
+	    searchParams: 'URLSearchParams' in self,
+	    iterable: 'Symbol' in self && 'iterator' in Symbol,
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob()
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+	
+	  if (support.arrayBuffer) {
+	    var viewClasses = [
+	      '[object Int8Array]',
+	      '[object Uint8Array]',
+	      '[object Uint8ClampedArray]',
+	      '[object Int16Array]',
+	      '[object Uint16Array]',
+	      '[object Int32Array]',
+	      '[object Uint32Array]',
+	      '[object Float32Array]',
+	      '[object Float64Array]'
+	    ]
+	
+	    var isDataView = function(obj) {
+	      return obj && DataView.prototype.isPrototypeOf(obj)
+	    }
+	
+	    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+	      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+	    }
+	  }
+	
+	  function normalizeName(name) {
+	    if (typeof name !== 'string') {
+	      name = String(name)
+	    }
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	      throw new TypeError('Invalid character in header field name')
+	    }
+	    return name.toLowerCase()
+	  }
+	
+	  function normalizeValue(value) {
+	    if (typeof value !== 'string') {
+	      value = String(value)
+	    }
+	    return value
+	  }
+	
+	  // Build a destructive iterator for the value list
+	  function iteratorFor(items) {
+	    var iterator = {
+	      next: function() {
+	        var value = items.shift()
+	        return {done: value === undefined, value: value}
+	      }
+	    }
+	
+	    if (support.iterable) {
+	      iterator[Symbol.iterator] = function() {
+	        return iterator
+	      }
+	    }
+	
+	    return iterator
+	  }
+	
+	  function Headers(headers) {
+	    this.map = {}
+	
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(value, name) {
+	        this.append(name, value)
+	      }, this)
+	
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        this.append(name, headers[name])
+	      }, this)
+	    }
+	  }
+	
+	  Headers.prototype.append = function(name, value) {
+	    name = normalizeName(name)
+	    value = normalizeValue(value)
+	    var oldValue = this.map[name]
+	    this.map[name] = oldValue ? oldValue+','+value : value
+	  }
+	
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[normalizeName(name)]
+	  }
+	
+	  Headers.prototype.get = function(name) {
+	    name = normalizeName(name)
+	    return this.has(name) ? this.map[name] : null
+	  }
+	
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(normalizeName(name))
+	  }
+	
+	  Headers.prototype.set = function(name, value) {
+	    this.map[normalizeName(name)] = normalizeValue(value)
+	  }
+	
+	  Headers.prototype.forEach = function(callback, thisArg) {
+	    for (var name in this.map) {
+	      if (this.map.hasOwnProperty(name)) {
+	        callback.call(thisArg, this.map[name], name, this)
+	      }
+	    }
+	  }
+	
+	  Headers.prototype.keys = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push(name) })
+	    return iteratorFor(items)
+	  }
+	
+	  Headers.prototype.values = function() {
+	    var items = []
+	    this.forEach(function(value) { items.push(value) })
+	    return iteratorFor(items)
+	  }
+	
+	  Headers.prototype.entries = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push([name, value]) })
+	    return iteratorFor(items)
+	  }
+	
+	  if (support.iterable) {
+	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+	  }
+	
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+	
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+	
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
+	    reader.readAsArrayBuffer(blob)
+	    return promise
+	  }
+	
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
+	    reader.readAsText(blob)
+	    return promise
+	  }
+	
+	  function bufferClone(buf) {
+	    if (buf.slice) {
+	      return buf.slice(0)
+	    } else {
+	      var view = new Uint8Array(buf.byteLength)
+	      view.set(new Uint8Array(buf))
+	      return view.buffer
+	    }
+	  }
+	
+	  function Body() {
+	    this.bodyUsed = false
+	
+	    this._initBody = function(body) {
+	      this._bodyInit = body
+	      if (!body) {
+	        this._bodyText = ''
+	      } else if (typeof body === 'string') {
+	        this._bodyText = body
+	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	        this._bodyBlob = body
+	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	        this._bodyFormData = body
+	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	        this._bodyText = body.toString()
+	      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+	        this._bodyArrayBuffer = bufferClone(body.buffer)
+	        // IE 10-11 can't handle a DataView body.
+	        this._bodyInit = new Blob([this._bodyArrayBuffer])
+	      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+	        this._bodyArrayBuffer = bufferClone(body)
+	      } else {
+	        throw new Error('unsupported BodyInit type')
+	      }
+	
+	      if (!this.headers.get('content-type')) {
+	        if (typeof body === 'string') {
+	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+	        } else if (this._bodyBlob && this._bodyBlob.type) {
+	          this.headers.set('content-type', this._bodyBlob.type)
+	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+	        }
+	      }
+	    }
+	
+	    if (support.blob) {
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+	
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyArrayBuffer) {
+	          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+	    }
+	
+	    this.text = function() {
+	      var rejected = consumed(this)
+	      if (rejected) {
+	        return rejected
+	      }
+	
+	      if (this._bodyBlob) {
+	        return readBlobAsText(this._bodyBlob)
+	      } else if (this._bodyArrayBuffer) {
+	        var view = new Uint8Array(this._bodyArrayBuffer)
+	        var str = String.fromCharCode.apply(null, view)
+	        return Promise.resolve(str)
+	      } else if (this._bodyFormData) {
+	        throw new Error('could not read FormData body as text')
+	      } else {
+	        return Promise.resolve(this._bodyText)
+	      }
+	    }
+	
+	    if (support.arrayBuffer) {
+	      this.arrayBuffer = function() {
+	        if (this._bodyArrayBuffer) {
+	          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+	        } else {
+	          return this.blob().then(readBlobAsArrayBuffer)
+	        }
+	      }
+	    }
+	
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+	
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+	
+	    return this
+	  }
+	
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+	
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+	
+	  function Request(input, options) {
+	    options = options || {}
+	    var body = options.body
+	
+	    if (typeof input === 'string') {
+	      this.url = input
+	    } else {
+	      if (input.bodyUsed) {
+	        throw new TypeError('Already read')
+	      }
+	      this.url = input.url
+	      this.credentials = input.credentials
+	      if (!options.headers) {
+	        this.headers = new Headers(input.headers)
+	      }
+	      this.method = input.method
+	      this.mode = input.mode
+	      if (!body && input._bodyInit != null) {
+	        body = input._bodyInit
+	        input.bodyUsed = true
+	      }
+	    }
+	
+	    this.credentials = options.credentials || this.credentials || 'omit'
+	    if (options.headers || !this.headers) {
+	      this.headers = new Headers(options.headers)
+	    }
+	    this.method = normalizeMethod(options.method || this.method || 'GET')
+	    this.mode = options.mode || this.mode || null
+	    this.referrer = null
+	
+	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(body)
+	  }
+	
+	  Request.prototype.clone = function() {
+	    return new Request(this, { body: this._bodyInit })
+	  }
+	
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+	
+	  function parseHeaders(rawHeaders) {
+	    var headers = new Headers()
+	    rawHeaders.split('\r\n').forEach(function(line) {
+	      var parts = line.split(':')
+	      var key = parts.shift().trim()
+	      if (key) {
+	        var value = parts.join(':').trim()
+	        headers.append(key, value)
+	      }
+	    })
+	    return headers
+	  }
+	
+	  Body.call(Request.prototype)
+	
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+	
+	    this.type = 'default'
+	    this.status = 'status' in options ? options.status : 200
+	    this.ok = this.status >= 200 && this.status < 300
+	    this.statusText = 'statusText' in options ? options.statusText : 'OK'
+	    this.headers = new Headers(options.headers)
+	    this.url = options.url || ''
+	    this._initBody(bodyInit)
+	  }
+	
+	  Body.call(Response.prototype)
+	
+	  Response.prototype.clone = function() {
+	    return new Response(this._bodyInit, {
+	      status: this.status,
+	      statusText: this.statusText,
+	      headers: new Headers(this.headers),
+	      url: this.url
+	    })
+	  }
+	
+	  Response.error = function() {
+	    var response = new Response(null, {status: 0, statusText: ''})
+	    response.type = 'error'
+	    return response
+	  }
+	
+	  var redirectStatuses = [301, 302, 303, 307, 308]
+	
+	  Response.redirect = function(url, status) {
+	    if (redirectStatuses.indexOf(status) === -1) {
+	      throw new RangeError('Invalid status code')
+	    }
+	
+	    return new Response(null, {status: status, headers: {location: url}})
+	  }
+	
+	  self.Headers = Headers
+	  self.Request = Request
+	  self.Response = Response
+	
+	  self.fetch = function(input, init) {
+	    return new Promise(function(resolve, reject) {
+	      var request = new Request(input, init)
+	      var xhr = new XMLHttpRequest()
+	
+	      xhr.onload = function() {
+	        var options = {
+	          status: xhr.status,
+	          statusText: xhr.statusText,
+	          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+	        }
+	        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText
+	        resolve(new Response(body, options))
+	      }
+	
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+	
+	      xhr.ontimeout = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+	
+	      xhr.open(request.method, request.url, true)
+	
+	      if (request.credentials === 'include') {
+	        xhr.withCredentials = true
+	      }
+	
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+	
+	      request.headers.forEach(function(value, name) {
+	        xhr.setRequestHeader(name, value)
+	      })
+	
+	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+	    })
+	  }
+	  self.fetch.polyfill = true
+	})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5408,9 +5891,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = MapDataManipulator;
+	module.exports = exports['default'];
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5419,7 +5903,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _eventemitter = __webpack_require__(24);
+	var _eventemitter = __webpack_require__(25);
 	
 	/*---------------------
 	-------- PUBLIC -------
@@ -5511,9 +5995,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapEvents;
+	module.exports = exports['default'];
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5830,7 +6315,7 @@ var flatworld =
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6510,9 +6995,10 @@ var flatworld =
 	  MapLayerParent: MapLayerParent,
 	  MinimapLayer: MinimapLayer
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6521,7 +7007,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _javascriptStateMachine = __webpack_require__(27);
+	var _javascriptStateMachine = __webpack_require__(28);
 	
 	var StateMachine = _interopRequireWildcard(_javascriptStateMachine);
 	
@@ -6587,9 +7073,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapStates;
+	module.exports = exports['default'];
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -6822,7 +7309,7 @@ var flatworld =
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -6925,9 +7412,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = ObjectManager;
+	module.exports = exports["default"];
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7335,9 +7823,10 @@ var flatworld =
 	  ObjectSpriteTerrain: ObjectSpriteTerrain,
 	  ObjectSpriteUnit: ObjectSpriteUnit
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7352,7 +7841,7 @@ var flatworld =
 	
 	var Q = _interopRequireWildcard(_q);
 	
-	var _howler = __webpack_require__(31);
+	var _howler = __webpack_require__(32);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -7476,9 +7965,10 @@ var flatworld =
 	
 	
 	exports.default = Sound;
+	module.exports = exports['default'];
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -10241,7 +10731,7 @@ var flatworld =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10370,15 +10860,16 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = UI;
+	module.exports = exports['default'];
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	"use strict";
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10387,31 +10878,31 @@ var flatworld =
 	  value: true
 	});
 	
-	var _baseEventlisteners = __webpack_require__(35);
+	var _baseEventlisteners = __webpack_require__(36);
 	
 	var _baseEventlisteners2 = _interopRequireDefault(_baseEventlisteners);
 	
-	var _index = __webpack_require__(38);
+	var _index = __webpack_require__(39);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(40);
+	var _index3 = __webpack_require__(41);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _mapMovement = __webpack_require__(47);
+	var _mapMovement = __webpack_require__(49);
 	
 	var _mapMovement2 = _interopRequireDefault(_mapMovement);
 	
-	var _index5 = __webpack_require__(48);
+	var _index5 = __webpack_require__(50);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _mapDrag = __webpack_require__(50);
+	var _mapDrag = __webpack_require__(52);
 	
 	var _mapDrag2 = _interopRequireDefault(_mapDrag);
 	
-	var _mapZoom = __webpack_require__(51);
+	var _mapZoom = __webpack_require__(53);
 	
 	var _mapZoom2 = _interopRequireDefault(_mapZoom);
 	
@@ -10426,9 +10917,10 @@ var flatworld =
 	  mapDrag: _mapDrag2.default,
 	  mapZoom: _mapZoom2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10437,11 +10929,11 @@ var flatworld =
 	  value: true
 	});
 	
-	var _hammerjs = __webpack_require__(36);
+	var _hammerjs = __webpack_require__(37);
 	
 	var Hammer = _interopRequireWildcard(_hammerjs);
 	
-	var _hamsterjs = __webpack_require__(37);
+	var _hamsterjs = __webpack_require__(38);
 	
 	var _hamsterjs2 = _interopRequireDefault(_hamsterjs);
 	
@@ -10735,9 +11227,10 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = baseEventlisteners;
+	module.exports = exports['default'];
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -13386,7 +13879,7 @@ var flatworld =
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -13719,7 +14212,7 @@ var flatworld =
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13728,7 +14221,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _simpleFogOfWar = __webpack_require__(39);
+	var _simpleFogOfWar = __webpack_require__(40);
 	
 	var _simpleFogOfWar2 = _interopRequireDefault(_simpleFogOfWar);
 	
@@ -13737,9 +14230,10 @@ var flatworld =
 	exports.default = {
 	  simpleFogOfWar: _simpleFogOfWar2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13960,9 +14454,10 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = simpleFogOfWar;
+	module.exports = exports['default'];
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13971,21 +14466,25 @@ var flatworld =
 	  value: true
 	});
 	
-	var _units = __webpack_require__(41);
+	var _units = __webpack_require__(42);
 	
 	var eventListeners = _interopRequireWildcard(_units);
 	
-	var _selectHexagonPlugin = __webpack_require__(46);
+	var _selectHexagonPlugin = __webpack_require__(47);
 	
 	var hexagonPlugin = _interopRequireWildcard(_selectHexagonPlugin);
 	
-	var _findPath = __webpack_require__(42);
+	var _findPath = __webpack_require__(43);
 	
 	var pathfinding = _interopRequireWildcard(_findPath);
 	
-	var _utils = __webpack_require__(43);
+	var _utils = __webpack_require__(44);
 	
 	var utils = _interopRequireWildcard(_utils);
+	
+	var _Objects = __webpack_require__(48);
+	
+	var objects = _interopRequireWildcard(_Objects);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -13994,11 +14493,13 @@ var flatworld =
 	toBeExported.selectHexagonObject = hexagonPlugin.selectHexagonObject;
 	toBeExported.pathfinding = pathfinding;
 	toBeExported.utils = utils;
+	toBeExported.objects = objects;
 	
 	exports.default = toBeExported;
+	module.exports = exports['default'];
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14010,9 +14511,9 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _findPath = __webpack_require__(42);
+	var _findPath = __webpack_require__(43);
 	
-	var _utils = __webpack_require__(43);
+	var _utils = __webpack_require__(44);
 	
 	var hexaUtils = _interopRequireWildcard(_utils);
 	
@@ -14214,7 +14715,7 @@ var flatworld =
 	exports._tests = _tests;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14470,7 +14971,7 @@ var flatworld =
 	exports.findPath = findPath;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14480,11 +14981,11 @@ var flatworld =
 	});
 	exports.hexagonMath = exports.createHexagon = undefined;
 	
-	var _createHexagon = __webpack_require__(44);
+	var _createHexagon = __webpack_require__(45);
 	
 	var createHexagon = _interopRequireWildcard(_createHexagon);
 	
-	var _hexagonMath = __webpack_require__(45);
+	var _hexagonMath = __webpack_require__(46);
 	
 	var hexagonMath = _interopRequireWildcard(_hexagonMath);
 	
@@ -14494,7 +14995,7 @@ var flatworld =
 	exports.hexagonMath = hexagonMath;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14508,7 +15009,7 @@ var flatworld =
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _hexagonMath = __webpack_require__(45);
+	var _hexagonMath = __webpack_require__(46);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -14598,7 +15099,7 @@ var flatworld =
 	exports.createVisibleHexagon = createVisibleHexagon;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14914,7 +15415,7 @@ var flatworld =
 	exports.indexesToCoordinates = indexesToCoordinates;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14924,9 +15425,9 @@ var flatworld =
 	});
 	exports._tests = exports.selectHexagonObject = undefined;
 	
-	var _units = __webpack_require__(41);
+	var _units = __webpack_require__(42);
 	
-	var _utils = __webpack_require__(43);
+	var _utils = __webpack_require__(44);
 	
 	/*-----------------------
 	-------- PUBLIC ---------
@@ -15006,7 +15507,246 @@ var flatworld =
 	exports._tests = _tests;
 
 /***/ },
-/* 47 */
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ObjectHexaUnit = exports.ObjectHexaTerrain = exports.calculateHexa = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(9);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _index = __webpack_require__(2);
+	
+	var _utils = __webpack_require__(44);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ObjectSpriteTerrain = _index.objects.ObjectSpriteTerrain,
+	    ObjectSpriteUnit = _index.objects.ObjectSpriteUnit;
+	
+	/*-----------------------
+	-------- VARIABLES ------
+	-----------------------*/
+	
+	var shape = void 0;
+	
+	var ObjectHexaTerrain = function (_ObjectSpriteTerrain) {
+	  _inherits(ObjectHexaTerrain, _ObjectSpriteTerrain);
+	
+	  /**
+	   * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are inherited, depending on
+	   * the map type. For example you might want to add some click area for these
+	   *
+	   * @namespace flatworld.extensions.hexagons
+	   * @class ObjectHexaTerrain
+	   * @constructor
+	   * @param  {Object} coords
+	   * @param  {Integer} coords.x         X coordinate
+	   * @param  {Integer} coords.y         Y coordinate
+	   * @param {object} data               This units custom data
+	   * @param {Object} options            options.radius REQUIRED.
+	   * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
+	   */
+	  function ObjectHexaTerrain(texture) {
+	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
+	
+	    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	        data = _ref.data,
+	        radius = _ref.radius,
+	        minimapColor = _ref.minimapColor,
+	        minimapShape = _ref.minimapShape;
+	
+	    _classCallCheck(this, ObjectHexaTerrain);
+	
+	    var _this = _possibleConstructorReturn(this, (ObjectHexaTerrain.__proto__ || Object.getPrototypeOf(ObjectHexaTerrain)).call(this, texture, coords, { data: data }));
+	
+	    _this.name = 'DefaultTerrainObject_hexa';
+	    _this.minimapColor = minimapColor;
+	    _this.minimapShape = minimapShape;
+	    calculateHexa.call(_this, radius);
+	    return _this;
+	  }
+	  /**
+	   * Overwrite super method
+	   * @method calculateHexa
+	   * @return {[type]} [description]
+	   */
+	
+	
+	  _createClass(ObjectHexaTerrain, [{
+	    key: 'getCenterCoordinates',
+	    value: function getCenterCoordinates() {
+	      if (!this.coordinates.center) {
+	        this.coordinates.center = {
+	          x: this.HEXA_WIDTH / 2,
+	          y: this.HEXA_HEIGHT / 2
+	        };
+	      }
+	
+	      return this.coordinates.center;
+	    }
+	  }]);
+	
+	  return ObjectHexaTerrain;
+	}(ObjectSpriteTerrain);
+	
+	var ObjectHexaUnit = function (_ObjectSpriteUnit) {
+	  _inherits(ObjectHexaUnit, _ObjectSpriteUnit);
+	
+	  /**
+	   * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
+	   * For example you might want to add some click area for these (e.g. hexagon)
+	   *
+	   * @class ObjectHexaUnit
+	   * @constructor
+	   * @param {Object} coords            This units coordinates, relative to it's parent container
+	   * @param {Integer} coords.x         X coordinate
+	   * @param {Integer} coords.y         Y coordinate
+	   * @param {object} data               This units custom data
+	   * @param {Object} options            options.radius REQUIRED
+	   * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
+	   */
+	  function ObjectHexaUnit(texture) {
+	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
+	
+	    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	        data = _ref2.data,
+	        radius = _ref2.radius,
+	        minimapColor = _ref2.minimapColor,
+	        minimapShape = _ref2.minimapShape;
+	
+	    _classCallCheck(this, ObjectHexaUnit);
+	
+	    var _this2 = _possibleConstructorReturn(this, (ObjectHexaUnit.__proto__ || Object.getPrototypeOf(ObjectHexaUnit)).call(this, texture, coords, { data: data }));
+	
+	    _this2.name = 'DefaultUnitObjects_hexa';
+	    _this2.minimapColor = minimapColor;
+	    _this2.minimapShape = minimapShape;
+	    _this2.static = false;
+	
+	    calculateHexa.call(_this2, radius);
+	    return _this2;
+	  }
+	  /**
+	   * Overwrite super method
+	   * @method calculateHexa
+	   * @return {[type]} [description]
+	   */
+	
+	
+	  _createClass(ObjectHexaUnit, [{
+	    key: 'getCenterCoordinates',
+	    value: function getCenterCoordinates() {
+	      if (!this.coordinates.center) {
+	        this.coordinates.center = {
+	          x: this.HEXA_WIDTH / 2,
+	          y: this.HEXA_HEIGHT / 2
+	        };
+	      }
+	
+	      return this.coordinates.center;
+	    }
+	  }]);
+	
+	  return ObjectHexaUnit;
+	}(ObjectSpriteUnit);
+	/**
+	 * @static
+	 * @method calculateHexa
+	 * @param {Number} radius       Hexagon radius
+	 */
+	
+	
+	function calculateHexa(radius) {
+	  if (!radius) {
+	    throw new Error('Need radius!');
+	  }
+	
+	  var HEXA_HEIGHT = Math.round(_utils.hexagonMath.calcLongDiagonal(radius));
+	  var HEXA_WIDTH = Math.round(_utils.hexagonMath.calcShortDiagonal(radius));
+	  var SIDE = Math.round(radius);
+	
+	  this.anchor.set(0.5, 0.5);
+	  this.areaHeight = this.HEXA_HEIGHT = HEXA_HEIGHT;
+	  this.areaWidth = this.HEXA_WIDTH = HEXA_WIDTH;
+	  this.SIDE = SIDE;
+	  this.ROW_HEIGHT = Math.round(HEXA_HEIGHT * 0.75);
+	
+	  /* Draw hexagon to test the hits with hitArea */
+	  this.hitArea = setAndGetShape(radius);
+	  this.hitTest = function (coords) {
+	    var localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
+	
+	    return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
+	  };
+	}
+	/*-----------------------
+	--------- PRIVATE -------
+	-----------------------*/
+	/**
+	 * @private
+	 * @static
+	 * @method setAndGetShape
+	 * @param {Number} radius       Hexagon radius
+	 */
+	function setAndGetShape(radius) {
+	  if (!shape) {
+	    shape = _utils.createHexagon.createHexagon(radius);
+	  }
+	
+	  return shape;
+	}
+	
+	/* THIS IS ONLY TEMPORARY FIX. The PIXIs own contains method had a bug introduced in v4.1.0 and
+	 * and that is the one npm retrieves, so I decided to add the old v4.0.0 version here as a
+	 * temporary fix. Can be removed after PIXI fixes it's bug. Githib ticket here:
+	 * https://github.com/pixijs/pixi.js/pull/3165
+	 */
+	function bugFixedContains(x, y) {
+	  var inside = false;
+	
+	  // use some raycasting to test hits
+	  // https://github.com/substack/point-in-polygon/blob/master/index.js
+	  var length = this.points.length / 2;
+	
+	  for (var i = 0, j = length - 1; i < length; j = i++) {
+	    var xi = this.points[i * 2],
+	        yi = this.points[i * 2 + 1],
+	        xj = this.points[j * 2],
+	        yj = this.points[j * 2 + 1],
+	        intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
+	
+	    if (intersect) {
+	      inside = !inside;
+	    }
+	  }
+	
+	  return inside;
+	}
+	
+	/*---------------------
+	--------- API ---------
+	----------------------*/
+	exports.calculateHexa = calculateHexa;
+	exports.ObjectHexaTerrain = ObjectHexaTerrain;
+	exports.ObjectHexaUnit = ObjectHexaUnit;
+
+/***/ },
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15343,9 +16083,10 @@ var flatworld =
 	-----------------------*/
 	/* For debugging? This will show up if the plugin fails to load in Map.js */
 	exports.default = mapMovement;
+	module.exports = exports['default'];
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15354,7 +16095,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _pixelizedMinimap = __webpack_require__(49);
+	var _pixelizedMinimap = __webpack_require__(51);
 	
 	var _pixelizedMinimap2 = _interopRequireDefault(_pixelizedMinimap);
 	
@@ -15363,9 +16104,10 @@ var flatworld =
 	exports.default = {
 	  pixelizedMinimap: _pixelizedMinimap2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15374,7 +16116,7 @@ var flatworld =
 	    value: true
 	});
 	
-	var _hammerjs = __webpack_require__(36);
+	var _hammerjs = __webpack_require__(37);
 	
 	var _hammerjs2 = _interopRequireDefault(_hammerjs);
 	
@@ -15611,9 +16353,10 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = pixelizedMinimap;
+	module.exports = exports['default'];
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15764,9 +16507,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapDrag;
+	module.exports = exports['default'];
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16068,9 +16812,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapZoom;
+	module.exports = exports['default'];
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16080,7 +16825,7 @@ var flatworld =
 	});
 	exports.UIs = undefined;
 	
-	var _default = __webpack_require__(53);
+	var _default = __webpack_require__(55);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -16089,7 +16834,7 @@ var flatworld =
 	var UIs = exports.UIs = _default2.default;
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16098,7 +16843,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _default = __webpack_require__(54);
+	var _default = __webpack_require__(56);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -16107,9 +16852,10 @@ var flatworld =
 	exports.default = {
 	  UIDefault: _default2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16126,13 +16872,13 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _layout = __webpack_require__(55);
+	var _layout = __webpack_require__(57);
 	
 	var templates = _interopRequireWildcard(_layout);
 	
-	var _arrows = __webpack_require__(77);
+	var _arrows = __webpack_require__(79);
 	
-	var _createHexagon = __webpack_require__(44);
+	var _createHexagon = __webpack_require__(45);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -16451,9 +17197,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = UIDefault;
+	module.exports = exports['default'];
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16463,11 +17210,11 @@ var flatworld =
 	});
 	exports.singleSelection = exports.multiSelection = undefined;
 	
-	var _multiSelection = __webpack_require__(56);
+	var _multiSelection = __webpack_require__(58);
 	
 	var _multiSelection2 = _interopRequireDefault(_multiSelection);
 	
-	var _singleSelection = __webpack_require__(76);
+	var _singleSelection = __webpack_require__(78);
 	
 	var _singleSelection2 = _interopRequireDefault(_singleSelection);
 	
@@ -16477,10 +17224,10 @@ var flatworld =
 	exports.singleSelection = _singleSelection2.default;
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(57);
+	var Handlebars = __webpack_require__(59);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    return "  <li>\r\n    "
@@ -16497,16 +17244,16 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Create a simple path alias to allow browserify to resolve
 	// the runtime on a supported path.
-	module.exports = __webpack_require__(58)['default'];
+	module.exports = __webpack_require__(60)['default'];
 
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16520,30 +17267,30 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _handlebarsBase = __webpack_require__(59);
+	var _handlebarsBase = __webpack_require__(61);
 	
 	var base = _interopRequireWildcard(_handlebarsBase);
 	
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 	
-	var _handlebarsSafeString = __webpack_require__(73);
+	var _handlebarsSafeString = __webpack_require__(75);
 	
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 	
-	var _handlebarsException = __webpack_require__(61);
+	var _handlebarsException = __webpack_require__(63);
 	
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 	
-	var _handlebarsUtils = __webpack_require__(60);
+	var _handlebarsUtils = __webpack_require__(62);
 	
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 	
-	var _handlebarsRuntime = __webpack_require__(74);
+	var _handlebarsRuntime = __webpack_require__(76);
 	
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 	
-	var _handlebarsNoConflict = __webpack_require__(75);
+	var _handlebarsNoConflict = __webpack_require__(77);
 	
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 	
@@ -16578,7 +17325,7 @@ var flatworld =
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16589,17 +17336,17 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
-	var _exception = __webpack_require__(61);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _helpers = __webpack_require__(62);
+	var _helpers = __webpack_require__(64);
 	
-	var _decorators = __webpack_require__(70);
+	var _decorators = __webpack_require__(72);
 	
-	var _logger = __webpack_require__(72);
+	var _logger = __webpack_require__(74);
 	
 	var _logger2 = _interopRequireDefault(_logger);
 	
@@ -16688,7 +17435,7 @@ var flatworld =
 
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16818,7 +17565,7 @@ var flatworld =
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16864,7 +17611,7 @@ var flatworld =
 
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16875,31 +17622,31 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _helpersBlockHelperMissing = __webpack_require__(63);
+	var _helpersBlockHelperMissing = __webpack_require__(65);
 	
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 	
-	var _helpersEach = __webpack_require__(64);
+	var _helpersEach = __webpack_require__(66);
 	
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 	
-	var _helpersHelperMissing = __webpack_require__(65);
+	var _helpersHelperMissing = __webpack_require__(67);
 	
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 	
-	var _helpersIf = __webpack_require__(66);
+	var _helpersIf = __webpack_require__(68);
 	
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 	
-	var _helpersLog = __webpack_require__(67);
+	var _helpersLog = __webpack_require__(69);
 	
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 	
-	var _helpersLookup = __webpack_require__(68);
+	var _helpersLookup = __webpack_require__(70);
 	
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 	
-	var _helpersWith = __webpack_require__(69);
+	var _helpersWith = __webpack_require__(71);
 	
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 	
@@ -16916,14 +17663,14 @@ var flatworld =
 
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -16961,7 +17708,7 @@ var flatworld =
 
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16971,9 +17718,9 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
-	var _exception = __webpack_require__(61);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17061,7 +17808,7 @@ var flatworld =
 
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17071,7 +17818,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _exception = __webpack_require__(61);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17092,14 +17839,14 @@ var flatworld =
 
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -17127,7 +17874,7 @@ var flatworld =
 
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17159,7 +17906,7 @@ var flatworld =
 
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17177,14 +17924,14 @@ var flatworld =
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -17216,7 +17963,7 @@ var flatworld =
 
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17227,7 +17974,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _decoratorsInline = __webpack_require__(71);
+	var _decoratorsInline = __webpack_require__(73);
 	
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 	
@@ -17238,14 +17985,14 @@ var flatworld =
 
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -17273,14 +18020,14 @@ var flatworld =
 
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -17326,7 +18073,7 @@ var flatworld =
 
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -17347,7 +18094,7 @@ var flatworld =
 
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17367,15 +18114,15 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _utils = __webpack_require__(60);
+	var _utils = __webpack_require__(62);
 	
 	var Utils = _interopRequireWildcard(_utils);
 	
-	var _exception = __webpack_require__(61);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _base = __webpack_require__(59);
+	var _base = __webpack_require__(61);
 	
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -17645,7 +18392,7 @@ var flatworld =
 
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -17672,10 +18419,10 @@ var flatworld =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(57);
+	var Handlebars = __webpack_require__(59);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=container.escapeExpression;
@@ -17688,7 +18435,7 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17948,7 +18695,7 @@ var flatworld =
 	exports.drawLine = drawLine;
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18083,7 +18830,7 @@ var flatworld =
 	exports.Preload = Preload;
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18101,7 +18848,7 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _Objects = __webpack_require__(80);
+	var _Objects = __webpack_require__(48);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -18258,245 +19005,8 @@ var flatworld =
 	----------------------*/
 	exports.hexaFactory = hexaFactory;
 
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ObjectHexaUnit = exports.ObjectHexaTerrain = undefined;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _pixi = __webpack_require__(9);
-	
-	var PIXI = _interopRequireWildcard(_pixi);
-	
-	var _index = __webpack_require__(2);
-	
-	var _utils = __webpack_require__(43);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ObjectSpriteTerrain = _index.objects.ObjectSpriteTerrain,
-	    ObjectSpriteUnit = _index.objects.ObjectSpriteUnit;
-	
-	/*-----------------------
-	-------- VARIABLES ------
-	-----------------------*/
-	
-	var shape = void 0;
-	
-	var ObjectHexaTerrain = function (_ObjectSpriteTerrain) {
-	  _inherits(ObjectHexaTerrain, _ObjectSpriteTerrain);
-	
-	  /**
-	   * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are inherited, depending on
-	   * the map type. For example you might want to add some click area for these
-	   *
-	   * @namespace flatworld.extensions.hexagons
-	   * @class ObjectHexaTerrain
-	   * @constructor
-	   * @param  {Object} coords
-	   * @param  {Integer} coords.x         X coordinate
-	   * @param  {Integer} coords.y         Y coordinate
-	   * @param {object} data               This units custom data
-	   * @param {Object} options            options.radius REQUIRED.
-	   * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
-	   */
-	  function ObjectHexaTerrain(texture) {
-	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref.data,
-	        radius = _ref.radius,
-	        minimapColor = _ref.minimapColor,
-	        minimapShape = _ref.minimapShape;
-	
-	    _classCallCheck(this, ObjectHexaTerrain);
-	
-	    var _this = _possibleConstructorReturn(this, (ObjectHexaTerrain.__proto__ || Object.getPrototypeOf(ObjectHexaTerrain)).call(this, texture, coords, { data: data }));
-	
-	    _this.name = 'DefaultTerrainObject_hexa';
-	    _this.minimapColor = minimapColor;
-	    _this.minimapShape = minimapShape;
-	    calculateHexa.call(_this, radius);
-	    return _this;
-	  }
-	  /**
-	   * Overwrite super method
-	   * @method calculateHexa
-	   * @return {[type]} [description]
-	   */
-	
-	
-	  _createClass(ObjectHexaTerrain, [{
-	    key: 'getCenterCoordinates',
-	    value: function getCenterCoordinates() {
-	      if (!this.coordinates.center) {
-	        this.coordinates.center = {
-	          x: this.WIDTH / 2,
-	          y: this.HEIGHT / 2
-	        };
-	      }
-	
-	      return this.coordinates.center;
-	    }
-	  }]);
-	
-	  return ObjectHexaTerrain;
-	}(ObjectSpriteTerrain);
-	
-	var ObjectHexaUnit = function (_ObjectSpriteUnit) {
-	  _inherits(ObjectHexaUnit, _ObjectSpriteUnit);
-	
-	  /**
-	   * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
-	   * For example you might want to add some click area for these (e.g. hexagon)
-	   *
-	   * @class ObjectHexaUnit
-	   * @constructor
-	   * @param {Object} coords            This units coordinates, relative to it's parent container
-	   * @param {Integer} coords.x         X coordinate
-	   * @param {Integer} coords.y         Y coordinate
-	   * @param {object} data               This units custom data
-	   * @param {Object} options            options.radius REQUIRED
-	   * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
-	   */
-	  function ObjectHexaUnit(texture) {
-	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref2.data,
-	        radius = _ref2.radius,
-	        minimapColor = _ref2.minimapColor,
-	        minimapShape = _ref2.minimapShape;
-	
-	    _classCallCheck(this, ObjectHexaUnit);
-	
-	    var _this2 = _possibleConstructorReturn(this, (ObjectHexaUnit.__proto__ || Object.getPrototypeOf(ObjectHexaUnit)).call(this, texture, coords, { data: data }));
-	
-	    _this2.name = 'DefaultUnitObjects_hexa';
-	    _this2.minimapColor = minimapColor;
-	    _this2.minimapShape = minimapShape;
-	    _this2.static = false;
-	
-	    calculateHexa.call(_this2, radius);
-	    return _this2;
-	  }
-	  /**
-	   * Overwrite super method
-	   * @method calculateHexa
-	   * @return {[type]} [description]
-	   */
-	
-	
-	  _createClass(ObjectHexaUnit, [{
-	    key: 'getCenterCoordinates',
-	    value: function getCenterCoordinates() {
-	      if (!this.coordinates.center) {
-	        this.coordinates.center = {
-	          x: this.WIDTH / 2,
-	          y: this.HEIGHT / 2
-	        };
-	      }
-	
-	      return this.coordinates.center;
-	    }
-	  }]);
-	
-	  return ObjectHexaUnit;
-	}(ObjectSpriteUnit);
-	/*-----------------------
-	--------- PRIVATE -------
-	-----------------------*/
-	/**
-	 * @private
-	 * @static
-	 * @method calculateHexa
-	 * @param {Number} radius       Hexagon radius
-	 */
-	
-	
-	function calculateHexa(radius) {
-	  if (!radius) {
-	    throw new Error('Need radius!');
-	  }
-	
-	  var HEIGHT = Math.round(_utils.hexagonMath.calcLongDiagonal(radius));
-	  var WIDTH = Math.round(_utils.hexagonMath.calcShortDiagonal(radius));
-	  var SIDE = Math.round(radius);
-	
-	  this.anchor.set(0.5, 0.5);
-	  this.areaHeight = this.HEIGHT = HEIGHT;
-	  this.areaWidth = this.WIDTH = WIDTH;
-	  this.SIDE = SIDE;
-	  this.ROW_HEIGHT = Math.round(HEIGHT * 0.75);
-	
-	  /* Draw hexagon to test the hits with hitArea */
-	  this.hitArea = setAndGetShape(radius);
-	  this.hitTest = function (coords) {
-	    var localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
-	
-	    return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
-	  };
-	}
-	/**
-	 * @private
-	 * @static
-	 * @method setAndGetShape
-	 * @param {Number} radius       Hexagon radius
-	 */
-	function setAndGetShape(radius) {
-	  if (!shape) {
-	    shape = _utils.createHexagon.createHexagon(radius);
-	  }
-	
-	  return shape;
-	}
-	
-	/* THIS IS ONLY TEMPORARY FIX. The PIXIs own contains method had a bug introduced in v4.1.0 and
-	 * and that is the one npm retrieves, so I decided to add the old v4.0.0 version here as a
-	 * temporary fix. Can be removed after PIXI fixes it's bug. Githib ticket here:
-	 * https://github.com/pixijs/pixi.js/pull/3165
-	 */
-	function bugFixedContains(x, y) {
-	  var inside = false;
-	
-	  // use some raycasting to test hits
-	  // https://github.com/substack/point-in-polygon/blob/master/index.js
-	  var length = this.points.length / 2;
-	
-	  for (var i = 0, j = length - 1; i < length; j = i++) {
-	    var xi = this.points[i * 2],
-	        yi = this.points[i * 2 + 1],
-	        xj = this.points[j * 2],
-	        yj = this.points[j * 2 + 1],
-	        intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
-	
-	    if (intersect) {
-	      inside = !inside;
-	    }
-	  }
-	
-	  return inside;
-	}
-	
-	/*---------------------
-	--------- API ---------
-	----------------------*/
-	exports.ObjectHexaTerrain = ObjectHexaTerrain;
-	exports.ObjectHexaUnit = ObjectHexaUnit;
-
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;
 //# sourceMappingURL=flatworld.js.map

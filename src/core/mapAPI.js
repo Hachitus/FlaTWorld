@@ -1,6 +1,7 @@
 /*---------------------
 ------- IMPORT --------
 ----------------------*/
+import 'whatwg-fetch';
 import { log as mapLog } from './index';
 
 /*---------------------
