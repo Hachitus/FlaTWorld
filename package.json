@@ -43,7 +43,9 @@
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.18.0",
     "eslint": "^3.8.1",
     "eslint-loader": "^1.6.0",
@@ -52,6 +54,7 @@
     "yuidocjs": "^0.10.0"
   },
   "dependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
     "eventemitter3": "^2.0.2",
     "hammerjs": "^2.0.8",
     "hamsterjs": "^1.1.2",

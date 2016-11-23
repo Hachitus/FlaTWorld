@@ -1,5 +1,14 @@
-var flatworld =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["flatworld"] = factory();
+	else
+		root["flatworld"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -62,15 +71,15 @@ var flatworld =
 	
 	var _extensions2 = _interopRequireDefault(_extensions);
 	
-	var _UIs = __webpack_require__(53);
+	var _UIs = __webpack_require__(54);
 	
 	var UIModule = _interopRequireWildcard(_UIs);
 	
-	var _Preload = __webpack_require__(79);
+	var _Preload = __webpack_require__(80);
 	
 	var preloading = _interopRequireWildcard(_Preload);
 	
-	var _hexaFactory = __webpack_require__(80);
+	var _hexaFactory = __webpack_require__(81);
 	
 	var hexaFactory = _interopRequireWildcard(_hexaFactory);
 	
@@ -231,6 +240,7 @@ var flatworld =
 	  resize: _resize2.default,
 	  shapes: _shapes2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 4 */
@@ -291,6 +301,7 @@ var flatworld =
 	  mapObjectsToArray: mapObjectsToArray,
 	  flattenArrayBy1Level: flattenArrayBy1Level
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 5 */
@@ -334,6 +345,7 @@ var flatworld =
 	exports.default = {
 	    dropShadow: dropShadow
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 6 */
@@ -416,6 +428,7 @@ var flatworld =
 	  isTouchDevice: isTouchDevice,
 	  isMobile: isMobile
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 7 */
@@ -493,6 +506,7 @@ var flatworld =
 	  flatten2Levels: flatten2Levels,
 	  chunkArray: chunkArray
 	};
+	module.exports = exports["default"];
 
 /***/ },
 /* 8 */
@@ -653,6 +667,7 @@ var flatworld =
 	  eventMouseCoords: eventMouseCoords,
 	  toggleMouseTextSelection: toggleMouseTextSelection
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 9 */
@@ -830,6 +845,7 @@ var flatworld =
 	  es6String: es6String,
 	  setPrototypeOf: setPrototypeOf
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 11 */
@@ -948,6 +964,7 @@ var flatworld =
 	  resizePIXIRenderer: resizePIXIRenderer,
 	  fullsizeCanvasCSS: fullsizeCanvasCSS
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 12 */
@@ -980,6 +997,7 @@ var flatworld =
 	exports.default = {
 	  createSquare: createSquare
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 13 */
@@ -1008,6 +1026,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = constants;
+	module.exports = exports['default'];
 
 /***/ },
 /* 14 */
@@ -1192,6 +1211,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = eventListeners;
+	module.exports = exports['default'];
 
 /***/ },
 /* 15 */
@@ -2435,6 +2455,7 @@ var flatworld =
 	
 	
 	exports.default = Flatworld;
+	module.exports = exports['default'];
 
 /***/ },
 /* 16 */
@@ -4794,6 +4815,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = log;
+	module.exports = exports['default'];
 
 /***/ },
 /* 20 */
@@ -5200,6 +5222,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapAPI;
+	module.exports = exports['default'];
 
 /***/ },
 /* 22 */
@@ -5868,6 +5891,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = MapDataManipulator;
+	module.exports = exports['default'];
 
 /***/ },
 /* 24 */
@@ -5971,6 +5995,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapEvents;
+	module.exports = exports['default'];
 
 /***/ },
 /* 25 */
@@ -6970,6 +6995,7 @@ var flatworld =
 	  MapLayerParent: MapLayerParent,
 	  MinimapLayer: MinimapLayer
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 27 */
@@ -7047,6 +7073,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapStates;
+	module.exports = exports['default'];
 
 /***/ },
 /* 28 */
@@ -7385,6 +7412,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = ObjectManager;
+	module.exports = exports["default"];
 
 /***/ },
 /* 30 */
@@ -7795,6 +7823,7 @@ var flatworld =
 	  ObjectSpriteTerrain: ObjectSpriteTerrain,
 	  ObjectSpriteUnit: ObjectSpriteUnit
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 31 */
@@ -7936,6 +7965,7 @@ var flatworld =
 	
 	
 	exports.default = Sound;
+	module.exports = exports['default'];
 
 /***/ },
 /* 32 */
@@ -10830,6 +10860,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = UI;
+	module.exports = exports['default'];
 
 /***/ },
 /* 34 */
@@ -10859,19 +10890,19 @@ var flatworld =
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _mapMovement = __webpack_require__(48);
+	var _mapMovement = __webpack_require__(49);
 	
 	var _mapMovement2 = _interopRequireDefault(_mapMovement);
 	
-	var _index5 = __webpack_require__(49);
+	var _index5 = __webpack_require__(50);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _mapDrag = __webpack_require__(51);
+	var _mapDrag = __webpack_require__(52);
 	
 	var _mapDrag2 = _interopRequireDefault(_mapDrag);
 	
-	var _mapZoom = __webpack_require__(52);
+	var _mapZoom = __webpack_require__(53);
 	
 	var _mapZoom2 = _interopRequireDefault(_mapZoom);
 	
@@ -10886,6 +10917,7 @@ var flatworld =
 	  mapDrag: _mapDrag2.default,
 	  mapZoom: _mapZoom2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 36 */
@@ -11195,6 +11227,7 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = baseEventlisteners;
+	module.exports = exports['default'];
 
 /***/ },
 /* 37 */
@@ -14197,6 +14230,7 @@ var flatworld =
 	exports.default = {
 	  simpleFogOfWar: _simpleFogOfWar2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 40 */
@@ -14420,6 +14454,7 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = simpleFogOfWar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 41 */
@@ -14447,6 +14482,10 @@ var flatworld =
 	
 	var utils = _interopRequireWildcard(_utils);
 	
+	var _Objects = __webpack_require__(48);
+	
+	var objects = _interopRequireWildcard(_Objects);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	var toBeExported = {};
@@ -14454,8 +14493,10 @@ var flatworld =
 	toBeExported.selectHexagonObject = hexagonPlugin.selectHexagonObject;
 	toBeExported.pathfinding = pathfinding;
 	toBeExported.utils = utils;
+	toBeExported.objects = objects;
 	
 	exports.default = toBeExported;
+	module.exports = exports['default'];
 
 /***/ },
 /* 42 */
@@ -15474,6 +15515,245 @@ var flatworld =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.ObjectHexaUnit = exports.ObjectHexaTerrain = exports.calculateHexa = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _pixi = __webpack_require__(9);
+	
+	var PIXI = _interopRequireWildcard(_pixi);
+	
+	var _index = __webpack_require__(2);
+	
+	var _utils = __webpack_require__(44);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ObjectSpriteTerrain = _index.objects.ObjectSpriteTerrain,
+	    ObjectSpriteUnit = _index.objects.ObjectSpriteUnit;
+	
+	/*-----------------------
+	-------- VARIABLES ------
+	-----------------------*/
+	
+	var shape = void 0;
+	
+	var ObjectHexaTerrain = function (_ObjectSpriteTerrain) {
+	  _inherits(ObjectHexaTerrain, _ObjectSpriteTerrain);
+	
+	  /**
+	   * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are inherited, depending on
+	   * the map type. For example you might want to add some click area for these
+	   *
+	   * @namespace flatworld.extensions.hexagons
+	   * @class ObjectHexaTerrain
+	   * @constructor
+	   * @param  {Object} coords
+	   * @param  {Integer} coords.x         X coordinate
+	   * @param  {Integer} coords.y         Y coordinate
+	   * @param {object} data               This units custom data
+	   * @param {Object} options            options.radius REQUIRED.
+	   * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
+	   */
+	  function ObjectHexaTerrain(texture) {
+	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
+	
+	    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	        data = _ref.data,
+	        radius = _ref.radius,
+	        minimapColor = _ref.minimapColor,
+	        minimapShape = _ref.minimapShape;
+	
+	    _classCallCheck(this, ObjectHexaTerrain);
+	
+	    var _this = _possibleConstructorReturn(this, (ObjectHexaTerrain.__proto__ || Object.getPrototypeOf(ObjectHexaTerrain)).call(this, texture, coords, { data: data }));
+	
+	    _this.name = 'DefaultTerrainObject_hexa';
+	    _this.minimapColor = minimapColor;
+	    _this.minimapShape = minimapShape;
+	    calculateHexa.call(_this, radius);
+	    return _this;
+	  }
+	  /**
+	   * Overwrite super method
+	   * @method calculateHexa
+	   * @return {[type]} [description]
+	   */
+	
+	
+	  _createClass(ObjectHexaTerrain, [{
+	    key: 'getCenterCoordinates',
+	    value: function getCenterCoordinates() {
+	      if (!this.coordinates.center) {
+	        this.coordinates.center = {
+	          x: this.HEXA_WIDTH / 2,
+	          y: this.HEXA_HEIGHT / 2
+	        };
+	      }
+	
+	      return this.coordinates.center;
+	    }
+	  }]);
+	
+	  return ObjectHexaTerrain;
+	}(ObjectSpriteTerrain);
+	
+	var ObjectHexaUnit = function (_ObjectSpriteUnit) {
+	  _inherits(ObjectHexaUnit, _ObjectSpriteUnit);
+	
+	  /**
+	   * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
+	   * For example you might want to add some click area for these (e.g. hexagon)
+	   *
+	   * @class ObjectHexaUnit
+	   * @constructor
+	   * @param {Object} coords            This units coordinates, relative to it's parent container
+	   * @param {Integer} coords.x         X coordinate
+	   * @param {Integer} coords.y         Y coordinate
+	   * @param {object} data               This units custom data
+	   * @param {Object} options            options.radius REQUIRED
+	   * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
+	   */
+	  function ObjectHexaUnit(texture) {
+	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
+	
+	    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	        data = _ref2.data,
+	        radius = _ref2.radius,
+	        minimapColor = _ref2.minimapColor,
+	        minimapShape = _ref2.minimapShape;
+	
+	    _classCallCheck(this, ObjectHexaUnit);
+	
+	    var _this2 = _possibleConstructorReturn(this, (ObjectHexaUnit.__proto__ || Object.getPrototypeOf(ObjectHexaUnit)).call(this, texture, coords, { data: data }));
+	
+	    _this2.name = 'DefaultUnitObjects_hexa';
+	    _this2.minimapColor = minimapColor;
+	    _this2.minimapShape = minimapShape;
+	    _this2.static = false;
+	
+	    calculateHexa.call(_this2, radius);
+	    return _this2;
+	  }
+	  /**
+	   * Overwrite super method
+	   * @method calculateHexa
+	   * @return {[type]} [description]
+	   */
+	
+	
+	  _createClass(ObjectHexaUnit, [{
+	    key: 'getCenterCoordinates',
+	    value: function getCenterCoordinates() {
+	      if (!this.coordinates.center) {
+	        this.coordinates.center = {
+	          x: this.HEXA_WIDTH / 2,
+	          y: this.HEXA_HEIGHT / 2
+	        };
+	      }
+	
+	      return this.coordinates.center;
+	    }
+	  }]);
+	
+	  return ObjectHexaUnit;
+	}(ObjectSpriteUnit);
+	/**
+	 * @static
+	 * @method calculateHexa
+	 * @param {Number} radius       Hexagon radius
+	 */
+	
+	
+	function calculateHexa(radius) {
+	  if (!radius) {
+	    throw new Error('Need radius!');
+	  }
+	
+	  var HEXA_HEIGHT = Math.round(_utils.hexagonMath.calcLongDiagonal(radius));
+	  var HEXA_WIDTH = Math.round(_utils.hexagonMath.calcShortDiagonal(radius));
+	  var SIDE = Math.round(radius);
+	
+	  this.anchor.set(0.5, 0.5);
+	  this.areaHeight = this.HEXA_HEIGHT = HEXA_HEIGHT;
+	  this.areaWidth = this.HEXA_WIDTH = HEXA_WIDTH;
+	  this.SIDE = SIDE;
+	  this.ROW_HEIGHT = Math.round(HEXA_HEIGHT * 0.75);
+	
+	  /* Draw hexagon to test the hits with hitArea */
+	  this.hitArea = setAndGetShape(radius);
+	  this.hitTest = function (coords) {
+	    var localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
+	
+	    return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
+	  };
+	}
+	/*-----------------------
+	--------- PRIVATE -------
+	-----------------------*/
+	/**
+	 * @private
+	 * @static
+	 * @method setAndGetShape
+	 * @param {Number} radius       Hexagon radius
+	 */
+	function setAndGetShape(radius) {
+	  if (!shape) {
+	    shape = _utils.createHexagon.createHexagon(radius);
+	  }
+	
+	  return shape;
+	}
+	
+	/* THIS IS ONLY TEMPORARY FIX. The PIXIs own contains method had a bug introduced in v4.1.0 and
+	 * and that is the one npm retrieves, so I decided to add the old v4.0.0 version here as a
+	 * temporary fix. Can be removed after PIXI fixes it's bug. Githib ticket here:
+	 * https://github.com/pixijs/pixi.js/pull/3165
+	 */
+	function bugFixedContains(x, y) {
+	  var inside = false;
+	
+	  // use some raycasting to test hits
+	  // https://github.com/substack/point-in-polygon/blob/master/index.js
+	  var length = this.points.length / 2;
+	
+	  for (var i = 0, j = length - 1; i < length; j = i++) {
+	    var xi = this.points[i * 2],
+	        yi = this.points[i * 2 + 1],
+	        xj = this.points[j * 2],
+	        yj = this.points[j * 2 + 1],
+	        intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
+	
+	    if (intersect) {
+	      inside = !inside;
+	    }
+	  }
+	
+	  return inside;
+	}
+	
+	/*---------------------
+	--------- API ---------
+	----------------------*/
+	exports.calculateHexa = calculateHexa;
+	exports.ObjectHexaTerrain = ObjectHexaTerrain;
+	exports.ObjectHexaUnit = ObjectHexaUnit;
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _q = __webpack_require__(16);
 	
@@ -15803,9 +16083,10 @@ var flatworld =
 	-----------------------*/
 	/* For debugging? This will show up if the plugin fails to load in Map.js */
 	exports.default = mapMovement;
+	module.exports = exports['default'];
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15814,7 +16095,7 @@ var flatworld =
 	  value: true
 	});
 	
-	var _pixelizedMinimap = __webpack_require__(50);
+	var _pixelizedMinimap = __webpack_require__(51);
 	
 	var _pixelizedMinimap2 = _interopRequireDefault(_pixelizedMinimap);
 	
@@ -15823,9 +16104,10 @@ var flatworld =
 	exports.default = {
 	  pixelizedMinimap: _pixelizedMinimap2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16071,9 +16353,10 @@ var flatworld =
 	---------- API ----------
 	-----------------------*/
 	exports.default = pixelizedMinimap;
+	module.exports = exports['default'];
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16224,9 +16507,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapDrag;
+	module.exports = exports['default'];
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16528,25 +16812,7 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = mapZoom;
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UIs = undefined;
-	
-	var _default = __webpack_require__(54);
-	
-	var _default2 = _interopRequireDefault(_default);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var UIs = exports.UIs = _default2.default;
+	module.exports = exports['default'];
 
 /***/ },
 /* 54 */
@@ -16557,8 +16823,27 @@ var flatworld =
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.UIs = undefined;
 	
 	var _default = __webpack_require__(55);
+	
+	var _default2 = _interopRequireDefault(_default);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var UIs = exports.UIs = _default2.default;
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _default = __webpack_require__(56);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -16567,9 +16852,10 @@ var flatworld =
 	exports.default = {
 	  UIDefault: _default2.default
 	};
+	module.exports = exports['default'];
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16586,11 +16872,11 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _layout = __webpack_require__(56);
+	var _layout = __webpack_require__(57);
 	
 	var templates = _interopRequireWildcard(_layout);
 	
-	var _arrows = __webpack_require__(78);
+	var _arrows = __webpack_require__(79);
 	
 	var _createHexagon = __webpack_require__(45);
 	
@@ -16911,9 +17197,10 @@ var flatworld =
 	--------- API ---------
 	----------------------*/
 	exports.default = UIDefault;
+	module.exports = exports['default'];
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16923,11 +17210,11 @@ var flatworld =
 	});
 	exports.singleSelection = exports.multiSelection = undefined;
 	
-	var _multiSelection = __webpack_require__(57);
+	var _multiSelection = __webpack_require__(58);
 	
 	var _multiSelection2 = _interopRequireDefault(_multiSelection);
 	
-	var _singleSelection = __webpack_require__(77);
+	var _singleSelection = __webpack_require__(78);
 	
 	var _singleSelection2 = _interopRequireDefault(_singleSelection);
 	
@@ -16937,10 +17224,10 @@ var flatworld =
 	exports.singleSelection = _singleSelection2.default;
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(58);
+	var Handlebars = __webpack_require__(59);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    return "  <li>\r\n    "
@@ -16957,16 +17244,16 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Create a simple path alias to allow browserify to resolve
 	// the runtime on a supported path.
-	module.exports = __webpack_require__(59)['default'];
+	module.exports = __webpack_require__(60)['default'];
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16980,30 +17267,30 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _handlebarsBase = __webpack_require__(60);
+	var _handlebarsBase = __webpack_require__(61);
 	
 	var base = _interopRequireWildcard(_handlebarsBase);
 	
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 	
-	var _handlebarsSafeString = __webpack_require__(74);
+	var _handlebarsSafeString = __webpack_require__(75);
 	
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 	
-	var _handlebarsException = __webpack_require__(62);
+	var _handlebarsException = __webpack_require__(63);
 	
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 	
-	var _handlebarsUtils = __webpack_require__(61);
+	var _handlebarsUtils = __webpack_require__(62);
 	
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 	
-	var _handlebarsRuntime = __webpack_require__(75);
+	var _handlebarsRuntime = __webpack_require__(76);
 	
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 	
-	var _handlebarsNoConflict = __webpack_require__(76);
+	var _handlebarsNoConflict = __webpack_require__(77);
 	
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 	
@@ -17038,7 +17325,7 @@ var flatworld =
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17049,17 +17336,17 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _helpers = __webpack_require__(63);
+	var _helpers = __webpack_require__(64);
 	
-	var _decorators = __webpack_require__(71);
+	var _decorators = __webpack_require__(72);
 	
-	var _logger = __webpack_require__(73);
+	var _logger = __webpack_require__(74);
 	
 	var _logger2 = _interopRequireDefault(_logger);
 	
@@ -17148,7 +17435,7 @@ var flatworld =
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17278,7 +17565,7 @@ var flatworld =
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17324,7 +17611,7 @@ var flatworld =
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17335,31 +17622,31 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _helpersBlockHelperMissing = __webpack_require__(64);
+	var _helpersBlockHelperMissing = __webpack_require__(65);
 	
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 	
-	var _helpersEach = __webpack_require__(65);
+	var _helpersEach = __webpack_require__(66);
 	
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 	
-	var _helpersHelperMissing = __webpack_require__(66);
+	var _helpersHelperMissing = __webpack_require__(67);
 	
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 	
-	var _helpersIf = __webpack_require__(67);
+	var _helpersIf = __webpack_require__(68);
 	
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 	
-	var _helpersLog = __webpack_require__(68);
+	var _helpersLog = __webpack_require__(69);
 	
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 	
-	var _helpersLookup = __webpack_require__(69);
+	var _helpersLookup = __webpack_require__(70);
 	
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 	
-	var _helpersWith = __webpack_require__(70);
+	var _helpersWith = __webpack_require__(71);
 	
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 	
@@ -17376,14 +17663,14 @@ var flatworld =
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -17421,7 +17708,7 @@ var flatworld =
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17431,9 +17718,9 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17521,7 +17808,7 @@ var flatworld =
 
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17531,7 +17818,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -17552,14 +17839,14 @@ var flatworld =
 
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -17587,7 +17874,7 @@ var flatworld =
 
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17619,7 +17906,7 @@ var flatworld =
 
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17637,14 +17924,14 @@ var flatworld =
 
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -17676,7 +17963,7 @@ var flatworld =
 
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17687,7 +17974,7 @@ var flatworld =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _decoratorsInline = __webpack_require__(72);
+	var _decoratorsInline = __webpack_require__(73);
 	
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 	
@@ -17698,14 +17985,14 @@ var flatworld =
 
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -17733,14 +18020,14 @@ var flatworld =
 
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -17786,7 +18073,7 @@ var flatworld =
 
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -17807,7 +18094,7 @@ var flatworld =
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17827,15 +18114,15 @@ var flatworld =
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _utils = __webpack_require__(61);
+	var _utils = __webpack_require__(62);
 	
 	var Utils = _interopRequireWildcard(_utils);
 	
-	var _exception = __webpack_require__(62);
+	var _exception = __webpack_require__(63);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _base = __webpack_require__(60);
+	var _base = __webpack_require__(61);
 	
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -18105,7 +18392,7 @@ var flatworld =
 
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -18132,10 +18419,10 @@ var flatworld =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(58);
+	var Handlebars = __webpack_require__(59);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=container.escapeExpression;
@@ -18148,7 +18435,7 @@ var flatworld =
 	},"useData":true});
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18408,7 +18695,7 @@ var flatworld =
 	exports.drawLine = drawLine;
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18543,7 +18830,7 @@ var flatworld =
 	exports.Preload = Preload;
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18561,7 +18848,7 @@ var flatworld =
 	
 	var _core = __webpack_require__(2);
 	
-	var _Objects = __webpack_require__(81);
+	var _Objects = __webpack_require__(48);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -18718,245 +19005,8 @@ var flatworld =
 	----------------------*/
 	exports.hexaFactory = hexaFactory;
 
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.ObjectHexaUnit = exports.ObjectHexaTerrain = undefined;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _pixi = __webpack_require__(9);
-	
-	var PIXI = _interopRequireWildcard(_pixi);
-	
-	var _index = __webpack_require__(2);
-	
-	var _utils = __webpack_require__(44);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ObjectSpriteTerrain = _index.objects.ObjectSpriteTerrain,
-	    ObjectSpriteUnit = _index.objects.ObjectSpriteUnit;
-	
-	/*-----------------------
-	-------- VARIABLES ------
-	-----------------------*/
-	
-	var shape = void 0;
-	
-	var ObjectHexaTerrain = function (_ObjectSpriteTerrain) {
-	  _inherits(ObjectHexaTerrain, _ObjectSpriteTerrain);
-	
-	  /**
-	   * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are inherited, depending on
-	   * the map type. For example you might want to add some click area for these
-	   *
-	   * @namespace flatworld.extensions.hexagons
-	   * @class ObjectHexaTerrain
-	   * @constructor
-	   * @param  {Object} coords
-	   * @param  {Integer} coords.x         X coordinate
-	   * @param  {Integer} coords.y         Y coordinate
-	   * @param {object} data               This units custom data
-	   * @param {Object} options            options.radius REQUIRED.
-	   * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
-	   */
-	  function ObjectHexaTerrain(texture) {
-	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref.data,
-	        radius = _ref.radius,
-	        minimapColor = _ref.minimapColor,
-	        minimapShape = _ref.minimapShape;
-	
-	    _classCallCheck(this, ObjectHexaTerrain);
-	
-	    var _this = _possibleConstructorReturn(this, (ObjectHexaTerrain.__proto__ || Object.getPrototypeOf(ObjectHexaTerrain)).call(this, texture, coords, { data: data }));
-	
-	    _this.name = 'DefaultTerrainObject_hexa';
-	    _this.minimapColor = minimapColor;
-	    _this.minimapShape = minimapShape;
-	    calculateHexa.call(_this, radius);
-	    return _this;
-	  }
-	  /**
-	   * Overwrite super method
-	   * @method calculateHexa
-	   * @return {[type]} [description]
-	   */
-	
-	
-	  _createClass(ObjectHexaTerrain, [{
-	    key: 'getCenterCoordinates',
-	    value: function getCenterCoordinates() {
-	      if (!this.coordinates.center) {
-	        this.coordinates.center = {
-	          x: this.WIDTH / 2,
-	          y: this.HEIGHT / 2
-	        };
-	      }
-	
-	      return this.coordinates.center;
-	    }
-	  }]);
-	
-	  return ObjectHexaTerrain;
-	}(ObjectSpriteTerrain);
-	
-	var ObjectHexaUnit = function (_ObjectSpriteUnit) {
-	  _inherits(ObjectHexaUnit, _ObjectSpriteUnit);
-	
-	  /**
-	   * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
-	   * For example you might want to add some click area for these (e.g. hexagon)
-	   *
-	   * @class ObjectHexaUnit
-	   * @constructor
-	   * @param {Object} coords            This units coordinates, relative to it's parent container
-	   * @param {Integer} coords.x         X coordinate
-	   * @param {Integer} coords.y         Y coordinate
-	   * @param {object} data               This units custom data
-	   * @param {Object} options            options.radius REQUIRED
-	   * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
-	   */
-	  function ObjectHexaUnit(texture) {
-	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref2.data,
-	        radius = _ref2.radius,
-	        minimapColor = _ref2.minimapColor,
-	        minimapShape = _ref2.minimapShape;
-	
-	    _classCallCheck(this, ObjectHexaUnit);
-	
-	    var _this2 = _possibleConstructorReturn(this, (ObjectHexaUnit.__proto__ || Object.getPrototypeOf(ObjectHexaUnit)).call(this, texture, coords, { data: data }));
-	
-	    _this2.name = 'DefaultUnitObjects_hexa';
-	    _this2.minimapColor = minimapColor;
-	    _this2.minimapShape = minimapShape;
-	    _this2.static = false;
-	
-	    calculateHexa.call(_this2, radius);
-	    return _this2;
-	  }
-	  /**
-	   * Overwrite super method
-	   * @method calculateHexa
-	   * @return {[type]} [description]
-	   */
-	
-	
-	  _createClass(ObjectHexaUnit, [{
-	    key: 'getCenterCoordinates',
-	    value: function getCenterCoordinates() {
-	      if (!this.coordinates.center) {
-	        this.coordinates.center = {
-	          x: this.WIDTH / 2,
-	          y: this.HEIGHT / 2
-	        };
-	      }
-	
-	      return this.coordinates.center;
-	    }
-	  }]);
-	
-	  return ObjectHexaUnit;
-	}(ObjectSpriteUnit);
-	/*-----------------------
-	--------- PRIVATE -------
-	-----------------------*/
-	/**
-	 * @private
-	 * @static
-	 * @method calculateHexa
-	 * @param {Number} radius       Hexagon radius
-	 */
-	
-	
-	function calculateHexa(radius) {
-	  if (!radius) {
-	    throw new Error('Need radius!');
-	  }
-	
-	  var HEIGHT = Math.round(_utils.hexagonMath.calcLongDiagonal(radius));
-	  var WIDTH = Math.round(_utils.hexagonMath.calcShortDiagonal(radius));
-	  var SIDE = Math.round(radius);
-	
-	  this.anchor.set(0.5, 0.5);
-	  this.areaHeight = this.HEIGHT = HEIGHT;
-	  this.areaWidth = this.WIDTH = WIDTH;
-	  this.SIDE = SIDE;
-	  this.ROW_HEIGHT = Math.round(HEIGHT * 0.75);
-	
-	  /* Draw hexagon to test the hits with hitArea */
-	  this.hitArea = setAndGetShape(radius);
-	  this.hitTest = function (coords) {
-	    var localCoords = this.toLocal(new PIXI.Point(coords.x, coords.y));
-	
-	    return bugFixedContains.call(this.hitArea, localCoords.x * this.scale.x, localCoords.y * this.scale.y);
-	  };
-	}
-	/**
-	 * @private
-	 * @static
-	 * @method setAndGetShape
-	 * @param {Number} radius       Hexagon radius
-	 */
-	function setAndGetShape(radius) {
-	  if (!shape) {
-	    shape = _utils.createHexagon.createHexagon(radius);
-	  }
-	
-	  return shape;
-	}
-	
-	/* THIS IS ONLY TEMPORARY FIX. The PIXIs own contains method had a bug introduced in v4.1.0 and
-	 * and that is the one npm retrieves, so I decided to add the old v4.0.0 version here as a
-	 * temporary fix. Can be removed after PIXI fixes it's bug. Githib ticket here:
-	 * https://github.com/pixijs/pixi.js/pull/3165
-	 */
-	function bugFixedContains(x, y) {
-	  var inside = false;
-	
-	  // use some raycasting to test hits
-	  // https://github.com/substack/point-in-polygon/blob/master/index.js
-	  var length = this.points.length / 2;
-	
-	  for (var i = 0, j = length - 1; i < length; j = i++) {
-	    var xi = this.points[i * 2],
-	        yi = this.points[i * 2 + 1],
-	        xj = this.points[j * 2],
-	        yj = this.points[j * 2 + 1],
-	        intersect = yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
-	
-	    if (intersect) {
-	      inside = !inside;
-	    }
-	  }
-	
-	  return inside;
-	}
-	
-	/*---------------------
-	--------- API ---------
-	----------------------*/
-	exports.ObjectHexaTerrain = ObjectHexaTerrain;
-	exports.ObjectHexaUnit = ObjectHexaUnit;
-
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;
 //# sourceMappingURL=flatworld.js.map

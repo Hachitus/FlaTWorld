@@ -8,8 +8,9 @@ module.exports = {
   output: {
     path: './tests/dist',
     filename: 'flatworld.js',
-    ibraryTarget: "var",
-    library: 'flatworld'
+    libraryTarget: "umd",
+    library: 'flatworld',
+    UmdNamedDefine: true
   },
   node: {
     fs: "empty"
