@@ -2,7 +2,7 @@
 [![Gitter](https://badges.gitter.im/Hachitus/FlaTWorld.svg)](https://gitter.im/Hachitus/FlaTWorld)
 
 #ALPHA!
-The development is still in alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under dramatic changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
+The development is still in alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
 
 #Introduction
 2D turn-based strategy game engine for browsers. The engine originally got into development to get an engine for more hard-core turn-based games and not casual games. I was frustrated at waiting for those games and decided to start making it on my own. Browser environment is a perfect match for turn-based multiplayer. You can continue your turn easily anywhere, any time!
@@ -36,25 +36,7 @@ Table of contents
 
 #Developing
 ##Installation
-You can
-
-    git clone https://github.com/Hachitus/FlaTWorld.git
-
-Then install dependencies for building
-
-    npm install
-
-Then build for development
-
-    npm run build
-
-And the current distribution build will be in: src/dist/ (flatworld.js and flatworld_libraries.js)
-
-If you need files for production, deploy
-
-    npm run deploy
-
-And the production files (uglified) will be in: dist/ (flatworld.js and flatworld_libraries.js)
+    npm i flatworld
 
 ##Examples
 Best example is found in [plunkr](http://plnkr.co/edit/X9XexHw65aB5Sa6xSroZ?p=preview). This is the base map created with the engine. The latest example will be found from the engines manual tests (in src/tests/-folder). A working example should also be found in: *http://flatworld.level7.fi/manualStressTest.html*, but not quaranteed that it is always on (as server can be down or dns changed).

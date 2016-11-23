@@ -1,3 +1,11 @@
+<a name="0.6.2"></a>
+# 0.6.2 npm published in UMD (2016-11-23)
+## Others
+* This update was mostly just to publish the engine to npm.
+* Added fetch polyfill
+* CalculateHexa function as public function, instead of private
+* Exported the object function, so those can be used to extend the classes
+
 <a name="0.6.1"></a>
 # 0.6.1 Tiny milestone for UI (2016-11-09)
 ## Possible breaking changes
