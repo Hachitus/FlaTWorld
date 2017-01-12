@@ -23,13 +23,16 @@ class ObjectHexaTerrain extends ObjectSpriteTerrain {
    * @param {Object} options            options.radius REQUIRED.
    * @param {Number} options.radius     REQUIRED. This is the radius of the game maps hexagon.
    */
-  constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape } = {}) {
+  constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape, anchor = 0.5 }) {
     super(texture, coords, { data });
 
     this.name = 'DefaultTerrainObject_hexa';
     this.minimapColor = minimapColor;
     this.minimapShape = minimapShape;
-    calculateHexa.call(this, radius);
+    // Set graphics to center of the hexa
+    this.anchor.set(anchor, anchor);
+
+    calculateHexa.call(this, radius);    
   }
   /**
    * Overwrite super method
@@ -62,13 +65,15 @@ class ObjectHexaUnit extends ObjectSpriteUnit {
    * @param {Object} options            options.radius REQUIRED
    * @param {Object} options.radius     REQUIRED. This is the radius of the game maps hexagon
    */
-  constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape } = {}) {
+  constructor(texture, coords = { x: 0, y: 0 }, { data, radius, minimapColor, minimapShape, anchor = 0.5 }) {
     super(texture, coords, { data });
 
     this.name = 'DefaultUnitObjects_hexa';
     this.minimapColor = minimapColor;
     this.minimapShape = minimapShape;
     this.static = false;
+    // Set graphics to center of the hexa
+    this.anchor.set(anchor, anchor);
 
     calculateHexa.call(this, radius);
   }
@@ -102,7 +107,6 @@ function calculateHexa(radius) {
   const HEXA_WIDTH = Math.round(hexagonMath.calcShortDiagonal(radius));
   const SIDE = Math.round(radius);
 
-  this.anchor.set(0.5, 0.5);
   this.areaHeight = this.HEXA_HEIGHT = HEXA_HEIGHT;
   this.areaWidth = this.HEXA_WIDTH = HEXA_WIDTH;
   this.SIDE = SIDE;

@@ -15563,12 +15563,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  function ObjectHexaTerrain(texture) {
 	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref.data,
+	    var _ref = arguments[2];
+	    var data = _ref.data,
 	        radius = _ref.radius,
 	        minimapColor = _ref.minimapColor,
-	        minimapShape = _ref.minimapShape;
+	        minimapShape = _ref.minimapShape,
+	        _ref$anchor = _ref.anchor,
+	        anchor = _ref$anchor === undefined ? 0.5 : _ref$anchor;
 	
 	    _classCallCheck(this, ObjectHexaTerrain);
 	
@@ -15577,6 +15578,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.name = 'DefaultTerrainObject_hexa';
 	    _this.minimapColor = minimapColor;
 	    _this.minimapShape = minimapShape;
+	    // Set graphics to center of the hexa
+	    _this.anchor.set(anchor, anchor);
+	
 	    calculateHexa.call(_this, radius);
 	    return _this;
 	  }
@@ -15622,12 +15626,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  function ObjectHexaUnit(texture) {
 	    var coords = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { x: 0, y: 0 };
-	
-	    var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
-	        data = _ref2.data,
+	    var _ref2 = arguments[2];
+	    var data = _ref2.data,
 	        radius = _ref2.radius,
 	        minimapColor = _ref2.minimapColor,
-	        minimapShape = _ref2.minimapShape;
+	        minimapShape = _ref2.minimapShape,
+	        _ref2$anchor = _ref2.anchor,
+	        anchor = _ref2$anchor === undefined ? 0.5 : _ref2$anchor;
 	
 	    _classCallCheck(this, ObjectHexaUnit);
 	
@@ -15637,6 +15642,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this2.minimapColor = minimapColor;
 	    _this2.minimapShape = minimapShape;
 	    _this2.static = false;
+	    // Set graphics to center of the hexa
+	    _this2.anchor.set(anchor, anchor);
 	
 	    calculateHexa.call(_this2, radius);
 	    return _this2;
@@ -15680,7 +15687,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var HEXA_WIDTH = Math.round(_utils.hexagonMath.calcShortDiagonal(radius));
 	  var SIDE = Math.round(radius);
 	
-	  this.anchor.set(0.5, 0.5);
 	  this.areaHeight = this.HEXA_HEIGHT = HEXA_HEIGHT;
 	  this.areaWidth = this.HEXA_WIDTH = HEXA_WIDTH;
 	  this.SIDE = SIDE;
