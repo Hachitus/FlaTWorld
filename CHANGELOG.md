@@ -1,3 +1,8 @@
+<a name="0.6.3"></a>
+# 0.6.3 Bug fixes (2017-?-?)
+## Bugs
+* Selecting objects didn't take element position into account (assumed canvas is in 0,0 coordinates)
+
 <a name="0.6.2"></a>
 # 0.6.2 npm published in UMD (2016-11-23)
 ## Others

@@ -28,7 +28,9 @@ function disableContextMenu(canvas) {
  * @return {Object}
  */
 function getPointerCoords(e) {
-  return new PIXI.Point(e.offsetX, e.offsetY);
+  const position = e.target.getBoundingClientRect();
+
+  return new PIXI.Point(e.offsetX - position.left, e.offsetY - position.top);
 }
 /**
  * @method getHAMMERPointerCoords
@@ -36,7 +38,9 @@ function getPointerCoords(e) {
  * @return {Object}
  */
 function getHAMMERPointerCoords(e) {
-  return new PIXI.Point(e.center.x, e.center.y);
+  const position = e.target.getBoundingClientRect();
+
+  return new PIXI.Point(e.center.x - position.left, e.center.y - position.top);
 }
 
 
