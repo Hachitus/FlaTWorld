@@ -1,4 +1,3 @@
-import Q from 'q';
 import * as PIXI from 'pixi.js';
 
 class Preload {
@@ -21,15 +20,19 @@ class Preload {
    * @return {Promise} Return promise object, that will be resolved when the preloading is finished
    **/
   resolveOnComplete() {
-    const promise = Q.defer();
+    const promise = new Promise((resolve, reject) => {
+      try {
+        this.preloaderClass.load();
 
-    this.preloaderClass.load();
-
-    this.preloaderClass.once('complete', function (loader, resources) {
-      promise.resolve(loader, resources);
+        this.preloaderClass.once('complete', function (loader, resources) {
+          resolve(loader, resources);
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
 
-    return promise.promise;
+    return promise;
   }
   /**
    * @method addResource

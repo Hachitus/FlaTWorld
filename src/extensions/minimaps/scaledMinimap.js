@@ -43,6 +43,8 @@
       map = givenMap;
       map.initMinimap = initMinimap;
       _minimapLayer = map.getMinimapLayer();
+
+      return Promise.resolve();
     }
 
     function initMinimap({ width, height }, UIImage, backgroundImage, { x = 0, y = 0 } = {}) {

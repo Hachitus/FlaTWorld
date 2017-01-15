@@ -1,4 +1,3 @@
-import * as Q from 'q';
 import { Howl } from 'howler';
 
 /*---------------------
@@ -50,11 +49,6 @@ class Sound {
    * @param  {String} name      Name of the sound to play
    */
   play(name) {
-    const promise = Q.defer();
-
-    this._allSounds[name]._onend = () => {
-      promise.resolve(true);
-    };
     this._allSounds[name].play();
   }
   /**
@@ -77,14 +71,19 @@ class Sound {
    * @return {Promise}                Promise that resolves after fade is complete
    */
   fade(name, from, to, duration) {
-    const promise = Q.defer();
-    const cb = () => {
-      promise.resolve(true);
-    };
+    const promise = new Promise((resolve, reject) => {
+      try {
+        const cb = () => {
+          resolve(true);
+        };
 
-    this._allSounds[name].fade(from, to, duration, cb);
+        this._allSounds[name].fade(from, to, duration, cb);
+      } catch (e) {
+        reject(e);
+      }
+    })
 
-    return promise.promise;
+    return promise;
   }
 }
 

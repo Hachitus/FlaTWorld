@@ -1,4 +1,3 @@
-import Q from 'q';
 import { mapEvents, utils } from '../../core/';
 
 /*-----------------------
@@ -197,40 +196,48 @@ const mapMovement = (function(debug = false) {
 
     primaryLayers = utils.general.chunkArray(primaryLayers, VIEWPORT_OFFSET);
     promises = primaryLayers.map((theseLayers) => {
-      const promise = Q.defer();
+      const promise = new Promise((resolve, reject) => {
+        try {
+          window.setTimeout(function () {
+            const foundSubcontainers = theseLayers.map((layer) => {
+              return layer.getSubcontainersByCoordinates(largerViewportAreaWithOffset);
+            });
+            containersUnderChangedArea = containersUnderChangedArea.concat(foundSubcontainers);
 
-      window.setTimeout(function () {
-        const foundSubcontainers = theseLayers.map((layer) => {
-          return layer.getSubcontainersByCoordinates(largerViewportAreaWithOffset);
-        });
-        containersUnderChangedArea = containersUnderChangedArea.concat(foundSubcontainers);
-
-        promise.resolve(containersUnderChangedArea);
+            resolve(containersUnderChangedArea);
+          });
+        } catch (e) {
+          reject(e);
+        }
       });
 
-      return promise.promise;
+      return promise;
     });
 
-    promises = Q.all(promises).then(() => {
+    promises = Promise.all(promises).then(() => {
       containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
 
       const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
       const promises = subcontainers.map((thesesContainers) => {
-        const promise = Q.defer();
-
-        window.setTimeout(function () {
-          promise.resolve(thesesContainers.filter((thisContainer) => {
-            return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
-          }));
+        const promise = new Promise((resolve, reject) => {
+          try {
+            window.setTimeout(function () {
+              resolve(thesesContainers.filter((thisContainer) => {
+                return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
+              }));
+            });
+          } catch (e) {
+            reject(e);
+          }
         });
 
-        return promise.promise;
+        return promise;
       });
 
       return promises;
     });
-    Q.all(promises).then(() => {
+    Promise.all(promises).then(() => {
       queue.processing = false;
 
       mapInstance.drawOnNextTick();

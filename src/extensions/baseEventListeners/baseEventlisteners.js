@@ -65,6 +65,8 @@ const baseEventlisteners = (function () {
     eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
     eventListeners.setDetector('select', selectToggle.on, selectToggle.off);
     eventListeners.setDetector('order', orderToggle.on, orderToggle.off);
+
+    return Promise.resolve();
   }
 
   /**

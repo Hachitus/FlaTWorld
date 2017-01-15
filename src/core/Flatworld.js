@@ -1,4 +1,3 @@
-import Q from 'q';
 import * as PIXI from 'pixi.js';
 import { mapLayers, ObjectManager, mapEvents, log, utils, constants, UI } from './index';
 
@@ -57,7 +56,6 @@ class Flatworld {
    * @constructor
    * @requires PIXI.JS framework in global namespace
    * @requires Canvas (webGL support recommended) HTML5-element supported.
-   * @requires Q for promises
    * @requires Hammer for touch events
    * @requires Hamster for mouse scroll events
    *
@@ -328,7 +326,7 @@ class Flatworld {
    * @return {Promise}        Promise that holds all the individual plugin loading promises
    **/
   whenReady() {
-    return Q.all(isMapReadyPromises);
+    return Promise.all(isMapReadyPromises);
   }
   /**
    * The correct way to update / redraw the map. Check happens at every tick and thus in every frame.
@@ -583,7 +581,7 @@ class Flatworld {
    * @param {Object} plugin        Plugin module
    * */
   initPlugin(plugin, params = []) {
-    let promise;
+    let promise = Promise.resolve();
 
     try {
       if (!plugin || !plugin.pluginName || !plugin.init) {
@@ -599,7 +597,7 @@ class Flatworld {
     } catch (e) {
       e.message += ' INFO: An error initializing plugin. JSON.stringify: "' + plugin.pluginName + '" ';
       log.error(e);
-      promise = Q.reject();
+      promise = Promise.reject();
     }
 
     return promise;

@@ -66,6 +66,8 @@ const mapZoom = (function() {
 
     /* Singleton should have been instantiated before, we only retrieve it with 0 params */
     eventListeners.on('zoom', unifiedEventCB);
+
+    return Promise.resolve();
   }
 
   /*----------------------------------------
