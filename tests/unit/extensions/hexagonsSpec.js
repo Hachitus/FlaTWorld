@@ -1,3 +1,5 @@
+// DISABLED
+
 (function hexagonsSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
   const { createHexagonDataStructure, _isBlocked, _orderListener } = window.flatworld.extensions.hexagons._tests;
@@ -124,14 +126,14 @@
       expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith(new PIXI.Point(
         x,
         y
-      );
+      ));
       expect(mapEvents.publish).toHaveBeenCalledWith('objectMoves', map.currentlySelectedObjects[0]);
       expect(map.currentlySelectedObjects[0].move).toHaveBeenCalledWith(new PIXI.Point(
         x,
         y
-      );
+      ));
       expect(mapStates.objectOrderEnd).toHaveBeenCalled();
       expect(map.drawOnNextTick).toHaveBeenCalled();
     });
 	});
-})();
+});

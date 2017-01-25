@@ -10,6 +10,7 @@
       let cbFinished = 'no';
       const testCallback = function (datas, context) {
         cbFinished = datas;
+        console.log(console.time())
       };
 
       mapEvents.subscribe('test', testCallback);
@@ -22,7 +23,7 @@
 
       expect(cbFinished).toEqual(['called3', 'called4']);
     });
-    it('custom cooldown', (done) => {
+    it('custom cooldown (very flaky as timing involved, we should have a better one)', (done) => {
       let cbFinished = 'no';
       const testCallback = function (datas) {
         cbFinished = datas;
@@ -32,24 +33,24 @@
 
       mapEvents.subscribe('test2', testCallback);
       mapEvents.publish({ name: 'test2', cooldown: 20 }, [1, 2]);
-      expect(cbFinished).toEqual([1, 2]);
+      expect(cbFinished).toEqual([1, 2], 'FIRST');
 
       window.setTimeout(() => {
-        expect(cbFinished).toEqual([1, 2]);
+        expect(cbFinished).toEqual([1, 2], 'SECOND');
         mapEvents.publish({ name: 'test2', cooldown: 45 }, [3, 4]);
       }, 5);
 
       window.setTimeout(() => {
-        expect(cbFinished).toEqual([1, 2]);
-        mapEvents.publish({ name: 'test2', cooldown: 5 }, [5, 6]);
+        expect(cbFinished).toEqual([1, 2], 'THIRD');
+        mapEvents.publish({ name: 'test2', cooldown: 50 }, [5, 6]);
       }, 10);
 
-      expect(cbFinished).toEqual([1, 2]);
+      expect(cbFinished).toEqual([1, 2], 'FOURTH');
 
       window.setTimeout(() => {
         expect(cbFinished).toEqual([5, 6]);
         done();
-      }, 100);
+      }, 200);
     });
     it('debounce', (done) => {
       let cbFinished = 'no';

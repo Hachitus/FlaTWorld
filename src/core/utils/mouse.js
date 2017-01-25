@@ -28,9 +28,7 @@ function disableContextMenu(canvas) {
  * @return {Object}
  */
 function getPointerCoords(e) {
-  const position = e.target.getBoundingClientRect();
-
-  return new PIXI.Point(e.offsetX - position.left, e.offsetY - position.top);
+  return new PIXI.Point(e.offsetX, e.offsetY);
 }
 /**
  * @method getHAMMERPointerCoords
@@ -38,6 +36,7 @@ function getPointerCoords(e) {
  * @return {Object}
  */
 function getHAMMERPointerCoords(e) {
+  // We need the remove the element position on the page from the center coordinates.
   const position = e.target.getBoundingClientRect();
 
   return new PIXI.Point(e.center.x - position.left, e.center.y - position.top);

@@ -88,7 +88,7 @@ class Flatworld {
       maxDetectionOffset: 0 // maxDetectionOffset default set later
     },
     trackFPSCB = false,
-    defaultScaleMode = PIXI.SCALE_MODES.DEFAULT } = {},
+    defaultScaleMode = constants.DEFAULT_SCALE_MODE } = {},
     mouseTextSelection = false) {
     if (!utils.environment.isWebglSupported()) {
       const error = new Error('Webgl is not supported');
@@ -157,10 +157,8 @@ class Flatworld {
     protectedProperties.zoomLayer = _zoomLayer;
     protectedProperties.movableLayer = _movableLayer;
 
-    /* PIXI.SCALE_MODES.DEFAULT is officially a const, but since it's not ES6 we don't care :P.
-     * Setting this separately in each
-     * baseTexture, would seem stupid, so we do it like this for now. */
-    this.defaultScaleMode = PIXI.SCALE_MODES.DEFAULT = defaultScaleMode;
+    /* See PIXI.SCALE_MODES for */
+    this.defaultScaleMode = PIXI.settings.SCALE_MODE = defaultScaleMode;
     /**
      * canvas element that was generated and is being used by this new generated Map instance.
      *

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { Flatworld, utils, log } from '../core/';
+import { Flatworld, utils, log, constants } from '../core/';
 import { ObjectHexaTerrain, ObjectHexaUnit } from '../extensions/hexagons/Objects';
 
 /*---------------------
@@ -25,7 +25,7 @@ function hexaFactory(mapCanvas, datas, {
       trackFPSCB = false,
       isHiddenByDefault = true,
       minimapCanvas,
-      scaleMode = PIXI.SCALE_MODES.DEFAULT } = {}) {
+      scaleMode = constants.DEFAULT_SCALE_MODE } = {}) {
   log.debug('============== Hexagonal Map factory started =============');
   const pixelRatio = utils.environment.getPixelRatio();
   const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;

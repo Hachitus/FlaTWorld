@@ -1,7 +1,18 @@
+// DISABLED
+
 (function forOfWarSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
   const fogOfWarMod = window.flatworld.extensions.fogOfWars.simpleFogOfWar;
   const { creator } = window.flatworldCreatorHelper;
+
+  function filterCreator () {
+    return new flatworld.MapDataManipulator({
+      type: 'filter',
+      object: 'layer',
+      property: 'selectable',
+      value: true,
+    });
+  }
 
   describe('fogOfWar tests => ', () => {
     let fogOfWarModule;
@@ -9,7 +20,7 @@
 
     beforeEach(function () {
       fogOfWarModule = Object.assign({}, fogOfWarMod);
-      map = creator.initFlatworld([fogOfWarModule], {
+      map = creator({
         subcontainers: {
           width: 50,
           height: 50,
@@ -19,6 +30,16 @@
     })
 
     it('calculateCorrectCoordinates', () => {
+      fogOfWarModule.init.call(
+        {
+          mapInstance: map,
+          _properties: {
+            zoomLayer: {}
+          }
+        }, {
+          cb: () => {},
+          filter: filterCreator
+        });
       const testUnit = map._getMovableLayer().children[0].children[0];
       const testPoint = new PIXI.Point(10, 10);
       const testPoint2 = new PIXI.Point(20, 10);
@@ -39,19 +60,25 @@
     });
 
     it('activateFogOfWar works', () => {
-      const cb = () => {
-        return new PIXI.Sprite(PIXI.Texture.EMPTY);
-      };
-
       spyOn(map, 'createSpecialLayer');
 
-      fogOfWarModule.activateFogOfWar(cb);
+      fogOfWarModule.init.call(
+        {
+          mapInstance: map,
+          _properties: {
+            zoomLayer: {}
+          }
+        }, {
+          cb: () => {
+            return new PIXI.Sprite(PIXI.Texture.EMPTY);
+          }
+        });
 
       expect(map.createSpecialLayer).toHaveBeenCalledWith('FoWMovableMaskLayer');
     });
 
     it('getFoWObjectArray', () => {
-      const cb = () => {
+      let cb = () => {
         return new PIXI.Sprite(PIXI.Texture.EMPTY);
       };
       fogOfWarModule.activateFogOfWar(cb);
@@ -61,7 +88,7 @@
       }]);
 
       let cbCalled = false;
-      const cb = (coords) => {
+      cb = (coords) => {
         cbCalled = true;
         return coords;
       };
@@ -76,4 +103,4 @@
       fogOfWarModule.refreshFoW();
     });
   });
-})();
+});

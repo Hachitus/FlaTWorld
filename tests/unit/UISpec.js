@@ -13,6 +13,9 @@
         },
         showUnitMovement: function (coordinates, options) {
           return [ coordinates, options];
+        },
+        unSelect: function (coordinates, options) {
+          return 1;
         }
       };
       passedArguments = [
@@ -49,7 +52,9 @@
 
       result = ui.showSelections.apply(ui, passedArguments);
 
-      expect(result).toEqual(returnedArguments);
+      expect(result[0][0]).toEqual(returnedArguments[0]);
+      expect(result[1]).toEqual(returnedArguments[1]);
+      expect(result[2]).toEqual(returnedArguments[2]);
 
       passedArguments[0] = [1,2];
       returnedArguments[0] = [1,2];

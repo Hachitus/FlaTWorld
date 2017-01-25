@@ -52,7 +52,7 @@ const simpleFogOfWar = (function() {
    * @param  {Object} parameters    This plugin requires cb and filter properties!
    */
   function init(params) {
-    if (!(params.cb || params.filter)) {
+    if (!(params.cb && params.filter)) {
       throw new Error('SimpleFogOfWar plugin requires cb and filter properties')
     }
     mapInstance = this.mapInstance;

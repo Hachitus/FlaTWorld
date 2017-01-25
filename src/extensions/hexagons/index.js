@@ -10,5 +10,6 @@ toBeExported.selectHexagonObject = hexagonPlugin.selectHexagonObject;
 toBeExported.pathfinding = pathfinding;
 toBeExported.utils = utils;
 toBeExported.objects = objects;
+toBeExported._tests = hexagonPlugin._tests;
 
 export default toBeExported;
