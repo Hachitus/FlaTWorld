@@ -226,7 +226,7 @@ class MapLayer extends PIXI.Container {
    * @return {Array} empty    UIObjects array
    * */
   deleteUIObjects(UIName) {
-    const UILayer = this.getUILayer();
+    const UILayer = this.getUILayer() || this.createUILayer();
 
     if (UIName) {
       const object = this.UIObjectList[UIName];
