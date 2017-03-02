@@ -23,6 +23,7 @@ const mapAPI = (function() {
   return {
     get,
     post,
+    put,
     add,
     remove,
     update,
@@ -57,6 +58,20 @@ const mapAPI = (function() {
    */
   function post(type, params) {
     return _doFetch('post', type, params);
+  }
+  /**
+   * Send data to server
+   *
+   * @method put
+   * @param  {String} name    The indentifier for this API call / endpoint
+   * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+   * handle this API data. E.g. at least the
+   * POST data that will be sent to server needs to be set in the callback to the object.body
+   * property.
+   * @return {Promise}        ES6 native Promise as the API advances
+   */
+  function put(type, params) {
+    return _doFetch('put', type, params);
   }
   /**
    * Add a new mapApi endpoint

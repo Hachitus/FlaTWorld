@@ -40382,6 +40382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return {
 	    get: get,
 	    post: post,
+	    put: put,
 	    add: add,
 	    remove: remove,
 	    update: update,
@@ -40416,6 +40417,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  function post(type, params) {
 	    return _doFetch('post', type, params);
+	  }
+	  /**
+	   * Send data to server
+	   *
+	   * @method put
+	   * @param  {String} name    The indentifier for this API call / endpoint
+	   * @param  {Array} params   Params that are sent to the callbacks that have been attached to
+	   * handle this API data. E.g. at least the
+	   * POST data that will be sent to server needs to be set in the callback to the object.body
+	   * property.
+	   * @return {Promise}        ES6 native Promise as the API advances
+	   */
+	  function put(type, params) {
+	    return _doFetch('put', type, params);
 	  }
 	  /**
 	   * Add a new mapApi endpoint
@@ -41604,7 +41619,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function deleteUIObjects(UIName) {
 	      var _this2 = this;
 	
-	      var UILayer = this.getUILayer();
+	      var UILayer = this.getUILayer() || this.createUILayer();
 	
 	      if (UIName) {
 	        var object = this.UIObjectList[UIName];
@@ -42779,8 +42794,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'move',
 	    value: function move(to) {
 	      _index.mapEvents.publish('objectMove', this);
-	      _index.mapAPI.post('objectMove', {
-	        id: this.id,
+	      _index.mapAPI.put('objectMove', {
+	        id: this.data.id,
 	        from: {
 	          x: this.x,
 	          y: this.y

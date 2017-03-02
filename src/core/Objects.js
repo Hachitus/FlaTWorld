@@ -279,8 +279,8 @@ class ObjectSpriteUnit extends ObjectSprite {
     */
   move(to) {
     mapEvents.publish('objectMove', this);
-    mapAPI.post('objectMove', {
-      id: this.id,
+    mapAPI.put('objectMove', {
+      id: this.data.id,
       from: {
         x: this.x,
         y: this.y
