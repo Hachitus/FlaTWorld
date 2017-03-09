@@ -66,7 +66,7 @@ function hexaFactory(mapCanvas, datas, {
   };
   const map = new Flatworld(mapCanvas, mapProperties);
 
-  PIXI.SCALE_MODES.DEFAULT = 1;
+  PIXI.settings.SCALE_MODE = 1;
 
   DATA_MAP.layers.forEach(layerData => {
     if (typeof layerData !== 'object') {
