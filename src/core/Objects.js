@@ -277,15 +277,11 @@ class ObjectSpriteUnit extends ObjectSprite {
     * @requires  mapAPIa..('objectMove") to be declared
     * @attribute [name]
     */
-  move(to) {
+  move(path) {
     mapEvents.publish('objectMove', this);
     mapAPI.put('objectMove', {
       id: this.data.id,
-      from: {
-        x: this.x,
-        y: this.y
-      },
-      to
+      path
     });
   }
 }
