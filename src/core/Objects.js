@@ -277,8 +277,9 @@ class ObjectSpriteUnit extends ObjectSprite {
     * @param {String} path  Path through which the object moves
     */
   move(path) {
-    mapEvents.publish('objectMove', {
-      object: this,
+    mapEvents.publish('objectMove', this);
+    mapAPI.put('objectMove', {
+      id: this.data.id,
       path
     });
   }

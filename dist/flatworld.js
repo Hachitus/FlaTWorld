@@ -41435,8 +41435,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'move',
 	    value: function move(path) {
-	      _index.mapEvents.publish('objectMove', {
-	        object: this,
+	      _index.mapEvents.publish('objectMove', this);
+	      mapAPI.put('objectMove', {
+	        id: this.data.id,
 	        path: path
 	      });
 	    }
