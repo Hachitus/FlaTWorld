@@ -36,7 +36,7 @@ function getPointerCoords(e) {
  * @return {Object}
  */
 function getHAMMERPointerCoords(e) {
-  // We need the remove the element position on the page from the center coordinates.
+  // We need to remove the element position on the page from the center coordinates.
   const position = e.target.getBoundingClientRect();
 
   return new PIXI.Point(e.center.x - position.left, e.center.y - position.top);
