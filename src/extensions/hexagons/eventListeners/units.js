@@ -146,7 +146,7 @@ function _orderListener(e) {
       throw e;
     }
     
-    selectedObject.move(pathsToCoordinates[pathsToCoordinates.length - 1]);
+    selectedObject.move(pathsToCoordinates);
 
     ui.showUnitMovement(pathsToCoordinates);
 
