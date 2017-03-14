@@ -64,7 +64,6 @@
     "javascript-state-machine": "^2.3.5",
     "loglevel": "^1.4.1",
     "pixi.js": "^4.3.2",
-    "q": "^1.4.1",
     "whatwg-fetch": "^2.0.0"
   }
 }
