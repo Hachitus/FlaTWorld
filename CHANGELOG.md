@@ -1,7 +1,12 @@
 <a name="0.6.3"></a>
-# 0.6.3 Bug fixes (2017-?-?)
+# 0.6.3 Bug fixes (2017-03-14)
 ## Bugs
 * Selecting objects didn't take element position into account (assumed canvas is in 0,0 coordinates)
+* Updating PIXI from 4.1.0 to 4.3.2
+* Removed Q from dependencies, using native ES6 promises
+* Added mapAPI.put and use it rather than mapAPI.post (whole thing should be refactored to something more general later anyway)
+* Added anchor as optional parameter for objects
+* Some other smaller bug fixes
 
 <a name="0.6.2"></a>
 # 0.6.2 npm published in UMD (2016-11-23)

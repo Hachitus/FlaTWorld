@@ -144,7 +144,7 @@ Thank you to browserstack for providing magnificient testing tools
 <a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
 
 #Credits
-Copyright (c) 2016 Janne Hyytiä
+Copyright (c) 2017 Janne Hyytiä
 
 Graphics:
 * Realistic units from freecivs amplio set (http://download.gna.org/freeciv/contrib/tilesets/amplio/Readme).

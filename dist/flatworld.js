@@ -560,7 +560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Object}
 	 */
 	function getHAMMERPointerCoords(e) {
-	  // We need the remove the element position on the page from the center coordinates.
+	  // We need to remove the element position on the page from the center coordinates.
 	  var position = e.target.getBoundingClientRect();
 	
 	  return new PIXI.Point(e.center.x - position.left, e.center.y - position.top);
@@ -38650,7 +38650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var constants = {
 	  ZERO_COORDINATES: new PIXI.Point(0, 0),
-	  VERSION: '0.6.2',
+	  VERSION: '0.6.3',
 	  DEFAULT_SCALE_MODE: 0
 	};
 	
@@ -49664,7 +49664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw e;
 	    }
 	
-	    selectedObject.move(pathsToCoordinates[pathsToCoordinates.length - 1]);
+	    selectedObject.move(pathsToCoordinates);
 	
 	    ui.showUnitMovement(pathsToCoordinates);
 	
@@ -53903,7 +53903,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	  var map = new _core.Flatworld(mapCanvas, mapProperties);
 	
-	  PIXI.SCALE_MODES.DEFAULT = 1;
+	  PIXI.settings.SCALE_MODE = 1;
 	
 	  DATA_MAP.layers.forEach(function (layerData) {
 	    if ((typeof layerData === 'undefined' ? 'undefined' : _typeof(layerData)) !== 'object') {
