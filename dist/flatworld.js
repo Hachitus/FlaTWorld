@@ -42792,15 +42792,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  }, {
 	    key: 'move',
-	    value: function move(to) {
+	    value: function move(path) {
 	      _index.mapEvents.publish('objectMove', this);
 	      _index.mapAPI.put('objectMove', {
 	        id: this.data.id,
-	        from: {
-	          x: this.x,
-	          y: this.y
-	        },
-	        to: to
+	        path: path
 	      });
 	    }
 	  }]);
