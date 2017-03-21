@@ -40512,7 +40512,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    return fetch(completeData.url, {
 	      method: fetchType,
-	      body: completeData.body
+	      body: completeData.body,
+	      headers: new Headers({
+	        'Content-Type': 'application/json'
+	      })
 	    }).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {

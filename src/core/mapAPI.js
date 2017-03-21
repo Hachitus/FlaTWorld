@@ -151,10 +151,14 @@ const mapAPI = (function() {
       completeData = cb(fetchType, completeData, params);
     });
 
-    return fetch(completeData.url, {
-      method: fetchType,
-      body: completeData.body
-    })
+    return fetch(completeData.url,
+      {
+        method: fetchType,
+        body: completeData.body,
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
       .then(function (response) {
         return response.json();
       }).then(function (json) {
