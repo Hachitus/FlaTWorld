@@ -102,8 +102,11 @@ function calcLongDiagonal({ radius = globalRadius, floorNumbers = true } = {}) {
  * @param {Object} {}                   *OPTIONAL*
  * @param {float} {}.radius             Usually the radius of the hexagon
  */
-function calcSpecialDistance({ radius = globalRadius } = {}) {
-  return calcLongDiagonal(radius) - radius / 2;
+function calcSpecialDistance({ radius = globalRadius, floorNumbers = true } = {}) {
+  let answer = calcLongDiagonal(radius) - radius / 2;
+  answer = floorNumbers ? Math.floor(answer) : answer;
+
+  return answer;
 }
 /**
  * Test do the given coordinates hit the hexagon, given by the points container / array

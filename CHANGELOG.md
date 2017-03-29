@@ -1,3 +1,8 @@
+<a name="0.6.4"></a>
+# 0.6.3 Bug fixes (2017-03-14)
+## Bugs
+* Added floor option for special distance
+
 <a name="0.6.3"></a>
 # 0.6.3 Bug fixes (2017-03-14)
 ## Bugs
