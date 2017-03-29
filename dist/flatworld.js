@@ -45819,19 +45819,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @method showUnitMovement
 	   * @static
 	   * @param {Object} object         Unit that the player wants to move
-	   * @param {Object | Array} to     Coordinates as an object or array of waypoints / coordinates
+	   * @param {Array} path            Array of coordinates for the path of movement
 	   * where the unit is being moved to.
 	   * @param {Object} options        Extra options. Like dropping a shadow etc.
 	   * */
-	  scope.showUnitMovement = function (to) {
+	  scope.showUnitMovement = function (path) {
 	    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
 	        UIThemeOptions = _ref2.UIThemeOptions;
 	
-	    if (!Array.isArray(to)) {
+	    if (!Array.isArray(path)) {
 	      _index.mapLog.error('Array expected for showUnitMovement');
 	    }
 	
-	    var returnable = UITheme.showUnitMovement(to, UIThemeOptions);
+	    var returnable = UITheme.showUnitMovement(path, UIThemeOptions);
 	
 	    givenMap.drawOnNextTick();
 	
@@ -50238,9 +50238,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	function calcSpecialDistance() {
 	  var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
 	      _ref5$radius = _ref5.radius,
-	      radius = _ref5$radius === undefined ? globalRadius : _ref5$radius;
+	      radius = _ref5$radius === undefined ? globalRadius : _ref5$radius,
+	      _ref5$floorNumbers = _ref5.floorNumbers,
+	      floorNumbers = _ref5$floorNumbers === undefined ? true : _ref5$floorNumbers;
 	
-	  return calcLongDiagonal(radius) - radius / 2;
+	  var answer = calcLongDiagonal(radius) - radius / 2;
+	  answer = floorNumbers ? Math.floor(answer) : answer;
+	
+	  return answer;
 	}
 	/**
 	 * Test do the given coordinates hit the hexagon, given by the points container / array

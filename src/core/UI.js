@@ -84,16 +84,16 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
    * @method showUnitMovement
    * @static
    * @param {Object} object         Unit that the player wants to move
-   * @param {Object | Array} to     Coordinates as an object or array of waypoints / coordinates
+   * @param {Array} path            Array of coordinates for the path of movement
    * where the unit is being moved to.
    * @param {Object} options        Extra options. Like dropping a shadow etc.
    * */
-  scope.showUnitMovement = function (to, { UIThemeOptions } = {}) {
-    if (!Array.isArray(to)) {
+  scope.showUnitMovement = function (path, { UIThemeOptions } = {}) {
+    if (!Array.isArray(path)) {
       mapLog.error('Array expected for showUnitMovement');
     }
 
-    const returnable = UITheme.showUnitMovement(to, UIThemeOptions);
+    const returnable = UITheme.showUnitMovement(path, UIThemeOptions);
 
     givenMap.drawOnNextTick();
 
