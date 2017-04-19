@@ -477,7 +477,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function flatten2Levels(arr) {
 	  var _ref;
 	
-	  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr));
+	  return (_ref = []).concat.apply(_ref, _toConsumableArray(arr)).filter(function (n) {
+	    return n != undefined;
+	  }); // eslint-disable-line eqeqeq
 	}
 	/**
 	 * This function takes an array and slices it to proper chunks.

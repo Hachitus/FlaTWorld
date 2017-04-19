@@ -31,7 +31,7 @@ function requireParameter(className, paramName) {
  * @return {Array}            Flattened array
  */
 function flatten2Levels(arr) {
-  return [].concat(...arr);
+  return [].concat(...arr).filter(function(n){ return n != undefined }); // eslint-disable-line eqeqeq
 }
 /**
  * This function takes an array and slices it to proper chunks.
