@@ -50957,7 +50957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return promise;
 	    });
 	
-	    promises = Promise.all(promises).then(function () {
+	    Promise.all(promises).then(function () {
 	      containersUnderChangedArea = _core.utils.general.flatten2Levels(containersUnderChangedArea);
 	
 	      var subcontainers = _core.utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
@@ -50979,12 +50979,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	
 	      return promises;
-	    });
-	    Promise.all(promises).then(function () {
+	    }).then(function () {
 	      queue.processing = false;
 	
 	      mapInstance.drawOnNextTick();
-	    }).then(null, function (err) {
+	    }).catch(function (err) {
+	      queue.processing = true;
+	
 	      window.flatworld.log.debug(err);
 	    });
 	  }
@@ -51456,10 +51457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      map.moveMap(moved);
 	    }
 	
-	    offsetCoords.setOffset({
-	      x: coords.x,
-	      y: coords.y
-	    });
+	    offsetCoords.setOffset(coords);
 	
 	    e.preventDefault();
 	  }

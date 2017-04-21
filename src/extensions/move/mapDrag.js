@@ -105,10 +105,7 @@ const mapDrag = (function() {
       map.moveMap(moved);
     }
 
-    offsetCoords.setOffset({
-      x: coords.x,
-      y: coords.y
-    });
+    offsetCoords.setOffset(coords);
 
     e.preventDefault();
   }

@@ -214,7 +214,7 @@ const mapMovement = (function(debug = false) {
       return promise;
     });
 
-    promises = Promise.all(promises).then(() => {
+    Promise.all(promises).then(() => {
       containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
 
       const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
@@ -236,12 +236,13 @@ const mapMovement = (function(debug = false) {
       });
 
       return promises;
-    });
-    Promise.all(promises).then(() => {
+    }).then(() => {
       queue.processing = false;
 
       mapInstance.drawOnNextTick();
-    }).then(null, (err) => {
+    }).catch((err) => {
+      queue.processing = true;
+
       window.flatworld.log.debug(err);
     });
   }
