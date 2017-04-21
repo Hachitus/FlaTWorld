@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { constants, utils, mapAPI, mapEvents } from './index';
+import { constants, utils, mapEvents } from './index';
 
 /*-----------------------
 ---------- API ----------
@@ -274,13 +274,11 @@ class ObjectSpriteUnit extends ObjectSprite {
     * don't implement your own, I suggest you use it. You can attach any method to object if you wish. Like attack, siege, greet, talk.
     *
     * @method move
-    * @requires  mapAPIa..('objectMove") to be declared
-    * @attribute [name]
+    * @param {String} path  Path through which the object moves
     */
   move(path) {
-    mapEvents.publish('objectMove', this);
-    mapAPI.put('objectMove', {
-      id: this.data.id,
+    mapEvents.publish('objectMove', {
+      object: this,
       path
     });
   }

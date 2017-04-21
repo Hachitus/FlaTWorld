@@ -3,7 +3,6 @@ import { default as constants } from './constants';
 import { default as eventListeners } from './eventlisteners';
 import { default as Flatworld } from './Flatworld';
 import { default as log } from './log';
-import { default as mapAPI } from './mapAPI';
 import { default as MapDataManipulator } from './MapDataManipulator';
 import { default as mapEvents } from './mapEvents';
 import { default as mapLayers } from './MapLayers';
@@ -20,7 +19,6 @@ export {
   eventListeners,
   Flatworld,
   log,
-  mapAPI,
   MapDataManipulator,
   mapEvents,
   mapLayers,

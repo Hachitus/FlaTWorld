@@ -19,7 +19,6 @@
   var hexaUtils = window.flatworld.extensions.hexagons.utils;
   var Sound = window.flatworld.Sound;
   var mapEvents = window.flatworld.mapEvents;
-  var mapAPI = window.flatworld.mapAPI;
   var UI = window.flatworld.UI;
   var MapDataManipulator = window.flatworld.MapDataManipulator;
   /* DATA FILES used for testing */
@@ -197,7 +196,6 @@
 
     /* This NEEDS to be set for the hexagon plugin to work correctly */
     hexagons.utils.hexagonMath.init(gameData.hexagonRadius);
-    activateAPIs();
 
     /* Determines how much stuff we show on screen for stress testing */
     // If either is even 1 pixel bigger than this, gets all black
@@ -497,25 +495,6 @@
     });
 
     return layerData;
-  }
-
-  function activateAPIs() {
-    mapAPI.add(
-      'objectMove',
-      function (type, data, movementData) {
-        if (type === 'get') {
-          return {
-            url: data.baseUrl + movementData.id
-          };
-        } else {
-          return {
-            url: data.baseUrl + movementData.id,
-            body: JSON.stringify(movementData)
-          };
-        }
-      },
-      BASE_URL
-    );
   }
 
   /* This function should really not be needed or if it really is, it should be elsewhere!
