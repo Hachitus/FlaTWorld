@@ -48942,13 +48942,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _core.log.debug('No objects found for selection!');
 	    // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
 	    ui.showSelections([]);
-	    return;
+	
+	    return false;
+	  } else if (objects.length === 1) {
+	    FTW.currentlySelectedObjects = objects;
+	    _core.mapEvents.publish('objectsSelected', objects);
+	
+	    _core.log.debug('One object selected');
+	  } else {
+	    _core.mapEvents.publish('multipObjectsSelected', objects);
+	
+	    _core.log.debug('Multiple objects selected');
 	  }
 	
-	  FTW.currentlySelectedObjects = objects;
-	  _core.mapEvents.publish('objectsSelected', objects);
 	  ui.showSelections(objects, getData);
 	  FTW.drawOnNextTick();
+	
+	  return true;
 	}
 	/**
 	 * This listener is for the situation, where we have an object and we issue an order / action to
@@ -49165,6 +49175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var visited = [];
 	    var startMinTime = dest && getMinSteps(dest.x - xStart, dest.y - yStart, hexagonGrid);
 	    var queue = new PriorityQueue();
+	    var allCoordinates = new Set();
 	    var start = {
 	      x: xStart,
 	      y: yStart,
@@ -49217,6 +49228,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!isVisited(next)) {
 	          var loss = next.time + (dest ? getMinSteps(dest.x - x, dest.y - y, hexagonGrid) - startMinTime : 0);
 	          queue.push(next, loss /* * (maxTime + 1) - next.time*/);
+	          if (!dest) {
+	            allCoordinates.add(next.x + ',' + next.y);
+	          }
 	        }
 	      }
 	    }
@@ -49225,15 +49239,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return resPath && pathListToArray(resPath);
 	    }
 	
-	    return visited.reduce(function (res, time, key) {
-	      var dy = key % height;
-	      var dx = (key - dy) / height - width;
-	      if (dx || dy) {
-	        // do not include starting point
-	        res.push({ x: dx + xStart, y: dy + yStart, time: time });
-	      }
-	      return res;
-	    }, []);
+	    // If we get all available coordinates (e.g. for are highlighting), not only path for start -> destination
+	    return [].concat(_toConsumableArray(allCoordinates)).map(function (coordinateString) {
+	      var coordinates = coordinateString.split(',');
+	      return {
+	        x: +coordinates[0],
+	        y: +coordinates[1]
+	      };
+	    });
 	
 	    function isVisited(cell) {
 	      // if width and height are chosen right then the key should not be negative

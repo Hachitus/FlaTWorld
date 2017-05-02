@@ -84,13 +84,23 @@ function _tapListener(e) {
     log.debug('No objects found for selection!');
     // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
     ui.showSelections([]);
-    return;
+
+    return false;
+  } else if (objects.length === 1) {
+    FTW.currentlySelectedObjects = objects;
+    mapEvents.publish('objectsSelected', objects);
+
+    log.debug('One object selected');
+  } else {
+    mapEvents.publish('multipObjectsSelected', objects);
+
+    log.debug('Multiple objects selected');
   }
 
-  FTW.currentlySelectedObjects = objects;
-  mapEvents.publish('objectsSelected', objects);
   ui.showSelections(objects, getData);
   FTW.drawOnNextTick();
+
+  return true;
 }
 /**
  * This listener is for the situation, where we have an object and we issue an order / action to
