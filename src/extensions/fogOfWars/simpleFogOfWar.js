@@ -65,7 +65,7 @@ const simpleFogOfWar = (function() {
     maskMovableContainer = new PIXI.ParticleContainer();
     maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
-    activateFogOfWar(this.mapInstance, params.cb, params.filter);
+    activateFogOfWar(this.mapInstance, params.cb, params.filter, params.getOptions ? params.getOptions() : {});
 
     return Promise.resolve();
   }
