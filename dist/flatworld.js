@@ -49654,8 +49654,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      columns = gridSize.columns;
 	
 	  var gridArray = [];
-	  var shortDistance = calcShortDiagonal(radius);
-	  var longDistance = calcLongDiagonal(radius) - radius / 2;
+	  var shortDistance = calcShortDiagonal({ floorNumbers: false });
+	  var longDistance = calcLongDiagonal({ floorNumbers: false }) - radius / 2;
 	  /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
 	  var rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
 	  var columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
@@ -49664,7 +49664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var column = 0; columns > column; column++) {
 	      /* Se the coordinates for each hexagons upper-left corner on the grid */
 	      gridArray.push({
-	        x: Math.round(column * columnWidth + (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
+	        x: Math.floor(column * columnWidth + (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
 	        y: row * rowHeight
 	      });
 	    }
@@ -49706,11 +49706,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      startingPoint = _ref8$startingPoint === undefined ? globalStartingPoint : _ref8$startingPoint;
 	
 	  var coordinates = {
-	    x: Math.floor(indexes.x * calcShortDiagonal() + startingPoint.x),
-	    y: Math.floor(indexes.y * calcSpecialDistance() + startingPoint.y)
+	    x: Math.floor(indexes.x * calcShortDiagonal({ floorNumbers: false }) + startingPoint.x),
+	    y: Math.floor(indexes.y * calcSpecialDistance({ floorNumbers: false }) + startingPoint.y)
 	  };
 	
-	  coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));
+	  coordinates.x += Math.floor(indexes.y * (calcShortDiagonal({ floorNumbers: false }) / 2));
 	
 	  return coordinates;
 	}

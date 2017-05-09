@@ -151,8 +151,8 @@ function hexaHitTest(points, hitCoords, offsetCoords = { x: 0, y: 0 }) {
 function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orientation = globalOrientation } = {}) {
   const { rows, columns } = gridSize;
   const gridArray = [];
-  const shortDistance = calcShortDiagonal(radius);
-  const longDistance = calcLongDiagonal(radius) - radius / 2;
+  const shortDistance = calcShortDiagonal({ floorNumbers: false });
+  const longDistance = calcLongDiagonal({ floorNumbers: false }) - radius / 2;
   /* We set the distances of hexagons / hexagon rows and columns, depending are we building horizontal or vertical hexagon grid. */
   const rowHeight = orientation === 'horizontal' ? longDistance : shortDistance;
   const columnWidth = orientation === 'horizontal' ? shortDistance : longDistance;
@@ -161,7 +161,7 @@ function createHexagonGridCoordinates(gridSize, { radius = globalRadius, orienta
     for (let column = 0; columns > column; column++) {
       /* Se the coordinates for each hexagons upper-left corner on the grid */
       gridArray.push({
-        x: Math.round((column * columnWidth) +
+        x: Math.floor((column * columnWidth) +
           (orientation === 'horizontal' && (row === 0 || row % 2 === 0) ? 0 : -shortDistance / 2)),
         y: row * rowHeight
       });
@@ -196,11 +196,11 @@ function coordinatesToIndexes(coordinates, { startingPoint = globalStartingPoint
  */
 function indexesToCoordinates(indexes, { startingPoint = globalStartingPoint } = {}) {
   const coordinates = {
-    x: Math.floor((indexes.x * calcShortDiagonal()) + startingPoint.x),
-    y: Math.floor((indexes.y * calcSpecialDistance()) + startingPoint.y)
+    x: Math.floor((indexes.x * calcShortDiagonal({ floorNumbers: false })) + startingPoint.x),
+    y: Math.floor((indexes.y * calcSpecialDistance({ floorNumbers: false })) + startingPoint.y)
   };
 
-  coordinates.x += Math.floor(indexes.y * (calcShortDiagonal() / 2));
+  coordinates.x += Math.floor(indexes.y * (calcShortDiagonal({ floorNumbers: false }) / 2));
 
   return coordinates;
 }
