@@ -48938,7 +48938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  objects = _core.utils.dataManipulation.flattenArrayBy1Level(objects);
 	
 	  if (!objects.length) {
-	    FTW.currentlySelectedObjects = undefined;
+	    FTW.currentlySelectedObjects.length = 0;
 	    _core.log.debug('No objects found for selection!');
 	    // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
 	    ui.showSelections([]);

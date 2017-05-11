@@ -80,7 +80,7 @@ function _tapListener(e) {
   objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
   if (!objects.length) {
-    FTW.currentlySelectedObjects = undefined;
+    FTW.currentlySelectedObjects.length = 0;
     log.debug('No objects found for selection!');
     // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
     ui.showSelections([]);
