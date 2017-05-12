@@ -49685,11 +49685,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      startingPoint = _ref7$startingPoint === undefined ? globalStartingPoint : _ref7$startingPoint;
 	
 	  var indexes = {
-	    x: Math.floor((coordinates.x - startingPoint.x) / calcShortDiagonal()),
-	    y: Math.floor((coordinates.y - startingPoint.y) / calcSpecialDistance())
+	    x: (coordinates.x - startingPoint.x) / calcShortDiagonal({ floorNumbers: false }),
+	    y: (coordinates.y - startingPoint.y) / calcSpecialDistance({ floorNumbers: false })
 	  };
 	
-	  indexes.x -= Math.floor(coordinates.y / (calcSpecialDistance() * 2));
+	  indexes.x -= coordinates.y / (calcSpecialDistance({ floorNumbers: false }) * 2);
+	
+	  indexes.x = Math.round(indexes.x);
+	  indexes.y = Math.round(indexes.y);
 	
 	  return indexes;
 	}
@@ -49706,11 +49709,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      startingPoint = _ref8$startingPoint === undefined ? globalStartingPoint : _ref8$startingPoint;
 	
 	  var coordinates = {
-	    x: Math.floor(indexes.x * calcShortDiagonal({ floorNumbers: false }) + startingPoint.x),
-	    y: Math.floor(indexes.y * calcSpecialDistance({ floorNumbers: false }) + startingPoint.y)
+	    x: indexes.x * calcShortDiagonal({ floorNumbers: false }) + startingPoint.x,
+	    y: indexes.y * calcSpecialDistance({ floorNumbers: false }) + startingPoint.y
 	  };
 	
-	  coordinates.x += Math.floor(indexes.y * (calcShortDiagonal({ floorNumbers: false }) / 2));
+	  coordinates.x += indexes.y * (calcShortDiagonal({ floorNumbers: false }) / 2);
+	
+	  coordinates.x = _floorTowardsZero(coordinates.x);
+	  coordinates.y = _floorTowardsZero(coordinates.y);
 	
 	  return coordinates;
 	}
@@ -49754,6 +49760,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  return inside;
+	}
+	
+	function _floorTowardsZero(x) {
+	  return Math.sign(x) * Math.floor(Math.abs(x));
 	}
 	
 	/*-----------------------
