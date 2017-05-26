@@ -62,7 +62,7 @@ const simpleFogOfWar = (function() {
     maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
     // We create a particle container, because it's faster for this purpose. We don't need any
     // fancy special effects for the container currently, so particle container works.
-    maskMovableContainer = new PIXI.ParticleContainer();
+    maskMovableContainer = new PIXI.particles.ParticleContainer();
     maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
     activateFogOfWar(this.mapInstance, params.cb, params.filter, params.getOptions ? params.getOptions() : {});
