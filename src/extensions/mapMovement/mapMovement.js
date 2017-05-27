@@ -192,10 +192,9 @@ const mapMovement = (function(debug = false) {
   function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
     const largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
     let containersUnderChangedArea = [];
-    let promises;
 
     primaryLayers = utils.general.chunkArray(primaryLayers, VIEWPORT_OFFSET);
-    promises = primaryLayers.map((theseLayers) => {
+    const promises = primaryLayers.map((theseLayers) => {
       const promise = new Promise((resolve, reject) => {
         try {
           window.setTimeout(function () {
