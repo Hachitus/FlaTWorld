@@ -60,9 +60,8 @@ const simpleFogOfWar = (function() {
     mapRenderer = this.mapInstance.getRenderer();
 
     maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-    // We create a particle container, because it's faster for this purpose. We don't need any
-    // fancy special effects for the container currently, so particle container works.
-    maskMovableContainer = new PIXI.particles.ParticleContainer();
+    // This could use particleContainer. But particleContainer + drawRect graphics have a conflict. In our case, when we zoom far enough and there is a lot of sprites on the screen, the particleContainer + drawRect gives a webGL error "glDrawElements: range out of bounds for buffer". So we must use container for now.
+    maskMovableContainer = new PIXI.Container();
     maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
     activateFogOfWar(this.mapInstance, params.cb, params.filter, params.getOptions ? params.getOptions() : {});

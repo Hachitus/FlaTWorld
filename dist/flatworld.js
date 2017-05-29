@@ -67,19 +67,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _extensions = __webpack_require__(205);
+	var _extensions = __webpack_require__(206);
 	
 	var _extensions2 = _interopRequireDefault(_extensions);
 	
-	var _UIs = __webpack_require__(224);
+	var _UIs = __webpack_require__(225);
 	
 	var UIModule = _interopRequireWildcard(_UIs);
 	
-	var _Preload = __webpack_require__(250);
+	var _Preload = __webpack_require__(251);
 	
 	var preloading = _interopRequireWildcard(_Preload);
 	
-	var _hexaFactory = __webpack_require__(251);
+	var _hexaFactory = __webpack_require__(252);
 	
 	var hexaFactory = _interopRequireWildcard(_hexaFactory);
 	
@@ -112,55 +112,55 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _constants = __webpack_require__(189);
+	var _constants = __webpack_require__(190);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _eventlisteners = __webpack_require__(190);
+	var _eventlisteners = __webpack_require__(191);
 	
 	var _eventlisteners2 = _interopRequireDefault(_eventlisteners);
 	
-	var _Flatworld = __webpack_require__(191);
+	var _Flatworld = __webpack_require__(192);
 	
 	var _Flatworld2 = _interopRequireDefault(_Flatworld);
 	
-	var _log = __webpack_require__(192);
+	var _log = __webpack_require__(193);
 	
 	var _log2 = _interopRequireDefault(_log);
 	
-	var _MapDataManipulator = __webpack_require__(194);
+	var _MapDataManipulator = __webpack_require__(195);
 	
 	var _MapDataManipulator2 = _interopRequireDefault(_MapDataManipulator);
 	
-	var _mapEvents = __webpack_require__(195);
+	var _mapEvents = __webpack_require__(196);
 	
 	var _mapEvents2 = _interopRequireDefault(_mapEvents);
 	
-	var _MapLayers = __webpack_require__(196);
+	var _MapLayers = __webpack_require__(197);
 	
 	var _MapLayers2 = _interopRequireDefault(_MapLayers);
 	
-	var _mapStates = __webpack_require__(197);
+	var _mapStates = __webpack_require__(198);
 	
 	var _mapStates2 = _interopRequireDefault(_mapStates);
 	
-	var _ObjectManager = __webpack_require__(199);
+	var _ObjectManager = __webpack_require__(200);
 	
 	var _ObjectManager2 = _interopRequireDefault(_ObjectManager);
 	
-	var _Objects = __webpack_require__(200);
+	var _Objects = __webpack_require__(201);
 	
 	var _Objects2 = _interopRequireDefault(_Objects);
 	
-	var _Sound = __webpack_require__(201);
+	var _Sound = __webpack_require__(202);
 	
 	var _Sound2 = _interopRequireDefault(_Sound);
 	
-	var _UI = __webpack_require__(203);
+	var _UI = __webpack_require__(204);
 	
 	var _UI2 = _interopRequireDefault(_UI);
 	
-	var _UIStates = __webpack_require__(204);
+	var _UIStates = __webpack_require__(205);
 	
 	var _UIStates2 = _interopRequireDefault(_UIStates);
 	
@@ -211,15 +211,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _mouse2 = _interopRequireDefault(_mouse);
 	
-	var _polyfills = __webpack_require__(186);
+	var _polyfills = __webpack_require__(187);
 	
 	var _polyfills2 = _interopRequireDefault(_polyfills);
 	
-	var _resize = __webpack_require__(187);
+	var _resize = __webpack_require__(188);
 	
 	var _resize2 = _interopRequireDefault(_resize);
 	
-	var _shapes = __webpack_require__(188);
+	var _shapes = __webpack_require__(189);
 	
 	var _shapes2 = _interopRequireDefault(_shapes);
 	
@@ -702,41 +702,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	});
 	
-	__webpack_require__(170);
+	__webpack_require__(158);
 	
-	var _accessibility = __webpack_require__(175);
+	var _accessibility = __webpack_require__(163);
 	
 	var accessibility = _interopRequireWildcard(_accessibility);
 	
-	var _extract = __webpack_require__(178);
+	var _extract = __webpack_require__(166);
 	
 	var extract = _interopRequireWildcard(_extract);
 	
-	var _extras = __webpack_require__(130);
+	var _extras = __webpack_require__(131);
 	
 	var extras = _interopRequireWildcard(_extras);
 	
-	var _filters = __webpack_require__(139);
+	var _filters = __webpack_require__(140);
 	
 	var filters = _interopRequireWildcard(_filters);
 	
-	var _interaction = __webpack_require__(181);
+	var _interaction = __webpack_require__(169);
 	
 	var interaction = _interopRequireWildcard(_interaction);
 	
-	var _loaders = __webpack_require__(157);
+	var _loaders = __webpack_require__(174);
 	
 	var loaders = _interopRequireWildcard(_loaders);
 	
-	var _mesh = __webpack_require__(118);
+	var _mesh = __webpack_require__(119);
 	
 	var mesh = _interopRequireWildcard(_mesh);
 	
-	var _particles = __webpack_require__(125);
+	var _particles = __webpack_require__(126);
 	
 	var particles = _interopRequireWildcard(_particles);
 	
-	var _prepare = __webpack_require__(151);
+	var _prepare = __webpack_require__(152);
 	
 	var prepare = _interopRequireWildcard(_prepare);
 	
@@ -787,29 +787,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _mesh = __webpack_require__(118);
+	var _mesh = __webpack_require__(119);
 	
 	var mesh = _interopRequireWildcard(_mesh);
 	
-	var _particles = __webpack_require__(125);
+	var _particles = __webpack_require__(126);
 	
 	var particles = _interopRequireWildcard(_particles);
 	
-	var _extras = __webpack_require__(130);
+	var _extras = __webpack_require__(131);
 	
 	var extras = _interopRequireWildcard(_extras);
 	
-	var _filters = __webpack_require__(139);
+	var _filters = __webpack_require__(140);
 	
 	var filters = _interopRequireWildcard(_filters);
 	
-	var _prepare = __webpack_require__(151);
+	var _prepare = __webpack_require__(152);
 	
 	var prepare = _interopRequireWildcard(_prepare);
-	
-	var _loaders = __webpack_require__(157);
-	
-	var loaders = _interopRequireWildcard(_loaders);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -1474,19 +1470,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var fontSizeIndex = -1;
 	
 	            this._fontSize = 26;
-	            for (var i = 0; i < splits.length; ++i) {
-	                if (splits[i].match(/(px|pt|em|%)/)) {
-	                    fontSizeIndex = i;
-	                    this._fontSize = splits[i];
+	            for (var _i = 0; _i < splits.length; ++_i) {
+	                if (splits[_i].match(/(px|pt|em|%)/)) {
+	                    fontSizeIndex = _i;
+	                    this._fontSize = splits[_i];
 	                    break;
 	                }
 	            }
 	
 	            // we can now search for fontWeight as we know it must occur before the fontSize
 	            this._fontWeight = 'normal';
-	            for (var _i = 0; _i < fontSizeIndex; ++_i) {
-	                if (splits[_i].match(/(bold|bolder|lighter|100|200|300|400|500|600|700|800|900)/)) {
-	                    this._fontWeight = splits[_i];
+	            for (var _i2 = 0; _i2 < fontSizeIndex; ++_i2) {
+	                if (splits[_i2].match(/(bold|bolder|lighter|100|200|300|400|500|600|700|800|900)/)) {
+	                    this._fontWeight = splits[_i2];
 	                    break;
 	                }
 	            }
@@ -1494,8 +1490,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // and finally join everything together after the fontSize in case the font family has multiple words
 	            if (fontSizeIndex > -1 && fontSizeIndex < splits.length - 1) {
 	                this._fontFamily = '';
-	                for (var _i2 = fontSizeIndex + 1; _i2 < splits.length; ++_i2) {
-	                    this._fontFamily += splits[_i2] + ' ';
+	                for (var _i3 = fontSizeIndex + 1; _i3 < splits.length; ++_i3) {
+	                    this._fontFamily += splits[_i3] + ' ';
 	                }
 	
 	                this._fontFamily = this._fontFamily.slice(0, -1);
@@ -1643,61 +1639,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return NaN;
 	    }
 	});
-	
-	Object.defineProperties(loaders.Resource.prototype, {
-	    isJson: {
-	        get: function get() {
-	            warn('The isJson property is deprecated, please use `resource.type === Resource.TYPE.JSON`.');
-	
-	            return this.type === loaders.Loader.Resource.TYPE.JSON;
-	        }
-	    },
-	    isXml: {
-	        get: function get() {
-	            warn('The isXml property is deprecated, please use `resource.type === Resource.TYPE.XML`.');
-	
-	            return this.type === loaders.Loader.Resource.TYPE.XML;
-	        }
-	    },
-	    isImage: {
-	        get: function get() {
-	            warn('The isImage property is deprecated, please use `resource.type === Resource.TYPE.IMAGE`.');
-	
-	            return this.type === loaders.Loader.Resource.TYPE.IMAGE;
-	        }
-	    },
-	    isAudio: {
-	        get: function get() {
-	            warn('The isAudio property is deprecated, please use `resource.type === Resource.TYPE.AUDIO`.');
-	
-	            return this.type === loaders.Loader.Resource.TYPE.AUDIO;
-	        }
-	    },
-	    isVideo: {
-	        get: function get() {
-	            warn('The isVideo property is deprecated, please use `resource.type === Resource.TYPE.VIDEO`.');
-	
-	            return this.type === loaders.Loader.Resource.TYPE.VIDEO;
-	        }
-	    }
-	});
-	
-	Object.defineProperties(loaders.Loader.prototype, {
-	    before: {
-	        get: function get() {
-	            warn('The before() method is deprecated, please use pre().');
-	
-	            return this.pre;
-	        }
-	    },
-	    after: {
-	        get: function get() {
-	            warn('The after() method is deprecated, please use use().');
-	
-	            return this.use;
-	        }
-	    }
-	});
 	//# sourceMappingURL=deprecation.js.map
 
 /***/ },
@@ -1707,7 +1648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 	
 	exports.__esModule = true;
-	exports.Filter = exports.SpriteMaskFilter = exports.Quad = exports.RenderTarget = exports.ObjectRenderer = exports.WebGLManager = exports.Shader = exports.CanvasRenderTarget = exports.TextureUvs = exports.VideoBaseTexture = exports.BaseRenderTexture = exports.RenderTexture = exports.BaseTexture = exports.Texture = exports.CanvasGraphicsRenderer = exports.GraphicsRenderer = exports.GraphicsData = exports.Graphics = exports.TextStyle = exports.Text = exports.SpriteRenderer = exports.CanvasTinter = exports.CanvasSpriteRenderer = exports.Sprite = exports.TransformBase = exports.TransformStatic = exports.Transform = exports.Container = exports.DisplayObject = exports.Bounds = exports.glCore = exports.WebGLRenderer = exports.CanvasRenderer = exports.ticker = exports.utils = exports.settings = undefined;
+	exports.Filter = exports.SpriteMaskFilter = exports.Quad = exports.RenderTarget = exports.ObjectRenderer = exports.WebGLManager = exports.Shader = exports.CanvasRenderTarget = exports.TextureUvs = exports.VideoBaseTexture = exports.BaseRenderTexture = exports.RenderTexture = exports.BaseTexture = exports.Texture = exports.CanvasGraphicsRenderer = exports.GraphicsRenderer = exports.GraphicsData = exports.Graphics = exports.TextStyle = exports.Text = exports.SpriteRenderer = exports.CanvasTinter = exports.CanvasSpriteRenderer = exports.Sprite = exports.TransformBase = exports.TransformStatic = exports.Transform = exports.Container = exports.DisplayObject = exports.glCore = exports.WebGLRenderer = exports.CanvasRenderer = exports.ticker = exports.utils = exports.settings = undefined;
 	
 	var _const = __webpack_require__(12);
 	
@@ -1721,7 +1662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	Object.keys(_math).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -1733,7 +1674,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	Object.defineProperty(exports, 'glCore', {
 	  enumerable: true,
@@ -1742,16 +1683,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Bounds = __webpack_require__(39);
-	
-	Object.defineProperty(exports, 'Bounds', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Bounds).default;
-	  }
-	});
-	
-	var _DisplayObject = __webpack_require__(40);
+	var _DisplayObject = __webpack_require__(41);
 	
 	Object.defineProperty(exports, 'DisplayObject', {
 	  enumerable: true,
@@ -1760,7 +1692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Container = __webpack_require__(49);
+	var _Container = __webpack_require__(50);
 	
 	Object.defineProperty(exports, 'Container', {
 	  enumerable: true,
@@ -1796,7 +1728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Sprite = __webpack_require__(52);
+	var _Sprite = __webpack_require__(53);
 	
 	Object.defineProperty(exports, 'Sprite', {
 	  enumerable: true,
@@ -1805,7 +1737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasSpriteRenderer = __webpack_require__(67);
+	var _CanvasSpriteRenderer = __webpack_require__(68);
 	
 	Object.defineProperty(exports, 'CanvasSpriteRenderer', {
 	  enumerable: true,
@@ -1814,7 +1746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasTinter = __webpack_require__(76);
+	var _CanvasTinter = __webpack_require__(77);
 	
 	Object.defineProperty(exports, 'CanvasTinter', {
 	  enumerable: true,
@@ -1823,7 +1755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _SpriteRenderer = __webpack_require__(77);
+	var _SpriteRenderer = __webpack_require__(78);
 	
 	Object.defineProperty(exports, 'SpriteRenderer', {
 	  enumerable: true,
@@ -1832,7 +1764,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Text = __webpack_require__(103);
+	var _Text = __webpack_require__(104);
 	
 	Object.defineProperty(exports, 'Text', {
 	  enumerable: true,
@@ -1841,7 +1773,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _TextStyle = __webpack_require__(104);
+	var _TextStyle = __webpack_require__(105);
 	
 	Object.defineProperty(exports, 'TextStyle', {
 	  enumerable: true,
@@ -1850,7 +1782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Graphics = __webpack_require__(105);
+	var _Graphics = __webpack_require__(106);
 	
 	Object.defineProperty(exports, 'Graphics', {
 	  enumerable: true,
@@ -1859,7 +1791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _GraphicsData = __webpack_require__(106);
+	var _GraphicsData = __webpack_require__(107);
 	
 	Object.defineProperty(exports, 'GraphicsData', {
 	  enumerable: true,
@@ -1868,7 +1800,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _GraphicsRenderer = __webpack_require__(108);
+	var _GraphicsRenderer = __webpack_require__(109);
 	
 	Object.defineProperty(exports, 'GraphicsRenderer', {
 	  enumerable: true,
@@ -1877,7 +1809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasGraphicsRenderer = __webpack_require__(117);
+	var _CanvasGraphicsRenderer = __webpack_require__(118);
 	
 	Object.defineProperty(exports, 'CanvasGraphicsRenderer', {
 	  enumerable: true,
@@ -1886,7 +1818,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Texture = __webpack_require__(53);
+	var _Texture = __webpack_require__(54);
 	
 	Object.defineProperty(exports, 'Texture', {
 	  enumerable: true,
@@ -1895,7 +1827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BaseTexture = __webpack_require__(54);
+	var _BaseTexture = __webpack_require__(55);
 	
 	Object.defineProperty(exports, 'BaseTexture', {
 	  enumerable: true,
@@ -1904,7 +1836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _RenderTexture = __webpack_require__(70);
+	var _RenderTexture = __webpack_require__(71);
 	
 	Object.defineProperty(exports, 'RenderTexture', {
 	  enumerable: true,
@@ -1913,7 +1845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BaseRenderTexture = __webpack_require__(71);
+	var _BaseRenderTexture = __webpack_require__(72);
 	
 	Object.defineProperty(exports, 'BaseRenderTexture', {
 	  enumerable: true,
@@ -1922,7 +1854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _VideoBaseTexture = __webpack_require__(63);
+	var _VideoBaseTexture = __webpack_require__(64);
 	
 	Object.defineProperty(exports, 'VideoBaseTexture', {
 	  enumerable: true,
@@ -1931,7 +1863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _TextureUvs = __webpack_require__(66);
+	var _TextureUvs = __webpack_require__(67);
 	
 	Object.defineProperty(exports, 'TextureUvs', {
 	  enumerable: true,
@@ -1940,7 +1872,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasRenderTarget = __webpack_require__(73);
+	var _CanvasRenderTarget = __webpack_require__(74);
 	
 	Object.defineProperty(exports, 'CanvasRenderTarget', {
 	  enumerable: true,
@@ -1949,7 +1881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Shader = __webpack_require__(92);
+	var _Shader = __webpack_require__(93);
 	
 	Object.defineProperty(exports, 'Shader', {
 	  enumerable: true,
@@ -1958,7 +1890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _WebGLManager = __webpack_require__(79);
+	var _WebGLManager = __webpack_require__(80);
 	
 	Object.defineProperty(exports, 'WebGLManager', {
 	  enumerable: true,
@@ -1967,7 +1899,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _ObjectRenderer = __webpack_require__(78);
+	var _ObjectRenderer = __webpack_require__(79);
 	
 	Object.defineProperty(exports, 'ObjectRenderer', {
 	  enumerable: true,
@@ -1976,7 +1908,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _RenderTarget = __webpack_require__(89);
+	var _RenderTarget = __webpack_require__(90);
 	
 	Object.defineProperty(exports, 'RenderTarget', {
 	  enumerable: true,
@@ -1985,7 +1917,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Quad = __webpack_require__(90);
+	var _Quad = __webpack_require__(91);
 	
 	Object.defineProperty(exports, 'Quad', {
 	  enumerable: true,
@@ -1994,7 +1926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _SpriteMaskFilter = __webpack_require__(82);
+	var _SpriteMaskFilter = __webpack_require__(83);
 	
 	Object.defineProperty(exports, 'SpriteMaskFilter', {
 	  enumerable: true,
@@ -2003,7 +1935,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Filter = __webpack_require__(83);
+	var _Filter = __webpack_require__(84);
 	
 	Object.defineProperty(exports, 'Filter', {
 	  enumerable: true,
@@ -2013,23 +1945,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.autoDetectRenderer = autoDetectRenderer;
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var utils = _interopRequireWildcard(_utils);
 	
-	var _ticker = __webpack_require__(64);
+	var _ticker = __webpack_require__(65);
 	
 	var ticker = _interopRequireWildcard(_ticker);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _CanvasRenderer = __webpack_require__(68);
+	var _CanvasRenderer = __webpack_require__(69);
 	
 	var _CanvasRenderer2 = _interopRequireDefault(_CanvasRenderer);
 	
-	var _WebGLRenderer = __webpack_require__(80);
+	var _WebGLRenderer = __webpack_require__(81);
 	
 	var _WebGLRenderer2 = _interopRequireDefault(_WebGLRenderer);
 	
@@ -2080,21 +2012,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
+	exports.CAN_UPLOAD_SAME_BUFFER = exports.TEXT_GRADIENT = exports.TRANSFORM_MODE = exports.PRECISION = exports.SHAPES = exports.SVG_SIZE = exports.DATA_URI = exports.URL_FILE_EXTENSION = exports.GC_MODES = exports.WRAP_MODES = exports.SCALE_MODES = exports.DRAW_MODES = exports.BLEND_MODES = exports.RENDERER_TYPE = exports.DEG_TO_RAD = exports.RAD_TO_DEG = exports.PI_2 = exports.VERSION = undefined;
+	
+	var _canUploadSameBuffer = __webpack_require__(13);
+	
+	var _canUploadSameBuffer2 = _interopRequireDefault(_canUploadSameBuffer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	/**
 	 * String of the current PIXI version.
 	 *
 	 * @static
 	 * @constant
 	 * @memberof PIXI
-	 * @name VERSION
 	 * @type {string}
 	 */
-	var VERSION = exports.VERSION = '4.3.2';
+	var VERSION = exports.VERSION = '4.2.1';
 	
 	/**
 	 * Two Pi.
@@ -2132,7 +2071,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @static
 	 * @constant
 	 * @memberof PIXI
-	 * @name RENDERER_TYPE
 	 * @type {object}
 	 * @property {number} UNKNOWN - Unknown render type.
 	 * @property {number} WEBGL - WebGL render type.
@@ -2153,7 +2091,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @static
 	 * @constant
 	 * @memberof PIXI
-	 * @name BLEND_MODES
 	 * @type {object}
 	 * @property {number} NORMAL
 	 * @property {number} ADD
@@ -2200,7 +2137,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @static
 	 * @constant
 	 * @memberof PIXI
-	 * @name DRAW_MODES
 	 * @type {object}
 	 * @property {number} POINTS
 	 * @property {number} LINES
@@ -2223,13 +2159,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * The scale modes that are supported by pixi.
 	 *
-	 * The {@link PIXI.settings.SCALE_MODE} scale mode affects the default scaling mode of future operations.
+	 * The PIXI.settings.SCALE_MODE scale mode affects the default scaling mode of future operations.
 	 * It can be re-assigned to either LINEAR or NEAREST, depending upon suitability.
 	 *
 	 * @static
 	 * @constant
 	 * @memberof PIXI
-	 * @name SCALE_MODES
 	 * @type {object}
 	 * @property {number} LINEAR Smooth scaling
 	 * @property {number} NEAREST Pixelating scaling
@@ -2242,7 +2177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * The wrap modes that are supported by pixi.
 	 *
-	 * The {@link PIXI.settings.WRAP_MODE} wrap mode affects the default wraping mode of future operations.
+	 * The PIXI.settings.WRAP_MODE wrap mode affects the default wraping mode of future operations.
 	 * It can be re-assigned to either CLAMP or REPEAT, depending upon suitability.
 	 * If the texture is non power of two then clamp will be used regardless as webGL can
 	 * only use REPEAT if the texture is po2.
@@ -2251,7 +2186,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name WRAP_MODES
 	 * @memberof PIXI
 	 * @type {object}
 	 * @property {number} CLAMP - The textures uvs are clamped
@@ -2267,7 +2201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * The gc modes that are supported by pixi.
 	 *
-	 * The {@link PIXI.settings.GC_MODE} Garbage Collection mode for pixi textures is AUTO
+	 * The PIXI.settings.GC_MODE Garbage Collection mode for pixi textures is AUTO
 	 * If set to GC_MODE, the renderer will occasianally check textures usage. If they are not
 	 * used for a specified period of time they will be removed from the GPU. They will of course
 	 * be uploaded again when they are required. This is a silent behind the scenes process that
@@ -2278,7 +2212,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name GC_MODES
 	 * @memberof PIXI
 	 * @type {object}
 	 * @property {number} AUTO - Garbage collection will happen periodically automatically
@@ -2302,14 +2235,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/**
 	 * Regexp for data URI.
-	 * Based on: {@link https://github.com/ragingwind/data-uri-regex}
+	 * Based on: https://github.com/ragingwind/data-uri-regex
 	 *
 	 * @static
 	 * @constant
-	 * @name DATA_URI
 	 * @memberof PIXI
 	 * @type {RegExp|string}
-	 * @example data:image/png;base64
+	 * @example `data:image/png;base64`
 	 */
 	var DATA_URI = exports.DATA_URI = /^\s*data:(?:([\w-]+)\/([\w+.-]+))?(?:;(charset=[\w-]+|base64))?,(.*)/i;
 	
@@ -2318,10 +2250,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name SVG_SIZE
 	 * @memberof PIXI
 	 * @type {RegExp|string}
-	 * @example &lt;svg width="100" height="100"&gt;&lt;/svg&gt;
+	 * @example `<svg width="100" height="100"></svg>`
 	 */
 	var SVG_SIZE = exports.SVG_SIZE = /<svg[^>]*(?:\s(width|height)=('|")(\d*(?:\.\d+)?)(?:px)?('|"))[^>]*(?:\s(width|height)=('|")(\d*(?:\.\d+)?)(?:px)?('|"))[^>]*>/i; // eslint-disable-line max-len
 	
@@ -2330,14 +2261,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name SHAPES
 	 * @memberof PIXI
 	 * @type {object}
-	 * @property {number} POLY Polygon
-	 * @property {number} RECT Rectangle
-	 * @property {number} CIRC Circle
-	 * @property {number} ELIP Ellipse
-	 * @property {number} RREC Rounded Rectangle
+	 * @property {number} POLY
+	 * @property {number} RECT
+	 * @property {number} CIRC
+	 * @property {number} ELIP
+	 * @property {number} RREC
 	 */
 	var SHAPES = exports.SHAPES = {
 	  POLY: 0,
@@ -2352,7 +2282,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name PRECISION
 	 * @memberof PIXI
 	 * @type {object}
 	 * @property {string} LOW='lowp'
@@ -2370,7 +2299,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name TRANSFORM_MODE
 	 * @memberof PIXI
 	 * @type {object}
 	 * @property {number} STATIC
@@ -2386,27 +2314,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @static
 	 * @constant
-	 * @name TEXT_GRADIENT
 	 * @memberof PIXI
 	 * @type {object}
-	 * @property {number} LINEAR_VERTICAL Vertical gradient
-	 * @property {number} LINEAR_HORIZONTAL Linear gradient
+	 * @property {number} LINEAR_VERTICAL
+	 * @property {number} LINEAR_HORIZONTAL
 	 */
 	var TEXT_GRADIENT = exports.TEXT_GRADIENT = {
 	  LINEAR_VERTICAL: 0,
 	  LINEAR_HORIZONTAL: 1
 	};
+	
+	// TODO: maybe change to SPRITE.BATCH_SIZE: 2000
+	// TODO: maybe add PARTICLE.BATCH_SIZE: 15000
+	
+	/**
+	 * Can we upload the same buffer in a single frame?
+	 *
+	 * @static
+	 * @constant
+	 * @memberof PIXI
+	 * @type {boolean}
+	 */
+	var CAN_UPLOAD_SAME_BUFFER = exports.CAN_UPLOAD_SAME_BUFFER = (0, _canUploadSameBuffer2.default)();
 	//# sourceMappingURL=const.js.map
 
 /***/ },
 /* 13 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	exports.default = canUploadSameBuffer;
+	function canUploadSameBuffer() {
+		// Uploading the same buffer multiple times in a single frame can cause perf issues.
+		// Apparent on IOS so only check for that at the moment
+		// this check may become more complex if this issue pops up elsewhere.
+		var ios = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+	
+		return !ios;
+	}
+	//# sourceMappingURL=canUploadSameBuffer.js.map
+
+/***/ },
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Point = __webpack_require__(14);
+	var _Point = __webpack_require__(15);
 	
 	Object.defineProperty(exports, 'Point', {
 	  enumerable: true,
@@ -2415,7 +2373,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _ObservablePoint = __webpack_require__(15);
+	var _ObservablePoint = __webpack_require__(16);
 	
 	Object.defineProperty(exports, 'ObservablePoint', {
 	  enumerable: true,
@@ -2424,7 +2382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Matrix = __webpack_require__(16);
+	var _Matrix = __webpack_require__(17);
 	
 	Object.defineProperty(exports, 'Matrix', {
 	  enumerable: true,
@@ -2433,7 +2391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _GroupD = __webpack_require__(17);
+	var _GroupD = __webpack_require__(18);
 	
 	Object.defineProperty(exports, 'GroupD8', {
 	  enumerable: true,
@@ -2442,7 +2400,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Circle = __webpack_require__(18);
+	var _Circle = __webpack_require__(19);
 	
 	Object.defineProperty(exports, 'Circle', {
 	  enumerable: true,
@@ -2451,7 +2409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Ellipse = __webpack_require__(20);
+	var _Ellipse = __webpack_require__(21);
 	
 	Object.defineProperty(exports, 'Ellipse', {
 	  enumerable: true,
@@ -2460,7 +2418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Polygon = __webpack_require__(21);
+	var _Polygon = __webpack_require__(22);
 	
 	Object.defineProperty(exports, 'Polygon', {
 	  enumerable: true,
@@ -2469,7 +2427,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Rectangle = __webpack_require__(19);
+	var _Rectangle = __webpack_require__(20);
 	
 	Object.defineProperty(exports, 'Rectangle', {
 	  enumerable: true,
@@ -2478,7 +2436,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _RoundedRectangle = __webpack_require__(22);
+	var _RoundedRectangle = __webpack_require__(23);
 	
 	Object.defineProperty(exports, 'RoundedRectangle', {
 	  enumerable: true,
@@ -2491,7 +2449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2586,7 +2544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Point.js.map
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2721,7 +2679,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ObservablePoint.js.map
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2730,7 +2688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _Point = __webpack_require__(14);
+	var _Point = __webpack_require__(15);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
@@ -3098,10 +3056,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var c = this.c;
 	        var d = this.d;
 	
-	        var skewX = -Math.atan2(-c, d);
+	        var skewX = Math.atan2(-c, d);
 	        var skewY = Math.atan2(b, a);
 	
-	        var delta = Math.abs(skewX + skewY);
+	        var delta = Math.abs(1 - skewX / skewY);
 	
 	        if (delta < 0.00001) {
 	            transform.rotation = skewY;
@@ -3244,14 +3202,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Matrix.js.map
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Matrix = __webpack_require__(16);
+	var _Matrix = __webpack_require__(17);
 	
 	var _Matrix2 = _interopRequireDefault(_Matrix);
 	
@@ -3437,14 +3395,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=GroupD8.js.map
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Rectangle = __webpack_require__(19);
+	var _Rectangle = __webpack_require__(20);
 	
 	var _Rectangle2 = _interopRequireDefault(_Rectangle);
 	
@@ -3555,7 +3513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Circle.js.map
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3830,14 +3788,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Rectangle.js.map
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Rectangle = __webpack_require__(19);
+	var _Rectangle = __webpack_require__(20);
 	
 	var _Rectangle2 = _interopRequireDefault(_Rectangle);
 	
@@ -3956,14 +3914,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Ellipse.js.map
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Point = __webpack_require__(14);
+	var _Point = __webpack_require__(15);
 	
 	var _Point2 = _interopRequireDefault(_Point);
 	
@@ -4091,7 +4049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Polygon.js.map
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4228,18 +4186,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=RoundedRectangle.js.map
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var gl = {
-	    createContext:          __webpack_require__(24),
-	    setVertexAttribArrays:  __webpack_require__(25),
-	    GLBuffer:               __webpack_require__(26),
-	    GLFramebuffer:          __webpack_require__(27),
-	    GLShader:               __webpack_require__(29),
-	    GLTexture:              __webpack_require__(28),
-	    VertexArrayObject:      __webpack_require__(37),
-	    shader:                 __webpack_require__(38)
+	    createContext:          __webpack_require__(25),
+	    setVertexAttribArrays:  __webpack_require__(26),
+	    GLBuffer:               __webpack_require__(27),
+	    GLFramebuffer:          __webpack_require__(28),
+	    GLShader:               __webpack_require__(30),
+	    GLTexture:              __webpack_require__(29),
+	    VertexArrayObject:      __webpack_require__(39),
+	    shader:                 __webpack_require__(40)
 	};
 	
 	// Export for Node-compatible environments
@@ -4259,7 +4217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	
@@ -4291,7 +4249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	// var GL_MAP = {};
@@ -4352,7 +4310,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	var EMPTY_ARRAY_BUFFER = new ArrayBuffer(0);
@@ -4382,7 +4340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * @member {WebGLBuffer}
 	     */
-		this.buffer = gl.createBuffer(); 
+		this.buffer = gl.createBuffer();
 	
 		/**
 	     * The type of the buffer
@@ -4409,6 +4367,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		{
 			this.upload(data);
 		}
+	
+		this._updateID = 0;
 	};
 	
 	/**
@@ -4475,11 +4435,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var Texture = __webpack_require__(28);
+	var Texture = __webpack_require__(29);
 	
 	/**
 	 * Helper class to create a webGL Framebuffer
@@ -4569,6 +4529,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // TODO.. this is depth AND stencil?
 	    gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.stencil);
 	    gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_STENCIL,  this.width  , this.height );
+	
+	
 	};
 	
 	/**
@@ -4585,7 +4547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var gl = this.gl;
 	
 	    gl.clearColor(r, g, b, a);
-	    gl.clear(gl.COLOR_BUFFER_BIT);
+	    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	};
 	
 	/**
@@ -4669,6 +4631,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var fbo = new Framebuffer(gl, width, height);
 	    fbo.enableTexture(texture);
 	
+	    //fbo.enableStencil(); // get this back on soon!
+	
 	    fbo.unbind();
 	
 	    return fbo;
@@ -4702,7 +4666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	
@@ -4798,7 +4762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		if(newHeight !== this.height || newWidth !== this.width)
 		{
-	    	gl.texImage2D(gl.TEXTURE_2D, 0, this.format, this.format, this.type, source);
+			gl.texImage2D(gl.TEXTURE_2D, 0, this.format, this.format, this.type, source);
 		}
 		else
 		{
@@ -4847,7 +4811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		else
 		{
 			// TODO support for other types
-			this.type = gl.UNSIGNED_BYTE;
+			this.type = this.type || gl.UNSIGNED_BYTE;
 		}
 	
 		// what type of data?
@@ -5041,14 +5005,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var compileProgram = __webpack_require__(30),
-		extractAttributes = __webpack_require__(31),
-		extractUniforms = __webpack_require__(34),
-		generateUniformAccessObject = __webpack_require__(36);
+	var compileProgram = __webpack_require__(31),
+		extractAttributes = __webpack_require__(32),
+		extractUniforms = __webpack_require__(35),
+		setPrecision = __webpack_require__(37),
+		generateUniformAccessObject = __webpack_require__(38);
 	
 	/**
 	 * Helper class to create a webGL Shader
@@ -5058,8 +5023,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param gl {WebGLRenderingContext}
 	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
 	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.
+	 * @param precision {precision]} The float precision of the shader. Options are 'lowp', 'mediump' or 'highp'.
+	 * @param attributeLocations {object} A key value pair showing which location eact attribute should sit eg {position:0, uvs:1}
 	 */
-	var Shader = function(gl, vertexSrc, fragmentSrc)
+	var Shader = function(gl, vertexSrc, fragmentSrc, precision, attributeLocations)
 	{
 		/**
 		 * The current WebGL rendering context
@@ -5068,14 +5035,19 @@ return /******/ (function(modules) { // webpackBootstrap
 		 */
 		this.gl = gl;
 	
+		if(precision)
+		{
+			vertexSrc = setPrecision(vertexSrc, precision);
+			fragmentSrc = setPrecision(fragmentSrc, precision);
+		}
+	
 		/**
 		 * The shader program
 		 *
 		 * @member {WebGLProgram}
 		 */
 		// First compile the program..
-		this.program = compileProgram(gl, vertexSrc, fragmentSrc);
-	
+		this.program = compileProgram(gl, vertexSrc, fragmentSrc, attributeLocations);
 	
 		/**
 		 * The attributes of the shader as an object containing the following properties
@@ -5090,7 +5062,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		// next extract the attributes
 		this.attributes = extractAttributes(gl, this.program);
 	
-	    var uniformData = extractUniforms(gl, this.program);
+	    this.uniformData = extractUniforms(gl, this.program);
 	
 		/**
 		 * The uniforms of the shader as an object containing the following properties
@@ -5100,7 +5072,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		 * }
 		 * @member {Object}
 		 */
-	    this.uniforms = generateUniformAccessObject( gl, uniformData );
+		this.uniforms = generateUniformAccessObject( gl, this.uniformData );
+	
 	};
 	/**
 	 * Uses this shader
@@ -5116,14 +5089,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	Shader.prototype.destroy = function()
 	{
-		// var gl = this.gl;
+		this.attributes = null;
+		this.uniformData = null;
+		this.uniforms = null;
+	
+		var gl = this.gl;
+		gl.deleteProgram(this.program);
 	};
+	
 	
 	module.exports = Shader;
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	
@@ -5133,9 +5112,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param gl {WebGLRenderingContext} The current WebGL context {WebGLProgram}
 	 * @param vertexSrc {string|string[]} The vertex shader source as an array of strings.
 	 * @param fragmentSrc {string|string[]} The fragment shader source as an array of strings.
+	 * @param attributeLocations {Object} An attribute location map that lets you manually set the attribute locations
 	 * @return {WebGLProgram} the shader program
 	 */
-	var compileProgram = function(gl, vertexSrc, fragmentSrc)
+	var compileProgram = function(gl, vertexSrc, fragmentSrc, attributeLocations)
 	{
 	    var glVertShader = compileShader(gl, gl.VERTEX_SHADER, vertexSrc);
 	    var glFragShader = compileShader(gl, gl.FRAGMENT_SHADER, fragmentSrc);
@@ -5144,6 +5124,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    gl.attachShader(program, glVertShader);
 	    gl.attachShader(program, glFragShader);
+	
+	    // optionally, set the attributes manually for the program rather than letting WebGL decide..
+	    if(attributeLocations)
+	    {
+	        for(var i in attributeLocations)
+	        {
+	            gl.bindAttribLocation(program, attributeLocations[i], i);
+	        }
+	    }
+	
+	
 	    gl.linkProgram(program);
 	
 	    // if linking fails, then log and cleanup
@@ -5197,12 +5188,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var mapType = __webpack_require__(32);
-	var mapSize = __webpack_require__(33);
+	var mapType = __webpack_require__(33);
+	var mapSize = __webpack_require__(34);
 	
 	/**
 	 * Extracts the attributes
@@ -5244,7 +5235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	
@@ -5296,7 +5287,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	/**
@@ -5338,11 +5329,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var mapType = __webpack_require__(32);
-	var defaultValue = __webpack_require__(35);
+	var mapType = __webpack_require__(33);
+	var defaultValue = __webpack_require__(36);
 	
 	/**
 	 * Extracts the uniforms
@@ -5379,7 +5370,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/**
@@ -5463,7 +5454,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 36 */
+/* 37 */
+/***/ function(module, exports) {
+
+	/**
+	 * Sets the float precision on the shader. If the precision is already present this function will do nothing
+	 * @param {string} src       the shader source
+	 * @param {string} precision The float precision of the shader. Options are 'lowp', 'mediump' or 'highp'.
+	 *
+	 * @return {string} modified shader source
+	 */
+	var setPrecision = function(src, precision)
+	{
+	    if(src.substring(0, 9) !== 'precision')
+	    {
+	        return 'precision ' + precision + ' float;\n' + src;
+	    }
+	
+	    return src;
+	};
+	
+	module.exports = setPrecision;
+
+
+/***/ },
+/* 38 */
 /***/ function(module, exports) {
 
 	/**
@@ -5490,6 +5505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        var nameTokens = fullName.split('.');
 	        var name = nameTokens[nameTokens.length - 1];
+	
 	
 	        var uniformGroup = getUniformGroup(nameTokens, uniforms);
 	
@@ -5609,12 +5625,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	// state object//
-	var setVertexAttribArrays = __webpack_require__( 25 );
+	var setVertexAttribArrays = __webpack_require__( 26 );
 	
 	/**
 	 * Helper class to work with WebGL VertexArrayObjects (vaos)
@@ -5749,19 +5765,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	            lastBuffer = attrib.buffer;
 	        }
 	
-	        //attrib.attribute.pointer(attrib.type, attrib.normalized, attrib.stride, attrib.start);
 	        gl.vertexAttribPointer(attrib.attribute.location,
-	                               attrib.attribute.size, attrib.type || gl.FLOAT,
+	                               attrib.attribute.size,
+	                               attrib.type || gl.FLOAT,
 	                               attrib.normalized || false,
 	                               attrib.stride || 0,
 	                               attrib.start || 0);
-	
-	
 	    }
 	
 	    setVertexAttribArrays(gl, this.attributes, this.nativeState);
 	
-	    this.indexBuffer.bind();
+	    if(this.indexBuffer)
+	    {
+	        this.indexBuffer.bind();
+	    }
 	
 	    return this;
 	};
@@ -5834,7 +5851,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	VertexArrayObject.prototype.draw = function(type, size, start)
 	{
 	    var gl = this.gl;
-	    gl.drawElements(type, size, gl.UNSIGNED_SHORT, start || 0);
+	
+	    if(this.indexBuffer)
+	    {
+	        gl.drawElements(type, size || this.indexBuffer.data.length, gl.UNSIGNED_SHORT, (start || 0) * 2 );
+	    }
+	    else
+	    {
+	        // TODO need a better way to calculate size..
+	        gl.drawArrays(type, start, size || this.getSize());
+	    }
 	
 	    return this;
 	};
@@ -5858,371 +5884,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.nativeVaoExtension = null;
 	    this.nativeVao = null;
 	};
-
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    compileProgram: __webpack_require__(30),
-	    defaultValue: __webpack_require__(35),
-	    extractAttributes: __webpack_require__(31),
-	    extractUniforms: __webpack_require__(34),
-	    generateUniformAccessObject: __webpack_require__(36),
-	    mapSize: __webpack_require__(33),
-	    mapType: __webpack_require__(32)  
+	
+	VertexArrayObject.prototype.getSize = function()
+	{
+	    var attrib = this.attributes[0];
+	    return attrib.buffer.data.length / (( attrib.stride/4 ) || attrib.attribute.size);
 	};
 
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _math = __webpack_require__(13);
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	/**
-	 * 'Builder' pattern for bounds rectangles
-	 * Axis-Aligned Bounding Box
-	 * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
-	 *
-	 * @class
-	 * @memberof PIXI
-	 */
-	var Bounds = function () {
-	    /**
-	     *
-	     */
-	    function Bounds() {
-	        _classCallCheck(this, Bounds);
-	
-	        /**
-	         * @member {number}
-	         * @default 0
-	         */
-	        this.minX = Infinity;
-	
-	        /**
-	         * @member {number}
-	         * @default 0
-	         */
-	        this.minY = Infinity;
-	
-	        /**
-	         * @member {number}
-	         * @default 0
-	         */
-	        this.maxX = -Infinity;
-	
-	        /**
-	         * @member {number}
-	         * @default 0
-	         */
-	        this.maxY = -Infinity;
-	
-	        this.rect = null;
-	    }
-	
-	    /**
-	     * Checks if bounds are empty.
-	     *
-	     * @return {boolean} True if empty.
-	     */
-	
-	
-	    Bounds.prototype.isEmpty = function isEmpty() {
-	        return this.minX > this.maxX || this.minY > this.maxY;
-	    };
-	
-	    /**
-	     * Clears the bounds and resets.
-	     *
-	     */
-	
-	
-	    Bounds.prototype.clear = function clear() {
-	        this.updateID++;
-	
-	        this.minX = Infinity;
-	        this.minY = Infinity;
-	        this.maxX = -Infinity;
-	        this.maxY = -Infinity;
-	    };
-	
-	    /**
-	     * Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle
-	     * It is not guaranteed that it will return tempRect
-	     *
-	     * @param {PIXI.Rectangle} rect - temporary object will be used if AABB is not empty
-	     * @returns {PIXI.Rectangle} A rectangle of the bounds
-	     */
-	
-	
-	    Bounds.prototype.getRectangle = function getRectangle(rect) {
-	        if (this.minX > this.maxX || this.minY > this.maxY) {
-	            return _math.Rectangle.EMPTY;
-	        }
-	
-	        rect = rect || new _math.Rectangle(0, 0, 1, 1);
-	
-	        rect.x = this.minX;
-	        rect.y = this.minY;
-	        rect.width = this.maxX - this.minX;
-	        rect.height = this.maxY - this.minY;
-	
-	        return rect;
-	    };
-	
-	    /**
-	     * This function should be inlined when its possible.
-	     *
-	     * @param {PIXI.Point} point - The point to add.
-	     */
-	
-	
-	    Bounds.prototype.addPoint = function addPoint(point) {
-	        this.minX = Math.min(this.minX, point.x);
-	        this.maxX = Math.max(this.maxX, point.x);
-	        this.minY = Math.min(this.minY, point.y);
-	        this.maxY = Math.max(this.maxY, point.y);
-	    };
-	
-	    /**
-	     * Adds a quad, not transformed
-	     *
-	     * @param {Float32Array} vertices - The verts to add.
-	     */
-	
-	
-	    Bounds.prototype.addQuad = function addQuad(vertices) {
-	        var minX = this.minX;
-	        var minY = this.minY;
-	        var maxX = this.maxX;
-	        var maxY = this.maxY;
-	
-	        var x = vertices[0];
-	        var y = vertices[1];
-	
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = vertices[2];
-	        y = vertices[3];
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = vertices[4];
-	        y = vertices[5];
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = vertices[6];
-	        y = vertices[7];
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        this.minX = minX;
-	        this.minY = minY;
-	        this.maxX = maxX;
-	        this.maxY = maxY;
-	    };
-	
-	    /**
-	     * Adds sprite frame, transformed.
-	     *
-	     * @param {PIXI.TransformBase} transform - TODO
-	     * @param {number} x0 - TODO
-	     * @param {number} y0 - TODO
-	     * @param {number} x1 - TODO
-	     * @param {number} y1 - TODO
-	     */
-	
-	
-	    Bounds.prototype.addFrame = function addFrame(transform, x0, y0, x1, y1) {
-	        var matrix = transform.worldTransform;
-	        var a = matrix.a;
-	        var b = matrix.b;
-	        var c = matrix.c;
-	        var d = matrix.d;
-	        var tx = matrix.tx;
-	        var ty = matrix.ty;
-	
-	        var minX = this.minX;
-	        var minY = this.minY;
-	        var maxX = this.maxX;
-	        var maxY = this.maxY;
-	
-	        var x = a * x0 + c * y0 + tx;
-	        var y = b * x0 + d * y0 + ty;
-	
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = a * x1 + c * y0 + tx;
-	        y = b * x1 + d * y0 + ty;
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = a * x0 + c * y1 + tx;
-	        y = b * x0 + d * y1 + ty;
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        x = a * x1 + c * y1 + tx;
-	        y = b * x1 + d * y1 + ty;
-	        minX = x < minX ? x : minX;
-	        minY = y < minY ? y : minY;
-	        maxX = x > maxX ? x : maxX;
-	        maxY = y > maxY ? y : maxY;
-	
-	        this.minX = minX;
-	        this.minY = minY;
-	        this.maxX = maxX;
-	        this.maxY = maxY;
-	    };
-	
-	    /**
-	     * Add an array of vertices
-	     *
-	     * @param {PIXI.TransformBase} transform - TODO
-	     * @param {Float32Array} vertices - TODO
-	     * @param {number} beginOffset - TODO
-	     * @param {number} endOffset - TODO
-	     */
-	
-	
-	    Bounds.prototype.addVertices = function addVertices(transform, vertices, beginOffset, endOffset) {
-	        var matrix = transform.worldTransform;
-	        var a = matrix.a;
-	        var b = matrix.b;
-	        var c = matrix.c;
-	        var d = matrix.d;
-	        var tx = matrix.tx;
-	        var ty = matrix.ty;
-	
-	        var minX = this.minX;
-	        var minY = this.minY;
-	        var maxX = this.maxX;
-	        var maxY = this.maxY;
-	
-	        for (var i = beginOffset; i < endOffset; i += 2) {
-	            var rawX = vertices[i];
-	            var rawY = vertices[i + 1];
-	            var x = a * rawX + c * rawY + tx;
-	            var y = d * rawY + b * rawX + ty;
-	
-	            minX = x < minX ? x : minX;
-	            minY = y < minY ? y : minY;
-	            maxX = x > maxX ? x : maxX;
-	            maxY = y > maxY ? y : maxY;
-	        }
-	
-	        this.minX = minX;
-	        this.minY = minY;
-	        this.maxX = maxX;
-	        this.maxY = maxY;
-	    };
-	
-	    /**
-	     * Adds other Bounds
-	     *
-	     * @param {PIXI.Bounds} bounds - TODO
-	     */
-	
-	
-	    Bounds.prototype.addBounds = function addBounds(bounds) {
-	        var minX = this.minX;
-	        var minY = this.minY;
-	        var maxX = this.maxX;
-	        var maxY = this.maxY;
-	
-	        this.minX = bounds.minX < minX ? bounds.minX : minX;
-	        this.minY = bounds.minY < minY ? bounds.minY : minY;
-	        this.maxX = bounds.maxX > maxX ? bounds.maxX : maxX;
-	        this.maxY = bounds.maxY > maxY ? bounds.maxY : maxY;
-	    };
-	
-	    /**
-	     * Adds other Bounds, masked with Bounds
-	     *
-	     * @param {PIXI.Bounds} bounds - TODO
-	     * @param {PIXI.Bounds} mask - TODO
-	     */
-	
-	
-	    Bounds.prototype.addBoundsMask = function addBoundsMask(bounds, mask) {
-	        var _minX = bounds.minX > mask.minX ? bounds.minX : mask.minX;
-	        var _minY = bounds.minY > mask.minY ? bounds.minY : mask.minY;
-	        var _maxX = bounds.maxX < mask.maxX ? bounds.maxX : mask.maxX;
-	        var _maxY = bounds.maxY < mask.maxY ? bounds.maxY : mask.maxY;
-	
-	        if (_minX <= _maxX && _minY <= _maxY) {
-	            var minX = this.minX;
-	            var minY = this.minY;
-	            var maxX = this.maxX;
-	            var maxY = this.maxY;
-	
-	            this.minX = _minX < minX ? _minX : minX;
-	            this.minY = _minY < minY ? _minY : minY;
-	            this.maxX = _maxX > maxX ? _maxX : maxX;
-	            this.maxY = _maxY > maxY ? _maxY : maxY;
-	        }
-	    };
-	
-	    /**
-	     * Adds other Bounds, masked with Rectangle
-	     *
-	     * @param {PIXI.Bounds} bounds - TODO
-	     * @param {PIXI.Rectangle} area - TODO
-	     */
-	
-	
-	    Bounds.prototype.addBoundsArea = function addBoundsArea(bounds, area) {
-	        var _minX = bounds.minX > area.x ? bounds.minX : area.x;
-	        var _minY = bounds.minY > area.y ? bounds.minY : area.y;
-	        var _maxX = bounds.maxX < area.x + area.width ? bounds.maxX : area.x + area.width;
-	        var _maxY = bounds.maxY < area.y + area.height ? bounds.maxY : area.y + area.height;
-	
-	        if (_minX <= _maxX && _minY <= _maxY) {
-	            var minX = this.minX;
-	            var minY = this.minY;
-	            var maxX = this.maxX;
-	            var maxY = this.maxY;
-	
-	            this.minX = _minX < minX ? _minX : minX;
-	            this.minY = _minY < minY ? _minY : minY;
-	            this.maxX = _maxX > maxX ? _maxX : maxX;
-	            this.maxY = _maxY > maxY ? _maxY : maxY;
-	        }
-	    };
-	
-	    return Bounds;
-	}();
-	
-	exports.default = Bounds;
-	//# sourceMappingURL=Bounds.js.map
 
 /***/ },
 /* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    compileProgram: __webpack_require__(31),
+	    defaultValue: __webpack_require__(36),
+	    extractAttributes: __webpack_require__(32),
+	    extractUniforms: __webpack_require__(35),
+	    generateUniformAccessObject: __webpack_require__(38),
+	    setPrecision: __webpack_require__(37),
+	    mapSize: __webpack_require__(34),
+	    mapType: __webpack_require__(33)
+	};
+
+/***/ },
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6231,13 +5917,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -6249,11 +5935,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _Transform2 = _interopRequireDefault(_Transform);
 	
-	var _Bounds = __webpack_require__(39);
+	var _Bounds = __webpack_require__(49);
 	
 	var _Bounds2 = _interopRequireDefault(_Bounds);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -6960,7 +6646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=DisplayObject.js.map
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7277,20 +6963,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _maxRecommendedTextures = __webpack_require__(43);
+	var _maxRecommendedTextures = __webpack_require__(44);
 	
 	var _maxRecommendedTextures2 = _interopRequireDefault(_maxRecommendedTextures);
-	
-	var _canUploadSameBuffer = __webpack_require__(45);
-	
-	var _canUploadSameBuffer2 = _interopRequireDefault(_canUploadSameBuffer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -7349,9 +7031,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @default 32
 	   */
 	  SPRITE_MAX_TEXTURES: (0, _maxRecommendedTextures2.default)(32),
-	
-	  // TODO: maybe change to SPRITE.BATCH_SIZE: 2000
-	  // TODO: maybe add PARTICLE.BATCH_SIZE: 15000
 	
 	  /**
 	   * The default sprite batch size.
@@ -7412,7 +7091,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @static
 	   * @memberof PIXI.settings
-	   * @type {PIXI.TRANSFORM_MODE}
+	   * @type {number}
 	   * @default PIXI.TRANSFORM_MODE.STATIC
 	   */
 	  TRANSFORM_MODE: 0,
@@ -7422,37 +7101,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @static
 	   * @memberof PIXI.settings
-	   * @type {PIXI.GC_MODES}
+	   * @type {number}
 	   * @default PIXI.GC_MODES.AUTO
 	   */
 	  GC_MODE: 0,
-	
-	  /**
-	   * Default Garbage Collection max idle.
-	   *
-	   * @static
-	   * @memberof PIXI.settings
-	   * @type {number}
-	   * @default 3600
-	   */
-	  GC_MAX_IDLE: 60 * 60,
-	
-	  /**
-	   * Default Garbage Collection maximum check count.
-	   *
-	   * @static
-	   * @memberof PIXI.settings
-	   * @type {number}
-	   * @default 600
-	   */
-	  GC_MAX_CHECK_COUNT: 60 * 10,
 	
 	  /**
 	   * Default wrap modes that are supported by pixi.
 	   *
 	   * @static
 	   * @memberof PIXI.settings
-	   * @type {PIXI.WRAP_MODES}
+	   * @type {number}
 	   * @default PIXI.WRAP_MODES.CLAMP
 	   */
 	  WRAP_MODE: 0,
@@ -7462,7 +7121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @static
 	   * @memberof PIXI.settings
-	   * @type {PIXI.SCALE_MODES}
+	   * @type {number}
 	   * @default PIXI.SCALE_MODES.LINEAR
 	   */
 	  SCALE_MODE: 0,
@@ -7472,26 +7131,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @static
 	   * @memberof PIXI.settings
-	   * @type {PIXI.PRECISION}
+	   * @type {string}
 	   * @default PIXI.PRECISION.MEDIUM
 	   */
-	  PRECISION: 'mediump',
-	
-	  /**
-	   * Can we upload the same buffer in a single frame?
-	   *
-	   * @static
-	   * @constant
-	   * @memberof PIXI
-	   * @type {boolean}
-	   */
-	  CAN_UPLOAD_SAME_BUFFER: (0, _canUploadSameBuffer2.default)()
+	  PRECISION: 'mediump'
 	
 	};
 	//# sourceMappingURL=settings.js.map
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7499,7 +7148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = maxRecommendedTextures;
 	
-	var _ismobilejs = __webpack_require__(44);
+	var _ismobilejs = __webpack_require__(45);
 	
 	var _ismobilejs2 = _interopRequireDefault(_ismobilejs);
 	
@@ -7517,11 +7166,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=maxRecommendedTextures.js.map
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
-	 * isMobile.js v0.4.0
+	 * isMobile.js v0.4.1
 	 *
 	 * A simple library to detect Apple phones and tablets,
 	 * Android phones and tablets, other mobile devices (like blackberry, mini-opera and windows phone),
@@ -7540,7 +7189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        android_tablet      = /Android/i,
 	        amazon_phone        = /(?=.*\bAndroid\b)(?=.*\bSD4930UR\b)/i,
 	        amazon_tablet       = /(?=.*\bAndroid\b)(?=.*\b(?:KFOT|KFTT|KFJWI|KFJWA|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|KFARWI|KFASWI|KFSAWI|KFSAWA)\b)/i,
-	        windows_phone       = /IEMobile/i,
+	        windows_phone       = /Windows Phone/i,
 	        windows_tablet      = /(?=.*\bWindows\b)(?=.*\bARM\b)/i, // Match 'Windows' AND 'ARM'
 	        other_blackberry    = /BlackBerry/i,
 	        other_blackberry_10 = /BB10/i,
@@ -7660,24 +7309,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports.__esModule = true;
-	exports.default = canUploadSameBuffer;
-	function canUploadSameBuffer() {
-		// Uploading the same buffer multiple times in a single frame can cause perf issues.
-		// Apparent on IOS so only check for that at the moment
-		// this check may become more complex if this issue pops up elsewhere.
-		var ios = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-	
-		return !ios;
-	}
-	//# sourceMappingURL=canUploadSameBuffer.js.map
-
-/***/ },
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -7687,7 +7318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	var _TransformBase2 = __webpack_require__(47);
 	
@@ -7749,10 +7380,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    _this._rotation = 0;
 	
-	    _this._cx = 1; // cos rotation + skewY;
-	    _this._sx = 0; // sin rotation + skewY;
-	    _this._cy = 0; // cos rotation + Math.PI/2 - skewX;
-	    _this._sy = 1; // sin rotation + Math.PI/2 - skewX;
+	    _this._sr = Math.sin(0);
+	    _this._cr = Math.cos(0);
+	    _this._cy = Math.cos(0); // skewY);
+	    _this._sy = Math.sin(0); // skewY);
+	    _this._nsx = Math.sin(0); // skewX);
+	    _this._cx = Math.cos(0); // skewX);
 	
 	    _this._localID = 0;
 	    _this._currentLocalID = 0;
@@ -7771,17 +7404,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  /**
-	   * Called when skew or rotation changes
+	   * Called when skew changes
 	   *
 	   * @private
 	   */
 	
 	
 	  TransformStatic.prototype.updateSkew = function updateSkew() {
-	    this._cx = Math.cos(this._rotation + this.skew._y);
-	    this._sx = Math.sin(this._rotation + this.skew._y);
-	    this._cy = -Math.sin(this._rotation - this.skew._x); // cos, added PI/2
-	    this._sy = Math.cos(this._rotation - this.skew._x); // sin, added PI/2
+	    this._cy = Math.cos(this.skew._y);
+	    this._sy = Math.sin(this.skew._y);
+	    this._nsx = Math.sin(this.skew._x);
+	    this._cx = Math.cos(this.skew._x);
 	
 	    this._localID++;
 	  };
@@ -7796,10 +7429,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (this._localID !== this._currentLocalID) {
 	      // get the matrix values of the displayobject based on its transform properties..
-	      lt.a = this._cx * this.scale._x;
-	      lt.b = this._sx * this.scale._x;
-	      lt.c = this._cy * this.scale._y;
-	      lt.d = this._sy * this.scale._y;
+	      var a = this._cr * this.scale._x;
+	      var b = this._sr * this.scale._x;
+	      var c = -this._sr * this.scale._y;
+	      var d = this._cr * this.scale._y;
+	
+	      lt.a = this._cy * a + this._sy * c;
+	      lt.b = this._cy * b + this._sy * d;
+	      lt.c = this._nsx * a + this._cx * c;
+	      lt.d = this._nsx * b + this._cx * d;
 	
 	      lt.tx = this.position._x - (this.pivot._x * lt.a + this.pivot._y * lt.c);
 	      lt.ty = this.position._y - (this.pivot._x * lt.b + this.pivot._y * lt.d);
@@ -7818,14 +7456,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  TransformStatic.prototype.updateTransform = function updateTransform(parentTransform) {
+	    var pt = parentTransform.worldTransform;
+	    var wt = this.worldTransform;
 	    var lt = this.localTransform;
 	
 	    if (this._localID !== this._currentLocalID) {
 	      // get the matrix values of the displayobject based on its transform properties..
-	      lt.a = this._cx * this.scale._x;
-	      lt.b = this._sx * this.scale._x;
-	      lt.c = this._cy * this.scale._y;
-	      lt.d = this._sy * this.scale._y;
+	      var a = this._cr * this.scale._x;
+	      var b = this._sr * this.scale._x;
+	      var c = -this._sr * this.scale._y;
+	      var d = this._cr * this.scale._y;
+	
+	      lt.a = this._cy * a + this._sy * c;
+	      lt.b = this._cy * b + this._sy * d;
+	      lt.c = this._nsx * a + this._cx * c;
+	      lt.d = this._nsx * b + this._cx * d;
 	
 	      lt.tx = this.position._x - (this.pivot._x * lt.a + this.pivot._y * lt.c);
 	      lt.ty = this.position._y - (this.pivot._x * lt.b + this.pivot._y * lt.d);
@@ -7837,9 +7482,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    if (this._parentID !== parentTransform._worldID) {
 	      // concat the parent matrix with the objects transform.
-	      var pt = parentTransform.worldTransform;
-	      var wt = this.worldTransform;
-	
 	      wt.a = lt.a * pt.a + lt.b * pt.c;
 	      wt.b = lt.a * pt.b + lt.b * pt.d;
 	      wt.c = lt.c * pt.a + lt.d * pt.c;
@@ -7888,7 +7530,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ,
 	    set: function set(value) {
 	      this._rotation = value;
-	      this.updateSkew();
+	      this._sr = Math.sin(value);
+	      this._cr = Math.cos(value);
+	      this._localID++;
 	    }
 	  }]);
 	
@@ -7906,7 +7550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.__esModule = true;
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7999,7 +7643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	var _TransformBase2 = __webpack_require__(47);
 	
@@ -8068,25 +7712,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    _this._rotation = 0;
 	
-	    _this._cx = 1; // cos rotation + skewY;
-	    _this._sx = 0; // sin rotation + skewY;
-	    _this._cy = 0; // cos rotation + Math.PI/2 - skewX;
-	    _this._sy = 1; // sin rotation + Math.PI/2 - skewX;
+	    _this._sr = Math.sin(0);
+	    _this._cr = Math.cos(0);
+	    _this._cy = Math.cos(0); // skewY);
+	    _this._sy = Math.sin(0); // skewY);
+	    _this._nsx = Math.sin(0); // skewX);
+	    _this._cx = Math.cos(0); // skewX);
 	    return _this;
 	  }
 	
 	  /**
-	   * Updates the skew values when the skew or rotation changes.
+	   * Updates the skew values when the skew changes.
 	   *
 	   * @private
 	   */
 	
 	
 	  Transform.prototype.updateSkew = function updateSkew() {
-	    this._cx = Math.cos(this._rotation + this.skew._y);
-	    this._sx = Math.sin(this._rotation + this.skew._y);
-	    this._cy = -Math.sin(this._rotation - this.skew._x); // cos, added PI/2
-	    this._sy = Math.cos(this._rotation - this.skew._x); // sin, added PI/2
+	    this._cy = Math.cos(this.skew.y);
+	    this._sy = Math.sin(this.skew.y);
+	    this._nsx = Math.sin(this.skew.x);
+	    this._cx = Math.cos(this.skew.x);
 	  };
 	
 	  /**
@@ -8096,14 +7742,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  Transform.prototype.updateLocalTransform = function updateLocalTransform() {
 	    var lt = this.localTransform;
+	    var a = this._cr * this.scale.x;
+	    var b = this._sr * this.scale.x;
+	    var c = -this._sr * this.scale.y;
+	    var d = this._cr * this.scale.y;
 	
-	    lt.a = this._cx * this.scale.x;
-	    lt.b = this._sx * this.scale.x;
-	    lt.c = this._cy * this.scale.y;
-	    lt.d = this._sy * this.scale.y;
-	
-	    lt.tx = this.position.x - (this.pivot.x * lt.a + this.pivot.y * lt.c);
-	    lt.ty = this.position.y - (this.pivot.x * lt.b + this.pivot.y * lt.d);
+	    lt.a = this._cy * a + this._sy * c;
+	    lt.b = this._cy * b + this._sy * d;
+	    lt.c = this._nsx * a + this._cx * c;
+	    lt.d = this._nsx * b + this._cx * d;
 	  };
 	
 	  /**
@@ -8114,20 +7761,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  Transform.prototype.updateTransform = function updateTransform(parentTransform) {
+	    var pt = parentTransform.worldTransform;
+	    var wt = this.worldTransform;
 	    var lt = this.localTransform;
 	
-	    lt.a = this._cx * this.scale.x;
-	    lt.b = this._sx * this.scale.x;
-	    lt.c = this._cy * this.scale.y;
-	    lt.d = this._sy * this.scale.y;
+	    var a = this._cr * this.scale.x;
+	    var b = this._sr * this.scale.x;
+	    var c = -this._sr * this.scale.y;
+	    var d = this._cr * this.scale.y;
+	
+	    lt.a = this._cy * a + this._sy * c;
+	    lt.b = this._cy * b + this._sy * d;
+	    lt.c = this._nsx * a + this._cx * c;
+	    lt.d = this._nsx * b + this._cx * d;
 	
 	    lt.tx = this.position.x - (this.pivot.x * lt.a + this.pivot.y * lt.c);
 	    lt.ty = this.position.y - (this.pivot.x * lt.b + this.pivot.y * lt.d);
 	
 	    // concat the parent matrix with the objects transform.
-	    var pt = parentTransform.worldTransform;
-	    var wt = this.worldTransform;
-	
 	    wt.a = lt.a * pt.a + lt.b * pt.c;
 	    wt.b = lt.a * pt.b + lt.b * pt.d;
 	    wt.c = lt.c * pt.a + lt.d * pt.c;
@@ -8171,7 +7822,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ,
 	    set: function set(value) {
 	      this._rotation = value;
-	      this.updateSkew();
+	      this._sr = Math.sin(value);
+	      this._cr = Math.cos(value);
 	    }
 	  }]);
 	
@@ -8189,11 +7841,358 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	exports.__esModule = true;
 	
+	var _math = __webpack_require__(14);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	/**
+	 * 'Builder' pattern for bounds rectangles
+	 * Axis-Aligned Bounding Box
+	 * It is not a shape! Its mutable thing, no 'EMPTY' or that kind of problems
+	 *
+	 * @class
+	 * @memberof PIXI
+	 */
+	var Bounds = function () {
+	    /**
+	     *
+	     */
+	    function Bounds() {
+	        _classCallCheck(this, Bounds);
+	
+	        /**
+	         * @member {number}
+	         * @default 0
+	         */
+	        this.minX = Infinity;
+	
+	        /**
+	         * @member {number}
+	         * @default 0
+	         */
+	        this.minY = Infinity;
+	
+	        /**
+	         * @member {number}
+	         * @default 0
+	         */
+	        this.maxX = -Infinity;
+	
+	        /**
+	         * @member {number}
+	         * @default 0
+	         */
+	        this.maxY = -Infinity;
+	
+	        this.rect = null;
+	    }
+	
+	    /**
+	     * Checks if bounds are empty.
+	     *
+	     * @return {boolean} True if empty.
+	     */
+	
+	
+	    Bounds.prototype.isEmpty = function isEmpty() {
+	        return this.minX > this.maxX || this.minY > this.maxY;
+	    };
+	
+	    /**
+	     * Clears the bounds and resets.
+	     *
+	     */
+	
+	
+	    Bounds.prototype.clear = function clear() {
+	        this.updateID++;
+	
+	        this.minX = Infinity;
+	        this.minY = Infinity;
+	        this.maxX = -Infinity;
+	        this.maxY = -Infinity;
+	    };
+	
+	    /**
+	     * Can return Rectangle.EMPTY constant, either construct new rectangle, either use your rectangle
+	     * It is not guaranteed that it will return tempRect
+	     *
+	     * @param {PIXI.Rectangle} rect - temporary object will be used if AABB is not empty
+	     * @returns {PIXI.Rectangle} A rectangle of the bounds
+	     */
+	
+	
+	    Bounds.prototype.getRectangle = function getRectangle(rect) {
+	        if (this.minX > this.maxX || this.minY > this.maxY) {
+	            return _math.Rectangle.EMPTY;
+	        }
+	
+	        rect = rect || new _math.Rectangle(0, 0, 1, 1);
+	
+	        rect.x = this.minX;
+	        rect.y = this.minY;
+	        rect.width = this.maxX - this.minX;
+	        rect.height = this.maxY - this.minY;
+	
+	        return rect;
+	    };
+	
+	    /**
+	     * This function should be inlined when its possible.
+	     *
+	     * @param {PIXI.Point} point - The point to add.
+	     */
+	
+	
+	    Bounds.prototype.addPoint = function addPoint(point) {
+	        this.minX = Math.min(this.minX, point.x);
+	        this.maxX = Math.max(this.maxX, point.x);
+	        this.minY = Math.min(this.minY, point.y);
+	        this.maxY = Math.max(this.maxY, point.y);
+	    };
+	
+	    /**
+	     * Adds a quad, not transformed
+	     *
+	     * @param {Float32Array} vertices - The verts to add.
+	     */
+	
+	
+	    Bounds.prototype.addQuad = function addQuad(vertices) {
+	        var minX = this.minX;
+	        var minY = this.minY;
+	        var maxX = this.maxX;
+	        var maxY = this.maxY;
+	
+	        var x = vertices[0];
+	        var y = vertices[1];
+	
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = vertices[2];
+	        y = vertices[3];
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = vertices[4];
+	        y = vertices[5];
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = vertices[6];
+	        y = vertices[7];
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        this.minX = minX;
+	        this.minY = minY;
+	        this.maxX = maxX;
+	        this.maxY = maxY;
+	    };
+	
+	    /**
+	     * Adds sprite frame, transformed.
+	     *
+	     * @param {PIXI.TransformBase} transform - TODO
+	     * @param {number} x0 - TODO
+	     * @param {number} y0 - TODO
+	     * @param {number} x1 - TODO
+	     * @param {number} y1 - TODO
+	     */
+	
+	
+	    Bounds.prototype.addFrame = function addFrame(transform, x0, y0, x1, y1) {
+	        var matrix = transform.worldTransform;
+	        var a = matrix.a;
+	        var b = matrix.b;
+	        var c = matrix.c;
+	        var d = matrix.d;
+	        var tx = matrix.tx;
+	        var ty = matrix.ty;
+	
+	        var minX = this.minX;
+	        var minY = this.minY;
+	        var maxX = this.maxX;
+	        var maxY = this.maxY;
+	
+	        var x = a * x0 + c * y0 + tx;
+	        var y = b * x0 + d * y0 + ty;
+	
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = a * x1 + c * y0 + tx;
+	        y = b * x1 + d * y0 + ty;
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = a * x0 + c * y1 + tx;
+	        y = b * x0 + d * y1 + ty;
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        x = a * x1 + c * y1 + tx;
+	        y = b * x1 + d * y1 + ty;
+	        minX = x < minX ? x : minX;
+	        minY = y < minY ? y : minY;
+	        maxX = x > maxX ? x : maxX;
+	        maxY = y > maxY ? y : maxY;
+	
+	        this.minX = minX;
+	        this.minY = minY;
+	        this.maxX = maxX;
+	        this.maxY = maxY;
+	    };
+	
+	    /**
+	     * Add an array of vertices
+	     *
+	     * @param {PIXI.TransformBase} transform - TODO
+	     * @param {Float32Array} vertices - TODO
+	     * @param {number} beginOffset - TODO
+	     * @param {number} endOffset - TODO
+	     */
+	
+	
+	    Bounds.prototype.addVertices = function addVertices(transform, vertices, beginOffset, endOffset) {
+	        var matrix = transform.worldTransform;
+	        var a = matrix.a;
+	        var b = matrix.b;
+	        var c = matrix.c;
+	        var d = matrix.d;
+	        var tx = matrix.tx;
+	        var ty = matrix.ty;
+	
+	        var minX = this.minX;
+	        var minY = this.minY;
+	        var maxX = this.maxX;
+	        var maxY = this.maxY;
+	
+	        for (var i = beginOffset; i < endOffset; i += 2) {
+	            var rawX = vertices[i];
+	            var rawY = vertices[i + 1];
+	            var x = a * rawX + c * rawY + tx;
+	            var y = d * rawY + b * rawX + ty;
+	
+	            minX = x < minX ? x : minX;
+	            minY = y < minY ? y : minY;
+	            maxX = x > maxX ? x : maxX;
+	            maxY = y > maxY ? y : maxY;
+	        }
+	
+	        this.minX = minX;
+	        this.minY = minY;
+	        this.maxX = maxX;
+	        this.maxY = maxY;
+	    };
+	
+	    /**
+	     * Adds other Bounds
+	     *
+	     * @param {PIXI.Bounds} bounds - TODO
+	     */
+	
+	
+	    Bounds.prototype.addBounds = function addBounds(bounds) {
+	        var minX = this.minX;
+	        var minY = this.minY;
+	        var maxX = this.maxX;
+	        var maxY = this.maxY;
+	
+	        this.minX = bounds.minX < minX ? bounds.minX : minX;
+	        this.minY = bounds.minY < minY ? bounds.minY : minY;
+	        this.maxX = bounds.maxX > maxX ? bounds.maxX : maxX;
+	        this.maxY = bounds.maxY > maxY ? bounds.maxY : maxY;
+	    };
+	
+	    /**
+	     * Adds other Bounds, masked with Bounds
+	     *
+	     * @param {PIXI.Bounds} bounds - TODO
+	     * @param {PIXI.Bounds} mask - TODO
+	     */
+	
+	
+	    Bounds.prototype.addBoundsMask = function addBoundsMask(bounds, mask) {
+	        var _minX = bounds.minX > mask.minX ? bounds.minX : mask.minX;
+	        var _minY = bounds.minY > mask.minY ? bounds.minY : mask.minY;
+	        var _maxX = bounds.maxX < mask.maxX ? bounds.maxX : mask.maxX;
+	        var _maxY = bounds.maxY < mask.maxY ? bounds.maxY : mask.maxY;
+	
+	        if (_minX <= _maxX && _minY <= _maxY) {
+	            var minX = this.minX;
+	            var minY = this.minY;
+	            var maxX = this.maxX;
+	            var maxY = this.maxY;
+	
+	            this.minX = _minX < minX ? _minX : minX;
+	            this.minY = _minY < minY ? _minY : minY;
+	            this.maxX = _maxX > maxX ? _maxX : maxX;
+	            this.maxY = _maxY > maxY ? _maxY : maxY;
+	        }
+	    };
+	
+	    /**
+	     * Adds other Bounds, masked with Rectangle
+	     *
+	     * @param {PIXI.Bounds} bounds - TODO
+	     * @param {PIXI.Rectangle} area - TODO
+	     */
+	
+	
+	    Bounds.prototype.addBoundsArea = function addBoundsArea(bounds, area) {
+	        var _minX = bounds.minX > area.x ? bounds.minX : area.x;
+	        var _minY = bounds.minY > area.y ? bounds.minY : area.y;
+	        var _maxX = bounds.maxX < area.x + area.width ? bounds.maxX : area.x + area.width;
+	        var _maxY = bounds.maxY < area.y + area.height ? bounds.maxY : area.y + area.height;
+	
+	        if (_minX <= _maxX && _minY <= _maxY) {
+	            var minX = this.minX;
+	            var minY = this.minY;
+	            var maxX = this.maxX;
+	            var maxY = this.maxY;
+	
+	            this.minX = _minX < minX ? _minX : minX;
+	            this.minY = _minY < minY ? _minY : minY;
+	            this.maxX = _maxX > maxX ? _maxX : maxX;
+	            this.maxY = _maxY > maxY ? _maxY : maxY;
+	        }
+	    };
+	
+	    return Bounds;
+	}();
+	
+	exports.default = Bounds;
+	//# sourceMappingURL=Bounds.js.map
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _DisplayObject2 = __webpack_require__(40);
+	var _DisplayObject2 = __webpack_require__(41);
 	
 	var _DisplayObject3 = _interopRequireDefault(_DisplayObject2);
 	
@@ -8798,7 +8797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Container.js.map
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8821,19 +8820,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
-	var _pluginTarget = __webpack_require__(51);
+	var _pluginTarget = __webpack_require__(52);
 	
 	var _pluginTarget2 = _interopRequireDefault(_pluginTarget);
 	
-	var _ismobilejs = __webpack_require__(44);
+	var _ismobilejs = __webpack_require__(45);
 	
 	var isMobile = _interopRequireWildcard(_ismobilejs);
 	
@@ -8916,17 +8915,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @memberof PIXI.utils
 	 * @function getResolutionOfUrl
 	 * @param {string} url - the image path
-	 * @param {number} [defaultValue=1] - the defaultValue if no filename prefix is set.
 	 * @return {number} resolution / device pixel ratio of an asset
 	 */
-	function getResolutionOfUrl(url, defaultValue) {
+	function getResolutionOfUrl(url) {
 	    var resolution = _settings2.default.RETINA_PREFIX.exec(url);
 	
 	    if (resolution) {
 	        return parseFloat(resolution[1]);
 	    }
 	
-	    return defaultValue !== undefined ? defaultValue : 1;
+	    return 1;
 	}
 	
 	/**
@@ -9140,7 +9138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -9210,7 +9208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=pluginTarget.js.map
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9219,17 +9217,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
-	var _Texture = __webpack_require__(53);
+	var _Texture = __webpack_require__(54);
 	
 	var _Texture2 = _interopRequireDefault(_Texture);
 	
-	var _Container2 = __webpack_require__(49);
+	var _Container2 = __webpack_require__(50);
 	
 	var _Container3 = _interopRequireDefault(_Container2);
 	
@@ -9360,15 +9358,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        _this._transformID = -1;
 	        _this._textureID = -1;
-	
-	        /**
-	         * Plugin that is responsible for rendering this element.
-	         * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
-	         *
-	         * @member {string}
-	         * @default 'sprite'
-	         */
-	        _this.pluginName = 'sprite';
 	        return _this;
 	    }
 	
@@ -9530,8 +9519,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Sprite.prototype._renderWebGL = function _renderWebGL(renderer) {
 	        this.calculateVertices();
 	
-	        renderer.setObjectRenderer(renderer.plugins[this.pluginName]);
-	        renderer.plugins[this.pluginName].render(this);
+	        renderer.setObjectRenderer(renderer.plugins.sprite);
+	        renderer.plugins.sprite.render(this);
 	    };
 	
 	    /**
@@ -9543,7 +9532,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    Sprite.prototype._renderCanvas = function _renderCanvas(renderer) {
-	        renderer.plugins[this.pluginName].render(this);
+	        renderer.plugins.sprite.render(this);
 	    };
 	
 	    /**
@@ -9719,7 +9708,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(Sprite, [{
 	        key: 'width',
 	        get: function get() {
-	            return Math.abs(this.scale.x) * this._texture.orig.width;
+	            return Math.abs(this.scale.x) * this.texture.orig.width;
 	        }
 	
 	        /**
@@ -9731,7 +9720,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        set: function set(value) {
 	            var s = (0, _utils.sign)(this.scale.x) || 1;
 	
-	            this.scale.x = s * value / this._texture.orig.width;
+	            this.scale.x = s * value / this.texture.orig.width;
 	            this._width = value;
 	        }
 	
@@ -9745,7 +9734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'height',
 	        get: function get() {
-	            return Math.abs(this.scale.y) * this._texture.orig.height;
+	            return Math.abs(this.scale.y) * this.texture.orig.height;
 	        }
 	
 	        /**
@@ -9757,7 +9746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        set: function set(value) {
 	            var s = (0, _utils.sign)(this.scale.y) || 1;
 	
-	            this.scale.y = s * value / this._texture.orig.height;
+	            this.scale.y = s * value / this.texture.orig.height;
 	            this._height = value;
 	        }
 	
@@ -9860,7 +9849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Sprite.js.map
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9869,25 +9858,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _BaseTexture = __webpack_require__(54);
+	var _BaseTexture = __webpack_require__(55);
 	
 	var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 	
-	var _VideoBaseTexture = __webpack_require__(63);
+	var _VideoBaseTexture = __webpack_require__(64);
 	
 	var _VideoBaseTexture2 = _interopRequireDefault(_VideoBaseTexture);
 	
-	var _TextureUvs = __webpack_require__(66);
+	var _TextureUvs = __webpack_require__(67);
 	
 	var _TextureUvs2 = _interopRequireDefault(_TextureUvs);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -10399,7 +10388,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'width',
 	        get: function get() {
-	            return this.orig.width;
+	            return this.orig ? this.orig.width : 0;
 	        }
 	
 	        /**
@@ -10411,7 +10400,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'height',
 	        get: function get() {
-	            return this.orig.height;
+	            return this.orig ? this.orig.height : 0;
 	        }
 	    }]);
 	
@@ -10436,7 +10425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Texture.js.map
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10445,21 +10434,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
-	var _determineCrossOrigin = __webpack_require__(55);
+	var _determineCrossOrigin = __webpack_require__(56);
 	
 	var _determineCrossOrigin2 = _interopRequireDefault(_determineCrossOrigin);
 	
-	var _bitTwiddle = __webpack_require__(62);
+	var _bitTwiddle = __webpack_require__(63);
 	
 	var _bitTwiddle2 = _interopRequireDefault(_bitTwiddle);
 	
@@ -10471,6 +10460,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var RESOLUTION = _settings2.default.RESOLUTION,
+	    MIPMAP_TEXTURES = _settings2.default.MIPMAP_TEXTURES,
+	    SCALE_MODE = _settings2.default.SCALE_MODE,
+	    WRAP_MODE = _settings2.default.WRAP_MODE;
+	
 	/**
 	 * A texture stores the information that represents an image. All textures have a base texture.
 	 *
@@ -10478,6 +10472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @extends EventEmitter
 	 * @memberof PIXI
 	 */
+	
 	var BaseTexture = function (_EventEmitter) {
 	    _inherits(BaseTexture, _EventEmitter);
 	
@@ -10501,7 +10496,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {number}
 	         * @default 1
 	         */
-	        _this.resolution = resolution || _settings2.default.RESOLUTION;
+	        _this.resolution = resolution || RESOLUTION;
 	
 	        /**
 	         * The width of the base texture set when the image has loaded
@@ -10543,7 +10538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @default PIXI.settings.SCALE_MODE
 	         * @see PIXI.SCALE_MODES
 	         */
-	        _this.scaleMode = scaleMode || _settings2.default.SCALE_MODE;
+	        _this.scaleMode = scaleMode || SCALE_MODE;
 	
 	        /**
 	         * Set to true once the base texture has successfully loaded.
@@ -10640,7 +10635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {boolean}
 	         * @see PIXI.MIPMAP_TEXTURES
 	         */
-	        _this.mipmap = _settings2.default.MIPMAP_TEXTURES;
+	        _this.mipmap = MIPMAP_TEXTURES;
 	
 	        /**
 	         *
@@ -10649,7 +10644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {number}
 	         * @see PIXI.WRAP_MODES
 	         */
-	        _this.wrapMode = _settings2.default.WRAP_MODE;
+	        _this.wrapMode = WRAP_MODE;
 	
 	        /**
 	         * A map of renderer IDs to webgl textures
@@ -11143,7 +11138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BaseTexture.js.map
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11151,7 +11146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = determineCrossOrigin;
 	
-	var _url2 = __webpack_require__(56);
+	var _url2 = __webpack_require__(57);
 	
 	var _url3 = _interopRequireDefault(_url2);
 	
@@ -11203,7 +11198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=determineCrossOrigin.js.map
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -11227,7 +11222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var punycode = __webpack_require__(57);
+	var punycode = __webpack_require__(58);
 	
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -11299,7 +11294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(59);
+	    querystring = __webpack_require__(60);
 	
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -11916,7 +11911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -12448,10 +12443,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	}(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(58)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(59)(module), (function() { return this; }())))
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -12467,17 +12462,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(60);
-	exports.encode = exports.stringify = __webpack_require__(61);
+	exports.decode = exports.parse = __webpack_require__(61);
+	exports.encode = exports.stringify = __webpack_require__(62);
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -12563,7 +12558,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -12633,7 +12628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports) {
 
 	/**
@@ -12843,7 +12838,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12852,13 +12847,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _BaseTexture2 = __webpack_require__(54);
+	var _BaseTexture2 = __webpack_require__(55);
 	
 	var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _ticker = __webpack_require__(64);
+	var _ticker = __webpack_require__(65);
 	
 	var ticker = _interopRequireWildcard(_ticker);
 	
@@ -13181,7 +13176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=VideoBaseTexture.js.map
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13189,7 +13184,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.Ticker = exports.shared = undefined;
 	
-	var _Ticker = __webpack_require__(65);
+	var _Ticker = __webpack_require__(66);
 	
 	var _Ticker2 = _interopRequireDefault(_Ticker);
 	
@@ -13249,7 +13244,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13258,11 +13253,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
@@ -13272,6 +13267,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Internal event used by composed emitter
 	var TICK = 'tick';
+	
+	var TARGET_FPMS = _settings2.default.TARGET_FPMS;
 	
 	/**
 	 * A Ticker class that runs an update loop that other objects listen to.
@@ -13343,7 +13340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {number}
 	         * @default 1 / TARGET_FPMS
 	         */
-	        this.elapsedMS = 1 / _settings2.default.TARGET_FPMS; // default to target frame time
+	        this.elapsedMS = 1 / TARGET_FPMS; // default to target frame time
 	
 	        /**
 	         * The last time {@link PIXI.ticker.Ticker#update} was invoked.
@@ -13587,7 +13584,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                elapsedMS = this._maxElapsedMS;
 	            }
 	
-	            this.deltaTime = elapsedMS * _settings2.default.TARGET_FPMS * this.speed;
+	            this.deltaTime = elapsedMS * TARGET_FPMS * this.speed;
 	
 	            // Invoke listeners added to internal emitter
 	            this._emitter.emit(TICK, this.deltaTime);
@@ -13642,7 +13639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ,
 	        set: function set(fps) {
 	            // Clamp: 0 to TARGET_FPMS
-	            var minFPMS = Math.min(Math.max(0, fps) / 1000, _settings2.default.TARGET_FPMS);
+	            var minFPMS = Math.min(Math.max(0, fps) / 1000, TARGET_FPMS);
 	
 	            this._maxElapsedMS = 1 / minFPMS;
 	        }
@@ -13655,14 +13652,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Ticker.js.map
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _GroupD = __webpack_require__(17);
+	var _GroupD = __webpack_require__(18);
 	
 	var _GroupD2 = _interopRequireDefault(_GroupD);
 	
@@ -13764,22 +13761,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TextureUvs.js.map
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _CanvasRenderer = __webpack_require__(68);
+	var _CanvasRenderer = __webpack_require__(69);
 	
 	var _CanvasRenderer2 = _interopRequireDefault(_CanvasRenderer);
 	
 	var _const = __webpack_require__(12);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _CanvasTinter = __webpack_require__(76);
+	var _CanvasTinter = __webpack_require__(77);
 	
 	var _CanvasTinter2 = _interopRequireDefault(_CanvasTinter);
 	
@@ -13921,34 +13918,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasSpriteRenderer.js.map
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _SystemRenderer2 = __webpack_require__(69);
+	var _SystemRenderer2 = __webpack_require__(70);
 	
 	var _SystemRenderer3 = _interopRequireDefault(_SystemRenderer2);
 	
-	var _CanvasMaskManager = __webpack_require__(72);
+	var _CanvasMaskManager = __webpack_require__(73);
 	
 	var _CanvasMaskManager2 = _interopRequireDefault(_CanvasMaskManager);
 	
-	var _CanvasRenderTarget = __webpack_require__(73);
+	var _CanvasRenderTarget = __webpack_require__(74);
 	
 	var _CanvasRenderTarget2 = _interopRequireDefault(_CanvasRenderTarget);
 	
-	var _mapCanvasBlendModesToPixi = __webpack_require__(74);
+	var _mapCanvasBlendModesToPixi = __webpack_require__(75);
 	
 	var _mapCanvasBlendModesToPixi2 = _interopRequireDefault(_mapCanvasBlendModesToPixi);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -14072,8 +14069,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        this.emit('prerender');
 	
-	        var rootResolution = this.resolution;
-	
 	        if (renderTexture) {
 	            renderTexture = renderTexture.baseTexture || renderTexture;
 	
@@ -14141,29 +14136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        displayObject.renderCanvas(this);
 	        this.context = tempContext;
 	
-	        this.resolution = rootResolution;
-	
 	        this.emit('postrender');
-	    };
-	
-	    /**
-	     * Clear the canvas of renderer.
-	     *
-	     * @param {string} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
-	     */
-	
-	
-	    CanvasRenderer.prototype.clear = function clear(clearColor) {
-	        var context = this.context;
-	
-	        clearColor = clearColor || this._backgroundColorString;
-	
-	        if (!this.transparent && clearColor) {
-	            context.fillStyle = clearColor;
-	            context.fillRect(0, 0, this.width, this.height);
-	        } else {
-	            context.clearRect(0, 0, this.width, this.height);
-	        }
 	    };
 	
 	    /**
@@ -14235,7 +14208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasRenderer.js.map
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14244,25 +14217,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _Container = __webpack_require__(49);
+	var _Container = __webpack_require__(50);
 	
 	var _Container2 = _interopRequireDefault(_Container);
 	
-	var _RenderTexture = __webpack_require__(70);
+	var _RenderTexture = __webpack_require__(71);
 	
 	var _RenderTexture2 = _interopRequireDefault(_RenderTexture);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
@@ -14275,6 +14248,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var tempMatrix = new _math.Matrix();
+	var RESOLUTION = _settings2.default.RESOLUTION,
+	    RENDER_OPTIONS = _settings2.default.RENDER_OPTIONS;
 	
 	/**
 	 * The SystemRenderer is the base for a Pixi Renderer. It is extended by the {@link PIXI.CanvasRenderer}
@@ -14316,13 +14291,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    // prepare options
 	    if (options) {
-	      for (var i in _settings2.default.RENDER_OPTIONS) {
+	      for (var i in RENDER_OPTIONS) {
 	        if (typeof options[i] === 'undefined') {
-	          options[i] = _settings2.default.RENDER_OPTIONS[i];
+	          options[i] = RENDER_OPTIONS[i];
 	        }
 	      }
 	    } else {
-	      options = _settings2.default.RENDER_OPTIONS;
+	      options = RENDER_OPTIONS;
 	    }
 	
 	    /**
@@ -14363,7 +14338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {number}
 	     * @default 1
 	     */
-	    _this.resolution = options.resolution || _settings2.default.RESOLUTION;
+	    _this.resolution = options.resolution || RESOLUTION;
 	
 	    /**
 	     * Whether the render view is transparent
@@ -14578,18 +14553,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=SystemRenderer.js.map
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _BaseRenderTexture = __webpack_require__(71);
+	var _BaseRenderTexture = __webpack_require__(72);
 	
 	var _BaseRenderTexture2 = _interopRequireDefault(_BaseRenderTexture);
 	
-	var _Texture2 = __webpack_require__(53);
+	var _Texture2 = __webpack_require__(54);
 	
 	var _Texture3 = _interopRequireDefault(_Texture2);
 	
@@ -14733,18 +14708,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=RenderTexture.js.map
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _BaseTexture2 = __webpack_require__(54);
+	var _BaseTexture2 = __webpack_require__(55);
 	
 	var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -14901,7 +14876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BaseRenderTexture.js.map
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15073,7 +15048,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasMaskManager.js.map
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15082,7 +15057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -15218,7 +15193,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasRenderTarget.js.map
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15228,7 +15203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _const = __webpack_require__(12);
 	
-	var _canUseNewCanvasBlendModes = __webpack_require__(75);
+	var _canUseNewCanvasBlendModes = __webpack_require__(76);
 	
 	var _canUseNewCanvasBlendModes2 = _interopRequireDefault(_canUseNewCanvasBlendModes);
 	
@@ -15290,7 +15265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=mapCanvasBlendModesToPixi.js.map
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15301,7 +15276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Creates a little colored canvas
 	 *
 	 * @ignore
-	 * @param {string} color - The color to make the canvas
+	 * @param {number} color - The color to make the canvas
 	 * @return {canvas} a small canvas element
 	 */
 	function createColoredCanvas(color) {
@@ -15355,16 +15330,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=canUseNewCanvasBlendModes.js.map
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _canUseNewCanvasBlendModes = __webpack_require__(75);
+	var _canUseNewCanvasBlendModes = __webpack_require__(76);
 	
 	var _canUseNewCanvasBlendModes2 = _interopRequireDefault(_canUseNewCanvasBlendModes);
 	
@@ -15595,46 +15570,48 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasTinter.js.map
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _ObjectRenderer2 = __webpack_require__(78);
+	var _ObjectRenderer2 = __webpack_require__(79);
 	
 	var _ObjectRenderer3 = _interopRequireDefault(_ObjectRenderer2);
 	
-	var _WebGLRenderer = __webpack_require__(80);
+	var _WebGLRenderer = __webpack_require__(81);
 	
 	var _WebGLRenderer2 = _interopRequireDefault(_WebGLRenderer);
 	
-	var _createIndicesForQuads = __webpack_require__(91);
+	var _createIndicesForQuads = __webpack_require__(92);
 	
 	var _createIndicesForQuads2 = _interopRequireDefault(_createIndicesForQuads);
 	
-	var _generateMultiTextureShader = __webpack_require__(100);
+	var _generateMultiTextureShader = __webpack_require__(101);
 	
 	var _generateMultiTextureShader2 = _interopRequireDefault(_generateMultiTextureShader);
 	
-	var _checkMaxIfStatmentsInShader = __webpack_require__(101);
+	var _checkMaxIfStatmentsInShader = __webpack_require__(102);
 	
 	var _checkMaxIfStatmentsInShader2 = _interopRequireDefault(_checkMaxIfStatmentsInShader);
 	
-	var _BatchBuffer = __webpack_require__(102);
+	var _BatchBuffer = __webpack_require__(103);
 	
 	var _BatchBuffer2 = _interopRequireDefault(_BatchBuffer);
 	
-	var _settings = __webpack_require__(42);
+	var _const = __webpack_require__(12);
+	
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
-	var _bitTwiddle = __webpack_require__(62);
+	var _bitTwiddle = __webpack_require__(63);
 	
 	var _bitTwiddle2 = _interopRequireDefault(_bitTwiddle);
 	
@@ -15645,6 +15622,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SPRITE_BATCH_SIZE = _settings2.default.SPRITE_BATCH_SIZE,
+	    SPRITE_MAX_TEXTURES = _settings2.default.SPRITE_MAX_TEXTURES;
+	
 	
 	var TICK = 0;
 	var TEXTURE_TICK = 0;
@@ -15685,11 +15666,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.vertByteSize = _this.vertSize * 4;
 	
 	        /**
-	         * The number of images in the SpriteRenderer before it flushes.
+	         * The number of images in the SpriteBatch before it flushes.
 	         *
 	         * @member {number}
 	         */
-	        _this.size = _settings2.default.SPRITE_BATCH_SIZE; // 2000 is a nice balance between mobile / desktop
+	        _this.size = SPRITE_BATCH_SIZE; // 2000 is a nice balance between mobile / desktop
 	
 	        // the total number of bytes in our batch
 	        // let numVerts = this.size * 4 * this.vertByteSize;
@@ -15745,7 +15726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var gl = this.renderer.gl;
 	
 	        // step 1: first check max textures the GPU can handle.
-	        this.MAX_TEXTURES = Math.min(gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS), _settings2.default.SPRITE_MAX_TEXTURES);
+	        this.MAX_TEXTURES = Math.min(gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS), SPRITE_MAX_TEXTURES);
 	
 	        // step 2: check the maximum number of if statements the shader can have too..
 	        this.MAX_TEXTURES = (0, _checkMaxIfStatmentsInShader2.default)(this.MAX_TEXTURES, gl);
@@ -15804,7 +15785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // get the uvs for the texture
 	
 	        // if the uvs have not updated then no point rendering just yet!
-	        if (!sprite._texture._uvs) {
+	        if (!sprite.texture._uvs) {
 	            return;
 	        }
 	
@@ -15974,7 +15955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            uint32View[index + 12] = uvs[2];
 	            uint32View[index + 17] = uvs[3];
 	
-	            uint32View[index + 3] = uint32View[index + 8] = uint32View[index + 13] = uint32View[index + 18] = sprite._tintRGB + (Math.min(sprite.worldAlpha, 1) * 255 << 24);
+	            uint32View[index + 3] = uint32View[index + 8] = uint32View[index + 13] = uint32View[index + 18] = sprite._tintRGB + (sprite.worldAlpha * 255 << 24);
 	
 	            float32View[index + 4] = float32View[index + 9] = float32View[index + 14] = float32View[index + 19] = nextTexture._virtalBoundId;
 	
@@ -15983,9 +15964,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        currentGroup.size = i - currentGroup.start;
 	
-	        if (!_settings2.default.CAN_UPLOAD_SAME_BUFFER) {
+	        if (!_const.CAN_UPLOAD_SAME_BUFFER) {
 	            // this is still needed for IOS performance..
-	            // it really does not like uploading to the same buffer in a single frame!
+	            // it realy doe not like uploading to  the same bufffer in a single frame!
 	            if (this.vaoMax <= this.vertexCount) {
 	                this.vaoMax++;
 	                this.vertexBuffers[this.vertexCount] = _pixiGlCore2.default.GLBuffer.createVertexBuffer(gl, null, gl.STREAM_DRAW);
@@ -16000,7 +15981,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            this.vertexCount++;
 	        } else {
-	            // lets use the faster option, always use buffer number 0
+	            // lets use the faster option..
 	            this.vertexBuffers[this.vertexCount].upload(buffer.vertices, 0, true);
 	        }
 	
@@ -16044,12 +16025,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    SpriteRenderer.prototype.start = function start() {
 	        this.renderer.bindShader(this.shader);
 	
-	        if (_settings2.default.CAN_UPLOAD_SAME_BUFFER) {
-	            // bind buffer #0, we don't need others
-	            this.renderer.bindVao(this.vaos[this.vertexCount]);
+	        this.renderer.bindVao(this.vaos[this.vertexCount]);
 	
-	            this.vertexBuffers[this.vertexCount].bind();
-	        }
+	        this.vertexBuffers[this.vertexCount].bind();
 	    };
 	
 	    /**
@@ -16063,7 +16041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	
 	    /**
-	     * Destroys the SpriteRenderer.
+	     * Destroys the SpriteBatch.
 	     *
 	     */
 	
@@ -16113,14 +16091,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=SpriteRenderer.js.map
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLManager2 = __webpack_require__(79);
+	var _WebGLManager2 = __webpack_require__(80);
 	
 	var _WebGLManager3 = _interopRequireDefault(_WebGLManager2);
 	
@@ -16195,7 +16173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ObjectRenderer.js.map
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16254,64 +16232,64 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLManager.js.map
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _SystemRenderer2 = __webpack_require__(69);
+	var _SystemRenderer2 = __webpack_require__(70);
 	
 	var _SystemRenderer3 = _interopRequireDefault(_SystemRenderer2);
 	
-	var _MaskManager = __webpack_require__(81);
+	var _MaskManager = __webpack_require__(82);
 	
 	var _MaskManager2 = _interopRequireDefault(_MaskManager);
 	
-	var _StencilManager = __webpack_require__(87);
+	var _StencilManager = __webpack_require__(88);
 	
 	var _StencilManager2 = _interopRequireDefault(_StencilManager);
 	
-	var _FilterManager = __webpack_require__(88);
+	var _FilterManager = __webpack_require__(89);
 	
 	var _FilterManager2 = _interopRequireDefault(_FilterManager);
 	
-	var _RenderTarget = __webpack_require__(89);
+	var _RenderTarget = __webpack_require__(90);
 	
 	var _RenderTarget2 = _interopRequireDefault(_RenderTarget);
 	
-	var _ObjectRenderer = __webpack_require__(78);
+	var _ObjectRenderer = __webpack_require__(79);
 	
 	var _ObjectRenderer2 = _interopRequireDefault(_ObjectRenderer);
 	
-	var _TextureManager = __webpack_require__(94);
+	var _TextureManager = __webpack_require__(95);
 	
 	var _TextureManager2 = _interopRequireDefault(_TextureManager);
 	
-	var _BaseTexture = __webpack_require__(54);
+	var _BaseTexture = __webpack_require__(55);
 	
 	var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 	
-	var _TextureGarbageCollector = __webpack_require__(95);
+	var _TextureGarbageCollector = __webpack_require__(96);
 	
 	var _TextureGarbageCollector2 = _interopRequireDefault(_TextureGarbageCollector);
 	
-	var _WebGLState = __webpack_require__(96);
+	var _WebGLState = __webpack_require__(97);
 	
 	var _WebGLState2 = _interopRequireDefault(_WebGLState);
 	
-	var _mapWebGLDrawModesToPixi = __webpack_require__(98);
+	var _mapWebGLDrawModesToPixi = __webpack_require__(99);
 	
 	var _mapWebGLDrawModesToPixi2 = _interopRequireDefault(_mapWebGLDrawModesToPixi);
 	
-	var _validateContext = __webpack_require__(99);
+	var _validateContext = __webpack_require__(100);
 	
 	var _validateContext2 = _interopRequireDefault(_validateContext);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
@@ -16460,6 +16438,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	         */
 	        _this.boundTextures = null;
 	
+	        _this._initContext();
+	        /**
+	         * Manages the filters.
+	         *
+	         * @member {PIXI.FilterManager}
+	         */
+	        _this.filterManager = new _FilterManager2.default(_this);
+	        // map some webGL blend and drawmodes..
+	        _this.drawModes = (0, _mapWebGLDrawModesToPixi2.default)(_this.gl);
+	
 	        /**
 	         * Holds the current shader
 	         *
@@ -16475,17 +16463,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {PIXI.RenderTarget}
 	         */
 	        _this._activeRenderTarget = null;
-	
-	        _this._initContext();
-	
-	        /**
-	         * Manages the filters.
-	         *
-	         * @member {PIXI.FilterManager}
-	         */
-	        _this.filterManager = new _FilterManager2.default(_this);
-	        // map some webGL blend and drawmodes..
-	        _this.drawModes = (0, _mapWebGLDrawModesToPixi2.default)(_this.gl);
 	
 	        _this._nextTextureLocation = 0;
 	
@@ -16982,18 +16959,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLRenderer.js.map
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLManager2 = __webpack_require__(79);
+	var _WebGLManager2 = __webpack_require__(80);
 	
 	var _WebGLManager3 = _interopRequireDefault(_WebGLManager2);
 	
-	var _SpriteMaskFilter = __webpack_require__(82);
+	var _SpriteMaskFilter = __webpack_require__(83);
 	
 	var _SpriteMaskFilter2 = _interopRequireDefault(_SpriteMaskFilter);
 	
@@ -17192,20 +17169,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=MaskManager.js.map
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Filter2 = __webpack_require__(83);
+	var _Filter2 = __webpack_require__(84);
 	
 	var _Filter3 = _interopRequireDefault(_Filter2);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -17268,7 +17245,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=SpriteMaskFilter.js.map
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17277,11 +17254,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _extractUniformsFromSrc = __webpack_require__(84);
+	var _extractUniformsFromSrc = __webpack_require__(85);
 	
 	var _extractUniformsFromSrc2 = _interopRequireDefault(_extractUniformsFromSrc);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
@@ -17434,7 +17411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Filter.js.map
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17442,7 +17419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = extractUniformsFromSrc;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
@@ -17500,7 +17477,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=extractUniformsFromSrc.js.map
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -17728,10 +17705,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(86)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(87)))
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -17917,14 +17894,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLManager2 = __webpack_require__(79);
+	var _WebGLManager2 = __webpack_require__(80);
 	
 	var _WebGLManager3 = _interopRequireDefault(_WebGLManager2);
 	
@@ -18055,36 +18032,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=StencilManager.js.map
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLManager2 = __webpack_require__(79);
+	var _WebGLManager2 = __webpack_require__(80);
 	
 	var _WebGLManager3 = _interopRequireDefault(_WebGLManager2);
 	
-	var _RenderTarget = __webpack_require__(89);
+	var _RenderTarget = __webpack_require__(90);
 	
 	var _RenderTarget2 = _interopRequireDefault(_RenderTarget);
 	
-	var _Quad = __webpack_require__(90);
+	var _Quad = __webpack_require__(91);
 	
 	var _Quad2 = _interopRequireDefault(_Quad);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _Shader = __webpack_require__(92);
+	var _Shader = __webpack_require__(93);
 	
 	var _Shader2 = _interopRequireDefault(_Shader);
 	
-	var _filterTransforms = __webpack_require__(93);
+	var _filterTransforms = __webpack_require__(94);
 	
 	var filterTransforms = _interopRequireWildcard(_filterTransforms);
 	
-	var _bitTwiddle = __webpack_require__(62);
+	var _bitTwiddle = __webpack_require__(63);
 	
 	var _bitTwiddle2 = _interopRequireDefault(_bitTwiddle);
 	
@@ -18223,10 +18200,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // bind the render target to draw the shape in the top corner..
 	
 	        renderTarget.setFrame(destinationFrame, sourceFrame);
-	
 	        // bind the render target
 	        renderer.bindRenderTarget(renderTarget);
-	        renderTarget.clear();
+	
+	        // clear the renderTarget
+	        renderer.clear(); // [0.5,0.5,0.5, 1.0]);
 	    };
 	
 	    /**
@@ -18254,9 +18232,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            flop.setFrame(currentState.destinationFrame, currentState.sourceFrame);
 	
-	            // finally lets clear the render target before drawing to it..
-	            flop.clear();
-	
 	            var i = 0;
 	
 	            for (i = 0; i < filters.length - 1; ++i) {
@@ -18268,7 +18243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                flop = t;
 	            }
 	
-	            filters[i].apply(this, flip, lastState.renderTarget, true);
+	            filters[i].apply(this, flip, lastState.renderTarget, false);
 	
 	            this.freePotRenderTarget(flip);
 	            this.freePotRenderTarget(flop);
@@ -18409,9 +18384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    // rather than a renderTarget
 	                    var gl = this.renderer.gl;
 	
-	                    this.renderer.boundTextures[textureCount] = this.renderer.emptyTextures[textureCount];
 	                    gl.activeTexture(gl.TEXTURE0 + textureCount);
-	
 	                    uniforms[i].texture.bind();
 	                }
 	
@@ -18623,31 +18596,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=FilterManager.js.map
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	var RESOLUTION = _settings2.default.RESOLUTION,
+	    SCALE_MODE = _settings2.default.SCALE_MODE;
+	
 	/**
 	 * @class
 	 * @memberof PIXI
 	 */
+	
 	var RenderTarget = function () {
 	  /**
 	   * @param {WebGLRenderingContext} gl - The current WebGL drawing context
@@ -18705,7 +18682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {number}
 	     * @default 1
 	     */
-	    this.resolution = resolution || _settings2.default.RESOLUTION;
+	    this.resolution = resolution || RESOLUTION;
 	
 	    /**
 	     * The projection matrix
@@ -18765,7 +18742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @default PIXI.settings.SCALE_MODE
 	     * @see PIXI.SCALE_MODES
 	     */
-	    this.scaleMode = scaleMode || _settings2.default.SCALE_MODE;
+	    this.scaleMode = scaleMode || SCALE_MODE;
 	
 	    /**
 	     * Whether this object is the root element or not
@@ -18954,18 +18931,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=RenderTarget.js.map
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
-	var _createIndicesForQuads = __webpack_require__(91);
+	var _createIndicesForQuads = __webpack_require__(92);
 	
 	var _createIndicesForQuads2 = _interopRequireDefault(_createIndicesForQuads);
 	
@@ -19131,7 +19108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Quad.js.map
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -19169,16 +19146,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=createIndicesForQuads.js.map
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -19240,7 +19217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Shader.js.map
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19250,7 +19227,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.calculateNormalizedScreenSpaceMatrix = calculateNormalizedScreenSpaceMatrix;
 	exports.calculateSpriteMatrix = calculateSpriteMatrix;
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
 	/*
 	 * Calculates the mapped matrix
@@ -19326,22 +19303,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=filterTransforms.js.map
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _const = __webpack_require__(12);
 	
-	var _RenderTarget = __webpack_require__(89);
+	var _RenderTarget = __webpack_require__(90);
 	
 	var _RenderTarget2 = _interopRequireDefault(_RenderTarget);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -19415,6 +19392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    TextureManager.prototype.updateTexture = function updateTexture(texture, location) {
 	        // assume it good!
 	        // texture = texture.baseTexture || texture;
+	        location = location || 0;
 	
 	        var gl = this.gl;
 	
@@ -19423,26 +19401,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!texture.hasLoaded) {
 	            return null;
 	        }
-	
-	        var boundTextures = this.renderer.boundTextures;
-	
-	        // if the location is undefined then this may have been called by n event.
-	        // this being the case the texture may already be bound to a slot. As a texture can only be bound once
-	        // we need to find its current location if it exists.
-	        if (location === undefined) {
-	            location = 0;
-	
-	            // TODO maybe we can use texture bound ids later on...
-	            // check if texture is already bound..
-	            for (var i = 0; i < boundTextures.length; ++i) {
-	                if (boundTextures[i] === texture) {
-	                    location = i;
-	                    break;
-	                }
-	            }
-	        }
-	
-	        boundTextures[location] = texture;
 	
 	        gl.activeTexture(gl.TEXTURE0 + location);
 	
@@ -19497,6 +19455,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            } else {
 	                glTexture.upload(texture.source);
 	            }
+	
+	        this.renderer.boundTextures[location] = texture;
 	
 	        return glTexture;
 	    };
@@ -19577,7 +19537,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TextureManager.js.map
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19586,7 +19546,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
@@ -19612,8 +19572,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        this.count = 0;
 	        this.checkCount = 0;
-	        this.maxIdle = _settings2.default.GC_MAX_IDLE;
-	        this.checkCountMax = _settings2.default.GC_MAX_CHECK_COUNT;
+	        this.maxIdle = 60 * 60;
+	        this.checkCountMax = 60 * 10;
+	
 	        this.mode = _settings2.default.GC_MODE;
 	    }
 	
@@ -19684,8 +19645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    TextureGarbageCollector.prototype.unload = function unload(displayObject) {
 	        var tm = this.renderer.textureManager;
 	
-	        // only destroy non generated textures
-	        if (displayObject._texture && displayObject._texture._glRenderTargets) {
+	        if (displayObject._texture) {
 	            tm.destroyTexture(displayObject._texture, true);
 	        }
 	
@@ -19701,14 +19661,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TextureGarbageCollector.js.map
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _mapWebGLBlendModesToPixi = __webpack_require__(97);
+	var _mapWebGLBlendModesToPixi = __webpack_require__(98);
 	
 	var _mapWebGLBlendModesToPixi2 = _interopRequireDefault(_mapWebGLBlendModesToPixi);
 	
@@ -19977,7 +19937,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLState.js.map
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20025,7 +19985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=mapWebGLBlendModesToPixi.js.map
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20061,7 +20021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=mapWebGLDrawModesToPixi.js.map
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20081,7 +20041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=validateContext.js.map
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20089,11 +20049,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = generateMultiTextureShader;
 	
-	var _Shader = __webpack_require__(92);
+	var _Shader = __webpack_require__(93);
 	
 	var _Shader2 = _interopRequireDefault(_Shader);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20148,7 +20108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=generateMultiTextureShader.js.map
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20156,7 +20116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = checkMaxIfStatmentsInShader;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
@@ -20227,7 +20187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=checkMaxIfStatmentsInShader.js.map
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20283,7 +20243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BatchBuffer.js.map
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20292,25 +20252,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _Sprite2 = __webpack_require__(52);
+	var _Sprite2 = __webpack_require__(53);
 	
 	var _Sprite3 = _interopRequireDefault(_Sprite2);
 	
-	var _Texture = __webpack_require__(53);
+	var _Texture = __webpack_require__(54);
 	
 	var _Texture2 = _interopRequireDefault(_Texture);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
-	var _settings = __webpack_require__(42);
+	var _settings = __webpack_require__(43);
 	
 	var _settings2 = _interopRequireDefault(_settings);
 	
-	var _TextStyle = __webpack_require__(104);
+	var _TextStyle = __webpack_require__(105);
 	
 	var _TextStyle2 = _interopRequireDefault(_TextStyle);
 	
@@ -20321,6 +20281,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint max-depth: [2, 8] */
+	
+	
+	var RESOLUTION = _settings2.default.RESOLUTION;
 	
 	
 	var defaultDestroyOptions = {
@@ -20350,12 +20313,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @param {string} text - The string that you would like the text to display
 	     * @param {object|PIXI.TextStyle} [style] - The style parameters
-	     * @param {HTMLCanvasElement} [canvas] - The canvas element for drawing text
 	     */
-	    function Text(text, style, canvas) {
+	    function Text(text, style) {
 	        _classCallCheck(this, Text);
 	
-	        canvas = canvas || document.createElement('canvas');
+	        var canvas = document.createElement('canvas');
 	
 	        canvas.width = 3;
 	        canvas.height = 3;
@@ -20385,7 +20347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {number}
 	         * @default 1
 	         */
-	        _this.resolution = _settings2.default.RESOLUTION;
+	        _this.resolution = RESOLUTION;
 	
 	        /**
 	         * Private tracker for the current text.
@@ -20776,7 +20738,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * @private
 	     * @param {object} style - The style.
-	     * @param {string[]} lines - The lines of text.
+	     * @param {string} lines - The lines of text.
 	     * @return {string|number|CanvasGradient} The fill style
 	     */
 	
@@ -20892,26 +20854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // build canvas api font setting from individual components. Convert a numeric style.fontSize to px
 	        var fontSizeString = typeof style.fontSize === 'number' ? style.fontSize + 'px' : style.fontSize;
 	
-	        // Clean-up fontFamily property by quoting each font name
-	        // this will support font names with spaces
-	        var fontFamilies = style.fontFamily;
-	
-	        if (!Array.isArray(style.fontFamily)) {
-	            fontFamilies = style.fontFamily.split(',');
-	        }
-	
-	        for (var i = fontFamilies.length - 1; i >= 0; i--) {
-	            // Trim any extra white-space
-	            var fontFamily = fontFamilies[i].trim();
-	
-	            // Check if font already contains strings
-	            if (!/([\"\'])[^\'\"]+\1/.test(fontFamily)) {
-	                fontFamily = '"' + fontFamily + '"';
-	            }
-	            fontFamilies[i] = fontFamily;
-	        }
-	
-	        return style.fontStyle + ' ' + style.fontVariant + ' ' + style.fontWeight + ' ' + fontSizeString + ' ' + fontFamilies.join(',');
+	        return style.fontStyle + ' ' + style.fontVariant + ' ' + style.fontWeight + ' ' + fontSizeString + ' ' + style.fontFamily;
 	    };
 	
 	    /**
@@ -21011,7 +20954,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        get: function get() {
 	            this.updateText(true);
 	
-	            return Math.abs(this.scale.x) * this._texture.orig.width;
+	            return Math.abs(this.scale.x) * this.texture.orig.width;
 	        }
 	
 	        /**
@@ -21025,7 +20968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            var s = (0, _utils.sign)(this.scale.x) || 1;
 	
-	            this.scale.x = s * value / this._texture.orig.width;
+	            this.scale.x = s * value / this.texture.orig.width;
 	            this._width = value;
 	        }
 	
@@ -21055,7 +20998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            var s = (0, _utils.sign)(this.scale.y) || 1;
 	
-	            this.scale.y = s * value / this._texture.orig.height;
+	            this.scale.y = s * value / this.texture.orig.height;
 	            this._height = value;
 	        }
 	
@@ -21112,7 +21055,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	         */
 	        ,
 	        set: function set(text) {
-	            text = String(text || ' ');
+	            text = text || ' ';
+	            text = text.toString();
 	
 	            if (this._text === text) {
 	                return;
@@ -21134,7 +21078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Text.js.map
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21146,7 +21090,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _const = __webpack_require__(12);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -21203,7 +21147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * {@link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle|MDN}
 	     * @param {number} [style.fillGradientType=PIXI.TEXT_GRADIENT.LINEAR_VERTICAL] - If fills styles are
 	     *  supplied, this can change the type/direction of the gradient. See {@link PIXI.TEXT_GRADIENT} for possible values
-	     * @param {string|string[]} [style.fontFamily='Arial'] - The font family
+	     * @param {string} [style.fontFamily='Arial'] - The font family
 	     * @param {number|string} [style.fontSize=26] - The font size (as a number it converts to px, but as a string,
 	     *  equivalents are '26px','20pt','160%' or '1.6em')
 	     * @param {string} [style.fontStyle='normal'] - The font style ('normal', 'italic' or 'oblique')
@@ -21245,7 +21189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    TextStyle.prototype.clone = function clone() {
 	        var clonedProperties = {};
 	
-	        for (var key in defaultStyle) {
+	        for (var key in this._defaults) {
 	            clonedProperties[key] = this[key];
 	        }
 	
@@ -21258,7 +21202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	    TextStyle.prototype.reset = function reset() {
-	        Object.assign(this, defaultStyle);
+	        Object.assign(this, this._defaults);
 	    };
 	
 	    _createClass(TextStyle, [{
@@ -21542,81 +21486,64 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	exports.default = TextStyle;
-	function getSingleColor(color) {
+	function getColor(color) {
 	    if (typeof color === 'number') {
 	        return (0, _utils.hex2string)(color);
-	    } else if (typeof color === 'string') {
-	        if (color.indexOf('0x') === 0) {
-	            color = color.replace('0x', '#');
+	    } else if (Array.isArray(color)) {
+	        for (var i = 0; i < color.length; ++i) {
+	            if (typeof color[i] === 'number') {
+	                color[i] = (0, _utils.hex2string)(color[i]);
+	            }
 	        }
 	    }
 	
 	    return color;
 	}
-	
-	/**
-	 * Utility function to convert hexadecimal colors to strings, and simply return the color if it's a string.
-	 * This version can also convert array of colors
-	 *
-	 * @param {number|number[]} color
-	 * @return {string} The color as a string.
-	 */
-	function getColor(color) {
-	    if (!Array.isArray(color)) {
-	        return getSingleColor(color);
-	    } else {
-	        for (var i = 0; i < color.length; ++i) {
-	            color[i] = getSingleColor(color[i]);
-	        }
-	
-	        return color;
-	    }
-	}
 	//# sourceMappingURL=TextStyle.js.map
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Container2 = __webpack_require__(49);
+	var _Container2 = __webpack_require__(50);
 	
 	var _Container3 = _interopRequireDefault(_Container2);
 	
-	var _RenderTexture = __webpack_require__(70);
+	var _RenderTexture = __webpack_require__(71);
 	
 	var _RenderTexture2 = _interopRequireDefault(_RenderTexture);
 	
-	var _Texture = __webpack_require__(53);
+	var _Texture = __webpack_require__(54);
 	
 	var _Texture2 = _interopRequireDefault(_Texture);
 	
-	var _GraphicsData = __webpack_require__(106);
+	var _GraphicsData = __webpack_require__(107);
 	
 	var _GraphicsData2 = _interopRequireDefault(_GraphicsData);
 	
-	var _Sprite = __webpack_require__(52);
+	var _Sprite = __webpack_require__(53);
 	
 	var _Sprite2 = _interopRequireDefault(_Sprite);
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
-	var _Bounds = __webpack_require__(39);
+	var _Bounds = __webpack_require__(49);
 	
 	var _Bounds2 = _interopRequireDefault(_Bounds);
 	
-	var _bezierCurveTo2 = __webpack_require__(107);
+	var _bezierCurveTo2 = __webpack_require__(108);
 	
 	var _bezierCurveTo3 = _interopRequireDefault(_bezierCurveTo2);
 	
-	var _CanvasRenderer = __webpack_require__(68);
+	var _CanvasRenderer = __webpack_require__(69);
 	
 	var _CanvasRenderer2 = _interopRequireDefault(_CanvasRenderer);
 	
@@ -22098,16 +22025,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var startX = cx + Math.cos(startAngle) * radius;
 	        var startY = cy + Math.sin(startAngle) * radius;
 	
-	        // If the currentPath exists, take its points. Otherwise call `moveTo` to start a path.
-	        var points = this.currentPath ? this.currentPath.shape.points : null;
+	        var points = this.currentPath.shape.points;
 	
-	        if (points) {
+	        if (this.currentPath) {
 	            if (points[points.length - 2] !== startX || points[points.length - 1] !== startY) {
 	                points.push(startX, startY);
 	            }
 	        } else {
 	            this.moveTo(startX, startY);
-	            points = this.currentPath.shape.points;
 	        }
 	
 	        var theta = sweep / (segs * 2);
@@ -22297,14 +22222,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.lineWidth = 0;
 	            this.filling = false;
 	
-	            this.boundsDirty = -1;
 	            this.dirty++;
 	            this.clearDirty++;
 	            this.graphicsData.length = 0;
 	        }
-	
-	        this.currentPath = null;
-	        this._spriteRect = null;
 	
 	        return this;
 	    };
@@ -22432,6 +22353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.boundsDirty = this.dirty;
 	            this.updateLocalBounds();
 	
+	            this.dirty++;
 	            this.cachedSpriteDirty = true;
 	        }
 	
@@ -22734,7 +22656,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Graphics.js.map
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22855,7 +22777,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=GraphicsData.js.map
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22909,46 +22831,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=bezierCurveTo.js.map
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	var _const = __webpack_require__(12);
 	
-	var _ObjectRenderer2 = __webpack_require__(78);
+	var _ObjectRenderer2 = __webpack_require__(79);
 	
 	var _ObjectRenderer3 = _interopRequireDefault(_ObjectRenderer2);
 	
-	var _WebGLRenderer = __webpack_require__(80);
+	var _WebGLRenderer = __webpack_require__(81);
 	
 	var _WebGLRenderer2 = _interopRequireDefault(_WebGLRenderer);
 	
-	var _WebGLGraphicsData = __webpack_require__(109);
+	var _WebGLGraphicsData = __webpack_require__(110);
 	
 	var _WebGLGraphicsData2 = _interopRequireDefault(_WebGLGraphicsData);
 	
-	var _PrimitiveShader = __webpack_require__(110);
+	var _PrimitiveShader = __webpack_require__(111);
 	
 	var _PrimitiveShader2 = _interopRequireDefault(_PrimitiveShader);
 	
-	var _buildPoly = __webpack_require__(111);
+	var _buildPoly = __webpack_require__(112);
 	
 	var _buildPoly2 = _interopRequireDefault(_buildPoly);
 	
-	var _buildRectangle = __webpack_require__(114);
+	var _buildRectangle = __webpack_require__(115);
 	
 	var _buildRectangle2 = _interopRequireDefault(_buildRectangle);
 	
-	var _buildRoundedRectangle = __webpack_require__(115);
+	var _buildRoundedRectangle = __webpack_require__(116);
 	
 	var _buildRoundedRectangle2 = _interopRequireDefault(_buildRoundedRectangle);
 	
-	var _buildCircle = __webpack_require__(116);
+	var _buildCircle = __webpack_require__(117);
 	
 	var _buildCircle2 = _interopRequireDefault(_buildCircle);
 	
@@ -23166,14 +23088,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=GraphicsRenderer.js.map
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
@@ -23307,14 +23229,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLGraphicsData.js.map
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Shader2 = __webpack_require__(92);
+	var _Shader2 = __webpack_require__(93);
 	
 	var _Shader3 = _interopRequireDefault(_Shader2);
 	
@@ -23356,7 +23278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=PrimitiveShader.js.map
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23364,13 +23286,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = buildPoly;
 	
-	var _buildLine = __webpack_require__(112);
+	var _buildLine = __webpack_require__(113);
 	
 	var _buildLine2 = _interopRequireDefault(_buildLine);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
-	var _earcut = __webpack_require__(113);
+	var _earcut = __webpack_require__(114);
 	
 	var _earcut2 = _interopRequireDefault(_earcut);
 	
@@ -23445,7 +23367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=buildPoly.js.map
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23453,9 +23375,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = buildLine;
 	
-	var _math = __webpack_require__(13);
+	var _math = __webpack_require__(14);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	/**
 	 * Builds a line to draw
@@ -23658,7 +23580,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=buildLine.js.map
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24308,7 +24230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24316,11 +24238,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = buildRectangle;
 	
-	var _buildLine = __webpack_require__(112);
+	var _buildLine = __webpack_require__(113);
 	
 	var _buildLine2 = _interopRequireDefault(_buildLine);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24387,7 +24309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=buildRectangle.js.map
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24395,15 +24317,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = buildRoundedRectangle;
 	
-	var _earcut = __webpack_require__(113);
+	var _earcut = __webpack_require__(114);
 	
 	var _earcut2 = _interopRequireDefault(_earcut);
 	
-	var _buildLine = __webpack_require__(112);
+	var _buildLine = __webpack_require__(113);
 	
 	var _buildLine2 = _interopRequireDefault(_buildLine);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24533,7 +24455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=buildRoundedRectangle.js.map
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24541,13 +24463,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.default = buildCircle;
 	
-	var _buildLine = __webpack_require__(112);
+	var _buildLine = __webpack_require__(113);
 	
 	var _buildLine2 = _interopRequireDefault(_buildLine);
 	
 	var _const = __webpack_require__(12);
 	
-	var _utils = __webpack_require__(50);
+	var _utils = __webpack_require__(51);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24625,14 +24547,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=buildCircle.js.map
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _CanvasRenderer = __webpack_require__(68);
+	var _CanvasRenderer = __webpack_require__(69);
 	
 	var _CanvasRenderer2 = _interopRequireDefault(_CanvasRenderer);
 	
@@ -24898,14 +24820,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasGraphicsRenderer.js.map
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Mesh = __webpack_require__(119);
+	var _Mesh = __webpack_require__(120);
 	
 	Object.defineProperty(exports, 'Mesh', {
 	  enumerable: true,
@@ -24914,7 +24836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _MeshRenderer = __webpack_require__(120);
+	var _MeshRenderer = __webpack_require__(121);
 	
 	Object.defineProperty(exports, 'MeshRenderer', {
 	  enumerable: true,
@@ -24923,7 +24845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasMeshRenderer = __webpack_require__(121);
+	var _CanvasMeshRenderer = __webpack_require__(122);
 	
 	Object.defineProperty(exports, 'CanvasMeshRenderer', {
 	  enumerable: true,
@@ -24932,7 +24854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Plane = __webpack_require__(122);
+	var _Plane = __webpack_require__(123);
 	
 	Object.defineProperty(exports, 'Plane', {
 	  enumerable: true,
@@ -24941,7 +24863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _NineSlicePlane = __webpack_require__(123);
+	var _NineSlicePlane = __webpack_require__(124);
 	
 	Object.defineProperty(exports, 'NineSlicePlane', {
 	  enumerable: true,
@@ -24950,7 +24872,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _Rope = __webpack_require__(124);
+	var _Rope = __webpack_require__(125);
 	
 	Object.defineProperty(exports, 'Rope', {
 	  enumerable: true,
@@ -24963,7 +24885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25103,15 +25025,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @member {object<number, object>}
 	     */
 	    _this._glDatas = {};
-	
-	    /**
-	     * Plugin that is responsible for rendering this element.
-	     * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
-	     *
-	     * @member {string}
-	     * @default 'mesh'
-	     */
-	    _this.pluginName = 'mesh';
 	    return _this;
 	  }
 	
@@ -25124,8 +25037,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  Mesh.prototype._renderWebGL = function _renderWebGL(renderer) {
-	    renderer.setObjectRenderer(renderer.plugins[this.pluginName]);
-	    renderer.plugins[this.pluginName].render(this);
+	    renderer.setObjectRenderer(renderer.plugins.mesh);
+	    renderer.plugins.mesh.render(this);
 	  };
 	
 	  /**
@@ -25137,7 +25050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	  Mesh.prototype._renderCanvas = function _renderCanvas(renderer) {
-	    renderer.plugins[this.pluginName].render(this);
+	    renderer.plugins.mesh.render(this);
 	  };
 	
 	  /**
@@ -25287,7 +25200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Mesh.js.map
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25298,15 +25211,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
-	var _Mesh = __webpack_require__(119);
+	var _Mesh = __webpack_require__(120);
 	
 	var _Mesh2 = _interopRequireDefault(_Mesh);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25427,7 +25340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=MeshRenderer.js.map
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25438,7 +25351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _Mesh = __webpack_require__(119);
+	var _Mesh = __webpack_require__(120);
 	
 	var _Mesh2 = _interopRequireDefault(_Mesh);
 	
@@ -25695,14 +25608,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasMeshRenderer.js.map
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Mesh2 = __webpack_require__(119);
+	var _Mesh2 = __webpack_require__(120);
 	
 	var _Mesh3 = _interopRequireDefault(_Mesh2);
 	
@@ -25842,7 +25755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Plane.js.map
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25851,7 +25764,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _Plane2 = __webpack_require__(122);
+	var _Plane2 = __webpack_require__(123);
 	
 	var _Plane3 = _interopRequireDefault(_Plane2);
 	
@@ -26268,14 +26181,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=NineSlicePlane.js.map
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Mesh2 = __webpack_require__(119);
+	var _Mesh2 = __webpack_require__(120);
 	
 	var _Mesh3 = _interopRequireDefault(_Mesh2);
 	
@@ -26513,14 +26426,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Rope.js.map
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _ParticleContainer = __webpack_require__(126);
+	var _ParticleContainer = __webpack_require__(127);
 	
 	Object.defineProperty(exports, 'ParticleContainer', {
 	  enumerable: true,
@@ -26529,7 +26442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _ParticleRenderer = __webpack_require__(127);
+	var _ParticleRenderer = __webpack_require__(128);
 	
 	Object.defineProperty(exports, 'ParticleRenderer', {
 	  enumerable: true,
@@ -26542,7 +26455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26803,7 +26716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                continue;
 	            }
 	
-	            var frame = child._texture.frame;
+	            var frame = child.texture.frame;
 	
 	            context.globalAlpha = this.worldAlpha * child.alpha;
 	
@@ -26842,9 +26755,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                finalHeight = frame.height;
 	            }
 	
-	            var resolution = child._texture.baseTexture.resolution;
+	            var resolution = child.texture.baseTexture.resolution;
 	
-	            context.drawImage(child._texture.baseTexture.source, frame.x * resolution, frame.y * resolution, frame.width * resolution, frame.height * resolution, positionX * resolution, positionY * resolution, finalWidth * resolution, finalHeight * resolution);
+	            context.drawImage(child.texture.baseTexture.source, frame.x * resolution, frame.y * resolution, frame.width * resolution, frame.height * resolution, positionX * resolution, positionY * resolution, finalWidth * resolution, finalHeight * resolution);
 	        }
 	    };
 	
@@ -26878,7 +26791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ParticleContainer.js.map
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26889,11 +26802,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _ParticleShader = __webpack_require__(128);
+	var _ParticleShader = __webpack_require__(129);
 	
 	var _ParticleShader2 = _interopRequireDefault(_ParticleShader);
 	
-	var _ParticleBuffer = __webpack_require__(129);
+	var _ParticleBuffer = __webpack_require__(130);
 	
 	var _ParticleBuffer2 = _interopRequireDefault(_ParticleBuffer);
 	
@@ -27326,14 +27239,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ParticleRenderer.js.map
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _Shader2 = __webpack_require__(92);
+	var _Shader2 = __webpack_require__(93);
 	
 	var _Shader3 = _interopRequireDefault(_Shader2);
 	
@@ -27373,18 +27286,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ParticleShader.js.map
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _pixiGlCore = __webpack_require__(23);
+	var _pixiGlCore = __webpack_require__(24);
 	
 	var _pixiGlCore2 = _interopRequireDefault(_pixiGlCore);
 	
-	var _createIndicesForQuads = __webpack_require__(91);
+	var _createIndicesForQuads = __webpack_require__(92);
 	
 	var _createIndicesForQuads2 = _interopRequireDefault(_createIndicesForQuads);
 	
@@ -27617,7 +27530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ParticleBuffer.js.map
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27625,7 +27538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports.BitmapText = exports.TilingSpriteRenderer = exports.TilingSprite = exports.AnimatedSprite = exports.TextureTransform = undefined;
 	
-	var _TextureTransform = __webpack_require__(131);
+	var _TextureTransform = __webpack_require__(132);
 	
 	Object.defineProperty(exports, 'TextureTransform', {
 	  enumerable: true,
@@ -27634,7 +27547,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _AnimatedSprite = __webpack_require__(132);
+	var _AnimatedSprite = __webpack_require__(133);
 	
 	Object.defineProperty(exports, 'AnimatedSprite', {
 	  enumerable: true,
@@ -27643,7 +27556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _TilingSprite = __webpack_require__(133);
+	var _TilingSprite = __webpack_require__(134);
 	
 	Object.defineProperty(exports, 'TilingSprite', {
 	  enumerable: true,
@@ -27652,7 +27565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _TilingSpriteRenderer = __webpack_require__(134);
+	var _TilingSpriteRenderer = __webpack_require__(135);
 	
 	Object.defineProperty(exports, 'TilingSpriteRenderer', {
 	  enumerable: true,
@@ -27661,7 +27574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BitmapText = __webpack_require__(135);
+	var _BitmapText = __webpack_require__(136);
 	
 	Object.defineProperty(exports, 'BitmapText', {
 	  enumerable: true,
@@ -27670,11 +27583,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	__webpack_require__(136);
-	
 	__webpack_require__(137);
 	
 	__webpack_require__(138);
+	
+	__webpack_require__(139);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27682,7 +27595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27691,7 +27604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _Matrix = __webpack_require__(16);
+	var _Matrix = __webpack_require__(17);
 	
 	var _Matrix2 = _interopRequireDefault(_Matrix);
 	
@@ -27703,9 +27616,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/**
 	 * class controls uv transform and frame clamp for texture
-	 *
-	 * @class
-	 * @memberof PIXI.extras
 	 */
 	
 	var TextureTransform = function () {
@@ -27731,7 +27641,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        /**
 	         * Changes frame clamping
 	         * Works with TilingSprite and Mesh
-	         * Change to 1.5 if you texture has repeated right and bottom lines, that leads to smoother borders
+	         * Change to 1.5 if you tex ture has repeated right and bottom lines, that leads to smoother borders
 	         *
 	         * @default 0
 	         * @member {number}
@@ -27761,19 +27671,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {boolean} forceUpdate if true, matrices will be updated any case
 	     */
 	    TextureTransform.prototype.update = function update(forceUpdate) {
-	        var tex = this._texture;
+	        var tex = this.texture;
 	
 	        if (!tex || !tex.valid) {
 	            return;
 	        }
 	
-	        if (!forceUpdate && this._lastTextureID === tex._updateID) {
+	        if (!forceUpdate && this._lastTextureID === this.texture._updateID) {
 	            return;
 	        }
 	
-	        this._lastTextureID = tex._updateID;
+	        this._lastTextureID = this.texture._updateID;
 	
-	        var uvs = tex._uvs;
+	        var uvs = this.texture._uvs;
 	
 	        this.mapCoord.set(uvs.x1 - uvs.x0, uvs.y1 - uvs.y0, uvs.x3 - uvs.x0, uvs.y3 - uvs.y0, uvs.x0, uvs.y0);
 	
@@ -27822,7 +27732,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TextureTransform.js.map
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28209,7 +28119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=AnimatedSprite.js.map
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28222,11 +28132,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _CanvasTinter = __webpack_require__(76);
+	var _CanvasTinter = __webpack_require__(77);
 	
 	var _CanvasTinter2 = _interopRequireDefault(_CanvasTinter);
 	
-	var _TextureTransform = __webpack_require__(131);
+	var _TextureTransform = __webpack_require__(132);
 	
 	var _TextureTransform2 = _interopRequireDefault(_TextureTransform);
 	
@@ -28305,15 +28215,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * @member {PIXI.extras.TextureTransform}
 	         */
 	        _this.uvTransform = texture.transform || new _TextureTransform2.default(texture);
-	
-	        /**
-	         * Plugin that is responsible for rendering this element.
-	         * Allows to customize the rendering process without overriding '_renderWebGL' method.
-	         *
-	         * @member {string}
-	         * @default 'tilingSprite'
-	         */
-	        _this.pluginName = 'tilingSprite';
 	        return _this;
 	    }
 	    /**
@@ -28354,8 +28255,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.tileTransform.updateLocalTransform();
 	        this.uvTransform.update();
 	
-	        renderer.setObjectRenderer(renderer.plugins[this.pluginName]);
-	        renderer.plugins[this.pluginName].render(this);
+	        renderer.setObjectRenderer(renderer.plugins.tilingSprite);
+	        renderer.plugins.tilingSprite.render(this);
 	    };
 	
 	    /**
@@ -28676,7 +28577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TilingSprite.js.map
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28689,7 +28590,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _const = __webpack_require__(12);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -28842,7 +28743,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TilingSpriteRenderer.js.map
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28855,7 +28756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _ObservablePoint = __webpack_require__(15);
+	var _ObservablePoint = __webpack_require__(16);
 	
 	var _ObservablePoint2 = _interopRequireDefault(_ObservablePoint);
 	
@@ -28907,22 +28808,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _classCallCheck(this, BitmapText);
 	
 	        /**
-	         * Private tracker for the width of the overall text
+	         * The width of the overall text, different from fontSize,
+	         * which is defined in the style object
 	         *
 	         * @member {number}
-	         * @private
+	         * @readonly
 	         */
 	        var _this = _possibleConstructorReturn(this, _core$Container.call(this));
 	
-	        _this._textWidth = 0;
+	        _this.textWidth = 0;
 	
 	        /**
-	         * Private tracker for the height of the overall text
+	         * The height of the overall text, different from fontSize,
+	         * which is defined in the style object
 	         *
 	         * @member {number}
-	         * @private
+	         * @readonly
 	         */
-	        _this._textHeight = 0;
+	        _this.textHeight = 0;
 	
 	        /**
 	         * Private tracker for the letter sprite pool.
@@ -29122,14 +29025,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.removeChild(this._glyphs[_i3]);
 	        }
 	
-	        this._textWidth = maxLineWidth * scale;
-	        this._textHeight = (pos.y + data.lineHeight) * scale;
+	        this.textWidth = maxLineWidth * scale;
+	        this.textHeight = (pos.y + data.lineHeight) * scale;
 	
 	        // apply anchor
 	        if (this.anchor.x !== 0 || this.anchor.y !== 0) {
 	            for (var _i4 = 0; _i4 < lenChars; _i4++) {
-	                this._glyphs[_i4].x -= this._textWidth * this.anchor.x;
-	                this._glyphs[_i4].y -= this._textHeight * this.anchor.y;
+	                this._glyphs[_i4].x -= this.textWidth * this.anchor.x;
+	                this._glyphs[_i4].y -= this.textHeight * this.anchor.y;
 	            }
 	        }
 	        this.maxLineHeight = maxLineHeight * scale;
@@ -29320,40 +29223,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this._text = value;
 	            this.dirty = true;
 	        }
-	
-	        /**
-	         * The width of the overall text, different from fontSize,
-	         * which is defined in the style object
-	         *
-	         * @member {number}
-	         * @memberof PIXI.extras.BitmapText#
-	         * @readonly
-	         */
-	
-	    }, {
-	        key: 'textWidth',
-	        get: function get() {
-	            this.validate();
-	
-	            return this._textWidth;
-	        }
-	
-	        /**
-	         * The height of the overall text, different from fontSize,
-	         * which is defined in the style object
-	         *
-	         * @member {number}
-	         * @memberof PIXI.extras.BitmapText#
-	         * @readonly
-	         */
-	
-	    }, {
-	        key: 'textHeight',
-	        get: function get() {
-	            this.validate();
-	
-	            return this._textHeight;
-	        }
 	    }]);
 	
 	    return BitmapText;
@@ -29366,7 +29235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BitmapText.js.map
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29722,7 +29591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=cacheAsBitmap.js.map
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29760,7 +29629,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=getChildByName.js.map
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29797,14 +29666,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=getGlobalPosition.js.map
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _FXAAFilter = __webpack_require__(140);
+	var _FXAAFilter = __webpack_require__(141);
 	
 	Object.defineProperty(exports, 'FXAAFilter', {
 	  enumerable: true,
@@ -29813,7 +29682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _NoiseFilter = __webpack_require__(141);
+	var _NoiseFilter = __webpack_require__(142);
 	
 	Object.defineProperty(exports, 'NoiseFilter', {
 	  enumerable: true,
@@ -29822,7 +29691,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _DisplacementFilter = __webpack_require__(142);
+	var _DisplacementFilter = __webpack_require__(143);
 	
 	Object.defineProperty(exports, 'DisplacementFilter', {
 	  enumerable: true,
@@ -29831,7 +29700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BlurFilter = __webpack_require__(143);
+	var _BlurFilter = __webpack_require__(144);
 	
 	Object.defineProperty(exports, 'BlurFilter', {
 	  enumerable: true,
@@ -29840,7 +29709,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BlurXFilter = __webpack_require__(144);
+	var _BlurXFilter = __webpack_require__(145);
 	
 	Object.defineProperty(exports, 'BlurXFilter', {
 	  enumerable: true,
@@ -29849,7 +29718,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BlurYFilter = __webpack_require__(148);
+	var _BlurYFilter = __webpack_require__(149);
 	
 	Object.defineProperty(exports, 'BlurYFilter', {
 	  enumerable: true,
@@ -29858,7 +29727,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _ColorMatrixFilter = __webpack_require__(149);
+	var _ColorMatrixFilter = __webpack_require__(150);
 	
 	Object.defineProperty(exports, 'ColorMatrixFilter', {
 	  enumerable: true,
@@ -29867,7 +29736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _VoidFilter = __webpack_require__(150);
+	var _VoidFilter = __webpack_require__(151);
 	
 	Object.defineProperty(exports, 'VoidFilter', {
 	  enumerable: true,
@@ -29880,7 +29749,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29891,7 +29760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -29938,7 +29807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=FXAAFilter.js.map
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29951,7 +29820,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -30025,7 +29894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=NoiseFilter.js.map
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30038,7 +29907,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -30146,7 +30015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=DisplacementFilter.js.map
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30159,11 +30028,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _BlurXFilter = __webpack_require__(144);
+	var _BlurXFilter = __webpack_require__(145);
 	
 	var _BlurXFilter2 = _interopRequireDefault(_BlurXFilter);
 	
-	var _BlurYFilter = __webpack_require__(148);
+	var _BlurYFilter = __webpack_require__(149);
 	
 	var _BlurYFilter2 = _interopRequireDefault(_BlurYFilter);
 	
@@ -30191,16 +30060,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @param {number} strength - The strength of the blur filter.
 	   * @param {number} quality - The quality of the blur filter.
-	   * @param {number} resolution - The resolution of the blur filter.
-	   * @param {number} [kernelSize=5] - The kernelSize of the blur filter.Options: 5, 7, 9, 11, 13, 15.
+	   * @param {number} resolution - The reoslution of the blur filter.
 	   */
-	  function BlurFilter(strength, quality, resolution, kernelSize) {
+	  function BlurFilter(strength, quality, resolution) {
 	    _classCallCheck(this, BlurFilter);
 	
 	    var _this = _possibleConstructorReturn(this, _core$Filter.call(this));
 	
-	    _this.blurXFilter = new _BlurXFilter2.default(strength, quality, resolution, kernelSize);
-	    _this.blurYFilter = new _BlurYFilter2.default(strength, quality, resolution, kernelSize);
+	    _this.blurXFilter = new _BlurXFilter2.default();
+	    _this.blurYFilter = new _BlurYFilter2.default();
 	    _this.resolution = 1;
 	
 	    _this.padding = 0;
@@ -30336,7 +30204,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BlurFilter.js.map
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30349,15 +30217,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _generateBlurVertSource = __webpack_require__(145);
+	var _generateBlurVertSource = __webpack_require__(146);
 	
 	var _generateBlurVertSource2 = _interopRequireDefault(_generateBlurVertSource);
 	
-	var _generateBlurFragSource = __webpack_require__(146);
+	var _generateBlurFragSource = __webpack_require__(147);
 	
 	var _generateBlurFragSource2 = _interopRequireDefault(_generateBlurFragSource);
 	
-	var _getMaxBlurKernelSize = __webpack_require__(147);
+	var _getMaxBlurKernelSize = __webpack_require__(148);
 	
 	var _getMaxBlurKernelSize2 = _interopRequireDefault(_getMaxBlurKernelSize);
 	
@@ -30384,15 +30252,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @param {number} strength - The strength of the blur filter.
 	     * @param {number} quality - The quality of the blur filter.
-	     * @param {number} resolution - The resolution of the blur filter.
-	     * @param {number} [kernelSize=5] - The kernelSize of the blur filter.Options: 5, 7, 9, 11, 13, 15.
+	     * @param {number} resolution - The reoslution of the blur filter.
 	     */
-	    function BlurXFilter(strength, quality, resolution, kernelSize) {
+	    function BlurXFilter(strength, quality, resolution) {
 	        _classCallCheck(this, BlurXFilter);
 	
-	        kernelSize = kernelSize || 5;
-	        var vertSrc = (0, _generateBlurVertSource2.default)(kernelSize, true);
-	        var fragSrc = (0, _generateBlurFragSource2.default)(kernelSize);
+	        var vertSrc = (0, _generateBlurVertSource2.default)(5, true);
+	        var fragSrc = (0, _generateBlurFragSource2.default)(5);
 	
 	        var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
 	        // vertex shader
@@ -30520,7 +30386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BlurXFilter.js.map
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30568,7 +30434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=generateBlurVertSource.js.map
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30619,7 +30485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=generateBlurFragSource.js.map
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30639,7 +30505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=getMaxBlurKernelSize.js.map
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30652,15 +30518,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _generateBlurVertSource = __webpack_require__(145);
+	var _generateBlurVertSource = __webpack_require__(146);
 	
 	var _generateBlurVertSource2 = _interopRequireDefault(_generateBlurVertSource);
 	
-	var _generateBlurFragSource = __webpack_require__(146);
+	var _generateBlurFragSource = __webpack_require__(147);
 	
 	var _generateBlurFragSource2 = _interopRequireDefault(_generateBlurFragSource);
 	
-	var _getMaxBlurKernelSize = __webpack_require__(147);
+	var _getMaxBlurKernelSize = __webpack_require__(148);
 	
 	var _getMaxBlurKernelSize2 = _interopRequireDefault(_getMaxBlurKernelSize);
 	
@@ -30687,15 +30553,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @param {number} strength - The strength of the blur filter.
 	     * @param {number} quality - The quality of the blur filter.
-	     * @param {number} resolution - The resolution of the blur filter.
-	     * @param {number} [kernelSize=5] - The kernelSize of the blur filter.Options: 5, 7, 9, 11, 13, 15.
+	     * @param {number} resolution - The reoslution of the blur filter.
 	     */
-	    function BlurYFilter(strength, quality, resolution, kernelSize) {
+	    function BlurYFilter(strength, quality, resolution) {
 	        _classCallCheck(this, BlurYFilter);
 	
-	        kernelSize = kernelSize || 5;
-	        var vertSrc = (0, _generateBlurVertSource2.default)(kernelSize, false);
-	        var fragSrc = (0, _generateBlurFragSource2.default)(kernelSize);
+	        var vertSrc = (0, _generateBlurVertSource2.default)(5, false);
+	        var fragSrc = (0, _generateBlurFragSource2.default)(5);
 	
 	        var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
 	        // vertex shader
@@ -30822,7 +30686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BlurYFilter.js.map
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30835,7 +30699,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -31361,7 +31225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=ColorMatrixFilter.js.map
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31372,7 +31236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _path = __webpack_require__(85);
+	var _path = __webpack_require__(86);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -31415,14 +31279,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=VoidFilter.js.map
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLPrepare = __webpack_require__(152);
+	var _WebGLPrepare = __webpack_require__(153);
 	
 	Object.defineProperty(exports, 'webgl', {
 	  enumerable: true,
@@ -31431,7 +31295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasPrepare = __webpack_require__(155);
+	var _CanvasPrepare = __webpack_require__(156);
 	
 	Object.defineProperty(exports, 'canvas', {
 	  enumerable: true,
@@ -31440,7 +31304,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _BasePrepare = __webpack_require__(153);
+	var _BasePrepare = __webpack_require__(154);
 	
 	Object.defineProperty(exports, 'BasePrepare', {
 	  enumerable: true,
@@ -31449,7 +31313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CountLimiter = __webpack_require__(154);
+	var _CountLimiter = __webpack_require__(155);
 	
 	Object.defineProperty(exports, 'CountLimiter', {
 	  enumerable: true,
@@ -31458,7 +31322,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _TimeLimiter = __webpack_require__(156);
+	var _TimeLimiter = __webpack_require__(157);
 	
 	Object.defineProperty(exports, 'TimeLimiter', {
 	  enumerable: true,
@@ -31471,7 +31335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31482,7 +31346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _BasePrepare2 = __webpack_require__(153);
+	var _BasePrepare2 = __webpack_require__(154);
 	
 	var _BasePrepare3 = _interopRequireDefault(_BasePrepare2);
 	
@@ -31622,7 +31486,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLPrepare.js.map
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31633,7 +31497,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _CountLimiter = __webpack_require__(154);
+	var _CountLimiter = __webpack_require__(155);
 	
 	var _CountLimiter2 = _interopRequireDefault(_CountLimiter);
 	
@@ -31645,16 +31509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var SharedTicker = core.ticker.shared;
 	
-	/**
-	 * Default number of uploads per frame using prepare plugin.
-	 *
-	 * @static
-	 * @memberof PIXI.settings
-	 * @name UPLOADS_PER_FRAME
-	 * @type {number}
-	 * @default 4
-	 */
-	core.settings.UPLOADS_PER_FRAME = 4;
+	var DEFAULT_UPLOADS_PER_FRAME = 4;
 	
 	/**
 	 * The prepare manager provides functionality to upload content to the GPU. BasePrepare handles
@@ -31679,7 +31534,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	         * The limiter to be used to control how quickly items are prepared.
 	         * @type {PIXI.prepare.CountLimiter|PIXI.prepare.TimeLimiter}
 	         */
-	        this.limiter = new _CountLimiter2.default(core.settings.UPLOADS_PER_FRAME);
+	        this.limiter = new _CountLimiter2.default(DEFAULT_UPLOADS_PER_FRAME);
 	
 	        /**
 	         * Reference to the renderer.
@@ -32011,7 +31866,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=BasePrepare.js.map
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32073,7 +31928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CountLimiter.js.map
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32084,7 +31939,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _BasePrepare2 = __webpack_require__(153);
+	var _BasePrepare2 = __webpack_require__(154);
 	
 	var _BasePrepare3 = _interopRequireDefault(_BasePrepare2);
 	
@@ -32223,7 +32078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasPrepare.js.map
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32285,2875 +32140,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=TimeLimiter.js.map
 
 /***/ },
-/* 157 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _loader = __webpack_require__(158);
-	
-	Object.defineProperty(exports, 'Loader', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_loader).default;
-	  }
-	});
-	
-	var _bitmapFontParser = __webpack_require__(169);
-	
-	Object.defineProperty(exports, 'bitmapFontParser', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_bitmapFontParser).default;
-	  }
-	});
-	Object.defineProperty(exports, 'parseBitmapFontData', {
-	  enumerable: true,
-	  get: function get() {
-	    return _bitmapFontParser.parse;
-	  }
-	});
-	
-	var _spritesheetParser = __webpack_require__(168);
-	
-	Object.defineProperty(exports, 'spritesheetParser', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_spritesheetParser).default;
-	  }
-	});
-	
-	var _textureParser = __webpack_require__(167);
-	
-	Object.defineProperty(exports, 'textureParser', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_textureParser).default;
-	  }
-	});
-	
-	var _resourceLoader = __webpack_require__(159);
-	
-	Object.defineProperty(exports, 'Resource', {
-	  enumerable: true,
-	  get: function get() {
-	    return _resourceLoader.Resource;
-	  }
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	//# sourceMappingURL=index.js.map
-
-/***/ },
 /* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.__esModule = true;
+	__webpack_require__(159);
 	
-	var _resourceLoader = __webpack_require__(159);
+	__webpack_require__(161);
 	
-	var _resourceLoader2 = _interopRequireDefault(_resourceLoader);
-	
-	var _blob = __webpack_require__(166);
-	
-	var _eventemitter = __webpack_require__(41);
-	
-	var _eventemitter2 = _interopRequireDefault(_eventemitter);
-	
-	var _textureParser = __webpack_require__(167);
-	
-	var _textureParser2 = _interopRequireDefault(_textureParser);
-	
-	var _spritesheetParser = __webpack_require__(168);
-	
-	var _spritesheetParser2 = _interopRequireDefault(_spritesheetParser);
-	
-	var _bitmapFontParser = __webpack_require__(169);
-	
-	var _bitmapFontParser2 = _interopRequireDefault(_bitmapFontParser);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	/**
-	 *
-	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
-	 *
-	 * ```js
-	 * let loader = PIXI.loader; // pixi exposes a premade instance for you to use.
-	 * //or
-	 * let loader = new PIXI.loaders.Loader(); // you can also create your own if you want
-	 *
-	 * loader.add('bunny', 'data/bunny.png');
-	 * loader.add('spaceship', 'assets/spritesheet.json');
-	 * loader.add('scoreFont', 'assets/score.fnt');
-	 *
-	 * loader.once('complete',onAssetsLoaded);
-	 *
-	 * loader.load();
-	 * ```
-	 *
-	 * @see https://github.com/englercj/resource-loader
-	 *
-	 * @class
-	 * @extends module:resource-loader.ResourceLoader
-	 * @memberof PIXI.loaders
-	 */
-	var Loader = function (_ResourceLoader) {
-	    _inherits(Loader, _ResourceLoader);
-	
-	    /**
-	     * @param {string} [baseUrl=''] - The base url for all resources loaded by this loader.
-	     * @param {number} [concurrency=10] - The number of resources to load concurrently.
-	     */
-	    function Loader(baseUrl, concurrency) {
-	        _classCallCheck(this, Loader);
-	
-	        var _this = _possibleConstructorReturn(this, _ResourceLoader.call(this, baseUrl, concurrency));
-	
-	        _eventemitter2.default.call(_this);
-	
-	        for (var i = 0; i < Loader._pixiMiddleware.length; ++i) {
-	            _this.use(Loader._pixiMiddleware[i]());
-	        }
-	
-	        // Compat layer, translate the new v2 signals into old v1 events.
-	        _this.onStart.add(function (l) {
-	            return _this.emit('start', l);
-	        });
-	        _this.onProgress.add(function (l, r) {
-	            return _this.emit('progress', l, r);
-	        });
-	        _this.onError.add(function (e, l, r) {
-	            return _this.emit('error', e, l, r);
-	        });
-	        _this.onLoad.add(function (l, r) {
-	            return _this.emit('load', l, r);
-	        });
-	        _this.onComplete.add(function (l, r) {
-	            return _this.emit('complete', l, r);
-	        });
-	        return _this;
-	    }
-	
-	    /**
-	     * Adds a default middleware to the pixi loader.
-	     *
-	     * @static
-	     * @param {Function} fn - The middleware to add.
-	     */
-	
-	
-	    Loader.addPixiMiddleware = function addPixiMiddleware(fn) {
-	        Loader._pixiMiddleware.push(fn);
-	    };
-	
-	    return Loader;
-	}(_resourceLoader2.default);
-	
-	// Copy EE3 prototype (mixin)
-	
-	
-	exports.default = Loader;
-	for (var k in _eventemitter2.default.prototype) {
-	    Loader.prototype[k] = _eventemitter2.default.prototype[k];
-	}
-	
-	Loader._pixiMiddleware = [
-	// parse any blob into more usable objects (e.g. Image)
-	_blob.blobMiddlewareFactory,
-	// parse any Image objects into textures
-	_textureParser2.default,
-	// parse any spritesheet data into multiple textures
-	_spritesheetParser2.default,
-	// parse bitmap font data into multiple textures
-	_bitmapFontParser2.default];
-	
-	// Add custom extentions
-	var Resource = _resourceLoader2.default.Resource;
-	
-	Resource.setExtensionXhrType('fnt', Resource.XHR_RESPONSE_TYPE.DOCUMENT);
-	//# sourceMappingURL=loader.js.map
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _Loader = __webpack_require__(160);
-	
-	var _Loader2 = _interopRequireDefault(_Loader);
-	
-	var _Resource = __webpack_require__(164);
-	
-	var _Resource2 = _interopRequireDefault(_Resource);
-	
-	var _async = __webpack_require__(163);
-	
-	var async = _interopRequireWildcard(_async);
-	
-	var _b = __webpack_require__(165);
-	
-	var b64 = _interopRequireWildcard(_b);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	_Loader2.default.Resource = _Resource2.default;
-	_Loader2.default.async = async;
-	_Loader2.default.base64 = b64;
-	
-	// export manually, and also as default
-	module.exports = _Loader2.default; // eslint-disable-line no-undef
-	exports.default = _Loader2.default;
-	//# sourceMappingURL=index.js.map
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	var _miniSignals = __webpack_require__(161);
-	
-	var _miniSignals2 = _interopRequireDefault(_miniSignals);
-	
-	var _parseUri = __webpack_require__(162);
-	
-	var _parseUri2 = _interopRequireDefault(_parseUri);
-	
-	var _async = __webpack_require__(163);
-	
-	var async = _interopRequireWildcard(_async);
-	
-	var _Resource = __webpack_require__(164);
-	
-	var _Resource2 = _interopRequireDefault(_Resource);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	// some constants
-	var MAX_PROGRESS = 100;
-	var rgxExtractUrlHash = /(#[\w\-]+)?$/;
-	
-	/**
-	 * Manages the state and loading of multiple resources to load.
-	 *
-	 * @class
-	 */
-	
-	var Loader = function () {
-	    /**
-	     * @param {string} [baseUrl=''] - The base url for all resources loaded by this loader.
-	     * @param {number} [concurrency=10] - The number of resources to load concurrently.
-	     */
-	    function Loader() {
-	        var _this = this;
-	
-	        var baseUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-	        var concurrency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
-	
-	        _classCallCheck(this, Loader);
-	
-	        /**
-	         * The base url for all resources loaded by this loader.
-	         *
-	         * @member {string}
-	         */
-	        this.baseUrl = baseUrl;
-	
-	        /**
-	         * The progress percent of the loader going through the queue.
-	         *
-	         * @member {number}
-	         */
-	        this.progress = 0;
-	
-	        /**
-	         * Loading state of the loader, true if it is currently loading resources.
-	         *
-	         * @member {boolean}
-	         */
-	        this.loading = false;
-	
-	        /**
-	         * A querystring to append to every URL added to the loader.
-	         *
-	         * This should be a valid query string *without* the question-mark (`?`). The loader will
-	         * also *not* escape values for you. Make sure to escape your parameters with
-	         * [`encodeURIComponent`](https://mdn.io/encodeURIComponent) before assigning this property.
-	         *
-	         * @example
-	         *
-	         * ```js
-	         * const loader = new Loader();
-	         *
-	         * loader.defaultQueryString = 'user=me&password=secret';
-	         *
-	         * // This will request 'image.png?user=me&password=secret'
-	         * loader.add('image.png').load();
-	         *
-	         * loader.reset();
-	         *
-	         * // This will request 'image.png?v=1&user=me&password=secret'
-	         * loader.add('iamge.png?v=1').load();
-	         * ```
-	         */
-	        this.defaultQueryString = '';
-	
-	        /**
-	         * The middleware to run before loading each resource.
-	         *
-	         * @member {function[]}
-	         */
-	        this._beforeMiddleware = [];
-	
-	        /**
-	         * The middleware to run after loading each resource.
-	         *
-	         * @member {function[]}
-	         */
-	        this._afterMiddleware = [];
-	
-	        /**
-	         * The `_loadResource` function bound with this object context.
-	         *
-	         * @private
-	         * @member {function}
-	         * @param {Resource} r - The resource to load
-	         * @param {Function} d - The dequeue function
-	         * @return {undefined}
-	         */
-	        this._boundLoadResource = function (r, d) {
-	            return _this._loadResource(r, d);
-	        };
-	
-	        /**
-	         * The resources waiting to be loaded.
-	         *
-	         * @private
-	         * @member {Resource[]}
-	         */
-	        this._queue = async.queue(this._boundLoadResource, concurrency);
-	
-	        this._queue.pause();
-	
-	        /**
-	         * All the resources for this loader keyed by name.
-	         *
-	         * @member {object<string, Resource>}
-	         */
-	        this.resources = {};
-	
-	        /**
-	         * Dispatched once per loaded or errored resource.
-	         *
-	         * The callback looks like {@link Loader.OnProgressSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onProgress = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched once per errored resource.
-	         *
-	         * The callback looks like {@link Loader.OnErrorSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onError = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched once per loaded resource.
-	         *
-	         * The callback looks like {@link Loader.OnLoadSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onLoad = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched when the loader begins to process the queue.
-	         *
-	         * The callback looks like {@link Loader.OnStartSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onStart = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched when the queued resources all load.
-	         *
-	         * The callback looks like {@link Loader.OnCompleteSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onComplete = new _miniSignals2.default();
-	
-	        /**
-	         * When the progress changes the loader and resource are disaptched.
-	         *
-	         * @memberof Loader
-	         * @callback OnProgressSignal
-	         * @param {Loader} loader - The loader the progress is advancing on.
-	         * @param {Resource} resource - The resource that has completed or failed to cause the progress to advance.
-	         */
-	
-	        /**
-	         * When an error occurrs the loader and resource are disaptched.
-	         *
-	         * @memberof Loader
-	         * @callback OnErrorSignal
-	         * @param {Loader} loader - The loader the error happened in.
-	         * @param {Resource} resource - The resource that caused the error.
-	         */
-	
-	        /**
-	         * When a load completes the loader and resource are disaptched.
-	         *
-	         * @memberof Loader
-	         * @callback OnLoadSignal
-	         * @param {Loader} loader - The loader that laoded the resource.
-	         * @param {Resource} resource - The resource that has completed loading.
-	         */
-	
-	        /**
-	         * When the loader starts loading resources it dispatches this callback.
-	         *
-	         * @memberof Loader
-	         * @callback OnStartSignal
-	         * @param {Loader} loader - The loader that has started loading resources.
-	         */
-	
-	        /**
-	         * When the loader completes loading resources it dispatches this callback.
-	         *
-	         * @memberof Loader
-	         * @callback OnCompleteSignal
-	         * @param {Loader} loader - The loader that has finished loading resources.
-	         */
-	    }
-	
-	    /**
-	     * Adds a resource (or multiple resources) to the loader queue.
-	     *
-	     * This function can take a wide variety of different parameters. The only thing that is always
-	     * required the url to load. All the following will work:
-	     *
-	     * ```js
-	     * loader
-	     *     // normal param syntax
-	     *     .add('key', 'http://...', function () {})
-	     *     .add('http://...', function () {})
-	     *     .add('http://...')
-	     *
-	     *     // object syntax
-	     *     .add({
-	     *         name: 'key2',
-	     *         url: 'http://...'
-	     *     }, function () {})
-	     *     .add({
-	     *         url: 'http://...'
-	     *     }, function () {})
-	     *     .add({
-	     *         name: 'key3',
-	     *         url: 'http://...'
-	     *         onComplete: function () {}
-	     *     })
-	     *     .add({
-	     *         url: 'https://...',
-	     *         onComplete: function () {},
-	     *         crossOrigin: true
-	     *     })
-	     *
-	     *     // you can also pass an array of objects or urls or both
-	     *     .add([
-	     *         { name: 'key4', url: 'http://...', onComplete: function () {} },
-	     *         { url: 'http://...', onComplete: function () {} },
-	     *         'http://...'
-	     *     ])
-	     *
-	     *     // and you can use both params and options
-	     *     .add('key', 'http://...', { crossOrigin: true }, function () {})
-	     *     .add('http://...', { crossOrigin: true }, function () {});
-	     * ```
-	     *
-	     * @param {string} [name] - The name of the resource to load, if not passed the url is used.
-	     * @param {string} [url] - The url for this resource, relative to the baseUrl of this loader.
-	     * @param {object} [options] - The options for the load.
-	     * @param {boolean} [options.crossOrigin] - Is this request cross-origin? Default is to determine automatically.
-	     * @param {Resource.LOAD_TYPE} [options.loadType=Resource.LOAD_TYPE.XHR] - How should this resource be loaded?
-	     * @param {Resource.XHR_RESPONSE_TYPE} [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How should
-	     *      the data being loaded be interpreted when using XHR?
-	     * @param {object} [options.metadata] - Extra configuration for middleware and the Resource object.
-	     * @param {HTMLImageElement|HTMLAudioElement|HTMLVideoElement} [options.metadata.loadElement=null] - The
-	     *      element to use for loading, instead of creating one.
-	     * @param {boolean} [options.metadata.skipSource=false] - Skips adding source(s) to the load element. This
-	     *      is useful if you want to pass in a `loadElement` that you already added load sources to.
-	     * @param {function} [cb] - Function to call when this specific resource completes loading.
-	     * @return {Loader} Returns itself.
-	     */
-	
-	
-	    Loader.prototype.add = function add(name, url, options, cb) {
-	        // special case of an array of objects or urls
-	        if (Array.isArray(name)) {
-	            for (var i = 0; i < name.length; ++i) {
-	                this.add(name[i]);
-	            }
-	
-	            return this;
-	        }
-	
-	        // if an object is passed instead of params
-	        if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
-	            cb = url || name.callback || name.onComplete;
-	            options = name;
-	            url = name.url;
-	            name = name.name || name.key || name.url;
-	        }
-	
-	        // case where no name is passed shift all args over by one.
-	        if (typeof url !== 'string') {
-	            cb = options;
-	            options = url;
-	            url = name;
-	        }
-	
-	        // now that we shifted make sure we have a proper url.
-	        if (typeof url !== 'string') {
-	            throw new Error('No url passed to add resource to loader.');
-	        }
-	
-	        // options are optional so people might pass a function and no options
-	        if (typeof options === 'function') {
-	            cb = options;
-	            options = null;
-	        }
-	
-	        // if loading already you can only add resources that have a parent.
-	        if (this.loading && (!options || !options.parentResource)) {
-	            throw new Error('Cannot add resources while the loader is running.');
-	        }
-	
-	        // check if resource already exists.
-	        if (this.resources[name]) {
-	            throw new Error('Resource named "' + name + '" already exists.');
-	        }
-	
-	        // add base url if this isn't an absolute url
-	        url = this._prepareUrl(url);
-	
-	        // create the store the resource
-	        this.resources[name] = new _Resource2.default(name, url, options);
-	
-	        if (typeof cb === 'function') {
-	            this.resources[name].onAfterMiddleware.once(cb);
-	        }
-	
-	        // if loading make sure to adjust progress chunks for that parent and its children
-	        if (this.loading) {
-	            var parent = options.parentResource;
-	            var fullChunk = parent.progressChunk * (parent.children.length + 1); // +1 for parent
-	            var eachChunk = fullChunk / (parent.children.length + 2); // +2 for parent & new child
-	
-	            parent.children.push(this.resources[name]);
-	            parent.progressChunk = eachChunk;
-	
-	            for (var _i = 0; _i < parent.children.length; ++_i) {
-	                parent.children[_i].progressChunk = eachChunk;
-	            }
-	        }
-	
-	        // add the resource to the queue
-	        this._queue.push(this.resources[name]);
-	
-	        return this;
-	    };
-	
-	    /**
-	     * Sets up a middleware function that will run *before* the
-	     * resource is loaded.
-	     *
-	     * @method before
-	     * @param {function} fn - The middleware function to register.
-	     * @return {Loader} Returns itself.
-	     */
-	
-	
-	    Loader.prototype.pre = function pre(fn) {
-	        this._beforeMiddleware.push(fn);
-	
-	        return this;
-	    };
-	
-	    /**
-	     * Sets up a middleware function that will run *after* the
-	     * resource is loaded.
-	     *
-	     * @alias use
-	     * @method after
-	     * @param {function} fn - The middleware function to register.
-	     * @return {Loader} Returns itself.
-	     */
-	
-	
-	    Loader.prototype.use = function use(fn) {
-	        this._afterMiddleware.push(fn);
-	
-	        return this;
-	    };
-	
-	    /**
-	     * Resets the queue of the loader to prepare for a new load.
-	     *
-	     * @return {Loader} Returns itself.
-	     */
-	
-	
-	    Loader.prototype.reset = function reset() {
-	        this.progress = 0;
-	        this.loading = false;
-	
-	        this._queue.kill();
-	        this._queue.pause();
-	
-	        // abort all resource loads
-	        for (var k in this.resources) {
-	            var res = this.resources[k];
-	
-	            if (res._onLoadBinding) {
-	                res._onLoadBinding.detach();
-	            }
-	
-	            if (res.isLoading) {
-	                res.abort();
-	            }
-	        }
-	
-	        this.resources = {};
-	
-	        return this;
-	    };
-	
-	    /**
-	     * Starts loading the queued resources.
-	     *
-	     * @param {function} [cb] - Optional callback that will be bound to the `complete` event.
-	     * @return {Loader} Returns itself.
-	     */
-	
-	
-	    Loader.prototype.load = function load(cb) {
-	        // register complete callback if they pass one
-	        if (typeof cb === 'function') {
-	            this.onComplete.once(cb);
-	        }
-	
-	        // if the queue has already started we are done here
-	        if (this.loading) {
-	            return this;
-	        }
-	
-	        // distribute progress chunks
-	        var chunk = 100 / this._queue._tasks.length;
-	
-	        for (var i = 0; i < this._queue._tasks.length; ++i) {
-	            this._queue._tasks[i].data.progressChunk = chunk;
-	        }
-	
-	        // update loading state
-	        this.loading = true;
-	
-	        // notify of start
-	        this.onStart.dispatch(this);
-	
-	        // start loading
-	        this._queue.resume();
-	
-	        return this;
-	    };
-	
-	    /**
-	     * Prepares a url for usage based on the configuration of this object
-	     *
-	     * @private
-	     * @param {string} url - The url to prepare.
-	     * @return {string} The prepared url.
-	     */
-	
-	
-	    Loader.prototype._prepareUrl = function _prepareUrl(url) {
-	        var parsedUrl = (0, _parseUri2.default)(url, { strictMode: true });
-	        var result = void 0;
-	
-	        // absolute url, just use it as is.
-	        if (parsedUrl.protocol || !parsedUrl.path || url.indexOf('//') === 0) {
-	            result = url;
-	        }
-	        // if baseUrl doesn't end in slash and url doesn't start with slash, then add a slash inbetween
-	        else if (this.baseUrl.length && this.baseUrl.lastIndexOf('/') !== this.baseUrl.length - 1 && url.charAt(0) !== '/') {
-	                result = this.baseUrl + '/' + url;
-	            } else {
-	                result = this.baseUrl + url;
-	            }
-	
-	        // if we need to add a default querystring, there is a bit more work
-	        if (this.defaultQueryString) {
-	            var hash = rgxExtractUrlHash.exec(result)[0];
-	
-	            result = result.substr(0, result.length - hash.length);
-	
-	            if (result.indexOf('?') !== -1) {
-	                result += '&' + this.defaultQueryString;
-	            } else {
-	                result += '?' + this.defaultQueryString;
-	            }
-	
-	            result += hash;
-	        }
-	
-	        return result;
-	    };
-	
-	    /**
-	     * Loads a single resource.
-	     *
-	     * @private
-	     * @param {Resource} resource - The resource to load.
-	     * @param {function} dequeue - The function to call when we need to dequeue this item.
-	     */
-	
-	
-	    Loader.prototype._loadResource = function _loadResource(resource, dequeue) {
-	        var _this2 = this;
-	
-	        resource._dequeue = dequeue;
-	
-	        // run before middleware
-	        async.eachSeries(this._beforeMiddleware, function (fn, next) {
-	            fn.call(_this2, resource, function () {
-	                // if the before middleware marks the resource as complete,
-	                // break and don't process any more before middleware
-	                next(resource.isComplete ? {} : null);
-	            });
-	        }, function () {
-	            if (resource.isComplete) {
-	                _this2._onLoad(resource);
-	            } else {
-	                resource._onLoadBinding = resource.onComplete.once(_this2._onLoad, _this2);
-	                resource.load();
-	            }
-	        });
-	    };
-	
-	    /**
-	     * Called once each resource has loaded.
-	     *
-	     * @private
-	     */
-	
-	
-	    Loader.prototype._onComplete = function _onComplete() {
-	        this.loading = false;
-	
-	        this.onComplete.dispatch(this, this.resources);
-	    };
-	
-	    /**
-	     * Called each time a resources is loaded.
-	     *
-	     * @private
-	     * @param {Resource} resource - The resource that was loaded
-	     */
-	
-	
-	    Loader.prototype._onLoad = function _onLoad(resource) {
-	        var _this3 = this;
-	
-	        resource._onLoadBinding = null;
-	
-	        // run middleware, this *must* happen before dequeue so sub-assets get added properly
-	        async.eachSeries(this._afterMiddleware, function (fn, next) {
-	            fn.call(_this3, resource, next);
-	        }, function () {
-	            resource.onAfterMiddleware.dispatch(resource);
-	
-	            _this3.progress += resource.progressChunk;
-	            _this3.onProgress.dispatch(_this3, resource);
-	
-	            if (resource.error) {
-	                _this3.onError.dispatch(resource.error, _this3, resource);
-	            } else {
-	                _this3.onLoad.dispatch(_this3, resource);
-	            }
-	
-	            // remove this resource from the async queue
-	            resource._dequeue();
-	
-	            // do completion check
-	            if (_this3._queue.idle()) {
-	                _this3.progress = MAX_PROGRESS;
-	                _this3._onComplete();
-	            }
-	        });
-	    };
-	
-	    return Loader;
-	}();
-	
-	exports.default = Loader;
-	//# sourceMappingURL=Loader.js.map
-
-/***/ },
-/* 161 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var MiniSignalBinding = (function () {
-	  function MiniSignalBinding(fn, once, thisArg) {
-	    if (once === undefined) once = false;
-	
-	    _classCallCheck(this, MiniSignalBinding);
-	
-	    this._fn = fn;
-	    this._once = once;
-	    this._thisArg = thisArg;
-	    this._next = this._prev = this._owner = null;
-	  }
-	
-	  _createClass(MiniSignalBinding, [{
-	    key: 'detach',
-	    value: function detach() {
-	      if (this._owner === null) return false;
-	      this._owner.detach(this);
-	      return true;
-	    }
-	  }]);
-	
-	  return MiniSignalBinding;
-	})();
-	
-	function _addMiniSignalBinding(self, node) {
-	  if (!self._head) {
-	    self._head = node;
-	    self._tail = node;
-	  } else {
-	    self._tail._next = node;
-	    node._prev = self._tail;
-	    self._tail = node;
-	  }
-	
-	  node._owner = self;
-	
-	  return node;
-	}
-	
-	var MiniSignal = (function () {
-	  function MiniSignal() {
-	    _classCallCheck(this, MiniSignal);
-	
-	    this._head = this._tail = undefined;
-	  }
-	
-	  _createClass(MiniSignal, [{
-	    key: 'handlers',
-	    value: function handlers() {
-	      var exists = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-	
-	      var node = this._head;
-	
-	      if (exists) return !!node;
-	
-	      var ee = [];
-	
-	      while (node) {
-	        ee.push(node);
-	        node = node._next;
-	      }
-	
-	      return ee;
-	    }
-	  }, {
-	    key: 'has',
-	    value: function has(node) {
-	      if (!(node instanceof MiniSignalBinding)) {
-	        throw new Error('MiniSignal#has(): First arg must be a MiniSignalBinding object.');
-	      }
-	
-	      return node._owner === this;
-	    }
-	  }, {
-	    key: 'dispatch',
-	    value: function dispatch() {
-	      var node = this._head;
-	
-	      if (!node) return false;
-	
-	      while (node) {
-	        if (node._once) this.detach(node);
-	        node._fn.apply(node._thisArg, arguments);
-	        node = node._next;
-	      }
-	
-	      return true;
-	    }
-	  }, {
-	    key: 'add',
-	    value: function add(fn) {
-	      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	
-	      if (typeof fn !== 'function') {
-	        throw new Error('MiniSignal#add(): First arg must be a Function.');
-	      }
-	      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, false, thisArg));
-	    }
-	  }, {
-	    key: 'once',
-	    value: function once(fn) {
-	      var thisArg = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	
-	      if (typeof fn !== 'function') {
-	        throw new Error('MiniSignal#once(): First arg must be a Function.');
-	      }
-	      return _addMiniSignalBinding(this, new MiniSignalBinding(fn, true, thisArg));
-	    }
-	  }, {
-	    key: 'detach',
-	    value: function detach(node) {
-	      if (!(node instanceof MiniSignalBinding)) {
-	        throw new Error('MiniSignal#detach(): First arg must be a MiniSignalBinding object.');
-	      }
-	      if (node._owner !== this) return this;
-	
-	      if (node._prev) node._prev._next = node._next;
-	      if (node._next) node._next._prev = node._prev;
-	
-	      if (node === this._head) {
-	        this._head = node._next;
-	        if (node._next === null) {
-	          this._tail = null;
-	        }
-	      } else if (node === this._tail) {
-	        this._tail = node._prev;
-	        this._tail._next = null;
-	      }
-	
-	      node._owner = null;
-	      return this;
-	    }
-	  }, {
-	    key: 'detachAll',
-	    value: function detachAll() {
-	      var node = this._head;
-	      if (!node) return this;
-	
-	      this._head = this._tail = null;
-	
-	      while (node) {
-	        node._owner = null;
-	        node = node._next;
-	      }
-	      return this;
-	    }
-	  }]);
-	
-	  return MiniSignal;
-	})();
-	
-	MiniSignal.MiniSignalBinding = MiniSignalBinding;
-	
-	exports['default'] = MiniSignal;
-	module.exports = exports['default'];
-
-
-/***/ },
-/* 162 */
-/***/ function(module, exports) {
-
-	'use strict'
-	
-	module.exports = function parseURI (str, opts) {
-	  opts = opts || {}
-	
-	  var o = {
-	    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
-	    q: {
-	      name: 'queryKey',
-	      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-	    },
-	    parser: {
-	      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-	      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-	    }
-	  }
-	
-	  var m = o.parser[opts.strictMode ? 'strict' : 'loose'].exec(str)
-	  var uri = {}
-	  var i = 14
-	
-	  while (i--) uri[o.key[i]] = m[i] || ''
-	
-	  uri[o.q.name] = {}
-	  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-	    if ($1) uri[o.q.name][$1] = $2
-	  })
-	
-	  return uri
-	}
-
-
-/***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.eachSeries = eachSeries;
-	exports.queue = queue;
-	/**
-	 * Smaller version of the async library constructs.
-	 *
-	 */
-	function _noop() {} /* empty */
-	
-	/**
-	 * Iterates an array in series.
-	 *
-	 * @param {*[]} array - Array to iterate.
-	 * @param {function} iterator - Function to call for each element.
-	 * @param {function} callback - Function to call when done, or on error.
-	 */
-	function eachSeries(array, iterator, callback) {
-	    var i = 0;
-	    var len = array.length;
-	
-	    (function next(err) {
-	        if (err || i === len) {
-	            if (callback) {
-	                callback(err);
-	            }
-	
-	            return;
-	        }
-	
-	        iterator(array[i++], next);
-	    })();
-	}
-	
-	/**
-	 * Ensures a function is only called once.
-	 *
-	 * @param {function} fn - The function to wrap.
-	 * @return {function} The wrapping function.
-	 */
-	function onlyOnce(fn) {
-	    return function onceWrapper() {
-	        if (fn === null) {
-	            throw new Error('Callback was already called.');
-	        }
-	
-	        var callFn = fn;
-	
-	        fn = null;
-	        callFn.apply(this, arguments);
-	    };
-	}
-	
-	/**
-	 * Async queue implementation,
-	 *
-	 * @param {function} worker - The worker function to call for each task.
-	 * @param {number} concurrency - How many workers to run in parrallel.
-	 * @return {*} The async queue object.
-	 */
-	function queue(worker, concurrency) {
-	    if (concurrency == null) {
-	        // eslint-disable-line no-eq-null,eqeqeq
-	        concurrency = 1;
-	    } else if (concurrency === 0) {
-	        throw new Error('Concurrency must not be zero');
-	    }
-	
-	    var workers = 0;
-	    var q = {
-	        _tasks: [],
-	        concurrency: concurrency,
-	        saturated: _noop,
-	        unsaturated: _noop,
-	        buffer: concurrency / 4,
-	        empty: _noop,
-	        drain: _noop,
-	        error: _noop,
-	        started: false,
-	        paused: false,
-	        push: function push(data, callback) {
-	            _insert(data, false, callback);
-	        },
-	        kill: function kill() {
-	            workers = 0;
-	            q.drain = _noop;
-	            q.started = false;
-	            q._tasks = [];
-	        },
-	        unshift: function unshift(data, callback) {
-	            _insert(data, true, callback);
-	        },
-	        process: function process() {
-	            while (!q.paused && workers < q.concurrency && q._tasks.length) {
-	                var task = q._tasks.shift();
-	
-	                if (q._tasks.length === 0) {
-	                    q.empty();
-	                }
-	
-	                workers += 1;
-	
-	                if (workers === q.concurrency) {
-	                    q.saturated();
-	                }
-	
-	                worker(task.data, onlyOnce(_next(task)));
-	            }
-	        },
-	        length: function length() {
-	            return q._tasks.length;
-	        },
-	        running: function running() {
-	            return workers;
-	        },
-	        idle: function idle() {
-	            return q._tasks.length + workers === 0;
-	        },
-	        pause: function pause() {
-	            if (q.paused === true) {
-	                return;
-	            }
-	
-	            q.paused = true;
-	        },
-	        resume: function resume() {
-	            if (q.paused === false) {
-	                return;
-	            }
-	
-	            q.paused = false;
-	
-	            // Need to call q.process once per concurrent
-	            // worker to preserve full concurrency after pause
-	            for (var w = 1; w <= q.concurrency; w++) {
-	                q.process();
-	            }
-	        }
-	    };
-	
-	    function _insert(data, insertAtFront, callback) {
-	        if (callback != null && typeof callback !== 'function') {
-	            // eslint-disable-line no-eq-null,eqeqeq
-	            throw new Error('task callback must be a function');
-	        }
-	
-	        q.started = true;
-	
-	        if (data == null && q.idle()) {
-	            // eslint-disable-line no-eq-null,eqeqeq
-	            // call drain immediately if there are no tasks
-	            setTimeout(function () {
-	                return q.drain();
-	            }, 1);
-	
-	            return;
-	        }
-	
-	        var item = {
-	            data: data,
-	            callback: typeof callback === 'function' ? callback : _noop
-	        };
-	
-	        if (insertAtFront) {
-	            q._tasks.unshift(item);
-	        } else {
-	            q._tasks.push(item);
-	        }
-	
-	        setTimeout(function () {
-	            return q.process();
-	        }, 1);
-	    }
-	
-	    function _next(task) {
-	        return function next() {
-	            workers -= 1;
-	
-	            task.callback.apply(task, arguments);
-	
-	            if (arguments[0] != null) {
-	                // eslint-disable-line no-eq-null,eqeqeq
-	                q.error(arguments[0], task.data);
-	            }
-	
-	            if (workers <= q.concurrency - q.buffer) {
-	                q.unsaturated();
-	            }
-	
-	            if (q.idle()) {
-	                q.drain();
-	            }
-	
-	            q.process();
-	        };
-	    }
-	
-	    return q;
-	}
-	//# sourceMappingURL=async.js.map
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _parseUri = __webpack_require__(162);
-	
-	var _parseUri2 = _interopRequireDefault(_parseUri);
-	
-	var _miniSignals = __webpack_require__(161);
-	
-	var _miniSignals2 = _interopRequireDefault(_miniSignals);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	// tests is CORS is supported in XHR, if not we need to use XDR
-	var useXdr = !!(window.XDomainRequest && !('withCredentials' in new XMLHttpRequest()));
-	var tempAnchor = null;
-	
-	// some status constants
-	var STATUS_NONE = 0;
-	var STATUS_OK = 200;
-	var STATUS_EMPTY = 204;
-	
-	// noop
-	function _noop() {} /* empty */
-	
-	/**
-	 * Manages the state and loading of a resource and all child resources.
-	 *
-	 * @class
-	 */
-	
-	var Resource = function () {
-	    /**
-	     * Sets the load type to be used for a specific extension.
-	     *
-	     * @static
-	     * @param {string} extname - The extension to set the type for, e.g. "png" or "fnt"
-	     * @param {Resource.LOAD_TYPE} loadType - The load type to set it to.
-	     */
-	    Resource.setExtensionLoadType = function setExtensionLoadType(extname, loadType) {
-	        setExtMap(Resource._loadTypeMap, extname, loadType);
-	    };
-	
-	    /**
-	     * Sets the load type to be used for a specific extension.
-	     *
-	     * @static
-	     * @param {string} extname - The extension to set the type for, e.g. "png" or "fnt"
-	     * @param {Resource.XHR_RESPONSE_TYPE} xhrType - The xhr type to set it to.
-	     */
-	
-	
-	    Resource.setExtensionXhrType = function setExtensionXhrType(extname, xhrType) {
-	        setExtMap(Resource._xhrTypeMap, extname, xhrType);
-	    };
-	
-	    /**
-	     * @param {string} name - The name of the resource to load.
-	     * @param {string|string[]} url - The url for this resource, for audio/video loads you can pass
-	     *      an array of sources.
-	     * @param {object} [options] - The options for the load.
-	     * @param {string|boolean} [options.crossOrigin] - Is this request cross-origin? Default is to
-	     *      determine automatically.
-	     * @param {Resource.LOAD_TYPE} [options.loadType=Resource.LOAD_TYPE.XHR] - How should this resource
-	     *      be loaded?
-	     * @param {Resource.XHR_RESPONSE_TYPE} [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How
-	     *      should the data being loaded be interpreted when using XHR?
-	     * @param {object} [options.metadata] - Extra configuration for middleware and the Resource object.
-	     * @param {HTMLImageElement|HTMLAudioElement|HTMLVideoElement} [options.metadata.loadElement=null] - The
-	     *      element to use for loading, instead of creating one.
-	     * @param {boolean} [options.metadata.skipSource=false] - Skips adding source(s) to the load element. This
-	     *      is useful if you want to pass in a `loadElement` that you already added load sources to.
-	     */
-	
-	
-	    function Resource(name, url, options) {
-	        _classCallCheck(this, Resource);
-	
-	        if (typeof name !== 'string' || typeof url !== 'string') {
-	            throw new Error('Both name and url are required for constructing a resource.');
-	        }
-	
-	        options = options || {};
-	
-	        /**
-	         * The state flags of this resource.
-	         *
-	         * @member {number}
-	         */
-	        this._flags = 0;
-	
-	        // set data url flag, needs to be set early for some _determineX checks to work.
-	        this._setFlag(Resource.STATUS_FLAGS.DATA_URL, url.indexOf('data:') === 0);
-	
-	        /**
-	         * The name of this resource.
-	         *
-	         * @member {string}
-	         * @readonly
-	         */
-	        this.name = name;
-	
-	        /**
-	         * The url used to load this resource.
-	         *
-	         * @member {string}
-	         * @readonly
-	         */
-	        this.url = url;
-	
-	        /**
-	         * The data that was loaded by the resource.
-	         *
-	         * @member {any}
-	         */
-	        this.data = null;
-	
-	        /**
-	         * Is this request cross-origin? If unset, determined automatically.
-	         *
-	         * @member {string}
-	         */
-	        this.crossOrigin = options.crossOrigin === true ? 'anonymous' : options.crossOrigin;
-	
-	        /**
-	         * The method of loading to use for this resource.
-	         *
-	         * @member {Resource.LOAD_TYPE}
-	         */
-	        this.loadType = options.loadType || this._determineLoadType();
-	
-	        /**
-	         * The type used to load the resource via XHR. If unset, determined automatically.
-	         *
-	         * @member {string}
-	         */
-	        this.xhrType = options.xhrType;
-	
-	        /**
-	         * Extra info for middleware, and controlling specifics about how the resource loads.
-	         *
-	         * Note that if you pass in a `loadElement`, the Resource class takes ownership of it.
-	         * Meaning it will modify it as it sees fit.
-	         *
-	         * @member {object}
-	         * @property {HTMLImageElement|HTMLAudioElement|HTMLVideoElement} [loadElement=null] - The
-	         *  element to use for loading, instead of creating one.
-	         * @property {boolean} [skipSource=false] - Skips adding source(s) to the load element. This
-	         *  is useful if you want to pass in a `loadElement` that you already added load sources
-	         *  to.
-	         */
-	        this.metadata = options.metadata || {};
-	
-	        /**
-	         * The error that occurred while loading (if any).
-	         *
-	         * @member {Error}
-	         * @readonly
-	         */
-	        this.error = null;
-	
-	        /**
-	         * The XHR object that was used to load this resource. This is only set
-	         * when `loadType` is `Resource.LOAD_TYPE.XHR`.
-	         *
-	         * @member {XMLHttpRequest}
-	         * @readonly
-	         */
-	        this.xhr = null;
-	
-	        /**
-	         * The child resources this resource owns.
-	         *
-	         * @member {Resource[]}
-	         * @readonly
-	         */
-	        this.children = [];
-	
-	        /**
-	         * The resource type.
-	         *
-	         * @member {Resource.TYPE}
-	         * @readonly
-	         */
-	        this.type = Resource.TYPE.UNKNOWN;
-	
-	        /**
-	         * The progress chunk owned by this resource.
-	         *
-	         * @member {number}
-	         * @readonly
-	         */
-	        this.progressChunk = 0;
-	
-	        /**
-	         * The `dequeue` method that will be used a storage place for the async queue dequeue method
-	         * used privately by the loader.
-	         *
-	         * @private
-	         * @member {function}
-	         */
-	        this._dequeue = _noop;
-	
-	        /**
-	         * Used a storage place for the on load binding used privately by the loader.
-	         *
-	         * @private
-	         * @member {function}
-	         */
-	        this._onLoadBinding = null;
-	
-	        /**
-	         * The `complete` function bound to this resource's context.
-	         *
-	         * @private
-	         * @member {function}
-	         */
-	        this._boundComplete = this.complete.bind(this);
-	
-	        /**
-	         * The `_onError` function bound to this resource's context.
-	         *
-	         * @private
-	         * @member {function}
-	         */
-	        this._boundOnError = this._onError.bind(this);
-	
-	        /**
-	         * The `_onProgress` function bound to this resource's context.
-	         *
-	         * @private
-	         * @member {function}
-	         */
-	        this._boundOnProgress = this._onProgress.bind(this);
-	
-	        // xhr callbacks
-	        this._boundXhrOnError = this._xhrOnError.bind(this);
-	        this._boundXhrOnAbort = this._xhrOnAbort.bind(this);
-	        this._boundXhrOnLoad = this._xhrOnLoad.bind(this);
-	        this._boundXdrOnTimeout = this._xdrOnTimeout.bind(this);
-	
-	        /**
-	         * Dispatched when the resource beings to load.
-	         *
-	         * The callback looks like {@link Resource.OnStartSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onStart = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched each time progress of this resource load updates.
-	         * Not all resources types and loader systems can support this event
-	         * so sometimes it may not be available. If the resource
-	         * is being loaded on a modern browser, using XHR, and the remote server
-	         * properly sets Content-Length headers, then this will be available.
-	         *
-	         * The callback looks like {@link Resource.OnProgressSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onProgress = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched once this resource has loaded, if there was an error it will
-	         * be in the `error` property.
-	         *
-	         * The callback looks like {@link Resource.OnCompleteSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onComplete = new _miniSignals2.default();
-	
-	        /**
-	         * Dispatched after this resource has had all the *after* middleware run on it.
-	         *
-	         * The callback looks like {@link Resource.OnCompleteSignal}.
-	         *
-	         * @member {Signal}
-	         */
-	        this.onAfterMiddleware = new _miniSignals2.default();
-	
-	        /**
-	         * When the resource starts to load.
-	         *
-	         * @memberof Resource
-	         * @callback OnStartSignal
-	         * @param {Resource} resource - The resource that the event happened on.
-	         */
-	
-	        /**
-	         * When the resource reports loading progress.
-	         *
-	         * @memberof Resource
-	         * @callback OnProgressSignal
-	         * @param {Resource} resource - The resource that the event happened on.
-	         * @param {number} percentage - The progress of the load in the range [0, 1].
-	         */
-	
-	        /**
-	         * When the resource finishes loading.
-	         *
-	         * @memberof Resource
-	         * @callback OnCompleteSignal
-	         * @param {Resource} resource - The resource that the event happened on.
-	         */
-	    }
-	
-	    /**
-	     * Stores whether or not this url is a data url.
-	     *
-	     * @member {boolean}
-	     * @readonly
-	     */
-	
-	
-	    /**
-	     * Marks the resource as complete.
-	     *
-	     */
-	    Resource.prototype.complete = function complete() {
-	        // TODO: Clean this up in a wrapper or something...gross....
-	        if (this.data && this.data.removeEventListener) {
-	            this.data.removeEventListener('error', this._boundOnError, false);
-	            this.data.removeEventListener('load', this._boundComplete, false);
-	            this.data.removeEventListener('progress', this._boundOnProgress, false);
-	            this.data.removeEventListener('canplaythrough', this._boundComplete, false);
-	        }
-	
-	        if (this.xhr) {
-	            if (this.xhr.removeEventListener) {
-	                this.xhr.removeEventListener('error', this._boundXhrOnError, false);
-	                this.xhr.removeEventListener('abort', this._boundXhrOnAbort, false);
-	                this.xhr.removeEventListener('progress', this._boundOnProgress, false);
-	                this.xhr.removeEventListener('load', this._boundXhrOnLoad, false);
-	            } else {
-	                this.xhr.onerror = null;
-	                this.xhr.ontimeout = null;
-	                this.xhr.onprogress = null;
-	                this.xhr.onload = null;
-	            }
-	        }
-	
-	        if (this.isComplete) {
-	            throw new Error('Complete called again for an already completed resource.');
-	        }
-	
-	        this._setFlag(Resource.STATUS_FLAGS.COMPLETE, true);
-	        this._setFlag(Resource.STATUS_FLAGS.LOADING, false);
-	
-	        this.onComplete.dispatch(this);
-	    };
-	
-	    /**
-	     * Aborts the loading of this resource, with an optional message.
-	     *
-	     * @param {string} message - The message to use for the error
-	     */
-	
-	
-	    Resource.prototype.abort = function abort(message) {
-	        // abort can be called multiple times, ignore subsequent calls.
-	        if (this.error) {
-	            return;
-	        }
-	
-	        // store error
-	        this.error = new Error(message);
-	
-	        // abort the actual loading
-	        if (this.xhr) {
-	            this.xhr.abort();
-	        } else if (this.xdr) {
-	            this.xdr.abort();
-	        } else if (this.data) {
-	            // single source
-	            if (this.data.src) {
-	                this.data.src = Resource.EMPTY_GIF;
-	            }
-	            // multi-source
-	            else {
-	                    while (this.data.firstChild) {
-	                        this.data.removeChild(this.data.firstChild);
-	                    }
-	                }
-	        }
-	
-	        // done now.
-	        this.complete();
-	    };
-	
-	    /**
-	     * Kicks off loading of this resource. This method is asynchronous.
-	     *
-	     * @param {function} [cb] - Optional callback to call once the resource is loaded.
-	     */
-	
-	
-	    Resource.prototype.load = function load(cb) {
-	        var _this = this;
-	
-	        if (this.isLoading) {
-	            return;
-	        }
-	
-	        if (this.isComplete) {
-	            if (cb) {
-	                setTimeout(function () {
-	                    return cb(_this);
-	                }, 1);
-	            }
-	
-	            return;
-	        } else if (cb) {
-	            this.onComplete.once(cb);
-	        }
-	
-	        this._setFlag(Resource.STATUS_FLAGS.LOADING, true);
-	
-	        this.onStart.dispatch(this);
-	
-	        // if unset, determine the value
-	        if (this.crossOrigin === false || typeof this.crossOrigin !== 'string') {
-	            this.crossOrigin = this._determineCrossOrigin(this.url);
-	        }
-	
-	        switch (this.loadType) {
-	            case Resource.LOAD_TYPE.IMAGE:
-	                this.type = Resource.TYPE.IMAGE;
-	                this._loadElement('image');
-	                break;
-	
-	            case Resource.LOAD_TYPE.AUDIO:
-	                this.type = Resource.TYPE.AUDIO;
-	                this._loadSourceElement('audio');
-	                break;
-	
-	            case Resource.LOAD_TYPE.VIDEO:
-	                this.type = Resource.TYPE.VIDEO;
-	                this._loadSourceElement('video');
-	                break;
-	
-	            case Resource.LOAD_TYPE.XHR:
-	            /* falls through */
-	            default:
-	                if (useXdr && this.crossOrigin) {
-	                    this._loadXdr();
-	                } else {
-	                    this._loadXhr();
-	                }
-	                break;
-	        }
-	    };
-	
-	    /**
-	     * Checks if the flag is set.
-	     *
-	     * @private
-	     * @param {number} flag - The flag to check.
-	     * @return {boolean} True if the flag is set.
-	     */
-	
-	
-	    Resource.prototype._hasFlag = function _hasFlag(flag) {
-	        return !!(this._flags & flag);
-	    };
-	
-	    /**
-	     * (Un)Sets the flag.
-	     *
-	     * @private
-	     * @param {number} flag - The flag to (un)set.
-	     * @param {boolean} value - Whether to set or (un)set the flag.
-	     */
-	
-	
-	    Resource.prototype._setFlag = function _setFlag(flag, value) {
-	        this._flags = value ? this._flags | flag : this._flags & ~flag;
-	    };
-	
-	    /**
-	     * Loads this resources using an element that has a single source,
-	     * like an HTMLImageElement.
-	     *
-	     * @private
-	     * @param {string} type - The type of element to use.
-	     */
-	
-	
-	    Resource.prototype._loadElement = function _loadElement(type) {
-	        if (this.metadata.loadElement) {
-	            this.data = this.metadata.loadElement;
-	        } else if (type === 'image' && typeof window.Image !== 'undefined') {
-	            this.data = new Image();
-	        } else {
-	            this.data = document.createElement(type);
-	        }
-	
-	        if (this.crossOrigin) {
-	            this.data.crossOrigin = this.crossOrigin;
-	        }
-	
-	        if (!this.metadata.skipSource) {
-	            this.data.src = this.url;
-	        }
-	
-	        this.data.addEventListener('error', this._boundOnError, false);
-	        this.data.addEventListener('load', this._boundComplete, false);
-	        this.data.addEventListener('progress', this._boundOnProgress, false);
-	    };
-	
-	    /**
-	     * Loads this resources using an element that has multiple sources,
-	     * like an HTMLAudioElement or HTMLVideoElement.
-	     *
-	     * @private
-	     * @param {string} type - The type of element to use.
-	     */
-	
-	
-	    Resource.prototype._loadSourceElement = function _loadSourceElement(type) {
-	        if (this.metadata.loadElement) {
-	            this.data = this.metadata.loadElement;
-	        } else if (type === 'audio' && typeof window.Audio !== 'undefined') {
-	            this.data = new Audio();
-	        } else {
-	            this.data = document.createElement(type);
-	        }
-	
-	        if (this.data === null) {
-	            this.abort('Unsupported element: ' + type);
-	
-	            return;
-	        }
-	
-	        if (!this.metadata.skipSource) {
-	            // support for CocoonJS Canvas+ runtime, lacks document.createElement('source')
-	            if (navigator.isCocoonJS) {
-	                this.data.src = Array.isArray(this.url) ? this.url[0] : this.url;
-	            } else if (Array.isArray(this.url)) {
-	                for (var i = 0; i < this.url.length; ++i) {
-	                    this.data.appendChild(this._createSource(type, this.url[i]));
-	                }
-	            } else {
-	                this.data.appendChild(this._createSource(type, this.url));
-	            }
-	        }
-	
-	        this.data.addEventListener('error', this._boundOnError, false);
-	        this.data.addEventListener('load', this._boundComplete, false);
-	        this.data.addEventListener('progress', this._boundOnProgress, false);
-	        this.data.addEventListener('canplaythrough', this._boundComplete, false);
-	
-	        this.data.load();
-	    };
-	
-	    /**
-	     * Loads this resources using an XMLHttpRequest.
-	     *
-	     * @private
-	     */
-	
-	
-	    Resource.prototype._loadXhr = function _loadXhr() {
-	        // if unset, determine the value
-	        if (typeof this.xhrType !== 'string') {
-	            this.xhrType = this._determineXhrType();
-	        }
-	
-	        var xhr = this.xhr = new XMLHttpRequest();
-	
-	        // set the request type and url
-	        xhr.open('GET', this.url, true);
-	
-	        // load json as text and parse it ourselves. We do this because some browsers
-	        // *cough* safari *cough* can't deal with it.
-	        if (this.xhrType === Resource.XHR_RESPONSE_TYPE.JSON || this.xhrType === Resource.XHR_RESPONSE_TYPE.DOCUMENT) {
-	            xhr.responseType = Resource.XHR_RESPONSE_TYPE.TEXT;
-	        } else {
-	            xhr.responseType = this.xhrType;
-	        }
-	
-	        xhr.addEventListener('error', this._boundXhrOnError, false);
-	        xhr.addEventListener('abort', this._boundXhrOnAbort, false);
-	        xhr.addEventListener('progress', this._boundOnProgress, false);
-	        xhr.addEventListener('load', this._boundXhrOnLoad, false);
-	
-	        xhr.send();
-	    };
-	
-	    /**
-	     * Loads this resources using an XDomainRequest. This is here because we need to support IE9 (gross).
-	     *
-	     * @private
-	     */
-	
-	
-	    Resource.prototype._loadXdr = function _loadXdr() {
-	        // if unset, determine the value
-	        if (typeof this.xhrType !== 'string') {
-	            this.xhrType = this._determineXhrType();
-	        }
-	
-	        var xdr = this.xhr = new XDomainRequest();
-	
-	        // XDomainRequest has a few quirks. Occasionally it will abort requests
-	        // A way to avoid this is to make sure ALL callbacks are set even if not used
-	        // More info here: http://stackoverflow.com/questions/15786966/xdomainrequest-aborts-post-on-ie-9
-	        xdr.timeout = 5000;
-	
-	        xdr.onerror = this._boundXhrOnError;
-	        xdr.ontimeout = this._boundXdrOnTimeout;
-	        xdr.onprogress = this._boundOnProgress;
-	        xdr.onload = this._boundXhrOnLoad;
-	
-	        xdr.open('GET', this.url, true);
-	
-	        // Note: The xdr.send() call is wrapped in a timeout to prevent an
-	        // issue with the interface where some requests are lost if multiple
-	        // XDomainRequests are being sent at the same time.
-	        // Some info here: https://github.com/photonstorm/phaser/issues/1248
-	        setTimeout(function () {
-	            return xdr.send();
-	        }, 1);
-	    };
-	
-	    /**
-	     * Creates a source used in loading via an element.
-	     *
-	     * @private
-	     * @param {string} type - The element type (video or audio).
-	     * @param {string} url - The source URL to load from.
-	     * @param {string} [mime] - The mime type of the video
-	     * @return {HTMLSourceElement} The source element.
-	     */
-	
-	
-	    Resource.prototype._createSource = function _createSource(type, url, mime) {
-	        if (!mime) {
-	            mime = type + '/' + url.substr(url.lastIndexOf('.') + 1);
-	        }
-	
-	        var source = document.createElement('source');
-	
-	        source.src = url;
-	        source.type = mime;
-	
-	        return source;
-	    };
-	
-	    /**
-	     * Called if a load errors out.
-	     *
-	     * @param {Event} event - The error event from the element that emits it.
-	     * @private
-	     */
-	
-	
-	    Resource.prototype._onError = function _onError(event) {
-	        this.abort('Failed to load element using: ' + event.target.nodeName);
-	    };
-	
-	    /**
-	     * Called if a load progress event fires for xhr/xdr.
-	     *
-	     * @private
-	     * @param {XMLHttpRequestProgressEvent|Event} event - Progress event.
-	     */
-	
-	
-	    Resource.prototype._onProgress = function _onProgress(event) {
-	        if (event && event.lengthComputable) {
-	            this.onProgress.dispatch(this, event.loaded / event.total);
-	        }
-	    };
-	
-	    /**
-	     * Called if an error event fires for xhr/xdr.
-	     *
-	     * @private
-	     * @param {XMLHttpRequestErrorEvent|Event} event - Error event.
-	     */
-	
-	
-	    Resource.prototype._xhrOnError = function _xhrOnError() {
-	        var xhr = this.xhr;
-	
-	        this.abort(reqType(xhr) + ' Request failed. Status: ' + xhr.status + ', text: "' + xhr.statusText + '"');
-	    };
-	
-	    /**
-	     * Called if an abort event fires for xhr.
-	     *
-	     * @private
-	     * @param {XMLHttpRequestAbortEvent} event - Abort Event
-	     */
-	
-	
-	    Resource.prototype._xhrOnAbort = function _xhrOnAbort() {
-	        this.abort(reqType(this.xhr) + ' Request was aborted by the user.');
-	    };
-	
-	    /**
-	     * Called if a timeout event fires for xdr.
-	     *
-	     * @private
-	     * @param {Event} event - Timeout event.
-	     */
-	
-	
-	    Resource.prototype._xdrOnTimeout = function _xdrOnTimeout() {
-	        this.abort(reqType(this.xhr) + ' Request timed out.');
-	    };
-	
-	    /**
-	     * Called when data successfully loads from an xhr/xdr request.
-	     *
-	     * @private
-	     * @param {XMLHttpRequestLoadEvent|Event} event - Load event
-	     */
-	
-	
-	    Resource.prototype._xhrOnLoad = function _xhrOnLoad() {
-	        var xhr = this.xhr;
-	        var status = typeof xhr.status === 'undefined' ? xhr.status : STATUS_OK; // XDR has no `.status`, assume 200.
-	
-	        // status can be 0 when using the `file://` protocol so we also check if a response is set
-	        if (status === STATUS_OK || status === STATUS_EMPTY || status === STATUS_NONE && xhr.responseText.length > 0) {
-	            // if text, just return it
-	            if (this.xhrType === Resource.XHR_RESPONSE_TYPE.TEXT) {
-	                this.data = xhr.responseText;
-	                this.type = Resource.TYPE.TEXT;
-	            }
-	            // if json, parse into json object
-	            else if (this.xhrType === Resource.XHR_RESPONSE_TYPE.JSON) {
-	                    try {
-	                        this.data = JSON.parse(xhr.responseText);
-	                        this.type = Resource.TYPE.JSON;
-	                    } catch (e) {
-	                        this.abort('Error trying to parse loaded json: ' + e);
-	
-	                        return;
-	                    }
-	                }
-	                // if xml, parse into an xml document or div element
-	                else if (this.xhrType === Resource.XHR_RESPONSE_TYPE.DOCUMENT) {
-	                        try {
-	                            if (window.DOMParser) {
-	                                var domparser = new DOMParser();
-	
-	                                this.data = domparser.parseFromString(xhr.responseText, 'text/xml');
-	                            } else {
-	                                var div = document.createElement('div');
-	
-	                                div.innerHTML = xhr.responseText;
-	
-	                                this.data = div;
-	                            }
-	
-	                            this.type = Resource.TYPE.XML;
-	                        } catch (e) {
-	                            this.abort('Error trying to parse loaded xml: ' + e);
-	
-	                            return;
-	                        }
-	                    }
-	                    // other types just return the response
-	                    else {
-	                            this.data = xhr.response || xhr.responseText;
-	                        }
-	        } else {
-	            this.abort('[' + xhr.status + '] ' + xhr.statusText + ': ' + xhr.responseURL);
-	
-	            return;
-	        }
-	
-	        this.complete();
-	    };
-	
-	    /**
-	     * Sets the `crossOrigin` property for this resource based on if the url
-	     * for this resource is cross-origin. If crossOrigin was manually set, this
-	     * function does nothing.
-	     *
-	     * @private
-	     * @param {string} url - The url to test.
-	     * @param {object} [loc=window.location] - The location object to test against.
-	     * @return {string} The crossOrigin value to use (or empty string for none).
-	     */
-	
-	
-	    Resource.prototype._determineCrossOrigin = function _determineCrossOrigin(url, loc) {
-	        // data: and javascript: urls are considered same-origin
-	        if (url.indexOf('data:') === 0) {
-	            return '';
-	        }
-	
-	        // default is window.location
-	        loc = loc || window.location;
-	
-	        if (!tempAnchor) {
-	            tempAnchor = document.createElement('a');
-	        }
-	
-	        // let the browser determine the full href for the url of this resource and then
-	        // parse with the node url lib, we can't use the properties of the anchor element
-	        // because they don't work in IE9 :(
-	        tempAnchor.href = url;
-	        url = (0, _parseUri2.default)(tempAnchor.href, { strictMode: true });
-	
-	        var samePort = !url.port && loc.port === '' || url.port === loc.port;
-	        var protocol = url.protocol ? url.protocol + ':' : '';
-	
-	        // if cross origin
-	        if (url.host !== loc.hostname || !samePort || protocol !== loc.protocol) {
-	            return 'anonymous';
-	        }
-	
-	        return '';
-	    };
-	
-	    /**
-	     * Determines the responseType of an XHR request based on the extension of the
-	     * resource being loaded.
-	     *
-	     * @private
-	     * @return {Resource.XHR_RESPONSE_TYPE} The responseType to use.
-	     */
-	
-	
-	    Resource.prototype._determineXhrType = function _determineXhrType() {
-	        return Resource._xhrTypeMap[this._getExtension()] || Resource.XHR_RESPONSE_TYPE.TEXT;
-	    };
-	
-	    /**
-	     * Determines the loadType of a resource based on the extension of the
-	     * resource being loaded.
-	     *
-	     * @private
-	     * @return {Resource.LOAD_TYPE} The loadType to use.
-	     */
-	
-	
-	    Resource.prototype._determineLoadType = function _determineLoadType() {
-	        return Resource._loadTypeMap[this._getExtension()] || Resource.LOAD_TYPE.XHR;
-	    };
-	
-	    /**
-	     * Extracts the extension (sans '.') of the file being loaded by the resource.
-	     *
-	     * @private
-	     * @return {string} The extension.
-	     */
-	
-	
-	    Resource.prototype._getExtension = function _getExtension() {
-	        var url = this.url;
-	        var ext = '';
-	
-	        if (this.isDataUrl) {
-	            var slashIndex = url.indexOf('/');
-	
-	            ext = url.substring(slashIndex + 1, url.indexOf(';', slashIndex));
-	        } else {
-	            var queryStart = url.indexOf('?');
-	
-	            if (queryStart !== -1) {
-	                url = url.substring(0, queryStart);
-	            }
-	
-	            ext = url.substring(url.lastIndexOf('.') + 1);
-	        }
-	
-	        return ext.toLowerCase();
-	    };
-	
-	    /**
-	     * Determines the mime type of an XHR request based on the responseType of
-	     * resource being loaded.
-	     *
-	     * @private
-	     * @param {Resource.XHR_RESPONSE_TYPE} type - The type to get a mime type for.
-	     * @return {string} The mime type to use.
-	     */
-	
-	
-	    Resource.prototype._getMimeFromXhrType = function _getMimeFromXhrType(type) {
-	        switch (type) {
-	            case Resource.XHR_RESPONSE_TYPE.BUFFER:
-	                return 'application/octet-binary';
-	
-	            case Resource.XHR_RESPONSE_TYPE.BLOB:
-	                return 'application/blob';
-	
-	            case Resource.XHR_RESPONSE_TYPE.DOCUMENT:
-	                return 'application/xml';
-	
-	            case Resource.XHR_RESPONSE_TYPE.JSON:
-	                return 'application/json';
-	
-	            case Resource.XHR_RESPONSE_TYPE.DEFAULT:
-	            case Resource.XHR_RESPONSE_TYPE.TEXT:
-	            /* falls through */
-	            default:
-	                return 'text/plain';
-	
-	        }
-	    };
-	
-	    _createClass(Resource, [{
-	        key: 'isDataUrl',
-	        get: function get() {
-	            return this._hasFlag(Resource.STATUS_FLAGS.DATA_URL);
-	        }
-	
-	        /**
-	         * Describes if this resource has finished loading. Is true when the resource has completely
-	         * loaded.
-	         *
-	         * @member {boolean}
-	         * @readonly
-	         */
-	
-	    }, {
-	        key: 'isComplete',
-	        get: function get() {
-	            return this._hasFlag(Resource.STATUS_FLAGS.COMPLETE);
-	        }
-	
-	        /**
-	         * Describes if this resource is currently loading. Is true when the resource starts loading,
-	         * and is false again when complete.
-	         *
-	         * @member {boolean}
-	         * @readonly
-	         */
-	
-	    }, {
-	        key: 'isLoading',
-	        get: function get() {
-	            return this._hasFlag(Resource.STATUS_FLAGS.LOADING);
-	        }
-	    }]);
-	
-	    return Resource;
-	}();
-	
-	/**
-	 * The types of resources a resource could represent.
-	 *
-	 * @static
-	 * @readonly
-	 * @enum {number}
-	 */
-	
-	
-	exports.default = Resource;
-	Resource.STATUS_FLAGS = {
-	    NONE: 0,
-	    DATA_URL: 1 << 0,
-	    COMPLETE: 1 << 1,
-	    LOADING: 1 << 2
-	};
-	
-	/**
-	 * The types of resources a resource could represent.
-	 *
-	 * @static
-	 * @readonly
-	 * @enum {number}
-	 */
-	Resource.TYPE = {
-	    UNKNOWN: 0,
-	    JSON: 1,
-	    XML: 2,
-	    IMAGE: 3,
-	    AUDIO: 4,
-	    VIDEO: 5,
-	    TEXT: 6
-	};
-	
-	/**
-	 * The types of loading a resource can use.
-	 *
-	 * @static
-	 * @readonly
-	 * @enum {number}
-	 */
-	Resource.LOAD_TYPE = {
-	    /** Uses XMLHttpRequest to load the resource. */
-	    XHR: 1,
-	    /** Uses an `Image` object to load the resource. */
-	    IMAGE: 2,
-	    /** Uses an `Audio` object to load the resource. */
-	    AUDIO: 3,
-	    /** Uses a `Video` object to load the resource. */
-	    VIDEO: 4
-	};
-	
-	/**
-	 * The XHR ready states, used internally.
-	 *
-	 * @static
-	 * @readonly
-	 * @enum {string}
-	 */
-	Resource.XHR_RESPONSE_TYPE = {
-	    /** string */
-	    DEFAULT: 'text',
-	    /** ArrayBuffer */
-	    BUFFER: 'arraybuffer',
-	    /** Blob */
-	    BLOB: 'blob',
-	    /** Document */
-	    DOCUMENT: 'document',
-	    /** Object */
-	    JSON: 'json',
-	    /** String */
-	    TEXT: 'text'
-	};
-	
-	Resource._loadTypeMap = {
-	    // images
-	    gif: Resource.LOAD_TYPE.IMAGE,
-	    png: Resource.LOAD_TYPE.IMAGE,
-	    bmp: Resource.LOAD_TYPE.IMAGE,
-	    jpg: Resource.LOAD_TYPE.IMAGE,
-	    jpeg: Resource.LOAD_TYPE.IMAGE,
-	    tif: Resource.LOAD_TYPE.IMAGE,
-	    tiff: Resource.LOAD_TYPE.IMAGE,
-	    webp: Resource.LOAD_TYPE.IMAGE,
-	    tga: Resource.LOAD_TYPE.IMAGE,
-	    svg: Resource.LOAD_TYPE.IMAGE,
-	    'svg+xml': Resource.LOAD_TYPE.IMAGE, // for SVG data urls
-	
-	    // audio
-	    mp3: Resource.LOAD_TYPE.AUDIO,
-	    ogg: Resource.LOAD_TYPE.AUDIO,
-	    wav: Resource.LOAD_TYPE.AUDIO,
-	
-	    // videos
-	    mp4: Resource.LOAD_TYPE.VIDEO,
-	    webm: Resource.LOAD_TYPE.VIDEO
-	};
-	
-	Resource._xhrTypeMap = {
-	    // xml
-	    xhtml: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	    html: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	    htm: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	    xml: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	    tmx: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	    svg: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	
-	    // This was added to handle Tiled Tileset XML, but .tsx is also a TypeScript React Component.
-	    // Since it is way less likely for people to be loading TypeScript files instead of Tiled files,
-	    // this should probably be fine.
-	    tsx: Resource.XHR_RESPONSE_TYPE.DOCUMENT,
-	
-	    // images
-	    gif: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    png: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    bmp: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    jpg: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    jpeg: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    tif: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    tiff: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    webp: Resource.XHR_RESPONSE_TYPE.BLOB,
-	    tga: Resource.XHR_RESPONSE_TYPE.BLOB,
-	
-	    // json
-	    json: Resource.XHR_RESPONSE_TYPE.JSON,
-	
-	    // text
-	    text: Resource.XHR_RESPONSE_TYPE.TEXT,
-	    txt: Resource.XHR_RESPONSE_TYPE.TEXT,
-	
-	    // fonts
-	    ttf: Resource.XHR_RESPONSE_TYPE.BUFFER,
-	    otf: Resource.XHR_RESPONSE_TYPE.BUFFER
-	};
-	
-	// We can't set the `src` attribute to empty string, so on abort we set it to this 1px transparent gif
-	Resource.EMPTY_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-	
-	/**
-	 * Quick helper to set a value on one of the extension maps. Ensures there is no
-	 * dot at the start of the extension.
-	 *
-	 * @ignore
-	 * @param {object} map - The map to set on.
-	 * @param {string} extname - The extension (or key) to set.
-	 * @param {number} val - The value to set.
-	 */
-	function setExtMap(map, extname, val) {
-	    if (extname && extname.indexOf('.') === 0) {
-	        extname = extname.substring(1);
-	    }
-	
-	    if (!extname) {
-	        return;
-	    }
-	
-	    map[extname] = val;
-	}
-	
-	/**
-	 * Quick helper to get string xhr type.
-	 *
-	 * @ignore
-	 * @param {XMLHttpRequest|XDomainRequest} xhr - The request to check.
-	 * @return {string} The type.
-	 */
-	function reqType(xhr) {
-	    return xhr.toString().replace('object ', '');
-	}
-	//# sourceMappingURL=Resource.js.map
-
-/***/ },
-/* 165 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.encodeBinary = encodeBinary;
-	var _keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-	
-	function encodeBinary(input) {
-	    var output = '';
-	    var inx = 0;
-	
-	    while (inx < input.length) {
-	        // Fill byte buffer array
-	        var bytebuffer = [0, 0, 0];
-	        var encodedCharIndexes = [0, 0, 0, 0];
-	
-	        for (var jnx = 0; jnx < bytebuffer.length; ++jnx) {
-	            if (inx < input.length) {
-	                // throw away high-order byte, as documented at:
-	                // https://developer.mozilla.org/En/Using_XMLHttpRequest#Handling_binary_data
-	                bytebuffer[jnx] = input.charCodeAt(inx++) & 0xff;
-	            } else {
-	                bytebuffer[jnx] = 0;
-	            }
-	        }
-	
-	        // Get each encoded character, 6 bits at a time
-	        // index 1: first 6 bits
-	        encodedCharIndexes[0] = bytebuffer[0] >> 2;
-	
-	        // index 2: second 6 bits (2 least significant bits from input byte 1 + 4 most significant bits from byte 2)
-	        encodedCharIndexes[1] = (bytebuffer[0] & 0x3) << 4 | bytebuffer[1] >> 4;
-	
-	        // index 3: third 6 bits (4 least significant bits from input byte 2 + 2 most significant bits from byte 3)
-	        encodedCharIndexes[2] = (bytebuffer[1] & 0x0f) << 2 | bytebuffer[2] >> 6;
-	
-	        // index 3: forth 6 bits (6 least significant bits from input byte 3)
-	        encodedCharIndexes[3] = bytebuffer[2] & 0x3f;
-	
-	        // Determine whether padding happened, and adjust accordingly
-	        var paddingBytes = inx - (input.length - 1);
-	
-	        switch (paddingBytes) {
-	            case 2:
-	                // Set last 2 characters to padding char
-	                encodedCharIndexes[3] = 64;
-	                encodedCharIndexes[2] = 64;
-	                break;
-	
-	            case 1:
-	                // Set last character to padding char
-	                encodedCharIndexes[3] = 64;
-	                break;
-	
-	            default:
-	                break; // No padding - proceed
-	        }
-	
-	        // Now we will grab each appropriate character out of our keystring
-	        // based on our index array and append it to the output string
-	        for (var _jnx = 0; _jnx < encodedCharIndexes.length; ++_jnx) {
-	            output += _keyStr.charAt(encodedCharIndexes[_jnx]);
-	        }
-	    }
-	
-	    return output;
-	}
-	//# sourceMappingURL=b64.js.map
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
-	exports.blobMiddlewareFactory = blobMiddlewareFactory;
-	
-	var _Resource = __webpack_require__(164);
-	
-	var _Resource2 = _interopRequireDefault(_Resource);
-	
-	var _b = __webpack_require__(165);
-	
-	var _b2 = _interopRequireDefault(_b);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Url = window.URL || window.webkitURL;
-	
-	// a middleware for transforming XHR loaded Blobs into more useful objects
-	function blobMiddlewareFactory() {
-	    return function blobMiddleware(resource, next) {
-	        if (!resource.data) {
-	            next();
-	
-	            return;
-	        }
-	
-	        // if this was an XHR load of a blob
-	        if (resource.xhr && resource.xhrType === _Resource2.default.XHR_RESPONSE_TYPE.BLOB) {
-	            // if there is no blob support we probably got a binary string back
-	            if (!window.Blob || typeof resource.data === 'string') {
-	                var type = resource.xhr.getResponseHeader('content-type');
-	
-	                // this is an image, convert the binary string into a data url
-	                if (type && type.indexOf('image') === 0) {
-	                    resource.data = new Image();
-	                    resource.data.src = 'data:' + type + ';base64,' + _b2.default.encodeBinary(resource.xhr.responseText);
-	
-	                    resource.type = _Resource2.default.TYPE.IMAGE;
-	
-	                    // wait until the image loads and then callback
-	                    resource.data.onload = function () {
-	                        resource.data.onload = null;
-	
-	                        next();
-	                    };
-	
-	                    // next will be called on load
-	                    return;
-	                }
-	            }
-	            // if content type says this is an image, then we should transform the blob into an Image object
-	            else if (resource.data.type.indexOf('image') === 0) {
-	                    var _ret = function () {
-	                        var src = Url.createObjectURL(resource.data);
-	
-	                        resource.blob = resource.data;
-	                        resource.data = new Image();
-	                        resource.data.src = src;
-	
-	                        resource.type = _Resource2.default.TYPE.IMAGE;
-	
-	                        // cleanup the no longer used blob after the image loads
-	                        // TODO: Is this correct? Will the image be invalid after revoking?
-	                        resource.data.onload = function () {
-	                            Url.revokeObjectURL(src);
-	                            resource.data.onload = null;
-	
-	                            next();
-	                        };
-	
-	                        // next will be called on load.
-	                        return {
-	                            v: void 0
-	                        };
-	                    }();
-	
-	                    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	                }
-	        }
-	
-	        next();
-	    };
-	}
-	//# sourceMappingURL=blob.js.map
-
-/***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	exports.default = function () {
-	    return function textureParser(resource, next) {
-	        // create a new texture if the data is an Image object
-	        if (resource.data && resource.type === _resourceLoader.Resource.TYPE.IMAGE) {
-	            var baseTexture = new core.BaseTexture(resource.data, null, core.utils.getResolutionOfUrl(resource.url));
-	
-	            baseTexture.imageUrl = resource.url;
-	            resource.texture = new core.Texture(baseTexture);
-	
-	            // lets also add the frame to pixi's global cache for fromFrame and fromImage fucntions
-	            core.utils.BaseTextureCache[resource.name] = baseTexture;
-	            core.utils.TextureCache[resource.name] = resource.texture;
-	
-	            // also add references by url if they are different.
-	            if (resource.name !== resource.url) {
-	                core.utils.BaseTextureCache[resource.url] = baseTexture;
-	                core.utils.TextureCache[resource.url] = resource.texture;
-	            }
-	        }
-	
-	        next();
-	    };
-	};
-	
-	var _core = __webpack_require__(11);
-	
-	var core = _interopRequireWildcard(_core);
-	
-	var _resourceLoader = __webpack_require__(159);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	//# sourceMappingURL=textureParser.js.map
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	exports.default = function () {
-	    return function spritesheetParser(resource, next) {
-	        var resourcePath = void 0;
-	        var imageResourceName = resource.name + '_image';
-	
-	        // skip if no data, its not json, it isn't spritesheet data, or the image resource already exists
-	        if (!resource.data || resource.type !== _resourceLoader.Resource.TYPE.JSON || !resource.data.frames || this.resources[imageResourceName]) {
-	            next();
-	
-	            return;
-	        }
-	
-	        var loadOptions = {
-	            crossOrigin: resource.crossOrigin,
-	            loadType: _resourceLoader.Resource.LOAD_TYPE.IMAGE,
-	            metadata: resource.metadata.imageMetadata,
-	            parentResource: resource
-	        };
-	
-	        // Prepend url path unless the resource image is a data url
-	        if (resource.isDataUrl) {
-	            resourcePath = resource.data.meta.image;
-	        } else {
-	            resourcePath = _path2.default.dirname(resource.url.replace(this.baseUrl, '')) + '/' + resource.data.meta.image;
-	        }
-	
-	        // load the image for this sheet
-	        this.add(imageResourceName, resourcePath, loadOptions, function onImageLoad(res) {
-	            resource.textures = {};
-	
-	            var frames = resource.data.frames;
-	            var frameKeys = Object.keys(frames);
-	            var baseTexture = res.texture.baseTexture;
-	            var scale = resource.data.meta.scale;
-	
-	            // Use a defaultValue of `null` to check if a url-based resolution is set
-	            var resolution = core.utils.getResolutionOfUrl(resource.url, null);
-	
-	            // No resolution found via URL
-	            if (resolution === null) {
-	                // Use the scale value or default to 1
-	                resolution = scale !== undefined ? scale : 1;
-	            }
-	
-	            // For non-1 resolutions, update baseTexture
-	            if (resolution !== 1) {
-	                baseTexture.resolution = resolution;
-	                baseTexture.update();
-	            }
-	
-	            var batchIndex = 0;
-	
-	            function processFrames(initialFrameIndex, maxFrames) {
-	                var frameIndex = initialFrameIndex;
-	
-	                while (frameIndex - initialFrameIndex < maxFrames && frameIndex < frameKeys.length) {
-	                    var i = frameKeys[frameIndex];
-	                    var rect = frames[i].frame;
-	
-	                    if (rect) {
-	                        var frame = null;
-	                        var trim = null;
-	                        var orig = new core.Rectangle(0, 0, frames[i].sourceSize.w / resolution, frames[i].sourceSize.h / resolution);
-	
-	                        if (frames[i].rotated) {
-	                            frame = new core.Rectangle(rect.x / resolution, rect.y / resolution, rect.h / resolution, rect.w / resolution);
-	                        } else {
-	                            frame = new core.Rectangle(rect.x / resolution, rect.y / resolution, rect.w / resolution, rect.h / resolution);
-	                        }
-	
-	                        //  Check to see if the sprite is trimmed
-	                        if (frames[i].trimmed) {
-	                            trim = new core.Rectangle(frames[i].spriteSourceSize.x / resolution, frames[i].spriteSourceSize.y / resolution, rect.w / resolution, rect.h / resolution);
-	                        }
-	
-	                        resource.textures[i] = new core.Texture(baseTexture, frame, orig, trim, frames[i].rotated ? 2 : 0);
-	
-	                        // lets also add the frame to pixi's global cache for fromFrame and fromImage functions
-	                        core.utils.TextureCache[i] = resource.textures[i];
-	                    }
-	
-	                    frameIndex++;
-	                }
-	            }
-	
-	            function shouldProcessNextBatch() {
-	                return batchIndex * BATCH_SIZE < frameKeys.length;
-	            }
-	
-	            function processNextBatch(done) {
-	                processFrames(batchIndex * BATCH_SIZE, BATCH_SIZE);
-	                batchIndex++;
-	                setTimeout(done, 0);
-	            }
-	
-	            function iteration() {
-	                processNextBatch(function () {
-	                    if (shouldProcessNextBatch()) {
-	                        iteration();
-	                    } else {
-	                        next();
-	                    }
-	                });
-	            }
-	
-	            if (frameKeys.length <= BATCH_SIZE) {
-	                processFrames(0, BATCH_SIZE);
-	                next();
-	            } else {
-	                iteration();
-	            }
-	        });
-	    };
-	};
-	
-	var _resourceLoader = __webpack_require__(159);
-	
-	var _path = __webpack_require__(85);
-	
-	var _path2 = _interopRequireDefault(_path);
-	
-	var _core = __webpack_require__(11);
-	
-	var core = _interopRequireWildcard(_core);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var BATCH_SIZE = 1000;
-	//# sourceMappingURL=spritesheetParser.js.map
-
-/***/ },
-/* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.__esModule = true;
-	exports.parse = parse;
-	
-	exports.default = function () {
-	    return function bitmapFontParser(resource, next) {
-	        // skip if no data or not xml data
-	        if (!resource.data || resource.type !== _resourceLoader.Resource.TYPE.XML) {
-	            next();
-	
-	            return;
-	        }
-	
-	        // skip if not bitmap font data, using some silly duck-typing
-	        if (resource.data.getElementsByTagName('page').length === 0 || resource.data.getElementsByTagName('info').length === 0 || resource.data.getElementsByTagName('info')[0].getAttribute('face') === null) {
-	            next();
-	
-	            return;
-	        }
-	
-	        var xmlUrl = !resource.isDataUrl ? path.dirname(resource.url) : '';
-	
-	        if (resource.isDataUrl) {
-	            if (xmlUrl === '.') {
-	                xmlUrl = '';
-	            }
-	
-	            if (this.baseUrl && xmlUrl) {
-	                // if baseurl has a trailing slash then add one to xmlUrl so the replace works below
-	                if (this.baseUrl.charAt(this.baseUrl.length - 1) === '/') {
-	                    xmlUrl += '/';
-	                }
-	
-	                // remove baseUrl from xmlUrl
-	                xmlUrl = xmlUrl.replace(this.baseUrl, '');
-	            }
-	        }
-	
-	        // if there is an xmlUrl now, it needs a trailing slash. Ensure that it does if the string isn't empty.
-	        if (xmlUrl && xmlUrl.charAt(xmlUrl.length - 1) !== '/') {
-	            xmlUrl += '/';
-	        }
-	
-	        var textureUrl = xmlUrl + resource.data.getElementsByTagName('page')[0].getAttribute('file');
-	
-	        if (_core.utils.TextureCache[textureUrl]) {
-	            // reuse existing texture
-	            parse(resource, _core.utils.TextureCache[textureUrl]);
-	            next();
-	        } else {
-	            var loadOptions = {
-	                crossOrigin: resource.crossOrigin,
-	                loadType: _resourceLoader.Resource.LOAD_TYPE.IMAGE,
-	                metadata: resource.metadata.imageMetadata,
-	                parentResource: resource
-	            };
-	
-	            // load the texture for the font
-	            this.add(resource.name + '_image', textureUrl, loadOptions, function (res) {
-	                parse(resource, res.texture);
-	                next();
-	            });
-	        }
-	    };
-	};
-	
-	var _path = __webpack_require__(85);
-	
-	var path = _interopRequireWildcard(_path);
-	
-	var _core = __webpack_require__(11);
-	
-	var _resourceLoader = __webpack_require__(159);
-	
-	var _extras = __webpack_require__(130);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function parse(resource, texture) {
-	    var data = {};
-	    var info = resource.data.getElementsByTagName('info')[0];
-	    var common = resource.data.getElementsByTagName('common')[0];
-	
-	    data.font = info.getAttribute('face');
-	    data.size = parseInt(info.getAttribute('size'), 10);
-	    data.lineHeight = parseInt(common.getAttribute('lineHeight'), 10);
-	    data.chars = {};
-	
-	    // parse letters
-	    var letters = resource.data.getElementsByTagName('char');
-	
-	    for (var i = 0; i < letters.length; i++) {
-	        var charCode = parseInt(letters[i].getAttribute('id'), 10);
-	
-	        var textureRect = new _core.Rectangle(parseInt(letters[i].getAttribute('x'), 10) + texture.frame.x, parseInt(letters[i].getAttribute('y'), 10) + texture.frame.y, parseInt(letters[i].getAttribute('width'), 10), parseInt(letters[i].getAttribute('height'), 10));
-	
-	        data.chars[charCode] = {
-	            xOffset: parseInt(letters[i].getAttribute('xoffset'), 10),
-	            yOffset: parseInt(letters[i].getAttribute('yoffset'), 10),
-	            xAdvance: parseInt(letters[i].getAttribute('xadvance'), 10),
-	            kerning: {},
-	            texture: new _core.Texture(texture.baseTexture, textureRect)
-	
-	        };
-	    }
-	
-	    // parse kernings
-	    var kernings = resource.data.getElementsByTagName('kerning');
-	
-	    for (var _i = 0; _i < kernings.length; _i++) {
-	        var first = parseInt(kernings[_i].getAttribute('first'), 10);
-	        var second = parseInt(kernings[_i].getAttribute('second'), 10);
-	        var amount = parseInt(kernings[_i].getAttribute('amount'), 10);
-	
-	        if (data.chars[second]) {
-	            data.chars[second].kerning[first] = amount;
-	        }
-	    }
-	
-	    resource.bitmapFont = data;
-	
-	    // I'm leaving this as a temporary fix so we can test the bitmap fonts in v3
-	    // but it's very likely to change
-	    _extras.BitmapText.fonts[data.font] = data;
-	}
-	//# sourceMappingURL=bitmapFontParser.js.map
-
-/***/ },
-/* 170 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	__webpack_require__(171);
-	
-	__webpack_require__(173);
-	
-	__webpack_require__(174);
+	__webpack_require__(162);
 	
 	if (!window.ArrayBuffer) {
 	    window.ArrayBuffer = Array;
@@ -35173,12 +32169,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 171 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _objectAssign = __webpack_require__(172);
+	var _objectAssign = __webpack_require__(160);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -35192,7 +32188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Object.assign.js.map
 
 /***/ },
-/* 172 */
+/* 160 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35281,7 +32277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 173 */
+/* 161 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -35363,7 +32359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 174 */
+/* 162 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35385,14 +32381,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Math.sign.js.map
 
 /***/ },
-/* 175 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _accessibleTarget = __webpack_require__(176);
+	var _accessibleTarget = __webpack_require__(164);
 	
 	Object.defineProperty(exports, 'accessibleTarget', {
 	  enumerable: true,
@@ -35401,7 +32397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _AccessibilityManager = __webpack_require__(177);
+	var _AccessibilityManager = __webpack_require__(165);
 	
 	Object.defineProperty(exports, 'AccessibilityManager', {
 	  enumerable: true,
@@ -35414,7 +32410,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 176 */
+/* 164 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -35477,7 +32473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=accessibleTarget.js.map
 
 /***/ },
-/* 177 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35488,11 +32484,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _ismobilejs = __webpack_require__(44);
+	var _ismobilejs = __webpack_require__(45);
 	
 	var _ismobilejs2 = _interopRequireDefault(_ismobilejs);
 	
-	var _accessibleTarget = __webpack_require__(176);
+	var _accessibleTarget = __webpack_require__(164);
 	
 	var _accessibleTarget2 = _interopRequireDefault(_accessibleTarget);
 	
@@ -35973,14 +32969,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=AccessibilityManager.js.map
 
 /***/ },
-/* 178 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _WebGLExtract = __webpack_require__(179);
+	var _WebGLExtract = __webpack_require__(167);
 	
 	Object.defineProperty(exports, 'webgl', {
 	  enumerable: true,
@@ -35989,7 +32985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _CanvasExtract = __webpack_require__(180);
+	var _CanvasExtract = __webpack_require__(168);
 	
 	Object.defineProperty(exports, 'canvas', {
 	  enumerable: true,
@@ -36002,7 +32998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 179 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36227,7 +33223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=WebGLExtract.js.map
 
 /***/ },
-/* 180 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36409,14 +33405,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=CanvasExtract.js.map
 
 /***/ },
-/* 181 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _InteractionData = __webpack_require__(182);
+	var _InteractionData = __webpack_require__(170);
 	
 	Object.defineProperty(exports, 'InteractionData', {
 	  enumerable: true,
@@ -36425,7 +33421,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _InteractionManager = __webpack_require__(183);
+	var _InteractionManager = __webpack_require__(171);
 	
 	Object.defineProperty(exports, 'InteractionManager', {
 	  enumerable: true,
@@ -36434,7 +33430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 	
-	var _interactiveTarget = __webpack_require__(185);
+	var _interactiveTarget = __webpack_require__(173);
 	
 	Object.defineProperty(exports, 'interactiveTarget', {
 	  enumerable: true,
@@ -36447,7 +33443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 182 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36522,7 +33518,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=InteractionData.js.map
 
 /***/ },
-/* 183 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36533,23 +33529,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var core = _interopRequireWildcard(_core);
 	
-	var _InteractionData = __webpack_require__(182);
+	var _InteractionData = __webpack_require__(170);
 	
 	var _InteractionData2 = _interopRequireDefault(_InteractionData);
 	
-	var _InteractionEvent = __webpack_require__(184);
+	var _InteractionEvent = __webpack_require__(172);
 	
 	var _InteractionEvent2 = _interopRequireDefault(_InteractionEvent);
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
-	var _interactiveTarget = __webpack_require__(185);
+	var _interactiveTarget = __webpack_require__(173);
 	
 	var _interactiveTarget2 = _interopRequireDefault(_interactiveTarget);
 	
-	var _ismobilejs = __webpack_require__(44);
+	var _ismobilejs = __webpack_require__(45);
 	
 	var _ismobilejs2 = _interopRequireDefault(_ismobilejs);
 	
@@ -36570,7 +33566,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * The interaction manager deals with mouse and touch events. Any DisplayObject can be interactive
 	 * if its interactive parameter is set to true
 	 * This manager also supports multitouch.
-	 * By default, an instance of this class is automatically created, and can be found at renderer.plugins.interaction
 	 *
 	 * @class
 	 * @extends EventEmitter
@@ -36612,7 +33607,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.autoPreventDefault = options.autoPreventDefault !== undefined ? options.autoPreventDefault : true;
 	
 	        /**
-	         * Frequency in milliseconds that the mousemove, moveover & mouseout interaction events will be checked.
+	         * As this frequency increases the interaction events will be checked more often.
 	         *
 	         * @member {number}
 	         * @default 10
@@ -36664,16 +33659,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.interactionDOMElement = null;
 	
 	        /**
-	         * This property determines if mousemove and touchmove events are fired only when the cursor
+	         * This property determins if mousemove and touchmove events are fired only when the cursror
 	         * is over the object.
 	         * Setting to true will make things work more in line with how the DOM verison works.
 	         * Setting to false can make things easier for things like dragging
 	         * It is currently set to false as this is how pixi used to work. This will be set to true in
 	         * future versions of pixi.
 	         *
-	         * @member {boolean} moveWhenInside
-	         * @memberof PIXI.interaction.InteractionManager#
-	         * @default false
+	         * @private
+	         * @member {boolean}
 	         */
 	        _this.moveWhenInside = false;
 	
@@ -37275,10 +34269,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            rect = this.interactionDOMElement.getBoundingClientRect();
 	        }
 	
-	        var resolutionMultiplier = navigator.isCocoonJS ? this.resolution : 1.0 / this.resolution;
-	
-	        point.x = (x - rect.left) * (this.interactionDOMElement.width / rect.width) * resolutionMultiplier;
-	        point.y = (y - rect.top) * (this.interactionDOMElement.height / rect.height) * resolutionMultiplier;
+	        point.x = (x - rect.left) * (this.interactionDOMElement.width / rect.width) / this.resolution;
+	        point.y = (y - rect.top) * (this.interactionDOMElement.height / rect.height) / this.resolution;
 	    };
 	
 	    /**
@@ -38122,7 +35114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=InteractionManager.js.map
 
 /***/ },
-/* 184 */
+/* 172 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38145,15 +35137,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _classCallCheck(this, InteractionEvent);
 	
 	    /**
-	     * Whether this event will continue propagating in the tree
+	     * Which this event will continue propagating in the tree
 	     *
 	     * @member {boolean}
 	     */
 	    this.stopped = false;
 	
 	    /**
-	     * The object which caused this event to be dispatched.
-	     * For listener callback see {@link PIXI.interaction.InteractionEvent.currentTarget}.
+	     * The object to which event is dispatched.
 	     *
 	     * @member {PIXI.DisplayObject}
 	     */
@@ -38211,7 +35202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=InteractionEvent.js.map
 
 /***/ },
-/* 185 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38325,7 +35316,2330 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=interactiveTarget.js.map
 
 /***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _loader = __webpack_require__(175);
+	
+	Object.defineProperty(exports, 'Loader', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_loader).default;
+	  }
+	});
+	
+	var _bitmapFontParser = __webpack_require__(186);
+	
+	Object.defineProperty(exports, 'bitmapFontParser', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_bitmapFontParser).default;
+	  }
+	});
+	Object.defineProperty(exports, 'parseBitmapFontData', {
+	  enumerable: true,
+	  get: function get() {
+	    return _bitmapFontParser.parse;
+	  }
+	});
+	
+	var _spritesheetParser = __webpack_require__(185);
+	
+	Object.defineProperty(exports, 'spritesheetParser', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_spritesheetParser).default;
+	  }
+	});
+	
+	var _textureParser = __webpack_require__(184);
+	
+	Object.defineProperty(exports, 'textureParser', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_textureParser).default;
+	  }
+	});
+	
+	var _resourceLoader = __webpack_require__(176);
+	
+	Object.defineProperty(exports, 'Resource', {
+	  enumerable: true,
+	  get: function get() {
+	    return _resourceLoader.Resource;
+	  }
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	//# sourceMappingURL=index.js.map
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _resourceLoader = __webpack_require__(176);
+	
+	var _resourceLoader2 = _interopRequireDefault(_resourceLoader);
+	
+	var _textureParser = __webpack_require__(184);
+	
+	var _textureParser2 = _interopRequireDefault(_textureParser);
+	
+	var _spritesheetParser = __webpack_require__(185);
+	
+	var _spritesheetParser2 = _interopRequireDefault(_spritesheetParser);
+	
+	var _bitmapFontParser = __webpack_require__(186);
+	
+	var _bitmapFontParser2 = _interopRequireDefault(_bitmapFontParser);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	/**
+	 *
+	 * The new loader, extends Resource Loader by Chad Engler : https://github.com/englercj/resource-loader
+	 *
+	 * ```js
+	 * let loader = PIXI.loader; // pixi exposes a premade instance for you to use.
+	 * //or
+	 * let loader = new PIXI.loaders.Loader(); // you can also create your own if you want
+	 *
+	 * loader.add('bunny',"data/bunny.png");
+	 *
+	 * loader.once('complete',onAssetsLoaded);
+	 *
+	 * loader.load();
+	 * ```
+	 *
+	 * @see https://github.com/englercj/resource-loader
+	 *
+	 * @class
+	 * @extends module:resource-loader.ResourceLoader
+	 * @memberof PIXI.loaders
+	 */
+	var Loader = function (_ResourceLoader) {
+	    _inherits(Loader, _ResourceLoader);
+	
+	    /**
+	     * @param {string} [baseUrl=''] - The base url for all resources loaded by this loader.
+	     * @param {number} [concurrency=10] - The number of resources to load concurrently.
+	     */
+	    function Loader(baseUrl, concurrency) {
+	        _classCallCheck(this, Loader);
+	
+	        var _this = _possibleConstructorReturn(this, _ResourceLoader.call(this, baseUrl, concurrency));
+	
+	        for (var i = 0; i < Loader._pixiMiddleware.length; ++i) {
+	            _this.use(Loader._pixiMiddleware[i]());
+	        }
+	        return _this;
+	    }
+	
+	    /**
+	     * Adds a default middleware to the pixi loader.
+	     *
+	     * @static
+	     * @param {Function} fn - The middleware to add.
+	     */
+	
+	
+	    Loader.addPixiMiddleware = function addPixiMiddleware(fn) {
+	        Loader._pixiMiddleware.push(fn);
+	    };
+	
+	    return Loader;
+	}(_resourceLoader2.default);
+	
+	exports.default = Loader;
+	
+	
+	Loader._pixiMiddleware = [
+	// parse any blob into more usable objects (e.g. Image)
+	_resourceLoader2.default.middleware.parsing.blob,
+	// parse any Image objects into textures
+	_textureParser2.default,
+	// parse any spritesheet data into multiple textures
+	_spritesheetParser2.default,
+	// parse bitmap font data into multiple textures
+	_bitmapFontParser2.default];
+	
+	// Add custom extentions
+	var Resource = _resourceLoader2.default.Resource;
+	
+	Resource.setExtensionXhrType('fnt', Resource.XHR_RESPONSE_TYPE.DOCUMENT);
+	//# sourceMappingURL=loader.js.map
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint global-require: 0 */
+	'use strict';
+	
+	module.exports = __webpack_require__(177);
+	module.exports.Resource = __webpack_require__(180);
+	module.exports.middleware = {
+	    caching: {
+	        memory: __webpack_require__(181)
+	    },
+	    parsing: {
+	        blob: __webpack_require__(182)
+	    }
+	};
+	
+	module.exports.async = __webpack_require__(179);
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var parseUri        = __webpack_require__(178);
+	var async           = __webpack_require__(179);
+	var Resource        = __webpack_require__(180);
+	var EventEmitter    = __webpack_require__(42);
+	
+	// some constants
+	var DEFAULT_CONCURRENCY = 10;
+	var MAX_PROGRESS = 100;
+	
+	/**
+	 * Manages the state and loading of multiple resources to load.
+	 *
+	 * @class
+	 * @param {string} [baseUrl=''] - The base url for all resources loaded by this loader.
+	 * @param {number} [concurrency=10] - The number of resources to load concurrently.
+	 */
+	function Loader(baseUrl, concurrency) {
+	    EventEmitter.call(this);
+	
+	    concurrency = concurrency || DEFAULT_CONCURRENCY;
+	
+	    /**
+	     * The base url for all resources loaded by this loader.
+	     *
+	     * @member {string}
+	     */
+	    this.baseUrl = baseUrl || '';
+	
+	    /**
+	     * The progress percent of the loader going through the queue.
+	     *
+	     * @member {number}
+	     */
+	    this.progress = 0;
+	
+	    /**
+	     * Loading state of the loader, true if it is currently loading resources.
+	     *
+	     * @member {boolean}
+	     */
+	    this.loading = false;
+	
+	    /**
+	     * The percentage of total progress that a single resource represents.
+	     *
+	     * @member {number}
+	     */
+	    this._progressChunk = 0;
+	
+	    /**
+	     * The middleware to run before loading each resource.
+	     *
+	     * @member {function[]}
+	     */
+	    this._beforeMiddleware = [];
+	
+	    /**
+	     * The middleware to run after loading each resource.
+	     *
+	     * @member {function[]}
+	     */
+	    this._afterMiddleware = [];
+	
+	    /**
+	     * The `_loadResource` function bound with this object context.
+	     *
+	     * @private
+	     * @member {function}
+	     */
+	    this._boundLoadResource = this._loadResource.bind(this);
+	
+	    /**
+	     * The resource buffer that fills until `load` is called to start loading resources.
+	     *
+	     * @private
+	     * @member {Resource[]}
+	     */
+	    this._buffer = [];
+	
+	    /**
+	     * Used to track load completion.
+	     *
+	     * @private
+	     * @member {number}
+	     */
+	    this._numToLoad = 0;
+	
+	    /**
+	     * The resources waiting to be loaded.
+	     *
+	     * @private
+	     * @member {Resource[]}
+	     */
+	    this._queue = async.queue(this._boundLoadResource, concurrency);
+	
+	    /**
+	     * All the resources for this loader keyed by name.
+	     *
+	     * @member {object<string, Resource>}
+	     */
+	    this.resources = {};
+	
+	    /**
+	     * Emitted once per loaded or errored resource.
+	     *
+	     * @event progress
+	     * @memberof Loader#
+	     */
+	
+	    /**
+	     * Emitted once per errored resource.
+	     *
+	     * @event error
+	     * @memberof Loader#
+	     */
+	
+	    /**
+	     * Emitted once per loaded resource.
+	     *
+	     * @event load
+	     * @memberof Loader#
+	     */
+	
+	    /**
+	     * Emitted when the loader begins to process the queue.
+	     *
+	     * @event start
+	     * @memberof Loader#
+	     */
+	
+	    /**
+	     * Emitted when the queued resources all load.
+	     *
+	     * @event complete
+	     * @memberof Loader#
+	     */
+	}
+	
+	Loader.prototype = Object.create(EventEmitter.prototype);
+	Loader.prototype.constructor = Loader;
+	module.exports = Loader;
+	
+	/**
+	 * Adds a resource (or multiple resources) to the loader queue.
+	 *
+	 * This function can take a wide variety of different parameters. The only thing that is always
+	 * required the url to load. All the following will work:
+	 *
+	 * ```js
+	 * loader
+	 *     // normal param syntax
+	 *     .add('key', 'http://...', function () {})
+	 *     .add('http://...', function () {})
+	 *     .add('http://...')
+	 *
+	 *     // object syntax
+	 *     .add({
+	 *         name: 'key2',
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         url: 'http://...'
+	 *     }, function () {})
+	 *     .add({
+	 *         name: 'key3',
+	 *         url: 'http://...'
+	 *         onComplete: function () {}
+	 *     })
+	 *     .add({
+	 *         url: 'https://...',
+	 *         onComplete: function () {},
+	 *         crossOrigin: true
+	 *     })
+	 *
+	 *     // you can also pass an array of objects or urls or both
+	 *     .add([
+	 *         { name: 'key4', url: 'http://...', onComplete: function () {} },
+	 *         { url: 'http://...', onComplete: function () {} },
+	 *         'http://...'
+	 *     ])
+	 *
+	 *     // and you can use both params and options
+	 *     .add('key', 'http://...', { crossOrigin: true }, function () {})
+	 *     .add('http://...', { crossOrigin: true }, function () {});
+	 * ```
+	 *
+	 * @alias enqueue
+	 * @param {string} [name] - The name of the resource to load, if not passed the url is used.
+	 * @param {string} [url] - The url for this resource, relative to the baseUrl of this loader.
+	 * @param {object} [options] - The options for the load.
+	 * @param {boolean} [options.crossOrigin] - Is this request cross-origin? Default is to determine automatically.
+	 * @param {Resource.XHR_LOAD_TYPE} [options.loadType=Resource.LOAD_TYPE.XHR] - How should this resource be loaded?
+	 * @param {Resource.XHR_RESPONSE_TYPE} [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param {function} [cb] - Function to call when this specific resource completes loading.
+	 * @return {Loader} Returns itself.
+	 */
+	Loader.prototype.add = Loader.prototype.enqueue = function (name, url, options, cb) {
+	    // special case of an array of objects or urls
+	    if (Array.isArray(name)) {
+	        for (var i = 0; i < name.length; ++i) {
+	            this.add(name[i]);
+	        }
+	
+	        return this;
+	    }
+	
+	    // if an object is passed instead of params
+	    if (typeof name === 'object') {
+	        cb = url || name.callback || name.onComplete;
+	        options = name;
+	        url = name.url;
+	        name = name.name || name.key || name.url;
+	    }
+	
+	    // case where no name is passed shift all args over by one.
+	    if (typeof url !== 'string') {
+	        cb = options;
+	        options = url;
+	        url = name;
+	    }
+	
+	    // now that we shifted make sure we have a proper url.
+	    if (typeof url !== 'string') {
+	        throw new Error('No url passed to add resource to loader.');
+	    }
+	
+	    // options are optional so people might pass a function and no options
+	    if (typeof options === 'function') {
+	        cb = options;
+	        options = null;
+	    }
+	
+	    // check if resource already exists.
+	    if (this.resources[name]) {
+	        throw new Error('Resource with name "' + name + '" already exists.');
+	    }
+	
+	    // add base url if this isn't an absolute url
+	    url = this._prepareUrl(url);
+	
+	    // create the store the resource
+	    this.resources[name] = new Resource(name, url, options);
+	
+	    if (typeof cb === 'function') {
+	        this.resources[name].once('afterMiddleware', cb);
+	    }
+	
+	    this._numToLoad++;
+	
+	    // if already loading add it to the worker queue
+	    if (this._queue.started) {
+	        this._queue.push(this.resources[name]);
+	        this._progressChunk = (MAX_PROGRESS - this.progress) / (this._queue.length() + this._queue.running());
+	    }
+	    // otherwise buffer it to be added to the queue later
+	    else {
+	        this._buffer.push(this.resources[name]);
+	        this._progressChunk = MAX_PROGRESS / this._buffer.length;
+	    }
+	
+	    return this;
+	};
+	
+	/**
+	 * Sets up a middleware function that will run *before* the
+	 * resource is loaded.
+	 *
+	 * @alias pre
+	 * @method before
+	 * @param {function} fn - The middleware function to register.
+	 * @return {Loader} Returns itself.
+	 */
+	Loader.prototype.before = Loader.prototype.pre = function (fn) {
+	    this._beforeMiddleware.push(fn);
+	
+	    return this;
+	};
+	
+	/**
+	 * Sets up a middleware function that will run *after* the
+	 * resource is loaded.
+	 *
+	 * @alias use
+	 * @method after
+	 * @param {function} fn - The middleware function to register.
+	 * @return {Loader} Returns itself.
+	 */
+	Loader.prototype.after = Loader.prototype.use = function (fn) {
+	    this._afterMiddleware.push(fn);
+	
+	    return this;
+	};
+	
+	/**
+	 * Resets the queue of the loader to prepare for a new load.
+	 *
+	 * @return {Loader} Returns itself.
+	 */
+	Loader.prototype.reset = function () {
+	    // this.baseUrl = baseUrl || '';
+	
+	    this.progress = 0;
+	
+	    this.loading = false;
+	
+	    this._progressChunk = 0;
+	
+	    // this._beforeMiddleware.length = 0;
+	    // this._afterMiddleware.length = 0;
+	
+	    this._buffer.length = 0;
+	
+	    this._numToLoad = 0;
+	
+	    this._queue.kill();
+	    this._queue.started = false;
+	
+	    // abort all resource loads
+	    for (var k in this.resources) {
+	        var res = this.resources[k];
+	
+	        res.off('complete', this._onLoad, this);
+	
+	        if (res.isLoading) {
+	            res.abort();
+	        }
+	    }
+	
+	    this.resources = {};
+	
+	    return this;
+	};
+	
+	/**
+	 * Starts loading the queued resources.
+	 *
+	 * @fires start
+	 * @param {function} [cb] - Optional callback that will be bound to the `complete` event.
+	 * @return {Loader} Returns itself.
+	 */
+	Loader.prototype.load = function (cb) {
+	    // register complete callback if they pass one
+	    if (typeof cb === 'function') {
+	        this.once('complete', cb);
+	    }
+	
+	    // if the queue has already started we are done here
+	    if (this._queue.started) {
+	        return this;
+	    }
+	
+	    // notify of start
+	    this.emit('start', this);
+	
+	    // update loading state
+	    this.loading = true;
+	
+	    // start the internal queue
+	    for (var i = 0; i < this._buffer.length; ++i) {
+	        this._queue.push(this._buffer[i]);
+	    }
+	
+	    // empty the buffer
+	    this._buffer.length = 0;
+	
+	    return this;
+	};
+	
+	/**
+	 * Prepares a url for usage based on the configuration of this object
+	 *
+	 * @private
+	 * @param {string} url - The url to prepare.
+	 * @return {string} The prepared url.
+	 */
+	Loader.prototype._prepareUrl = function (url) {
+	    var parsedUrl = parseUri(url, { strictMode: true });
+	
+	    // absolute url, just use it as is.
+	    if (parsedUrl.protocol || !parsedUrl.path || parsedUrl.path.indexOf('//') === 0) {
+	        return url;
+	    }
+	
+	    // if baseUrl doesn't end in slash and url doesn't start with slash, then add a slash inbetween
+	    if (this.baseUrl.length
+	        && this.baseUrl.lastIndexOf('/') !== this.baseUrl.length - 1
+	        && url.charAt(0) !== '/'
+	    ) {
+	        return this.baseUrl + '/' + url;
+	    }
+	
+	    return this.baseUrl + url;
+	};
+	
+	/**
+	 * Loads a single resource.
+	 *
+	 * @private
+	 * @param {Resource} resource - The resource to load.
+	 * @param {function} dequeue - The function to call when we need to dequeue this item.
+	 */
+	Loader.prototype._loadResource = function (resource, dequeue) {
+	    var self = this;
+	
+	    resource._dequeue = dequeue;
+	
+	    // run before middleware
+	    async.eachSeries(
+	        this._beforeMiddleware,
+	        function (fn, next) {
+	            fn.call(self, resource, function () {
+	                // if the before middleware marks the resource as complete,
+	                // break and don't process any more before middleware
+	                next(resource.isComplete ? {} : null);
+	            });
+	        },
+	        function () {
+	            // resource.on('progress', self.emit.bind(self, 'progress'));
+	
+	            if (resource.isComplete) {
+	                self._onLoad(resource);
+	            }
+	            else {
+	                resource.once('complete', self._onLoad, self);
+	                resource.load();
+	            }
+	        }
+	    );
+	};
+	
+	/**
+	 * Called once each resource has loaded.
+	 *
+	 * @fires complete
+	 * @private
+	 */
+	Loader.prototype._onComplete = function () {
+	    this.loading = false;
+	
+	    this.emit('complete', this, this.resources);
+	};
+	
+	/**
+	 * Called each time a resources is loaded.
+	 *
+	 * @fires progress
+	 * @fires error
+	 * @fires load
+	 * @private
+	 * @param {Resource} resource - The resource that was loaded
+	 */
+	Loader.prototype._onLoad = function (resource) {
+	    var self = this;
+	
+	    // run middleware, this *must* happen before dequeue so sub-assets get added properly
+	    async.eachSeries(
+	        this._afterMiddleware,
+	        function (fn, next) {
+	            fn.call(self, resource, next);
+	        },
+	        function () {
+	            resource.emit('afterMiddleware', resource);
+	
+	            self._numToLoad--;
+	
+	            self.progress += self._progressChunk;
+	            self.emit('progress', self, resource);
+	
+	            if (resource.error) {
+	                self.emit('error', resource.error, self, resource);
+	            }
+	            else {
+	                self.emit('load', self, resource);
+	            }
+	
+	            // do completion check
+	            if (self._numToLoad === 0) {
+	                self.progress = 100;
+	                self._onComplete();
+	            }
+	        }
+	    );
+	
+	    // remove this resource from the async queue
+	    resource._dequeue();
+	};
+	
+	Loader.LOAD_TYPE = Resource.LOAD_TYPE;
+	Loader.XHR_RESPONSE_TYPE = Resource.XHR_RESPONSE_TYPE;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	'use strict'
+	
+	module.exports = function parseURI (str, opts) {
+	  opts = opts || {}
+	
+	  var o = {
+	    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
+	    q: {
+	      name: 'queryKey',
+	      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+	    },
+	    parser: {
+	      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+	      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+	    }
+	  }
+	
+	  var m = o.parser[opts.strictMode ? 'strict' : 'loose'].exec(str)
+	  var uri = {}
+	  var i = 14
+	
+	  while (i--) uri[o.key[i]] = m[i] || ''
+	
+	  uri[o.q.name] = {}
+	  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+	    if ($1) uri[o.q.name][$1] = $2
+	  })
+	
+	  return uri
+	}
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Smaller version of the async library constructs.
+	 *
+	 */
+	
+	module.exports = {
+	    eachSeries: asyncEachSeries,
+	    queue: asyncQueue
+	};
+	
+	function _noop() { /* empty */ }
+	
+	/**
+	 * Iterates an array in series.
+	 *
+	 * @param {*[]} array - Array to iterate.
+	 * @param {function} iterator - Function to call for each element.
+	 * @param {function} callback - Function to call when done, or on error.
+	 */
+	function asyncEachSeries(array, iterator, callback) {
+	    var i = 0;
+	    var len = array.length;
+	
+	    (function next(err) {
+	        if (err || i === len) {
+	            if (callback) {
+	                callback(err);
+	            }
+	
+	            return;
+	        }
+	
+	        iterator(array[i++], next);
+	    })();
+	}
+	
+	/**
+	 * Ensures a function is only called once.
+	 *
+	 * @param {function} fn - The function to wrap.
+	 * @return {function} The wrapping function.
+	 */
+	function onlyOnce(fn) {
+	    return function onceWrapper() {
+	        if (fn === null) {
+	            throw new Error('Callback was already called.');
+	        }
+	
+	        var callFn = fn;
+	
+	        fn = null;
+	        callFn.apply(this, arguments);
+	    };
+	}
+	
+	/**
+	 * Async queue implementation,
+	 *
+	 * @param {function} worker - The worker function to call for each task.
+	 * @param {number} concurrency - How many workers to run in parrallel.
+	 * @return {*} The async queue object.
+	 */
+	function asyncQueue(worker, concurrency) {
+	    if (concurrency == null) { // eslint-disable-line no-eq-null,eqeqeq
+	        concurrency = 1;
+	    }
+	    else if (concurrency === 0) {
+	        throw new Error('Concurrency must not be zero');
+	    }
+	
+	    var workers = 0;
+	    var q = {
+	        _tasks: [],
+	        concurrency: concurrency,
+	        saturated: _noop,
+	        unsaturated: _noop,
+	        buffer: concurrency / 4,
+	        empty: _noop,
+	        drain: _noop,
+	        error: _noop,
+	        started: false,
+	        paused: false,
+	        push: function (data, callback) {
+	            _insert(data, false, callback);
+	        },
+	        kill: function () {
+	            q.drain = _noop;
+	            q._tasks = [];
+	        },
+	        unshift: function (data, callback) {
+	            _insert(data, true, callback);
+	        },
+	        process: function () {
+	            while (!q.paused && workers < q.concurrency && q._tasks.length) {
+	                var task = q._tasks.shift();
+	
+	                if (q._tasks.length === 0) {
+	                    q.empty();
+	                }
+	
+	                workers += 1;
+	
+	                if (workers === q.concurrency) {
+	                    q.saturated();
+	                }
+	
+	                worker(task.data, onlyOnce(_next(task)));
+	            }
+	        },
+	        length: function () {
+	            return q._tasks.length;
+	        },
+	        running: function () {
+	            return workers;
+	        },
+	        idle: function () {
+	            return q._tasks.length + workers === 0;
+	        },
+	        pause: function () {
+	            if (q.paused === true) {
+	                return;
+	            }
+	
+	            q.paused = true;
+	        },
+	        resume: function () {
+	            if (q.paused === false) {
+	                return;
+	            }
+	
+	            q.paused = false;
+	
+	            // Need to call q.process once per concurrent
+	            // worker to preserve full concurrency after pause
+	            for (var w = 1; w <= q.concurrency; w++) {
+	                q.process();
+	            }
+	        }
+	    };
+	
+	    function _insert(data, insertAtFront, callback) {
+	        if (callback != null && typeof callback !== 'function') { // eslint-disable-line no-eq-null,eqeqeq
+	            throw new Error('task callback must be a function');
+	        }
+	
+	        q.started = true;
+	
+	        if (data == null && q.idle()) { // eslint-disable-line no-eq-null,eqeqeq
+	            // call drain immediately if there are no tasks
+	            setTimeout(function () {
+	                q.drain();
+	            }, 1);
+	
+	            return;
+	        }
+	
+	        var item = {
+	            data: data,
+	            callback: typeof callback === 'function' ? callback : _noop
+	        };
+	
+	        if (insertAtFront) {
+	            q._tasks.unshift(item);
+	        }
+	        else {
+	            q._tasks.push(item);
+	        }
+	
+	        setTimeout(function () {
+	            q.process();
+	        }, 1);
+	    }
+	
+	    function _next(task) {
+	        return function () {
+	            workers -= 1;
+	
+	            task.callback.apply(task, arguments);
+	
+	            if (arguments[0] != null) { // eslint-disable-line no-eq-null,eqeqeq
+	                q.error(arguments[0], task.data);
+	            }
+	
+	            if (workers <= (q.concurrency - q.buffer)) {
+	                q.unsaturated();
+	            }
+	
+	            if (q.idle()) {
+	                q.drain();
+	            }
+	
+	            q.process();
+	        };
+	    }
+	
+	    return q;
+	}
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var EventEmitter    = __webpack_require__(42);
+	var parseUri        = __webpack_require__(178);
+	
+	// tests is CORS is supported in XHR, if not we need to use XDR
+	var useXdr = !!(window.XDomainRequest && !('withCredentials' in (new XMLHttpRequest())));
+	var tempAnchor = null;
+	
+	// some status constants
+	var STATUS_NONE = 0;
+	var STATUS_OK = 200;
+	var STATUS_EMPTY = 204;
+	
+	/**
+	 * Manages the state and loading of a single resource represented by
+	 * a single URL.
+	 *
+	 * @class
+	 * @param {string} name - The name of the resource to load.
+	 * @param {string|string[]} url - The url for this resource, for audio/video loads you can pass an array of sources.
+	 * @param {object} [options] - The options for the load.
+	 * @param {string|boolean} [options.crossOrigin] - Is this request cross-origin? Default is to determine automatically.
+	 * @param {Resource.LOAD_TYPE} [options.loadType=Resource.LOAD_TYPE.XHR] - How should this resource be loaded?
+	 * @param {Resource.XHR_RESPONSE_TYPE} [options.xhrType=Resource.XHR_RESPONSE_TYPE.DEFAULT] - How should the data being
+	 *      loaded be interpreted when using XHR?
+	 * @param {object} [options.metadata] - Extra info for middleware.
+	 */
+	function Resource(name, url, options) {
+	    EventEmitter.call(this);
+	
+	    options = options || {};
+	
+	    if (typeof name !== 'string' || typeof url !== 'string') {
+	        throw new Error('Both name and url are required for constructing a resource.');
+	    }
+	
+	    /**
+	     * The name of this resource.
+	     *
+	     * @member {string}
+	     * @readonly
+	     */
+	    this.name = name;
+	
+	    /**
+	     * The url used to load this resource.
+	     *
+	     * @member {string}
+	     * @readonly
+	     */
+	    this.url = url;
+	
+	    /**
+	     * Stores whether or not this url is a data url.
+	     *
+	     * @member {boolean}
+	     * @readonly
+	     */
+	    this.isDataUrl = this.url.indexOf('data:') === 0;
+	
+	    /**
+	     * The data that was loaded by the resource.
+	     *
+	     * @member {any}
+	     */
+	    this.data = null;
+	
+	    /**
+	     * Is this request cross-origin? If unset, determined automatically.
+	     *
+	     * @member {string}
+	     */
+	    this.crossOrigin = options.crossOrigin === true ? 'anonymous' : options.crossOrigin;
+	
+	    /**
+	     * The method of loading to use for this resource.
+	     *
+	     * @member {Resource.LOAD_TYPE}
+	     */
+	    this.loadType = options.loadType || this._determineLoadType();
+	
+	    /**
+	     * The type used to load the resource via XHR. If unset, determined automatically.
+	     *
+	     * @member {string}
+	     */
+	    this.xhrType = options.xhrType;
+	
+	    /**
+	     * Extra info for middleware, and controlling specifics about how the resource loads.
+	     *
+	     * Note that if you pass in a `loadElement`, the Resource class takes ownership of it.
+	     * Meaning it will modify it as it sees fit.
+	     *
+	     * @member {object}
+	     * @property {HTMLImageElement|HTMLAudioElement|HTMLVideoElement} [loadElement=null] - The
+	     *  element to use for loading, instead of creating one.
+	     * @property {boolean} [skipSource=false] - Skips adding source(s) to the load element. This
+	     *  is useful if you want to pass in a `loadElement` that you already added load sources
+	     *  to.
+	     */
+	    this.metadata = options.metadata || {};
+	
+	    /**
+	     * The error that occurred while loading (if any).
+	     *
+	     * @member {Error}
+	     * @readonly
+	     */
+	    this.error = null;
+	
+	    /**
+	     * The XHR object that was used to load this resource. This is only set
+	     * when `loadType` is `Resource.LOAD_TYPE.XHR`.
+	     *
+	     * @member {XMLHttpRequest}
+	     */
+	    this.xhr = null;
+	
+	    /**
+	     * Describes if this resource was loaded as json. Only valid after the resource
+	     * has completely loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isJson = false;
+	
+	    /**
+	     * Describes if this resource was loaded as xml. Only valid after the resource
+	     * has completely loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isXml = false;
+	
+	    /**
+	     * Describes if this resource was loaded as an image tag. Only valid after the resource
+	     * has completely loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isImage = false;
+	
+	    /**
+	     * Describes if this resource was loaded as an audio tag. Only valid after the resource
+	     * has completely loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isAudio = false;
+	
+	    /**
+	     * Describes if this resource was loaded as a video tag. Only valid after the resource
+	     * has completely loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isVideo = false;
+	
+	    /**
+	     * Describes if this resource has finished loading. Is true when the resource has completely
+	     * loaded.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isComplete = false;
+	
+	    /**
+	     * Describes if this resource is currently loading. Is true when the resource starts loading,
+	     * and is false again when complete.
+	     *
+	     * @member {boolean}
+	     */
+	    this.isLoading = false;
+	
+	    /**
+	     * The `dequeue` method that will be used a storage place for the async queue dequeue method
+	     * used privately by the loader.
+	     *
+	     * @private
+	     * @member {function}
+	     */
+	    this._dequeue = null;
+	
+	    /**
+	     * The `complete` function bound to this resource's context.
+	     *
+	     * @private
+	     * @member {function}
+	     */
+	    this._boundComplete = this.complete.bind(this);
+	
+	    /**
+	     * The `_onError` function bound to this resource's context.
+	     *
+	     * @private
+	     * @member {function}
+	     */
+	    this._boundOnError = this._onError.bind(this);
+	
+	    /**
+	     * The `_onProgress` function bound to this resource's context.
+	     *
+	     * @private
+	     * @member {function}
+	     */
+	    this._boundOnProgress = this._onProgress.bind(this);
+	
+	    // xhr callbacks
+	    this._boundXhrOnError = this._xhrOnError.bind(this);
+	    this._boundXhrOnAbort = this._xhrOnAbort.bind(this);
+	    this._boundXhrOnLoad = this._xhrOnLoad.bind(this);
+	    this._boundXdrOnTimeout = this._xdrOnTimeout.bind(this);
+	
+	    /**
+	     * Emitted when the resource beings to load.
+	     *
+	     * @event start
+	     * @memberof Resource#
+	     */
+	
+	    /**
+	     * Emitted each time progress of this resource load updates.
+	     * Not all resources types and loader systems can support this event
+	     * so sometimes it may not be available. If the resource
+	     * is being loaded on a modern browser, using XHR, and the remote server
+	     * properly sets Content-Length headers, then this will be available.
+	     *
+	     * @event progress
+	     * @memberof Resource#
+	     */
+	
+	    /**
+	     * Emitted once this resource has loaded, if there was an error it will
+	     * be in the `error` property.
+	     *
+	     * @event complete
+	     * @memberof Resource#
+	     */
+	}
+	
+	Resource.prototype = Object.create(EventEmitter.prototype);
+	Resource.prototype.constructor = Resource;
+	module.exports = Resource;
+	
+	/**
+	 * Marks the resource as complete.
+	 *
+	 * @fires complete
+	 */
+	Resource.prototype.complete = function () {
+	    // TODO: Clean this up in a wrapper or something...gross....
+	    if (this.data && this.data.removeEventListener) {
+	        this.data.removeEventListener('error', this._boundOnError, false);
+	        this.data.removeEventListener('load', this._boundComplete, false);
+	        this.data.removeEventListener('progress', this._boundOnProgress, false);
+	        this.data.removeEventListener('canplaythrough', this._boundComplete, false);
+	    }
+	
+	    if (this.xhr) {
+	        if (this.xhr.removeEventListener) {
+	            this.xhr.removeEventListener('error', this._boundXhrOnError, false);
+	            this.xhr.removeEventListener('abort', this._boundXhrOnAbort, false);
+	            this.xhr.removeEventListener('progress', this._boundOnProgress, false);
+	            this.xhr.removeEventListener('load', this._boundXhrOnLoad, false);
+	        }
+	        else {
+	            this.xhr.onerror = null;
+	            this.xhr.ontimeout = null;
+	            this.xhr.onprogress = null;
+	            this.xhr.onload = null;
+	        }
+	    }
+	
+	    if (this.isComplete) {
+	        throw new Error('Complete called again for an already completed resource.');
+	    }
+	
+	    this.isComplete = true;
+	    this.isLoading = false;
+	
+	    this.emit('complete', this);
+	};
+	
+	/**
+	 * Aborts the loading of this resource, with an optional message.
+	 *
+	 * @param {string} message - The message to use for the error
+	 */
+	Resource.prototype.abort = function (message) {
+	    // abort can be called multiple times, ignore subsequent calls.
+	    if (this.error) {
+	        return;
+	    }
+	
+	    // store error
+	    this.error = new Error(message);
+	
+	    // abort the actual loading
+	    if (this.xhr) {
+	        this.xhr.abort();
+	    }
+	    else if (this.xdr) {
+	        this.xdr.abort();
+	    }
+	    else if (this.data) {
+	        // single source
+	        if (typeof this.data.src !== 'undefined') {
+	            this.data.src = '';
+	        }
+	        // multi-source
+	        else {
+	            while (this.data.firstChild) {
+	                this.data.removeChild(this.data.firstChild);
+	            }
+	        }
+	    }
+	
+	    // done now.
+	    this.complete();
+	};
+	
+	/**
+	 * Kicks off loading of this resource. This method is asynchronous.
+	 *
+	 * @fires start
+	 * @param {function} [cb] - Optional callback to call once the resource is loaded.
+	 */
+	Resource.prototype.load = function (cb) {
+	    if (this.isLoading) {
+	        return;
+	    }
+	
+	    if (this.isComplete) {
+	        if (cb) {
+	            var self = this;
+	
+	            setTimeout(function () {
+	                cb(self);
+	            }, 1);
+	        }
+	
+	        return;
+	    }
+	    else if (cb) {
+	        this.once('complete', cb);
+	    }
+	
+	    this.isLoading = true;
+	
+	    this.emit('start', this);
+	
+	    // if unset, determine the value
+	    if (this.crossOrigin === false || typeof this.crossOrigin !== 'string') {
+	        this.crossOrigin = this._determineCrossOrigin(this.url);
+	    }
+	
+	    switch (this.loadType) {
+	        case Resource.LOAD_TYPE.IMAGE:
+	            this._loadElement('image');
+	            break;
+	
+	        case Resource.LOAD_TYPE.AUDIO:
+	            this._loadSourceElement('audio');
+	            break;
+	
+	        case Resource.LOAD_TYPE.VIDEO:
+	            this._loadSourceElement('video');
+	            break;
+	
+	        case Resource.LOAD_TYPE.XHR:
+	            /* falls through */
+	        default:
+	            if (useXdr && this.crossOrigin) {
+	                this._loadXdr();
+	            }
+	            else {
+	                this._loadXhr();
+	            }
+	            break;
+	    }
+	};
+	
+	/**
+	 * Loads this resources using an element that has a single source,
+	 * like an HTMLImageElement.
+	 *
+	 * @private
+	 * @param {string} type - The type of element to use.
+	 */
+	Resource.prototype._loadElement = function (type) {
+	    if (this.metadata.loadElement) {
+	        this.data = this.metadata.loadElement;
+	    }
+	    else if (type === 'image' && typeof window.Image !== 'undefined') {
+	        this.data = new Image();
+	    }
+	    else {
+	        this.data = document.createElement(type);
+	    }
+	
+	    if (this.crossOrigin) {
+	        this.data.crossOrigin = this.crossOrigin;
+	    }
+	
+	    if (!this.metadata.skipSource) {
+	        this.data.src = this.url;
+	    }
+	
+	    var typeName = 'is' + type[0].toUpperCase() + type.substring(1);
+	
+	    if (this[typeName] === false) {
+	        this[typeName] = true;
+	    }
+	
+	    this.data.addEventListener('error', this._boundOnError, false);
+	    this.data.addEventListener('load', this._boundComplete, false);
+	    this.data.addEventListener('progress', this._boundOnProgress, false);
+	};
+	
+	/**
+	 * Loads this resources using an element that has multiple sources,
+	 * like an HTMLAudioElement or HTMLVideoElement.
+	 *
+	 * @private
+	 * @param {string} type - The type of element to use.
+	 */
+	Resource.prototype._loadSourceElement = function (type) {
+	    if (this.metadata.loadElement) {
+	        this.data = this.metadata.loadElement;
+	    }
+	    else if (type === 'audio' && typeof window.Audio !== 'undefined') {
+	        this.data = new Audio();
+	    }
+	    else {
+	        this.data = document.createElement(type);
+	    }
+	
+	    if (this.data === null) {
+	        this.abort('Unsupported element ' + type);
+	
+	        return;
+	    }
+	
+	    if (!this.metadata.skipSource) {
+	        // support for CocoonJS Canvas+ runtime, lacks document.createElement('source')
+	        if (navigator.isCocoonJS) {
+	            this.data.src = Array.isArray(this.url) ? this.url[0] : this.url;
+	        }
+	        else if (Array.isArray(this.url)) {
+	            for (var i = 0; i < this.url.length; ++i) {
+	                this.data.appendChild(this._createSource(type, this.url[i]));
+	            }
+	        }
+	        else {
+	            this.data.appendChild(this._createSource(type, this.url));
+	        }
+	    }
+	
+	    this['is' + type[0].toUpperCase() + type.substring(1)] = true;
+	
+	    this.data.addEventListener('error', this._boundOnError, false);
+	    this.data.addEventListener('load', this._boundComplete, false);
+	    this.data.addEventListener('progress', this._boundOnProgress, false);
+	    this.data.addEventListener('canplaythrough', this._boundComplete, false);
+	
+	    this.data.load();
+	};
+	
+	/**
+	 * Loads this resources using an XMLHttpRequest.
+	 *
+	 * @private
+	 */
+	Resource.prototype._loadXhr = function () {
+	    // if unset, determine the value
+	    if (typeof this.xhrType !== 'string') {
+	        this.xhrType = this._determineXhrType();
+	    }
+	
+	    var xhr = this.xhr = new XMLHttpRequest();
+	
+	    // set the request type and url
+	    xhr.open('GET', this.url, true);
+	
+	    // load json as text and parse it ourselves. We do this because some browsers
+	    // *cough* safari *cough* can't deal with it.
+	    if (this.xhrType === Resource.XHR_RESPONSE_TYPE.JSON || this.xhrType === Resource.XHR_RESPONSE_TYPE.DOCUMENT) {
+	        xhr.responseType = Resource.XHR_RESPONSE_TYPE.TEXT;
+	    }
+	    else {
+	        xhr.responseType = this.xhrType;
+	    }
+	
+	    xhr.addEventListener('error', this._boundXhrOnError, false);
+	    xhr.addEventListener('abort', this._boundXhrOnAbort, false);
+	    xhr.addEventListener('progress', this._boundOnProgress, false);
+	    xhr.addEventListener('load', this._boundXhrOnLoad, false);
+	
+	    xhr.send();
+	};
+	
+	/**
+	 * Loads this resources using an XDomainRequest. This is here because we need to support IE9 (gross).
+	 *
+	 * @private
+	 */
+	Resource.prototype._loadXdr = function () {
+	    // if unset, determine the value
+	    if (typeof this.xhrType !== 'string') {
+	        this.xhrType = this._determineXhrType();
+	    }
+	
+	    var xdr = this.xhr = new XDomainRequest();
+	
+	    // XDomainRequest has a few quirks. Occasionally it will abort requests
+	    // A way to avoid this is to make sure ALL callbacks are set even if not used
+	    // More info here: http://stackoverflow.com/questions/15786966/xdomainrequest-aborts-post-on-ie-9
+	    xdr.timeout = 5000;
+	
+	    xdr.onerror = this._boundXhrOnError;
+	    xdr.ontimeout = this._boundXdrOnTimeout;
+	    xdr.onprogress = this._boundOnProgress;
+	    xdr.onload = this._boundXhrOnLoad;
+	
+	    xdr.open('GET', this.url, true);
+	
+	    // Note: The xdr.send() call is wrapped in a timeout to prevent an
+	    // issue with the interface where some requests are lost if multiple
+	    // XDomainRequests are being sent at the same time.
+	    // Some info here: https://github.com/photonstorm/phaser/issues/1248
+	    setTimeout(function () {
+	        xdr.send();
+	    }, 0);
+	};
+	
+	/**
+	 * Creates a source used in loading via an element.
+	 *
+	 * @private
+	 * @param {string} type - The element type (video or audio).
+	 * @param {string} url - The source URL to load from.
+	 * @param {string} [mime] - The mime type of the video
+	 * @return {HTMLSourceElement} The source element.
+	 */
+	Resource.prototype._createSource = function (type, url, mime) {
+	    if (!mime) {
+	        mime = type + '/' + url.substr(url.lastIndexOf('.') + 1);
+	    }
+	
+	    var source = document.createElement('source');
+	
+	    source.src = url;
+	    source.type = mime;
+	
+	    return source;
+	};
+	
+	/**
+	 * Called if a load errors out.
+	 *
+	 * @param {Event} event - The error event from the element that emits it.
+	 * @private
+	 */
+	Resource.prototype._onError = function (event) {
+	    this.abort('Failed to load element using ' + event.target.nodeName);
+	};
+	
+	/**
+	 * Called if a load progress event fires for xhr/xdr.
+	 *
+	 * @fires progress
+	 * @private
+	 * @param {XMLHttpRequestProgressEvent|Event} event - Progress event.
+	 */
+	Resource.prototype._onProgress = function (event) {
+	    if (event && event.lengthComputable) {
+	        this.emit('progress', this, event.loaded / event.total);
+	    }
+	};
+	
+	/**
+	 * Called if an error event fires for xhr/xdr.
+	 *
+	 * @private
+	 * @param {XMLHttpRequestErrorEvent|Event} event - Error event.
+	 */
+	Resource.prototype._xhrOnError = function () {
+	    var xhr = this.xhr;
+	
+	    this.abort(reqType(xhr) + ' Request failed. Status: ' + xhr.status + ', text: "' + xhr.statusText + '"');
+	};
+	
+	/**
+	 * Called if an abort event fires for xhr.
+	 *
+	 * @private
+	 * @param {XMLHttpRequestAbortEvent} event - Abort Event
+	 */
+	Resource.prototype._xhrOnAbort = function () {
+	    this.abort(reqType(this.xhr) + ' Request was aborted by the user.');
+	};
+	
+	/**
+	 * Called if a timeout event fires for xdr.
+	 *
+	 * @private
+	 * @param {Event} event - Timeout event.
+	 */
+	Resource.prototype._xdrOnTimeout = function () {
+	    this.abort(reqType(this.xhr) + ' Request timed out.');
+	};
+	
+	/**
+	 * Called when data successfully loads from an xhr/xdr request.
+	 *
+	 * @private
+	 * @param {XMLHttpRequestLoadEvent|Event} event - Load event
+	 */
+	Resource.prototype._xhrOnLoad = function () {
+	    var xhr = this.xhr;
+	    var status = typeof xhr.status === 'undefined' ? xhr.status : STATUS_OK; // XDR has no `.status`, assume 200.
+	
+	    // status can be 0 when using the file:// protocol, also check if a response was found
+	    if (status === STATUS_OK || status === STATUS_EMPTY || (status === STATUS_NONE && xhr.responseText.length > 0)) {
+	        // if text, just return it
+	        if (this.xhrType === Resource.XHR_RESPONSE_TYPE.TEXT) {
+	            this.data = xhr.responseText;
+	        }
+	        // if json, parse into json object
+	        else if (this.xhrType === Resource.XHR_RESPONSE_TYPE.JSON) {
+	            try {
+	                this.data = JSON.parse(xhr.responseText);
+	                this.isJson = true;
+	            }
+	            catch (e) {
+	                this.abort('Error trying to parse loaded json:', e);
+	
+	                return;
+	            }
+	        }
+	        // if xml, parse into an xml document or div element
+	        else if (this.xhrType === Resource.XHR_RESPONSE_TYPE.DOCUMENT) {
+	            try {
+	                if (window.DOMParser) {
+	                    var domparser = new DOMParser();
+	
+	                    this.data = domparser.parseFromString(xhr.responseText, 'text/xml');
+	                }
+	                else {
+	                    var div = document.createElement('div');
+	
+	                    div.innerHTML = xhr.responseText;
+	                    this.data = div;
+	                }
+	                this.isXml = true;
+	            }
+	            catch (e) {
+	                this.abort('Error trying to parse loaded xml:', e);
+	
+	                return;
+	            }
+	        }
+	        // other types just return the response
+	        else {
+	            this.data = xhr.response || xhr.responseText;
+	        }
+	    }
+	    else {
+	        this.abort('[' + xhr.status + ']' + xhr.statusText + ':' + xhr.responseURL);
+	
+	        return;
+	    }
+	
+	    this.complete();
+	};
+	
+	/**
+	 * Sets the `crossOrigin` property for this resource based on if the url
+	 * for this resource is cross-origin. If crossOrigin was manually set, this
+	 * function does nothing.
+	 *
+	 * @private
+	 * @param {string} url - The url to test.
+	 * @param {object} [loc=window.location] - The location object to test against.
+	 * @return {string} The crossOrigin value to use (or empty string for none).
+	 */
+	Resource.prototype._determineCrossOrigin = function (url, loc) {
+	    // data: and javascript: urls are considered same-origin
+	    if (url.indexOf('data:') === 0) {
+	        return '';
+	    }
+	
+	    // default is window.location
+	    loc = loc || window.location;
+	
+	    if (!tempAnchor) {
+	        tempAnchor = document.createElement('a');
+	    }
+	
+	    // let the browser determine the full href for the url of this resource and then
+	    // parse with the node url lib, we can't use the properties of the anchor element
+	    // because they don't work in IE9 :(
+	    tempAnchor.href = url;
+	    url = parseUri(tempAnchor.href, { strictMode: true });
+	
+	    var samePort = (!url.port && loc.port === '') || (url.port === loc.port);
+	    var protocol = url.protocol ? url.protocol + ':' : '';
+	
+	    // if cross origin
+	    if (url.host !== loc.hostname || !samePort || protocol !== loc.protocol) {
+	        return 'anonymous';
+	    }
+	
+	    return '';
+	};
+	
+	/**
+	 * Determines the responseType of an XHR request based on the extension of the
+	 * resource being loaded.
+	 *
+	 * @private
+	 * @return {Resource.XHR_RESPONSE_TYPE} The responseType to use.
+	 */
+	Resource.prototype._determineXhrType = function () {
+	    return Resource._xhrTypeMap[this._getExtension()] || Resource.XHR_RESPONSE_TYPE.TEXT;
+	};
+	
+	Resource.prototype._determineLoadType = function () {
+	    return Resource._loadTypeMap[this._getExtension()] || Resource.LOAD_TYPE.XHR;
+	};
+	
+	Resource.prototype._getExtension = function () {
+	    var url = this.url;
+	    var ext = '';
+	
+	    if (this.isDataUrl) {
+	        var slashIndex = url.indexOf('/');
+	
+	        ext = url.substring(slashIndex + 1, url.indexOf(';', slashIndex));
+	    }
+	    else {
+	        var queryStart = url.indexOf('?');
+	
+	        if (queryStart !== -1) {
+	            url = url.substring(0, queryStart);
+	        }
+	
+	        ext = url.substring(url.lastIndexOf('.') + 1);
+	    }
+	
+	    return ext.toLowerCase();
+	};
+	
+	/**
+	 * Determines the mime type of an XHR request based on the responseType of
+	 * resource being loaded.
+	 *
+	 * @private
+	 * @param {Resource.XHR_RESPONSE_TYPE} type - The type to get a mime type for.
+	 * @return {string} The mime type to use.
+	 */
+	Resource.prototype._getMimeFromXhrType = function (type) {
+	    switch (type) {
+	        case Resource.XHR_RESPONSE_TYPE.BUFFER:
+	            return 'application/octet-binary';
+	
+	        case Resource.XHR_RESPONSE_TYPE.BLOB:
+	            return 'application/blob';
+	
+	        case Resource.XHR_RESPONSE_TYPE.DOCUMENT:
+	            return 'application/xml';
+	
+	        case Resource.XHR_RESPONSE_TYPE.JSON:
+	            return 'application/json';
+	
+	        case Resource.XHR_RESPONSE_TYPE.DEFAULT:
+	        case Resource.XHR_RESPONSE_TYPE.TEXT:
+	            /* falls through */
+	        default:
+	            return 'text/plain';
+	
+	    }
+	};
+	
+	/**
+	 * Quick helper to get string xhr type.
+	 *
+	 * @ignore
+	 * @param {XMLHttpRequest|XDomainRequest} xhr - The request to check.
+	 * @return {string} The type.
+	 */
+	function reqType(xhr) {
+	    return xhr.toString().replace('object ', '');
+	}
+	
+	/**
+	 * The types of loading a resource can use.
+	 *
+	 * @static
+	 * @readonly
+	 * @enum {number}
+	 */
+	Resource.LOAD_TYPE = {
+	    /** Uses XMLHttpRequest to load the resource. */
+	    XHR:    1,
+	    /** Uses an `Image` object to load the resource. */
+	    IMAGE:  2,
+	    /** Uses an `Audio` object to load the resource. */
+	    AUDIO:  3,
+	    /** Uses a `Video` object to load the resource. */
+	    VIDEO:  4
+	};
+	
+	/**
+	 * The XHR ready states, used internally.
+	 *
+	 * @static
+	 * @readonly
+	 * @enum {string}
+	 */
+	Resource.XHR_RESPONSE_TYPE = {
+	    /** defaults to text */
+	    DEFAULT:    'text',
+	    /** ArrayBuffer */
+	    BUFFER:     'arraybuffer',
+	    /** Blob */
+	    BLOB:       'blob',
+	    /** Document */
+	    DOCUMENT:   'document',
+	    /** Object */
+	    JSON:       'json',
+	    /** String */
+	    TEXT:       'text'
+	};
+	
+	Resource._loadTypeMap = {
+	    gif:      Resource.LOAD_TYPE.IMAGE,
+	    png:      Resource.LOAD_TYPE.IMAGE,
+	    bmp:      Resource.LOAD_TYPE.IMAGE,
+	    jpg:      Resource.LOAD_TYPE.IMAGE,
+	    jpeg:     Resource.LOAD_TYPE.IMAGE,
+	    tif:      Resource.LOAD_TYPE.IMAGE,
+	    tiff:     Resource.LOAD_TYPE.IMAGE,
+	    webp:     Resource.LOAD_TYPE.IMAGE,
+	    tga:      Resource.LOAD_TYPE.IMAGE,
+	    'svg+xml':  Resource.LOAD_TYPE.IMAGE
+	};
+	
+	Resource._xhrTypeMap = {
+	    // xml
+	    xhtml:    Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    html:     Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    htm:      Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    xml:      Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    tmx:      Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    tsx:      Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	    svg:      Resource.XHR_RESPONSE_TYPE.DOCUMENT,
+	
+	    // images
+	    gif:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	    png:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	    bmp:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	    jpg:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	    jpeg:     Resource.XHR_RESPONSE_TYPE.BLOB,
+	    tif:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	    tiff:     Resource.XHR_RESPONSE_TYPE.BLOB,
+	    webp:     Resource.XHR_RESPONSE_TYPE.BLOB,
+	    tga:      Resource.XHR_RESPONSE_TYPE.BLOB,
+	
+	    // json
+	    json:     Resource.XHR_RESPONSE_TYPE.JSON,
+	
+	    // text
+	    text:     Resource.XHR_RESPONSE_TYPE.TEXT,
+	    txt:      Resource.XHR_RESPONSE_TYPE.TEXT
+	};
+	
+	/**
+	 * Sets the load type to be used for a specific extension.
+	 *
+	 * @static
+	 * @param {string} extname - The extension to set the type for, e.g. "png" or "fnt"
+	 * @param {Resource.LOAD_TYPE} loadType - The load type to set it to.
+	 */
+	Resource.setExtensionLoadType = function (extname, loadType) {
+	    setExtMap(Resource._loadTypeMap, extname, loadType);
+	};
+	
+	/**
+	 * Sets the load type to be used for a specific extension.
+	 *
+	 * @static
+	 * @param {string} extname - The extension to set the type for, e.g. "png" or "fnt"
+	 * @param {Resource.XHR_RESPONSE_TYPE} xhrType - The xhr type to set it to.
+	 */
+	Resource.setExtensionXhrType = function (extname, xhrType) {
+	    setExtMap(Resource._xhrTypeMap, extname, xhrType);
+	};
+	
+	function setExtMap(map, extname, val) {
+	    if (extname && extname.indexOf('.') === 0) {
+	        extname = extname.substring(1);
+	    }
+	
+	    if (!extname) {
+	        return;
+	    }
+	
+	    map[extname] = val;
+	}
+
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	// a simple in-memory cache for resources
+	var cache = {};
+	
+	module.exports = function () {
+	    return function (resource, next) {
+	        // if cached, then set data and complete the resource
+	        if (cache[resource.url]) {
+	            resource.data = cache[resource.url];
+	            resource.complete(); // marks resource load complete and stops processing before middlewares
+	        }
+	        // if not cached, wait for complete and store it in the cache.
+	        else {
+	            resource.once('complete', function () {
+	                cache[this.url] = this.data;
+	            });
+	        }
+	
+	        next();
+	    };
+	};
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var Resource = __webpack_require__(180);
+	var b64 = __webpack_require__(183);
+	
+	var Url = window.URL || window.webkitURL;
+	
+	// a middleware for transforming XHR loaded Blobs into more useful objects
+	
+	module.exports = function () {
+	    return function (resource, next) {
+	        if (!resource.data) {
+	            next();
+	
+	            return;
+	        }
+	
+	        // if this was an XHR load of a blob
+	        if (resource.xhr && resource.xhrType === Resource.XHR_RESPONSE_TYPE.BLOB) {
+	            // if there is no blob support we probably got a binary string back
+	            if (!window.Blob || typeof resource.data === 'string') {
+	                var type = resource.xhr.getResponseHeader('content-type');
+	
+	                // this is an image, convert the binary string into a data url
+	                if (type && type.indexOf('image') === 0) {
+	                    resource.data = new Image();
+	                    resource.data.src = 'data:' + type + ';base64,' + b64.encodeBinary(resource.xhr.responseText);
+	
+	                    resource.isImage = true;
+	
+	                    // wait until the image loads and then callback
+	                    resource.data.onload = function () {
+	                        resource.data.onload = null;
+	
+	                        next();
+	                    };
+	
+	                    // next will be called on load
+	                    return;
+	                }
+	            }
+	            // if content type says this is an image, then we should transform the blob into an Image object
+	            else if (resource.data.type.indexOf('image') === 0) {
+	                var src = Url.createObjectURL(resource.data);
+	
+	                resource.blob = resource.data;
+	                resource.data = new Image();
+	                resource.data.src = src;
+	
+	                resource.isImage = true;
+	
+	                // cleanup the no longer used blob after the image loads
+	                resource.data.onload = function () {
+	                    Url.revokeObjectURL(src);
+	                    resource.data.onload = null;
+	
+	                    next();
+	                };
+	
+	                // next will be called on load.
+	                return;
+	            }
+	        }
+	
+	        next();
+	    };
+	};
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	/* eslint no-magic-numbers: 0 */
+	'use strict';
+	
+	module.exports = {
+	    // private property
+	    _keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+	
+	    encodeBinary: function (input) {
+	        var output = '';
+	        var bytebuffer;
+	        var encodedCharIndexes = new Array(4);
+	        var inx = 0;
+	        var jnx = 0;
+	        var paddingBytes = 0;
+	
+	        while (inx < input.length) {
+	            // Fill byte buffer array
+	            bytebuffer = new Array(3);
+	
+	            for (jnx = 0; jnx < bytebuffer.length; jnx++) {
+	                if (inx < input.length) {
+	                    // throw away high-order byte, as documented at:
+	                    // https://developer.mozilla.org/En/Using_XMLHttpRequest#Handling_binary_data
+	                    bytebuffer[jnx] = input.charCodeAt(inx++) & 0xff;
+	                }
+	                else {
+	                    bytebuffer[jnx] = 0;
+	                }
+	            }
+	
+	            // Get each encoded character, 6 bits at a time
+	            // index 1: first 6 bits
+	            encodedCharIndexes[0] = bytebuffer[0] >> 2;
+	            // index 2: second 6 bits (2 least significant bits from input byte 1 + 4 most significant bits from byte 2)
+	            encodedCharIndexes[1] = ((bytebuffer[0] & 0x3) << 4) | (bytebuffer[1] >> 4);
+	            // index 3: third 6 bits (4 least significant bits from input byte 2 + 2 most significant bits from byte 3)
+	            encodedCharIndexes[2] = ((bytebuffer[1] & 0x0f) << 2) | (bytebuffer[2] >> 6);
+	            // index 3: forth 6 bits (6 least significant bits from input byte 3)
+	            encodedCharIndexes[3] = bytebuffer[2] & 0x3f;
+	
+	            // Determine whether padding happened, and adjust accordingly
+	            paddingBytes = inx - (input.length - 1);
+	            switch (paddingBytes) {
+	                case 2:
+	                    // Set last 2 characters to padding char
+	                    encodedCharIndexes[3] = 64;
+	                    encodedCharIndexes[2] = 64;
+	                    break;
+	
+	                case 1:
+	                    // Set last character to padding char
+	                    encodedCharIndexes[3] = 64;
+	                    break;
+	
+	                default:
+	                    break; // No padding - proceed
+	            }
+	
+	            // Now we will grab each appropriate character out of our keystring
+	            // based on our index array and append it to the output string
+	            for (jnx = 0; jnx < encodedCharIndexes.length; jnx++) {
+	                output += this._keyStr.charAt(encodedCharIndexes[jnx]);
+	            }
+	        }
+	
+	        return output;
+	    }
+	};
+
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	exports.default = function () {
+	    return function textureParser(resource, next) {
+	        // create a new texture if the data is an Image object
+	        if (resource.data && resource.isImage) {
+	            var baseTexture = new core.BaseTexture(resource.data, null, core.utils.getResolutionOfUrl(resource.url));
+	
+	            baseTexture.imageUrl = resource.url;
+	            resource.texture = new core.Texture(baseTexture);
+	
+	            // lets also add the frame to pixi's global cache for fromFrame and fromImage fucntions
+	            core.utils.BaseTextureCache[resource.name] = baseTexture;
+	            core.utils.TextureCache[resource.name] = resource.texture;
+	
+	            // also add references by url if they are different.
+	            if (resource.name !== resource.url) {
+	                core.utils.BaseTextureCache[resource.url] = baseTexture;
+	                core.utils.TextureCache[resource.url] = resource.texture;
+	            }
+	        }
+	
+	        next();
+	    };
+	};
+	
+	var _core = __webpack_require__(11);
+	
+	var core = _interopRequireWildcard(_core);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	//# sourceMappingURL=textureParser.js.map
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	exports.default = function () {
+	    return function spritesheetParser(resource, next) {
+	        var resourcePath = void 0;
+	        var imageResourceName = resource.name + '_image';
+	
+	        // skip if no data, its not json, it isn't spritesheet data, or the image resource already exists
+	        if (!resource.data || !resource.isJson || !resource.data.frames || this.resources[imageResourceName]) {
+	            next();
+	
+	            return;
+	        }
+	
+	        var loadOptions = {
+	            crossOrigin: resource.crossOrigin,
+	            loadType: _resourceLoader.Resource.LOAD_TYPE.IMAGE,
+	            metadata: resource.metadata.imageMetadata
+	        };
+	
+	        // Prepend url path unless the resource image is a data url
+	        if (resource.isDataUrl) {
+	            resourcePath = resource.data.meta.image;
+	        } else {
+	            resourcePath = _path2.default.dirname(resource.url.replace(this.baseUrl, '')) + '/' + resource.data.meta.image;
+	        }
+	
+	        // load the image for this sheet
+	        this.add(imageResourceName, resourcePath, loadOptions, function onImageLoad(res) {
+	            resource.textures = {};
+	
+	            var frames = resource.data.frames;
+	            var frameKeys = Object.keys(frames);
+	            var baseTexture = res.texture.baseTexture;
+	            var resolution = core.utils.getResolutionOfUrl(resource.url);
+	            var scale = resource.data.meta.scale;
+	
+	            // for now (to keep things compatible) resolution overrides scale
+	            // Support scale field on spritesheet
+	            if (resolution === 1 && scale !== undefined && scale !== 1) {
+	                baseTexture.resolution = resolution = scale;
+	                baseTexture.update();
+	            }
+	
+	            var batchIndex = 0;
+	
+	            function processFrames(initialFrameIndex, maxFrames) {
+	                var frameIndex = initialFrameIndex;
+	
+	                while (frameIndex - initialFrameIndex < maxFrames && frameIndex < frameKeys.length) {
+	                    var i = frameKeys[frameIndex];
+	                    var rect = frames[i].frame;
+	
+	                    if (rect) {
+	                        var frame = null;
+	                        var trim = null;
+	                        var orig = new core.Rectangle(0, 0, frames[i].sourceSize.w / resolution, frames[i].sourceSize.h / resolution);
+	
+	                        if (frames[i].rotated) {
+	                            frame = new core.Rectangle(rect.x / resolution, rect.y / resolution, rect.h / resolution, rect.w / resolution);
+	                        } else {
+	                            frame = new core.Rectangle(rect.x / resolution, rect.y / resolution, rect.w / resolution, rect.h / resolution);
+	                        }
+	
+	                        //  Check to see if the sprite is trimmed
+	                        if (frames[i].trimmed) {
+	                            trim = new core.Rectangle(frames[i].spriteSourceSize.x / resolution, frames[i].spriteSourceSize.y / resolution, rect.w / resolution, rect.h / resolution);
+	                        }
+	
+	                        resource.textures[i] = new core.Texture(baseTexture, frame, orig, trim, frames[i].rotated ? 2 : 0);
+	
+	                        // lets also add the frame to pixi's global cache for fromFrame and fromImage functions
+	                        core.utils.TextureCache[i] = resource.textures[i];
+	                    }
+	
+	                    frameIndex++;
+	                }
+	            }
+	
+	            function shouldProcessNextBatch() {
+	                return batchIndex * BATCH_SIZE < frameKeys.length;
+	            }
+	
+	            function processNextBatch(done) {
+	                processFrames(batchIndex * BATCH_SIZE, BATCH_SIZE);
+	                batchIndex++;
+	                setTimeout(done, 0);
+	            }
+	
+	            function iteration() {
+	                processNextBatch(function () {
+	                    if (shouldProcessNextBatch()) {
+	                        iteration();
+	                    } else {
+	                        next();
+	                    }
+	                });
+	            }
+	
+	            if (frameKeys.length <= BATCH_SIZE) {
+	                processFrames(0, BATCH_SIZE);
+	                next();
+	            } else {
+	                iteration();
+	            }
+	        });
+	    };
+	};
+	
+	var _resourceLoader = __webpack_require__(176);
+	
+	var _path = __webpack_require__(86);
+	
+	var _path2 = _interopRequireDefault(_path);
+	
+	var _core = __webpack_require__(11);
+	
+	var core = _interopRequireWildcard(_core);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var BATCH_SIZE = 1000;
+	//# sourceMappingURL=spritesheetParser.js.map
+
+/***/ },
 /* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.parse = parse;
+	
+	exports.default = function () {
+	    return function bitmapFontParser(resource, next) {
+	        // skip if no data or not xml data
+	        if (!resource.data || !resource.isXml) {
+	            next();
+	
+	            return;
+	        }
+	
+	        // skip if not bitmap font data, using some silly duck-typing
+	        if (resource.data.getElementsByTagName('page').length === 0 || resource.data.getElementsByTagName('info').length === 0 || resource.data.getElementsByTagName('info')[0].getAttribute('face') === null) {
+	            next();
+	
+	            return;
+	        }
+	
+	        var xmlUrl = !resource.isDataUrl ? path.dirname(resource.url) : '';
+	
+	        if (resource.isDataUrl) {
+	            if (xmlUrl === '.') {
+	                xmlUrl = '';
+	            }
+	
+	            if (this.baseUrl && xmlUrl) {
+	                // if baseurl has a trailing slash then add one to xmlUrl so the replace works below
+	                if (this.baseUrl.charAt(this.baseUrl.length - 1) === '/') {
+	                    xmlUrl += '/';
+	                }
+	
+	                // remove baseUrl from xmlUrl
+	                xmlUrl = xmlUrl.replace(this.baseUrl, '');
+	            }
+	        }
+	
+	        // if there is an xmlUrl now, it needs a trailing slash. Ensure that it does if the string isn't empty.
+	        if (xmlUrl && xmlUrl.charAt(xmlUrl.length - 1) !== '/') {
+	            xmlUrl += '/';
+	        }
+	
+	        var textureUrl = xmlUrl + resource.data.getElementsByTagName('page')[0].getAttribute('file');
+	
+	        if (_core.utils.TextureCache[textureUrl]) {
+	            // reuse existing texture
+	            parse(resource, _core.utils.TextureCache[textureUrl]);
+	            next();
+	        } else {
+	            var loadOptions = {
+	                crossOrigin: resource.crossOrigin,
+	                loadType: _resourceLoader.Resource.LOAD_TYPE.IMAGE,
+	                metadata: resource.metadata.imageMetadata
+	            };
+	
+	            // load the texture for the font
+	            this.add(resource.name + '_image', textureUrl, loadOptions, function (res) {
+	                parse(resource, res.texture);
+	                next();
+	            });
+	        }
+	    };
+	};
+	
+	var _path = __webpack_require__(86);
+	
+	var path = _interopRequireWildcard(_path);
+	
+	var _core = __webpack_require__(11);
+	
+	var _resourceLoader = __webpack_require__(176);
+	
+	var _extras = __webpack_require__(131);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function parse(resource, texture) {
+	    var data = {};
+	    var info = resource.data.getElementsByTagName('info')[0];
+	    var common = resource.data.getElementsByTagName('common')[0];
+	
+	    data.font = info.getAttribute('face');
+	    data.size = parseInt(info.getAttribute('size'), 10);
+	    data.lineHeight = parseInt(common.getAttribute('lineHeight'), 10);
+	    data.chars = {};
+	
+	    // parse letters
+	    var letters = resource.data.getElementsByTagName('char');
+	
+	    for (var i = 0; i < letters.length; i++) {
+	        var charCode = parseInt(letters[i].getAttribute('id'), 10);
+	
+	        var textureRect = new _core.Rectangle(parseInt(letters[i].getAttribute('x'), 10) + texture.frame.x, parseInt(letters[i].getAttribute('y'), 10) + texture.frame.y, parseInt(letters[i].getAttribute('width'), 10), parseInt(letters[i].getAttribute('height'), 10));
+	
+	        data.chars[charCode] = {
+	            xOffset: parseInt(letters[i].getAttribute('xoffset'), 10),
+	            yOffset: parseInt(letters[i].getAttribute('yoffset'), 10),
+	            xAdvance: parseInt(letters[i].getAttribute('xadvance'), 10),
+	            kerning: {},
+	            texture: new _core.Texture(texture.baseTexture, textureRect)
+	
+	        };
+	    }
+	
+	    // parse kernings
+	    var kernings = resource.data.getElementsByTagName('kerning');
+	
+	    for (var _i = 0; _i < kernings.length; _i++) {
+	        var first = parseInt(kernings[_i].getAttribute('first'), 10);
+	        var second = parseInt(kernings[_i].getAttribute('second'), 10);
+	        var amount = parseInt(kernings[_i].getAttribute('amount'), 10);
+	
+	        if (data.chars[second]) {
+	            data.chars[second].kerning[first] = amount;
+	        }
+	    }
+	
+	    resource.bitmapFont = data;
+	
+	    // I'm leaving this as a temporary fix so we can test the bitmap fonts in v3
+	    // but it's very likely to change
+	    _extras.BitmapText.fonts[data.font] = data;
+	}
+	//# sourceMappingURL=bitmapFontParser.js.map
+
+/***/ },
+/* 187 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38476,7 +37790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38595,7 +37909,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38628,7 +37942,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38658,7 +37972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38843,7 +38157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40078,7 +39392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40087,7 +39401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _loglevel = __webpack_require__(193);
+	var _loglevel = __webpack_require__(194);
 	
 	var _loglevel2 = _interopRequireDefault(_loglevel);
 	
@@ -40115,7 +39429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -40344,7 +39658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40555,7 +39869,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40564,7 +39878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _eventemitter = __webpack_require__(41);
+	var _eventemitter = __webpack_require__(42);
 	
 	/*---------------------
 	-------- PUBLIC -------
@@ -40659,7 +39973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41342,7 +40656,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41351,7 +40665,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _javascriptStateMachine = __webpack_require__(198);
+	var _javascriptStateMachine = __webpack_require__(199);
 	
 	var StateMachine = _interopRequireWildcard(_javascriptStateMachine);
 	
@@ -41420,7 +40734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -41653,7 +40967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41759,7 +41073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42164,7 +41478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42175,7 +41489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _howler = __webpack_require__(202);
+	var _howler = __webpack_require__(203);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -42302,7 +41616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -45065,7 +44379,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45197,13 +44511,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports) {
 
 	"use strict";
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45212,31 +44526,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _baseEventlisteners = __webpack_require__(206);
+	var _baseEventlisteners = __webpack_require__(207);
 	
 	var _baseEventlisteners2 = _interopRequireDefault(_baseEventlisteners);
 	
-	var _index = __webpack_require__(209);
+	var _index = __webpack_require__(210);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _index3 = __webpack_require__(211);
+	var _index3 = __webpack_require__(212);
 	
 	var _index4 = _interopRequireDefault(_index3);
 	
-	var _mapMovement = __webpack_require__(219);
+	var _mapMovement = __webpack_require__(220);
 	
 	var _mapMovement2 = _interopRequireDefault(_mapMovement);
 	
-	var _index5 = __webpack_require__(220);
+	var _index5 = __webpack_require__(221);
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
-	var _mapDrag = __webpack_require__(222);
+	var _mapDrag = __webpack_require__(223);
 	
 	var _mapDrag2 = _interopRequireDefault(_mapDrag);
 	
-	var _mapZoom = __webpack_require__(223);
+	var _mapZoom = __webpack_require__(224);
 	
 	var _mapZoom2 = _interopRequireDefault(_mapZoom);
 	
@@ -45254,7 +44568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45263,11 +44577,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _hammerjs = __webpack_require__(207);
+	var _hammerjs = __webpack_require__(208);
 	
 	var Hammer = _interopRequireWildcard(_hammerjs);
 	
-	var _hamsterjs = __webpack_require__(208);
+	var _hamsterjs = __webpack_require__(209);
 	
 	var _hamsterjs2 = _interopRequireDefault(_hamsterjs);
 	
@@ -45566,7 +44880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
@@ -48215,7 +47529,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -48548,7 +47862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48557,7 +47871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _simpleFogOfWar = __webpack_require__(210);
+	var _simpleFogOfWar = __webpack_require__(211);
 	
 	var _simpleFogOfWar2 = _interopRequireDefault(_simpleFogOfWar);
 	
@@ -48569,7 +47883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48651,9 +47965,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    mapRenderer = this.mapInstance.getRenderer();
 	
 	    maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-	    // We create a particle container, because it's faster for this purpose. We don't need any
-	    // fancy special effects for the container currently, so particle container works.
-	    maskMovableContainer = new PIXI.ParticleContainer();
+	    // This could use particleContainer. But particleContainer + drawRect graphics have a conflict. In our case, when we zoom far enough and there is a lot of sprites on the screen, the particleContainer + drawRect gives a webGL error "glDrawElements: range out of bounds for buffer". So we must use container for now.
+	    maskMovableContainer = new PIXI.Container();
 	    maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 	
 	    activateFogOfWar(this.mapInstance, params.cb, params.filter, params.getOptions ? params.getOptions() : {});
@@ -48793,7 +48106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48802,23 +48115,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _units = __webpack_require__(212);
+	var _units = __webpack_require__(213);
 	
 	var eventListeners = _interopRequireWildcard(_units);
 	
-	var _selectHexagonPlugin = __webpack_require__(217);
+	var _selectHexagonPlugin = __webpack_require__(218);
 	
 	var hexagonPlugin = _interopRequireWildcard(_selectHexagonPlugin);
 	
-	var _findPath = __webpack_require__(213);
+	var _findPath = __webpack_require__(214);
 	
 	var pathfinding = _interopRequireWildcard(_findPath);
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var utils = _interopRequireWildcard(_utils);
 	
-	var _Objects = __webpack_require__(218);
+	var _Objects = __webpack_require__(219);
 	
 	var objects = _interopRequireWildcard(_Objects);
 	
@@ -48836,7 +48149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48848,9 +48161,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _core = __webpack_require__(2);
 	
-	var _findPath = __webpack_require__(213);
+	var _findPath = __webpack_require__(214);
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var hexaUtils = _interopRequireWildcard(_utils);
 	
@@ -49062,7 +48375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports._tests = _tests;
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -49321,7 +48634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.findPath = findPath;
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49331,11 +48644,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.hexagonMath = exports.createHexagon = undefined;
 	
-	var _createHexagon = __webpack_require__(215);
+	var _createHexagon = __webpack_require__(216);
 	
 	var createHexagon = _interopRequireWildcard(_createHexagon);
 	
-	var _hexagonMath = __webpack_require__(216);
+	var _hexagonMath = __webpack_require__(217);
 	
 	var hexagonMath = _interopRequireWildcard(_hexagonMath);
 	
@@ -49345,7 +48658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.hexagonMath = hexagonMath;
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49359,7 +48672,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var PIXI = _interopRequireWildcard(_pixi);
 	
-	var _hexagonMath = __webpack_require__(216);
+	var _hexagonMath = __webpack_require__(217);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -49449,7 +48762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.createVisibleHexagon = createVisibleHexagon;
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49780,7 +49093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.indexesToCoordinates = indexesToCoordinates;
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49790,9 +49103,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports._tests = exports.selectHexagonObject = undefined;
 	
-	var _units = __webpack_require__(212);
+	var _units = __webpack_require__(213);
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	/*-----------------------
 	-------- PUBLIC ---------
@@ -49872,7 +49185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports._tests = _tests;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49890,7 +49203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _index = __webpack_require__(2);
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -50090,7 +49403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.ObjectHexaUnit = ObjectHexaUnit;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50297,10 +49610,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
 	    var largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
 	    var containersUnderChangedArea = [];
-	    var promises = void 0;
 	
 	    primaryLayers = _core.utils.general.chunkArray(primaryLayers, VIEWPORT_OFFSET);
-	    promises = primaryLayers.map(function (theseLayers) {
+	    var promises = primaryLayers.map(function (theseLayers) {
 	      var promise = new Promise(function (resolve, reject) {
 	        try {
 	          window.setTimeout(function () {
@@ -50433,7 +49745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50442,7 +49754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _pixelizedMinimap = __webpack_require__(221);
+	var _pixelizedMinimap = __webpack_require__(222);
 	
 	var _pixelizedMinimap2 = _interopRequireDefault(_pixelizedMinimap);
 	
@@ -50454,7 +49766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50463,7 +49775,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 	
-	var _hammerjs = __webpack_require__(207);
+	var _hammerjs = __webpack_require__(208);
 	
 	var _hammerjs2 = _interopRequireDefault(_hammerjs);
 	
@@ -50703,7 +50015,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -50856,7 +50168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51163,7 +50475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51173,7 +50485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.UIs = undefined;
 	
-	var _default = __webpack_require__(225);
+	var _default = __webpack_require__(226);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -51182,7 +50494,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var UIs = exports.UIs = _default2.default;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51191,7 +50503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 	
-	var _default = __webpack_require__(226);
+	var _default = __webpack_require__(227);
 	
 	var _default2 = _interopRequireDefault(_default);
 	
@@ -51203,7 +50515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51220,13 +50532,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _core = __webpack_require__(2);
 	
-	var _layout = __webpack_require__(227);
+	var _layout = __webpack_require__(228);
 	
 	var templates = _interopRequireWildcard(_layout);
 	
-	var _arrows = __webpack_require__(249);
+	var _arrows = __webpack_require__(250);
 	
-	var _createHexagon = __webpack_require__(215);
+	var _createHexagon = __webpack_require__(216);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -51548,7 +50860,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51558,11 +50870,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.singleSelection = exports.multiSelection = undefined;
 	
-	var _multiSelection = __webpack_require__(228);
+	var _multiSelection = __webpack_require__(229);
 	
 	var _multiSelection2 = _interopRequireDefault(_multiSelection);
 	
-	var _singleSelection = __webpack_require__(248);
+	var _singleSelection = __webpack_require__(249);
 	
 	var _singleSelection2 = _interopRequireDefault(_singleSelection);
 	
@@ -51572,10 +50884,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.singleSelection = _singleSelection2.default;
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(229);
+	var Handlebars = __webpack_require__(230);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
 	    return "  <li>\r\n    "
@@ -51592,16 +50904,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	},"useData":true});
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Create a simple path alias to allow browserify to resolve
 	// the runtime on a supported path.
-	module.exports = __webpack_require__(230)['default'];
+	module.exports = __webpack_require__(231)['default'];
 
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51615,30 +50927,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _handlebarsBase = __webpack_require__(231);
+	var _handlebarsBase = __webpack_require__(232);
 	
 	var base = _interopRequireWildcard(_handlebarsBase);
 	
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 	
-	var _handlebarsSafeString = __webpack_require__(245);
+	var _handlebarsSafeString = __webpack_require__(246);
 	
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 	
-	var _handlebarsException = __webpack_require__(233);
+	var _handlebarsException = __webpack_require__(234);
 	
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 	
-	var _handlebarsUtils = __webpack_require__(232);
+	var _handlebarsUtils = __webpack_require__(233);
 	
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 	
-	var _handlebarsRuntime = __webpack_require__(246);
+	var _handlebarsRuntime = __webpack_require__(247);
 	
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 	
-	var _handlebarsNoConflict = __webpack_require__(247);
+	var _handlebarsNoConflict = __webpack_require__(248);
 	
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 	
@@ -51673,7 +50985,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51684,17 +50996,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
-	var _exception = __webpack_require__(233);
+	var _exception = __webpack_require__(234);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _helpers = __webpack_require__(234);
+	var _helpers = __webpack_require__(235);
 	
-	var _decorators = __webpack_require__(242);
+	var _decorators = __webpack_require__(243);
 	
-	var _logger = __webpack_require__(244);
+	var _logger = __webpack_require__(245);
 	
 	var _logger2 = _interopRequireDefault(_logger);
 	
@@ -51783,7 +51095,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -51913,7 +51225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -51959,7 +51271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51970,31 +51282,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _helpersBlockHelperMissing = __webpack_require__(235);
+	var _helpersBlockHelperMissing = __webpack_require__(236);
 	
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 	
-	var _helpersEach = __webpack_require__(236);
+	var _helpersEach = __webpack_require__(237);
 	
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 	
-	var _helpersHelperMissing = __webpack_require__(237);
+	var _helpersHelperMissing = __webpack_require__(238);
 	
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 	
-	var _helpersIf = __webpack_require__(238);
+	var _helpersIf = __webpack_require__(239);
 	
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 	
-	var _helpersLog = __webpack_require__(239);
+	var _helpersLog = __webpack_require__(240);
 	
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 	
-	var _helpersLookup = __webpack_require__(240);
+	var _helpersLookup = __webpack_require__(241);
 	
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 	
-	var _helpersWith = __webpack_require__(241);
+	var _helpersWith = __webpack_require__(242);
 	
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 	
@@ -52011,14 +51323,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -52056,7 +51368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52066,9 +51378,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
-	var _exception = __webpack_require__(233);
+	var _exception = __webpack_require__(234);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -52156,7 +51468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52166,7 +51478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _exception = __webpack_require__(233);
+	var _exception = __webpack_require__(234);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
@@ -52187,14 +51499,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -52222,7 +51534,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -52254,7 +51566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -52272,14 +51584,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -52311,7 +51623,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52322,7 +51634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _decoratorsInline = __webpack_require__(243);
+	var _decoratorsInline = __webpack_require__(244);
 	
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 	
@@ -52333,14 +51645,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -52368,14 +51680,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -52421,7 +51733,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -52442,7 +51754,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52462,15 +51774,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _utils = __webpack_require__(232);
+	var _utils = __webpack_require__(233);
 	
 	var Utils = _interopRequireWildcard(_utils);
 	
-	var _exception = __webpack_require__(233);
+	var _exception = __webpack_require__(234);
 	
 	var _exception2 = _interopRequireDefault(_exception);
 	
-	var _base = __webpack_require__(231);
+	var _base = __webpack_require__(232);
 	
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -52740,7 +52052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -52767,10 +52079,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(229);
+	var Handlebars = __webpack_require__(230);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var stack1, helper, alias1=container.escapeExpression;
@@ -52783,7 +52095,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	},"useData":true});
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53043,7 +52355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.drawLine = drawLine;
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53178,7 +52490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Preload = Preload;
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -53196,7 +52508,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _core = __webpack_require__(2);
 	
-	var _Objects = __webpack_require__(218);
+	var _Objects = __webpack_require__(219);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
