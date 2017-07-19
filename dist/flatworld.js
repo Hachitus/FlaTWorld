@@ -48180,8 +48180,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var unitLayerFilter = new _core.MapDataManipulator({
 	  type: 'filter',
 	  object: 'layer',
-	  property: 'name',
-	  value: 'unitLayer'
+	  property: 'selectable',
+	  value: true
 	});
 	var terrainLayerFilter = new _core.MapDataManipulator({
 	  type: 'filter',

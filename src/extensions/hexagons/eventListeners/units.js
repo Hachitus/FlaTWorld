@@ -12,8 +12,8 @@ const hexagons = {
 const unitLayerFilter = new MapDataManipulator({
   type: 'filter',
   object: 'layer',
-  property: 'name',
-  value: 'unitLayer'
+  property: 'selectable',
+  value: true
 });
 const terrainLayerFilter = new MapDataManipulator({
   type: 'filter',

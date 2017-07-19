@@ -1,5 +1,7 @@
 <a name="0.6.4"></a>
 # 0.6.3 Bug fixes (2017-03-14)
+## Possible breaking changes
+* Changed hexagon selection to work based on selectable-property instead of name
 ## Bugs
 * Added floor option for special distance
 
