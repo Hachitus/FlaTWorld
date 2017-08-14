@@ -48312,19 +48312,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var destinationIndexes = hexagons.utils.hexagonMath.coordinatesToIndexes(centerCoords);
 	
 	    var pathsToCoordinates = void 0;
-	    try {
-	      var timeUnits = selectedObject.data.typeData.move;
-	      pathsToCoordinates = hexagons.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
-	      pathsToCoordinates = pathsToCoordinates.map(function (coords) {
-	        return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
-	      });
-	    } catch (e) {
-	      if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
-	        e.message = 'the destination was farther than the given maximum distance';
-	      } else {
-	        e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+	
+	    if (objectIndexes.x === destinationIndexes.x && objectIndexes.y === destinationIndexes.y) {
+	      pathsToCoordinates = [];
+	    } else {
+	      try {
+	        var timeUnits = selectedObject.data.typeData.move;
+	        pathsToCoordinates = hexagons.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
+	        pathsToCoordinates = pathsToCoordinates.map(function (coords) {
+	          return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
+	        });
+	      } catch (e) {
+	        if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+	          e.message = 'the destination was farther than the given maximum distance';
+	        } else {
+	          e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+	        }
+	
+	        throw e;
 	      }
-	      throw e;
 	    }
 	
 	    selectedObject.move(pathsToCoordinates);
