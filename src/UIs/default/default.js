@@ -196,7 +196,7 @@ class UIDefault {
 
     container.position = options.coords;
 
-    this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id);
+    this.FTW.removeUIObject(this.FTW.layerTypes.movableType.id, UI_CONTAINER_NAME);
     this.FTW.addUIObject(this.FTW.layerTypes.movableType.id, container, UI_CONTAINER_NAME);
   }
   /**
