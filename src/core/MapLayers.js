@@ -4,7 +4,6 @@ import { utils } from './index.js';
 /*---------------------
 ------ VARIABLES ------
 ---------------------*/
-let _UIObjects = [];
 
 /*---------------------
 -------- EXPORT -------
@@ -117,15 +116,6 @@ class MapLayer extends PIXI.Container {
   getZoom() {
     return this.scale.x;
   }
-    /**
-   * get UIObjects on this layer, if there are any, or defaulty empty array if no UIObjects are active
-   *
-   * @method getUIObjects
-   * @return {Array} current UIObjects
-   * */
-  getUIObjects() {
-    return _UIObjects;
-  }
   /**
    * Get primary layers, that this layer holds as children. So basically all children that are
    * not special layers (such as UI layers etc.)
@@ -198,8 +188,6 @@ class MapLayer extends PIXI.Container {
    * @return {Array}          All the UIObjects currently on this layer
    */
   addUIObject(object, UIName) {
-    _UIObjects = _UIObjects || [];
-
     if (this.UIObjectList[UIName] && Array.isArray(this.UIObjectList[UIName])) {
       this.UIObjectList[UIName].push(object);
     } else if (this.UIObjectList[UIName]) {
@@ -214,9 +202,8 @@ class MapLayer extends PIXI.Container {
     }
 
     this.UILayer.addChild(object);
-    _UIObjects.push(object);
 
-    return _UIObjects;
+    return this.UIObjectList;
   }
   /**
    * If object is given, removes that object, otherwiseRemove all the UIObjects from this layer
@@ -245,7 +232,7 @@ class MapLayer extends PIXI.Container {
       });
     }
 
-    return _UIObjects;
+    return this.UIObjectList;
   }
 }
 

@@ -40003,12 +40003,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/*---------------------
 	------ VARIABLES ------
 	---------------------*/
-	var _UIObjects = [];
 	
 	/*---------------------
 	-------- EXPORT -------
 	---------------------*/
-	
 	var MapLayer = function (_PIXI$Container) {
 	  _inherits(MapLayer, _PIXI$Container);
 	
@@ -40144,18 +40142,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return this.scale.x;
 	    }
 	    /**
-	    * get UIObjects on this layer, if there are any, or defaulty empty array if no UIObjects are active
-	    *
-	    * @method getUIObjects
-	    * @return {Array} current UIObjects
-	    * */
-	
-	  }, {
-	    key: 'getUIObjects',
-	    value: function getUIObjects() {
-	      return _UIObjects;
-	    }
-	    /**
 	     * Get primary layers, that this layer holds as children. So basically all children that are
 	     * not special layers (such as UI layers etc.)
 	     *
@@ -40246,8 +40232,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'addUIObject',
 	    value: function addUIObject(object, UIName) {
-	      _UIObjects = _UIObjects || [];
-	
 	      if (this.UIObjectList[UIName] && Array.isArray(this.UIObjectList[UIName])) {
 	        this.UIObjectList[UIName].push(object);
 	      } else if (this.UIObjectList[UIName]) {
@@ -40262,9 +40246,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      this.UILayer.addChild(object);
-	      _UIObjects.push(object);
 	
-	      return _UIObjects;
+	      return this.UIObjectList;
 	    }
 	    /**
 	     * If object is given, removes that object, otherwiseRemove all the UIObjects from this layer
@@ -40298,7 +40281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	      }
 	
-	      return _UIObjects;
+	      return this.UIObjectList;
 	    }
 	  }]);
 	
