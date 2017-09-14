@@ -1,13 +1,32 @@
+<a name="0.6.5"></a>
+# 0.6.3 Bug fixes (2017-09-14)
+
+## Possible breaking changes
+* Removed MapLayer.getUIObjects
+* 'objectMove' event sends a sligthly modified data
+* MapApi removed. This was not really supposed to be in anyway, I don't think it belong to the engine.
+
+## Bug fixes
+* For of war, remove particleContainer as it was causing issues.
+* Hexagon-plugin multiple fixes.
+* MapMovement-plugin fixed issues with the queue
+
+# Others
+* Pixi.js updated 4.2.1 -> 4.3.2
+
 <a name="0.6.4"></a>
 # 0.6.3 Bug fixes (2017-03-14)
+
 ## Possible breaking changes
 * Changed hexagon selection to work based on selectable-property instead of name
-## Bugs
+
+## Bug fixes
 * Added floor option for special distance
 
 <a name="0.6.3"></a>
 # 0.6.3 Bug fixes (2017-03-14)
-## Bugs
+
+## Bug fixes
 * Selecting objects didn't take element position into account (assumed canvas is in 0,0 coordinates)
 * Updating PIXI from 4.1.0 to 4.3.2
 * Removed Q from dependencies, using native ES6 promises
@@ -17,6 +36,7 @@
 
 <a name="0.6.2"></a>
 # 0.6.2 npm published in UMD (2016-11-23)
+
 ## Others
 * This update was mostly just to publish the engine to npm.
 * Added fetch polyfill
@@ -25,6 +45,7 @@
 
 <a name="0.6.1"></a>
 # 0.6.1 Tiny milestone for UI (2016-11-09)
+
 ## Possible breaking changes
 * Changed UI.showSelections-method logic, not API.
 
@@ -37,6 +58,7 @@
 
 <a name="0.6.0"></a>
 # 0.6.0 Pathfinding (2016-10-30)
+
 ## Possible breaking changes
 * flatworld.getMovableLayer and flatworld.getZoomLayer removed
 * Added a default prevention of selecting text with mouse. Optional parameter to activate.
@@ -60,6 +82,7 @@
 
 <a name="0.5.0"></a>
 # 0.5.0 Fog of war polish and multi-development setups (2016-09-25)
+
 ## Bug Fixes
 * Fog of war works is synced with map rendering by adding pre-rendering scripts to the engine.
 
@@ -72,6 +95,7 @@
 
 <a name="0.4.0"></a>
 # 0.4.0 Bug fixes (2016-08-31)
+
 ## Bug Fixes
 * Caching functionality removed! From the whole library. Currently it was not working correctly and and should have been checked through anyway. It's not considered needed for now.
 * Fog of war works correctly now.
@@ -87,6 +111,7 @@
 
 <a name="0.3.0"></a>
 # 0.3.0 Bug fixes (2016-08-02)
+
 ## Bug Fixes
 * Major Fog of War optimizations.
 * MapLayerParent.getSubcontainers should have flattened the arrays (breaking change).
@@ -99,6 +124,7 @@
 
 <a name="0.2.0"></a>
 # 0.2.0 Bug fixes (2016-07-??)
+
 ## Bug Fixes
 * If minimap canvas was not given flatworld main module threw an error.
 * Minimap optimizations (caching)
@@ -116,6 +142,7 @@
 
 <a name="0.1.0"></a>
 # 0.1.0 Bug fixes (2016-04-24)
+
 ## Bug Fixes
 * Context menu is totally disabled now and right click works better cross browser.
 * ES6 away from test scripts. Was failing on android.
@@ -131,6 +158,7 @@
 
 <a name="0.0.1"></a>
 # 0.0.1 Tiny bug fixes to kickstart the official versions development (2016-04-03)
+
 ## Bug Fixes
 * Changed README
 * Stripped gulp-uglify from development version, sourcemaps were not working.

@@ -37961,7 +37961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var constants = {
 	  ZERO_COORDINATES: new PIXI.Point(0, 0),
-	  VERSION: '0.6.3',
+	  VERSION: '0.6.5',
 	  DEFAULT_SCALE_MODE: 0
 	};
 	
