@@ -17,7 +17,7 @@
     "canvas",
     "HTML5"
   ],
-  "version": "0.6.3",
+  "version": "0.6.4",
   "main": "dist/flatworld.js",
   "author": "Janne Hyytiä",
   "license": "AGPL-3.0",
