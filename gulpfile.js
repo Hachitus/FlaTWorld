@@ -26,7 +26,6 @@ var config = {
     './src/components/map/core/utils/effects.js',
     './src/components/map/core/utils/utils.js',
     './src/components/map/core/utils/shapes.js',
-    './src/components/map/core/mapAPI.js',
     './src/components/map/core/mapEvents.js',
     './src/components/map/core/eventlisteners.js',
     './src/components/map/core/MapLayers.js',
