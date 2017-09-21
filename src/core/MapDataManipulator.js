@@ -18,6 +18,7 @@ class MapDataManipulator {
    *   type: 'filter',
    *   object: 'layer',
    *   property: 'selectable', // THIS can also be an array, like: ['data', 'a'] => data.a
+   *   matchAny: 'false', // By default all rules have to match, with matchAny only one has to match
    *   value: true,
    * }
    * For more information, please check the mapDataManipulatorSpec.js (test) for now.
@@ -101,6 +102,10 @@ class MapDataManipulator {
     this.rules.forEach((rule) => {
       if (rule.type === 'filter') {
         if (rule.object !== matchedType) {
+          return;
+        } else if (rule.matchNotRequired && ruleMatches) {
+          return;
+        } else if(!ruleMatches) {
           return;
         }
 

@@ -1,6 +1,12 @@
 <a name="0.6.5"></a>
 # 0.6.3 Bug fixes (2017-09-14)
 
+## Features
+* Possibilty to filte with mapDataManipulator using "and / or" option.
+
+<a name="0.6.5"></a>
+# 0.6.3 Bug fixes (2017-09-14)
+
 ## Possible breaking changes
 * Removed MapLayer.getUIObjects
 * 'objectMove' event sends a sligthly modified data
