@@ -185,7 +185,7 @@ function _isBlocked(coordinates) {
   
   if (!correctHexagon) {
     return -1;
-  } else if (returnedWeight && isInteger(returnedWeight)) {
+  } else if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
     return returnedWeight;
   } else if (returnedWeight && !isInteger(returnedWeight)) {
     throw new Error('weight callback has to return an integer');

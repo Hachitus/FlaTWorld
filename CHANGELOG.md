@@ -1,11 +1,14 @@
-<a name="0.6.5"></a>
-# 0.6.3 Bug fixes (2017-09-14)
+<a name="0.6.6"></a>
+# 0.6.6 Important changes ()
+
+## Possible breaking changes
+* Added argument to weightFn in hexagon extensions and changes the functionality a bit. The argument makes it possible to track the whole path being generated.
 
 ## Features
-* Possibilty to filte with mapDataManipulator using "and / or" option.
+* Possibilty to filter with mapDataManipulator using "and / or" option.
 
 <a name="0.6.5"></a>
-# 0.6.3 Bug fixes (2017-09-14)
+# 0.6.5 Bug fixes (2017-09-14)
 
 ## Possible breaking changes
 * Removed MapLayer.getUIObjects

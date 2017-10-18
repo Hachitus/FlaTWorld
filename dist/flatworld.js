@@ -39691,6 +39691,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   type: 'filter',
 	   *   object: 'layer',
 	   *   property: 'selectable', // THIS can also be an array, like: ['data', 'a'] => data.a
+	   *   matchAny: 'false', // By default all rules have to match, with matchAny only one has to match
 	   *   value: true,
 	   * }
 	   * For more information, please check the mapDataManipulatorSpec.js (test) for now.
@@ -39804,6 +39805,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.rules.forEach(function (rule) {
 	        if (rule.type === 'filter') {
 	          if (rule.object !== matchedType) {
+	            return;
+	          } else if (rule.matchNotRequired && ruleMatches) {
+	            return;
+	          } else if (!ruleMatches) {
 	            return;
 	          }
 	
@@ -41435,10 +41440,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'move',
 	    value: function move(path) {
-	      _index.mapEvents.publish('objectMove', this);
-	      mapAPI.put('objectMove', {
-	        id: this.data.id,
-	        path: path
+	      _index.mapEvents.publish('objectMove', {
+	        path: path,
+	        object: this
 	      });
 	    }
 	  }]);
@@ -48340,7 +48344,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  if (!correctHexagon) {
 	    return -1;
-	  } else if (returnedWeight && isInteger(returnedWeight)) {
+	  } else if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
 	    return returnedWeight;
 	  } else if (returnedWeight && !isInteger(returnedWeight)) {
 	    throw new Error('weight callback has to return an integer');
@@ -48444,7 +48448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param  {int} width - width of the grid
 	 * @param  {int} height - height of the grid
 	 * @param  {int} maxTime - maximal allowed time to get to destination (must be at least 1)
-	 * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weightFn - function that returns time between two adjacent cells
+	 * @param  {({ x: int, y: int }, { x: int, y: int }, [currentPaths]) => int} weightFn - function that returns time between two adjacent cells. The last argument signifies a "stable path". It can be used to track for instance gasoline used through the whole route
 	 * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
 	 * @return {{ x: int, y: int, time: int }[]} - path coordinates from start to destination (including starting point)
 	 */
@@ -48459,6 +48463,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  validateArgs();
 	
+	  // Counter calculates how many hexagon movements have been made so far
 	  var counter = 0;
 	  var d = Date.now();
 	
@@ -48509,11 +48514,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var y = curr.y + directions[i].y;
 	        var next = { x: x, y: y };
 	        var weight = weightFn(next, curr);
-	
-	        if (debug && (!isInteger(weight) || weight < 0)) {
-	          console.error(next, curr); // eslint-disable-line no-console
-	          throw new Error('weightFn didn\'t return non-negative integer: ' + weight);
-	        }
 	
 	        if (weight < 0 || curr.time + weight > maxTime) {
 	          continue;
