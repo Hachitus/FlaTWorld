@@ -83,21 +83,21 @@ function _tapListener(e) {
     FTW.currentlySelectedObjects.length = 0;
     log.debug('No objects found for selection!');
     // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-    ui.showSelections([]);
+
+    mapEvents.publish('objectsUnselected', []);
 
     return false;
   } else if (objects.length === 1) {
     FTW.currentlySelectedObjects = objects;
-    mapEvents.publish('objectsSelected', objects);
+    mapEvents.publish('objectsSelected', objects, getData);
 
     log.debug('One object selected');
   } else {
-    mapEvents.publish('multipObjectsSelected', objects);
+    mapEvents.publish('multipleObjectsSelected', objects, getData);
 
     log.debug('Multiple objects selected');
   }
 
-  ui.showSelections(objects, getData);
   FTW.drawOnNextTick();
 
   return true;
@@ -164,7 +164,8 @@ function _orderListener(e) {
 
     selectedObject.move(pathsToCoordinates);
     
-    ui.showUnitMovement(pathsToCoordinates);
+    mapEvents.publish('unitMoved', pathsToCoordinates);
+    // ui.showUnitMovement(pathsToCoordinates);
 
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
@@ -175,13 +176,13 @@ function _orderListener(e) {
   }
 }
 
-function _isBlocked(coordinates) {
+function _isBlocked(nextCoordinates, queue) {
   /* We use the EARLIER path to test, how much moving to the next area will require. We can
    * not use the next area to test it, as that could lead to nasty surpises (like units
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
    */
-  const correctHexagon = FTW.hexagonIndexes[coordinates.x] && FTW.hexagonIndexes[coordinates.x][coordinates.y];
-  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
+  const correctHexagon = FTW.hexagonIndexes[nextCoordinates.x] && FTW.hexagonIndexes[nextCoordinates.x][nextCoordinates.y];
+  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
   
   if (!correctHexagon) {
     return -1;

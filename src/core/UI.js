@@ -1,4 +1,4 @@
-import { mapLog } from './index';
+import { mapLog, mapEvents } from './index';
 
 /*---------------------
 ------ VARIABLES ------
@@ -36,6 +36,20 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
   if (!UITheme || !givenMap) {
     throw new Error(`UI-module requires UITheme and map object, This is a singleton class, so it's possible it should have been already called earlier`);
   }
+
+  mapEvents.subscribe('objectsUnselected', () => {
+    givenMap.currentlySelectedObjects.length = 0;
+    scope.showSelections([]);
+  })
+  mapEvents.subscribe('objectsSelected', (objects, getData) => {
+    scope.showSelections(objects, getData);
+  })
+  mapEvents.subscribe('multipleObjectsSelected', (objects, getData) => {
+    scope.showSelections(objects, getData);
+  })
+  mapEvents.subscribe('unitMoved', (pathsToCoordinates) => {
+    scope.showUnitMovement(pathsToCoordinates);
+  })
 
   validateUITheme([
     'highlightSelectedObject',
