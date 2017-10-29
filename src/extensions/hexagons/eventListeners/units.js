@@ -79,24 +79,9 @@ function _tapListener(e) {
   objects = utils.dataManipulation.mapObjectsToArray(objects);
   objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
-  if (!objects.length) {
-    FTW.currentlySelectedObjects.length = 0;
-    log.debug('No objects found for selection!');
-    // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-
-    mapEvents.publish('objectsUnselected', []);
-
-    return false;
-  } else if (objects.length === 1) {
-    FTW.currentlySelectedObjects = objects;
-    mapEvents.publish('objectsSelected', objects, getData);
-
-    log.debug('One object selected');
-  } else {
-    mapEvents.publish('multipleObjectsSelected', objects, getData);
-
-    log.debug('Multiple objects selected');
-  }
+  FTW.currentlySelectedObjects = objects;
+  mapEvents.publish('objectsSelected', objects, getData)
+  log.debug('objectsSelected', objects, getData);
 
   FTW.drawOnNextTick();
 
