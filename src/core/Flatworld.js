@@ -9,6 +9,7 @@ const LAYER_TYPE_MOVABLE = 1;
 const LAYER_TYPE_MINIMAP = 2;
 const _renderers = {};
 const protectedProperties = {};
+const currentlySelectedObjects = [];
 let _drawMapOnNextTick = false;
 let isMapReadyPromises = [];
 let _privateRenderers, _zoomLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
@@ -221,13 +222,6 @@ class Flatworld {
      * @type {Boolean}
      **/
     this.isSupportedTouch = utils.environment.isTouchDevice();
-    /**
-     * The object or objects that are currently selected for details and actions / orders. This gets set by other modules, like plugins.
-     *
-     * @attribute currentlySelectedObjects
-     * @type {Array}
-     **/
-    this.currentlySelectedObjects = [];
     /**
      * Layer types. Can be extended, but the already defined types are supposed to be constants and not to be changed.
      *
@@ -798,6 +792,20 @@ class Flatworld {
    */
   removeMinimapLayer() {
     _minimapLayer = undefined;
+  }
+
+  /**
+   * The objects that are currently selected for details and actions / orders. This gets set by other modules, like plugins.
+   *
+   * @attribute currentlySelectedObjects
+   * @type {Array}
+   **/
+  get currentlySelectedObjects() {
+    return currentlySelectedObjects;
+  }
+  set currentlySelectedObjects(newObjects) {
+    currentlySelectedObjects.length = 0;
+    currentlySelectedObjects.push(...newObjects);
   }
   /*---------------------------------------------
    ------- ABSTRACT APIS THROUGH PLUGINS --------
