@@ -809,6 +809,7 @@ class Flatworld {
     }
     currentlySelectedObjects.length = 0;
     currentlySelectedObjects.push(...newObjects);
+    mapEvents.publish('objectsSelected', newObjects)
   }
   /*---------------------------------------------
    ------- ABSTRACT APIS THROUGH PLUGINS --------

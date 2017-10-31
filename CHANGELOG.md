@@ -1,6 +1,11 @@
 <a name="0.7.0"></a>
-# 0.6.6 Changes the library to event based (2017-11-?)
+# 0.7.0 Changes the library to event based (2017-11-?)
 
+## Breaking changes
+* Removed the UI.js and themes. We do things event based
+
+## Features
+* Added currentlySelectedObjects setter to flatworld, to give ability to set selectedObjects and control how they are set.
 
 ## Possible breaking changes
 * Added argument to weightFn in hexagon extensions and changes the functionality a bit. The argument makes it possible to track the whole path being generated.
