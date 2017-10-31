@@ -1,5 +1,6 @@
-<a name="0.6.6"></a>
-# 0.6.6 Important changes ()
+<a name="0.7.0"></a>
+# 0.6.6 Changes the library to event based (2017-11-?)
+
 
 ## Possible breaking changes
 * Added argument to weightFn in hexagon extensions and changes the functionality a bit. The argument makes it possible to track the whole path being generated.
