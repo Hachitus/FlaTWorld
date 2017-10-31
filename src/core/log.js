@@ -10,6 +10,9 @@ const log = {
   debug(e) {
     loglevel.debug(e);
   },
+  warn(e) {
+    loglevel.warn(e);
+  },
   error(e) {
     loglevel.error(e);
   }
