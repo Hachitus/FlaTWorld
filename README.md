@@ -1,6 +1,9 @@
 [![GPLv3 Affero License](http://img.shields.io/badge/license-LGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl.html)
 [![Gitter](https://badges.gitter.im/Hachitus/FlaTWorld.svg)](https://gitter.im/Hachitus/FlaTWorld)
 
+#Development halted
+Unfortunately for several (personal) reasons, I've decided to cancel the development of the engine. There was a game in an ok status being developed with it, so with small performance and bug tweaks then engine was in quite a good shape already. But there is a time for everything.
+
 #ALPHA!
 The development is still in alpha stage. Basic features are mostly done for the engine, but the API and structure can still go under changes, please take that into account! Also please contact me if you plan to use the engine or have questions! Gitter is an easy option too.
 
