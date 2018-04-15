@@ -27,14 +27,6 @@ module.exports = {
     loaders: [{
         test: /\.handlebars$/,
         loader: "handlebars-loader"
-      }, {
-        test: /\.js$/,
-        //include: path.join(__dirname, 'src'),
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-/*        query: {
-          presets: ['es2015'],  
-        }*/
       }
     ]
   },
