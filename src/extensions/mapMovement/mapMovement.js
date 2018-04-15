@@ -189,7 +189,7 @@ const mapMovement = (function(debug = false) {
    * @param  {Object} scaledViewport    Viewportarea that has been scaled.
    * @param  {Array} primaryLayers      The primarylayers that we handle
    */
-  function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
+  async function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
     const largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
     let containersUnderChangedArea = [];
 
@@ -213,37 +213,37 @@ const mapMovement = (function(debug = false) {
       return promise;
     });
 
-    Promise.all(promises).then(() => {
-      containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
+    await Promise.all(promises).then(() => {
+        containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
 
-      const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
+        const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
-      const promises = subcontainers.map((thesesContainers) => {
-        const promise = new Promise((resolve, reject) => {
-          try {
-            window.setTimeout(function () {
-              resolve(thesesContainers.filter((thisContainer) => {
-                return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
-              }));
-            });
-          } catch (e) {
-            reject(e);
-          }
+        const promises = subcontainers.map((thesesContainers) => {
+          const promise = new Promise((resolve, reject) => {
+            try {
+              window.setTimeout(function () {
+                resolve(thesesContainers.filter((thisContainer) => {
+                  return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
+                }));
+              });
+            } catch (e) {
+              reject(e);
+            }
+          });
+
+          return promise;
         });
 
-        return promise;
+        return promises;
+      }).then(() => {
+        queue.processing = false;
+
+        mapInstance.drawOnNextTick();
+      }).catch((err) => {
+        queue.processing = true;
+
+        window.flatworld.log.debug(err);
       });
-
-      return promises;
-    }).then(() => {
-      queue.processing = false;
-
-      mapInstance.drawOnNextTick();
-    }).catch((err) => {
-      queue.processing = true;
-
-      window.flatworld.log.debug(err);
-    });
   }
   /**
    * Initializes the module variables viewportArea and offsetSize

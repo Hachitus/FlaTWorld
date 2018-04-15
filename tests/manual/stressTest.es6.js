@@ -153,7 +153,7 @@
     return returnable;
   }
 
-  function initFlatworld(mapData, options) {
+  async function initFlatworld(mapData, options) {
     var mapsize = options.mapsize;
     var mapCanvas = options.mapCanvas;
     var trackFPSCB = options.trackFPSCB;
@@ -222,7 +222,7 @@
       console.log('progressing' + progress);
     });
 
-    return preload.resolveOnComplete()
+    await preload.resolveOnComplete()
       .then(onComplete)
       .then(function (map) {
         return map.whenReady;
