@@ -1,10 +1,13 @@
-window.flatworldCreatorHelper = {
+import Flatworld from '../../src/core/Flatworld';
+import objects from '../../src/core/Objects';
+
+export default {
   creator: privateCreator,
   initFlatworld: privateInitFlatworld
 };
 
 function privateCreator(flatworldOptions) {
-  const { Flatworld, objects } = window.flatworld;
+  console.log("=======================================")
   const renderer = new PIXI.WebGLRenderer();
   const map = new Flatworld(renderer.view, flatworldOptions);
 

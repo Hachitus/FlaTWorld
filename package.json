@@ -18,7 +18,7 @@
     "HTML5"
   ],
   "version": "0.6.5",
-  "main": "dist/flatworld.js",
+  "main": "dist/FlaTWorld.js",
   "author": "Janne Hyytiä",
   "license": "AGPL-3.0",
   "repository": {
@@ -30,25 +30,36 @@
   },
   "homepage": "https://github.com/Hachitus/FlaTWorld",
   "scripts": {
-    "start": "echo 'starting instance in http://localhost:9001/' && forever start startEngine.js",
-    "stop": "forever stop startEngine.js",
-    "build": "webpack",
-    "watch": "webpack --progress --colors --watch",
-    "deploy": "webpack --output-path=./dist",
+    "start:dev": "npx webpack-dev-server --config webpack.config.dev.js",
+    "build:prod": "npx webpack --config webpack.config.prod.js",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
-    "document": "yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
-    "showDocuments": "echo 'starting instance in http://localhost:9002/' && forever start startDocument.js --uid FlaTWorldDocument",
-    "init": "npm i -g forever && ln -s /usr/bin/nodejs /usr/bin/node && npm install",
-    "lint": "node_modules/.bin/eslint ."
+    "document": "npx yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
+    "showDocuments": "echo 'starting instance in http://localhost:9002/' && npx forever start startDocument.js --uid FlaTWorldDocument",
+    "test": "npx karma start karma.conf.js --log-level debug --single-run",
+    "init": "ln -s /usr/bin/nodejs /usr/bin/node && npm install",
+    "lint": "npx eslint ."
   },
   "devDependencies": {
+    "bundle-loader": "^0.5.6",
     "eslint": "^3.8.1",
     "eslint-loader": "^1.6.0",
     "express": "^4.12.4",
-    "webpack": "^1.13.2",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-edge-launcher": "^0.4.2",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-webpack": "^3.0.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.1.3",
     "yuidocjs": "^0.10.0"
   },
   "dependencies": {
+    "edge-launcher": "^1.2.2",
+    "esm": "^3.0.25",
     "eventemitter3": "^2.0.2",
     "hammerjs": "^2.0.8",
     "hamsterjs": "^1.1.2",
@@ -57,6 +68,7 @@
     "howler": "^2.0.1",
     "javascript-state-machine": "^2.3.5",
     "loglevel": "^1.4.1",
+    "nvm": "0.0.4",
     "pixi.js": "^4.2.1",
     "whatwg-fetch": "^2.0.0"
   }

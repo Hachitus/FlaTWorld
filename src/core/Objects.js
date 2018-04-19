@@ -4,7 +4,7 @@ import { constants, utils, mapEvents } from './index';
 /*-----------------------
 ---------- API ----------
 -----------------------*/
-class ObjectSprite extends PIXI.Sprite {
+export class ObjectSprite extends PIXI.Sprite {
   /**
    * The base class of all sprite objects
    *
@@ -186,7 +186,7 @@ class ObjectSprite extends PIXI.Sprite {
   }
 }
 
-class ObjectSpriteTerrain extends ObjectSprite {
+export class ObjectSpriteTerrain extends ObjectSprite {
   /**
    * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are
    * inherited, depending on the map type. For example you might want to add some click area for these
@@ -206,7 +206,7 @@ class ObjectSpriteTerrain extends ObjectSprite {
   }
 }
 
-class ObjectSpriteUnit extends ObjectSprite {
+export class ObjectSpriteUnit extends ObjectSprite {
   /**
    * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
    * For example you might want to add some click area for these (e.g. hexagon)

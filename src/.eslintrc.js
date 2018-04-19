@@ -1,5 +1,5 @@
 module.exports = {
-  "parser": "babel-eslint",
+  /* "parser": "babel-eslint", */
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
@@ -26,6 +26,7 @@ module.exports = {
     "no-use-before-define": ["error", {
       "functions": false,
       "classes": true
-    }]
+    }],
+    "max-len": "120",
   }
 };
