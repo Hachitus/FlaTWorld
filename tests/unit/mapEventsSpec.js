@@ -11,7 +11,6 @@ describe('mapEvents tests => ', () => {
     let cbFinished = 'no';
     const testCallback = function (datas, context) {
       cbFinished = datas;
-      console.log(console.time())
     };
 
     mapEvents.subscribe('test', testCallback);

@@ -1,11 +1,11 @@
-import creator from './flatworldCreatorHelper';
+import helper from './flatworldCreatorHelper';
 import { ObjectSprite, ObjectSpriteTerrain, ObjectSpriteUnit } from '../../src/core/Objects';
 
 let map;
 
 describe('object tests => ', () => {
   beforeEach(() => {
-    map = creator();
+    map = helper.creator();
   });      
 
   it('ObjectSprite', () => {

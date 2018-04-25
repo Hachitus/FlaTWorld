@@ -7,7 +7,6 @@ export default {
 };
 
 function privateCreator(flatworldOptions) {
-  console.log("=======================================")
   const renderer = new PIXI.WebGLRenderer();
   const map = new Flatworld(renderer.view, flatworldOptions);
 

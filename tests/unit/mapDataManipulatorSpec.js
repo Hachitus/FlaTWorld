@@ -1,8 +1,9 @@
+import MapDataManipulator from '../../src/core/MapDataManipulator';
+import mapLayers from '../../src/core/MapLayers';
+import objects from '../../src/core/Objects';
+import utils from '../../src/core/utils/';
+
 describe('mapDataManipulator => ', () => {
-  const MapDataManipulator = window.flatworld.MapDataManipulator;
-  const mapLayers = window.flatworld.mapLayers;
-  const objects = window.flatworld.objects;
-  const utils = window.flatworld.utils;
   let layerRules;
   let objectRules;
   let testLayers;
