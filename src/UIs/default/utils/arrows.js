@@ -11,7 +11,9 @@
       2 - unfilled but stroked head
       3 - filled head with back a curve drawn with quadraticCurveTo
       4 - filled head with back a curve drawn with bezierCurveTo
-          function(ctx,x0,y0,x1,y1,x2,y2,style) - a function provided by the user to draw the head. Point (x1,y1) is the same as the end of the line, and (x0,y0) and (x2,y2) are the two back corners. The style argument is the this for the function. An example that just draws little circles at each corner of the arrow head is shown later in this document.
+          function(ctx,x0,y0,x1,y1,x2,y2,style) - a function provided by the user to draw the head. Point (x1,y1) is the same as the end of
+          the line, and (x0,y0) and (x2,y2) are the two back corners. The style argument is the this for the function. An example that just
+          draws little circles at each corner of the arrow head is shown later in this document.
       default 3 (filled head with quadratic back)
   @param {int} which - which end(s) get the arrow
       0 - neither

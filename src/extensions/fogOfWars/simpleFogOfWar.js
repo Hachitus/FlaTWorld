@@ -60,7 +60,10 @@ const simpleFogOfWar = (function() {
     mapRenderer = this.mapInstance.getRenderer();
 
     maskStageContainer = this.mapInstance.createSpecialLayer('FoWStageMaskLayer');
-    // This could use particleContainer. But particleContainer + drawRect graphics have a conflict. In our case, when we zoom far enough and there is a lot of sprites on the screen, the particleContainer + drawRect gives a webGL error "glDrawElements: range out of bounds for buffer". So we must use container for now.
+    /* This could use particleContainer. But particleContainer + drawRect graphics have a conflict. In our case, when we zoom far enough
+     * and there is a lot of sprites on the screen, the particleContainer + drawRect gives a webGL error "glDrawElements: range out of 
+     * bounds for buffer". So we must use container for now.
+     */
     maskMovableContainer = new PIXI.Container();
     maskMovableContainer.position = mapInstance.getMapCoordinates(undefined, true);
 
@@ -139,7 +142,10 @@ const simpleFogOfWar = (function() {
     //renderTexture.resize(resize.getWindowSize().x, resize.getWindowSize().y);
     maskSprite.width = resize.getWindowSize().x;
     maskSprite.height = resize.getWindowSize().y;
-    // MaskSprites bounds create a filterArea to the zoomLayer as the maskSprite is a mask for it. This causes resizing not to work correctly, if the bounds are not changed and bounds are not updated without this call (for some reason just width and height change is not enough).
+    /* MaskSprites bounds create a filterArea to the zoomLayer as the maskSprite is a mask for it. This causes resizing not to work
+     * correctly, if the bounds are not changed and bounds are not updated without this call (for some reason just width and height change
+     * is not enough).
+     */
     maskSprite.getBounds();
   }
 

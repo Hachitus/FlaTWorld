@@ -289,7 +289,8 @@ class MapLayerParent extends MapLayer {
     return displayObject;
   }
   /**
-   * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects. Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
+   * Get all objects that are this layers children or subcontainers children. Does not return layers, but the objects.
+   * Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
    *
    * @method getObjects
    * @return {Array}            All the objects (not layers) found under this layer

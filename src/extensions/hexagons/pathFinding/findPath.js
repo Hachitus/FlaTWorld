@@ -46,7 +46,8 @@ class PriorityQueue {
  * @param  {int} width - width of the grid
  * @param  {int} height - height of the grid
  * @param  {int} maxTime - maximal allowed time to get to destination (must be at least 1)
- * @param  {({ x: int, y: int }, { x: int, y: int }, [currentPaths]) => int} weightFn - function that returns time between two adjacent cells. The last argument signifies a "stable path". It can be used to track for instance gasoline used through the whole route
+ * @param  {({ x: int, y: int }, { x: int, y: int }, [currentPaths]) => int} weightFn - function that returns time between two adjacent 
+ * cells. The last argument signifies a "stable path". It can be used to track for instance gasoline used through the whole route
  * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
  * @return {{ x: int, y: int, time: int }[]} - path coordinates from start to destination (including starting point)
  */

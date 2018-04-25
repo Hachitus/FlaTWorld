@@ -103,7 +103,9 @@ function hexaFactory(mapCanvas, datas, {
           try {
             objTypeData = DATA_TYPE[spritesheetType][object.objType];
             if (!objTypeData) {
-              const error = new Error('Bad mapData for type:' + spritesheetType.toString() + object.objType.toString() + object.name.toString());
+              const error = new Error(
+                `Bad mapData for type: ${spritesheetType.toString()} ${object.objType.toString()} ${object.name.toString()}`
+              );
               log.error(error);
               throw error;
             }
@@ -120,7 +122,8 @@ function hexaFactory(mapCanvas, datas, {
             };
 
             newObject = new functionsInObj[objectGroup.type](texture, object.coord, objectOptions);
-            /** @todo This is here to test using higher resolution sprites, that would handle zooming more gracefully. This should not really be here, but rather as some kind of option or in the object classes that are extended */
+            /** @todo This is here to test using higher resolution sprites, that would handle zooming more gracefully. This should not 
+             * really be here, but rather as some kind of option or in the object classes that are extended */
             if (DATA_GRAPHIC[objectGroup.typeImageData].initialScale) {
               newObject.scale.x = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;
               newObject.scale.y = DATA_GRAPHIC[objectGroup.typeImageData].initialScale;

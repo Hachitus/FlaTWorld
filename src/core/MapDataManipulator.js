@@ -68,7 +68,9 @@ class MapDataManipulator {
     this.rules.concat(rules);
   }
 
-  /** @todo I think this should be implemented. But it's a small optimization so don't bother yet. Basically the idea is to ONLY use the filters that each situation requires. Not iterate through the unneeded filters */
+  /** @todo I think this should be implemented. But it's a small optimization so don't bother yet. Basically the idea is
+   * to ONLY use the filters that each situation requires. Not iterate through the unneeded filters
+   */
   getOnlyFiltersOf(/*type*/) { }
 
   /**

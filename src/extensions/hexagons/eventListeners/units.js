@@ -132,7 +132,14 @@ function _orderListener(e) {
     } else {
       try {
         const timeUnits = selectedObject.data.typeData.move;
-        pathsToCoordinates = hexagons.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
+        pathsToCoordinates = hexagons.findPath(
+          objectIndexes, 
+          destinationIndexes, 
+          +FTW.getMapsize().x, 
+          +FTW.getMapsize().y, 
+          +timeUnits, 
+          _isBlocked
+        );
         pathsToCoordinates = pathsToCoordinates.map(coords => {
           return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
         });
@@ -140,7 +147,8 @@ function _orderListener(e) {
         if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
           e.message = 'the destination was farther than the given maximum distance';
         } else {
-          e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
+          e.message += `, EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or 
+                        something else happened`;
         }
 
         throw e;

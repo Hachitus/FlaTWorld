@@ -27,6 +27,8 @@ module.exports = {
       "functions": false,
       "classes": true
     }],
-    "max-len": "120",
+    "max-len": ["warn", {
+      code: 140,
+    }],
   }
 };

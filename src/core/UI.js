@@ -34,7 +34,8 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
   }
 
   if (!UITheme || !givenMap) {
-    throw new Error(`UI-module requires UITheme and map object, This is a singleton class, so it's possible it should have been already called earlier`);
+    throw new Error(`UI-module requires UITheme and map object, This is a singleton class, 
+                    so it's possible it should have been already called earlier`);
   }
 
   mapEvents.subscribe('objectsSelected', (objects, getData) => {
