@@ -12,7 +12,7 @@ module.exports = [{
     library: 'stressTest',
     umdNamedDefine: true
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [{
       enforce: 'pre',

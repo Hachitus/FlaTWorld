@@ -15,7 +15,6 @@ module.exports = [{
     node: {
       fs: "empty"
     },
-    devtool: 'source-map',
     module: {
       rules: [{
         enforce: 'pre',
@@ -28,7 +27,10 @@ module.exports = [{
         loader: "handlebars-loader"
       }]
     },
-    mode: 'production'
+    mode: 'production',
+    performance: {
+      hints: false,
+    },
   }, {
     entry: [
       './src/bundle'
@@ -43,7 +45,6 @@ module.exports = [{
     node: {
       fs: "empty"
     },
-    devtool: 'source-map',
     module: {
       rules: [{
         enforce: 'pre',
@@ -56,5 +57,8 @@ module.exports = [{
         loader: "handlebars-loader"
       }]
     },
-    mode: 'production'
+    mode: 'production',
+    performance: {
+      hints: false
+    },
 }];
