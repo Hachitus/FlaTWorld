@@ -26,13 +26,6 @@ module.exports = [{
       },{
         test: /\.handlebars$/,
         loader: "handlebars-loader"
-      },
-      {
-        test: /\.js?$/,
-        loader: 'bundle-loader',          
-        options: {
-          name: 'my-chunk'
-        }
       }]
     },
     mode: 'production'
@@ -42,7 +35,7 @@ module.exports = [{
     ],
     output: {
       path: `${path.resolve(__dirname)}/dist`,
-      filename: 'flatworld.var.js',
+      filename: 'flatworld.min.js',
       libraryTarget: 'var',
       library: 'flatworld',
       umdNamedDefine: true
@@ -61,13 +54,6 @@ module.exports = [{
       },{
         test: /\.handlebars$/,
         loader: "handlebars-loader"
-      },
-      {
-        test: /\.js?$/,
-        loader: 'bundle-loader',          
-        options: {
-          name: 'my-chunk'
-        }
       }]
     },
     mode: 'production'

@@ -40,7 +40,6 @@
     "lint": "npx eslint ./src/"
   },
   "devDependencies": {
-    "bundle-loader": "^0.5.6",
     "eslint": "^3.8.1",
     "eslint-loader": "^1.6.0",
     "express": "^4.12.4",
