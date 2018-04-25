@@ -1,4 +1,4 @@
-import {  utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, log } from '../../../core/';
+import {  utils, mapEvents, MapDataManipulator, eventListeners, mapStates, log } from '../../../core/';
 import { findPath } from '../pathFinding/findPath';
 import * as hexaUtils from '../utils/';
 const hexagons = {
@@ -27,7 +27,7 @@ let weight = () => 0;
 const getObjectData = (object) => {
   return object.data.typeData;
 }
-let FTW, ui;
+let FTW;
 
 /*---------------------
 ------- PUBLIC --------
@@ -48,8 +48,6 @@ function setupHexagonClick(mapInstance, weightFn) {
   }
 
   FTW = mapInstance;
-
-  ui = UI();
 
   eventListeners.on('select', _tapListener);
   eventListeners.on('order', _orderListener);
@@ -158,7 +156,6 @@ function _orderListener(e) {
     selectedObject.move(pathsToCoordinates);
     
     mapEvents.publish('unitMoved', pathsToCoordinates);
-    // ui.showUnitMovement(pathsToCoordinates);
 
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
