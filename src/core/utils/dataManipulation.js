@@ -26,7 +26,7 @@
  * @param  {Object} objects       Object that holds objects
  * @return {Array}                Returns the transformed array
  */
-function mapObjectsToArray(objects) {
+export function mapObjectsToArray(objects) {
   return Object.keys(objects).map(objGroup => {
     return objects[objGroup];
   });
@@ -35,7 +35,7 @@ function mapObjectsToArray(objects) {
  * @method flattenArrayBy1Level
  * @param  {Array} objects
  */
-function flattenArrayBy1Level(objects) {
+export function flattenArrayBy1Level(objects) {
   const merged = [];
 
   return merged.concat.apply(merged, objects);

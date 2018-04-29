@@ -8,7 +8,7 @@ import { utils } from './index.js';
 /*---------------------
 -------- EXPORT -------
 ---------------------*/
-class MapLayer extends PIXI.Container {
+export class MapLayer extends PIXI.Container {
   /**
    * Creates a basic layer for the Map. This type of layer can not hold subcontainers. Note that different devices and graphic cards can
    * only have specific size of bitmap drawn, and PIXI cache always draws a bitmap thus the default is: 4096, based on this site:
@@ -34,6 +34,7 @@ class MapLayer extends PIXI.Container {
       zoomLayer = true,
       selectable = false } = {}) {
     super();
+
     Object.assign(this, coord);
 
     /**
@@ -121,7 +122,9 @@ class MapLayer extends PIXI.Container {
    * not special layers (such as UI layers etc.)
    *
    * @method getPrimaryLayers
-   * @return {Array}                            Primary children layers under this layer
+   * @param {MapDataManipulator} filters    Filters the children based on these rules
+   * @param filters               
+   * @return {Array}                        Primary children layers under this layer
    * */
   getPrimaryLayers({ filters } = {}) {
     return this.children.filter(thisChild => {
@@ -236,7 +239,7 @@ class MapLayer extends PIXI.Container {
   }
 }
 
-class MapLayerParent extends MapLayer {
+export class MapLayerParent extends MapLayer {
   /**
    * Layer designed to hold subcontainers. But can handle objects too. Different devices graphic cards can only have specific size of
    * bitmap drawn, and PIXI cache always draws a bitmap. Thus the default is: 4096, based on this site: http://webglstats.com/ and
@@ -293,6 +296,7 @@ class MapLayerParent extends MapLayer {
    * Works on primary layer only currently. So can not seek for complicated children structure, seeks only inside subcontainers.
    *
    * @method getObjects
+   * @param {MapDataManipulator}  filter  filter for filtering correct objects
    * @return {Array}            All the objects (not layers) found under this layer
    * */
   getObjects(filter) {
@@ -346,8 +350,11 @@ class MapLayerParent extends MapLayer {
   }
 }
 
-class MapSubcontainer extends PIXI.Container {
+export class MapSubcontainer extends PIXI.Container {
   /**
+   * This class is intended mostly for use with mapLayers, so an internal class. It is exported for
+   * testing purposes.
+   * 
    * Subcontainers are containers that hold objects like units and terrain etc. under them. They have some restrictions atm. since they
    * are PIXI.ParticleContainers. But when needed we can extend MapLayers with another class which is subcontainer, but not
    * ParticleContainer at the present there is no need, so we won't extend yet. Subcontainers help the layers to make better movement of
@@ -358,11 +365,15 @@ class MapSubcontainer extends PIXI.Container {
    * @private
    * @class MapSubcontainer
    * @constructor
-   * @param  {Object} size              Subontainer size. If given activated subcontainers, otherwise not.
+   * @param  {Object} size              REQUIRED. Defineds subontainer size.
    * @param  {Integer} size.width       width (in pixels)
    * @param  {Integer} size.height      height (in pixels)
    */
   constructor(size) {
+    if (!size) {
+      throw new Error('MapSubcontainer requires size parameter');
+    }
+
     super();
 
     this.specialLayer = true;
@@ -377,8 +388,8 @@ class MapSubcontainer extends PIXI.Container {
    * @param {Boolean} options.toGlobal                  Do we get the global coordinates or local
    * @return {Object}                                   x, y, width and height returned inside object.
    */
-  getSubcontainerArea(options = { toGlobal: true }) {
-    const coordinates = options.toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
+  getSubcontainerArea({ toGlobal = true } = {}) {
+    const coordinates = toGlobal ? this.toGlobal(new PIXI.Point(0, 0)) : this;
 
     return {
       x: Math.round(coordinates.x),
@@ -389,7 +400,7 @@ class MapSubcontainer extends PIXI.Container {
   }
 }
 
-class MinimapLayer extends PIXI.Container {
+export class MinimapLayer extends PIXI.Container {
   /**
    * Subcontainers are containers that hold objects like units and terrain etc. under them. They have some restrictions atm. since they
    * are PIXI.ParticleContainers. But when needed we can extend MapLayers with another class which is subcontainer, but not

@@ -8,6 +8,7 @@ describe('mapDataManipulator => ', () => {
   let objectRules;
   let testLayers;
   let testObjects;
+  let allObjects
 
   beforeEach(() => {
     layerRules = {
@@ -28,16 +29,17 @@ describe('mapDataManipulator => ', () => {
     }),
     new mapLayers.MapLayer({
       selectable: true,
-      name: 'unitLayer',
+      name: 'unitLayer1',
     }),
     new mapLayers.MapLayer({
       selectable: false,
-      name: 'unitLayer',
+      name: 'unitLayer2',
     })];
     testObjects = [
       new objects.ObjectSpriteTerrain(),
       new objects.ObjectSpriteUnit(),
     ];
+    allObjects = testObjects.concat(testLayers);
   });
 
   it('constructing without params should throw error', () => {
@@ -50,7 +52,7 @@ describe('mapDataManipulator => ', () => {
 
     let foundLayers = mapDataManipulator.filter(testLayers);
 
-    expect(foundLayers[0]).toBe(testLayers[1]);
+    expect(foundLayers[0].name).toEqual(testLayers[1].name);
 
     testLayers[2].selectable = true;
     foundLayers = mapDataManipulator.filter(testLayers);
@@ -62,7 +64,7 @@ describe('mapDataManipulator => ', () => {
 
     let foundObjects = mapDataManipulator.filter(testObjects);
 
-    expect(foundObjects[0]).toBe(testObjects[0]);
+    expect(foundObjects[0].name).toEqual(testObjects[0].name);
 
     testObjects[1].name = 'DefaultTerrainObject';
     foundObjects = mapDataManipulator.filter(testObjects);
@@ -71,11 +73,24 @@ describe('mapDataManipulator => ', () => {
   });
   it('filter both', () => {
     const layerAndObjectsFilter = new MapDataManipulator([layerRules, objectRules]);
-    const allObjects = testObjects.concat(testLayers);
 
     const foundObjects = layerAndObjectsFilter.filter(allObjects);
 
     expect(foundObjects[0]).toBe(testObjects[0]);
     expect(foundObjects[1]).toBe(testLayers[1]);
+  });
+  it('filter propertyOptional', () => {
+    const rulesWithOptional = Object.assign({ propertyOptional: true }, layerRules);
+    const rulesWithOptional2 = Object.assign({ propertyOptional: true }, objectRules);
+
+    let mapDataManipulator = new MapDataManipulator([rulesWithOptional, rulesWithOptional2]);
+    let found = mapDataManipulator.filter(allObjects);
+
+    expect(found.length).toBe(5);
+
+    mapDataManipulator = new MapDataManipulator([rulesWithOptional, objectRules]);
+    found = mapDataManipulator.filter(allObjects);
+
+    expect(found.length).toBe(4);
   });
 });

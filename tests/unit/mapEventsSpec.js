@@ -1,7 +1,6 @@
 
 
 import mapEvents from '../../src/core/mapEvents';
-let map;
 
 describe('mapEvents tests => ', () => {
   beforeEach(() => {
@@ -9,7 +8,7 @@ describe('mapEvents tests => ', () => {
   })
   it('basic', () => {
     let cbFinished = 'no';
-    const testCallback = function (datas, context) {
+    const testCallback = function (datas/* , context */) {
       cbFinished = datas;
     };
 
@@ -45,7 +44,6 @@ describe('mapEvents tests => ', () => {
     /* This one has timeout set to 5 milliseconds and our cooldown in milliseconds is 50, the 50 milliseconds should not
       have passed from the call to publish last time couple rows higher. So the callback should get called */
     window.setTimeout(() => {
-      console.log("1st timeout")
       expect(cbFinished).toEqual([1, 2], 'SECOND');
       mapEvents.publish({ name: 'test2', cooldown: testCooldown }, [3, 4]);
     }, 5);
@@ -53,7 +51,6 @@ describe('mapEvents tests => ', () => {
     /* This one waits for 100 milliseconds, which is longer than the given cooldown of 50 milliseconds, so the callback
       should get called */
     window.setTimeout(() => {
-      console.log("2nd timeout")
       expect(cbFinished).toEqual([1, 2], 'THIRD');
       mapEvents.publish({ name: 'test2', cooldown: testCooldown }, [5, 6]);
     }, 100);
@@ -63,7 +60,6 @@ describe('mapEvents tests => ', () => {
     /* This one waits for more than 100 milliseconds, which is longer than the last setTimeout, which set the [5, 6] 
     values, so the callback should have set the [5, 6] values correctly through callback */
     window.setTimeout(() => {
-      console.log("3rd timeout", cbFinished)
       expect(cbFinished).toEqual([5, 6], 'FINAL');
       done();
     }, 200);

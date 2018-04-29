@@ -214,36 +214,36 @@ const mapMovement = (function(debug = false) {
     });
 
     await Promise.all(promises).then(() => {
-        containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
+      containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
 
-        const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
+      const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);
 
-        const promises = subcontainers.map((thesesContainers) => {
-          const promise = new Promise((resolve, reject) => {
-            try {
-              window.setTimeout(function () {
-                resolve(thesesContainers.filter((thisContainer) => {
-                  return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
-                }));
-              });
-            } catch (e) {
-              reject(e);
-            }
-          });
-
-          return promise;
+      const promises = subcontainers.map((thesesContainers) => {
+        const promise = new Promise((resolve, reject) => {
+          try {
+            window.setTimeout(function () {
+              resolve(thesesContainers.filter((thisContainer) => {
+                return thisContainer.visible = isObjectOutsideViewport(thisContainer, scaledViewport) ? false : true;
+              }));
+            });
+          } catch (e) {
+            reject(e);
+          }
         });
 
-        return promises;
-      }).then(() => {
-        queue.processing = false;
-
-        mapInstance.drawOnNextTick();
-      }).catch((err) => {
-        queue.processing = true;
-
-        window.flatworld.log.debug(err);
+        return promise;
       });
+
+      return promises;
+    }).then(() => {
+      queue.processing = false;
+
+      mapInstance.drawOnNextTick();
+    }).catch((err) => {
+      queue.processing = true;
+
+      window.flatworld.log.debug(err);
+    });
   }
   /**
    * Initializes the module variables viewportArea and offsetSize

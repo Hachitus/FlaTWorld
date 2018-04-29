@@ -6,20 +6,30 @@ import { mapLayers, objects, utils } from './index';
 class MapDataManipulator {
   /**
    * Class to get a consistent standard for the engine to be able to filter objects, when
-   * etrieving or sorting them. This is used
-   * when some method uses filters.
+   * retrieving or sorting them. This is used when some method uses filters.
    *
    * You must provide an object that defines how the given objects should be filtered, when
    * constructing. The module will filter with every rule and object given and everything that
    * doesn't pass one of the given filters, will be dropped out.
+   * 
+   * The rules property must match the value. So for example given property 
+   * ['prop1', 'isBig'] and value: 'true', object like: 
+   * {
+   *  obj:
+   *    prop1: {
+   *      isBig: 'true'
+   *    }
+   * }
+   * 
+   * Would match this
    *
-   * Given filters look something like this:
+   * The filters are like this:
    * {
    *   type: 'filter',
-   *   object: 'layer',
+   *   object: 'layer' | 'object',
    *   property: 'selectable', // THIS can also be an array, like: ['data', 'a'] => data.a
-   *   matchAny: 'false', // By default all rules have to match, with matchAny only one has to match
    *   value: true,
+   *   propertyOptional: truthy | falsy
    * }
    * For more information, please check the mapDataManipulatorSpec.js (test) for now.
    *
@@ -38,8 +48,7 @@ class MapDataManipulator {
   }
   /**
    * This has exceptional query, since it actually queries it's parent. Subcontainers have
-   * really no useful values and they are dumb
-   * containers of objects, every data is on their parent container
+   * really no useful values and they are dumb containers of objects, every data is on their parent container
    *
    * @method filter
    * @param  {Array | Object} objects     The objects that are being filtered
@@ -105,7 +114,7 @@ class MapDataManipulator {
       if (rule.type === 'filter') {
         if (rule.object !== matchedType) {
           return;
-        } else if (rule.matchNotRequired && ruleMatches) {
+        } else if (String(rule.propertyOptional) === 'true' && ruleMatches) {
           return;
         } else if(!ruleMatches) {
           return;
