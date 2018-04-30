@@ -1,6 +1,11 @@
 import * as PIXI from 'pixi.js';
 
-function createSquare() {
+/**
+ * @method createSquare
+ * 
+ * @return {Pixi.Graphics}
+ */
+export function createSquare() {
   const graphics = new PIXI.Graphics();
 
   graphics.lineStyle(2, 0x0000FF, 1);

@@ -6,7 +6,7 @@
 /**
  * @method toggleFullScreen
  */
-function toggleFullScreen() {
+export function toggleFullScreen() {
   const elem = document.body; // Make the body go full screen.
   const isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||
      (
@@ -54,7 +54,7 @@ function toggleFullScreen() {
  * @method setToFullSize
  * @param {HTMLElement} context        DOMElement Canvas context
  */
-function setToFullSize(context) {
+export function setToFullSize(context) {
   return function fullSize() {
     const size = getWindowSize();
 
@@ -68,7 +68,7 @@ function setToFullSize(context) {
  * @method getWindowSize
  * @param {HTMLElement} context        DOMElement Canvas context
  */
-function getWindowSize() {
+export function getWindowSize() {
   return {
     x: window.innerWidth,
     y: window.innerHeight
@@ -83,7 +83,7 @@ function getWindowSize() {
  * @param {PIXI.WebGLRenderer} renderer   The renderer for the map
  * @param {Function} drawOnNextTick       Function that handles re-rendering canvas
  */
-function resizePIXIRenderer(renderer, drawOnNextTick) {
+export function resizePIXIRenderer(renderer, drawOnNextTick) {
   const windowSize = getWindowSize();
 
   renderer.autoResize = true; // eslint-disable-line no-param-reassign
@@ -96,7 +96,7 @@ function resizePIXIRenderer(renderer, drawOnNextTick) {
  *
  * @param {Element} canvasElement
  */
-function fullsizeCanvasCSS(canvasElement) {
+export function fullsizeCanvasCSS(canvasElement) {
   canvasElement.style.position = 'absolute';
   canvasElement.style.display = 'block';
   canvasElement.style.left = '0px';

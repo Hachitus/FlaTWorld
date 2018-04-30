@@ -5,11 +5,12 @@
 const PIXEL_EPSILON = 0.01;
 
 /**
- * @method epsilonEquality
+ * @method pixelEpsilonEquality
  * @param  {Number} x
  * @param  {Number} y
+ * @return {Boolean}
  */
-function epsilonEquality(x, y) {
+export function pixelEpsilonEquality(x, y) {
   return (Math.abs(x) - Math.abs(y)) < PIXEL_EPSILON;
 }
 
@@ -18,9 +19,10 @@ function epsilonEquality(x, y) {
  *
  * @param {String} className Name of the function / class used
  * @param {String} paramName Name of the parameter that is required
+ * @throws {Error}
  */
-function requireParameter(className, paramName) {
-  throw new Error(`Function '${className}' requires parameter ${paramName}`);
+export function requireParameter(className, paramName) {
+  throw new Error(`Function '${className}' requires parameter '${paramName}'`);
 }
 
 /**
@@ -30,7 +32,7 @@ function requireParameter(className, paramName) {
  * @param  {Array} arr        Array to flatten
  * @return {Array}            Flattened array
  */
-function flatten2Levels(arr) {
+export function flatten2Levels(arr) {
   return [].concat(...arr).filter(function(n){ return n != undefined }); // eslint-disable-line eqeqeq
 }
 /**
@@ -39,9 +41,10 @@ function flatten2Levels(arr) {
  * @method chunkArray
  * @param {Array} array             The array to be chunked
  * @param {Integer} chunksize       size of the chunks
+ * @return {Array}
  * from: http://stackoverflow.com/a/34847417/1523545
  */
-function chunkArray(array, chunkSize) {
+export function chunkArray(array, chunkSize) {
   const result = [];
 
   for (let i = 0; i < array.length; i += chunkSize) {
@@ -55,7 +58,7 @@ function chunkArray(array, chunkSize) {
 --------- API ---------
 ----------------------*/
 export default {
-  pixelEpsilonEquality: epsilonEquality,
+  pixelEpsilonEquality,
   requireParameter,
   flatten2Levels,
   chunkArray

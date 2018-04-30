@@ -5,9 +5,9 @@
 import * as flatworld from '../../src/core/flatworld';
 
 /* REQUIRED FOR IE11 */
-flatworld.utils.arrayFind();
-flatworld.utils.es6String();
-flatworld.utils.setPrototypeOf();
+// flatworld.utils.arrayFind();
+// flatworld.utils.es6String();
+// flatworld.utils.setPrototypeOf();
 
 var factories = flatworld.factories;
 var Preload = flatworld.preloading.Preload;

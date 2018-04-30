@@ -3,7 +3,7 @@
 import { mapObjectsToArray, flattenArrayBy1Level } from '../../../src/core/utils/dataManipulation';
 
 describe('utils -> dataManipulation => ', () => {
-  fit('mapObjectsToArray', () => {
+  it('mapObjectsToArray', () => {
     const object = {
       units: [{
         a: 1,
