@@ -4,7 +4,13 @@ import * as StateMachine from 'javascript-state-machine';
 -------- PUBLIC -------
 ----------------------*/
 /**
- * Finite state machine for the map. Uses this library and pretty much it's API https://github.com/jakesgordon/javascript-state-machine.
+ * Finite state machine for the map. Uses this library and pretty much it's API 
+ * https://github.com/jakesgordon/javascript-state-machine.
+ * 
+ * You use this class simply by calling the states:
+ * import mapStates from '...';
+ * mapStates.objectSelect()
+ * mapStates.normalize()
  *
  * @namespace flatworld
  * @class mapStates

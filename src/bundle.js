@@ -1,7 +1,7 @@
 import * as core from './core/';
 import { default as extensions } from './extensions/';
 import * as UIModule from './UIs/';
-import * as preloading from './preloading/Preload';
+import preloading from './preloading/Preload';
 import * as hexaFactory from './factories/hexaFactory';
 
 const UIs = UIModule.UIs;

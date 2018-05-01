@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-class Preload {
+export class Preload {
   /**
    * Preloads assets before initializing map.
    *
@@ -53,8 +53,8 @@ class Preload {
    *
    * @method setErrorHandler
    **/
-  setErrorHandler(errorCB) {
-    this.preloaderClass.on('error', errorCB);
+  setErrorHandler(callback) {
+    this.preloaderClass.on('error', callback);
 
     return this;
   }
@@ -63,8 +63,8 @@ class Preload {
    *
    * @method setProgressHandler
    **/
-  setProgressHandler(progressCB) {
-    this.preloaderClass.on('error', progressCB);
+  setProgressHandler(callback) {
+    this.preloaderClass.on('progress', callback);
 
     return this;
   }
@@ -81,6 +81,6 @@ class Preload {
 /*---------------------
 --------- API ---------
 ----------------------*/
-export {
+export default {
   Preload
 };

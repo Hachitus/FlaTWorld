@@ -8,7 +8,7 @@ const { ObjectSpriteTerrain, ObjectSpriteUnit } = objects;
 -----------------------*/
 let shape;
 
-class ObjectHexaTerrain extends ObjectSpriteTerrain {
+export class ObjectHexaTerrain extends ObjectSpriteTerrain {
   /**
    * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are inherited, depending on
    * the map type. For example you might want to add some click area for these
@@ -51,7 +51,7 @@ class ObjectHexaTerrain extends ObjectSpriteTerrain {
   }
 }
 
-class ObjectHexaUnit extends ObjectSpriteUnit {
+export class ObjectHexaUnit extends ObjectSpriteUnit {
   /**
    * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
    * For example you might want to add some click area for these (e.g. hexagon)
@@ -98,7 +98,7 @@ class ObjectHexaUnit extends ObjectSpriteUnit {
  * @method calculateHexa
  * @param {Number} radius       Hexagon radius
  */
-function calculateHexa(radius) {
+export function calculateHexa(radius) {
   if (!radius) {
     throw new Error('Need radius!');
   }
@@ -140,8 +140,7 @@ function setAndGetShape(radius) {
 /*---------------------
 --------- API ---------
 ----------------------*/
-export {
-  calculateHexa,
+export default {
   ObjectHexaTerrain,
   ObjectHexaUnit
 };

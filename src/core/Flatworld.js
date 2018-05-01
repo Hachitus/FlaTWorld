@@ -658,18 +658,7 @@ class Flatworld {
 /*      if (this.usesSubcontainers()) {*/
     const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
-    objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
-/*      } else {
-      const filteredContainers = _movableLayer.children.filter(thisChild => {
-        if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
-          return false;
-        }
-
-        return true;
-      });
-
-      objects = this._retrieveObjects(allCoords, filteredContainers);
-    }*/
+    objects = this._retrieveObjects(allCoords.globalCoords, allMatchingSubcontainers);
 
     if (filters && filters.doesItFilter("object")) {
       objects = filters.filter(objects);
@@ -874,12 +863,12 @@ class Flatworld {
    * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
    * @return {Array}                                  Found objects
    */
-  _retrieveObjects(allCoords, containers = [], { type = '' } = {}) {
-    return this.objectManager.retrieve(allCoords, containers, {
+  _retrieveObjects(globalCoords, containers = [], { type = '' } = {}) {
+    return this.objectManager.retrieve(globalCoords, containers, {
       type,
       size: {
-        width: allCoords.globalCoords.width,
-        height: allCoords.globalCoords.height
+        width: globalCoords.width,
+        height: globalCoords.height
       }
     });
   }
