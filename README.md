@@ -47,15 +47,16 @@ Best example is found in [plunkr](http://plnkr.co/edit/asL1N4?p=info). This is t
 ## Setup a simple map
 The main module for the whole map is core.Flatworld, so you should always primarily look through it's API and then dig deeper. The best examples for setting up a map at the moment is still going through the code. Check the test-files: tests/manualTest.html and tests/manualStressTest.html (which are more comprehensive). They use horizontalHexaFactory to go through the map data and setup objects based on that data. You can use horizontalHexaFactory if you want or setup your own factory and own data structure. Factories always have to follow a certain data structure so they might not be something everyone wants or can cope with.
 
-Simple unfinished example:
+Simple example:
 
-	import { Preload } from '/components/preloading/preloading';
+	import Loader from 'resource-loader';
 	import { ObjectTerrain, ObjectUnit } from "/components/map/extensions/hexagons/Objects";
 
-	preload = new Preload( "", { crossOrigin: false } );
-	preload.addResource( "terrainBase.json" );
+	const baseUrl = '';
+	preload = new Loader( baseUrl, { crossOrigin: false } );
+	preload.add( "terrainBase.json" );
 
-	preload.resolveOnComplete().then(() => {
+	preload.load(() => {
 		var map, thisLayer, newObject;
 		var layerOptions = {
 	    	name: "terrainLayer",
