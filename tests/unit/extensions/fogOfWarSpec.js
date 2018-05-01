@@ -1,6 +1,6 @@
-import helper from './flatworldCreatorHelper';
-import fogOfWarMod from '../../src/extensions/fogOfWars/simpleFogOfWar';
-import MapDataManipulator from '../../src/core/MapDataManipulator';
+import helper from '../flatworldCreatorHelper';
+import fogOfWarMod from '../../../src/extensions/fogOfWars/simpleFogOfWar';
+import MapDataManipulator from '../../../src/core/MapDataManipulator';
 
 function filterCreator () {
   return new MapDataManipulator({

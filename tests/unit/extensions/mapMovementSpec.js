@@ -1,5 +1,5 @@
-import helper from './flatworldCreatorHelper';
-import mapMovement from '../../src/extensions/mapMovement/mapMovement';
+import helper from '../flatworldCreatorHelper';
+import mapMovement from '../../../src/extensions/mapMovement/mapMovement';
 
 describe('mapMovement extension => ', function () {
   var subcontainerArea;

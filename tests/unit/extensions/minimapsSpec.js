@@ -1,6 +1,6 @@
-// import helper from './flatworldCreatorHelper';
-// import pixelizedMinimap from '../../src/extensions/minimaps/pixelizedMinimap';
-// import scaledMinimap from '../../src/extensions/minimaps/scaledMinimap';
+// import helper from '../flatworldCreatorHelper';
+// import pixelizedMinimap from '../../../src/extensions/minimaps/pixelizedMinimap';
+// import scaledMinimap from '../../../src/extensions/minimaps/scaledMinimap';
 
 // Not in use
 xdescribe('Scaled minimap => ', function () {
