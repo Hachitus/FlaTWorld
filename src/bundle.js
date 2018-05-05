@@ -1,13 +1,10 @@
-import * as core from './core/';
-import { default as extensions } from './extensions/';
+export * from './core/';
+import * as allExtensions from './extensions/';
+import * as Pixi from 'pixi.js';
 import * as UIModule from './UIs/';
 import * as hexaFactory from './factories/hexaFactory';
 
-const UIs = UIModule.UIs;
-
-const toBeExported = core;
-toBeExported.extensions = extensions;
-toBeExported.UIs = UIs;
-toBeExported.factories = hexaFactory;
-
-module.exports = toBeExported;
+export const extensions = allExtensions;
+export const Preloader = Pixi.loaders.Loader;
+export const UIs = UIModule.UIs;
+export const factories = hexaFactory;

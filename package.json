@@ -30,8 +30,10 @@
   },
   "homepage": "https://github.com/Hachitus/FlaTWorld",
   "scripts": {
-    "start:dev": "npx webpack-dev-server --config webpack.config.dev.js",
+    "build:dev": "npx webpack --config webpack.config.dev.js",
+    "start:dev": "npm run build:dev && npx webpack-dev-server --config webpack.config.dev.js",
     "build:prod": "npx webpack --config webpack.config.prod.js",
+    "start:prod": "npm run build:prod && npx webpack-dev-server --config webpack.config.prod.js",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
     "document": "npx yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
     "showDocuments": "echo 'starting instance in http://localhost:9002/' && npx forever start startDocument.js --uid FlaTWorldDocument",

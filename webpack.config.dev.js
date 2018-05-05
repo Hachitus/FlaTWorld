@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = [{
   entry: [
@@ -8,9 +8,6 @@ module.exports = [{
   output: {
     path: path.join(__dirname, 'tests/dist'),
     filename: 'stressTest.es6.js',
-    libraryTarget: 'var',
-    library: 'stressTest',
-    umdNamedDefine: true
   },
   devtool: 'eval-source-map',
   module: {
@@ -23,13 +20,6 @@ module.exports = [{
     },{
       test: /\.handlebars$/,
       loader: "handlebars-loader"
-    },
-    {
-      test: /\.js?$/,
-      loader: 'bundle-loader',          
-      options: {
-        name: 'my-chunk'
-      }
     }]
   },
   devServer: {
