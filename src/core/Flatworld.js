@@ -155,9 +155,6 @@ class Flatworld {
     /* We cache the privateRenderers in array format to a module variable */
     _privateRenderers = Object.keys(_renderers).map(idx => _renderers[idx]);
 
-    protectedProperties.zoomLayer = _zoomLayer;
-    protectedProperties.movableLayer = _movableLayer;
-
     /* See PIXI.SCALE_MODES for */
     this.defaultScaleMode = PIXI.settings.SCALE_MODE = defaultScaleMode;
     /**
@@ -303,13 +300,6 @@ class Flatworld {
     tickCB && this.customTickOn(tickCB);
 
     return isMapReadyPromises || Promise.resolve();
-  }
-  /**
-   * This method will initialize the UI module. It requires constructed UI theme module as param
-   * @param {Object} UITheme This is the UI theme module created to work with UI module
-   */
-  initUI(UITheme) {
-    UI(UITheme, this, protectedProperties);
   }
   /**
    * Returns a promise that resolves after the map is fully initialized

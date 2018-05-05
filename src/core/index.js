@@ -10,5 +10,3 @@ export { default as mapStates } from './mapStates';
 export { default as ObjectManager } from './ObjectManager';
 export { default as objects } from './Objects';
 export { default as Sound } from './Sound';
-export { default as UI } from './UI';
-export { default as UIStates } from './UIStates';

@@ -1,8 +1,8 @@
 import * as PIXI from 'pixi.js';
-import { log as mapLog } from '../../core/';
+import { log as mapLog } from '../../../../../../src/core/';
 import * as templates from './layout/';
 import { drawLine } from './utils/arrows';
-import { createVisibleHexagon } from '../../extensions/hexagons/utils/createHexagon';
+import { createVisibleHexagon } from '../../../../../../src/extensions/hexagons/utils/createHexagon';
 
 /*---------------------
 ------ VARIABLES ------
@@ -179,7 +179,7 @@ class UIDefault {
    */
   createHighlight(object, options = { coords: new PIXI.Point(0, 0) }) {
     const UI_CONTAINER_NAME = 'unit highlight';
-    const container = new this.FTW.createSpecialLayer('UILayer', { toLayer: this.FTW.layerTypes.movableType.id });
+    const container = this.FTW.createSpecialLayer('UILayer', { toLayer: this.FTW.layerTypes.movableType.id });
     const objCoords = {
       x: Number(object.x),
       y: Number(object.y)

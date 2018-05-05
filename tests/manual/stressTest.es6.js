@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js';
-import { Sound, mapEvents, MapDataManipulator, Preloader, factories, extensions, UIs } from '../../src/bundle';
+import { Sound, mapEvents, MapDataManipulator, Preloader, factories, extensions } from '../../src/bundle';
+import UI from '../testAssets/js/UI/UI';
+import UIThemes from '../testAssets/js/UI/themes/';
 
 const { baseEventlisteners, mapZoom, mapDrag, hexagons, mapMovement, fogOfWars, minimaps } = extensions;
 const { simpleFogOfWar } = fogOfWars;
@@ -17,6 +19,10 @@ const HEXAGON_RADIUS = gameData.hexagonRadius;
 const X_PADDING = 20;
 const Y_PADDING = 20;
 const FOW_IMAGE = '/testAssets/images/FoW/hexagonFoW.png';
+
+const UIs = {
+  UIDefault: UIThemes.UIDefault,
+}
 
 const minimapCheckbox = document.getElementById('minimap');
 const fowCheckbox = document.getElementById('fow');
@@ -247,10 +253,15 @@ async function initFlatworld(mapData, options) {
     }
 
     const dialog_selection = document.getElementById('dialog_select');
+    
     const initializedUITheme = new UITheme(dialog_selection, map, { elements: {
       select: '#dialog_select'
     }});
-    map.initUI(initializedUITheme);
+    const protectedProperties = {
+      zoomLayer: map.getPrimaryLayers()[0].parent.parent,
+      movableLayer: map.getPrimaryLayers()[0].parent,
+    };
+    UI(initializedUITheme, map, protectedProperties);
 
     map.init( pluginsToActivate, mapData.startPoint );
 

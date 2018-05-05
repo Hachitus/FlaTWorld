@@ -1,4 +1,4 @@
-import { log as mapLog, mapEvents } from './index';
+import { log as mapLog, mapEvents } from '../../../../src/bundle';
 
 /*---------------------
 ------ VARIABLES ------
