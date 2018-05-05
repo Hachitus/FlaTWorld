@@ -513,8 +513,11 @@ function _createFoWParams() {
 
 function _createHexagonParams() {
   return {
-    isBlocked: function (correctHexagon/* , selectedObject */) {
+    isBlocked: (correctHexagon/* , selectedObject */) => {
       return +correctHexagon.data.typeData.movement;
+    },
+    getData: (object) => {
+      return object.data.typeData;
     }
   };
 }

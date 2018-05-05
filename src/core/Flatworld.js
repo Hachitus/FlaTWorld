@@ -155,6 +155,9 @@ class Flatworld {
     /* We cache the privateRenderers in array format to a module variable */
     _privateRenderers = Object.keys(_renderers).map(idx => _renderers[idx]);
 
+    protectedProperties.zoomLayer = _zoomLayer;
+    protectedProperties.movableLayer = _movableLayer;
+
     /* See PIXI.SCALE_MODES for */
     this.defaultScaleMode = PIXI.settings.SCALE_MODE = defaultScaleMode;
     /**
@@ -793,6 +796,13 @@ class Flatworld {
   /*---------------------------------------------
    ------- ABSTRACT APIS THROUGH PLUGINS --------
    --------------------------------------------*/
+   /**
+    * This is abstract method and needs to be implemented with a plugin. This is responsible for translating the object that we receive
+    * from the map to actual object data
+    *
+    * @method getData
+    */
+  getData(/* object */) { return 'notImplementedYet. Activate with plugin'; }
    /**
     * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
     * implement your own, I suggest you use it.

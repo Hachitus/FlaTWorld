@@ -23,10 +23,6 @@ const terrainLayerFilter = new MapDataManipulator({
 });
 /* @todo This must be changed to outside the module */
 let weight = () => 0;
-/* @todo This must be changed to game logic too! */
-const getObjectData = (object) => {
-  return object.data.typeData;
-}
 let FTW;
 
 /*---------------------
@@ -42,7 +38,7 @@ let FTW;
  * @param  {Map} map      The currently use Map instance
  * @return {Boolean}      True
  */
-function setupHexagonClick(mapInstance, weightFn) {
+function setupHexagonClick(mapInstance, weightFn, getData) {
   if (!mapInstance) {
     throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
   }
@@ -51,6 +47,8 @@ function setupHexagonClick(mapInstance, weightFn) {
 
   eventListeners.on('select', _tapListener);
   eventListeners.on('order', _orderListener);
+
+  mapInstance.setPrototype('getData', getData);
 
   weight = weightFn || weight;
 
@@ -66,11 +64,6 @@ function setupHexagonClick(mapInstance, weightFn) {
  */
 function _tapListener(e) {
   const globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-  const getData = {
-    allData(object) {
-      return getObjectData(object);
-    }
-  };
   mapStates.objectSelect();
 
   let objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
@@ -78,8 +71,6 @@ function _tapListener(e) {
   objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
   FTW.currentlySelectedObjects = objects;
-  mapEvents.publish('objectsSelected', objects, getData)
-  log.debug('objectsSelected', objects, getData);
 
   FTW.drawOnNextTick();
 

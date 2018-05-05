@@ -38,8 +38,8 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
                     so it's possible it should have been already called earlier`);
   }
 
-  mapEvents.subscribe('objectsSelected', (objects, getData) => {
-    scope.showSelections(objects, getData);
+  mapEvents.subscribe('objectsSelected', (objects) => {
+    scope.showSelections(objects, givenMap.getData.bind(givenMap));
   })
   mapEvents.subscribe('unitMoved', (pathsToCoordinates) => {
     scope.showUnitMovement(pathsToCoordinates);

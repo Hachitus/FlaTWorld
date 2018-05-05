@@ -30,7 +30,7 @@ const selectHexagonObject = (function() {
 
     this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
 
-    startClickListener(this.mapInstance, params.isBlocked);
+    startClickListener(this.mapInstance, params.isBlocked, params.getData);
 
     return Promise.resolve();
   }
@@ -43,8 +43,8 @@ const selectHexagonObject = (function() {
    * @method startClickListener
    * @param {Map} map              Instantiated Map class object
    */
-  function startClickListener(mapInstance, isBlocked) {
-    return setupHexagonClick(mapInstance, isBlocked);
+  function startClickListener(mapInstance, isBlocked, getData) {
+    return setupHexagonClick(mapInstance, isBlocked, getData);
   }
 })();
 

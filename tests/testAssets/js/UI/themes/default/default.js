@@ -226,10 +226,10 @@ class UIDefault {
    * @param {Object} cssClasses
    * @todo make sure / check, that modalElem.classList.add gets added only once
    */
-  showModal(data, getDatas, type = 'select') {
+  showModal(data, getData, type = 'select') {
     //const objectDatas = getDatas.allData(object);
     if(Array.isArray(data)) {
-      data = data.map(o => getDatas.allData(o));
+      data = data.map(o => getData(o));
       this.modal.innerHTML = templates.multiSelection({
         title: 'Objects',
         data
@@ -238,7 +238,7 @@ class UIDefault {
       this.modal.innerHTML = templates.singleSelection({
         title: 'Selected',
         object: {
-          name: getDatas.allData(data).name
+          name: getData(data).name
         }
       });            
     }
