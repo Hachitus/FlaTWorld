@@ -18,17 +18,17 @@
     "HTML5"
   ],
   "version": "0.6.5",
-  "main": "dist/FlaTWorld.js",
+  "main": "dist/flatworld.js",
   "author": "Janne Hyytiä",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hachitus/FlaTWorld.git"
+    "url": "https://github.com/Hachitus/flatworld.git"
   },
   "bugs": {
-    "url": "https://github.com/Hachitus/FlaTWorld/issues"
+    "url": "https://github.com/Hachitus/flatworld/issues"
   },
-  "homepage": "https://github.com/Hachitus/FlaTWorld",
+  "homepage": "https://github.com/Hachitus/flatworld",
   "scripts": {
     "build:dev": "npx webpack --config webpack.config.dev.js",
     "start:dev": "npm run build:dev && npx webpack-dev-server --config webpack.config.dev.js",
@@ -36,7 +36,7 @@
     "start:prod": "npm run build:prod && npx webpack-dev-server --config webpack.config.prod.js",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
     "document": "npx yuidoc -t node_modules/yuidoc-theme-blue && gh-pages -d documentation",
-    "showDocuments": "echo 'starting instance in http://localhost:9002/' && npx forever start startDocument.js --uid FlaTWorldDocument",
+    "showDocuments": "echo 'starting instance in http://localhost:9002/' && npx forever start startDocument.js --uid flatworldDocument",
     "test": "npx karma start karma.conf.js --log-level debug --single-run",
     "init": "ln -s /usr/bin/nodejs /usr/bin/node && npm install",
     "lint": "npx eslint ./src/"

@@ -1,6 +1,6 @@
 FROM node:9.11.1
 
-WORKDIR /var/www/FlaTWorld
+WORKDIR /var/www/flatworld
 
 COPY package*.json ./
 RUN npm install
