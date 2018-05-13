@@ -8,8 +8,7 @@ module.exports = [{
     output: {
       path: `${path.resolve(__dirname)}/dist`,
       filename: 'flatworld.js',
-      libraryTarget: 'umd',
-      library: 'flatworld',
+      libraryTarget: 'commonjs',
       umdNamedDefine: true
     },
     node: {
