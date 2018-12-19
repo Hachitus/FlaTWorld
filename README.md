@@ -143,12 +143,10 @@ These are still subject to change (both raised and lowered). The map is planned 
 * Total object count on map: ~50k
 * FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
 
-# Sponsors
-Thank you to browserstack for providing magnificient testing tools
-<a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
-
 # Credits
-Copyright (c) 2017 Janne Hyytiä
+Testing:
+* Thank you to browserstack for providing magnificient testing tools
+<a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
 
 Graphics:
 * Realistic units from freecivs amplio set (http://download.gna.org/freeciv/contrib/tilesets/amplio/Readme).
@@ -157,5 +155,5 @@ Sounds:
 * http://www.freesound.org/people/_hash_Hazard/sounds/127601/
 * http://www.freesound.org/people/Artmasterrich/sounds/345458/
 
-# Thank yous
-https://github.com/dmitrysteblyuk (Pathfinding module)
+Contributors:
+* https://github.com/dmitrysteblyuk (Pathfinding module)
