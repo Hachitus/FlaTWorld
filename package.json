@@ -42,7 +42,7 @@
     "test": "npx karma start karma.conf.js --log-level debug --single-run",
     "init": "ln -s /usr/bin/nodejs /usr/bin/node && npm install",
     "lint": "npx eslint ./src/",
-    "prepublish": "npm run build:prod"
+    "prepublishOnly": "npm run build:prod"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
