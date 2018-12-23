@@ -22,10 +22,10 @@ import { ObjectHexaTerrain, ObjectHexaUnit } from '../extensions/hexagons/Object
  * @param {Function} {}.trackFPSCB             Callback to track FPS
  **/
 function hexaFactory(mapCanvas, datas, {
-      trackFPSCB = false,
-      isHiddenByDefault = true,
-      minimapCanvas,
-      scaleMode = constants.DEFAULT_SCALE_MODE } = {}) {
+  trackFPSCB = false,
+  isHiddenByDefault = true,
+  minimapCanvas,
+  scaleMode = constants.DEFAULT_SCALE_MODE } = {}) {
   log.debug('============== Hexagonal Map factory started =============');
   const pixelRatio = utils.environment.getPixelRatio();
   const DATA_MAP = (typeof datas.map === 'string') ? JSON.parse(datas.map) : datas.map;

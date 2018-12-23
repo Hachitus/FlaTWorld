@@ -28,11 +28,11 @@ export class MapLayer extends PIXI.Container {
    * @param  {Integer} options.specialLayer.y         Y coordinate
    **/
   constructor({
-      name = '',
-      coord = { x: 0, y: 0 },
-      specialLayer = false,
-      zoomLayer = true,
-      selectable = false } = {}) {
+    name = '',
+    coord = { x: 0, y: 0 },
+    specialLayer = false,
+    zoomLayer = true,
+    selectable = false } = {}) {
     super();
 
     Object.assign(this, coord);
@@ -259,12 +259,12 @@ export class MapLayerParent extends MapLayer {
    * @param {Boolean} options.specialLayer           Is this special layer or not.
    */
   constructor({
-      name = '', // eslint-disable-line no-unused-vars
-      coord = { x: 0, y: 0 }, // eslint-disable-line no-unused-vars
-      subcontainers = { width: 0, height: 0, maxDetectionOffset: 100 },
-      specialLayer = false,
-      zoomLayer = true, // eslint-disable-line no-unused-vars
-      selectable = false } = {}) {
+    name = '', // eslint-disable-line no-unused-vars
+    coord = { x: 0, y: 0 }, // eslint-disable-line no-unused-vars
+    subcontainers = { width: 0, height: 0, maxDetectionOffset: 100 },
+    specialLayer = false,
+    zoomLayer = true, // eslint-disable-line no-unused-vars
+    selectable = false } = {}) {
     super(arguments[0]);
 
     this.oldAddChild = super.addChild.bind(this);

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { mapLayers, ObjectManager, mapEvents, log, utils, constants, UI } from './index';
+import { mapLayers, ObjectManager, mapEvents, log, utils, constants } from './index';
 
 /*---------------------
 ------ VARIABLES ------
@@ -78,19 +78,22 @@ class Flatworld {
    *
    * @return {Object}                                      New Map instance
    */
-  constructor(mapCanvas = null, {
-    bounds = { width: 0, height: 0 },
-    mapSize = { x: 0, y: 0 },
-    rendererOptions = { autoResize: true, antialias: false },
-    minimapCanvas,
-    subcontainers = {
-      width: 100,
-      height: 100,
-      maxDetectionOffset: 0 // maxDetectionOffset default set later
-    },
-    trackFPSCB = false,
-    defaultScaleMode = constants.DEFAULT_SCALE_MODE } = {},
+  constructor(
+    mapCanvas = null, {
+      bounds = { width: 0, height: 0 },
+      mapSize = { x: 0, y: 0 },
+      rendererOptions = { autoResize: true, antialias: false },
+      minimapCanvas,
+      subcontainers = {
+        width: 100,
+        height: 100,
+        maxDetectionOffset: 0 // maxDetectionOffset default set later
+      },
+      trackFPSCB = false,
+      defaultScaleMode = constants.DEFAULT_SCALE_MODE
+    } = {},
     mouseTextSelection = false) {
+
     if (!utils.environment.isWebglSupported()) {
       const error = new Error('Webgl is not supported');
       log.error(error);
@@ -648,7 +651,7 @@ class Flatworld {
     allCoords.localCoords.width = globalCoords.width / this.getZoom();
     allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
-/*      if (this.usesSubcontainers()) {*/
+    /* if (this.usesSubcontainers()) {*/
     const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
     objects = this._retrieveObjects(allCoords.globalCoords, allMatchingSubcontainers);
@@ -796,21 +799,21 @@ class Flatworld {
   /*---------------------------------------------
    ------- ABSTRACT APIS THROUGH PLUGINS --------
    --------------------------------------------*/
-   /**
+  /**
     * This is abstract method and needs to be implemented with a plugin. This is responsible for translating the object that we receive
     * from the map to actual object data
     *
     * @method getData
     */
   getData(/* object */) { return 'notImplementedYet. Activate with plugin'; }
-   /**
+  /**
     * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
     * implement your own, I suggest you use it.
     *
     * @method zoomIn
     */
   zoomIn() { return 'notImplementedYet. Activate with plugin'; }
-   /**
+  /**
     * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
     * implement your own, I suggest you use it.
     *

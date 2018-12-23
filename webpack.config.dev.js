@@ -16,7 +16,10 @@ module.exports = [{
       test: /\.js?$/,
       exclude: [/node_modules/, /assets/],
       loader: 'eslint-loader',
-      include: __dirname + '/src' 
+      include: __dirname + '/src' ,
+      options: {
+        emitWarning: true
+      }
     },{
       test: /\.handlebars$/,
       loader: "handlebars-loader"

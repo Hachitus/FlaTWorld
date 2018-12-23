@@ -122,7 +122,8 @@ function _orderListener(e) {
       try {
         const timeUnits = selectedObject.getMovement();
         if (!Number.isInteger(timeUnits)) {
-          throw new Error(`getMovement method, did not return an integer! Returned '${timeUnits.toString()} from object '${selectedObject.toString()}`)
+          throw new Error(`getMovement method, did not return an integer! Returned '${timeUnits.toString()} from object
+            '${selectedObject.toString()}`)
         }
         pathsToCoordinates = hexagons.findPath(
           objectIndexes, 

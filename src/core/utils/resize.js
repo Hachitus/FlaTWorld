@@ -10,7 +10,7 @@ export function toggleFullScreen() {
   const elem = document.body; // Make the body go full screen.
   const isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||
      (
-     document.mozFullScreen || document.webkitIsFullScreen);
+       document.mozFullScreen || document.webkitIsFullScreen);
 
   isInFullScreen ? cancelFullScreen(document) : requestFullScreen(elem);
 

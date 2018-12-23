@@ -105,11 +105,11 @@ const simpleFogOfWar = (function() {
   }
 
   function refreshFoW() {
-/*    var t0 = performance.now();*/
+    /*    var t0 = performance.now();*/
     mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
 
     maskSprite.texture = renderTexture;
-/*    var t1 = performance.now();
+    /*    var t1 = performance.now();
     console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")*/
   }
 
