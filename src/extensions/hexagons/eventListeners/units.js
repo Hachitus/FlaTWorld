@@ -120,7 +120,10 @@ function _orderListener(e) {
       pathsToCoordinates = [];
     } else {
       try {
-        const timeUnits = selectedObject.data.typeData.move;
+        const timeUnits = selectedObject.getMovement();
+        if (!Number.isInteger(timeUnits)) {
+          throw new Error(`getMovement method, did not return an integer! Returned '${timeUnits.toString()} from object '${selectedObject.toString()}`)
+        }
         pathsToCoordinates = hexagons.findPath(
           objectIndexes, 
           destinationIndexes, 
