@@ -1,7 +1,8 @@
 import * as PIXI from 'pixi.js';
-import { Sound, mapEvents, MapDataManipulator, Preloader, factories, extensions } from '../../src/bundle';
+import { Sound, mapEvents, MapDataManipulator, Preloader, extensions } from '../../src/bundle';
 import UI from '../testAssets/js/UI/UI';
 import UIThemes from '../testAssets/js/UI/themes/';
+import hexaFactory from './hexaFactory';
 
 const { baseEventlisteners, mapZoom, mapDrag, hexagons, mapMovement, fogOfWars, minimaps } = extensions;
 const { simpleFogOfWar } = fogOfWars;
@@ -224,7 +225,7 @@ async function initFlatworld(mapData, options) {
         console.log(e);
       })
       // eslint-disable-next-line no-console
-      .catch(console.error)
+        .catch(console.error)
     }
   } catch(e) {
     // eslint-disable-next-line no-console
@@ -233,7 +234,7 @@ async function initFlatworld(mapData, options) {
 
   function onComplete(/* loader, resources */) {
     try {
-      window.worldMap = map = globalMap.data = factories.hexaFactory(
+      window.worldMap = map = globalMap.data = hexaFactory(
         mapCanvas, {
           game: gameData,
           map: mapData,
