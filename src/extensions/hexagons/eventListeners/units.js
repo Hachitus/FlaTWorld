@@ -99,7 +99,7 @@ function _orderListener(e) {
 
     const selectedObject = FTW.currentlySelectedObjects[0];
     const selectedObjectsCoordinates = selectedObject.getMapCoordinates();
-    const globalCoords = utils.mouse.eventData.getGlobalCoordinates(e, FTW.isSupportedTouch);
+    const globalCoords = utils.mouse.eventData.getGlobalCoordinates(e);
 
     const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
 

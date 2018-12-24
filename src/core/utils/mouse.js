@@ -43,8 +43,8 @@ function getHAMMERPointerCoords(e) {
 }
 
 
-function getGlobalCoordinates(e, isSupportedTouch) {
-  return isSupportedTouch ? getHAMMERPointerCoords(e) : getPointerCoords(e);
+function getGlobalCoordinates(e) {
+  return getHAMMERPointerCoords(e);
 }
 /**
  * Transform coordinates that are in the window to become relative with the given element
