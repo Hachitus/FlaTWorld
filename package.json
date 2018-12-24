@@ -51,7 +51,6 @@
     "jasmine-core": "^3.1.0",
     "karma": "^2.0.2",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-edge-launcher": "^0.4.2",
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^1.1.1",
     "karma-safari-launcher": "^1.0.0",
