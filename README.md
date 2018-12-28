@@ -94,7 +94,7 @@ Simple example:
 ## Factories
 Factories are the ones that get the server-side data, iterate through it and create the necessary objects to the FlaTWorld map.
 
-You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [horizontalHexaFactory.js](src/factories/horizontalHexaFactory.js) and create your own based on that.
+You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [hexaFactory.js](tests/manual/hexaFactory.js) and create your own based on that.
 
 ## Extensions
 The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to few rules:
