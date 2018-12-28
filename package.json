@@ -24,6 +24,7 @@
   "browser": "dist/flatworld.js",
   "author": "Janne Hyytiä",
   "license": "mit",
+  "devtool": "source-map",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hachitus/flatworld.git"
