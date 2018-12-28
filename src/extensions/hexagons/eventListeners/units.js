@@ -83,6 +83,13 @@ function _tapListener(e) {
  * @private
  * @method _orderListener
  * @param  {Event} e      Event object
+ * @throws Normal javascript error with special .customCode - property:
+ * 100: No objects selected for orders
+ * 110: The selected object is only supported to be one atm.
+ * 120: No terrain objects found for destination
+ * 130: GetMovement-method did not return an integer
+ * 140: The destination was farther than the given maximum distance
+ * 150: Some other unknown error occured
  */
 function _orderListener(e) {
   // We want to wrap the whole functionality in try catch, to cancel the order state, if any
@@ -92,9 +99,13 @@ function _orderListener(e) {
     mapStates.objectOrder();
 
     if (!FTW.currentlySelectedObjects) {
-      throw 'No objects selected for orders!';
+      const error =  new Error('No objects selected for orders');
+      error.customCode = 100;
+      throw error;
     } else if (FTW.currentlySelectedObjects.length > 1) {
-      throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]);
+      const error = new Error('The selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]));
+      error.customCode = 110;
+      throw error;
     }
 
     const selectedObject = FTW.currentlySelectedObjects[0];
@@ -104,7 +115,9 @@ function _orderListener(e) {
     const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
 
     if (!objects.length) {
-      throw 'No terrain objects found for destination!';
+      const error = new Error('No terrain objects found for destination');
+      error.customCode = 120;
+      throw error;
     }
 
     const objectIndexes = hexagons.utils.hexagonMath.coordinatesToIndexes(selectedObjectsCoordinates);
@@ -122,8 +135,10 @@ function _orderListener(e) {
       try {
         const timeUnits = selectedObject.getMovement();
         if (!Number.isInteger(timeUnits)) {
-          throw new Error(`getMovement method, did not return an integer! Returned '${timeUnits.toString()} from object
+          const error = new Error(`GetMovement-method did not return an integer. Returned '${timeUnits.toString()} from object
             '${selectedObject.toString()}`)
+          error.customCode = 130;
+          throw error;
         }
         pathsToCoordinates = hexagons.findPath(
           objectIndexes, 
@@ -138,10 +153,12 @@ function _orderListener(e) {
         });
       } catch (e) {
         if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
-          e.message = 'the destination was farther than the given maximum distance';
+          e.message = 'The destination was farther than the given maximum distance';
+          e.customCode = 140;
         } else {
-          e.message += `, EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or 
-                        something else happened`;
+          e.message += `, EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach
+            the destination or something else happened`;
+          e.customCode = 150;
         }
 
         throw e;
@@ -156,6 +173,7 @@ function _orderListener(e) {
     FTW.drawOnNextTick();
   } catch(e) {
     mapStates.objectOrderEnd();
+    mapEvents.publish('unitOrderFailed', e);
     log.debug(e);
     return;
   }
