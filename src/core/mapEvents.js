@@ -14,7 +14,8 @@ import { EventEmitter } from 'eventemitter3';
  * Events atm:
  * - mapdrag
  * - mapzoomed
- * - objectsSelected (in hexagon extension units.js)
+ * - objectsSelected - implemented in plugins (e.g. in hexagon extension units.js)
+ * - objectOrderFailed - implemented in plugins (e.g. in hexagon extension units.js)
  * - mapMoved
  * - mapResize
  * @namespace flatworld

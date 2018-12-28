@@ -166,14 +166,14 @@ function _orderListener(e) {
     }
 
     selectedObject.move(pathsToCoordinates);
-    
+
     mapEvents.publish('unitMoved', pathsToCoordinates);
 
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
   } catch(e) {
     mapStates.objectOrderEnd();
-    mapEvents.publish('unitOrderFailed', e);
+    mapEvents.publish('objectOrderFailed', e);
     log.debug(e);
     return;
   }
