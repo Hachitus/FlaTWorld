@@ -17,11 +17,13 @@
     "canvas",
     "HTML5"
   ],
+  "engines" : {
+    "node" : ">=10.8.0"
+  },
   "version": "0.6.5",
-  "main": "dist/flatworld.js",
-  "module": "dist/flatworld.js",
+  "browser": "dist/flatworld.js",
   "author": "Janne Hyytiä",
-  "license": "AGPL-3.0",
+  "license": "mit",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hachitus/flatworld.git"
