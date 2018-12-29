@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
-module.exports = [{
+module.exports = [
+  {
     entry: [
       './src/bundle'
     ],
@@ -11,6 +12,7 @@ module.exports = [{
       libraryTarget: 'commonjs',
       umdNamedDefine: true
     },
+    devtool: 'source-map',
     node: {
       fs: "empty"
     },
@@ -60,4 +62,5 @@ module.exports = [{
     performance: {
       hints: false
     },
-}];
+  }
+];
