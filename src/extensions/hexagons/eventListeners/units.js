@@ -135,8 +135,8 @@ function _orderListener(e) {
       try {
         const timeUnits = selectedObject.getMovement();
         if (!Number.isInteger(timeUnits)) {
-          const error = new Error(`GetMovement-method did not return an integer. Returned '${timeUnits.toString()} from object
-            '${selectedObject.toString()}`)
+          const error = new Error(`GetMovement-method did not return an integer. Returned '${timeUnits && timeUnits.toString()} from object
+            '${selectedObject && selectedObject.toString()}`)
           error.customCode = 130;
           throw error;
         }
@@ -152,14 +152,9 @@ function _orderListener(e) {
           return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
         });
       } catch (e) {
-        if (e.customCode !== 130 && (!pathsToCoordinates || pathsToCoordinates.length < 1)) {
-          e.message = 'The destination was farther than the given maximum distance';
-          e.customCode = 140;
-        } else if (e.customCode !== 130) {
-          e.message += `, EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach
-            the destination or something else happened`;
-          e.customCode = 150;
-        }
+        e.customMessage = `The destination could be further than the given maximum distance,
+          EXTRA INFO: start and end point are same, destination is blocked, unit could not reach
+          the destination or something else happened`;
 
         throw e;
       }

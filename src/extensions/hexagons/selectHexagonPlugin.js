@@ -11,30 +11,31 @@ import { hexagonMath } from './utils/';
  * @class selectHexagonObject
  * @return {Object}       Return methods inside object
  */
-const selectHexagonObject = (function() {
-  return {
-    init,
-    pluginName: 'selectHexagonObject'
-  };
+const selectHexagonObject = {
+  pluginName: 'selectHexagonObject',
+  init,
+}
 
-  /**
-   * @method  init
-   * @param {Map} givenMap                  Instantiated Map class object
-   * @param {Object} protectedProperties    Holds all the non-public properties to use
-   * @param {Array} params                  Rest of the parameters
-   */
-  function init(params) {
-    if (!params.pathWeight || typeof params.pathWeight !== 'function') {
-      throw new Error('hexagon pathFinding plugin requires parameter-object with pathWeight-property that is a callback')
-    }
-
-    this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
-
-    setupHexagonClick(this.mapInstance, params.pathWeight, params.getData);
-
-    return Promise.resolve();
+/**
+ * @method  init
+ * @param {Map} givenMap                  Instantiated Map class object
+ * @param {Object} protectedProperties    Holds all the non-public properties to use
+ * @param {Array} params                  Rest of the parameters
+ */
+function init(params) {
+  if (!params.pathWeight || typeof params.pathWeight !== 'function') {
+    const error = new Error(`Hexagon plugin requires parameters property! This parameter must have "pathWeight"-property
+      that is a callback, which returns the weight of the path for path finder. So it must be callback that return
+      integer`, params);
+    throw error;
   }
-})();
+
+  this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
+
+  setupHexagonClick(this.mapInstance, params.pathWeight, params.getData);
+
+  return Promise.resolve();
+}
 
 function createHexagonDataStructure(getLayers) {
   const hexagonIndexes = {};
