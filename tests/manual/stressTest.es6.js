@@ -195,6 +195,7 @@ async function initFlatworld(mapData, options) {
   loadSounds();
   mapEvents.subscribe('objectsSelected', unitSelectedSound);
   mapEvents.subscribe('objectMove', unitOrderSound);
+  mapEvents.subscribe('objectOrderFailed', objectOrderFailed);
 
   await preloadGameAssets([{
     name: 'terrains',
@@ -375,6 +376,10 @@ async function initFlatworld(mapData, options) {
 /*---------------------
 ------- PRIVATE -------
 ---------------------*/
+function objectOrderFailed(e) {
+  alert('Issuing order failed. You should make this a proper test handle, not alert :P');
+  console.warn(e);
+}
 /* THESE GENERATE THE ACTUAL RANDOM MAP DATA */
 function addBase_spriteLayerData(name, group, options) {
   options = options || {};
