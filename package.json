@@ -36,6 +36,7 @@
     "build:dev": "npx webpack --config webpack.config.dev.js",
     "start": "npm run start:dev",
     "start:dev": "npm run build:dev && npx webpack-dev-server --config webpack.config.dev.js",
+    "build": "npm run build:prod",
     "build:prod": "npx webpack --config webpack.config.prod.js",
     "start:prod": "npm run build:prod && npx webpack-dev-server --config webpack.config.prod.js",
     "nextVersion": "echo 'MANUAL: npm version patch/minor/major && git tag -a ?.?.? -m 'comment' && git push --tags && update CHANGELOG && update roadmap if needed'",
@@ -45,7 +46,7 @@
     "init": "ln -s /usr/bin/nodejs /usr/bin/node && npm install",
     "lint": "npx eslint ./src/",
     "prepublishOnly": "npm run build:prod",
-    "pack:dev": "npm build & npm pack"
+    "pack:dev": "npm run build & npm pack"
   },
   "devDependencies": {
     "eslint": "^5.11.0",
