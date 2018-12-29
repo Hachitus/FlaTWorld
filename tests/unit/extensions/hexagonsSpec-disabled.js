@@ -2,7 +2,7 @@
 
 (function hexagonsSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
-  const { createHexagonDataStructure, _isBlocked, _orderListener } = window.flatworld.extensions.hexagons._tests;
+  const { createHexagonDataStructure, _pathWeight, _orderListener } = window.flatworld.extensions.hexagons._tests;
   const { creator } = window.flatworldCreatorHelper;
   const { UI, eventListeners, mapStates, mapEvents } = window.flatworld;
   const { selectHexagonObject, utils } = window.flatworld.extensions.hexagons;
@@ -75,7 +75,7 @@
     	expect(createdStructure[0][0]).toBe(map.allMapObjects.terrainLayer[0]);
 		});
 
-    it('_isBlocked', () => {
+    it('_pathWeight', () => {
       pathFindingObj = {
         len: 2,
         x: 1,
@@ -87,7 +87,7 @@
           y: 0
         }
       };
-      const isItBlocked = _isBlocked(pathFindingObj);
+      const isItBlocked = _pathWeight(pathFindingObj);
 
       expect(isItBlocked).toBe(false);
     });

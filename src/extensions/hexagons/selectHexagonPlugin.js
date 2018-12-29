@@ -24,27 +24,15 @@ const selectHexagonObject = (function() {
    * @param {Array} params                  Rest of the parameters
    */
   function init(params) {
-    if (!params.isBlocked) {
-      throw new Error('hexagon pathFinding plugin requires cb and filter properties')
+    if (!params.pathWeight || typeof params.pathWeight !== 'function') {
+      throw new Error('hexagon pathFinding plugin requires parameter-object with pathWeight-property that is a callback')
     }
 
     this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
 
-    startClickListener(this.mapInstance, params.isBlocked, params.getData);
+    setupHexagonClick(this.mapInstance, params.pathWeight, params.getData);
 
     return Promise.resolve();
-  }
-
-  /*-----------------------
-  -------- PRIVATE --------
-  -----------------------*/
-  /**
-   * @private
-   * @method startClickListener
-   * @param {Map} map              Instantiated Map class object
-   */
-  function startClickListener(mapInstance, isBlocked, getData) {
-    return setupHexagonClick(mapInstance, isBlocked, getData);
   }
 })();
 

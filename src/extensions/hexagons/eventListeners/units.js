@@ -145,17 +145,17 @@ function _orderListener(e) {
           destinationIndexes, 
           +FTW.getMapsize().x, 
           +FTW.getMapsize().y, 
-          +timeUnits, 
-          _isBlocked
+          +timeUnits,
+          _pathWeight
         );
         pathsToCoordinates = pathsToCoordinates.map(coords => {
           return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
         });
       } catch (e) {
-        if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+        if (e.customCode !== 130 && (!pathsToCoordinates || pathsToCoordinates.length < 1)) {
           e.message = 'The destination was farther than the given maximum distance';
           e.customCode = 140;
-        } else {
+        } else if (e.customCode !== 130) {
           e.message += `, EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach
             the destination or something else happened`;
           e.customCode = 150;
@@ -179,7 +179,7 @@ function _orderListener(e) {
   }
 }
 
-function _isBlocked(nextCoordinates, queue) {
+function _pathWeight(nextCoordinates, queue) {
   /* We use the EARLIER path to test, how much moving to the next area will require. We can
    * not use the next area to test it, as that could lead to nasty surpises (like units
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
@@ -206,7 +206,7 @@ function isInteger(x) {
 --------- API ---------
 ----------------------*/
 const _tests = {
-  _isBlocked,
+  _pathWeight,
   _orderListener,
   _tapListener
 };
