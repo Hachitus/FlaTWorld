@@ -1,6 +1,7 @@
 import {  utils, mapEvents, MapDataManipulator, eventListeners, mapStates, log } from '../../../core/';
 import { findPath } from '../pathFinding/findPath';
 import * as hexaUtils from '../utils/';
+
 const hexagons = {
   findPath,
   utils: hexaUtils
@@ -103,8 +104,9 @@ function _orderListener(e) {
       error.customCode = 100;
       throw error;
     } else if (FTW.currentlySelectedObjects.length > 1) {
-      const error = new Error('The selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]));
+      const error = new Error('The selected object is only supported to be one atm.' + FTW.currentlySelectedObjects[0].id);
       error.customCode = 110;
+      error.customData = FTW.currentlySelectedObjects[0];
       throw error;
     }
 
@@ -117,6 +119,11 @@ function _orderListener(e) {
     if (!objects.length) {
       const error = new Error('No terrain objects found for destination');
       error.customCode = 120;
+      error.customData = {
+        globalCoords,
+        filters: terrainLayerFilter,
+        selectedObject
+      };
       throw error;
     }
 
@@ -142,9 +149,9 @@ function _orderListener(e) {
         }
         pathsToCoordinates = hexagons.findPath(
           objectIndexes, 
-          destinationIndexes, 
-          +FTW.getMapsize().x, 
-          +FTW.getMapsize().y, 
+          destinationIndexes,
+          +FTW.getMapsize().x,
+          +FTW.getMapsize().y,
           +timeUnits,
           _pathWeight
         );
@@ -156,6 +163,7 @@ function _orderListener(e) {
           start and end point could also be same, destination is blocked, unit could not reach
           the destination or something else happened`;
 
+        log.debug(e);
         throw e;
       }
     }

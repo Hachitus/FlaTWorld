@@ -1,6 +1,6 @@
 import * as Hammer from 'hammerjs';
 import { default as Hamster } from 'hamsterjs';
-import { mapEvents, utils, mapStates, eventListeners } from '../../core/';
+import { mapEvents, utils, mapStates, eventListeners, log as mapLog } from '../../core/';
 
 /*-----------------------
 -------- PUBLIC ---------
@@ -227,30 +227,33 @@ const baseEventlisteners = (function () {
           const press = new Hammer.Press();
 
           hammer.add(press);
-          hammer.on('press', clickListener);
-          /* We are detecting mouse right click here. This should be in utils */
+          hammer.on('press', pressListener);
+          /* We are detecting mouse right click here */
           mapInstance.canvas.addEventListener('mouseup', (e) => {
-            if (e.which === 3) {
-              clickListener(e);
+            if (utils.mouse.isRightClick(e)) {
+              pressListener(e);
             }
           }, true);
         },
         off: () => {
-          hammer.off('press', clickListener);
-          mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
+          hammer.off('press', pressListener);
+          mapInstance.canvas.removeEventListener('mouseup', pressListener, true);
         }
       };
     }
 
     return caches['order'];
 
-    function clickListener(e) {
+    function pressListener(e) {
+      /* Check if desktop, the user clicked right button or pressed on mobile */
       if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
+        mapLog.debug(`pressListener activated when user didn't right click or press`)
         return;
       }
 
-      /* Check that finite state is correct and that if desktop, the user clicked right button */
-      if (! mapStates.can('objectOrder') && (mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
+      /* Check that finite state is correct */
+      if (! mapStates.can('objectOrder')) {
+        mapLog.debug(`pressListener activated when objectOrder is not possible. Current state: ${mapStates.current}`)
         return false;
       }
 
