@@ -89,8 +89,9 @@ function _tapListener(e) {
  * 110: The selected object is only supported to be one atm.
  * 120: No terrain objects found for destination
  * 130: GetMovement-method did not return an integer
- * 140: The destination was farther than the given maximum distance
- * 150: Some other unknown error occured
+ * 140: PathFinding module could not find path from source to destination
+ * No code: Some other unknown error occured
+ * Pathfinding can also return error, if source and destination coordinates are same
  */
 function _orderListener(e) {
   // We want to wrap the whole functionality in try catch, to cancel the order state, if any
@@ -106,7 +107,7 @@ function _orderListener(e) {
     } else if (FTW.currentlySelectedObjects.length > 1) {
       const error = new Error('The selected object is only supported to be one atm.' + FTW.currentlySelectedObjects[0].id);
       error.customCode = 110;
-      error.customData = FTW.currentlySelectedObjects[0];
+      error.customData = FTW.currentlySelectedObjects;
       throw error;
     }
 
@@ -139,33 +140,38 @@ function _orderListener(e) {
     if (objectIndexes.x === destinationIndexes.x && objectIndexes.y === destinationIndexes.y) {
       pathsToCoordinates = [];
     } else {
-      try {
-        const timeUnits = selectedObject.getMovement();
-        if (!Number.isInteger(timeUnits)) {
-          const error = new Error(`GetMovement-method did not return an integer. Returned '${timeUnits && timeUnits.toString()} from object
-            '${selectedObject && selectedObject.toString()}`)
-          error.customCode = 130;
-          throw error;
-        }
-        pathsToCoordinates = hexagons.findPath(
-          objectIndexes, 
-          destinationIndexes,
-          +FTW.getMapsize().x,
-          +FTW.getMapsize().y,
-          +timeUnits,
-          _pathWeight
-        );
-        pathsToCoordinates = pathsToCoordinates.map(coords => {
-          return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
-        });
-      } catch (e) {
-        e.customMessage = `The destination could be further than the given maximum distance,
-          start and end point could also be same, destination is blocked, unit could not reach
-          the destination or something else happened`;
-
-        log.debug(e);
-        throw e;
+      const timeUnits = selectedObject.getMovement();
+      if (!Number.isInteger(timeUnits)) {
+        const error = new Error(`GetMovement-method did not return an integer. Got: '${timeUnits && timeUnits.toString()}.
+          Object data in customData-property.`)
+        error.customCode = 130;
+        error.customData = selectedObject;
+        throw error;
       }
+      pathsToCoordinates = hexagons.findPath(
+        objectIndexes,
+        destinationIndexes,
+        +FTW.getMapsize().x,
+        +FTW.getMapsize().y,
+        +timeUnits,
+        _pathWeight
+      );
+      if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+        const error = new Error('No path found from source to destination');
+        error.customCode = 140;
+        error.customData = {
+          selectedObject,
+          objectIndexes,
+          destinationIndexes,
+          mapSize: FTW.getMapsize(),
+          timeUnits,
+          weight
+        };
+        throw error;
+      }
+      pathsToCoordinates = pathsToCoordinates.map(coords => {
+        return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
+      });
     }
 
     selectedObject.move(pathsToCoordinates);
