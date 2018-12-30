@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/Hachitus/flatworld",
   "scripts": {
-    "build:dev": "npx webpack --config webpack.config.dev.js",
+    "build:dev": "npx webpack --config webpack.config.dev.build.js",
     "start": "npm run start:dev",
     "start:dev": "npm run build:dev && npx webpack-dev-server --config webpack.config.dev.js",
     "build": "npm run build:prod",

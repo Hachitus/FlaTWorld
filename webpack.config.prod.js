@@ -30,7 +30,7 @@ module.exports = [
     },
     mode: 'production',
     performance: {
-      hints: false,
+      hints: true,
     },
   }, {
     entry: [
@@ -52,7 +52,7 @@ module.exports = [
         test: /\.js?$/,
         exclude: [/node_modules/, /assets/],
         loader: 'eslint-loader',
-        include: __dirname + '/src' 
+        include: __dirname + '/src'
       },{
         test: /\.handlebars$/,
         loader: "handlebars-loader"
@@ -60,7 +60,7 @@ module.exports = [
     },
     mode: 'production',
     performance: {
-      hints: false
+      hints: true
     },
   }
 ];
