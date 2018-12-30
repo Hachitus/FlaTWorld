@@ -153,7 +153,7 @@ function _orderListener(e) {
         });
       } catch (e) {
         e.customMessage = `The destination could be further than the given maximum distance,
-          EXTRA INFO: start and end point are same, destination is blocked, unit could not reach
+          start and end point could also be same, destination is blocked, unit could not reach
           the destination or something else happened`;
 
         throw e;
@@ -167,10 +167,9 @@ function _orderListener(e) {
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
   } catch(e) {
-    mapStates.objectOrderEnd();
-    mapEvents.publish('objectOrderFailed', e);
     log.debug(e);
-    return;
+    mapEvents.publish('objectOrderFailed', e);
+    mapStates.objectOrderEnd();
   }
 }
 
