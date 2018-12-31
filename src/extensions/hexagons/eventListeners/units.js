@@ -100,7 +100,7 @@ function _orderListener(e) {
   try {
     mapStates.objectOrder();
 
-    if (!FTW.currentlySelectedObjects || !FTW.currentlySelectedObjects.length < 1) {
+    if (!FTW.currentlySelectedObjects || FTW.currentlySelectedObjects.length < 1) {
       const error =  new Error('No objects selected for orders');
       error.customCode = 100;
       throw error;

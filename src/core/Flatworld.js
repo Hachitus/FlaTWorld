@@ -789,8 +789,8 @@ class Flatworld {
     return currentlySelectedObjects;
   }
   set currentlySelectedObjects(newObjects) {
-    if (!newObjects.length || !(newObjects[0] instanceof PIXI.Sprite)) {
-      log.warn('currentlySelectedObjects need to an array and should hold instances of PIXI.Sprite');
+    if (newObjects.length && !(newObjects[0] instanceof PIXI.Sprite)) {
+      log.warn('currentlySelectedObjects need to be an empty array or array of PIXI.Sprites');
     }
     currentlySelectedObjects.length = 0;
     currentlySelectedObjects.push(...newObjects);
