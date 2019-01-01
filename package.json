@@ -17,8 +17,8 @@
     "canvas",
     "HTML5"
   ],
-  "engines" : {
-    "node" : ">=10.8.0"
+  "engines": {
+    "node": ">=10.8.0"
   },
   "version": "0.6.5",
   "browser": "dist/flatworld.js",
@@ -66,17 +66,17 @@
   },
   "dependencies": {
     "edge-launcher": "^1.2.2",
-    "esm": "^3.0.25",
-    "eventemitter3": "^2.0.2",
+    "esm": "^3.0.84",
+    "eventemitter3": "^2.0.3",
     "hammerjs": "^2.0.8",
-    "hamsterjs": "^1.1.2",
-    "handlebars": "^4.0.5",
+    "hamsterjs": "^1.1.3",
+    "handlebars": "^4.0.12",
     "handlebars-loader": "^1.4.0",
     "howler": "^2.0.1",
     "javascript-state-machine": "^2.3.5",
     "loglevel": "^1.4.1",
     "nvm": "0.0.4",
-    "pixi.js": "^4.2.1",
-    "whatwg-fetch": "^2.0.0"
+    "pixi.js": "^4.8.4",
+    "whatwg-fetch": "^2.0.4"
   }
 }

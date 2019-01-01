@@ -55,10 +55,7 @@ class Flatworld {
    * @namespace flatworld
    * @class Flatworld
    * @constructor
-   * @requires PIXI.JS framework in global namespace
    * @requires Canvas (webGL support recommended) HTML5-element supported.
-   * @requires Hammer for touch events
-   * @requires Hamster for mouse scroll events
    *
    * @param {HTMLElement} mapCanvas                       HTML element which will be container for the created canvas element.
    * @param {Object} [props]                              Extra properties
