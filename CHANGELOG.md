@@ -1,5 +1,8 @@
-<a name="0.7.0"></a>
-# 0.7.0 Changes the library to event based (2017-11-?)
+ <a name="0.7.0"></a>
+ # 0.7.0 Changes the library to event based (2017-11-?)
++* Loads of changes and not all of them very friendly. I don't believe anyone uses the library and will make these drastic changes. They are needed.
++* The logic was changed to more event-based instead of being unnecessarily tied to the code. Library should communicate through events.
++* Removed mapDrag and mapZoom plugins, using pixi-viewport
 
 ## Breaking changes
 * Removed the UI.js and themes. We do things event based
