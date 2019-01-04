@@ -33,4 +33,28 @@ module.exports = [{
     open: true,
   },
   mode: 'development',
+}, {
+  entry: [
+    './src/bundle'
+  ],
+  output: {
+    path: path.join(__dirname, 'tests/dist'),
+    filename: 'flatworld.js',
+    libraryTarget: 'commonjs',
+    umdNamedDefine: true
+  },
+  devtool: 'eval-source-map',
+  module: {
+    rules: [{
+      enforce: 'pre',
+      test: /\.js?$/,
+      exclude: [/node_modules/, /assets/],
+      loader: 'eslint-loader',
+      include: __dirname + '/src'
+    },{
+      test: /\.handlebars$/,
+      loader: "handlebars-loader"
+    }]
+  },
+  mode: 'development',
 }];
