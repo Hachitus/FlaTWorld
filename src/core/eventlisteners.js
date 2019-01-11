@@ -1,5 +1,3 @@
-import { mapEvents } from './index';
-
 /*-----------------------
 ------- VARIABLES -------
 -----------------------*/
@@ -34,7 +32,7 @@ function on(type = '', cb = false) {
     throw new Error('eventlisteners.on needs to have detector set with this event type!');
   }
 
-  detectors[type].on(_createEventListenerWrapper('Map' + type, cb));
+  detectors[type].on(cb);
   activeEventListeners[type] = activeEventListeners[type] || new Set();
   activeEventListeners[type].add(cb);
 }
@@ -110,30 +108,6 @@ function clearDetector(type = '') {
   /* remove all data / references to event listeners and detector */
   delete activeEventListeners[type];
   delete detectors[type];
-}
-
-/*-----------------------------
------------ PRIVATE -----------
-------------------------------*/
-/**
- * This creates a wrapper for callback. The idea is to send map events from this wrapper for all events.
- *
- * @private
- * @static
- * @method _createEventListenerWrapper
- * @param  {String}   type   Event type
- * @param  {Function} cb     Event callback
- */
-function _createEventListenerWrapper(type, cb) {
-  /* NOTE! There can be more than one arguments in an event. E.g. Hamster.js */
-  return (...args) => {
-    /**
-     * @event Event gets fired when the specific eventListener trigger. The name consists of "Map" + the given event type, like such:
-     * "MapDrag"
-     */
-    mapEvents.publish(type);
-    cb(...args);
-  };
 }
 
 /*---------------------

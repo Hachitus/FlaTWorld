@@ -56,5 +56,5 @@ module.exports = [{
       loader: "handlebars-loader"
     }]
   },
-  mode: 'development',
+  mode: 'development'
 }];

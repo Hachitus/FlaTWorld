@@ -1,4 +1,5 @@
 import { EventEmitter } from 'eventemitter3';
+import mapLog from './log';
 
 /*---------------------
 -------- PUBLIC -------
@@ -12,16 +13,17 @@ import { EventEmitter } from 'eventemitter3';
  * This uses https://github.com/primus/eventemitter3 and follows the nodeJS event
  * conventions: https://nodejs.org/api/events.html
  * Events atm:
- * - mapdrag
- * - mapzoomed
+ * - mapDrag
+ * - mapZoomed
  * - objectsSelected - implemented in plugins (e.g. in hexagon extension units.js)
  * - objectOrderFailed - implemented in plugins (e.g. in hexagon extension units.js)
  * - mapMoved
- * - mapResize
+ * - mapResized
+ * - mapFullscreen (fullscreen and mapResize events are sent in the same situation)
+ * - mapFullSize (fullSize and mapResize events are sent in the same situation)
  * @namespace flatworld
  * @class mapEvents
  * @return {Object}     subsribe and publish
- * @todo add mapfullscreen, mapfullSize and check if something is missing from the list
  */
 const mapEvents = (function() {
   const TIMER_FOR_SAME_TYPE = 50;
@@ -58,6 +60,8 @@ const mapEvents = (function() {
     if ((lastTimePublished[realType] + (type.cooldown || TIMER_FOR_SAME_TYPE) < timestamp)) {
       lastTimePublished[realType] = timestamp;
       EE.emit(realType, datas);
+
+      mapLog.debug(`Event ${realType} happened`, datas)
     }
   }
 

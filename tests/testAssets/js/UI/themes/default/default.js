@@ -224,7 +224,6 @@ class UIDefault {
    *
    * @param {HTMLElement} modalElem
    * @param {Object} cssClasses
-   * @todo make sure / check, that modalElem.classList.add gets added only once
    */
   showModal(data, getData, type = 'select') {
     //const objectDatas = getDatas.allData(object);
@@ -240,12 +239,14 @@ class UIDefault {
         object: {
           name: getData(data).name
         }
-      });            
+      });
     }
 
     _getElement('select').style.display = 'block';
 
-    this.modal.classList.add(cssClasses[type]);
+    if (!this.modal.classList.contains(cssClasses[type])) {
+      this.modal.classList.add(cssClasses[type]);
+    }
   }
 }
 

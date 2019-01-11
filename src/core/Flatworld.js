@@ -282,7 +282,7 @@ class Flatworld {
       throw new Error('You should have layers created for the map, before initializing the map');
     }
 
-    options.fullsize && this.toggleFullsize();
+    options.fullsize && this.resizeCanvasToFullSize();
 
     this.getAllObjects().forEach(o => {
       if (o && o.initializeCoordinates) {
@@ -507,7 +507,6 @@ class Flatworld {
    * @param {Integer} coord.y              Y coordinate
    * @param {Integer} absolute             If the given coordinates are not relative, like move map 1 pixel, but instead absolute, like
    * move map to coordinates { x: 1, y: 2 }. Defaults to false (relative).
-   * @todo  the informcoordinates away and fix the issue they tried to fix!
    **/
   moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
     const realCoordinates = {
@@ -521,7 +520,7 @@ class Flatworld {
       _movableLayer.move(realCoordinates);
     }
 
-    mapEvents.publish('mapMoved', realCoordinates);
+    mapEvents.publish('mapMoved');
     this.drawOnNextTick();
   }
   /**
@@ -820,15 +819,25 @@ class Flatworld {
   /**
    * Resize the canvas to fill the whole browser content area. Defined by the baseEventlisteners-module (core modules plugin)
    *
-   * @method toggleFullsize
-   **/
-  toggleFullsize() { return 'notImplementedYet. Activate with plugin'; }
-  /**
-   * Toggles fullscreen mode. Defined by the baseEventlisteners-module (core modules plugin)
-   *
    * @method toggleFullScreen
    **/
-  toggleFullScreen() { return 'notImplementedYet. Activate with plugin'; }
+  toggleFullScreen() {
+    utils.resize.toggleFullScreen();
+    this.resizeCanvasToFullSize();
+  }
+  /**
+   * Resizes the canvas to the current most wide and high element status.
+   * Basically canvas size === window size.
+   *
+   * @method resizeCanvasToFullSize
+   */
+
+  resizeCanvasToFullSize() {
+    utils.resize.resizePIXIRenderer(
+      this.getRenderer(),
+      this.drawOnNextTick.bind(this)
+    );
+  }
   /**
    * Plugin will overwrite create this method. Method for actually activating minimap.
    *

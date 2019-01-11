@@ -337,7 +337,7 @@ async function initFlatworld(mapData, options) {
 
     /* Activate the fullscreen button: */
     document.getElementById('testFullscreen').addEventListener('click', function () {
-      map.setFullScreen();
+      map.toggleFullScreen();
     });
 
     const showFowCanvas = document.getElementById('showFowCanvas');
