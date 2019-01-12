@@ -1,6 +1,7 @@
 import * as Hammer from 'hammerjs';
 import { default as Hamster } from 'hamsterjs';
 import { utils, mapStates, eventListeners, log as mapLog, mapEvents } from '../../core/';
+import { eventMouseCoords } from '../../core/utils/mouse';
 
 /*-----------------------
 -------- PUBLIC ---------
@@ -236,11 +237,7 @@ const baseEventlisteners = (function () {
 
           hammer.on('press', wrappedCB);
           /* We are detecting mouse right click here */
-          const eventOff = mapInstance.canvas.addEventListener('mouseup', (e) => {
-            if (utils.mouse.isRightClick(e)) {
-              pressListener(e, wrappedCB);
-            }
-          }, true);
+          const eventOff = mapInstance.canvas.addEventListener('mouseup', wrappedCB, true);
 
           allPressCbs.set(cb, [wrappedCB, eventOff]);
         },
@@ -265,6 +262,12 @@ const baseEventlisteners = (function () {
       if (! mapStates.can('objectOrder')) {
         mapLog.debug(`pressListener activated when objectOrder is not possible. Current state: ${mapStates.current}`)
         return false;
+      }
+
+      // We make the normal mouse click to follow Hammer event standard (.center). This could work some other
+      // more standard and logical way? (since now we are tied to Hammer)
+      if (utils.mouse.isRightClick(e)) {
+        e.center = eventMouseCoords(e);
       }
 
       cb(e);
