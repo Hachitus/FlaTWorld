@@ -21,7 +21,7 @@
     "node": ">=10.8.0"
   },
   "version": "0.6.5",
-  "browser": "dist/flatworld.js",
+  "browser": "dist/flatworld.min.js",
   "author": "Janne Hyytiä",
   "license": "mit",
   "repository": {
