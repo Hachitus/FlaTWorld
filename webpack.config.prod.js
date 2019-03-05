@@ -9,8 +9,8 @@ module.exports = [
     output: {
       path: `${path.resolve(__dirname)}/dist`,
       filename: 'flatworld.js',
-      libraryTarget: 'commonjs',
-      umdNamedDefine: true
+      library: 'FTW',
+      libraryTarget: 'umd',
     },
     devtool: 'source-map',
     node: {
