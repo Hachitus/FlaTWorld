@@ -79,18 +79,26 @@ describe('mapDataManipulator => ', () => {
     expect(foundObjects[0]).toBe(testObjects[0]);
     expect(foundObjects[1]).toBe(testLayers[1]);
   });
-  it('filter propertyOptional', () => {
-    const rulesWithOptional = Object.assign({ propertyOptional: true }, layerRules);
-    const rulesWithOptional2 = Object.assign({ propertyOptional: true }, objectRules);
+  it('filter matchAny', () => {
+    const layerRulesFailing = {
+      type: 'filter',
+      object: 'layer',
+      property: 'selectable',
+      value: 'dlfkdfkd',
+    };
+    const failingRuleWithMatchAny = {
+      matchAny: true,
+      rules: [layerRules, layerRulesFailing]
+    };
 
-    let mapDataManipulator = new MapDataManipulator([rulesWithOptional, rulesWithOptional2]);
+    let mapDataManipulator = new MapDataManipulator([layerRules, layerRulesFailing, objectRules]);
     let found = mapDataManipulator.filter(allObjects);
 
-    expect(found.length).toBe(5);
+    expect(found.length).toBe(1);
 
-    mapDataManipulator = new MapDataManipulator([rulesWithOptional, objectRules]);
+    mapDataManipulator = new MapDataManipulator([failingRuleWithMatchAny, objectRules]);
     found = mapDataManipulator.filter(allObjects);
 
-    expect(found.length).toBe(4);
+    expect(found.length).toBe(2);
   });
 });

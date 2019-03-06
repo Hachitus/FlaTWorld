@@ -12,7 +12,7 @@ class MapDataManipulator {
    * constructing. The module will filter with every rule and object given and everything that
    * doesn't pass one of the given filters, will be dropped out.
    * 
-   * The rules property must match the value. So for example given property 
+   * The rules property must match the value. So for example given property
    * ['prop1', 'isBig'] and value: 'true', object like: 
    * {
    *  obj:
@@ -29,8 +29,14 @@ class MapDataManipulator {
    *   object: 'layer' | 'object',
    *   property: 'selectable', // THIS can also be an array, like: ['data', 'a'] => data.a
    *   value: true,
-   *   propertyOptional: truthy | falsy
+   *   matchAny: 'true' | falsy
    * }
+   *
+   * This class can only filter objects strictly. So that if any of the given filters fail, not objects of that type
+   * are returned. matchAny-flag, prevents the filter to fail when one of the objects fail. So if you have a
+   * layer-object and matchAny is present, if any of the given filters match, then the match is success. Normally
+   * when any of the filters fail, the whole filter result fails for that type.
+   *
    * For more information, please check the mapDataManipulatorSpec.js (test) for now.
    *
    * @namespace flatworld
@@ -99,7 +105,7 @@ class MapDataManipulator {
    * @param {Array} [varname] [description]
    **/
   _runRule(object) {
-    let ruleMatches = true;
+    let ruleMatches = undefined;
     let matchedType;
 
     Object.keys(this.classes).forEach((type) => {
@@ -110,23 +116,37 @@ class MapDataManipulator {
       matchedType = filtered.length ? type : matchedType;
     });
 
-    this.rules.forEach((rule) => {
-      if (rule.type === 'filter') {
-        if (rule.object !== matchedType) {
-          return;
-        } else if (String(rule.propertyOptional) === 'true' && ruleMatches) {
-          return;
-        } else if(!ruleMatches) {
-          return;
-        }
+    for (const rules of Object.values(this.rules)) {
+      let matchesAny = false;
+      let properRules = rules.rules;
 
-        if (matchedType === 'layer') {
-          ruleMatches = this._getObject(object, rule);
-        } else if (matchedType === 'object') {
-          ruleMatches = this._getObject(object, rule);
+      if (rules.matchAny) {
+        matchesAny = true;
+      } else if (!Array.isArray(rules.rules)) {
+        properRules = [rules];
+      }
+
+      for (const rule of Object.values(properRules)) {
+        if (rule.type === 'filter') {
+          if (rule.object !== matchedType) {
+            continue;
+          } else if (String(matchesAny) === 'true' && ruleMatches === true) {
+            // Rule matching has succeeded once and we skip the rest
+            break;
+          } else if (String(matchesAny) !== 'true' && ruleMatches === false) {
+            // Rule matching failed and all rules must match, since matchAny wasn't given!
+            break;
+          }
+
+          // Previous conditions didn't match so we continue matching this rule.
+          if (matchedType === 'layer') {
+            ruleMatches = this._getObject(object, rule);
+          } else if (matchedType === 'object') {
+            ruleMatches = this._getObject(object, rule);
+          }
         }
       }
-    });
+    }
 
     return ruleMatches;
   }
