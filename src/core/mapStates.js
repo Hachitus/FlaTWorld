@@ -20,23 +20,17 @@ const mapStates = StateMachine.create({
   initial: 'statusQuo',
   events: [
     /**
-     * When multiple objects are represented as an option
-     *
-     * @method objectSelectDialog
-     */
-    { name: 'objectSelectDialog', from: ['statusQuo', 'objectSelected'], to: 'objectSelectDialogOpened' },
-    /**
      * When the object is selected
      *
      * @method objectSelect
      */
-    { name: 'objectSelect', from: ['statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'objectSelected' },
+    { name: 'objectSelect', from: ['statusQuo', 'objectSelected'], to: 'objectSelected' },
     /**
      * When situation is normal, nothing selected.
      *
      * @method normalize
      */
-    { name: 'normalize', from: ['objectSelected', 'objectSelectDialogOpened'], to: 'statusQuo' },
+    { name: 'normalize', from: ['objectSelected'], to: 'statusQuo' },
     /**
      * When object is issued a move order
      *
@@ -49,18 +43,6 @@ const mapStates = StateMachine.create({
      * @method objectOrderEnd
      */
     { name: 'objectOrderEnd', from: 'animatingObject', to: 'objectSelected' },
-    /**
-     * The games main UI is opened and the map stays at the background, normally non-responsive
-     *
-     * @method UIOpen
-     */
-    { name: 'UIOpen', from: ['statusQuo', 'objectSelected', 'objectSelectDialogOpened'], to: 'mainUIOpened' },
-    /**
-     * Games main UI is closed and map is activated again
-     *
-     * @method UIClose
-     */
-    { name: 'UIClose', from: 'mainUIOpened', to: 'statusQuo' }
   ]});
 
 /*---------------------
