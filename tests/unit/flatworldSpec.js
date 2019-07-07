@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import helper from './flatworldCreatorHelper';
 import Flatworld from '../../src/core/Flatworld';
 import MapDataManipulator from '../../src/core/MapDataManipulator';
@@ -43,7 +44,7 @@ describe('Flatworld unit tests => ', () => {
     expect(returnedObjects[0]).toEqual(map._getMovableLayer().children[0].children[0].children[0]);
   });
   it('addLayer with subcontainers and move it', () => {
-    const renderer = new PIXI.WebGLRenderer();
+    const renderer = new PIXI.Renderer();
     map = new Flatworld(renderer.view, {
       subcontainers: {
         width: 50,
@@ -73,8 +74,8 @@ describe('Flatworld unit tests => ', () => {
 
     expect(
       map._getMovableLayer().children[0].getSubcontainerConfigs().width)
-    .toBe(
-      map._getMovableLayer().children[0].children[0].x);
+      .toBe(
+        map._getMovableLayer().children[0].children[0].x);
 
     map.moveMap({ x: 1000, y: 1000 });
 
@@ -84,8 +85,8 @@ describe('Flatworld unit tests => ', () => {
     expect(map._getMovableLayer().children[0].children[0].children[0].x).toBe(40);
   });
   it('getMapCoordinates', () => {
-    var expectedCoordinates = new PIXI.Point(100, 100);
-    var coordinatesOnMap = map.getMapCoordinates(expectedCoordinates);
+    const expectedCoordinates = new PIXI.Point(100, 100);
+    const coordinatesOnMap = map.getMapCoordinates(expectedCoordinates);
 
     expect(JSON.stringify(coordinatesOnMap)).toBe(JSON.stringify(expectedCoordinates));
 

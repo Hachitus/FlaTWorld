@@ -111,14 +111,16 @@ class Flatworld {
     /* Make sure the mapCanvas is empty. So there are no nasty surprises */
     mapCanvas.innerHTML = '';
     /* Add the given canvas Element to the options that are passed to PIXI renderer */
-    rendererOptions.view = mapCanvas;
+    Object.assign(rendererOptions, bounds, {
+      view: mapCanvas,
+    });
     /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
-    _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+    _renderers.main = new PIXI.Renderer(rendererOptions);
     _renderers.main.getResponsibleLayer = () => _zoomLayer;
     /* Create PIXI renderer for minimap */
     if (minimapCanvas) {
       _renderers.minimap = minimapCanvas ?
-        new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) :
+        new PIXI.Renderer({ width: 0, height: 0, view: minimapCanvas, autoResize: true }) :
         undefined;
       _renderers.minimap.plugins.interaction.destroy();
       _renderers.minimap.getResponsibleLayer = this.getMinimapLayer;
@@ -931,7 +933,7 @@ class Flatworld {
     let renderStart;
     let totalRenderTime;
 
-    PIXI.ticker.shared.add(() => {
+    PIXI.Ticker.shared.add(() => {
       if (_drawMapOnNextTick) {
         if (this.trackFPSCB) {
           renderStart = new Date().getTime();

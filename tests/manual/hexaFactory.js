@@ -111,7 +111,7 @@ export default function hexaFactory(mapCanvas, datas, {
               throw error;
             }
 
-            texture = PIXI.Texture.fromFrame(objTypeData.image);
+            texture = PIXI.Texture.from(objTypeData.image);
             objectOptions = {
               data: {
                 typeData: objTypeData,

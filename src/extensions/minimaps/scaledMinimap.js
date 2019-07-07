@@ -57,7 +57,7 @@
       mapEvents.publish('minimapInitialized', minimap);
     }
     function setMinimapUI(UIImage) {
-      const UITexture = PIXI.Texture.fromFrame(UIImage);
+      const UITexture = PIXI.Texture.from(UIImage);
       const UISprite = new PIXI.Sprite(UITexture);
 
       map.getMinimapLayer().addChild(UISprite);

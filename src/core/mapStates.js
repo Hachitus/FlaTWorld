@@ -16,9 +16,9 @@ import * as StateMachine from 'javascript-state-machine';
  * @class mapStates
  * @requires  state-machine library
  */
-const mapStates = StateMachine.create({
-  initial: 'statusQuo',
-  events: [
+const mapStates = new StateMachine({
+  init: 'statusQuo',
+  transitions: [
     /**
      * When the object is selected
      *

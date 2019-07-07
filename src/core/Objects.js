@@ -100,7 +100,7 @@ export class ObjectSprite extends PIXI.Sprite {
    * @return this object instance
    */
   innerDraw(x, y) {
-    this.fromFrame(this.currentFrame);
+    this.from(this.currentFrame);
     this.x = x;
     this.y = y;
 

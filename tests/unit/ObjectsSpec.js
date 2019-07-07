@@ -1,12 +1,13 @@
+import * as PIXI from 'pixi.js';
 import helper from './flatworldCreatorHelper';
-import { ObjectSprite, ObjectSpriteTerrain, ObjectSpriteUnit } from '../../src/core/Objects';
+import { ObjectSprite } from '../../src/core/Objects';
 
 let map;
 
 describe('object tests => ', () => {
   beforeEach(() => {
     map = helper.creator();
-  });      
+  });
 
   it('ObjectSprite', () => {
     const object = new ObjectSprite(PIXI.Texture.EMPTY, { x: 0, y: 0 });

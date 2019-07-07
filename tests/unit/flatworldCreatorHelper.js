@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import Flatworld from '../../src/core/Flatworld';
 import objects from '../../src/core/Objects';
 
@@ -7,7 +8,7 @@ export default {
 };
 
 function privateCreator(flatworldOptions) {
-  const renderer = new PIXI.WebGLRenderer();
+  const renderer = new PIXI.Renderer();
   const map = new Flatworld(renderer.view, flatworldOptions);
 
   const unitLayer = map.addLayer({

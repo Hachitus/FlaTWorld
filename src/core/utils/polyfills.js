@@ -47,7 +47,7 @@ export function objectAssign() {
           const source = arguments[index];
           if (source !== undefined && source !== null) {
             for (const nextKey in source) {
-              if (source.hasOwnProperty(nextKey)) {
+              if (Object.prototype.hasOwnProperty.call(source, nextKey)) {
                 output[nextKey] = source[nextKey];
               }
             }

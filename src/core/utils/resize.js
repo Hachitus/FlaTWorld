@@ -80,7 +80,7 @@ export function getWindowSize() {
  *
  * @static
  * @method resizeRenderer
- * @param {PIXI.WebGLRenderer} renderer   The renderer for the map
+ * @param {PIXI.Renderer} renderer   The renderer for the map
  * @param {Function} drawOnNextTick       Function that handles re-rendering canvas
  */
 export function resizePIXIRenderer(renderer, drawOnNextTick) {

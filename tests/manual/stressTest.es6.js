@@ -378,6 +378,7 @@ async function initFlatworld(mapData, options) {
 ---------------------*/
 function objectOrderFailed(e) {
   alert('Issuing order failed. You should make this a proper test handle, not alert :P');
+  // eslint-disable-next-line
   console.warn(e);
 }
 /* THESE GENERATE THE ACTUAL RANDOM MAP DATA */
@@ -486,7 +487,7 @@ function _getCorrectGlobalCoords(obj) {
 
 function _createFoWParams() {
   /* ----------- FOW stuff ------------ */
-  const fowTexture = new PIXI.Texture.fromImage(FOW_IMAGE);
+  const fowTexture = new PIXI.Texture.from(FOW_IMAGE);
   const FoWFilter = function () {
     return new MapDataManipulator([{
       type: 'filter',
