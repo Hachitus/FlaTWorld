@@ -21,8 +21,9 @@
     "node": ">=10.8.0"
   },
   "version": "0.6.5",
-  "main": "dist/flatworld.min.js",
-  "browser": "dist/flatworld.min.js",
+  "module": "src/bundle.js",
+  "main": "src/bundle.js",
+  "browser": "src/bundle.js",
   "author": "Janne Hyytiä",
   "license": "mit",
   "repository": {
