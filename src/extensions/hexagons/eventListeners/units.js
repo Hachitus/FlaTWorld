@@ -193,11 +193,13 @@ function _pathWeight(nextCoordinates, queue) {
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
    */
   const correctHexagon = FTW.hexagonIndexes[nextCoordinates.x] && FTW.hexagonIndexes[nextCoordinates.x][nextCoordinates.y];
-  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
-  
+  // If the hexagon is outside the map or for some reason the hexagon isn't found (which is unknown error...)
   if (!correctHexagon) {
     return -1;
-  } else if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
+  }
+
+  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
+  if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
     return returnedWeight;
   } else if (returnedWeight && !isInteger(returnedWeight)) {
     throw new Error('weight callback has to return an integer');
