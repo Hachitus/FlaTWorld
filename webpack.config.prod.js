@@ -29,7 +29,7 @@ module.exports = [
     },
     mode: 'production',
     performance: {
-      hints: true,
+      hints: 'warning',
     },
   }, {
     entry: [
@@ -59,7 +59,7 @@ module.exports = [
     },
     mode: 'production',
     performance: {
-      hints: true
+      hints: 'warning'
     },
   }
 ];
