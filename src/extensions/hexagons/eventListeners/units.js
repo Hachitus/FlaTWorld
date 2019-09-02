@@ -176,7 +176,10 @@ function _orderListener(e) {
 
     selectedObject.move(pathsToCoordinates);
 
-    mapEvents.publish('unitMoved', pathsToCoordinates);
+    mapEvents.publish('unitMoved', {
+      path: pathsToCoordinates,
+      object: selectedObject
+    });
 
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
