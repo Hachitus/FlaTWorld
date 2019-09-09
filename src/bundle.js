@@ -1,6 +1,3 @@
 export * from './core/';
-import * as allExtensions from './extensions/';
-import * as Pixi from 'pixi.js';
-
-export const extensions = allExtensions;
-export const Preloader = Pixi.Loader;
+export * from './extensions/';
+export { Loader as Preloader } from 'pixi.js';

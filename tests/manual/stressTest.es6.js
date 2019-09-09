@@ -1,13 +1,23 @@
 import * as PIXI from 'pixi.js';
-import { Sound, mapEvents, MapDataManipulator, Preloader, extensions } from '../../src/bundle';
+import {
+  Sound,
+  mapEvents,
+  MapDataManipulator,
+  Preloader,
+  extension_baseEventlisteners,
+  extension_mapZoom,
+  extension_mapDrag,
+  extension_hexagons,
+  extension_mapMovement,
+  extension_fogOfWars,
+  extension_minimaps, } from '../../src/bundle';
 import UI from '../testAssets/js/UI/UI';
 import UIThemes from '../testAssets/js/UI/themes/';
 import hexaFactory from './hexaFactory';
 
-const { baseEventlisteners, mapZoom, mapDrag, hexagons, mapMovement, fogOfWars, minimaps } = extensions;
-const { simpleFogOfWar } = fogOfWars;
-const pixelizedMinimap = minimaps.pixelizedMinimap;
-const hexaUtils = hexagons.utils;
+const { simpleFogOfWar } = extension_fogOfWars;
+const pixelizedMinimap = extension_minimaps.pixelizedMinimap;
+const hexaUtils = extension_hexagons.utils;
 
 /* DATA FILES used for testing */
 const gameData = window.gameData;
@@ -102,17 +112,17 @@ function getMapData(mapsize) {
     y: mapsize
   };
   const gridSize = {
-    rows: Math.floor(coordMapsize.x / hexagons.utils.hexagonMath.calcShortDiagonal()),
-    columns: Math.floor(coordMapsize.y / hexagons.utils.hexagonMath.calcLongDiagonal())
+    rows: Math.floor(coordMapsize.x / extension_hexagons.utils.hexagonMath.calcShortDiagonal()),
+    columns: Math.floor(coordMapsize.y / extension_hexagons.utils.hexagonMath.calcLongDiagonal())
   };
   const gridSizeHalf = {
     rows: Math.floor(gridSize.rows / 2),
     columns: Math.floor(gridSize.columns / 2)
   };
   const hexagonGridCoordinates = {
-    terrains: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
-    units: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
-    units2: hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSizeHalf)
+    terrains: extension_hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
+    units: extension_hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSize),
+    units2: extension_hexagons.utils.hexagonMath.createHexagonGridCoordinates(gridSizeHalf)
   };
   const returnable = {
     gameID: '53837d47976fed3b24000005',
@@ -151,16 +161,16 @@ async function initFlatworld(mapData, options) {
   };
   const minimapSize = { x: 0, y: 0, width: 200, height: 200 };
   const pluginsToActivate = [{
-    plugin: baseEventlisteners
+    plugin: extension_baseEventlisteners
   }, {
-    plugin: mapZoom,
+    plugin: extension_mapZoom,
   }, {
-    plugin: mapDrag,
+    plugin: extension_mapDrag,
   }, {
-    plugin: hexagons.selectHexagonObject,
+    plugin: extension_hexagons.selectHexagonObject,
     parameters: _createHexagonParams()
   }, {
-    plugin: mapMovement
+    plugin: extension_mapMovement
   }];
   const sound = new Sound();
 
@@ -179,7 +189,7 @@ async function initFlatworld(mapData, options) {
   }
 
   /* This NEEDS to be set for the hexagon plugin to work correctly */
-  hexagons.utils.hexagonMath.init(gameData.hexagonRadius);
+  extension_hexagons.utils.hexagonMath.init(gameData.hexagonRadius);
 
   /* Determines how much stuff we show on screen for stress testing */
   // If either is even 1 pixel bigger than this, gets all black
@@ -280,7 +290,8 @@ async function initFlatworld(mapData, options) {
         minimapColor = 0x55FF55;
         size = size / 2;
       }
-      const minimapShape = obj.minimapShape || hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: minimapColor });
+      const minimapShape = obj.minimapShape ||
+        extension_hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: minimapColor });
       const globalPoints = _getCorrectGlobalCoords(obj);
 
       minimapShape.x = Math.floor(pixelRatio * globalPoints.x / hexaUtils.hexagonMath.calcShortDiagonal());
@@ -294,7 +305,8 @@ async function initFlatworld(mapData, options) {
       if (obj.type === 'unit') {
         size = size / 2;
       }
-      const minimapShape = obj.minimapShape || hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: obj.minimapColor });
+      const minimapShape = obj.minimapShape ||
+        extension_hexagons.utils.createHexagon.createVisibleHexagon(size / 2, { color: obj.minimapColor });
       const globalPoints = obj.toGlobal(new PIXI.Point(obj.x,obj.y));
 
       const indexes = new PIXI.Point(hexaUtils.hexagonMath.coordinatesToIndexes(globalPoints));

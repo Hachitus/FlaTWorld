@@ -3,7 +3,7 @@
   'use strict';
 
   describe('hexagon extension, testing utils => ', function () {
-    const HEXAGONS_UTILS = window.flatworld.extensions.hexagons.utils;
+    const HEXAGONS_UTILS = window.flatworld.extension_hexagons.utils;
     var radius, hexagonPoints, gridSize;
 
     beforeEach(function () {

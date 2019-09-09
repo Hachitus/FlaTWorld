@@ -2,10 +2,10 @@
 
 (function hexagonsSpec() {
   // const MapDataManipulator = window.flatworld.MapDataManipulator;
-  const { createHexagonDataStructure, _pathWeight, _orderListener } = window.flatworld.extensions.hexagons._tests;
+  const { createHexagonDataStructure, _pathWeight, _orderListener } = window.flatworld.extension_hexagons._tests;
   const { creator } = window.flatworldCreatorHelper;
   const { UI, eventListeners, mapStates, mapEvents } = window.flatworld;
-  const { selectHexagonObject, utils } = window.flatworld.extensions.hexagons;
+  const { selectHexagonObject, utils } = window.flatworld.extension_hexagons;
 
   const radius = 60;
 

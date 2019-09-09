@@ -8,7 +8,7 @@
   /*-----------------------
   ---------- API ----------
   -----------------------*/
-  window.flatworld.extensions.minimaps.scaledMinimap = setupScaledMinimap();
+  window.flatworld.extension_minimaps.scaledMinimap = setupScaledMinimap();
 
   /*-----------------------
   ------- VARIABLES -------
@@ -20,7 +20,7 @@
   -----------------------*/
   /**
    *
-   * @namespace flatworld.extensions.minimaps
+   * @namespace flatworld.extension_minimaps
    * @class scaledMinimap
    **/
   function setupScaledMinimap() {

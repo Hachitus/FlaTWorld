@@ -3,7 +3,7 @@
 /* global describe, beforeEach, it, expect */
 'use strict';
 
-const findPath = window.flatworld.extensions.hexagons.pathfinding.findPath;
+const findPath = window.flatworld.extension_hexagons.pathfinding.findPath;
 const compareToPathFindingJS = true;
 
 xdescribe('findPath', () => {
