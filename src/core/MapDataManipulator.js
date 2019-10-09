@@ -80,7 +80,17 @@ class MapDataManipulator {
    * @param {} rules        Rules to add
    */
   addRule(rules) {
-    this.rules.concat(rules);
+    this.rules = this.rules.concat(rules);
+  }
+
+  /**
+   * remove a filter rule
+   *
+   * @method addRule
+   * @param {} rules        Rules to add
+   */
+  removeRule(ruleToRemove) {
+    this.rules = this.rules.filter(rule => JSON.stringify(rule) !== JSON.stringify(ruleToRemove));
   }
 
   /** @todo I think this should be implemented. But it's a small optimization so don't bother yet. Basically the idea is

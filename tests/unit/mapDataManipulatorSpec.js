@@ -42,6 +42,28 @@ describe('mapDataManipulator => ', () => {
     allObjects = testObjects.concat(testLayers);
   });
 
+  it('addRule & removeRule', () => {
+    const mapDataManipulator = new MapDataManipulator(layerRules);
+    expect(mapDataManipulator.rules).toEqual([layerRules], 'INITIAL')
+
+    mapDataManipulator.removeRule(layerRules)
+    expect(mapDataManipulator.rules).toEqual([], 'REMOVAL')
+
+    mapDataManipulator.addRule([layerRules])
+    expect(mapDataManipulator.rules).toEqual([layerRules], 'ADDING')
+  });
+  it('doesItFilter', () => {
+    const mapDataManipulator = new MapDataManipulator(layerRules);
+
+    let result = mapDataManipulator.doesItFilter(MapDataManipulator.OBJECT_OBJECT)
+    expect(result).toBe(false)
+
+    result = mapDataManipulator.doesItFilter(MapDataManipulator.OBJECT_LAYER)
+    expect(result).toBe(true)
+  });
+  it('getPropertyWithArray', () => {
+    // MapDataManipulator.getPropertyWithArray(obj, array, index);
+  });
   it('constructing without params should throw error', () => {
     spyOn(utils.general, 'requireParameter');
     new MapDataManipulator(); // eslint-disable-line no-new
