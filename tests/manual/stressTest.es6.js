@@ -402,7 +402,7 @@ function addBase_spriteLayerData(name, group, options) {
     type: 'MapLayerParent',
     coord: { x: 0, y: 0 },
     name: name,
-    group: group, // For quadTrees
+    group: group,
     specials: [{
       interactive: interactive
     }],
@@ -537,7 +537,8 @@ function _createHexagonParams() {
     },
     getData: (object) => {
       return object.data.typeData;
-    }
+    },
+    getTerrainLayerName: () => 'terrain'
   };
 }
 

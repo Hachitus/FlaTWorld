@@ -20,7 +20,8 @@ const selectHexagonObject = {
  * @method  init
  * @param {Map} givenMap                  Instantiated Map class object
  * @param {Object} protectedProperties    Holds all the non-public properties to use
- * @param {Array} params                  Rest of the parameters
+ * @param {Array} params                  Rest of the parameters. Like pathWeight (function), getTerrainLayerName(() => string),
+ * getData(function)
  */
 function init(params) {
   if (!params.pathWeight || typeof params.pathWeight !== 'function') {
@@ -30,7 +31,7 @@ function init(params) {
     throw error;
   }
 
-  this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
+  this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects[params.getTerrainLayerName()]);
 
   setupHexagonClick(this.mapInstance, params.pathWeight, params.getData);
 

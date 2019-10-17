@@ -78,17 +78,18 @@ export default function hexaFactory(mapCanvas, datas, {
     const renderer = map.getRenderer();
     const layerOptions = {
       name: layerData.name,
+      group: layerData.group,
       coord: layerData.coord,
       drawOutsideViewport: {
         x: renderer.width,
         y: renderer.height
       },
-      selectable: layerData.name === 'unitLayer' ? true : false
+      selectable: layerData.group === 'unit' ? true : false
     };
     let thisLayer;
 
     try {
-      thisLayer = map.addLayer(layerOptions);
+      thisLayer = map.addLayer(layerData.group, layerOptions);
 
       layerData.objectGroups.forEach(objectGroup => {
         const spritesheetType = objectGroup.typeImageData;

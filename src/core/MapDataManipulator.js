@@ -21,8 +21,13 @@ class MapDataManipulator {
    *    }
    * }
    * 
-   * Would match this
-   *
+   * Would match this filter:
+   * {
+   *   type: 'filter',
+   *   object: 'object',
+   *   property: ['prop1', 'isBig'],
+   *   value: 'true',
+   * }
    * The filters are like this:
    * {
    *   type: 'filter',

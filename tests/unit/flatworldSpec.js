@@ -52,7 +52,7 @@ describe('Flatworld unit tests => ', () => {
         maxDetectionOffset: 100,
       },
     });
-    const testLayer = map.addLayer({
+    const testLayer = map.addLayer('terrain', {
       name: 'testLayer',
     });
     const sprite1 = new PIXI.Sprite(PIXI.Texture.EMPTY);

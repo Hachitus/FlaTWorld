@@ -11,7 +11,7 @@ function privateCreator(flatworldOptions) {
   const renderer = new PIXI.Renderer();
   const map = new Flatworld(renderer.view, flatworldOptions);
 
-  const unitLayer = map.addLayer({
+  const unitLayer = map.addLayer('unit', {
     name: 'unitLayer',
   });
   const testUnits = [
@@ -20,7 +20,7 @@ function privateCreator(flatworldOptions) {
   ];
   testUnits.forEach(o => unitLayer.addChild(o));
 
-  const terrrainLayer = map.addLayer({
+  const terrrainLayer = map.addLayer('terrain', {
     name: 'terrainLayer',
   });
   const testTerrain = new objects.ObjectSpriteTerrain();

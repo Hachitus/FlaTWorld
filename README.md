@@ -86,7 +86,7 @@ Simple example:
 
 		map.init( pluginsToActivate, startPoint );
 
-		thisLayer = map.addLayer(layerOptions);
+		thisLayer = map.addLayer('terrain', layerOptions);
 		newObject = new ObjectTerrain({ x: 1, y: 1 }, objData, objectOptions);
 		thisLayer.addChild(newObject);
 	})

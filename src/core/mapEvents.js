@@ -1,9 +1,11 @@
 import { EventEmitter } from 'eventemitter3';
 import mapLog from './log';
+import { getWindow } from './constants';
 
-/*---------------------
--------- PUBLIC -------
-----------------------*/
+const TIMER_FOR_SAME_TYPE = 50;
+const lastTimePublished = {};
+const EE = new EventEmitter();
+
 /**
  * This module handles map events. Like informing map movement, object selection and other
  * changes. Not that ALL the eventlisteners and their callbacks will throw one event!
@@ -25,25 +27,12 @@ import mapLog from './log';
  * @class mapEvents
  * @return {Object}     subsribe and publish
  */
-const mapEvents = (function() {
-  const TIMER_FOR_SAME_TYPE = 50;
-  const lastTimePublished = {};
-  const EE = new EventEmitter();
+export class MapEvents {
+  constructor() {
+    this.window = getWindow();
+  }
 
-  /*---------------------
-  --------- API ---------
-  ----------------------*/
-  return {
-    subscribe,
-    publish,
-    debounce,
-    removeAllListeners: EE.removeAllListeners.bind(EE)
-  };
-
-  /*---------------------
-  -------- PUBLIC -------
-  ----------------------*/
-  function subscribe(type, cb) {
+  subscribe(type, cb) {
     EE.on(type, cb);
     lastTimePublished[type] = 0;
   }
@@ -53,14 +42,12 @@ const mapEvents = (function() {
    * { name: String (required), cooldown: Int, debounce: Int }.
    * @param  {...[]} data       Can hold any data with rest of the parameters
    */
-  function publish(type = '', datas) {
+  publish(type = '', datas) {
     const timestamp = new Date().getTime();
     const realType = type.name || type;
-
     if ((lastTimePublished[realType] + (type.cooldown || TIMER_FOR_SAME_TYPE) < timestamp)) {
       lastTimePublished[realType] = timestamp;
       EE.emit(realType, datas);
-
       mapLog.debug(`Event ${realType} happened`, datas)
     }
   }
@@ -70,24 +57,23 @@ const mapEvents = (function() {
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
-  function debounce(func, wait, immediate) {
+  debounce(func, wait, immediate) {
     let timeout;
 
-    return function() {
-      const context = this, args = arguments;
+    return (...args) => {
       const later = function() {
         timeout = null;
-        if (!immediate) func.apply(context, args);
+        if (!immediate) func(...args);
       };
       const callNow = immediate && !timeout;
       clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
+      timeout = this.window.setTimeout(later, wait);
+      if (callNow) func(...args);
     }
   }
-})();
+  removeAllListeners(...args) {
+    EE.removeAllListeners(...args);
+  }
+}
 
-/*---------------------
---------- API ---------
-----------------------*/
-export default mapEvents;
+export default new MapEvents();

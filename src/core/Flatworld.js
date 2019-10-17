@@ -257,8 +257,9 @@ class Flatworld {
 
     /**
      * Holds all the objects on the map. This is an alternative data structure to make some
-     * operations easier. Basically it will be populated with the primaryLayers, this is done in
-     * init method. More details there.
+     * operations easier. Basically it will be populated with the primaryLayers, It is populated as an object, that is
+     * organized based on layers group-property. So when layer.group === 'terrain', allMapObjects.terrain will hold
+     * those objects.
      */
     this.allMapObjects = {};
   }
@@ -403,15 +404,22 @@ class Flatworld {
    * All parameters are passed to ParentLayerConstructor (normally constructor of MapLayer).
    *
    * @method addLayer
+   * @param {Object} group        REQUIRED
+   * @param {Object} layerOptions OPTIONAL
    * @uses MapLayer
-   * @return {MapLayer}          created MapLayer instance
+   * @return {MapLayer}           created MapLayer instance
    **/
-  addLayer(layerOptions) {
+  addLayer(group, layerOptions) {
+    if (!group) {
+      throw new Error('Group is required for every layer');
+    }
     if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
       layerOptions.subcontainers = this.getSubcontainerConfigs();
     }
 
-    const newLayer = new ParentLayerConstructor(layerOptions);
+    const layersParameters = Object.assign({}, layerOptions, { group });
+
+    const newLayer = new ParentLayerConstructor(layersParameters);
     _movableLayer.addChild(newLayer);
 
     return newLayer;
@@ -981,7 +989,7 @@ class Flatworld {
     const allObjects = {};
 
     this.getPrimaryLayers().forEach(layer => {
-      allObjects[layer.name] = layer.getObjects();
+      allObjects[layer.group] = layer.getObjects();
     });
 
     return allObjects;

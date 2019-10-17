@@ -28,6 +28,7 @@ export class MapLayer extends PIXI.Container {
    * @param  {Integer} options.specialLayer.y         Y coordinate
    **/
   constructor({
+    group = '',
     name = '',
     coord = { x: 0, y: 0 },
     specialLayer = false,
@@ -37,6 +38,13 @@ export class MapLayer extends PIXI.Container {
 
     Object.assign(this, coord);
 
+    /**
+     * Layers group id, used for finding layers.
+     *
+     * @attribute name
+     * @type {String}
+     */
+    this.group = '' + group;
     /**
      * Layers name, used for identifying the layer. Useful in debugging, but can be used for finding correct layers too
      *
