@@ -7,11 +7,14 @@ loglevel.enableAll();
  * @requires loglevel.js for frontend logging, or something similar
  **/
 const log = {
-  debug(e) {
-    loglevel.debug(e);
+  debug(e, ...args) {
+    loglevel.debug(e, ...args);
   },
-  error(e) {
-    loglevel.error(e);
+  warn(e, ...args) {
+    loglevel.warn(e, ...args);
+  },
+  error(e, ...args) {
+    loglevel.error(e, ...args);
   }
 };
 

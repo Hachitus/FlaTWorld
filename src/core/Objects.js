@@ -4,7 +4,7 @@ import { constants, utils, mapEvents } from './index';
 /*-----------------------
 ---------- API ----------
 -----------------------*/
-class ObjectSprite extends PIXI.Sprite {
+export class ObjectSprite extends PIXI.Sprite {
   /**
    * The base class of all sprite objects
    *
@@ -100,7 +100,7 @@ class ObjectSprite extends PIXI.Sprite {
    * @return this object instance
    */
   innerDraw(x, y) {
-    this.fromFrame(this.currentFrame);
+    this.from(this.currentFrame);
     this.x = x;
     this.y = y;
 
@@ -186,7 +186,7 @@ class ObjectSprite extends PIXI.Sprite {
   }
 }
 
-class ObjectSpriteTerrain extends ObjectSprite {
+export class ObjectSpriteTerrain extends ObjectSprite {
   /**
    * Terrain tile like desert or mountain, non-movable and cacheable. Normally, but not necessarily, these are
    * inherited, depending on the map type. For example you might want to add some click area for these
@@ -206,7 +206,7 @@ class ObjectSpriteTerrain extends ObjectSprite {
   }
 }
 
-class ObjectSpriteUnit extends ObjectSprite {
+export class ObjectSpriteUnit extends ObjectSprite {
   /**
    * Map unit like infantry or worker, usually something with actions or movable. Usually these are extended, depending on the map type.
    * For example you might want to add some click area for these (e.g. hexagon)
@@ -277,10 +277,9 @@ class ObjectSpriteUnit extends ObjectSprite {
     * @param {String} path  Path through which the object moves
     */
   move(path) {
-    mapEvents.publish('objectMove', this);
-    mapAPI.put('objectMove', {
-      id: this.data.id,
-      path
+    mapEvents.publish('objectMove', {
+      path,
+      object: this
     });
   }
 }

@@ -11,42 +11,32 @@ import { hexagonMath } from './utils/';
  * @class selectHexagonObject
  * @return {Object}       Return methods inside object
  */
-const selectHexagonObject = (function() {
-  return {
-    init,
-    pluginName: 'selectHexagonObject'
-  };
+const selectHexagonObject = {
+  pluginName: 'selectHexagonObject',
+  init,
+}
 
-  /**
-   * @method  init
-   * @param {Map} givenMap                  Instantiated Map class object
-   * @param {Object} protectedProperties    Holds all the non-public properties to use
-   * @param {Array} params                  Rest of the parameters
-   */
-  function init(params) {
-    if (!params.isBlocked) {
-      throw new Error('hexagon pathFinding plugin requires cb and filter properties')
-    }
-
-    this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects.terrainLayer);
-
-    startClickListener(this.mapInstance, params.isBlocked);
-
-    return Promise.resolve();
+/**
+ * @method  init
+ * @param {Map} givenMap                  Instantiated Map class object
+ * @param {Object} protectedProperties    Holds all the non-public properties to use
+ * @param {Array} params                  Rest of the parameters. Like pathWeight (function), getTerrainLayerName(() => string),
+ * getData(function)
+ */
+function init(params) {
+  if (!params.pathWeight || typeof params.pathWeight !== 'function') {
+    const error = new Error(`Hexagon plugin requires parameters property! This parameter must have "pathWeight"-property
+      that is a callback, which returns the weight of the path for path finder. So it must be callback that return
+      integer`, params);
+    throw error;
   }
 
-  /*-----------------------
-  -------- PRIVATE --------
-  -----------------------*/
-  /**
-   * @private
-   * @method startClickListener
-   * @param {Map} map              Instantiated Map class object
-   */
-  function startClickListener(mapInstance, isBlocked) {
-    return setupHexagonClick(mapInstance, isBlocked);
-  }
-})();
+  this.mapInstance.hexagonIndexes = createHexagonDataStructure(() => this.mapInstance.allMapObjects[params.getTerrainLayerName()]);
+
+  setupHexagonClick(this.mapInstance, params.pathWeight, params.getData);
+
+  return Promise.resolve();
+}
 
 function createHexagonDataStructure(getLayers) {
   const hexagonIndexes = {};

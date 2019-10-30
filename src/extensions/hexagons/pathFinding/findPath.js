@@ -26,8 +26,8 @@ class PriorityQueue {
 
   push(value, loss) {
     const [index, match] = this.items.length ?
-          binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
-          : [0, false];
+      binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
+      : [0, false];
 
     if (match) {
       this.items[index].stack.push(value);
@@ -46,23 +46,25 @@ class PriorityQueue {
  * @param  {int} width - width of the grid
  * @param  {int} height - height of the grid
  * @param  {int} maxTime - maximal allowed time to get to destination (must be at least 1)
- * @param  {({ x: int, y: int }, { x: int, y: int }) => int} weightFn - function that returns time between two adjacent cells
+ * @param  {({ x: int, y: int }, { x: int, y: int }, [currentPaths]) => int} weightFn - function that returns time between two adjacent 
+ * cells. The last argument signifies a "stable path". It can be used to track for instance gasoline used through the whole route
  * @param  {boolean} allowDiagonal - if not null then apply algorithm for normal square grid
  * @return {{ x: int, y: int, time: int }[]} - path coordinates from start to destination (including starting point)
  */
 function findPath(
-          { x: xStart, y: yStart},
-          dest,
-          width,
-          height,
-          maxTime,
-          weightFn,
-          allowDiagonal = null,
-          debug = false
-      ) {
+  { x: xStart, y: yStart},
+  dest,
+  width,
+  height,
+  maxTime,
+  weightFn,
+  allowDiagonal = null,
+  debug = false
+) {
 
   validateArgs();
 
+  // Counter calculates how many hexagon movements have been made so far
   let counter = 0;
   const d = Date.now();
 
@@ -71,11 +73,11 @@ function findPath(
 
   if (debug) {
     console.log(...(dest ? [] : ['reachable: ']), // eslint-disable-line no-console
-        `${Date.now() - d}ms`,
-        pathArr && pathArr.length,
-        `${counter} oper`,
-        `${maxTime} cells`,
-        `${counter / maxTime / Math.log(maxTime)} coeff`);
+      `${Date.now() - d}ms`,
+      pathArr && pathArr.length,
+      `${counter} oper`,
+      `${maxTime} cells`,
+      `${counter / maxTime / Math.log(maxTime)} coeff`);
   }
 
   return pathArr;
@@ -103,7 +105,7 @@ function findPath(
       const curr = queue.pop();
       const maxRemainingTime = allowedTime - curr.time;
       const minPossibleTime = !dest || maxRemainingTime < 1 ? 1
-            : getMinSteps(dest.x - curr.x, dest.y - curr.y, hexagonGrid);
+        : getMinSteps(dest.x - curr.x, dest.y - curr.y, hexagonGrid);
 
       if (minPossibleTime > maxRemainingTime) {
         continue;
@@ -116,11 +118,6 @@ function findPath(
         const y = curr.y + directions[i].y;
         const next = { x: x, y: y };
         const weight = weightFn(next, curr);
-
-        if (debug && (!isInteger(weight) || weight < 0)) {
-          console.error(next, curr); // eslint-disable-line no-console
-          throw new Error(`weightFn didn't return non-negative integer: ${weight}`);
-        }
 
         if (weight < 0 || curr.time + weight > maxTime) {
           continue;
@@ -160,7 +157,7 @@ function findPath(
     });
 
     function isVisited(cell) {
-        // if width and height are chosen right then the key should not be negative
+      // if width and height are chosen right then the key should not be negative
       const key = (cell.x - xStart + width) * height + (cell.y - yStart);
 
       if (key < 0) {
@@ -171,20 +168,20 @@ function findPath(
       }
 
       return visited[key] ?
-            visited[key] <= cell.time || (visited[key] = cell.time, false)
-            : (visited[key] = cell.time, false);
+        visited[key] <= cell.time || (visited[key] = cell.time, false)
+        : (visited[key] = cell.time, false);
     }
   }
 
   function validateArgs() {
     [xStart, yStart]
-          .concat(dest ? [dest.x, dest.y] : [])
-          .concat([width, height, maxTime])
-          .forEach((arg, i) => {
-            if (!isInteger(arg)) {
-              throw new Error(`argument #${i} must be an integer: ${arg}`);
-            }
-          });
+      .concat(dest ? [dest.x, dest.y] : [])
+      .concat([width, height, maxTime])
+      .forEach((arg, i) => {
+        if (!isInteger(arg)) {
+          throw new Error(`argument #${i} must be an integer: ${arg}`);
+        }
+      });
 
     if (maxTime < 1) {
       throw new Error(`maxTime must be at least 1: ${maxTime}`);
@@ -226,8 +223,8 @@ function isInteger(x) {
 function getMinSteps(dx, dy, hexagonGrid) {
   if (hexagonGrid) {
     return dx > 0 && dy > 0 ? dx + dy
-          : dx < 0 && dy < 0 ? -dx - dy
-          : Math.max(Math.abs(dx), Math.abs(dy));
+      : dx < 0 && dy < 0 ? -dx - dy
+        : Math.max(Math.abs(dx), Math.abs(dy));
   } else {
     return Math.abs(dx) + Math.abs(dy);
   }

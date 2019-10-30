@@ -1,6 +1,7 @@
 import * as Hammer from 'hammerjs';
 import { default as Hamster } from 'hamsterjs';
-import { mapEvents, utils, mapStates, eventListeners } from '../../core/';
+import { utils, mapStates, eventListeners, log as mapLog, mapEvents } from '../../core/';
+import { eventMouseCoords } from '../../core/utils/mouse';
 
 /*-----------------------
 -------- PUBLIC ---------
@@ -13,12 +14,13 @@ import { mapEvents, utils, mapStates, eventListeners } from '../../core/';
  * @class extensions.baseEventlisteners
  * @requires Hammer.js                    (for touch events)
  * @requires Hamster.js                   (for good cross-browser mousewheel events)
- * @event                                 mapEvents.publish('mapResized')
+ * @event mapFullSize,mapFullscreen       The event listeners publish their events accordingly (more info in mapEvent module)
  * @param {HTMLElement} canvasElement     The canvas element we listen events from. Will try to search the first canvas in the DOM,
  * if none is provided
  */
 const baseEventlisteners = (function () {
   const caches = {};
+  const allPressCbs = new Map();
   let hammer, hamster, mapInstance;
 
   /*---------------------------
@@ -49,68 +51,85 @@ const baseEventlisteners = (function () {
    */
   function init() {
     mapInstance = this.mapInstance;
-    const orderToggle = toggleOrder();
-    const selectToggle = toggleSelect();
 
     hammer = new Hammer.Manager(this.mapInstance.canvas);
     hamster = new Hamster(this.mapInstance.canvas);
 
-    eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off);
-    eventListeners.on('fullSize', resizeCanvas);
+    const orderToggle = toggleOrder();
+    const selectToggle = toggleSelect();
 
-    eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off);
-    this.mapInstance.setPrototype('setFullScreen', _setFullScreen);
+    eventListeners.setDetector('fullSize', toggleFullSize().on, toggleFullSize().off, ['mapFullSize', 'mapResized']);
+    eventListeners.on('fullSize', mapInstance.resizeCanvasToFullSize.bind(mapInstance));
 
-    eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off);
-    eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off);
-    eventListeners.setDetector('select', selectToggle.on, selectToggle.off);
-    eventListeners.setDetector('order', orderToggle.on, orderToggle.off);
+    eventListeners.setDetector('fullscreen', toggleFullscreen().on, toggleFullscreen().off, ['mapFullscreen', 'mapResized']);
+    eventListeners.on('fullscreen', mapInstance.toggleFullScreen.bind(mapInstance));
+
+    eventListeners.setDetector('zoom', toggleZoom().on, toggleZoom().off, ['mapZoomed']);
+    eventListeners.setDetector('drag', toggleDrag().on, toggleDrag().off, ['mapMoved']);
+    eventListeners.setDetector('select', selectToggle.on, selectToggle.off, ['objectSelectd']);
+    eventListeners.setDetector('order', orderToggle.on, orderToggle.off, ['orderIssued']);
 
     return Promise.resolve();
   }
 
   /**
-   * Sets the canvas to fullsize as in the same size of the window / content area. But not fullscreen. Note that
+   * When the canvas is set to fullsize the same size of the window / content area. Retaining the window mode
+   * (not fullscreen).
    *
    * @method toggleFullSize
    */
   function toggleFullSize() {
-    let activeCB;
+    const allCBs = new Set();
 
     if (!caches['fullsize']) {
+      window.addEventListener('resize', () => {
+        allCBs.forEach(cb => cb());
+        mapEvents.publish('mapResized');
+        mapEvents.publish('mapFullSize');
+      });
+
       caches['fullsize'] = {
         on: (cb) => {
-          activeCB = cb;
-
-          window.addEventListener('resize', activeCB);
+          allCBs.add(cb);
         },
-        off: () => {
-          window.removeEventListener('resize', activeCB);
+        off: (cb) => {
+          allCBs.delete(cb);
+        },
+        offAll: () => {
+          allCBs.clear();
         }
       };
+
+      return caches['fullsize'];
     }
 
     return caches['fullsize'];
   }
   /**
-   * Sets the browser in fullscreen mode.
+   * Happens when the browser is set to fullscreen
    *
    * @method toggleFullscreen
-   * @param {Function} cb     Callback that fires when this event activates
-   * @return {Boolean}        Return the state of this event
+   * @return {Boolean}        { on: Function(Function), off: Function(Function), offAll: Function() }
    */
   function toggleFullscreen() {
-    let activeCB;
+    const allCBs = new Set();
 
     if (!caches['fullscreen']) {
+      window.addEventListener('fullscreen', () => {
+        allCBs.forEach(cb => cb())
+        mapEvents.publish('mapResized');
+        mapEvents.publish('mapFullscreen');
+      });
+
       caches['fullscreen'] = {
         on: (cb) => {
-          activeCB = cb;
-
-          window.addEventListener('fullscreen', activeCB);
+          allCBs.add(cb);
         },
-        off: () => {
-          window.removeEventListener('fullscreen', activeCB);
+        off: (cb) => {
+          allCBs.delete(cb);
+        },
+        offAll: () => {
+          allCBs.clear();
         }
       };
 
@@ -127,24 +146,21 @@ const baseEventlisteners = (function () {
    * @return {Boolean}            Return the state of this event
    */
   function toggleZoom() {
-    let activeCB;
-
     if (!caches['zoom']) {
+      const pinch = new Hammer.Pinch({
+        threshold: 0.08
+      });
+      hammer.add(pinch);
+
       caches['zoom'] = {
         on: (cb) => {
-          const pinch = new Hammer.Pinch({
-            threshold: 0.08
-          });
-          activeCB = cb;
-
-          hammer.add(pinch);
-          hammer.on('pinch', activeCB);
+          hammer.on('pinch', cb);
           /* Hamster handles wheel events really nicely */
-          hamster.wheel(activeCB);
+          hamster.wheel(cb);
         },
-        off: () => {
-          hammer.on('pinch', activeCB);
-          hamster.unwheel(activeCB);
+        off: (cb) => {
+          hammer.off('pinch', cb);
+          hamster.unwheel(cb);
         }
       };
     }
@@ -159,22 +175,19 @@ const baseEventlisteners = (function () {
    * @return {Boolean}        Return the state of this event
    */
   function toggleDrag() {
-    let activeCB;
-
     if (!caches['drag']) {
+      const pan = new Hammer.Pan({
+        pointers: 1,
+        threshold: 5,
+        direction: Hammer.DIRECTION_ALL });
+      hammer.add(pan);
+
       caches['drag'] = {
         on: (cb) => {
-          const pan = new Hammer.Pan({
-            pointers: 1,
-            threshold: 5,
-            direction: Hammer.DIRECTION_ALL });
-          activeCB = cb;
-
-          hammer.add(pan);
-          hammer.on('pan', activeCB);
+          hammer.on('pan', cb);
         },
-        off: () => {
-          hammer.off('pan', activeCB);
+        off: (cb) => {
+          hammer.off('pan', cb);
         }
       };
     }
@@ -189,19 +202,16 @@ const baseEventlisteners = (function () {
    * @return {Boolean}        Return the state of this event
    */
   function toggleSelect() {
-    let activeCB;
-
     if (!caches['select']) {
+      const tap = new Hammer.Tap();
+      hammer.add(tap);
+
       caches['select'] = {
         on: (cb) => {
-          const tap = new Hammer.Tap();
-          activeCB = cb;
-
-          hammer.add(tap);
-          hammer.on('tap', activeCB);
+          hammer.on('tap', cb);
         },
-        off: () => {
-          hammer.off('tap', activeCB);
+        off: (cb) => {
+          hammer.off('tap', cb);
         }
       };
     }
@@ -217,71 +227,51 @@ const baseEventlisteners = (function () {
    * @return {Boolean}        Return the state of this event
    */
   function toggleOrder() {
-    let activeCB;
-
     if (!caches['order']) {
+      const press = new Hammer.Press();
+      hammer.add(press);
+
       caches['order'] = {
         on: (cb) => {
-          activeCB = cb;
+          const wrappedCB = (e) => pressListener(e, cb);
 
-          const press = new Hammer.Press();
+          hammer.on('press', wrappedCB);
+          /* We are detecting mouse right click here */
+          const eventOff = mapInstance.canvas.addEventListener('mouseup', wrappedCB, true);
 
-          hammer.add(press);
-          hammer.on('press', clickListener);
-          /* We are detecting mouse right click here. This should be in utils */
-          mapInstance.canvas.addEventListener('mouseup', (e) => {
-            if (e.which === 3) {
-              clickListener(e);
-            }
-          }, true);
+          allPressCbs.set(cb, [wrappedCB, eventOff]);
         },
-        off: () => {
-          hammer.off('press', clickListener);
-          mapInstance.canvas.removeEventListener('mouseup', clickListener, true);
+        off: (cb) => {
+          hammer.off('press', allPressCbs.get(cb)[0]);
+          mapInstance.canvas.addEventListener('mouseup', allPressCbs.get(cb)[1]);
+          allPressCbs.delete(cb);
         }
       };
     }
 
     return caches['order'];
 
-    function clickListener(e) {
+    function pressListener(e, cb) {
+      /* Check if desktop, the user clicked right button or pressed on mobile */
       if (!utils.mouse.isRightClick(e) && e.type !== 'press') {
+        mapLog.debug(`pressListener activated when user didn't right click or press`)
         return;
       }
 
-      /* Check that finite state is correct and that if desktop, the user clicked right button */
-      if (! mapStates.can('objectOrder') && (mapInstance.isSupportedTouch || utils.mouse.isRightClick(e))) {
+      /* Check that finite state is correct */
+      if (! mapStates.can('objectOrder')) {
+        mapLog.debug(`pressListener activated when objectOrder is not possible. Current state: ${mapStates.current}`)
         return false;
       }
 
-      activeCB(e);
-    }
-  }
+      // We make the normal mouse click to follow Hammer event standard (.center). This could work some other
+      // more standard and logical way? (since now we are tied to Hammer)
+      if (utils.mouse.isRightClick(e)) {
+        e.center = eventMouseCoords(e);
+      }
 
-  /**
-   * Activate the browsers fullScreen mode and expand the canvas to fullsize
-   *
-   * @private
-   * @method _setFullScreen
-   */
-  function _setFullScreen() {
-    utils.resize.toggleFullScreen();
-    resizeCanvas();
-    mapEvents.publish('mapResized');
-  }
-  /**
-   * Resizes the canvas to the current most wide and high element status.
-   * Basically canvas size === window size.
-   *
-   * @private
-   * @method _resizeCanvas
-   */
-  function resizeCanvas() {
-    utils.resize.resizePIXIRenderer(
-      mapInstance.getRenderer(),
-      mapInstance.drawOnNextTick.bind(mapInstance)
-    );
-    mapEvents.publish('mapResized');
+      cb(e);
+    }
   }
 })();
 

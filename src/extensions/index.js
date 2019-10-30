@@ -1,17 +1,7 @@
-import { default as baseEventlisteners } from './baseEventListeners/baseEventlisteners';
-import { default as fogOfWars } from './fogOfWars/index';
-import { default as hexagons } from './hexagons/index';
-import { default as mapMovement } from './mapMovement/mapMovement';
-import { default as minimaps } from './minimaps/index';
-import { default as mapDrag } from './move/mapDrag';
-import { default as mapZoom } from './zoom/mapZoom';
-
-export default {
-  baseEventlisteners,
-  fogOfWars,
-  hexagons,
-  mapMovement,
-  minimaps,
-  mapDrag,
-  mapZoom,
-}
+export { default as extension_baseEventlisteners } from './baseEventListeners/baseEventlisteners';
+export { default as extension_fogOfWars } from './fogOfWars/index';
+export { default as extension_hexagons } from './hexagons/index';
+export { default as extension_mapMovement } from './mapMovement/mapMovement';
+export { default as extension_minimaps } from './minimaps/index';
+export { default as extension_mapDrag } from './move/mapDrag';
+export { default as extension_mapZoom } from './zoom/mapZoom';

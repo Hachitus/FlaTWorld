@@ -50,8 +50,8 @@ const pixelizedMinimap = (function() {
    * @return {PIXI.Container}                     minimap layer
    */
   function initMinimap(UIImage, minimapSize, staticCB, dynamicCB, coordinateConvCB, givenMinimapViewport, {
-        xPadding = 10,
-        yPadding = 10 } = {}) {
+    xPadding = 10,
+    yPadding = 10 } = {}) {
     paddingX = xPadding;
     paddingY = yPadding;
     minimap.minimapSize = minimapSize;

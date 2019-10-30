@@ -1,6 +1,7 @@
-import {  utils, mapEvents, UI, MapDataManipulator, eventListeners, mapStates, log } from '../../../core/';
+import {  utils, mapEvents, MapDataManipulator, eventListeners, mapStates, log } from '../../../core/';
 import { findPath } from '../pathFinding/findPath';
 import * as hexaUtils from '../utils/';
+
 const hexagons = {
   findPath,
   utils: hexaUtils
@@ -23,11 +24,7 @@ const terrainLayerFilter = new MapDataManipulator({
 });
 /* @todo This must be changed to outside the module */
 let weight = () => 0;
-/* @todo This must be changed to game logic too! */
-const getObjectData = (object) => {
-  return object.data.typeData;
-}
-let FTW, ui;
+let FTW;
 
 /*---------------------
 ------- PUBLIC --------
@@ -42,17 +39,17 @@ let FTW, ui;
  * @param  {Map} map      The currently use Map instance
  * @return {Boolean}      True
  */
-function setupHexagonClick(mapInstance, weightFn) {
+function setupHexagonClick(mapInstance, weightFn, getData) {
   if (!mapInstance) {
     throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
   }
 
   FTW = mapInstance;
 
-  ui = UI();
-
   eventListeners.on('select', _tapListener);
   eventListeners.on('order', _orderListener);
+
+  mapInstance.setPrototype('getData', getData);
 
   weight = weightFn || weight;
 
@@ -68,36 +65,14 @@ function setupHexagonClick(mapInstance, weightFn) {
  */
 function _tapListener(e) {
   const globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
-  const getData = {
-    allData(object) {
-      return getObjectData(object);
-    }
-  };
   mapStates.objectSelect();
 
   let objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
   objects = utils.dataManipulation.mapObjectsToArray(objects);
   objects = utils.dataManipulation.flattenArrayBy1Level(objects);
 
-  if (!objects.length) {
-    FTW.currentlySelectedObjects.length = 0;
-    log.debug('No objects found for selection!');
-    // Delete the UI objects, as player clicked somewhere that doesn't have any selectable objects
-    ui.showSelections([]);
+  FTW.currentlySelectedObjects = objects;
 
-    return false;
-  } else if (objects.length === 1) {
-    FTW.currentlySelectedObjects = objects;
-    mapEvents.publish('objectsSelected', objects);
-
-    log.debug('One object selected');
-  } else {
-    mapEvents.publish('multipObjectsSelected', objects);
-
-    log.debug('Multiple objects selected');
-  }
-
-  ui.showSelections(objects, getData);
   FTW.drawOnNextTick();
 
   return true;
@@ -109,6 +84,14 @@ function _tapListener(e) {
  * @private
  * @method _orderListener
  * @param  {Event} e      Event object
+ * @throws Normal javascript error with special .customCode - property:
+ * 100: No objects selected for orders
+ * 110: The selected object is only supported to be one atm.
+ * 120: No terrain objects found for destination
+ * 130: GetMovement-method did not return an integer
+ * 140: PathFinding module could not find path from source to destination
+ * No code: Some other unknown error occured
+ * Pathfinding can also return error, if source and destination coordinates are same
  */
 function _orderListener(e) {
   // We want to wrap the whole functionality in try catch, to cancel the order state, if any
@@ -117,20 +100,32 @@ function _orderListener(e) {
   try {
     mapStates.objectOrder();
 
-    if (!FTW.currentlySelectedObjects) {
-      throw 'No objects selected for orders!';
+    if (!FTW.currentlySelectedObjects || FTW.currentlySelectedObjects.length < 1) {
+      const error =  new Error('No objects selected for orders');
+      error.customCode = 100;
+      throw error;
     } else if (FTW.currentlySelectedObjects.length > 1) {
-      throw 'the selected object is only supported to be one atm.' + JSON.stringify(FTW.currentlySelectedObjects[0]);
+      const error = new Error('The selected object is only supported to be one atm.' + FTW.currentlySelectedObjects[0].id);
+      error.customCode = 110;
+      error.customData = FTW.currentlySelectedObjects;
+      throw error;
     }
 
     const selectedObject = FTW.currentlySelectedObjects[0];
     const selectedObjectsCoordinates = selectedObject.getMapCoordinates();
-    const globalCoords = utils.mouse.eventData.getGlobalCoordinates(e, FTW.isSupportedTouch);
+    const globalCoords = utils.mouse.eventData.getGlobalCoordinates(e);
 
     const objects = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
 
     if (!objects.length) {
-      throw 'No terrain objects found for destination!';
+      const error = new Error('No terrain objects found for destination');
+      error.customCode = 120;
+      error.customData = {
+        globalCoords,
+        filters: terrainLayerFilter,
+        selectedObject
+      };
+      throw error;
     }
 
     const objectIndexes = hexagons.utils.hexagonMath.coordinatesToIndexes(selectedObjectsCoordinates);
@@ -145,47 +140,69 @@ function _orderListener(e) {
     if (objectIndexes.x === destinationIndexes.x && objectIndexes.y === destinationIndexes.y) {
       pathsToCoordinates = [];
     } else {
-      try {
-        const timeUnits = selectedObject.data.typeData.move;
-        pathsToCoordinates = hexagons.findPath(objectIndexes, destinationIndexes, +FTW.getMapsize().x, +FTW.getMapsize().y, +timeUnits, _isBlocked);
-        pathsToCoordinates = pathsToCoordinates.map(coords => {
-          return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
-        });
-      } catch (e) {
-        if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
-          e.message = 'the destination was farther than the given maximum distance';
-        } else {
-          e.message += ', EXTRA INFO: ' + 'start and end point are same, destination is blocked, unit could not reach the destination or something else happened';
-        }
-
-        throw e;
+      const timeUnits = selectedObject.getMovement();
+      if (!Number.isInteger(timeUnits)) {
+        const error = new Error(`GetMovement-method did not return an integer. Got: '${timeUnits && timeUnits.toString()}.
+          Object data in customData-property.`)
+        error.customCode = 130;
+        error.customData = selectedObject;
+        throw error;
       }
+      pathsToCoordinates = hexagons.findPath(
+        objectIndexes,
+        destinationIndexes,
+        +FTW.getMapsize().x,
+        +FTW.getMapsize().y,
+        +timeUnits,
+        _pathWeight
+      );
+      if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
+        const error = new Error('No path found from source to destination');
+        error.customCode = 140;
+        error.customData = {
+          selectedObject,
+          objectIndexes,
+          destinationIndexes,
+          mapSize: FTW.getMapsize(),
+          timeUnits,
+          weight
+        };
+        throw error;
+      }
+      pathsToCoordinates = pathsToCoordinates.map(coords => {
+        return hexagons.utils.hexagonMath.indexesToCoordinates(coords);
+      });
     }
 
     selectedObject.move(pathsToCoordinates);
-    
-    ui.showUnitMovement(pathsToCoordinates);
+
+    mapEvents.publish('unitMoved', {
+      path: pathsToCoordinates,
+      object: selectedObject
+    });
 
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
   } catch(e) {
-    mapStates.objectOrderEnd();
     log.debug(e);
-    return;
+    mapEvents.publish('objectOrderFailed', e);
+    mapStates.objectOrderEnd();
   }
 }
 
-function _isBlocked(coordinates) {
+function _pathWeight(nextCoordinates, queue) {
   /* We use the EARLIER path to test, how much moving to the next area will require. We can
    * not use the next area to test it, as that could lead to nasty surpises (like units
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
    */
-  const correctHexagon = FTW.hexagonIndexes[coordinates.x] && FTW.hexagonIndexes[coordinates.x][coordinates.y];
-  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], coordinates);
-  
+  const correctHexagon = FTW.hexagonIndexes[nextCoordinates.x] && FTW.hexagonIndexes[nextCoordinates.x][nextCoordinates.y];
+  // If the hexagon is outside the map or for some reason the hexagon isn't found (which is unknown error...)
   if (!correctHexagon) {
     return -1;
-  } else if (returnedWeight && isInteger(returnedWeight)) {
+  }
+
+  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
+  if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
     return returnedWeight;
   } else if (returnedWeight && !isInteger(returnedWeight)) {
     throw new Error('weight callback has to return an integer');
@@ -202,7 +219,7 @@ function isInteger(x) {
 --------- API ---------
 ----------------------*/
 const _tests = {
-  _isBlocked,
+  _pathWeight,
   _orderListener,
   _tapListener
 };

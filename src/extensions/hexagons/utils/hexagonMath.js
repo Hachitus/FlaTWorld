@@ -1,4 +1,4 @@
-import { mapLog } from '../../../core/';
+import { log as mapLog } from '../../../core/';
 
 /*-----------------------
 ------- VARIABLES -------

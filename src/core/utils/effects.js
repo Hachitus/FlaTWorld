@@ -14,7 +14,7 @@
  * @param  {Object} options
  */
 function dropShadow(/*options = { color: '#000000', distance: 5, alpha: 0.5, amgöe: 45, blur: 5 }*/) {
-    /*
+  /*
     var shadow  = new PIXI.filters.DropShadowFilter();
 
     shadow.color  = options.color;

@@ -1,14 +1,17 @@
-window.flatworldCreatorHelper = {
+import * as PIXI from 'pixi.js';
+import Flatworld from '../../src/core/Flatworld';
+import objects from '../../src/core/Objects';
+
+export default {
   creator: privateCreator,
   initFlatworld: privateInitFlatworld
 };
 
 function privateCreator(flatworldOptions) {
-  const { Flatworld, objects } = window.flatworld;
-  const renderer = new PIXI.WebGLRenderer();
+  const renderer = new PIXI.Renderer();
   const map = new Flatworld(renderer.view, flatworldOptions);
 
-  const unitLayer = map.addLayer({
+  const unitLayer = map.addLayer('unit', {
     name: 'unitLayer',
   });
   const testUnits = [
@@ -17,7 +20,7 @@ function privateCreator(flatworldOptions) {
   ];
   testUnits.forEach(o => unitLayer.addChild(o));
 
-  const terrrainLayer = map.addLayer({
+  const terrrainLayer = map.addLayer('terrain', {
     name: 'terrainLayer',
   });
   const testTerrain = new objects.ObjectSpriteTerrain();

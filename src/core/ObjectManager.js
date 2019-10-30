@@ -15,10 +15,12 @@ class ObjectManager {
   constructor() {}
   /**
    * Retrieve objects under certain coordinates or area, if size is given. Uses subcontainers when used, no other options yet.
+   * 
+   * Requires objects to have hitTest method
    *
    * @method retrieve
    * @param {Object} allCoords                                The coordinates which we want to hitTest
-   * @param {x:Integer, y:Integer} allCoords.globalCoords     Global coordinates on static layer / canvas
+   * @param {Object} allCoords.globalCoords                   Global coordinates on static layer / canvas
    * @param {x:Integer, y:Integer} allCoords.globalCoords.x
    * @param {x:Integer, y:Integer} allCoords.globalCoords.y
    * @param {Object} allCoords.localCoords                    Local coordiantes on movable layer
@@ -35,9 +37,8 @@ class ObjectManager {
    *
    * @todo add checks for rectangles. Now we can only check with width = 0 && height = 0
    */
-  retrieve(allCoords, containers = [], options = { type: undefined, size: { width: 0, height: 0 } }) {
+  retrieve(globalCoords, containers = [], options = { type: undefined, size: { width: 0, height: 0 } }) {
     const { size, type } = options;
-    const { globalCoords } = allCoords;
     let foundObjs = [];
 
     if (containers.length > 0) {

@@ -2,7 +2,7 @@
  * @static
  * @method arrayFind
  */
-function arrayFind() {
+export function arrayFind() {
   if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
       if (this === null) {
@@ -34,7 +34,7 @@ function arrayFind() {
  * @method objectAssign
  * @static
  */
-function objectAssign() {
+export function objectAssign() {
   if (typeof Object.assign != 'function') { // eslint-disable-line eqeqeq
     (function () {
       Object.assign = function (target) {
@@ -47,7 +47,7 @@ function objectAssign() {
           const source = arguments[index];
           if (source !== undefined && source !== null) {
             for (const nextKey in source) {
-              if (source.hasOwnProperty(nextKey)) {
+              if (Object.prototype.hasOwnProperty.call(source, nextKey)) {
                 output[nextKey] = source[nextKey];
               }
             }
@@ -59,7 +59,7 @@ function objectAssign() {
   }
 }
 // purely for internet explorer. Though I think this issue is only in EI11,not in edge?
-function es6String() {
+export function es6String() {
   /*! https://mths.be/repeat v0.2.0 by @mathias */
   if (!String.prototype.repeat) {
     (function () {
@@ -117,7 +117,7 @@ function es6String() {
   }
 }
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
-function setPrototypeOf() {
+export function setPrototypeOf() {
   Object.setPrototypeOf = Object.setPrototypeOf || function(obj, proto) {
     obj.__proto__ = proto;
     return obj; 

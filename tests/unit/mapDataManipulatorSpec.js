@@ -1,12 +1,14 @@
+import MapDataManipulator from '../../src/core/MapDataManipulator';
+import mapLayers from '../../src/core/MapLayers';
+import objects from '../../src/core/Objects';
+import utils from '../../src/core/utils/';
+
 describe('mapDataManipulator => ', () => {
-  const MapDataManipulator = window.flatworld.MapDataManipulator;
-  const mapLayers = window.flatworld.mapLayers;
-  const objects = window.flatworld.objects;
-  const utils = window.flatworld.utils;
   let layerRules;
   let objectRules;
   let testLayers;
   let testObjects;
+  let allObjects
 
   beforeEach(() => {
     layerRules = {
@@ -27,18 +29,41 @@ describe('mapDataManipulator => ', () => {
     }),
     new mapLayers.MapLayer({
       selectable: true,
-      name: 'unitLayer',
+      name: 'unitLayer1',
     }),
     new mapLayers.MapLayer({
       selectable: false,
-      name: 'unitLayer',
+      name: 'unitLayer2',
     })];
     testObjects = [
       new objects.ObjectSpriteTerrain(),
       new objects.ObjectSpriteUnit(),
     ];
+    allObjects = testObjects.concat(testLayers);
   });
 
+  it('addRule & removeRule', () => {
+    const mapDataManipulator = new MapDataManipulator(layerRules);
+    expect(mapDataManipulator.rules).toEqual([layerRules], 'INITIAL')
+
+    mapDataManipulator.removeRule(layerRules)
+    expect(mapDataManipulator.rules).toEqual([], 'REMOVAL')
+
+    mapDataManipulator.addRule([layerRules])
+    expect(mapDataManipulator.rules).toEqual([layerRules], 'ADDING')
+  });
+  it('doesItFilter', () => {
+    const mapDataManipulator = new MapDataManipulator(layerRules);
+
+    let result = mapDataManipulator.doesItFilter(MapDataManipulator.OBJECT_OBJECT)
+    expect(result).toBe(false)
+
+    result = mapDataManipulator.doesItFilter(MapDataManipulator.OBJECT_LAYER)
+    expect(result).toBe(true)
+  });
+  it('getPropertyWithArray', () => {
+    // MapDataManipulator.getPropertyWithArray(obj, array, index);
+  });
   it('constructing without params should throw error', () => {
     spyOn(utils.general, 'requireParameter');
     new MapDataManipulator(); // eslint-disable-line no-new
@@ -49,7 +74,7 @@ describe('mapDataManipulator => ', () => {
 
     let foundLayers = mapDataManipulator.filter(testLayers);
 
-    expect(foundLayers[0]).toBe(testLayers[1]);
+    expect(foundLayers[0].name).toEqual(testLayers[1].name);
 
     testLayers[2].selectable = true;
     foundLayers = mapDataManipulator.filter(testLayers);
@@ -61,7 +86,7 @@ describe('mapDataManipulator => ', () => {
 
     let foundObjects = mapDataManipulator.filter(testObjects);
 
-    expect(foundObjects[0]).toBe(testObjects[0]);
+    expect(foundObjects[0].name).toEqual(testObjects[0].name);
 
     testObjects[1].name = 'DefaultTerrainObject';
     foundObjects = mapDataManipulator.filter(testObjects);
@@ -70,11 +95,32 @@ describe('mapDataManipulator => ', () => {
   });
   it('filter both', () => {
     const layerAndObjectsFilter = new MapDataManipulator([layerRules, objectRules]);
-    const allObjects = testObjects.concat(testLayers);
 
     const foundObjects = layerAndObjectsFilter.filter(allObjects);
 
     expect(foundObjects[0]).toBe(testObjects[0]);
     expect(foundObjects[1]).toBe(testLayers[1]);
+  });
+  it('filter matchAny', () => {
+    const layerRulesFailing = {
+      type: 'filter',
+      object: 'layer',
+      property: 'selectable',
+      value: 'dlfkdfkd',
+    };
+    const failingRuleWithMatchAny = {
+      matchAny: true,
+      rules: [layerRules, layerRulesFailing]
+    };
+
+    let mapDataManipulator = new MapDataManipulator([layerRules, layerRulesFailing, objectRules]);
+    let found = mapDataManipulator.filter(allObjects);
+
+    expect(found.length).toBe(1);
+
+    mapDataManipulator = new MapDataManipulator([failingRuleWithMatchAny, objectRules]);
+    found = mapDataManipulator.filter(allObjects);
+
+    expect(found.length).toBe(2);
   });
 });

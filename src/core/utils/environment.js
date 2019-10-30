@@ -9,7 +9,7 @@
  * @param  {HTMLElement} canvasElement       HTML canvas element
  * @return {Number}
  */
-function getPixelRatio(canvasElement) {
+export function getPixelRatio(canvasElement) {
   const DPR = window.devicePixelRatio || 1;
   const ctx = (canvasElement && canvasElement.getContext('2d')) || document.createElement('canvas').getContext('2d');
   const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio ||
@@ -25,11 +25,11 @@ function getPixelRatio(canvasElement) {
  * @author alteredq / http://alteredqualia.com/
  * @author author mr.doob / http://mrdoob.com/
  * From three.js: https://github.com/mrdoob/three.js/blob/master/examples/js/Detector.js
+ * 
+ * @param  {HTMLElement} canvasElement       HTML canvas element
  */
-function isWebglSupported() {
+export function isWebglSupported(canvas = document.createElement( 'canvas' )) {
   try {
-    const canvas = document.createElement( 'canvas' );
-
     return !! ( window.WebGLRenderingContext &&
       ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) );
   } catch ( e ) {
@@ -43,8 +43,8 @@ function isWebglSupported() {
  * @method isMobile
  * @return {Boolean}
  */
-function isTouchDevice() {
-  if ('ontouchstart' in document.documentElement) {
+export function isTouchDevice() {
+  if (hasOnTouchStart()) {
     return true;
   } else {
     return false;
@@ -57,13 +57,17 @@ function isTouchDevice() {
  * @method isMobile
  * @return {Boolean}
  */
-function isMobile() {
+export function isMobile() {
   const screenSize = (screen.width <= 640) || (window.matchMedia && window.matchMedia('only screen and (max-width: 640px)').matches);
-  const features = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+  const features = hasOnTouchStart() || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
   return features && screenSize;
 }
 
+
+function hasOnTouchStart() {
+  return 'ontouchstart' in document.documentElement;
+}
 /*---------------------
 --------- API ---------
 ----------------------*/

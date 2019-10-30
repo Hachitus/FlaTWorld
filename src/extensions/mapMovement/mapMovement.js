@@ -51,10 +51,10 @@ const mapMovement = (function(debug = false) {
        * For debugging. Shows the amount of currectly active and inactive subcontainers. Console.logs the data.
        * Also extends window object.
        *
-       * @method window.FlaTWorld_mapMovement_subCheck
+       * @method window.flatworld_mapMovement_subCheck
        * @static
        */
-      window.FlaTWorld_mapMovement_subCheck = function () {
+      window.flatworld_mapMovement_subCheck = function () {
         mapInstance.getPrimaryLayers().forEach(layer => {
           const subcontainers = layer.getSubcontainers();
           const visibleContainers = subcontainers.filter(subcontainer => {
@@ -73,10 +73,10 @@ const mapMovement = (function(debug = false) {
       /**
        * For debugging. Sets all primaryLayers subcontainers on the map as visible = true.
        *
-       * @method window.FlaTWorld_mapMovement_deactivate
+       * @method window.flatworld_mapMovement_deactivate
        * @static
        */
-      window.FlaTWorld_mapMovement_deactivate = function () {
+      window.flatworld_mapMovement_deactivate = function () {
         mapInstance.getPrimaryLayers().forEach(layer => {
 
           layer.getSubcontainers().forEach(subcontainer => {
@@ -189,7 +189,7 @@ const mapMovement = (function(debug = false) {
    * @param  {Object} scaledViewport    Viewportarea that has been scaled.
    * @param  {Array} primaryLayers      The primarylayers that we handle
    */
-  function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
+  async function checkAndSetSubcontainers(scaledViewport, primaryLayers) {
     const largerViewportAreaWithOffset = getViewportWithOffset(scaledViewport);
     let containersUnderChangedArea = [];
 
@@ -213,7 +213,7 @@ const mapMovement = (function(debug = false) {
       return promise;
     });
 
-    Promise.all(promises).then(() => {
+    await Promise.all(promises).then(() => {
       containersUnderChangedArea = utils.general.flatten2Levels(containersUnderChangedArea);
 
       const subcontainers = utils.general.chunkArray(containersUnderChangedArea, SUBCONTAINERS_TO_HANDLE_IN_TIMEOUT);

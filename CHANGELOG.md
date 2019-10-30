@@ -1,5 +1,22 @@
+<a name="0.7.0"></a>
+# 0.7.0 Changes the library to event based (2017-11-?)
+* Loads of changes and not all of them very friendly. I don't believe anyone uses the library and will make these drastic changes. They are needed.
+* The logic was changed to more event-based instead of being unnecessarily tied to the code. Library should communicate through events.
+
+## Breaking changes
+* Removed the UI.js and themes. We do things event based
+
+## Features
+* Added currentlySelectedObjects setter to flatworld, to give ability to set selectedObjects and control how they are set.
+
+## Possible breaking changes
+* Added argument to weightFn in hexagon extensions and changes the functionality a bit. The argument makes it possible to track the whole path being generated.
+
+## Features
+* Possibilty to filter with mapDataManipulator using "and / or" option.
+
 <a name="0.6.5"></a>
-# 0.6.3 Bug fixes (2017-09-14)
+# 0.6.5 Bug fixes (2017-09-14)
 
 ## Possible breaking changes
 * Removed MapLayer.getUIObjects

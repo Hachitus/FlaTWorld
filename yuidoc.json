@@ -1,8 +1,8 @@
 {
-    "name": "FlaTWorld",
+    "name": "flatworld",
     "description": "2D game engine for browsers",
     "version": "0.1.1",
-    "url": "https://github.com/Hachitus/FlaTWorld",
+    "url": "https://github.com/Hachitus/flatworld",
     "options": {
         "linkNatives": "true",
         "nocode": true,

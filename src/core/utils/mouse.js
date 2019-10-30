@@ -25,7 +25,7 @@ function disableContextMenu(canvas) {
 /**
  * @method getPointerCoords
  * @param  {Event} e    Event object
- * @return {Object}
+ * @return {PIXI.Point}
  */
 function getPointerCoords(e) {
   return new PIXI.Point(e.offsetX, e.offsetY);
@@ -33,7 +33,7 @@ function getPointerCoords(e) {
 /**
  * @method getHAMMERPointerCoords
  * @param  {Event} e    Event object
- * @return {Object}
+ * @return {PIXI.Point}
  */
 function getHAMMERPointerCoords(e) {
   // We need to remove the element position on the page from the center coordinates.
@@ -43,8 +43,8 @@ function getHAMMERPointerCoords(e) {
 }
 
 
-function getGlobalCoordinates(e, isSupportedTouch) {
-  return isSupportedTouch ? getHAMMERPointerCoords(e) : getPointerCoords(e);
+function getGlobalCoordinates(e) {
+  return getHAMMERPointerCoords(e);
 }
 /**
  * Transform coordinates that are in the window to become relative with the given element
@@ -53,7 +53,7 @@ function getGlobalCoordinates(e, isSupportedTouch) {
  * @param  {[type]} element     [description]
  * @return {[type]}             [description]
  */
-function coordinatesFromGlobalToRelative(coordinates, element) {
+export function coordinatesFromGlobalToRelative(coordinates, element) {
   const elementPosition = getElementPositionInWindow(element);
 
   return {
@@ -98,7 +98,7 @@ function getElementPositionInWindow(el) {
  * @param  {Event} e    Event object
  * @return {Object}
  */
-function eventMouseCoords(e) {
+export function eventMouseCoords(e) {
   const pos = {
     x: 0,
     y: 0
@@ -124,7 +124,7 @@ function eventMouseCoords(e) {
  *
  * @method toggleMouseTextSelection
  */
-function toggleMouseTextSelection(element = document.getElementsByTagName('body')[0]) {
+export function toggleMouseTextSelection(element = document.getElementsByTagName('body')[0]) {
   element.style.webkitTouchCallout = 'none';
   element.style.webkitUserSelect = 'none';
   element.style.khtmlUserSelect = 'none';

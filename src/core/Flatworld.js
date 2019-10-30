@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { mapLayers, ObjectManager, mapEvents, log, utils, constants, UI } from './index';
+import { mapLayers, ObjectManager, mapEvents, log, utils, constants } from './index';
 
 /*---------------------
 ------ VARIABLES ------
@@ -9,6 +9,7 @@ const LAYER_TYPE_MOVABLE = 1;
 const LAYER_TYPE_MINIMAP = 2;
 const _renderers = {};
 const protectedProperties = {};
+const currentlySelectedObjects = [];
 let _drawMapOnNextTick = false;
 let isMapReadyPromises = [];
 let _privateRenderers, _zoomLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
@@ -27,7 +28,7 @@ class Flatworld {
    *
    * The biggest part of creating the map, is the data structure. There is a clear data structure that you can see from the
    * tests/data-folder, but the factory is responsible for creating the objects, so you can use your own factory implementation. So to
-   * understand more, please see e.g. {{#crossLink 'flatworld.factories.hexaFactory'}}{{/crossLink}}.
+   * understand more, please see e.g. hexaFactory in tests/manual.
    *
    * The map consists of layer on top of each other. The example is best understood when thinking typical war strategy game. The
    * structure is this:
@@ -54,10 +55,7 @@ class Flatworld {
    * @namespace flatworld
    * @class Flatworld
    * @constructor
-   * @requires PIXI.JS framework in global namespace
    * @requires Canvas (webGL support recommended) HTML5-element supported.
-   * @requires Hammer for touch events
-   * @requires Hamster for mouse scroll events
    *
    * @param {HTMLElement} mapCanvas                       HTML element which will be container for the created canvas element.
    * @param {Object} [props]                              Extra properties
@@ -77,19 +75,22 @@ class Flatworld {
    *
    * @return {Object}                                      New Map instance
    */
-  constructor(mapCanvas = null, {
-    bounds = { width: 0, height: 0 },
-    mapSize = { x: 0, y: 0 },
-    rendererOptions = { autoResize: true, antialias: false },
-    minimapCanvas,
-    subcontainers = {
-      width: 100,
-      height: 100,
-      maxDetectionOffset: 0 // maxDetectionOffset default set later
-    },
-    trackFPSCB = false,
-    defaultScaleMode = constants.DEFAULT_SCALE_MODE } = {},
+  constructor(
+    mapCanvas = null, {
+      bounds = { width: 0, height: 0 },
+      mapSize = { x: 0, y: 0 },
+      rendererOptions = { autoResize: true, antialias: false },
+      minimapCanvas,
+      subcontainers = {
+        width: 100,
+        height: 100,
+        maxDetectionOffset: 0 // maxDetectionOffset default set later
+      },
+      trackFPSCB = false,
+      defaultScaleMode = constants.DEFAULT_SCALE_MODE
+    } = {},
     mouseTextSelection = false) {
+
     if (!utils.environment.isWebglSupported()) {
       const error = new Error('Webgl is not supported');
       log.error(error);
@@ -110,14 +111,16 @@ class Flatworld {
     /* Make sure the mapCanvas is empty. So there are no nasty surprises */
     mapCanvas.innerHTML = '';
     /* Add the given canvas Element to the options that are passed to PIXI renderer */
-    rendererOptions.view = mapCanvas;
+    Object.assign(rendererOptions, bounds, {
+      view: mapCanvas,
+    });
     /* Create PIXI renderer. Practically PIXI creates its own canvas and does its magic to it */
-    _renderers.main = new PIXI.WebGLRenderer(bounds.width, bounds.height, rendererOptions);
+    _renderers.main = new PIXI.Renderer(rendererOptions);
     _renderers.main.getResponsibleLayer = () => _zoomLayer;
     /* Create PIXI renderer for minimap */
     if (minimapCanvas) {
       _renderers.minimap = minimapCanvas ?
-        new PIXI.WebGLRenderer(0, 0, { view: minimapCanvas, autoResize: true }) :
+        new PIXI.Renderer({ width: 0, height: 0, view: minimapCanvas, autoResize: true }) :
         undefined;
       _renderers.minimap.plugins.interaction.destroy();
       _renderers.minimap.getResponsibleLayer = this.getMinimapLayer;
@@ -222,13 +225,6 @@ class Flatworld {
      **/
     this.isSupportedTouch = utils.environment.isTouchDevice();
     /**
-     * The object or objects that are currently selected for details and actions / orders. This gets set by other modules, like plugins.
-     *
-     * @attribute currentlySelectedObjects
-     * @type {Array}
-     **/
-    this.currentlySelectedObjects = [];
-    /**
      * Layer types. Can be extended, but the already defined types are supposed to be constants and not to be changed.
      *
      * @attribute layerTypes
@@ -261,8 +257,9 @@ class Flatworld {
 
     /**
      * Holds all the objects on the map. This is an alternative data structure to make some
-     * operations easier. Basically it will be populated with the primaryLayers, this is done in
-     * init method. More details there.
+     * operations easier. Basically it will be populated with the primaryLayers, It is populated as an object, that is
+     * organized based on layers group-property. So when layer.group === 'terrain', allMapObjects.terrain will hold
+     * those objects.
      */
     this.allMapObjects = {};
   }
@@ -288,7 +285,7 @@ class Flatworld {
       throw new Error('You should have layers created for the map, before initializing the map');
     }
 
-    options.fullsize && this.toggleFullsize();
+    options.fullsize && this.resizeCanvasToFullSize();
 
     this.getAllObjects().forEach(o => {
       if (o && o.initializeCoordinates) {
@@ -309,13 +306,6 @@ class Flatworld {
     tickCB && this.customTickOn(tickCB);
 
     return isMapReadyPromises || Promise.resolve();
-  }
-  /**
-   * This method will initialize the UI module. It requires constructed UI theme module as param
-   * @param {Object} UITheme This is the UI theme module created to work with UI module
-   */
-  initUI(UITheme) {
-    UI(UITheme, this, protectedProperties);
   }
   /**
    * Returns a promise that resolves after the map is fully initialized
@@ -414,15 +404,22 @@ class Flatworld {
    * All parameters are passed to ParentLayerConstructor (normally constructor of MapLayer).
    *
    * @method addLayer
+   * @param {Object} group        REQUIRED
+   * @param {Object} layerOptions OPTIONAL
    * @uses MapLayer
-   * @return {MapLayer}          created MapLayer instance
+   * @return {MapLayer}           created MapLayer instance
    **/
-  addLayer(layerOptions) {
+  addLayer(group, layerOptions) {
+    if (!group) {
+      throw new Error('Group is required for every layer');
+    }
     if (this.getSubcontainerConfigs() && layerOptions.subcontainers !== false) {
       layerOptions.subcontainers = this.getSubcontainerConfigs();
     }
 
-    const newLayer = new ParentLayerConstructor(layerOptions);
+    const layersParameters = Object.assign({}, layerOptions, { group });
+
+    const newLayer = new ParentLayerConstructor(layersParameters);
     _movableLayer.addChild(newLayer);
 
     return newLayer;
@@ -520,7 +517,6 @@ class Flatworld {
    * @param {Integer} coord.y              Y coordinate
    * @param {Integer} absolute             If the given coordinates are not relative, like move map 1 pixel, but instead absolute, like
    * move map to coordinates { x: 1, y: 2 }. Defaults to false (relative).
-   * @todo  the informcoordinates away and fix the issue they tried to fix!
    **/
   moveMap({ x = 0, y = 0 }, { absolute = false } = {}) {
     const realCoordinates = {
@@ -534,7 +530,7 @@ class Flatworld {
       _movableLayer.move(realCoordinates);
     }
 
-    mapEvents.publish('mapMoved', realCoordinates);
+    mapEvents.publish('mapMoved');
     this.drawOnNextTick();
   }
   /**
@@ -661,21 +657,10 @@ class Flatworld {
     allCoords.localCoords.width = globalCoords.width / this.getZoom();
     allCoords.localCoords.height = globalCoords.height / this.getZoom();
 
-/*      if (this.usesSubcontainers()) {*/
+    /* if (this.usesSubcontainers()) {*/
     const allMatchingSubcontainers = this._getSubcontainersUnderArea(allCoords, { filters });
 
-    objects = this._retrieveObjects(allCoords, allMatchingSubcontainers);
-/*      } else {
-      const filteredContainers = _movableLayer.children.filter(thisChild => {
-        if ((filters && !filters.filter(thisChild).length) || thisChild.specialLayer) {
-          return false;
-        }
-
-        return true;
-      });
-
-      objects = this._retrieveObjects(allCoords, filteredContainers);
-    }*/
+    objects = this._retrieveObjects(allCoords.globalCoords, allMatchingSubcontainers);
 
     if (filters && filters.doesItFilter("object")) {
       objects = filters.filter(objects);
@@ -799,17 +784,42 @@ class Flatworld {
   removeMinimapLayer() {
     _minimapLayer = undefined;
   }
+
+  /**
+   * The objects that are currently selected for details and actions / orders. This gets set by other modules, like plugins.
+   *
+   * @attribute currentlySelectedObjects
+   * @type {Array}
+   **/
+  get currentlySelectedObjects() {
+    return currentlySelectedObjects;
+  }
+  set currentlySelectedObjects(newObjects) {
+    if (newObjects.length && !(newObjects[0] instanceof PIXI.Sprite)) {
+      log.warn('currentlySelectedObjects need to be an empty array or array of PIXI.Sprites');
+    }
+    currentlySelectedObjects.length = 0;
+    currentlySelectedObjects.push(...newObjects);
+    mapEvents.publish('objectsSelected', newObjects)
+  }
   /*---------------------------------------------
    ------- ABSTRACT APIS THROUGH PLUGINS --------
    --------------------------------------------*/
-   /**
+  /**
+    * This is abstract method and needs to be implemented with a plugin. This is responsible for translating the object that we receive
+    * from the map to actual object data
+    *
+    * @method getData
+    */
+  getData(/* object */) { return 'notImplementedYet. Activate with plugin'; }
+  /**
     * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
     * implement your own, I suggest you use it.
     *
     * @method zoomIn
     */
   zoomIn() { return 'notImplementedYet. Activate with plugin'; }
-   /**
+  /**
     * This is abstract method and needs to be implemented with a plugin. Core module has an implementation for this and if you don't
     * implement your own, I suggest you use it.
     *
@@ -819,15 +829,25 @@ class Flatworld {
   /**
    * Resize the canvas to fill the whole browser content area. Defined by the baseEventlisteners-module (core modules plugin)
    *
-   * @method toggleFullsize
-   **/
-  toggleFullsize() { return 'notImplementedYet. Activate with plugin'; }
-  /**
-   * Toggles fullscreen mode. Defined by the baseEventlisteners-module (core modules plugin)
-   *
    * @method toggleFullScreen
    **/
-  toggleFullScreen() { return 'notImplementedYet. Activate with plugin'; }
+  toggleFullScreen() {
+    utils.resize.toggleFullScreen();
+    this.resizeCanvasToFullSize();
+  }
+  /**
+   * Resizes the canvas to the current most wide and high element status.
+   * Basically canvas size === window size.
+   *
+   * @method resizeCanvasToFullSize
+   */
+
+  resizeCanvasToFullSize() {
+    utils.resize.resizePIXIRenderer(
+      this.getRenderer(),
+      this.drawOnNextTick.bind(this)
+    );
+  }
   /**
    * Plugin will overwrite create this method. Method for actually activating minimap.
    *
@@ -862,12 +882,12 @@ class Flatworld {
    * @param {Array} [{}.subcontainers]                Array of the subcontainers we will search
    * @return {Array}                                  Found objects
    */
-  _retrieveObjects(allCoords, containers = [], { type = '' } = {}) {
-    return this.objectManager.retrieve(allCoords, containers, {
+  _retrieveObjects(globalCoords, containers = [], { type = '' } = {}) {
+    return this.objectManager.retrieve(globalCoords, containers, {
       type,
       size: {
-        width: allCoords.globalCoords.width,
-        height: allCoords.globalCoords.height
+        width: globalCoords.width,
+        height: globalCoords.height
       }
     });
   }
@@ -921,7 +941,7 @@ class Flatworld {
     let renderStart;
     let totalRenderTime;
 
-    PIXI.ticker.shared.add(() => {
+    PIXI.Ticker.shared.add(() => {
       if (_drawMapOnNextTick) {
         if (this.trackFPSCB) {
           renderStart = new Date().getTime();
@@ -969,7 +989,7 @@ class Flatworld {
     const allObjects = {};
 
     this.getPrimaryLayers().forEach(layer => {
-      allObjects[layer.name] = layer.getObjects();
+      allObjects[layer.group] = layer.getObjects();
     });
 
     return allObjects;

@@ -47,15 +47,16 @@ Best example is found in [plunkr](http://plnkr.co/edit/asL1N4?p=info). This is t
 ## Setup a simple map
 The main module for the whole map is core.Flatworld, so you should always primarily look through it's API and then dig deeper. The best examples for setting up a map at the moment is still going through the code. Check the test-files: tests/manualTest.html and tests/manualStressTest.html (which are more comprehensive). They use horizontalHexaFactory to go through the map data and setup objects based on that data. You can use horizontalHexaFactory if you want or setup your own factory and own data structure. Factories always have to follow a certain data structure so they might not be something everyone wants or can cope with.
 
-Simple unfinished example:
+Simple example:
 
-	import { Preload } from '/components/preloading/preloading';
+	import Loader from 'resource-loader';
 	import { ObjectTerrain, ObjectUnit } from "/components/map/extensions/hexagons/Objects";
 
-	preload = new Preload( "", { crossOrigin: false } );
-	preload.addResource( "terrainBase.json" );
+	const baseUrl = '';
+	preload = new Loader( baseUrl, { crossOrigin: false } );
+	preload.add( "terrainBase.json" );
 
-	preload.resolveOnComplete().then(() => {
+	preload.load(() => {
 		var map, thisLayer, newObject;
 		var layerOptions = {
 	    	name: "terrainLayer",
@@ -85,7 +86,7 @@ Simple unfinished example:
 
 		map.init( pluginsToActivate, startPoint );
 
-		thisLayer = map.addLayer(layerOptions);
+		thisLayer = map.addLayer('terrain', layerOptions);
 		newObject = new ObjectTerrain({ x: 1, y: 1 }, objData, objectOptions);
 		thisLayer.addChild(newObject);
 	})
@@ -93,7 +94,7 @@ Simple unfinished example:
 ## Factories
 Factories are the ones that get the server-side data, iterate through it and create the necessary objects to the FlaTWorld map.
 
-You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [horizontalHexaFactory.js](src/factories/horizontalHexaFactory.js) and create your own based on that.
+You most likely need to implement your own factory function for your game, if the game is not very close to the factory that the engine provides. At the moment I suggest you read through the code in [hexaFactory.js](tests/manual/hexaFactory.js) and create your own based on that.
 
 ## Extensions
 The map supports adding extensions and even some of the core libraries parts have been implemented as extensions. You must comply to few rules:
@@ -142,12 +143,10 @@ These are still subject to change (both raised and lowered). The map is planned 
 * Total object count on map: ~50k
 * FPS in mobile min. 30. No FPS goal set for desktop as mobile defines the limits.
 
-# Sponsors
-Thank you to browserstack for providing magnificient testing tools
-<a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
-
 # Credits
-Copyright (c) 2017 Janne Hyytiä
+Testing:
+* Thank you to browserstack for providing magnificient testing tools
+<a href="http://www.browserstack.com"><img alt="browserstack logo" src="https://raw.githubusercontent.com/Hachitus/warmapengine/master/nonModuleRelated/browserStackLogo.png" width="150"/></a>
 
 Graphics:
 * Realistic units from freecivs amplio set (http://download.gna.org/freeciv/contrib/tilesets/amplio/Readme).
@@ -156,5 +155,5 @@ Sounds:
 * http://www.freesound.org/people/_hash_Hazard/sounds/127601/
 * http://www.freesound.org/people/Artmasterrich/sounds/345458/
 
-# Thank yous
-https://github.com/dmitrysteblyuk (Pathfinding module)
+Contributors:
+* https://github.com/dmitrysteblyuk (Pathfinding module)
