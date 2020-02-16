@@ -551,11 +551,16 @@ class Flatworld {
         data.parameters = data.parameters || {};
 
         Object.keys(data.parameters).forEach(i => {
-          if (!data.parameters[i].bind) {
-            throw new Error('All parameters to plugins must be functions with bind-method!');
+          try {
+            params[i] = data.parameters[i].bind(data.plugin);
+          } catch(e) {
+            if (!data.parameters[i]) {
+              log.error(`Plugin '${data.plugin.pluginName}' had empty parameter: `, data.parameters);
+              throw new Error(`All parameters to plugin '${data.plugin.pluginName}' must exist! (check above for more data)`);
+            } else if (!data.parameters[i] || !data.parameters[i].bind) {
+              throw new Error(`Plugin '${data.plugin.pluginName}' has parameter that is not a function with bind-method!`);
+            }
           }
-
-          params[i] = data.parameters[i].bind(data.plugin);
         });
 
         allPromises.push(this.initPlugin(data.plugin, params));
