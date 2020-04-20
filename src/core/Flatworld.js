@@ -299,13 +299,13 @@ class Flatworld {
     /* Sets the correct Map starting coordinates */
     coord && Object.assign(_movableLayer, coord);
 
-    isMapReadyPromises = plugins.length && this.initPlugins(plugins);
+    isMapReadyPromises = (plugins.length && this.initPlugins(plugins)) || [Promise.resolve()];
 
     /* We activate the default tick for the map, but if custom tick callback has been given, we activate it too */
     this._defaultTick();
     tickCB && this.customTickOn(tickCB);
 
-    return isMapReadyPromises || Promise.resolve();
+    return isMapReadyPromises;
   }
   /**
    * Returns a promise that resolves after the map is fully initialized
