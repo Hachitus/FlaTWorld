@@ -161,6 +161,7 @@ const simpleFogOfWar = (function() {
     coordinates.anchor = object.anchor;
     coordinates.pivot = object.pivot;
     coordinates.scale = mapInstance.getZoom();
+    coordinates.object = object;
 
     return coordinates;
   }
