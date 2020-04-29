@@ -970,7 +970,6 @@ class Flatworld {
             FPS: FPSCount,
             FPStime: fpsTimer,
             renderTime: totalRenderTime,
-            drawCount: _renderers.main.drawCount
           });
 
           FPSCount = 0;
