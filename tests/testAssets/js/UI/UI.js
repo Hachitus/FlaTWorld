@@ -41,7 +41,7 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
   mapEvents.subscribe('objectsSelected', (objects) => {
     scope.showSelections(objects, givenMap.getData.bind(givenMap));
   })
-  mapEvents.subscribe('unitMoved', ({ path }) => {
+  mapEvents.subscribe('objectMove', ({ path }) => {
     scope.showUnitMovement(path);
   })
 

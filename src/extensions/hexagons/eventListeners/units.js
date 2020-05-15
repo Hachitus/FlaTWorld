@@ -148,6 +148,9 @@ function _orderListener(e) {
         error.customData = selectedObject;
         throw error;
       }
+      mapEvents.publish('objectMoveStart', {
+        object: selectedObject,
+      });
       pathsToCoordinates = hexagons.findPath(
         objectIndexes,
         destinationIndexes,
@@ -176,11 +179,6 @@ function _orderListener(e) {
 
     selectedObject.move(pathsToCoordinates);
 
-    mapEvents.publish('unitMoved', {
-      path: pathsToCoordinates,
-      object: selectedObject
-    });
-
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
   } catch(e) {
@@ -190,7 +188,7 @@ function _orderListener(e) {
   }
 }
 
-function _pathWeight(nextCoordinates, queue) {
+function _pathWeight(nextCoordinates, queue, { length, isPristine }) {
   /* We use the EARLIER path to test, how much moving to the next area will require. We can
    * not use the next area to test it, as that could lead to nasty surpises (like units
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
@@ -201,7 +199,7 @@ function _pathWeight(nextCoordinates, queue) {
     return -1;
   }
 
-  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
+  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue, length, isPristine });
   if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
     return returnedWeight;
   } else if (returnedWeight && !isInteger(returnedWeight)) {
