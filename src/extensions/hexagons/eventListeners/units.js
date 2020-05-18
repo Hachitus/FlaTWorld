@@ -24,6 +24,7 @@ const terrainLayerFilter = new MapDataManipulator({
 });
 /* @todo This must be changed to outside the module */
 let weight = () => 0;
+let getMaxMoves = () => 15;
 let FTW;
 
 /*---------------------
@@ -39,7 +40,7 @@ let FTW;
  * @param  {Map} map      The currently use Map instance
  * @return {Boolean}      True
  */
-function setupHexagonClick(mapInstance, weightFn, getData) {
+function setupHexagonClick(mapInstance, weightFn, getData, getMaxMovesFn) {
   if (!mapInstance) {
     throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
   }
@@ -52,6 +53,7 @@ function setupHexagonClick(mapInstance, weightFn, getData) {
   mapInstance.setPrototype('getData', getData);
 
   weight = weightFn || weight;
+  getMaxMoves = getMaxMovesFn || getMaxMoves;
 
   return true;
 }
@@ -140,10 +142,10 @@ function _orderListener(e) {
     if (objectIndexes.x === destinationIndexes.x && objectIndexes.y === destinationIndexes.y) {
       pathsToCoordinates = [];
     } else {
-      const timeUnits = selectedObject.getMovement();
+      const timeUnits = getMaxMoves(selectedObject);
       if (!Number.isInteger(timeUnits)) {
-        const error = new Error(`GetMovement-method did not return an integer. Got: '${timeUnits && timeUnits.toString()}.
-          Object data in customData-property.`)
+        const error = new Error(`FlaTWorld: GetMovement-method did not return an integer. Got:
+          '${timeUnits && timeUnits.toString()}. Object data in customData-property.`)
         error.customCode = 130;
         error.customData = selectedObject;
         throw error;
@@ -151,6 +153,7 @@ function _orderListener(e) {
       mapEvents.publish('objectMoveStart', {
         object: selectedObject,
       });
+
       pathsToCoordinates = hexagons.findPath(
         objectIndexes,
         destinationIndexes,
@@ -159,8 +162,9 @@ function _orderListener(e) {
         +timeUnits,
         _pathWeight
       );
+
       if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
-        const error = new Error('No path found from source to destination');
+        const error = new Error('FlaTWorld: No path found from source to destination');
         error.customCode = 140;
         error.customData = {
           selectedObject,
