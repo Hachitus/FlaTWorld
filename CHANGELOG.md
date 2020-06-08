@@ -1,6 +1,6 @@
 <a name="0.7.0"></a>
-# 0.7.0 Changes the library to event based (2017-11-?)
-* Loads of changes and not all of them very friendly. I don't believe anyone uses the library and will make these drastic changes. They are needed.
+# 0.7.0 Changes the library to event based (2020-06-08)
+* I'll be honest. The game engine stopped being developed a long while ago already, because of multiple reasons. I doubt anyone uses the engine as such and it's still anyway under 1.0, so there will be multiple unreported (or documented) changes in this release and many breaking changes. Since those have happened in the last 2-3 years, it's not good use of time to document them at the moment. I'm still slowly developing something based on this engine.
 * The logic was changed to more event-based instead of being unnecessarily tied to the code. Library should communicate through events.
 
 ## Breaking changes
