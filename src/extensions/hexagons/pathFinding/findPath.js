@@ -9,6 +9,7 @@ const allNormalDirections = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: -1, y: 0 }, { 
 class PriorityQueue {
   constructor() {
     this.items = [];
+    this.isPristine = true;
   }
 
   get length() {
@@ -25,6 +26,7 @@ class PriorityQueue {
   }
 
   push(value, loss) {
+    this.isPristine = false;
     const [index, match] = this.items.length ?
       binarySearch(i => this.items[i].loss - loss, 0, this.items.length)
       : [0, false];
@@ -69,6 +71,7 @@ function findPath(
   const d = Date.now();
 
   const hexagonGrid = allowDiagonal === null;
+
   const pathArr = bestDirectionAlg();
 
   if (debug) {
@@ -108,6 +111,9 @@ function findPath(
         : getMinSteps(dest.x - curr.x, dest.y - curr.y, hexagonGrid);
 
       if (minPossibleTime > maxRemainingTime) {
+        if (counter === 1) {
+          throw new Error(`Destination ${minPossibleTime} is farther than max allowed movement: ${maxRemainingTime}`);
+        }
         continue;
       }
 
@@ -117,7 +123,10 @@ function findPath(
         const x = curr.x + directions[i].x;
         const y = curr.y + directions[i].y;
         const next = { x: x, y: y };
-        const weight = weightFn(next, curr);
+
+        const weight = weightFn(next, curr, {
+          isPristine: queue.isPristine,
+        });
 
         if (weight < 0 || curr.time + weight > maxTime) {
           continue;

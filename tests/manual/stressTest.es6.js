@@ -93,9 +93,8 @@ function init() {
         const totalFPS = data.FPS;
         const totalTime = data.FPStime;
         const totalRenderTime = data.renderTime;
-        const drawCount = data.drawCount;
 
-        window.FPSElement.innerHTML = totalFPS + ' - ' + Math.round( ( totalRenderTime / totalTime * 100 ) ) + '%' + ' : ' + drawCount;
+        window.FPSElement.innerHTML = totalFPS + ' - ' + Math.round( ( totalRenderTime / totalTime * 100 ) ) + '%';
       }
     });
   });

@@ -26,7 +26,7 @@ const scope = {};
  * the requires methods, this class throws an error.
  * @return {Object}               UI module
 */
-function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-unused-vars
+function UI(UITheme, givenMap) { // eslint-disable-line no-unused-vars
 
   /* SINGLETON MODULE */
   if (Object.keys(scope).length !== 0) {
@@ -41,7 +41,7 @@ function UI(UITheme, givenMap, protectedProperties) { // eslint-disable-line no-
   mapEvents.subscribe('objectsSelected', (objects) => {
     scope.showSelections(objects, givenMap.getData.bind(givenMap));
   })
-  mapEvents.subscribe('unitMoved', ({ path }) => {
+  mapEvents.subscribe('objectMove', ({ path }) => {
     scope.showUnitMovement(path);
   })
 

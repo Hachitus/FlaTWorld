@@ -24,6 +24,7 @@ const terrainLayerFilter = new MapDataManipulator({
 });
 /* @todo This must be changed to outside the module */
 let weight = () => 0;
+let getMaxMoves = () => 15;
 let FTW;
 
 /*---------------------
@@ -39,7 +40,7 @@ let FTW;
  * @param  {Map} map      The currently use Map instance
  * @return {Boolean}      True
  */
-function setupHexagonClick(mapInstance, weightFn, getData) {
+function setupHexagonClick(mapInstance, weightFn, getData, getMaxMovesFn) {
   if (!mapInstance) {
     throw new Error('eventlisteners initialization requires flatworld instance as a parameter');
   }
@@ -52,6 +53,7 @@ function setupHexagonClick(mapInstance, weightFn, getData) {
   mapInstance.setPrototype('getData', getData);
 
   weight = weightFn || weight;
+  getMaxMoves = getMaxMovesFn || getMaxMoves;
 
   return true;
 }
@@ -140,14 +142,18 @@ function _orderListener(e) {
     if (objectIndexes.x === destinationIndexes.x && objectIndexes.y === destinationIndexes.y) {
       pathsToCoordinates = [];
     } else {
-      const timeUnits = selectedObject.getMovement();
+      const timeUnits = getMaxMoves(selectedObject);
       if (!Number.isInteger(timeUnits)) {
-        const error = new Error(`GetMovement-method did not return an integer. Got: '${timeUnits && timeUnits.toString()}.
-          Object data in customData-property.`)
+        const error = new Error(`FlaTWorld: GetMovement-method did not return an integer. Got:
+          '${timeUnits && timeUnits.toString()}. Object data in customData-property.`)
         error.customCode = 130;
         error.customData = selectedObject;
         throw error;
       }
+      mapEvents.publish('objectMoveStart', {
+        object: selectedObject,
+      });
+
       pathsToCoordinates = hexagons.findPath(
         objectIndexes,
         destinationIndexes,
@@ -156,8 +162,9 @@ function _orderListener(e) {
         +timeUnits,
         _pathWeight
       );
+
       if (!pathsToCoordinates || pathsToCoordinates.length < 1) {
-        const error = new Error('No path found from source to destination');
+        const error = new Error('FlaTWorld: No path found from source to destination');
         error.customCode = 140;
         error.customData = {
           selectedObject,
@@ -176,11 +183,6 @@ function _orderListener(e) {
 
     selectedObject.move(pathsToCoordinates);
 
-    mapEvents.publish('unitMoved', {
-      path: pathsToCoordinates,
-      object: selectedObject
-    });
-
     mapStates.objectOrderEnd();
     FTW.drawOnNextTick();
   } catch(e) {
@@ -190,7 +192,7 @@ function _orderListener(e) {
   }
 }
 
-function _pathWeight(nextCoordinates, queue) {
+function _pathWeight(nextCoordinates, queue, { length, isPristine }) {
   /* We use the EARLIER path to test, how much moving to the next area will require. We can
    * not use the next area to test it, as that could lead to nasty surpises (like units
    * couldn't move to an area at all, because they have 1 move and it requires 2 moves)
@@ -201,7 +203,7 @@ function _pathWeight(nextCoordinates, queue) {
     return -1;
   }
 
-  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue });
+  const returnedWeight = weight(correctHexagon, FTW.currentlySelectedObjects[0], { nextCoordinates, queue, length, isPristine });
   if ((returnedWeight || returnedWeight === 0) && isInteger(returnedWeight)) {
     return returnedWeight;
   } else if (returnedWeight && !isInteger(returnedWeight)) {
