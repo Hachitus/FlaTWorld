@@ -99,6 +99,7 @@ function findPath(
 
     isVisited(start);
     queue.push(start, 0);
+    queue.isPristine = true;
 
     let resPath = null;
     let allowedTime = maxTime;
