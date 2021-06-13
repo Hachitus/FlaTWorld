@@ -84,7 +84,7 @@ module.exports = function(config) {
       plugins: [
         new webpack.HotModuleReplacementPlugin(),
       ],
-      devtool: 'cheap-module-eval-source-map',
+      devtool: 'eval-source-map',
       mode: 'development',
     },
   })

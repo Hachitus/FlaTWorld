@@ -1,6 +1,11 @@
 const path = require('path');
 
 module.exports = [{
+  resolve: {
+    fallback: {
+      util: require.resolve("util/")
+    }
+  },
   entry: [
     './tests/manual/stressTest.es6.js'
   ],

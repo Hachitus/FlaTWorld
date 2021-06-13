@@ -44,7 +44,8 @@ function createVisibleHexagon(radius, { color = 0xFF0000, isFlatTop = false } = 
   const graphics = new PIXI.Graphics();
   const points = coordsToPixiPoints(radius, isFlatTop);
 
-  graphics.beginFill(color, 1);
+  graphics.beginFill(color);
+  graphics.alpha = 1;
   graphics.drawPolygon(points, isFlatTop);
   graphics.endFill();
 

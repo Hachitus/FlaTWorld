@@ -1,24 +1,26 @@
 import mapEvents from '../../src/core/mapEvents';
-import * as sinon from 'sinon';
-import * as constants from '../../src/core/constants';
+// import * as sinon from 'sinon';
+// import * as constants from '../../src/core/constants';
+
+// SINON WAS NOT WORKING AFTER UPDATING WEBPACK DEPENDENCIES
 
 const jasmineClock = jasmine.clock();
 // We might want to mock this later on, if we change testing framework
-const windowMock = {
-  setTimeout: window.setTimeout.bind(window)
-}
+// const windowMock = {
+//   setTimeout: window.setTimeout.bind(window)
+// }
 
 describe('mapEvents tests => ', () => {
-  let constantMock;
+  // let constantMock;
   jasmineClock.install();
   jasmineClock.mockDate(new Date());
 
   beforeEach(() => {
-    constantMock = sinon.stub(constants, 'getWindow').returns(windowMock);
+    // constantMock = sinon.stub(constants, 'getWindow').returns(windowMock);
     mapEvents.removeAllListeners();
   });
   afterAll(() => {
-    constantMock.restore();
+    // constantMock.restore();
   })
   it('basic', () => {
     let cbFinished = 'no';

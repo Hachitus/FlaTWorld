@@ -52,7 +52,7 @@ export default function hexaFactory(mapCanvas, datas, {
     rendererOptions: {
       resolution: pixelRatio, // We might need this later on, when doing mobile optimizations, for different pizel density devices
       autoResize: true,
-      transparent: true,
+      backgroundAlpha: 0,
       antialias: false // TEST. Only should work in chrome atm.?
     },
     subcontainers: {
