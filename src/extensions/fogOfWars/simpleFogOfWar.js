@@ -106,7 +106,7 @@ const simpleFogOfWar = (function() {
 
   function refreshFoW() {
     /*    var t0 = performance.now();*/
-    mapRenderer.render(maskStageContainer, renderTexture, true, null, false);
+    mapRenderer.render(maskStageContainer, { renderTexture, clear: true, transform: null, skipTupdateTransform: false });
 
     maskSprite.texture = renderTexture;
     /*    var t1 = performance.now();
