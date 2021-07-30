@@ -62,7 +62,6 @@
     "howler": "2.2.1",
     "javascript-state-machine": "3.1.0",
     "loglevel": "1.7.1",
-    "nvm": "0.0.4",
     "pixi.js": "6.0.4",
     "whatwg-fetch": "3.6.2"
   },
