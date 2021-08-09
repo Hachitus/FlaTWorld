@@ -10,15 +10,15 @@ const hexagons = {
 /*---------------------
 ------ VARIABLES ------
 ----------------------*/
-const unitLayerFilter = new MapDataManipulator({
+const unitLayerFilter = new MapDataManipulator([{
   type: 'filter',
-  object: 'layer',
+  object: MapDataManipulator.OBJECT_LAYER,
   property: 'selectable',
   value: true
-});
+}]);
 const terrainLayerFilter = new MapDataManipulator({
   type: 'filter',
-  object: 'layer',
+  object: MapDataManipulator.OBJECT_LAYER,
   property: 'name',
   value: 'terrainLayer'
 });
@@ -69,10 +69,14 @@ function _tapListener(e) {
   const globalCoords = utils.mouse.eventData.getHAMMERPointerCoords(e);
   mapStates.objectSelect();
 
-  let objects = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
-  objects = utils.dataManipulation.mapObjectsToArray(objects);
-  objects = utils.dataManipulation.flattenArrayBy1Level(objects);
+  const units = FTW.getObjectsUnderArea(globalCoords, { filters: unitLayerFilter });
+  const terrains = FTW.getObjectsUnderArea(globalCoords, { filters: terrainLayerFilter });
+  const city = terrains.find((t) => t.type === 'City');
 
+  const all = units.concat(city).filter((a) => a); // remove empty
+  let objects = utils.dataManipulation.mapObjectsToArray(all);
+  objects = utils.dataManipulation.flattenArrayBy1Level(objects);
+  
   FTW.currentlySelectedObjects = objects;
 
   FTW.drawOnNextTick();

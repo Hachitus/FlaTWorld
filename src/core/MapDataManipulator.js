@@ -161,6 +161,9 @@ class MapDataManipulator {
           }
         }
       }
+      if (rules.matchAny && ruleMatches) {
+        return object;
+      }
     }
 
     return ruleMatches;
