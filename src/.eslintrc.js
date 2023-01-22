@@ -20,7 +20,7 @@ module.exports = {
     "no-undef": "error",
     "no-unused-vars": "error",
     "prefer-const": ["error", {
-        "destructuring": "all"
+      "destructuring": "all"
     }],
     "no-var": "error",
     "no-use-before-define": ["error", {
