@@ -30,7 +30,7 @@ module.exports = [{
     }]
   },
   devServer: {
-    contentBase: path.join(__dirname, 'tests'),
+    static: path.join(__dirname, 'tests'),
     compress: true,
     port: 9000,
     hot: true,
