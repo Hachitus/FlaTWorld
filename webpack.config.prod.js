@@ -12,8 +12,10 @@ module.exports = [
       libraryTarget: 'umd',
     },
     devtool: 'source-map',
-    node: {
-      fs: "empty"
+    resolve: {
+      fallback: {
+        fs: false
+      }
     },
     module: {
       rules: [{
@@ -42,8 +44,10 @@ module.exports = [
       library: 'flatworld',
       umdNamedDefine: true
     },
-    node: {
-      fs: "empty"
+    resolve: {
+      fallback: {
+        fs: false
+      }
     },
     module: {
       rules: [{
