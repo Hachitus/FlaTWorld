@@ -9,7 +9,7 @@ const LAYER_TYPE_MOVABLE = 1;
 const LAYER_TYPE_MINIMAP = 2;
 const _renderers = {};
 const protectedProperties = {};
-const currentlySelectedObjects = [];
+let currentlySelectedObjects = [];
 let _drawMapOnNextTick = false;
 let isMapReadyPromises = [];
 let _privateRenderers, _zoomLayer, _movableLayer, _minimapLayer, ParentLayerConstructor;
@@ -262,6 +262,8 @@ class Flatworld {
      * those objects.
      */
     this.allMapObjects = {};
+
+    window.flatworld = this;
   }
   /**
    * This initializes the map and makes everything appear on the map and actually work. Also initializes the given plugins since
@@ -803,8 +805,7 @@ class Flatworld {
     if (newObjects.length && !(newObjects[0] instanceof PIXI.Sprite)) {
       log.warn('currentlySelectedObjects need to be an empty array or array of PIXI.Sprites');
     }
-    currentlySelectedObjects.length = 0;
-    currentlySelectedObjects.push(...newObjects);
+    currentlySelectedObjects = Object.freeze(newObjects);
     mapEvents.publish('objectsSelected', newObjects)
   }
   /*---------------------------------------------
