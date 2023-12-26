@@ -805,6 +805,10 @@ class Flatworld {
     if (newObjects.length && !(newObjects[0] instanceof PIXI.Sprite)) {
       log.warn('currentlySelectedObjects need to be an empty array or array of PIXI.Sprites');
     }
+    // If this is a new attempt to clear the currentlySelectedObjects 
+    if ((currentlySelectedObjects.length === 0 && newObjects.length === 0)) {
+      return;
+    }
     currentlySelectedObjects = Object.freeze(newObjects);
     mapEvents.publish('objectsSelected', newObjects)
   }
